@@ -5061,3 +5061,11 @@ Unknown database 'snorby' (code: 1049, sql state: 42000, query: , uri: )
 (0.000344) INSERT INTO `schema` (`vseq`, `ctime`, `version`) VALUES (107, '2010-10-09 15:01:12', 'Snorby 2.0.0')
 [datamapper] Setting up the "development" environment:
 [datamapper] Setting up :default repository: 'snorby' on mysql
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
