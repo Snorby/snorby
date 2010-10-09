@@ -8,6 +8,9 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 module Snorby
   
+  raw_config = File.read("config/snorby_config.yml")
+  CONFIG = YAML.load(raw_config)[Rails.env].symbolize_keys
+  
   VERSION = '2.0.0'
   
   class Application < Rails::Application
@@ -38,6 +41,8 @@ module Snorby
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
+
+    config.action_mailer.default_url_options = { :host => Snorby::CONFIG[:domain] }
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]

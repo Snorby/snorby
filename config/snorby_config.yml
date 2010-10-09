@@ -1,0 +1,11 @@
+development:
+  domain: localhost:3000
+  mailer_sender: 'snorby@example.com'
+
+test:
+  domain: test.host
+  mailer_sender: 'snorby@example.com'
+
+production:
+  domain: example.com
+  mailer_sender: 'snorby@example.com'

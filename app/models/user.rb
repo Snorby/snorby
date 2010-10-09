@@ -26,8 +26,6 @@ class User
   # Define created_at and updated_at timestamps
   timestamps :at
 
-  validates_with_method :validate_password_confirmation
-
   #
   # Converts the user to a String.
   #

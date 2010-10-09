@@ -5626,3 +5626,529 @@ ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
   
 
 Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+
+
+Started GET "/login" for 127.0.0.1 at 2010-10-09 16:24:55 -0400
+  Processing by Devise::SessionsController#new as HTML
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/shared/_links.erb (1.8ms)
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/sessions/new.html.erb within layouts/application (7.6ms)
+Completed 200 OK in 15ms (Views: 12.8ms | ActiveRecord: 0.0ms | Models: 0.000ms)
+
+
+Started GET "/javascripts/jquery.min" for 127.0.0.1 at 2010-10-09 16:24:56 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/users/register" for 127.0.0.1 at 2010-10-09 16:24:58 -0400
+  Processing by Devise::RegistrationsController#new as HTML
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/shared/_links.erb (1.6ms)
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/registrations/new.html.erb within layouts/application (9.3ms)
+Completed 200 OK in 17ms (Views: 15.7ms | ActiveRecord: 0.0ms | Models: 0.000ms)
+
+
+Started GET "/javascripts/jquery.min" for 127.0.0.1 at 2010-10-09 16:24:58 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.1ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2010-10-09 16:25:07 -0400
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"7MlmWHpH2/XLICUr1zMImHMaVu/8ARdZQAubs4/VdP0=", "user"=>{"email"=>"dustin.webber@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[36mSQL (0.102ms)[0m  [1mSET sql_auto_is_null = 0[0m
+  [1m[35mSQL (0.069ms)[0m  SET SESSION sql_mode = 'ANSI,NO_BACKSLASH_ESCAPES,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION,NO_UNSIGNED_SUBTRACTION,TRADITIONAL'
+  [1m[36mSQL (0.195ms)[0m  [1mSELECT `id` FROM `users` WHERE `email` = 'dustin.webber@gmail.com' ORDER BY `id` LIMIT 1[0m
+  [1m[35mSQL (0.209ms)[0m  SELECT `id` FROM `users` WHERE `email` = 'dustin.webber@gmail.com' ORDER BY `id` LIMIT 1
+Completed   in 138ms
+
+NoMethodError (undefined method `validate_password_confirmation' for #<User:0x000001036b0158>):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.1ms)
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (110.5ms)
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (118.7ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2010-10-09 16:25:29 -0400
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"7MlmWHpH2/XLICUr1zMImHMaVu/8ARdZQAubs4/VdP0=", "user"=>{"email"=>"dustin.webber@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[36mSQL (0.240ms)[0m  [1mSELECT `id` FROM `users` WHERE `email` = 'dustin.webber@gmail.com' ORDER BY `id` LIMIT 1[0m
+  [1m[35mSQL (0.282ms)[0m  SELECT `id` FROM `users` WHERE `email` = 'dustin.webber@gmail.com' ORDER BY `id` LIMIT 1
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/shared/_links.erb (2.8ms)
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/registrations/new.html.erb within layouts/application (8.8ms)
+Completed 200 OK in 110ms (Views: 13.9ms | ActiveRecord: 1.1ms | Models: 1.097ms)
+
+
+Started GET "/javascripts/jquery.min" for 127.0.0.1 at 2010-10-09 16:25:29 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2010-10-09 16:25:39 -0400
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"7MlmWHpH2/XLICUr1zMImHMaVu/8ARdZQAubs4/VdP0=", "user"=>{"email"=>"dustin.webber@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[36mSQL (0.222ms)[0m  [1mSELECT `id` FROM `users` WHERE `email` = 'dustin.webber@gmail.com' ORDER BY `id` LIMIT 1[0m
+  [1m[35mSQL (0.181ms)[0m  SELECT `id` FROM `users` WHERE `email` = 'dustin.webber@gmail.com' ORDER BY `id` LIMIT 1
+  [1m[36mSQL (0.394ms)[0m  [1mINSERT INTO `users` (`email`, `encrypted_password`, `password_salt`, `sign_in_count`, `timezone`, `created_at`, `updated_at`) VALUES ('dustin.webber@gmail.com', '$2a$10$P5BYKy4dkpVDoNqpljQ7DeXHBq6HKPc4qcJ2miuMj4v0DDc7II3UK', '$2a$10$P5BYKy4dkpVDoNqpljQ7De', 0, 'UTC', '2010-10-09 16:25:39', '2010-10-09 16:25:39')[0m
+  [1m[35mSQL (0.490ms)[0m  UPDATE `users` SET `sign_in_count` = 1, `current_sign_in_at` = '2010-10-09 16:25:39', `last_sign_in_at` = '2010-10-09 16:25:39', `current_sign_in_ip` = '127.0.0.1', `last_sign_in_ip` = '127.0.0.1' WHERE `id` = 1
+Redirected to http://0.0.0.0:3000/
+Completed 302 Found in 101ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-09 16:25:39 -0400
+  Processing by PageController#dashboard as HTML
+  [1m[36mSQL (0.377ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1[0m
+Rendered page/dashboard.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 10ms (Views: 6.0ms | ActiveRecord: 0.4ms | Models: 0.377ms)
+
+
+Started GET "/javascripts/jquery.min" for 127.0.0.1 at 2010-10-09 16:25:40 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-09 16:25:54 -0400
+  Processing by PageController#dashboard as HTML
+  [1m[35mSQL (0.283ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1
+Rendered page/dashboard.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 10ms (Views: 6.8ms | ActiveRecord: 0.3ms | Models: 0.283ms)
+
+
+Started GET "/javascripts/jquery.min" for 127.0.0.1 at 2010-10-09 16:25:54 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+
+
+Started GET "/events" for 127.0.0.1 at 2010-10-09 16:26:01 -0400
+
+ActionController::RoutingError (No route matches "/events"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2010-10-09 16:26:08 -0400
+
+ActionController::RoutingError (No route matches "/users"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/logout" for 127.0.0.1 at 2010-10-09 16:26:21 -0400
+  Processing by Devise::SessionsController#destroy as HTML
+  [1m[36mSQL (0.273ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1[0m
+Redirected to http://0.0.0.0:3000/
+Completed 302 Found in 4ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-09 16:26:22 -0400
+  Processing by PageController#dashboard as HTML
+Completed   in 1ms
+
+
+Started GET "/users/login" for 127.0.0.1 at 2010-10-09 16:26:22 -0400
+  Processing by Devise::SessionsController#new as HTML
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/shared/_links.erb (2.0ms)
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/sessions/new.html.erb within layouts/application (10.4ms)
+Completed 200 OK in 18ms (Views: 16.6ms | ActiveRecord: 0.0ms | Models: 0.000ms)
+
+
+Started GET "/javascripts/jquery.min" for 127.0.0.1 at 2010-10-09 16:26:23 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started POST "/users/login" for 127.0.0.1 at 2010-10-09 16:26:32 -0400
+  Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"7MlmWHpH2/XLICUr1zMImHMaVu/8ARdZQAubs4/VdP0=", "user"=>{"email"=>"dustin.webber@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign in"}
+  [1m[35mSQL (0.300ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `email` = 'dustin.webber@gmail.com' ORDER BY `id` LIMIT 1
+  [1m[36mSQL (0.598ms)[0m  [1mUPDATE `users` SET `sign_in_count` = 2, `current_sign_in_at` = '2010-10-09 16:26:33' WHERE `id` = 1[0m
+Redirected to http://0.0.0.0:3000/
+Completed 302 Found in 93ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-09 16:26:33 -0400
+  Processing by PageController#dashboard as HTML
+  [1m[35mSQL (0.347ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1
+Rendered page/dashboard.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 11ms (Views: 7.1ms | ActiveRecord: 0.3ms | Models: 0.347ms)
+
+
+Started GET "/javascripts/jquery.min" for 127.0.0.1 at 2010-10-09 16:26:33 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-09 16:27:07 -0400
+  Processing by PageController#dashboard as HTML
+  [1m[36mSQL (0.458ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1[0m
+Rendered page/dashboard.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 86ms (Views: 82.0ms | ActiveRecord: 0.5ms | Models: 0.458ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-09 16:27:35 -0400
+  Processing by PageController#dashboard as HTML
+  [1m[35mSQL (0.262ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1
+Rendered page/dashboard.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 9ms (Views: 6.2ms | ActiveRecord: 0.3ms | Models: 0.262ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-09 16:27:38 -0400
+  Processing by PageController#dashboard as HTML
+  [1m[36mSQL (0.586ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1[0m
+Rendered page/dashboard.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 16ms (Views: 11.0ms | ActiveRecord: 0.6ms | Models: 0.586ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-09 16:28:13 -0400
+  Processing by PageController#dashboard as HTML
+  [1m[35mSQL (0.273ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1
+Rendered page/dashboard.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 14ms (Views: 11.0ms | ActiveRecord: 0.3ms | Models: 0.273ms)
+
+
+Started GET "/logout" for 127.0.0.1 at 2010-10-09 16:28:17 -0400
+  Processing by Devise::SessionsController#destroy as HTML
+  [1m[36mSQL (0.242ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1[0m
+Redirected to http://0.0.0.0:3000/
+Completed 302 Found in 4ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-09 16:28:18 -0400
+  Processing by PageController#dashboard as HTML
+Completed   in 1ms
+
+
+Started GET "/users/login" for 127.0.0.1 at 2010-10-09 16:28:18 -0400
+  Processing by Devise::SessionsController#new as HTML
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/shared/_links.erb (1.9ms)
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/sessions/new.html.erb within layouts/application (7.9ms)
+Completed 200 OK in 17ms (Views: 15.6ms | ActiveRecord: 0.0ms | Models: 0.000ms)
+
+
+Started GET "/users/login" for 127.0.0.1 at 2010-10-09 16:28:20 -0400
+  Processing by Devise::SessionsController#new as HTML
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/shared/_links.erb (1.8ms)
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/sessions/new.html.erb within layouts/application (7.9ms)
+Completed 200 OK in 15ms (Views: 13.4ms | ActiveRecord: 0.0ms | Models: 0.000ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-09 16:28:23 -0400
+  Processing by PageController#dashboard as HTML
+Completed   in 1ms
+
+
+Started GET "/users/login" for 127.0.0.1 at 2010-10-09 16:28:23 -0400
+  Processing by Devise::SessionsController#new as HTML
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/shared/_links.erb (1.7ms)
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/sessions/new.html.erb within layouts/application (7.6ms)
+Completed 200 OK in 14ms (Views: 12.9ms | ActiveRecord: 0.0ms | Models: 0.000ms)
+
+
+Started GET "/reset/password" for 127.0.0.1 at 2010-10-09 16:28:33 -0400
+  Processing by Devise::PasswordsController#edit as HTML
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/shared/_links.erb (1.5ms)
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/passwords/edit.html.erb within layouts/application (6.9ms)
+Completed 200 OK in 15ms (Views: 11.9ms | ActiveRecord: 0.0ms | Models: 0.000ms)
+
+
+Started POST "/users/password" for 127.0.0.1 at 2010-10-09 16:28:44 -0400
+  Processing by Devise::PasswordsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"7MlmWHpH2/XLICUr1zMImHMaVu/8ARdZQAubs4/VdP0=", "user"=>{"reset_password_token"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Change my password"}
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/shared/_links.erb (1.5ms)
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/passwords/edit.html.erb within layouts/application (7.4ms)
+Completed 200 OK in 14ms (Views: 12.8ms | ActiveRecord: 0.0ms | Models: 0.000ms)
+
+
+Started POST "/users/password" for 127.0.0.1 at 2010-10-09 16:29:02 -0400
+  Processing by Devise::PasswordsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"7MlmWHpH2/XLICUr1zMImHMaVu/8ARdZQAubs4/VdP0=", "user"=>{"reset_password_token"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Change my password"}
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/shared/_links.erb (1.5ms)
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/passwords/edit.html.erb within layouts/application (8.1ms)
+Completed 200 OK in 14ms (Views: 13.2ms | ActiveRecord: 0.0ms | Models: 0.000ms)
+
+
+Started GET "/users/login" for 127.0.0.1 at 2010-10-09 16:29:10 -0400
+  Processing by Devise::SessionsController#new as HTML
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/shared/_links.erb (1.6ms)
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/sessions/new.html.erb within layouts/application (8.4ms)
+Completed 200 OK in 18ms (Views: 16.3ms | ActiveRecord: 0.0ms | Models: 0.000ms)
+
+
+Started GET "/users/password/new" for 127.0.0.1 at 2010-10-09 16:29:12 -0400
+  Processing by Devise::PasswordsController#new as HTML
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/shared/_links.erb (1.5ms)
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/passwords/new.html.erb within layouts/application (6.6ms)
+Completed 200 OK in 14ms (Views: 12.5ms | ActiveRecord: 0.0ms | Models: 0.000ms)
+
+
+Started POST "/users/password" for 127.0.0.1 at 2010-10-09 16:29:17 -0400
+  Processing by Devise::PasswordsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"7MlmWHpH2/XLICUr1zMImHMaVu/8ARdZQAubs4/VdP0=", "user"=>{"email"=>"dustin.webber@gmail.com"}, "commit"=>"Send me reset password instructions"}
+  [1m[35mSQL (0.279ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `email` = 'dustin.webber@gmail.com' ORDER BY `id` LIMIT 1
+  [1m[36mSQL (0.984ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `reset_password_token` = 'czI10XsU0JTJLMuLznQH' ORDER BY `id` LIMIT 1[0m
+  [1m[35mSQL (0.612ms)[0m  UPDATE `users` SET `reset_password_token` = 'czI10XsU0JTJLMuLznQH' WHERE `id` = 1
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/mailer/reset_password_instructions.html.erb (30.1ms)
+Completed   in 2649ms
+
+ActionView::Template::Error (Missing host to link to! Please provide :host parameter or set default_url_options[:host]):
+    2: 
+    3: <p>Someone has requested a link to change your password, and you can do this through the link below.</p>
+    4: 
+    5: <p><%= link_to 'Change my password', edit_password_url(@resource, :reset_password_token => @resource.reset_password_token) %></p>
+    6: 
+    7: <p>If you didn't request this, please ignore this email.</p>
+    8: <p>Your password won't change until you access the link above and create a new one.</p>
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.5ms)
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (189.6ms)
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (195.8ms)
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+
+
+Started POST "/users/password" for 127.0.0.1 at 2010-10-09 16:38:42 -0400
+  Processing by Devise::PasswordsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"7MlmWHpH2/XLICUr1zMImHMaVu/8ARdZQAubs4/VdP0=", "user"=>{"email"=>"dustin.webber@gmail.com"}, "commit"=>"Send me reset password instructions"}
+  [1m[36mSQL (0.061ms)[0m  [1mSET sql_auto_is_null = 0[0m
+  [1m[35mSQL (0.058ms)[0m  SET SESSION sql_mode = 'ANSI,NO_BACKSLASH_ESCAPES,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION,NO_UNSIGNED_SUBTRACTION,TRADITIONAL'
+  [1m[36mSQL (0.285ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `email` = 'dustin.webber@gmail.com' ORDER BY `id` LIMIT 1[0m
+  [1m[35mSQL (0.228ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `reset_password_token` = 'yhRsNO8H79GQvxeZWYrF' ORDER BY `id` LIMIT 1
+  [1m[36mSQL (2.048ms)[0m  [1mUPDATE `users` SET `reset_password_token` = 'yhRsNO8H79GQvxeZWYrF' WHERE `id` = 1[0m
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/mailer/reset_password_instructions.html.erb (1.1ms)
+
+Sent mail to dustin.webber@gmail.com (79ms)
+Date: Sat, 09 Oct 2010 16:38:46 -0400
+From: please-change-me@config-initializers-devise.com
+To: dustin.webber@gmail.com
+Message-ID: <4cb0d2d6a2f86_faff80966a88834c1@TheMind.local.mail>
+Subject: Reset password instructions
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<p>Hello dustin.webber@gmail.com!</p>
+
+<p>Someone has requested a link to change your password, and you can do this through the link below.</p>
+
+<p><a href="http://localhost:3000/users/password/edit?reset_password_token=yhRsNO8H79GQvxeZWYrF">Change my password</a></p>
+
+<p>If you didn't request this, please ignore this email.</p>
+<p>Your password won't change until you access the link above and create a new one.</p>
+Redirected to http://0.0.0.0:3000/users/login
+Completed 302 Found in 1881ms
+
+
+Started GET "/users/login" for 127.0.0.1 at 2010-10-09 16:38:46 -0400
+  Processing by Devise::SessionsController#new as HTML
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/shared/_links.erb (1.5ms)
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/sessions/new.html.erb within layouts/application (7.2ms)
+Completed 200 OK in 13ms (Views: 12.0ms | ActiveRecord: 0.0ms | Models: 0.000ms)
+
+
+Started POST "/users/login" for 127.0.0.1 at 2010-10-09 16:38:56 -0400
+  Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"7MlmWHpH2/XLICUr1zMImHMaVu/8ARdZQAubs4/VdP0=", "user"=>{"email"=>"dustin.webber@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign in"}
+  [1m[35mSQL (0.269ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `email` = 'dustin.webber@gmail.com' ORDER BY `id` LIMIT 1
+  [1m[36mSQL (0.640ms)[0m  [1mUPDATE `users` SET `sign_in_count` = 3, `current_sign_in_at` = '2010-10-09 16:38:57', `last_sign_in_at` = '2010-10-09 16:26:33' WHERE `id` = 1[0m
+Redirected to http://0.0.0.0:3000/
+Completed 302 Found in 124ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-09 16:38:57 -0400
+  Processing by PageController#dashboard as HTML
+  [1m[35mSQL (0.259ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1
+Rendered page/dashboard.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 9ms (Views: 6.3ms | ActiveRecord: 0.3ms | Models: 0.259ms)
+
+
+Started GET "/reset/password" for 127.0.0.1 at 2010-10-09 16:39:07 -0400
+  Processing by Devise::PasswordsController#edit as HTML
+  [1m[36mSQL (0.361ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1[0m
+Redirected to http://0.0.0.0:3000/
+Completed 302 Found in 4ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-09 16:39:08 -0400
+  Processing by PageController#dashboard as HTML
+  [1m[35mSQL (0.247ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1
+Rendered page/dashboard.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 9ms (Views: 6.1ms | ActiveRecord: 0.2ms | Models: 0.247ms)
+
+
+Started GET "/logout" for 127.0.0.1 at 2010-10-09 16:39:12 -0400
+  Processing by Devise::SessionsController#destroy as HTML
+  [1m[36mSQL (0.284ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1[0m
+Redirected to http://0.0.0.0:3000/
+Completed 302 Found in 4ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-09 16:39:13 -0400
+  Processing by PageController#dashboard as HTML
+Completed   in 1ms
+
+
+Started GET "/users/login" for 127.0.0.1 at 2010-10-09 16:39:13 -0400
+  Processing by Devise::SessionsController#new as HTML
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/shared/_links.erb (1.5ms)
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/sessions/new.html.erb within layouts/application (7.9ms)
+Completed 200 OK in 15ms (Views: 14.2ms | ActiveRecord: 0.0ms | Models: 0.000ms)
+
+
+Started GET "/users/password/new" for 127.0.0.1 at 2010-10-09 16:39:17 -0400
+  Processing by Devise::PasswordsController#new as HTML
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/shared/_links.erb (1.7ms)
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/passwords/new.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 13ms (Views: 12.0ms | ActiveRecord: 0.0ms | Models: 0.000ms)
+
+
+Started POST "/users/password" for 127.0.0.1 at 2010-10-09 16:39:22 -0400
+  Processing by Devise::PasswordsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"7MlmWHpH2/XLICUr1zMImHMaVu/8ARdZQAubs4/VdP0=", "user"=>{"email"=>"dustin.webber@gmail.com"}, "commit"=>"Send me reset password instructions"}
+  [1m[35mSQL (0.295ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `email` = 'dustin.webber@gmail.com' ORDER BY `id` LIMIT 1
+  [1m[36mSQL (0.204ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `reset_password_token` = '0Nizxm558OTilXtVda4g' ORDER BY `id` LIMIT 1[0m
+  [1m[35mSQL (0.417ms)[0m  UPDATE `users` SET `reset_password_token` = '0Nizxm558OTilXtVda4g' WHERE `id` = 1
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/mailer/reset_password_instructions.html.erb (0.9ms)
+
+Sent mail to dustin.webber@gmail.com (9ms)
+Date: Sat, 09 Oct 2010 16:39:22 -0400
+From: please-change-me@config-initializers-devise.com
+To: dustin.webber@gmail.com
+Message-ID: <4cb0d2fa7d42e_faff807b5a408357a@TheMind.local.mail>
+Subject: Reset password instructions
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<p>Hello dustin.webber@gmail.com!</p>
+
+<p>Someone has requested a link to change your password, and you can do this through the link below.</p>
+
+<p><a href="http://localhost:3000/users/password/edit?reset_password_token=0Nizxm558OTilXtVda4g">Change my password</a></p>
+
+<p>If you didn't request this, please ignore this email.</p>
+<p>Your password won't change until you access the link above and create a new one.</p>
+Redirected to http://0.0.0.0:3000/users/login
+Completed 302 Found in 39ms
+
+
+Started GET "/users/login" for 127.0.0.1 at 2010-10-09 16:39:22 -0400
+  Processing by Devise::SessionsController#new as HTML
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/shared/_links.erb (1.7ms)
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/sessions/new.html.erb within layouts/application (7.8ms)
+Completed 200 OK in 14ms (Views: 12.9ms | ActiveRecord: 0.0ms | Models: 0.000ms)
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+
+
+Started GET "/users/password/new" for 127.0.0.1 at 2010-10-09 16:41:44 -0400
+  Processing by Devise::PasswordsController#new as HTML
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/shared/_links.erb (1.8ms)
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/passwords/new.html.erb within layouts/application (7.4ms)
+Completed 200 OK in 15ms (Views: 14.2ms | ActiveRecord: 0.0ms | Models: 0.000ms)
+
+
+Started POST "/users/password" for 127.0.0.1 at 2010-10-09 16:41:51 -0400
+  Processing by Devise::PasswordsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"7MlmWHpH2/XLICUr1zMImHMaVu/8ARdZQAubs4/VdP0=", "user"=>{"email"=>"dustin.webber@gmail.com"}, "commit"=>"Send me reset password instructions"}
+  [1m[36mSQL (0.112ms)[0m  [1mSET sql_auto_is_null = 0[0m
+  [1m[35mSQL (0.074ms)[0m  SET SESSION sql_mode = 'ANSI,NO_BACKSLASH_ESCAPES,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION,NO_UNSIGNED_SUBTRACTION,TRADITIONAL'
+  [1m[36mSQL (0.290ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `email` = 'dustin.webber@gmail.com' ORDER BY `id` LIMIT 1[0m
+  [1m[35mSQL (0.224ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `reset_password_token` = 'tiY8VnUvUhhCdrGcMaTP' ORDER BY `id` LIMIT 1
+  [1m[36mSQL (0.480ms)[0m  [1mUPDATE `users` SET `reset_password_token` = 'tiY8VnUvUhhCdrGcMaTP' WHERE `id` = 1[0m
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/mailer/reset_password_instructions.html.erb (0.9ms)
+
+Sent mail to dustin.webber@gmail.com (74ms)
+Date: Sat, 09 Oct 2010 16:41:53 -0400
+From: snorby@example.com
+To: dustin.webber@gmail.com
+Message-ID: <4cb0d391991d7_fb068096b3803333f@TheMind.local.mail>
+Subject: Reset password instructions
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<p>Hello dustin.webber@gmail.com!</p>
+
+<p>Someone has requested a link to change your password, and you can do this through the link below.</p>
+
+<p><a href="http://localhost:3000/users/password/edit?reset_password_token=tiY8VnUvUhhCdrGcMaTP">Change my password</a></p>
+
+<p>If you didn't request this, please ignore this email.</p>
+<p>Your password won't change until you access the link above and create a new one.</p>
+Redirected to http://0.0.0.0:3000/users/login
+Completed 302 Found in 1890ms
+
+
+Started GET "/users/login" for 127.0.0.1 at 2010-10-09 16:41:53 -0400
+  Processing by Devise::SessionsController#new as HTML
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/shared/_links.erb (1.5ms)
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/sessions/new.html.erb within layouts/application (7.2ms)
+Completed 200 OK in 14ms (Views: 12.5ms | ActiveRecord: 0.0ms | Models: 0.000ms)
+
+
+Started GET "/users/password/edit?reset_password_token=tiY8VnUvUhhCdrGcMaTP" for 127.0.0.1 at 2010-10-09 16:44:03 -0400
+  Processing by Devise::PasswordsController#edit as HTML
+  Parameters: {"reset_password_token"=>"[FILTERED]"}
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/shared/_links.erb (1.5ms)
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/passwords/edit.html.erb within layouts/application (8.3ms)
+Completed 200 OK in 14ms (Views: 13.2ms | ActiveRecord: 0.0ms | Models: 0.000ms)
+
+
+Started POST "/users/password" for 127.0.0.1 at 2010-10-09 16:44:17 -0400
+  Processing by Devise::PasswordsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"iXhv2LdGP1J4rZWR2Y2bxeSEWV3tj13DTpvrchy2niY=", "user"=>{"reset_password_token"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Change my password"}
+  [1m[35mSQL (0.048ms)[0m  SET sql_auto_is_null = 0
+  [1m[36mSQL (0.074ms)[0m  [1mSET SESSION sql_mode = 'ANSI,NO_BACKSLASH_ESCAPES,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION,NO_UNSIGNED_SUBTRACTION,TRADITIONAL'[0m
+  [1m[35mSQL (0.278ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `reset_password_token` = 'tiY8VnUvUhhCdrGcMaTP' ORDER BY `id` LIMIT 1
+  [1m[36mSQL (0.281ms)[0m  [1mSELECT `id` FROM `users` WHERE `email` = 'dustin.webber@gmail.com' ORDER BY `id` LIMIT 1[0m
+  [1m[35mSQL (0.219ms)[0m  SELECT `id` FROM `users` WHERE `email` = 'dustin.webber@gmail.com' ORDER BY `id` LIMIT 1
+  [1m[36mSQL (0.188ms)[0m  [1mSELECT `id` FROM `users` WHERE `email` = 'dustin.webber@gmail.com' ORDER BY `id` LIMIT 1[0m
+  [1m[35mSQL (0.157ms)[0m  SELECT `id` FROM `users` WHERE `email` = 'dustin.webber@gmail.com' ORDER BY `id` LIMIT 1
+  [1m[36mSQL (2.621ms)[0m  [1mUPDATE `users` SET `encrypted_password` = '$2a$10$xpbU3qlheW4qSOMGYTjpe.M7TMHPrK6lychHQYoe9htriTHJvUlIO', `password_salt` = '$2a$10$xpbU3qlheW4qSOMGYTjpe.', `reset_password_token` = NULL, `updated_at` = '2010-10-09 16:44:17' WHERE `id` = 1[0m
+  [1m[35mSQL (2.233ms)[0m  UPDATE `users` SET `sign_in_count` = 4, `current_sign_in_at` = '2010-10-09 16:44:17', `last_sign_in_at` = '2010-10-09 16:38:57' WHERE `id` = 1
+Redirected to http://localhost:3000/
+Completed 302 Found in 143ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-09 16:44:17 -0400
+  Processing by PageController#dashboard as HTML
+  [1m[36mSQL (0.265ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1[0m
+Rendered page/dashboard.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 9ms (Views: 6.2ms | ActiveRecord: 0.3ms | Models: 0.265ms)
