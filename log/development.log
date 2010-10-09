@@ -5059,3 +5059,5 @@ Unknown database 'snorby' (code: 1049, sql state: 42000, query: , uri: )
 (0.000353) SELECT `id`, `vseq`, `ctime`, `version` FROM `schema` ORDER BY `id` LIMIT 1
   [1m[36mSQL (0.344ms)[0m  [1mINSERT INTO `schema` (`vseq`, `ctime`, `version`) VALUES (107, '2010-10-09 15:01:12', 'Snorby 2.0.0')[0m
 (0.000344) INSERT INTO `schema` (`vseq`, `ctime`, `version`) VALUES (107, '2010-10-09 15:01:12', 'Snorby 2.0.0')
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
