@@ -5069,3 +5069,560 @@ Unknown database 'snorby' (code: 1049, sql state: 42000, query: , uri: )
 [datamapper] Setting up :default repository: 'snorby' on mysql
 [datamapper] Setting up the "development" environment:
 [datamapper] Setting up :default repository: 'snorby' on mysql
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-09 15:43:30 -0400
+  Processing by PageController#dashboard as HTML
+Completed   in 73ms
+
+ActionView::MissingTemplate (Missing template page/dashboard with {:handlers=>[:erb, :rjs, :builder, :rhtml, :rxml], :formats=>[:html], :locale=>[:en, :en]} in view paths "/Users/mephux/Source/ruby/snorby/app/views", "/Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/missing_template.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-09 15:43:44 -0400
+  Processing by PageController#dashboard as HTML
+Rendered page/dashboard.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 7ms (Views: 6.2ms | ActiveRecord: 0.0ms | Models: 0.000ms)
+
+
+Started GET "/javascripts/jquery.min" for 127.0.0.1 at 2010-10-09 15:43:44 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2010-10-09 15:43:51 -0400
+
+ActionController::RoutingError (No route matches "/users"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2010-10-09 15:43:54 -0400
+
+ActionController::RoutingError (No route matches "/login"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+  [1m[36mSQL (13.3ms)[0m  [1mDROP DATABASE IF EXISTS `snorby`[0m
+  [1m[35mSQL (0.3ms)[0m  CREATE DATABASE `snorby` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`
+  [1m[36mSQL (0.072ms)[0m  [1mSET sql_auto_is_null = 0[0m
+(0.000072) SET sql_auto_is_null = 0
+  [1m[35mSQL (0.083ms)[0m  SET SESSION sql_mode = 'ANSI,NO_BACKSLASH_ESCAPES,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION,NO_UNSIGNED_SUBTRACTION,TRADITIONAL'
+(0.000083) SET SESSION sql_mode = 'ANSI,NO_BACKSLASH_ESCAPES,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION,NO_UNSIGNED_SUBTRACTION,TRADITIONAL'
+  [1m[36mSQL (2.697ms)[0m  [1mSHOW TABLES LIKE 'users'[0m
+(0.002697) SHOW TABLES LIKE 'users'
+  [1m[35mSQL (0.130ms)[0m  SET sql_auto_is_null = 0
+(0.000130) SET sql_auto_is_null = 0
+  [1m[36mSQL (0.139ms)[0m  [1mSET SESSION sql_mode = 'ANSI,NO_BACKSLASH_ESCAPES,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION,NO_UNSIGNED_SUBTRACTION,TRADITIONAL'[0m
+(0.000139) SET SESSION sql_mode = 'ANSI,NO_BACKSLASH_ESCAPES,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION,NO_UNSIGNED_SUBTRACTION,TRADITIONAL'
+  [1m[35mSQL (0.322ms)[0m  SHOW VARIABLES LIKE 'character_set_connection'
+(0.000322) SHOW VARIABLES LIKE 'character_set_connection'
+  [1m[36mSQL (0.254ms)[0m  [1mSHOW VARIABLES LIKE 'collation_connection'[0m
+(0.000254) SHOW VARIABLES LIKE 'collation_connection'
+  [1m[35mSQL (40.117ms)[0m  CREATE TABLE `users` (`email` VARCHAR(50) NOT NULL, `encrypted_password` VARCHAR(128) DEFAULT '' NOT NULL, `password_salt` VARCHAR(50) DEFAULT '' NOT NULL, `remember_token` VARCHAR(50), `remember_created_at` DATETIME, `reset_password_token` VARCHAR(50), `sign_in_count` INTEGER DEFAULT 0, `current_sign_in_at` DATETIME, `last_sign_in_at` DATETIME, `current_sign_in_ip` VARCHAR(50), `last_sign_in_ip` VARCHAR(50), `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `name` VARCHAR(50), `timezone` VARCHAR(50) DEFAULT 'UTC', `admin` BOOLEAN, `created_at` DATETIME NOT NULL, `updated_at` DATETIME NOT NULL, PRIMARY KEY(`id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.040117) CREATE TABLE `users` (`email` VARCHAR(50) NOT NULL, `encrypted_password` VARCHAR(128) DEFAULT '' NOT NULL, `password_salt` VARCHAR(50) DEFAULT '' NOT NULL, `remember_token` VARCHAR(50), `remember_created_at` DATETIME, `reset_password_token` VARCHAR(50), `sign_in_count` INTEGER DEFAULT 0, `current_sign_in_at` DATETIME, `last_sign_in_at` DATETIME, `current_sign_in_ip` VARCHAR(50), `last_sign_in_ip` VARCHAR(50), `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `name` VARCHAR(50), `timezone` VARCHAR(50) DEFAULT 'UTC', `admin` BOOLEAN, `created_at` DATETIME NOT NULL, `updated_at` DATETIME NOT NULL, PRIMARY KEY(`id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (134.119ms)[0m  [1mCREATE UNIQUE INDEX `unique_users_email` ON `users` (`email`)[0m
+(0.134119) CREATE UNIQUE INDEX `unique_users_email` ON `users` (`email`)
+  [1m[35mSQL (0.318ms)[0m  SHOW TABLES LIKE 'users'
+(0.000318) SHOW TABLES LIKE 'users'
+  [1m[36mSQL (1.016ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'email'[0m
+(0.001016) SHOW COLUMNS FROM `users` LIKE 'email'
+  [1m[35mSQL (0.760ms)[0m  SHOW COLUMNS FROM `users` LIKE 'encrypted_password'
+(0.000760) SHOW COLUMNS FROM `users` LIKE 'encrypted_password'
+  [1m[36mSQL (0.999ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'password_salt'[0m
+(0.000999) SHOW COLUMNS FROM `users` LIKE 'password_salt'
+  [1m[35mSQL (0.632ms)[0m  SHOW COLUMNS FROM `users` LIKE 'remember_token'
+(0.000632) SHOW COLUMNS FROM `users` LIKE 'remember_token'
+  [1m[36mSQL (0.737ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'remember_created_at'[0m
+(0.000737) SHOW COLUMNS FROM `users` LIKE 'remember_created_at'
+  [1m[35mSQL (2.175ms)[0m  SHOW COLUMNS FROM `users` LIKE 'reset_password_token'
+(0.002175) SHOW COLUMNS FROM `users` LIKE 'reset_password_token'
+  [1m[36mSQL (0.662ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'sign_in_count'[0m
+(0.000662) SHOW COLUMNS FROM `users` LIKE 'sign_in_count'
+  [1m[35mSQL (0.592ms)[0m  SHOW COLUMNS FROM `users` LIKE 'current_sign_in_at'
+(0.000592) SHOW COLUMNS FROM `users` LIKE 'current_sign_in_at'
+  [1m[36mSQL (1.911ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'last_sign_in_at'[0m
+(0.001911) SHOW COLUMNS FROM `users` LIKE 'last_sign_in_at'
+  [1m[35mSQL (1.054ms)[0m  SHOW COLUMNS FROM `users` LIKE 'current_sign_in_ip'
+(0.001054) SHOW COLUMNS FROM `users` LIKE 'current_sign_in_ip'
+  [1m[36mSQL (6.441ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'last_sign_in_ip'[0m
+(0.006441) SHOW COLUMNS FROM `users` LIKE 'last_sign_in_ip'
+  [1m[35mSQL (1.103ms)[0m  SHOW COLUMNS FROM `users` LIKE 'id'
+(0.001103) SHOW COLUMNS FROM `users` LIKE 'id'
+  [1m[36mSQL (0.645ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'name'[0m
+(0.000645) SHOW COLUMNS FROM `users` LIKE 'name'
+  [1m[35mSQL (1.589ms)[0m  SHOW COLUMNS FROM `users` LIKE 'timezone'
+(0.001589) SHOW COLUMNS FROM `users` LIKE 'timezone'
+  [1m[36mSQL (0.692ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'admin'[0m
+(0.000692) SHOW COLUMNS FROM `users` LIKE 'admin'
+  [1m[35mSQL (0.685ms)[0m  SHOW COLUMNS FROM `users` LIKE 'created_at'
+(0.000685) SHOW COLUMNS FROM `users` LIKE 'created_at'
+  [1m[36mSQL (1.604ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'updated_at'[0m
+(0.001604) SHOW COLUMNS FROM `users` LIKE 'updated_at'
+  [1m[35mSQL (0.240ms)[0m  SHOW TABLES LIKE 'sig_class'
+(0.000240) SHOW TABLES LIKE 'sig_class'
+  [1m[36mSQL (10.394ms)[0m  [1mCREATE TABLE `sig_class` (`sig_class_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `sig_class_name` VARCHAR(50), PRIMARY KEY(`sig_class_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci[0m
+(0.010394) CREATE TABLE `sig_class` (`sig_class_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `sig_class_name` VARCHAR(50), PRIMARY KEY(`sig_class_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[35mSQL (0.273ms)[0m  SHOW TABLES LIKE 'detail'
+(0.000273) SHOW TABLES LIKE 'detail'
+  [1m[36mSQL (29.638ms)[0m  [1mCREATE TABLE `detail` (`detail_type` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `detail_text` TEXT, PRIMARY KEY(`detail_type`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci[0m
+(0.029638) CREATE TABLE `detail` (`detail_type` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `detail_text` TEXT, PRIMARY KEY(`detail_type`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[35mSQL (28.697ms)[0m  CREATE INDEX `index_detail_detail_type` ON `detail` (`detail_type`)
+(0.028697) CREATE INDEX `index_detail_detail_type` ON `detail` (`detail_type`)
+  [1m[36mSQL (0.266ms)[0m  [1mSHOW TABLES LIKE 'encoding'[0m
+(0.000266) SHOW TABLES LIKE 'encoding'
+  [1m[35mSQL (21.500ms)[0m  CREATE TABLE `encoding` (`encoding_type` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `encoding_text` TEXT, PRIMARY KEY(`encoding_type`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.021500) CREATE TABLE `encoding` (`encoding_type` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `encoding_text` TEXT, PRIMARY KEY(`encoding_type`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (0.229ms)[0m  [1mSHOW TABLES LIKE 'event'[0m
+(0.000229) SHOW TABLES LIKE 'event'
+  [1m[35mSQL (21.643ms)[0m  CREATE TABLE `event` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `signature` INTEGER, `timestamp` DATETIME, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.021643) CREATE TABLE `event` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `signature` INTEGER, `timestamp` DATETIME, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (0.348ms)[0m  [1mSHOW TABLES LIKE 'icmphdr'[0m
+(0.000348) SHOW TABLES LIKE 'icmphdr'
+  [1m[35mSQL (23.268ms)[0m  CREATE TABLE `icmphdr` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `icmp_type` INTEGER, `icmp_code` INTEGER, `icmp_csum` INTEGER, `icmp_id` INTEGER, `icmp_seq` INTEGER, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.023268) CREATE TABLE `icmphdr` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `icmp_type` INTEGER, `icmp_code` INTEGER, `icmp_csum` INTEGER, `icmp_id` INTEGER, `icmp_seq` INTEGER, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (0.250ms)[0m  [1mSHOW TABLES LIKE 'iphdr'[0m
+(0.000250) SHOW TABLES LIKE 'iphdr'
+  [1m[35mSQL (27.213ms)[0m  CREATE TABLE `iphdr` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `ip_src` INTEGER, `ip_dst` INTEGER, `ip_ver` INTEGER, `ip_hlen` INTEGER, `ip_tos` INTEGER, `ip_len` INTEGER, `ip_id` INTEGER, `ip_flags` INTEGER, `ip_off` INTEGER, `ip_ttl` INTEGER, `ip_proto` INTEGER, `ip_csum` INTEGER, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.027213) CREATE TABLE `iphdr` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `ip_src` INTEGER, `ip_dst` INTEGER, `ip_ver` INTEGER, `ip_hlen` INTEGER, `ip_tos` INTEGER, `ip_len` INTEGER, `ip_id` INTEGER, `ip_flags` INTEGER, `ip_off` INTEGER, `ip_ttl` INTEGER, `ip_proto` INTEGER, `ip_csum` INTEGER, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (0.327ms)[0m  [1mSHOW TABLES LIKE 'iphdr'[0m
+(0.000327) SHOW TABLES LIKE 'iphdr'
+  [1m[35mSQL (0.790ms)[0m  SHOW COLUMNS FROM `iphdr` LIKE 'sid'
+(0.000790) SHOW COLUMNS FROM `iphdr` LIKE 'sid'
+  [1m[36mSQL (0.690ms)[0m  [1mSHOW COLUMNS FROM `iphdr` LIKE 'cid'[0m
+(0.000690) SHOW COLUMNS FROM `iphdr` LIKE 'cid'
+  [1m[35mSQL (0.572ms)[0m  SHOW COLUMNS FROM `iphdr` LIKE 'ip_src'
+(0.000572) SHOW COLUMNS FROM `iphdr` LIKE 'ip_src'
+  [1m[36mSQL (1.289ms)[0m  [1mSHOW COLUMNS FROM `iphdr` LIKE 'ip_dst'[0m
+(0.001289) SHOW COLUMNS FROM `iphdr` LIKE 'ip_dst'
+  [1m[35mSQL (1.045ms)[0m  SHOW COLUMNS FROM `iphdr` LIKE 'ip_ver'
+(0.001045) SHOW COLUMNS FROM `iphdr` LIKE 'ip_ver'
+  [1m[36mSQL (1.311ms)[0m  [1mSHOW COLUMNS FROM `iphdr` LIKE 'ip_hlen'[0m
+(0.001311) SHOW COLUMNS FROM `iphdr` LIKE 'ip_hlen'
+  [1m[35mSQL (0.678ms)[0m  SHOW COLUMNS FROM `iphdr` LIKE 'ip_tos'
+(0.000678) SHOW COLUMNS FROM `iphdr` LIKE 'ip_tos'
+  [1m[36mSQL (0.838ms)[0m  [1mSHOW COLUMNS FROM `iphdr` LIKE 'ip_len'[0m
+(0.000838) SHOW COLUMNS FROM `iphdr` LIKE 'ip_len'
+  [1m[35mSQL (1.061ms)[0m  SHOW COLUMNS FROM `iphdr` LIKE 'ip_id'
+(0.001061) SHOW COLUMNS FROM `iphdr` LIKE 'ip_id'
+  [1m[36mSQL (0.738ms)[0m  [1mSHOW COLUMNS FROM `iphdr` LIKE 'ip_flags'[0m
+(0.000738) SHOW COLUMNS FROM `iphdr` LIKE 'ip_flags'
+  [1m[35mSQL (1.684ms)[0m  SHOW COLUMNS FROM `iphdr` LIKE 'ip_off'
+(0.001684) SHOW COLUMNS FROM `iphdr` LIKE 'ip_off'
+  [1m[36mSQL (0.658ms)[0m  [1mSHOW COLUMNS FROM `iphdr` LIKE 'ip_ttl'[0m
+(0.000658) SHOW COLUMNS FROM `iphdr` LIKE 'ip_ttl'
+  [1m[35mSQL (0.558ms)[0m  SHOW COLUMNS FROM `iphdr` LIKE 'ip_proto'
+(0.000558) SHOW COLUMNS FROM `iphdr` LIKE 'ip_proto'
+  [1m[36mSQL (2.003ms)[0m  [1mSHOW COLUMNS FROM `iphdr` LIKE 'ip_csum'[0m
+(0.002003) SHOW COLUMNS FROM `iphdr` LIKE 'ip_csum'
+  [1m[35mSQL (0.242ms)[0m  SHOW TABLES LIKE 'opt'
+(0.000242) SHOW TABLES LIKE 'opt'
+  [1m[36mSQL (22.244ms)[0m  [1mCREATE TABLE `opt` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `optid` INTEGER NOT NULL, `opt_proto` INTEGER, `opt_code` INTEGER, `opt_len` INTEGER, `opt_data` TEXT, PRIMARY KEY(`sid`, `cid`, `optid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci[0m
+(0.022244) CREATE TABLE `opt` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `optid` INTEGER NOT NULL, `opt_proto` INTEGER, `opt_code` INTEGER, `opt_len` INTEGER, `opt_data` TEXT, PRIMARY KEY(`sid`, `cid`, `optid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[35mSQL (0.243ms)[0m  SHOW TABLES LIKE 'data'
+(0.000243) SHOW TABLES LIKE 'data'
+  [1m[36mSQL (17.559ms)[0m  [1mCREATE TABLE `data` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `data_payload` TEXT, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci[0m
+(0.017559) CREATE TABLE `data` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `data_payload` TEXT, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[35mSQL (0.258ms)[0m  SHOW TABLES LIKE 'reference'
+(0.000258) SHOW TABLES LIKE 'reference'
+  [1m[36mSQL (18.238ms)[0m  [1mCREATE TABLE `reference` (`ref_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `ref_system_id` INTEGER, `ref_tag` TEXT, PRIMARY KEY(`ref_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci[0m
+(0.018238) CREATE TABLE `reference` (`ref_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `ref_system_id` INTEGER, `ref_tag` TEXT, PRIMARY KEY(`ref_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[35mSQL (0.316ms)[0m  SHOW TABLES LIKE 'reference_system'
+(0.000316) SHOW TABLES LIKE 'reference_system'
+  [1m[36mSQL (15.772ms)[0m  [1mCREATE TABLE `reference_system` (`ref_system_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `ref_system_name` VARCHAR(50), PRIMARY KEY(`ref_system_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci[0m
+(0.015772) CREATE TABLE `reference_system` (`ref_system_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `ref_system_name` VARCHAR(50), PRIMARY KEY(`ref_system_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[35mSQL (0.271ms)[0m  SHOW TABLES LIKE 'sensor'
+(0.000271) SHOW TABLES LIKE 'sensor'
+  [1m[36mSQL (23.479ms)[0m  [1mCREATE TABLE `sensor` (`sid` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `hostname` TEXT, `interface` TEXT, `filter` TEXT, `detail` INTEGER, `encoding` INTEGER, `last_cid` INTEGER, PRIMARY KEY(`sid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci[0m
+(0.023479) CREATE TABLE `sensor` (`sid` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `hostname` TEXT, `interface` TEXT, `filter` TEXT, `detail` INTEGER, `encoding` INTEGER, `last_cid` INTEGER, PRIMARY KEY(`sid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[35mSQL (0.288ms)[0m  SHOW TABLES LIKE 'sig_reference'
+(0.000288) SHOW TABLES LIKE 'sig_reference'
+  [1m[36mSQL (20.862ms)[0m  [1mCREATE TABLE `sig_reference` (`sig_id` INTEGER NOT NULL, `ref_seq` INTEGER NOT NULL, `ref_id` INTEGER, `signature_sig_class_id` INTEGER NOT NULL, PRIMARY KEY(`sig_id`, `ref_seq`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci[0m
+(0.020862) CREATE TABLE `sig_reference` (`sig_id` INTEGER NOT NULL, `ref_seq` INTEGER NOT NULL, `ref_id` INTEGER, `signature_sig_class_id` INTEGER NOT NULL, PRIMARY KEY(`sig_id`, `ref_seq`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[35mSQL (25.711ms)[0m  CREATE INDEX `index_sig_reference_signature` ON `sig_reference` (`signature_sig_class_id`)
+(0.025711) CREATE INDEX `index_sig_reference_signature` ON `sig_reference` (`signature_sig_class_id`)
+  [1m[36mSQL (0.250ms)[0m  [1mSHOW TABLES LIKE 'signature'[0m
+(0.000250) SHOW TABLES LIKE 'signature'
+  [1m[35mSQL (15.955ms)[0m  CREATE TABLE `signature` (`sig_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `sig_name` TEXT, `sig_class_id` INTEGER NOT NULL, `sig_priority` INTEGER, `sig_rev` INTEGER, `sig_sid` INTEGER, `sig_gid` INTEGER, PRIMARY KEY(`sig_id`, `sig_class_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.015955) CREATE TABLE `signature` (`sig_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `sig_name` TEXT, `sig_class_id` INTEGER NOT NULL, `sig_priority` INTEGER, `sig_rev` INTEGER, `sig_sid` INTEGER, `sig_gid` INTEGER, PRIMARY KEY(`sig_id`, `sig_class_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (0.269ms)[0m  [1mSHOW TABLES LIKE 'schema'[0m
+(0.000269) SHOW TABLES LIKE 'schema'
+  [1m[35mSQL (23.603ms)[0m  CREATE TABLE `schema` (`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `vseq` INTEGER, `ctime` DATETIME, `version` VARCHAR(50), PRIMARY KEY(`id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.023603) CREATE TABLE `schema` (`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `vseq` INTEGER, `ctime` DATETIME, `version` VARCHAR(50), PRIMARY KEY(`id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (0.258ms)[0m  [1mSHOW TABLES LIKE 'tcphdr'[0m
+(0.000258) SHOW TABLES LIKE 'tcphdr'
+  [1m[35mSQL (20.849ms)[0m  CREATE TABLE `tcphdr` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `tcp_sport` INTEGER, `tcp_dport` INTEGER, `tcp_seq` INTEGER, `tcp_ack` INTEGER, `tcp_off` INTEGER, `tcp_res` INTEGER, `tcp_flags` INTEGER, `tcp_win` INTEGER, `tcp_csum` INTEGER, `tcp_urp` INTEGER, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.020849) CREATE TABLE `tcphdr` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `tcp_sport` INTEGER, `tcp_dport` INTEGER, `tcp_seq` INTEGER, `tcp_ack` INTEGER, `tcp_off` INTEGER, `tcp_res` INTEGER, `tcp_flags` INTEGER, `tcp_win` INTEGER, `tcp_csum` INTEGER, `tcp_urp` INTEGER, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (0.258ms)[0m  [1mSHOW TABLES LIKE 'udphdr'[0m
+(0.000258) SHOW TABLES LIKE 'udphdr'
+  [1m[35mSQL (23.747ms)[0m  CREATE TABLE `udphdr` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `udp_sport` INTEGER, `udp_dport` INTEGER, `udp_len` INTEGER, `udp_csum` INTEGER, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.023747) CREATE TABLE `udphdr` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `udp_sport` INTEGER, `udp_dport` INTEGER, `udp_len` INTEGER, `udp_csum` INTEGER, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (0.304ms)[0m  [1mSELECT `id`, `vseq`, `ctime`, `version` FROM `schema` ORDER BY `id` LIMIT 1[0m
+(0.000304) SELECT `id`, `vseq`, `ctime`, `version` FROM `schema` ORDER BY `id` LIMIT 1
+  [1m[35mSQL (0.370ms)[0m  INSERT INTO `schema` (`vseq`, `ctime`, `version`) VALUES (107, '2010-10-09 15:50:51', 'Snorby 2.0.0')
+(0.000370) INSERT INTO `schema` (`vseq`, `ctime`, `version`) VALUES (107, '2010-10-09 15:50:51', 'Snorby 2.0.0')
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+
+
+Started GET "/login" for 127.0.0.1 at 2010-10-09 15:51:30 -0400
+
+ActionController::RoutingError (No route matches "/login"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.4ms)
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-10-09 15:51:36 -0400
+
+ActionController::RoutingError (No route matches "/signin"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.8ms)
+
+
+Started GET "/sign_in" for 127.0.0.1 at 2010-10-09 15:51:39 -0400
+
+ActionController::RoutingError (No route matches "/sign_in"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-09 15:51:46 -0400
+  Processing by PageController#dashboard as HTML
+Rendered page/dashboard.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 7ms (Views: 6.8ms | ActiveRecord: 0.0ms | Models: 0.000ms)
+
+
+Started GET "/javascripts/jquery.min" for 127.0.0.1 at 2010-10-09 15:51:46 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2010-10-09 15:51:50 -0400
+
+ActionController::RoutingError (No route matches "/users"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/user" for 127.0.0.1 at 2010-10-09 15:51:53 -0400
+
+ActionController::RoutingError (No route matches "/user"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+
+
+Started GET "/devise" for 127.0.0.1 at 2010-10-09 15:52:01 -0400
+
+ActionController::RoutingError (No route matches "/devise"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+
+
+Started GET "/login" for 127.0.0.1 at 2010-10-09 15:57:49 -0400
+
+AbstractController::ActionNotFound (The action 'sign_in' could not be found for Devise::SessionsController):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/unknown_action.erb within rescues/layout (1.0ms)
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+
+
+Started GET "/login" for 127.0.0.1 at 2010-10-09 15:58:31 -0400
+  Processing by Devise::SessionsController#create as HTML
+Completed   in 0ms
+
+AbstractController::ActionNotFound (AbstractController::ActionNotFound):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/unknown_action.erb within rescues/layout (0.9ms)
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+
+
+Started GET "/login" for 127.0.0.1 at 2010-10-09 15:59:23 -0400
+
+ActionController::RoutingError (uninitialized constant UsersController):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.2ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2010-10-09 16:00:33 -0400
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (1.9ms)
+Rendered devise/sessions/new.html.erb within layouts/application (52.1ms)
+Completed 200 OK in 58ms (Views: 56.9ms | ActiveRecord: 0.0ms | Models: 0.000ms)
+
+
+Started GET "/javascripts/jquery.min" for 127.0.0.1 at 2010-10-09 16:00:33 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2010-10-09 16:02:17 -0400
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (2.0ms)
+Rendered devise/sessions/new.html.erb within layouts/application (7.6ms)
+Completed 200 OK in 13ms (Views: 12.1ms | ActiveRecord: 0.0ms | Models: 0.000ms)
+
+
+Started GET "/javascripts/jquery.min" for 127.0.0.1 at 2010-10-09 16:02:18 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.9ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2010-10-09 16:02:23 -0400
+  Processing by Devise::SessionsController#new as HTML
+Completed   in 0ms
+
+AbstractController::ActionNotFound (AbstractController::ActionNotFound):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/unknown_action.erb within rescues/layout (0.8ms)
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+
+
+Started GET "/login" for 127.0.0.1 at 2010-10-09 16:05:49 -0400
+  Processing by Devise::SessionsController#new as HTML
+Completed   in 1ms
+
+AbstractController::ActionNotFound (AbstractController::ActionNotFound):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/unknown_action.erb within rescues/layout (1.8ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2010-10-09 16:05:54 -0400
+  Processing by Devise::SessionsController#new as HTML
+Completed   in 0ms
+
+AbstractController::ActionNotFound (AbstractController::ActionNotFound):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/unknown_action.erb within rescues/layout (0.8ms)
+
+
+Started GET "/users/login" for 127.0.0.1 at 2010-10-09 16:05:58 -0400
+  Processing by Devise::SessionsController#new as HTML
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/shared/_links.erb (1.5ms)
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/sessions/new.html.erb within layouts/application (7.3ms)
+Completed 200 OK in 14ms (Views: 12.8ms | ActiveRecord: 0.0ms | Models: 0.000ms)
+
+
+Started GET "/javascripts/jquery.min" for 127.0.0.1 at 2010-10-09 16:05:59 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/users/login" for 127.0.0.1 at 2010-10-09 16:07:22 -0400
+  Processing by Devise::SessionsController#new as HTML
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/shared/_links.erb (1.9ms)
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/sessions/new.html.erb within layouts/application (18.1ms)
+Completed 200 OK in 28ms (Views: 26.1ms | ActiveRecord: 0.0ms | Models: 0.000ms)
+
+
+Started GET "/javascripts/jquery.min" for 127.0.0.1 at 2010-10-09 16:07:23 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2010-10-09 16:07:25 -0400
+  Processing by Devise::SessionsController#new as HTML
+Completed   in 0ms
+
+AbstractController::ActionNotFound (AbstractController::ActionNotFound):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/unknown_action.erb within rescues/layout (0.8ms)
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+
+
+Started GET "/login" for 127.0.0.1 at 2010-10-09 16:07:50 -0400
+  Processing by Devise::SessionsController#new as HTML
+Completed   in 0ms
+
+AbstractController::ActionNotFound (AbstractController::ActionNotFound):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/unknown_action.erb within rescues/layout (0.9ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2010-10-09 16:07:53 -0400
+  Processing by Devise::SessionsController#new as HTML
+Completed   in 0ms
+
+AbstractController::ActionNotFound (AbstractController::ActionNotFound):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/unknown_action.erb within rescues/layout (0.7ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2010-10-09 16:08:02 -0400
+
+ActionController::RoutingError (uninitialized constant UsersController):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2010-10-09 16:08:10 -0400
+  Processing by Devise::SessionsController#new as HTML
+Completed   in 0ms
+
+AbstractController::ActionNotFound (AbstractController::ActionNotFound):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/unknown_action.erb within rescues/layout (0.9ms)
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+
+
+Started GET "/login" for 127.0.0.1 at 2010-10-09 16:11:04 -0400
+  Processing by Devise::SessionsController#new as HTML
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/shared/_links.erb (1.8ms)
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/sessions/new.html.erb within layouts/application (8.0ms)
+Completed 200 OK in 14ms (Views: 13.2ms | ActiveRecord: 0.0ms | Models: 0.000ms)
+
+
+Started GET "/javascripts/jquery.min" for 127.0.0.1 at 2010-10-09 16:11:05 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+
+
+Started GET "/logout" for 127.0.0.1 at 2010-10-09 16:11:09 -0400
+
+AbstractController::ActionNotFound (The action 'logout' could not be found for Devise::SessionsController):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/unknown_action.erb within rescues/layout (0.8ms)
+
+
+Started GET "/logout" for 127.0.0.1 at 2010-10-09 16:11:20 -0400
+  Processing by Devise::SessionsController#destroy as HTML
+Redirected to http://0.0.0.0:3000/
+Completed 302 Found in 1ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-09 16:11:21 -0400
+  Processing by PageController#dashboard as HTML
+Rendered page/dashboard.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 9ms (Views: 8.2ms | ActiveRecord: 0.0ms | Models: 0.000ms)
+
+
+Started GET "/javascripts/jquery.min" for 127.0.0.1 at 2010-10-09 16:11:21 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/reset/password" for 127.0.0.1 at 2010-10-09 16:11:29 -0400
+  Processing by Devise::PasswordsController#edit as HTML
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/shared/_links.erb (1.6ms)
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/passwords/edit.html.erb within layouts/application (7.2ms)
+Completed 200 OK in 13ms (Views: 12.4ms | ActiveRecord: 0.0ms | Models: 0.000ms)
+
+
+Started GET "/javascripts/jquery.min" for 127.0.0.1 at 2010-10-09 16:11:29 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-09 16:11:36 -0400
+  Processing by PageController#dashboard as HTML
+Rendered page/dashboard.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 7ms (Views: 6.3ms | ActiveRecord: 0.0ms | Models: 0.000ms)
+
+
+Started GET "/javascripts/jquery.min" for 127.0.0.1 at 2010-10-09 16:11:36 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2010-10-09 16:11:40 -0400
+  Processing by Devise::SessionsController#new as HTML
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/shared/_links.erb (2.2ms)
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/sessions/new.html.erb within layouts/application (13.8ms)
+Completed 200 OK in 20ms (Views: 19.0ms | ActiveRecord: 0.0ms | Models: 0.000ms)
+
+
+Started GET "/javascripts/jquery.min" for 127.0.0.1 at 2010-10-09 16:11:40 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
