@@ -8,6 +8,10 @@ Snorby::Application.routes.draw do
 
   root :to => "page#dashboard"
 
+  resources :users do
+    
+  end
+
   resources :page do
 
   end

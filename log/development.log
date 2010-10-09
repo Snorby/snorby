@@ -6152,3 +6152,925 @@ Started GET "/" for 127.0.0.1 at 2010-10-09 16:44:17 -0400
   [1m[36mSQL (0.265ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1[0m
 Rendered page/dashboard.html.erb within layouts/application (1.8ms)
 Completed 200 OK in 9ms (Views: 6.2ms | ActiveRecord: 0.3ms | Models: 0.265ms)
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+
+
+Started GET "/users" for 127.0.0.1 at 2010-10-09 16:46:23 -0400
+
+ActionController::RoutingError (No route matches "/users"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-09 16:46:32 -0400
+  Processing by PageController#dashboard as HTML
+  [1m[36mSQL (0.418ms)[0m  [1mSET sql_auto_is_null = 0[0m
+  [1m[35mSQL (0.072ms)[0m  SET SESSION sql_mode = 'ANSI,NO_BACKSLASH_ESCAPES,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION,NO_UNSIGNED_SUBTRACTION,TRADITIONAL'
+  [1m[36mSQL (0.738ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1[0m
+Rendered page/dashboard.html.erb within layouts/application (49.0ms)
+Completed 200 OK in 59ms (Views: 53.4ms | ActiveRecord: 1.2ms | Models: 1.228ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2010-10-09 16:47:10 -0400
+
+ActionController::RoutingError (No route matches "/users"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/users/edit" for 127.0.0.1 at 2010-10-09 16:47:13 -0400
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[35mSQL (0.372ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/registrations/edit.html.erb within layouts/application (5.2ms)
+Completed 200 OK in 16ms (Views: 11.6ms | ActiveRecord: 0.4ms | Models: 0.372ms)
+
+
+Started GET "/users/edit" for 127.0.0.1 at 2010-10-09 16:49:10 -0400
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mSQL (0.091ms)[0m  [1mSET sql_auto_is_null = 0[0m
+  [1m[35mSQL (0.068ms)[0m  SET SESSION sql_mode = 'ANSI,NO_BACKSLASH_ESCAPES,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION,NO_UNSIGNED_SUBTRACTION,TRADITIONAL'
+  [1m[36mSQL (0.260ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1[0m
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/registrations/edit.html.erb within layouts/application (5.1ms)
+Completed 200 OK in 16ms (Views: 10.8ms | ActiveRecord: 0.4ms | Models: 0.419ms)
+
+
+Started GET "/users/edit" for 127.0.0.1 at 2010-10-09 16:49:30 -0400
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[35mSQL (0.296ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/registrations/edit.html.erb within layouts/application (9.4ms)
+Completed 200 OK in 20ms (Views: 16.3ms | ActiveRecord: 0.3ms | Models: 0.296ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2010-10-09 16:49:32 -0400
+
+ActionController::RoutingError (No route matches "/users"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2010-10-09 16:50:03 -0400
+  Processing by UsersController#index as HTML
+  [1m[36mSQL (0.266ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1[0m
+Rendered users/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 10ms (Views: 6.6ms | ActiveRecord: 0.3ms | Models: 0.266ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2010-10-09 16:50:16 -0400
+  Processing by UsersController#index as HTML
+  [1m[35mSQL (0.302ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1
+Rendered users/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 10ms (Views: 6.6ms | ActiveRecord: 0.3ms | Models: 0.302ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2010-10-09 16:50:30 -0400
+  Processing by UsersController#index as HTML
+  [1m[36mSQL (1.009ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1[0m
+Rendered users/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 11ms (Views: 7.4ms | ActiveRecord: 1.0ms | Models: 1.009ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2010-10-09 16:50:40 -0400
+  Processing by UsersController#index as HTML
+  [1m[35mSQL (0.285ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1
+Rendered users/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 11ms (Views: 7.5ms | ActiveRecord: 0.3ms | Models: 0.285ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2010-10-09 16:50:44 -0400
+  Processing by UsersController#index as HTML
+  [1m[36mSQL (0.260ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1[0m
+Rendered users/index.html.erb within layouts/application (3.4ms)
+Completed 200 OK in 11ms (Views: 8.0ms | ActiveRecord: 0.3ms | Models: 0.260ms)
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+  [1m[36mSQL (11.6ms)[0m  [1mDROP DATABASE IF EXISTS `snorby`[0m
+  [1m[35mSQL (0.3ms)[0m  CREATE DATABASE `snorby` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`
+  [1m[36mSQL (0.080ms)[0m  [1mSET sql_auto_is_null = 0[0m
+(0.000080) SET sql_auto_is_null = 0
+  [1m[35mSQL (0.058ms)[0m  SET SESSION sql_mode = 'ANSI,NO_BACKSLASH_ESCAPES,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION,NO_UNSIGNED_SUBTRACTION,TRADITIONAL'
+(0.000058) SET SESSION sql_mode = 'ANSI,NO_BACKSLASH_ESCAPES,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION,NO_UNSIGNED_SUBTRACTION,TRADITIONAL'
+  [1m[36mSQL (0.283ms)[0m  [1mSHOW TABLES LIKE 'users'[0m
+(0.000283) SHOW TABLES LIKE 'users'
+  [1m[35mSQL (0.047ms)[0m  SET sql_auto_is_null = 0
+(0.000047) SET sql_auto_is_null = 0
+  [1m[36mSQL (0.065ms)[0m  [1mSET SESSION sql_mode = 'ANSI,NO_BACKSLASH_ESCAPES,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION,NO_UNSIGNED_SUBTRACTION,TRADITIONAL'[0m
+(0.000065) SET SESSION sql_mode = 'ANSI,NO_BACKSLASH_ESCAPES,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION,NO_UNSIGNED_SUBTRACTION,TRADITIONAL'
+  [1m[35mSQL (0.316ms)[0m  SHOW VARIABLES LIKE 'character_set_connection'
+(0.000316) SHOW VARIABLES LIKE 'character_set_connection'
+  [1m[36mSQL (0.268ms)[0m  [1mSHOW VARIABLES LIKE 'collation_connection'[0m
+(0.000268) SHOW VARIABLES LIKE 'collation_connection'
+  [1m[35mSQL (20.193ms)[0m  CREATE TABLE `users` (`email` VARCHAR(50) NOT NULL, `encrypted_password` VARCHAR(128) DEFAULT '' NOT NULL, `password_salt` VARCHAR(50) DEFAULT '' NOT NULL, `remember_token` VARCHAR(50), `remember_created_at` DATETIME, `reset_password_token` VARCHAR(50), `sign_in_count` INTEGER DEFAULT 0, `current_sign_in_at` DATETIME, `last_sign_in_at` DATETIME, `current_sign_in_ip` VARCHAR(50), `last_sign_in_ip` VARCHAR(50), `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `name` VARCHAR(50), `timezone` VARCHAR(50) DEFAULT 'UTC', `admin` BOOLEAN DEFAULT FALSE, `created_at` DATETIME NOT NULL, `updated_at` DATETIME NOT NULL, PRIMARY KEY(`id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.020193) CREATE TABLE `users` (`email` VARCHAR(50) NOT NULL, `encrypted_password` VARCHAR(128) DEFAULT '' NOT NULL, `password_salt` VARCHAR(50) DEFAULT '' NOT NULL, `remember_token` VARCHAR(50), `remember_created_at` DATETIME, `reset_password_token` VARCHAR(50), `sign_in_count` INTEGER DEFAULT 0, `current_sign_in_at` DATETIME, `last_sign_in_at` DATETIME, `current_sign_in_ip` VARCHAR(50), `last_sign_in_ip` VARCHAR(50), `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `name` VARCHAR(50), `timezone` VARCHAR(50) DEFAULT 'UTC', `admin` BOOLEAN DEFAULT FALSE, `created_at` DATETIME NOT NULL, `updated_at` DATETIME NOT NULL, PRIMARY KEY(`id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (50.986ms)[0m  [1mCREATE UNIQUE INDEX `unique_users_email` ON `users` (`email`)[0m
+(0.050986) CREATE UNIQUE INDEX `unique_users_email` ON `users` (`email`)
+  [1m[35mSQL (0.458ms)[0m  SHOW TABLES LIKE 'users'
+(0.000458) SHOW TABLES LIKE 'users'
+  [1m[36mSQL (1.208ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'email'[0m
+(0.001208) SHOW COLUMNS FROM `users` LIKE 'email'
+  [1m[35mSQL (1.120ms)[0m  SHOW COLUMNS FROM `users` LIKE 'encrypted_password'
+(0.001120) SHOW COLUMNS FROM `users` LIKE 'encrypted_password'
+  [1m[36mSQL (2.826ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'password_salt'[0m
+(0.002826) SHOW COLUMNS FROM `users` LIKE 'password_salt'
+  [1m[35mSQL (0.718ms)[0m  SHOW COLUMNS FROM `users` LIKE 'remember_token'
+(0.000718) SHOW COLUMNS FROM `users` LIKE 'remember_token'
+  [1m[36mSQL (0.657ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'remember_created_at'[0m
+(0.000657) SHOW COLUMNS FROM `users` LIKE 'remember_created_at'
+  [1m[35mSQL (3.007ms)[0m  SHOW COLUMNS FROM `users` LIKE 'reset_password_token'
+(0.003007) SHOW COLUMNS FROM `users` LIKE 'reset_password_token'
+  [1m[36mSQL (2.336ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'sign_in_count'[0m
+(0.002336) SHOW COLUMNS FROM `users` LIKE 'sign_in_count'
+  [1m[35mSQL (0.846ms)[0m  SHOW COLUMNS FROM `users` LIKE 'current_sign_in_at'
+(0.000846) SHOW COLUMNS FROM `users` LIKE 'current_sign_in_at'
+  [1m[36mSQL (0.730ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'last_sign_in_at'[0m
+(0.000730) SHOW COLUMNS FROM `users` LIKE 'last_sign_in_at'
+  [1m[35mSQL (1.276ms)[0m  SHOW COLUMNS FROM `users` LIKE 'current_sign_in_ip'
+(0.001276) SHOW COLUMNS FROM `users` LIKE 'current_sign_in_ip'
+  [1m[36mSQL (0.883ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'last_sign_in_ip'[0m
+(0.000883) SHOW COLUMNS FROM `users` LIKE 'last_sign_in_ip'
+  [1m[35mSQL (0.567ms)[0m  SHOW COLUMNS FROM `users` LIKE 'id'
+(0.000567) SHOW COLUMNS FROM `users` LIKE 'id'
+  [1m[36mSQL (0.600ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'name'[0m
+(0.000600) SHOW COLUMNS FROM `users` LIKE 'name'
+  [1m[35mSQL (0.663ms)[0m  SHOW COLUMNS FROM `users` LIKE 'timezone'
+(0.000663) SHOW COLUMNS FROM `users` LIKE 'timezone'
+  [1m[36mSQL (0.915ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'admin'[0m
+(0.000915) SHOW COLUMNS FROM `users` LIKE 'admin'
+  [1m[35mSQL (1.651ms)[0m  SHOW COLUMNS FROM `users` LIKE 'created_at'
+(0.001651) SHOW COLUMNS FROM `users` LIKE 'created_at'
+  [1m[36mSQL (0.779ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'updated_at'[0m
+(0.000779) SHOW COLUMNS FROM `users` LIKE 'updated_at'
+  [1m[35mSQL (0.208ms)[0m  SHOW TABLES LIKE 'sig_class'
+(0.000208) SHOW TABLES LIKE 'sig_class'
+  [1m[36mSQL (28.707ms)[0m  [1mCREATE TABLE `sig_class` (`sig_class_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `sig_class_name` VARCHAR(50), PRIMARY KEY(`sig_class_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci[0m
+(0.028707) CREATE TABLE `sig_class` (`sig_class_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `sig_class_name` VARCHAR(50), PRIMARY KEY(`sig_class_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[35mSQL (0.240ms)[0m  SHOW TABLES LIKE 'detail'
+(0.000240) SHOW TABLES LIKE 'detail'
+  [1m[36mSQL (22.203ms)[0m  [1mCREATE TABLE `detail` (`detail_type` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `detail_text` TEXT, PRIMARY KEY(`detail_type`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci[0m
+(0.022203) CREATE TABLE `detail` (`detail_type` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `detail_text` TEXT, PRIMARY KEY(`detail_type`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[35mSQL (30.558ms)[0m  CREATE INDEX `index_detail_detail_type` ON `detail` (`detail_type`)
+(0.030558) CREATE INDEX `index_detail_detail_type` ON `detail` (`detail_type`)
+  [1m[36mSQL (0.238ms)[0m  [1mSHOW TABLES LIKE 'encoding'[0m
+(0.000238) SHOW TABLES LIKE 'encoding'
+  [1m[35mSQL (21.365ms)[0m  CREATE TABLE `encoding` (`encoding_type` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `encoding_text` TEXT, PRIMARY KEY(`encoding_type`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.021365) CREATE TABLE `encoding` (`encoding_type` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `encoding_text` TEXT, PRIMARY KEY(`encoding_type`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (0.321ms)[0m  [1mSHOW TABLES LIKE 'event'[0m
+(0.000321) SHOW TABLES LIKE 'event'
+  [1m[35mSQL (21.539ms)[0m  CREATE TABLE `event` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `signature` INTEGER, `timestamp` DATETIME, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.021539) CREATE TABLE `event` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `signature` INTEGER, `timestamp` DATETIME, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (0.271ms)[0m  [1mSHOW TABLES LIKE 'icmphdr'[0m
+(0.000271) SHOW TABLES LIKE 'icmphdr'
+  [1m[35mSQL (24.779ms)[0m  CREATE TABLE `icmphdr` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `icmp_type` INTEGER, `icmp_code` INTEGER, `icmp_csum` INTEGER, `icmp_id` INTEGER, `icmp_seq` INTEGER, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.024779) CREATE TABLE `icmphdr` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `icmp_type` INTEGER, `icmp_code` INTEGER, `icmp_csum` INTEGER, `icmp_id` INTEGER, `icmp_seq` INTEGER, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (0.245ms)[0m  [1mSHOW TABLES LIKE 'iphdr'[0m
+(0.000245) SHOW TABLES LIKE 'iphdr'
+  [1m[35mSQL (20.787ms)[0m  CREATE TABLE `iphdr` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `ip_src` INTEGER, `ip_dst` INTEGER, `ip_ver` INTEGER, `ip_hlen` INTEGER, `ip_tos` INTEGER, `ip_len` INTEGER, `ip_id` INTEGER, `ip_flags` INTEGER, `ip_off` INTEGER, `ip_ttl` INTEGER, `ip_proto` INTEGER, `ip_csum` INTEGER, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.020787) CREATE TABLE `iphdr` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `ip_src` INTEGER, `ip_dst` INTEGER, `ip_ver` INTEGER, `ip_hlen` INTEGER, `ip_tos` INTEGER, `ip_len` INTEGER, `ip_id` INTEGER, `ip_flags` INTEGER, `ip_off` INTEGER, `ip_ttl` INTEGER, `ip_proto` INTEGER, `ip_csum` INTEGER, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (0.269ms)[0m  [1mSHOW TABLES LIKE 'iphdr'[0m
+(0.000269) SHOW TABLES LIKE 'iphdr'
+  [1m[35mSQL (0.773ms)[0m  SHOW COLUMNS FROM `iphdr` LIKE 'sid'
+(0.000773) SHOW COLUMNS FROM `iphdr` LIKE 'sid'
+  [1m[36mSQL (0.837ms)[0m  [1mSHOW COLUMNS FROM `iphdr` LIKE 'cid'[0m
+(0.000837) SHOW COLUMNS FROM `iphdr` LIKE 'cid'
+  [1m[35mSQL (0.574ms)[0m  SHOW COLUMNS FROM `iphdr` LIKE 'ip_src'
+(0.000574) SHOW COLUMNS FROM `iphdr` LIKE 'ip_src'
+  [1m[36mSQL (0.867ms)[0m  [1mSHOW COLUMNS FROM `iphdr` LIKE 'ip_dst'[0m
+(0.000867) SHOW COLUMNS FROM `iphdr` LIKE 'ip_dst'
+  [1m[35mSQL (2.432ms)[0m  SHOW COLUMNS FROM `iphdr` LIKE 'ip_ver'
+(0.002432) SHOW COLUMNS FROM `iphdr` LIKE 'ip_ver'
+  [1m[36mSQL (0.659ms)[0m  [1mSHOW COLUMNS FROM `iphdr` LIKE 'ip_hlen'[0m
+(0.000659) SHOW COLUMNS FROM `iphdr` LIKE 'ip_hlen'
+  [1m[35mSQL (0.620ms)[0m  SHOW COLUMNS FROM `iphdr` LIKE 'ip_tos'
+(0.000620) SHOW COLUMNS FROM `iphdr` LIKE 'ip_tos'
+  [1m[36mSQL (1.434ms)[0m  [1mSHOW COLUMNS FROM `iphdr` LIKE 'ip_len'[0m
+(0.001434) SHOW COLUMNS FROM `iphdr` LIKE 'ip_len'
+  [1m[35mSQL (0.997ms)[0m  SHOW COLUMNS FROM `iphdr` LIKE 'ip_id'
+(0.000997) SHOW COLUMNS FROM `iphdr` LIKE 'ip_id'
+  [1m[36mSQL (1.176ms)[0m  [1mSHOW COLUMNS FROM `iphdr` LIKE 'ip_flags'[0m
+(0.001176) SHOW COLUMNS FROM `iphdr` LIKE 'ip_flags'
+  [1m[35mSQL (0.623ms)[0m  SHOW COLUMNS FROM `iphdr` LIKE 'ip_off'
+(0.000623) SHOW COLUMNS FROM `iphdr` LIKE 'ip_off'
+  [1m[36mSQL (0.555ms)[0m  [1mSHOW COLUMNS FROM `iphdr` LIKE 'ip_ttl'[0m
+(0.000555) SHOW COLUMNS FROM `iphdr` LIKE 'ip_ttl'
+  [1m[35mSQL (0.928ms)[0m  SHOW COLUMNS FROM `iphdr` LIKE 'ip_proto'
+(0.000928) SHOW COLUMNS FROM `iphdr` LIKE 'ip_proto'
+  [1m[36mSQL (0.713ms)[0m  [1mSHOW COLUMNS FROM `iphdr` LIKE 'ip_csum'[0m
+(0.000713) SHOW COLUMNS FROM `iphdr` LIKE 'ip_csum'
+  [1m[35mSQL (0.228ms)[0m  SHOW TABLES LIKE 'opt'
+(0.000228) SHOW TABLES LIKE 'opt'
+  [1m[36mSQL (20.918ms)[0m  [1mCREATE TABLE `opt` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `optid` INTEGER NOT NULL, `opt_proto` INTEGER, `opt_code` INTEGER, `opt_len` INTEGER, `opt_data` TEXT, PRIMARY KEY(`sid`, `cid`, `optid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci[0m
+(0.020918) CREATE TABLE `opt` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `optid` INTEGER NOT NULL, `opt_proto` INTEGER, `opt_code` INTEGER, `opt_len` INTEGER, `opt_data` TEXT, PRIMARY KEY(`sid`, `cid`, `optid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[35mSQL (0.291ms)[0m  SHOW TABLES LIKE 'data'
+(0.000291) SHOW TABLES LIKE 'data'
+  [1m[36mSQL (18.758ms)[0m  [1mCREATE TABLE `data` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `data_payload` TEXT, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci[0m
+(0.018758) CREATE TABLE `data` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `data_payload` TEXT, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[35mSQL (0.256ms)[0m  SHOW TABLES LIKE 'reference'
+(0.000256) SHOW TABLES LIKE 'reference'
+  [1m[36mSQL (16.289ms)[0m  [1mCREATE TABLE `reference` (`ref_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `ref_system_id` INTEGER, `ref_tag` TEXT, PRIMARY KEY(`ref_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci[0m
+(0.016289) CREATE TABLE `reference` (`ref_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `ref_system_id` INTEGER, `ref_tag` TEXT, PRIMARY KEY(`ref_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[35mSQL (0.265ms)[0m  SHOW TABLES LIKE 'reference_system'
+(0.000265) SHOW TABLES LIKE 'reference_system'
+  [1m[36mSQL (16.653ms)[0m  [1mCREATE TABLE `reference_system` (`ref_system_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `ref_system_name` VARCHAR(50), PRIMARY KEY(`ref_system_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci[0m
+(0.016653) CREATE TABLE `reference_system` (`ref_system_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `ref_system_name` VARCHAR(50), PRIMARY KEY(`ref_system_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[35mSQL (0.253ms)[0m  SHOW TABLES LIKE 'sensor'
+(0.000253) SHOW TABLES LIKE 'sensor'
+  [1m[36mSQL (15.092ms)[0m  [1mCREATE TABLE `sensor` (`sid` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `hostname` TEXT, `interface` TEXT, `filter` TEXT, `detail` INTEGER, `encoding` INTEGER, `last_cid` INTEGER, PRIMARY KEY(`sid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci[0m
+(0.015092) CREATE TABLE `sensor` (`sid` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `hostname` TEXT, `interface` TEXT, `filter` TEXT, `detail` INTEGER, `encoding` INTEGER, `last_cid` INTEGER, PRIMARY KEY(`sid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[35mSQL (0.263ms)[0m  SHOW TABLES LIKE 'sig_reference'
+(0.000263) SHOW TABLES LIKE 'sig_reference'
+  [1m[36mSQL (16.376ms)[0m  [1mCREATE TABLE `sig_reference` (`sig_id` INTEGER NOT NULL, `ref_seq` INTEGER NOT NULL, `ref_id` INTEGER, `signature_sig_class_id` INTEGER NOT NULL, PRIMARY KEY(`sig_id`, `ref_seq`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci[0m
+(0.016376) CREATE TABLE `sig_reference` (`sig_id` INTEGER NOT NULL, `ref_seq` INTEGER NOT NULL, `ref_id` INTEGER, `signature_sig_class_id` INTEGER NOT NULL, PRIMARY KEY(`sig_id`, `ref_seq`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[35mSQL (24.336ms)[0m  CREATE INDEX `index_sig_reference_signature` ON `sig_reference` (`signature_sig_class_id`)
+(0.024336) CREATE INDEX `index_sig_reference_signature` ON `sig_reference` (`signature_sig_class_id`)
+  [1m[36mSQL (0.262ms)[0m  [1mSHOW TABLES LIKE 'signature'[0m
+(0.000262) SHOW TABLES LIKE 'signature'
+  [1m[35mSQL (16.988ms)[0m  CREATE TABLE `signature` (`sig_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `sig_name` TEXT, `sig_class_id` INTEGER NOT NULL, `sig_priority` INTEGER, `sig_rev` INTEGER, `sig_sid` INTEGER, `sig_gid` INTEGER, PRIMARY KEY(`sig_id`, `sig_class_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.016988) CREATE TABLE `signature` (`sig_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `sig_name` TEXT, `sig_class_id` INTEGER NOT NULL, `sig_priority` INTEGER, `sig_rev` INTEGER, `sig_sid` INTEGER, `sig_gid` INTEGER, PRIMARY KEY(`sig_id`, `sig_class_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (0.354ms)[0m  [1mSHOW TABLES LIKE 'schema'[0m
+(0.000354) SHOW TABLES LIKE 'schema'
+  [1m[35mSQL (21.409ms)[0m  CREATE TABLE `schema` (`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `vseq` INTEGER, `ctime` DATETIME, `version` VARCHAR(50), PRIMARY KEY(`id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.021409) CREATE TABLE `schema` (`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `vseq` INTEGER, `ctime` DATETIME, `version` VARCHAR(50), PRIMARY KEY(`id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (0.376ms)[0m  [1mSHOW TABLES LIKE 'tcphdr'[0m
+(0.000376) SHOW TABLES LIKE 'tcphdr'
+  [1m[35mSQL (23.467ms)[0m  CREATE TABLE `tcphdr` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `tcp_sport` INTEGER, `tcp_dport` INTEGER, `tcp_seq` INTEGER, `tcp_ack` INTEGER, `tcp_off` INTEGER, `tcp_res` INTEGER, `tcp_flags` INTEGER, `tcp_win` INTEGER, `tcp_csum` INTEGER, `tcp_urp` INTEGER, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.023467) CREATE TABLE `tcphdr` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `tcp_sport` INTEGER, `tcp_dport` INTEGER, `tcp_seq` INTEGER, `tcp_ack` INTEGER, `tcp_off` INTEGER, `tcp_res` INTEGER, `tcp_flags` INTEGER, `tcp_win` INTEGER, `tcp_csum` INTEGER, `tcp_urp` INTEGER, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (0.290ms)[0m  [1mSHOW TABLES LIKE 'udphdr'[0m
+(0.000290) SHOW TABLES LIKE 'udphdr'
+  [1m[35mSQL (21.378ms)[0m  CREATE TABLE `udphdr` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `udp_sport` INTEGER, `udp_dport` INTEGER, `udp_len` INTEGER, `udp_csum` INTEGER, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.021378) CREATE TABLE `udphdr` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `udp_sport` INTEGER, `udp_dport` INTEGER, `udp_len` INTEGER, `udp_csum` INTEGER, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (0.327ms)[0m  [1mSELECT `id`, `vseq`, `ctime`, `version` FROM `schema` ORDER BY `id` LIMIT 1[0m
+(0.000327) SELECT `id`, `vseq`, `ctime`, `version` FROM `schema` ORDER BY `id` LIMIT 1
+  [1m[35mSQL (0.531ms)[0m  INSERT INTO `schema` (`vseq`, `ctime`, `version`) VALUES (107, '2010-10-09 16:51:49', 'Snorby 2.0.0')
+(0.000531) INSERT INTO `schema` (`vseq`, `ctime`, `version`) VALUES (107, '2010-10-09 16:51:49', 'Snorby 2.0.0')
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+
+
+Started GET "/users" for 127.0.0.1 at 2010-10-09 16:52:00 -0400
+  Processing by UsersController#index as HTML
+  [1m[36mSQL (0.060ms)[0m  [1mSET sql_auto_is_null = 0[0m
+  [1m[35mSQL (0.067ms)[0m  SET SESSION sql_mode = 'ANSI,NO_BACKSLASH_ESCAPES,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION,NO_UNSIGNED_SUBTRACTION,TRADITIONAL'
+  [1m[36mSQL (0.231ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1[0m
+Completed   in 46ms
+
+
+Started GET "/users/login" for 127.0.0.1 at 2010-10-09 16:52:01 -0400
+  Processing by Devise::SessionsController#new as HTML
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/shared/_links.erb (1.6ms)
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/sessions/new.html.erb within layouts/application (8.3ms)
+Completed 200 OK in 14ms (Views: 13.3ms | ActiveRecord: 0.0ms | Models: 0.000ms)
+
+
+Started GET "/users/password/new" for 127.0.0.1 at 2010-10-09 16:52:04 -0400
+  Processing by Devise::PasswordsController#new as HTML
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/shared/_links.erb (1.6ms)
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/passwords/new.html.erb within layouts/application (9.1ms)
+Completed 200 OK in 15ms (Views: 14.1ms | ActiveRecord: 0.0ms | Models: 0.000ms)
+
+
+Started GET "/users/login" for 127.0.0.1 at 2010-10-09 16:52:05 -0400
+  Processing by Devise::SessionsController#new as HTML
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/shared/_links.erb (1.5ms)
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/sessions/new.html.erb within layouts/application (7.3ms)
+Completed 200 OK in 13ms (Views: 12.1ms | ActiveRecord: 0.0ms | Models: 0.000ms)
+
+
+Started GET "/users/register" for 127.0.0.1 at 2010-10-09 16:52:07 -0400
+  Processing by Devise::RegistrationsController#new as HTML
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/shared/_links.erb (1.5ms)
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/registrations/new.html.erb within layouts/application (7.4ms)
+Completed 200 OK in 13ms (Views: 12.3ms | ActiveRecord: 0.0ms | Models: 0.000ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2010-10-09 16:52:16 -0400
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"iXhv2LdGP1J4rZWR2Y2bxeSEWV3tj13DTpvrchy2niY=", "user"=>{"email"=>"dustin.webber@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35mSQL (0.217ms)[0m  SELECT `id` FROM `users` WHERE `email` = 'dustin.webber@gmail.com' ORDER BY `id` LIMIT 1
+  [1m[36mSQL (0.194ms)[0m  [1mSELECT `id` FROM `users` WHERE `email` = 'dustin.webber@gmail.com' ORDER BY `id` LIMIT 1[0m
+  [1m[35mSQL (0.380ms)[0m  INSERT INTO `users` (`email`, `encrypted_password`, `password_salt`, `sign_in_count`, `timezone`, `admin`, `created_at`, `updated_at`) VALUES ('dustin.webber@gmail.com', '$2a$10$v/fhr0a2S356q941XwAQ1euJ5upqudehDy9zygB1/Q9wcW9od3w5y', '$2a$10$v/fhr0a2S356q941XwAQ1e', 0, 'UTC', FALSE, '2010-10-09 16:52:17', '2010-10-09 16:52:17')
+  [1m[36mSQL (0.723ms)[0m  [1mUPDATE `users` SET `sign_in_count` = 1, `current_sign_in_at` = '2010-10-09 16:52:17', `last_sign_in_at` = '2010-10-09 16:52:17', `current_sign_in_ip` = '127.0.0.1', `last_sign_in_ip` = '127.0.0.1' WHERE `id` = 1[0m
+Redirected to http://localhost:3000/users
+Completed 302 Found in 127ms
+
+
+Started GET "/users" for 127.0.0.1 at 2010-10-09 16:52:17 -0400
+  Processing by UsersController#index as HTML
+  [1m[35mSQL (0.270ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1
+Rendered users/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 10ms (Views: 6.7ms | ActiveRecord: 0.3ms | Models: 0.270ms)
+
+
+Started GET "/users/edit" for 127.0.0.1 at 2010-10-09 16:52:30 -0400
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mSQL (0.294ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1[0m
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/registrations/edit.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 14ms (Views: 10.2ms | ActiveRecord: 0.3ms | Models: 0.294ms)
+
+
+Started GET "/users/edit" for 127.0.0.1 at 2010-10-09 16:54:13 -0400
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[35mSQL (0.053ms)[0m  SET sql_auto_is_null = 0
+  [1m[36mSQL (0.109ms)[0m  [1mSET SESSION sql_mode = 'ANSI,NO_BACKSLASH_ESCAPES,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION,NO_UNSIGNED_SUBTRACTION,TRADITIONAL'[0m
+  [1m[35mSQL (0.288ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/registrations/edit.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 16ms (Views: 10.8ms | ActiveRecord: 0.4ms | Models: 0.450ms)
+
+
+Started GET "/users/edit" for 127.0.0.1 at 2010-10-09 16:54:14 -0400
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mSQL (0.254ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1[0m
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/registrations/edit.html.erb within layouts/application (4.6ms)
+Completed 200 OK in 13ms (Views: 10.1ms | ActiveRecord: 0.3ms | Models: 0.254ms)
+
+
+Started GET "/users/edit" for 127.0.0.1 at 2010-10-09 16:54:17 -0400
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[35mSQL (0.352ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/registrations/edit.html.erb within layouts/application (4.3ms)
+Completed 200 OK in 13ms (Views: 9.6ms | ActiveRecord: 0.4ms | Models: 0.352ms)
+
+
+Started GET "/users/edit" for 127.0.0.1 at 2010-10-09 16:54:25 -0400
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mSQL (0.435ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1[0m
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/registrations/edit.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 17ms (Views: 12.5ms | ActiveRecord: 0.4ms | Models: 0.435ms)
+
+
+Started GET "/users/edit" for 127.0.0.1 at 2010-10-09 16:54:27 -0400
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[35mSQL (0.256ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/registrations/edit.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 14ms (Views: 10.0ms | ActiveRecord: 0.3ms | Models: 0.256ms)
+
+
+Started GET "/users/edit" for 127.0.0.1 at 2010-10-09 16:54:36 -0400
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mSQL (0.353ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1[0m
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/registrations/edit.html.erb within layouts/application (8.0ms)
+Completed 200 OK in 22ms (Views: 16.2ms | ActiveRecord: 0.4ms | Models: 0.353ms)
+
+
+Started GET "/users/edit" for 127.0.0.1 at 2010-10-09 16:55:14 -0400
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[35mSQL (0.297ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/registrations/edit.html.erb within layouts/application (6.0ms)
+Completed 200 OK in 16ms (Views: 11.4ms | ActiveRecord: 0.3ms | Models: 0.297ms)
+
+
+Started GET "/users/edit" for 127.0.0.1 at 2010-10-09 16:55:42 -0400
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mSQL (0.336ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1[0m
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/registrations/edit.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 13ms (Views: 10.1ms | ActiveRecord: 0.3ms | Models: 0.336ms)
+
+
+Started GET "/users/edit" for 127.0.0.1 at 2010-10-09 16:55:44 -0400
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[35mSQL (1.361ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/registrations/edit.html.erb within layouts/application (4.6ms)
+Completed 200 OK in 15ms (Views: 9.8ms | ActiveRecord: 1.4ms | Models: 1.361ms)
+
+
+Started GET "/users/edit" for 127.0.0.1 at 2010-10-09 16:56:04 -0400
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mSQL (0.287ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1[0m
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/registrations/edit.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 19ms (Views: 15.9ms | ActiveRecord: 0.3ms | Models: 0.287ms)
+
+
+Started GET "/users/edit" for 127.0.0.1 at 2010-10-09 16:56:05 -0400
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[35mSQL (0.267ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/registrations/edit.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 13ms (Views: 10.2ms | ActiveRecord: 0.3ms | Models: 0.267ms)
+
+
+Started GET "/users/edit" for 127.0.0.1 at 2010-10-09 16:57:06 -0400
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mSQL (0.270ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1[0m
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/registrations/edit.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 13ms (Views: 9.9ms | ActiveRecord: 0.3ms | Models: 0.270ms)
+
+
+Started GET "/users/edit" for 127.0.0.1 at 2010-10-09 16:57:07 -0400
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[35mSQL (0.267ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/devise-1.1.3/app/views/devise/registrations/edit.html.erb within layouts/application (4.8ms)
+Completed 200 OK in 13ms (Views: 10.2ms | ActiveRecord: 0.3ms | Models: 0.267ms)
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+
+
+Started GET "/users/edit" for 127.0.0.1 at 2010-10-09 16:59:12 -0400
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mSQL (0.114ms)[0m  [1mSET sql_auto_is_null = 0[0m
+  [1m[35mSQL (0.069ms)[0m  SET SESSION sql_mode = 'ANSI,NO_BACKSLASH_ESCAPES,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION,NO_UNSIGNED_SUBTRACTION,TRADITIONAL'
+  [1m[36mSQL (0.273ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1[0m
+Rendered users/registrations/edit.html.erb within layouts/application (4.8ms)
+Completed 200 OK in 14ms (Views: 9.3ms | ActiveRecord: 0.5ms | Models: 0.456ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2010-10-09 16:59:19 -0400
+  Processing by Devise::RegistrationsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"iXhv2LdGP1J4rZWR2Y2bxeSEWV3tj13DTpvrchy2niY=", "user"=>{"email"=>"dustin.webber@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]", "admin"=>"1"}, "commit"=>"Update"}
+  [1m[35mSQL (0.379ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1
+Rendered users/registrations/edit.html.erb within layouts/application (4.8ms)
+Completed 200 OK in 135ms (Views: 9.5ms | ActiveRecord: 0.4ms | Models: 0.379ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2010-10-09 16:59:28 -0400
+  Processing by Devise::RegistrationsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"iXhv2LdGP1J4rZWR2Y2bxeSEWV3tj13DTpvrchy2niY=", "user"=>{"email"=>"dustin.webber@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]", "admin"=>"1"}, "commit"=>"Update"}
+  [1m[36mSQL (0.291ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1[0m
+Rendered users/registrations/edit.html.erb within layouts/application (5.4ms)
+Completed 200 OK in 98ms (Views: 9.9ms | ActiveRecord: 0.3ms | Models: 0.291ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2010-10-09 16:59:36 -0400
+  Processing by Devise::RegistrationsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"iXhv2LdGP1J4rZWR2Y2bxeSEWV3tj13DTpvrchy2niY=", "user"=>{"email"=>"dustin.webber@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]", "admin"=>"1"}, "commit"=>"Update"}
+  [1m[35mSQL (0.280ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1
+  [1m[36mSQL (0.641ms)[0m  [1mSELECT `id` FROM `users` WHERE `email` = 'dustin.webber@gmail.com' ORDER BY `id` LIMIT 1[0m
+  [1m[35mSQL (0.316ms)[0m  SELECT `id` FROM `users` WHERE `email` = 'dustin.webber@gmail.com' ORDER BY `id` LIMIT 1
+  [1m[36mSQL (0.465ms)[0m  [1mUPDATE `users` SET `admin` = TRUE, `updated_at` = '2010-10-09 16:59:36' WHERE `id` = 1[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 99ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-09 16:59:36 -0400
+  Processing by PageController#dashboard as HTML
+  [1m[35mSQL (0.253ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1
+Rendered page/dashboard.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 10ms (Views: 6.7ms | ActiveRecord: 0.3ms | Models: 0.253ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-09 17:00:01 -0400
+  Processing by PageController#dashboard as HTML
+  [1m[36mSQL (0.352ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1[0m
+Rendered page/dashboard.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 10ms (Views: 6.4ms | ActiveRecord: 0.4ms | Models: 0.352ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2010-10-09 17:00:05 -0400
+  Processing by UsersController#index as HTML
+  [1m[35mSQL (0.393ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1
+Rendered users/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 11ms (Views: 6.9ms | ActiveRecord: 0.4ms | Models: 0.393ms)
+
+
+Started GET "/users/edit" for 127.0.0.1 at 2010-10-09 17:00:11 -0400
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mSQL (0.278ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1[0m
+Rendered users/registrations/edit.html.erb within layouts/application (5.3ms)
+Completed 200 OK in 13ms (Views: 9.8ms | ActiveRecord: 0.3ms | Models: 0.278ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2010-10-09 17:00:14 -0400
+  Processing by Devise::RegistrationsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"iXhv2LdGP1J4rZWR2Y2bxeSEWV3tj13DTpvrchy2niY=", "user"=>{"email"=>"dustin.webber@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]", "admin"=>"0"}, "commit"=>"Update"}
+  [1m[35mSQL (0.348ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1
+Rendered users/registrations/edit.html.erb within layouts/application (5.2ms)
+Completed 200 OK in 100ms (Views: 10.0ms | ActiveRecord: 0.3ms | Models: 0.348ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2010-10-09 17:00:26 -0400
+  Processing by Devise::RegistrationsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"iXhv2LdGP1J4rZWR2Y2bxeSEWV3tj13DTpvrchy2niY=", "user"=>{"email"=>"dustin.webber@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]"}, "commit"=>"Update"}
+  [1m[36mSQL (0.270ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 89ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-09 17:00:27 -0400
+  Processing by PageController#dashboard as HTML
+  [1m[35mSQL (0.254ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1
+Rendered page/dashboard.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 9ms (Views: 6.2ms | ActiveRecord: 0.3ms | Models: 0.254ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2010-10-09 17:00:31 -0400
+  Processing by UsersController#index as HTML
+  [1m[36mSQL (0.366ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1[0m
+Rendered users/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 10ms (Views: 6.5ms | ActiveRecord: 0.4ms | Models: 0.366ms)
+
+
+Started GET "/users/edit" for 127.0.0.1 at 2010-10-09 17:00:36 -0400
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[35mSQL (0.249ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1
+Rendered users/registrations/edit.html.erb within layouts/application (4.8ms)
+Completed 200 OK in 12ms (Views: 9.1ms | ActiveRecord: 0.2ms | Models: 0.249ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2010-10-09 17:00:42 -0400
+  Processing by Devise::RegistrationsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"iXhv2LdGP1J4rZWR2Y2bxeSEWV3tj13DTpvrchy2niY=", "user"=>{"email"=>"dustin.webber@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]", "admin"=>"0"}, "commit"=>"Update"}
+  [1m[36mSQL (0.258ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1[0m
+  [1m[35mSQL (0.426ms)[0m  SELECT `id` FROM `users` WHERE `email` = 'dustin.webber@gmail.com' ORDER BY `id` LIMIT 1
+  [1m[36mSQL (0.209ms)[0m  [1mSELECT `id` FROM `users` WHERE `email` = 'dustin.webber@gmail.com' ORDER BY `id` LIMIT 1[0m
+  [1m[35mSQL (0.439ms)[0m  UPDATE `users` SET `admin` = FALSE, `updated_at` = '2010-10-09 17:00:42' WHERE `id` = 1
+Redirected to http://localhost:3000/
+Completed 302 Found in 97ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-09 17:00:42 -0400
+  Processing by PageController#dashboard as HTML
+  [1m[36mSQL (0.274ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1[0m
+Rendered page/dashboard.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 9ms (Views: 6.1ms | ActiveRecord: 0.3ms | Models: 0.274ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2010-10-09 17:00:46 -0400
+  Processing by UsersController#index as HTML
+  [1m[35mSQL (0.266ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1
+Rendered users/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 9ms (Views: 6.2ms | ActiveRecord: 0.3ms | Models: 0.266ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2010-10-09 17:01:03 -0400
+  Processing by UsersController#index as HTML
+  [1m[36mSQL (0.272ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1[0m
+Rendered users/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 9ms (Views: 6.2ms | ActiveRecord: 0.3ms | Models: 0.272ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2010-10-09 17:01:06 -0400
+  Processing by UsersController#index as HTML
+  [1m[35mSQL (0.270ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1
+Rendered users/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 10ms (Views: 7.0ms | ActiveRecord: 0.3ms | Models: 0.270ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2010-10-09 17:01:24 -0400
+  Processing by UsersController#index as HTML
+  [1m[36mSQL (0.263ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 4ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-09 17:01:24 -0400
+  Processing by PageController#dashboard as HTML
+  [1m[35mSQL (0.266ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1
+Rendered page/dashboard.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 10ms (Views: 6.4ms | ActiveRecord: 0.3ms | Models: 0.266ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-09 17:01:43 -0400
+  Processing by PageController#dashboard as HTML
+  [1m[36mSQL (0.275ms)[0m  [1mSELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1[0m
+Rendered page/dashboard.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 9ms (Views: 6.2ms | ActiveRecord: 0.3ms | Models: 0.275ms)
+
+
+Started GET "/users/edit" for 127.0.0.1 at 2010-10-09 17:01:49 -0400
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[35mSQL (0.249ms)[0m  SELECT `id`, `email`, `encrypted_password`, `password_salt`, `remember_token`, `remember_created_at`, `reset_password_token`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `name`, `timezone`, `admin`, `created_at`, `updated_at` FROM `users` WHERE `id` = 1 ORDER BY `id` LIMIT 1
+Rendered users/registrations/edit.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 13ms (Views: 9.0ms | ActiveRecord: 0.2ms | Models: 0.249ms)
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+  [1m[36mSQL (19.3ms)[0m  [1mDROP DATABASE IF EXISTS `snorby`[0m
+  [1m[35mSQL (0.4ms)[0m  CREATE DATABASE `snorby` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`
+  [1m[36mSQL (0.060ms)[0m  [1mSET sql_auto_is_null = 0[0m
+(0.000060) SET sql_auto_is_null = 0
+  [1m[35mSQL (0.058ms)[0m  SET SESSION sql_mode = 'ANSI,NO_BACKSLASH_ESCAPES,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION,NO_UNSIGNED_SUBTRACTION,TRADITIONAL'
+(0.000058) SET SESSION sql_mode = 'ANSI,NO_BACKSLASH_ESCAPES,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION,NO_UNSIGNED_SUBTRACTION,TRADITIONAL'
+  [1m[36mSQL (0.260ms)[0m  [1mSHOW TABLES LIKE 'users'[0m
+(0.000260) SHOW TABLES LIKE 'users'
+  [1m[35mSQL (0.047ms)[0m  SET sql_auto_is_null = 0
+(0.000047) SET sql_auto_is_null = 0
+  [1m[36mSQL (0.078ms)[0m  [1mSET SESSION sql_mode = 'ANSI,NO_BACKSLASH_ESCAPES,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION,NO_UNSIGNED_SUBTRACTION,TRADITIONAL'[0m
+(0.000078) SET SESSION sql_mode = 'ANSI,NO_BACKSLASH_ESCAPES,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION,NO_UNSIGNED_SUBTRACTION,TRADITIONAL'
+  [1m[35mSQL (0.331ms)[0m  SHOW VARIABLES LIKE 'character_set_connection'
+(0.000331) SHOW VARIABLES LIKE 'character_set_connection'
+  [1m[36mSQL (0.263ms)[0m  [1mSHOW VARIABLES LIKE 'collation_connection'[0m
+(0.000263) SHOW VARIABLES LIKE 'collation_connection'
+  [1m[35mSQL (34.538ms)[0m  CREATE TABLE `users` (`email` VARCHAR(50) NOT NULL, `encrypted_password` VARCHAR(128) DEFAULT '' NOT NULL, `password_salt` VARCHAR(50) DEFAULT '' NOT NULL, `remember_token` VARCHAR(50), `remember_created_at` DATETIME, `reset_password_token` VARCHAR(50), `sign_in_count` INTEGER DEFAULT 0, `current_sign_in_at` DATETIME, `last_sign_in_at` DATETIME, `current_sign_in_ip` VARCHAR(50), `last_sign_in_ip` VARCHAR(50), `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `name` VARCHAR(50), `timezone` VARCHAR(50) DEFAULT 'UTC', `admin` BOOLEAN DEFAULT FALSE, `created_at` DATETIME NOT NULL, `updated_at` DATETIME NOT NULL, PRIMARY KEY(`id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.034538) CREATE TABLE `users` (`email` VARCHAR(50) NOT NULL, `encrypted_password` VARCHAR(128) DEFAULT '' NOT NULL, `password_salt` VARCHAR(50) DEFAULT '' NOT NULL, `remember_token` VARCHAR(50), `remember_created_at` DATETIME, `reset_password_token` VARCHAR(50), `sign_in_count` INTEGER DEFAULT 0, `current_sign_in_at` DATETIME, `last_sign_in_at` DATETIME, `current_sign_in_ip` VARCHAR(50), `last_sign_in_ip` VARCHAR(50), `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `name` VARCHAR(50), `timezone` VARCHAR(50) DEFAULT 'UTC', `admin` BOOLEAN DEFAULT FALSE, `created_at` DATETIME NOT NULL, `updated_at` DATETIME NOT NULL, PRIMARY KEY(`id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (94.946ms)[0m  [1mCREATE UNIQUE INDEX `unique_users_email` ON `users` (`email`)[0m
+(0.094946) CREATE UNIQUE INDEX `unique_users_email` ON `users` (`email`)
+  [1m[35mSQL (0.305ms)[0m  SHOW TABLES LIKE 'users'
+(0.000305) SHOW TABLES LIKE 'users'
+  [1m[36mSQL (0.789ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'email'[0m
+(0.000789) SHOW COLUMNS FROM `users` LIKE 'email'
+  [1m[35mSQL (0.554ms)[0m  SHOW COLUMNS FROM `users` LIKE 'encrypted_password'
+(0.000554) SHOW COLUMNS FROM `users` LIKE 'encrypted_password'
+  [1m[36mSQL (1.051ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'password_salt'[0m
+(0.001051) SHOW COLUMNS FROM `users` LIKE 'password_salt'
+  [1m[35mSQL (1.612ms)[0m  SHOW COLUMNS FROM `users` LIKE 'remember_token'
+(0.001612) SHOW COLUMNS FROM `users` LIKE 'remember_token'
+  [1m[36mSQL (0.623ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'remember_created_at'[0m
+(0.000623) SHOW COLUMNS FROM `users` LIKE 'remember_created_at'
+  [1m[35mSQL (0.637ms)[0m  SHOW COLUMNS FROM `users` LIKE 'reset_password_token'
+(0.000637) SHOW COLUMNS FROM `users` LIKE 'reset_password_token'
+  [1m[36mSQL (1.286ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'sign_in_count'[0m
+(0.001286) SHOW COLUMNS FROM `users` LIKE 'sign_in_count'
+  [1m[35mSQL (1.184ms)[0m  SHOW COLUMNS FROM `users` LIKE 'current_sign_in_at'
+(0.001184) SHOW COLUMNS FROM `users` LIKE 'current_sign_in_at'
+  [1m[36mSQL (0.938ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'last_sign_in_at'[0m
+(0.000938) SHOW COLUMNS FROM `users` LIKE 'last_sign_in_at'
+  [1m[35mSQL (0.915ms)[0m  SHOW COLUMNS FROM `users` LIKE 'current_sign_in_ip'
+(0.000915) SHOW COLUMNS FROM `users` LIKE 'current_sign_in_ip'
+  [1m[36mSQL (0.727ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'last_sign_in_ip'[0m
+(0.000727) SHOW COLUMNS FROM `users` LIKE 'last_sign_in_ip'
+  [1m[35mSQL (1.662ms)[0m  SHOW COLUMNS FROM `users` LIKE 'id'
+(0.001662) SHOW COLUMNS FROM `users` LIKE 'id'
+  [1m[36mSQL (0.654ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'name'[0m
+(0.000654) SHOW COLUMNS FROM `users` LIKE 'name'
+  [1m[35mSQL (0.605ms)[0m  SHOW COLUMNS FROM `users` LIKE 'timezone'
+(0.000605) SHOW COLUMNS FROM `users` LIKE 'timezone'
+  [1m[36mSQL (3.026ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'admin'[0m
+(0.003026) SHOW COLUMNS FROM `users` LIKE 'admin'
+  [1m[35mSQL (7.183ms)[0m  SHOW COLUMNS FROM `users` LIKE 'created_at'
+(0.007183) SHOW COLUMNS FROM `users` LIKE 'created_at'
+  [1m[36mSQL (0.840ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'updated_at'[0m
+(0.000840) SHOW COLUMNS FROM `users` LIKE 'updated_at'
+  [1m[35mSQL (0.260ms)[0m  SHOW TABLES LIKE 'sig_class'
+(0.000260) SHOW TABLES LIKE 'sig_class'
+  [1m[36mSQL (38.036ms)[0m  [1mCREATE TABLE `sig_class` (`sig_class_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `sig_class_name` VARCHAR(50), PRIMARY KEY(`sig_class_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci[0m
+(0.038036) CREATE TABLE `sig_class` (`sig_class_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `sig_class_name` VARCHAR(50), PRIMARY KEY(`sig_class_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[35mSQL (0.231ms)[0m  SHOW TABLES LIKE 'detail'
+(0.000231) SHOW TABLES LIKE 'detail'
+  [1m[36mSQL (37.533ms)[0m  [1mCREATE TABLE `detail` (`detail_type` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `detail_text` TEXT, PRIMARY KEY(`detail_type`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci[0m
+(0.037533) CREATE TABLE `detail` (`detail_type` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `detail_text` TEXT, PRIMARY KEY(`detail_type`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[35mSQL (23.891ms)[0m  CREATE INDEX `index_detail_detail_type` ON `detail` (`detail_type`)
+(0.023891) CREATE INDEX `index_detail_detail_type` ON `detail` (`detail_type`)
+  [1m[36mSQL (0.248ms)[0m  [1mSHOW TABLES LIKE 'encoding'[0m
+(0.000248) SHOW TABLES LIKE 'encoding'
+  [1m[35mSQL (22.757ms)[0m  CREATE TABLE `encoding` (`encoding_type` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `encoding_text` TEXT, PRIMARY KEY(`encoding_type`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.022757) CREATE TABLE `encoding` (`encoding_type` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `encoding_text` TEXT, PRIMARY KEY(`encoding_type`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (0.282ms)[0m  [1mSHOW TABLES LIKE 'event'[0m
+(0.000282) SHOW TABLES LIKE 'event'
+  [1m[35mSQL (20.664ms)[0m  CREATE TABLE `event` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `signature` INTEGER, `timestamp` DATETIME, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.020664) CREATE TABLE `event` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `signature` INTEGER, `timestamp` DATETIME, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (0.256ms)[0m  [1mSHOW TABLES LIKE 'icmphdr'[0m
+(0.000256) SHOW TABLES LIKE 'icmphdr'
+  [1m[35mSQL (16.526ms)[0m  CREATE TABLE `icmphdr` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `icmp_type` INTEGER, `icmp_code` INTEGER, `icmp_csum` INTEGER, `icmp_id` INTEGER, `icmp_seq` INTEGER, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.016526) CREATE TABLE `icmphdr` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `icmp_type` INTEGER, `icmp_code` INTEGER, `icmp_csum` INTEGER, `icmp_id` INTEGER, `icmp_seq` INTEGER, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (0.351ms)[0m  [1mSHOW TABLES LIKE 'iphdr'[0m
+(0.000351) SHOW TABLES LIKE 'iphdr'
+  [1m[35mSQL (20.688ms)[0m  CREATE TABLE `iphdr` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `ip_src` INTEGER, `ip_dst` INTEGER, `ip_ver` INTEGER, `ip_hlen` INTEGER, `ip_tos` INTEGER, `ip_len` INTEGER, `ip_id` INTEGER, `ip_flags` INTEGER, `ip_off` INTEGER, `ip_ttl` INTEGER, `ip_proto` INTEGER, `ip_csum` INTEGER, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.020688) CREATE TABLE `iphdr` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `ip_src` INTEGER, `ip_dst` INTEGER, `ip_ver` INTEGER, `ip_hlen` INTEGER, `ip_tos` INTEGER, `ip_len` INTEGER, `ip_id` INTEGER, `ip_flags` INTEGER, `ip_off` INTEGER, `ip_ttl` INTEGER, `ip_proto` INTEGER, `ip_csum` INTEGER, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (0.278ms)[0m  [1mSHOW TABLES LIKE 'iphdr'[0m
+(0.000278) SHOW TABLES LIKE 'iphdr'
+  [1m[35mSQL (0.810ms)[0m  SHOW COLUMNS FROM `iphdr` LIKE 'sid'
+(0.000810) SHOW COLUMNS FROM `iphdr` LIKE 'sid'
+  [1m[36mSQL (0.680ms)[0m  [1mSHOW COLUMNS FROM `iphdr` LIKE 'cid'[0m
+(0.000680) SHOW COLUMNS FROM `iphdr` LIKE 'cid'
+  [1m[35mSQL (0.651ms)[0m  SHOW COLUMNS FROM `iphdr` LIKE 'ip_src'
+(0.000651) SHOW COLUMNS FROM `iphdr` LIKE 'ip_src'
+  [1m[36mSQL (0.968ms)[0m  [1mSHOW COLUMNS FROM `iphdr` LIKE 'ip_dst'[0m
+(0.000968) SHOW COLUMNS FROM `iphdr` LIKE 'ip_dst'
+  [1m[35mSQL (1.468ms)[0m  SHOW COLUMNS FROM `iphdr` LIKE 'ip_ver'
+(0.001468) SHOW COLUMNS FROM `iphdr` LIKE 'ip_ver'
+  [1m[36mSQL (0.624ms)[0m  [1mSHOW COLUMNS FROM `iphdr` LIKE 'ip_hlen'[0m
+(0.000624) SHOW COLUMNS FROM `iphdr` LIKE 'ip_hlen'
+  [1m[35mSQL (0.535ms)[0m  SHOW COLUMNS FROM `iphdr` LIKE 'ip_tos'
+(0.000535) SHOW COLUMNS FROM `iphdr` LIKE 'ip_tos'
+  [1m[36mSQL (1.817ms)[0m  [1mSHOW COLUMNS FROM `iphdr` LIKE 'ip_len'[0m
+(0.001817) SHOW COLUMNS FROM `iphdr` LIKE 'ip_len'
+  [1m[35mSQL (0.836ms)[0m  SHOW COLUMNS FROM `iphdr` LIKE 'ip_id'
+(0.000836) SHOW COLUMNS FROM `iphdr` LIKE 'ip_id'
+  [1m[36mSQL (0.591ms)[0m  [1mSHOW COLUMNS FROM `iphdr` LIKE 'ip_flags'[0m
+(0.000591) SHOW COLUMNS FROM `iphdr` LIKE 'ip_flags'
+  [1m[35mSQL (0.838ms)[0m  SHOW COLUMNS FROM `iphdr` LIKE 'ip_off'
+(0.000838) SHOW COLUMNS FROM `iphdr` LIKE 'ip_off'
+  [1m[36mSQL (0.641ms)[0m  [1mSHOW COLUMNS FROM `iphdr` LIKE 'ip_ttl'[0m
+(0.000641) SHOW COLUMNS FROM `iphdr` LIKE 'ip_ttl'
+  [1m[35mSQL (1.157ms)[0m  SHOW COLUMNS FROM `iphdr` LIKE 'ip_proto'
+(0.001157) SHOW COLUMNS FROM `iphdr` LIKE 'ip_proto'
+  [1m[36mSQL (0.801ms)[0m  [1mSHOW COLUMNS FROM `iphdr` LIKE 'ip_csum'[0m
+(0.000801) SHOW COLUMNS FROM `iphdr` LIKE 'ip_csum'
+  [1m[35mSQL (0.305ms)[0m  SHOW TABLES LIKE 'opt'
+(0.000305) SHOW TABLES LIKE 'opt'
+  [1m[36mSQL (32.151ms)[0m  [1mCREATE TABLE `opt` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `optid` INTEGER NOT NULL, `opt_proto` INTEGER, `opt_code` INTEGER, `opt_len` INTEGER, `opt_data` TEXT, PRIMARY KEY(`sid`, `cid`, `optid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci[0m
+(0.032151) CREATE TABLE `opt` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `optid` INTEGER NOT NULL, `opt_proto` INTEGER, `opt_code` INTEGER, `opt_len` INTEGER, `opt_data` TEXT, PRIMARY KEY(`sid`, `cid`, `optid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[35mSQL (0.235ms)[0m  SHOW TABLES LIKE 'data'
+(0.000235) SHOW TABLES LIKE 'data'
+  [1m[36mSQL (24.358ms)[0m  [1mCREATE TABLE `data` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `data_payload` TEXT, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci[0m
+(0.024358) CREATE TABLE `data` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `data_payload` TEXT, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[35mSQL (0.265ms)[0m  SHOW TABLES LIKE 'reference'
+(0.000265) SHOW TABLES LIKE 'reference'
+  [1m[36mSQL (26.666ms)[0m  [1mCREATE TABLE `reference` (`ref_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `ref_system_id` INTEGER, `ref_tag` TEXT, PRIMARY KEY(`ref_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci[0m
+(0.026666) CREATE TABLE `reference` (`ref_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `ref_system_id` INTEGER, `ref_tag` TEXT, PRIMARY KEY(`ref_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[35mSQL (0.260ms)[0m  SHOW TABLES LIKE 'reference_system'
+(0.000260) SHOW TABLES LIKE 'reference_system'
+  [1m[36mSQL (21.726ms)[0m  [1mCREATE TABLE `reference_system` (`ref_system_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `ref_system_name` VARCHAR(50), PRIMARY KEY(`ref_system_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci[0m
+(0.021726) CREATE TABLE `reference_system` (`ref_system_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `ref_system_name` VARCHAR(50), PRIMARY KEY(`ref_system_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[35mSQL (0.267ms)[0m  SHOW TABLES LIKE 'sensor'
+(0.000267) SHOW TABLES LIKE 'sensor'
+  [1m[36mSQL (20.577ms)[0m  [1mCREATE TABLE `sensor` (`sid` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `hostname` TEXT, `interface` TEXT, `filter` TEXT, `detail` INTEGER, `encoding` INTEGER, `last_cid` INTEGER, PRIMARY KEY(`sid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci[0m
+(0.020577) CREATE TABLE `sensor` (`sid` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `hostname` TEXT, `interface` TEXT, `filter` TEXT, `detail` INTEGER, `encoding` INTEGER, `last_cid` INTEGER, PRIMARY KEY(`sid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[35mSQL (0.347ms)[0m  SHOW TABLES LIKE 'sig_reference'
+(0.000347) SHOW TABLES LIKE 'sig_reference'
+  [1m[36mSQL (16.524ms)[0m  [1mCREATE TABLE `sig_reference` (`sig_id` INTEGER NOT NULL, `ref_seq` INTEGER NOT NULL, `ref_id` INTEGER, `signature_sig_class_id` INTEGER NOT NULL, PRIMARY KEY(`sig_id`, `ref_seq`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci[0m
+(0.016524) CREATE TABLE `sig_reference` (`sig_id` INTEGER NOT NULL, `ref_seq` INTEGER NOT NULL, `ref_id` INTEGER, `signature_sig_class_id` INTEGER NOT NULL, PRIMARY KEY(`sig_id`, `ref_seq`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[35mSQL (18.668ms)[0m  CREATE INDEX `index_sig_reference_signature` ON `sig_reference` (`signature_sig_class_id`)
+(0.018668) CREATE INDEX `index_sig_reference_signature` ON `sig_reference` (`signature_sig_class_id`)
+  [1m[36mSQL (0.273ms)[0m  [1mSHOW TABLES LIKE 'signature'[0m
+(0.000273) SHOW TABLES LIKE 'signature'
+  [1m[35mSQL (16.035ms)[0m  CREATE TABLE `signature` (`sig_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `sig_name` TEXT, `sig_class_id` INTEGER NOT NULL, `sig_priority` INTEGER, `sig_rev` INTEGER, `sig_sid` INTEGER, `sig_gid` INTEGER, PRIMARY KEY(`sig_id`, `sig_class_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.016035) CREATE TABLE `signature` (`sig_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `sig_name` TEXT, `sig_class_id` INTEGER NOT NULL, `sig_priority` INTEGER, `sig_rev` INTEGER, `sig_sid` INTEGER, `sig_gid` INTEGER, PRIMARY KEY(`sig_id`, `sig_class_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (0.281ms)[0m  [1mSHOW TABLES LIKE 'schema'[0m
+(0.000281) SHOW TABLES LIKE 'schema'
+  [1m[35mSQL (17.245ms)[0m  CREATE TABLE `schema` (`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `vseq` INTEGER, `ctime` DATETIME, `version` VARCHAR(50), PRIMARY KEY(`id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.017245) CREATE TABLE `schema` (`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `vseq` INTEGER, `ctime` DATETIME, `version` VARCHAR(50), PRIMARY KEY(`id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (0.255ms)[0m  [1mSHOW TABLES LIKE 'tcphdr'[0m
+(0.000255) SHOW TABLES LIKE 'tcphdr'
+  [1m[35mSQL (13.161ms)[0m  CREATE TABLE `tcphdr` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `tcp_sport` INTEGER, `tcp_dport` INTEGER, `tcp_seq` INTEGER, `tcp_ack` INTEGER, `tcp_off` INTEGER, `tcp_res` INTEGER, `tcp_flags` INTEGER, `tcp_win` INTEGER, `tcp_csum` INTEGER, `tcp_urp` INTEGER, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.013161) CREATE TABLE `tcphdr` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `tcp_sport` INTEGER, `tcp_dport` INTEGER, `tcp_seq` INTEGER, `tcp_ack` INTEGER, `tcp_off` INTEGER, `tcp_res` INTEGER, `tcp_flags` INTEGER, `tcp_win` INTEGER, `tcp_csum` INTEGER, `tcp_urp` INTEGER, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (0.256ms)[0m  [1mSHOW TABLES LIKE 'udphdr'[0m
+(0.000256) SHOW TABLES LIKE 'udphdr'
+  [1m[35mSQL (22.148ms)[0m  CREATE TABLE `udphdr` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `udp_sport` INTEGER, `udp_dport` INTEGER, `udp_len` INTEGER, `udp_csum` INTEGER, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.022148) CREATE TABLE `udphdr` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `udp_sport` INTEGER, `udp_dport` INTEGER, `udp_len` INTEGER, `udp_csum` INTEGER, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (0.783ms)[0m  [1mSELECT `id`, `vseq`, `ctime`, `version` FROM `schema` ORDER BY `id` LIMIT 1[0m
+(0.000783) SELECT `id`, `vseq`, `ctime`, `version` FROM `schema` ORDER BY `id` LIMIT 1
+  [1m[35mSQL (0.359ms)[0m  INSERT INTO `schema` (`vseq`, `ctime`, `version`) VALUES (107, '2010-10-09 17:03:41', 'Snorby 2.0.0')
+(0.000359) INSERT INTO `schema` (`vseq`, `ctime`, `version`) VALUES (107, '2010-10-09 17:03:41', 'Snorby 2.0.0')
+  [1m[36mSQL (0.215ms)[0m  [1mSELECT `id` FROM `users` WHERE `email` = 'snorby@snorby.com' ORDER BY `id` LIMIT 1[0m
+(0.000215) SELECT `id` FROM `users` WHERE `email` = 'snorby@snorby.com' ORDER BY `id` LIMIT 1
+  [1m[35mSQL (0.166ms)[0m  SELECT `id` FROM `users` WHERE `email` = 'snorby@snorby.com' ORDER BY `id` LIMIT 1
+(0.000166) SELECT `id` FROM `users` WHERE `email` = 'snorby@snorby.com' ORDER BY `id` LIMIT 1
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+  [1m[36mSQL (21.3ms)[0m  [1mDROP DATABASE IF EXISTS `snorby`[0m
+  [1m[35mSQL (0.3ms)[0m  CREATE DATABASE `snorby` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`
+  [1m[36mSQL (0.065ms)[0m  [1mSET sql_auto_is_null = 0[0m
+(0.000065) SET sql_auto_is_null = 0
+  [1m[35mSQL (0.150ms)[0m  SET SESSION sql_mode = 'ANSI,NO_BACKSLASH_ESCAPES,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION,NO_UNSIGNED_SUBTRACTION,TRADITIONAL'
+(0.000150) SET SESSION sql_mode = 'ANSI,NO_BACKSLASH_ESCAPES,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION,NO_UNSIGNED_SUBTRACTION,TRADITIONAL'
+  [1m[36mSQL (0.263ms)[0m  [1mSHOW TABLES LIKE 'users'[0m
+(0.000263) SHOW TABLES LIKE 'users'
+  [1m[35mSQL (0.050ms)[0m  SET sql_auto_is_null = 0
+(0.000050) SET sql_auto_is_null = 0
+  [1m[36mSQL (0.067ms)[0m  [1mSET SESSION sql_mode = 'ANSI,NO_BACKSLASH_ESCAPES,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION,NO_UNSIGNED_SUBTRACTION,TRADITIONAL'[0m
+(0.000067) SET SESSION sql_mode = 'ANSI,NO_BACKSLASH_ESCAPES,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION,NO_UNSIGNED_SUBTRACTION,TRADITIONAL'
+  [1m[35mSQL (0.311ms)[0m  SHOW VARIABLES LIKE 'character_set_connection'
+(0.000311) SHOW VARIABLES LIKE 'character_set_connection'
+  [1m[36mSQL (0.247ms)[0m  [1mSHOW VARIABLES LIKE 'collation_connection'[0m
+(0.000247) SHOW VARIABLES LIKE 'collation_connection'
+  [1m[35mSQL (24.331ms)[0m  CREATE TABLE `users` (`email` VARCHAR(50) NOT NULL, `encrypted_password` VARCHAR(128) DEFAULT '' NOT NULL, `password_salt` VARCHAR(50) DEFAULT '' NOT NULL, `remember_token` VARCHAR(50), `remember_created_at` DATETIME, `reset_password_token` VARCHAR(50), `sign_in_count` INTEGER DEFAULT 0, `current_sign_in_at` DATETIME, `last_sign_in_at` DATETIME, `current_sign_in_ip` VARCHAR(50), `last_sign_in_ip` VARCHAR(50), `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `name` VARCHAR(50), `timezone` VARCHAR(50) DEFAULT 'UTC', `admin` BOOLEAN DEFAULT FALSE, `created_at` DATETIME NOT NULL, `updated_at` DATETIME NOT NULL, PRIMARY KEY(`id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.024331) CREATE TABLE `users` (`email` VARCHAR(50) NOT NULL, `encrypted_password` VARCHAR(128) DEFAULT '' NOT NULL, `password_salt` VARCHAR(50) DEFAULT '' NOT NULL, `remember_token` VARCHAR(50), `remember_created_at` DATETIME, `reset_password_token` VARCHAR(50), `sign_in_count` INTEGER DEFAULT 0, `current_sign_in_at` DATETIME, `last_sign_in_at` DATETIME, `current_sign_in_ip` VARCHAR(50), `last_sign_in_ip` VARCHAR(50), `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `name` VARCHAR(50), `timezone` VARCHAR(50) DEFAULT 'UTC', `admin` BOOLEAN DEFAULT FALSE, `created_at` DATETIME NOT NULL, `updated_at` DATETIME NOT NULL, PRIMARY KEY(`id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (82.034ms)[0m  [1mCREATE UNIQUE INDEX `unique_users_email` ON `users` (`email`)[0m
+(0.082034) CREATE UNIQUE INDEX `unique_users_email` ON `users` (`email`)
+  [1m[35mSQL (0.326ms)[0m  SHOW TABLES LIKE 'users'
+(0.000326) SHOW TABLES LIKE 'users'
+  [1m[36mSQL (0.845ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'email'[0m
+(0.000845) SHOW COLUMNS FROM `users` LIKE 'email'
+  [1m[35mSQL (0.688ms)[0m  SHOW COLUMNS FROM `users` LIKE 'encrypted_password'
+(0.000688) SHOW COLUMNS FROM `users` LIKE 'encrypted_password'
+  [1m[36mSQL (1.248ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'password_salt'[0m
+(0.001248) SHOW COLUMNS FROM `users` LIKE 'password_salt'
+  [1m[35mSQL (0.720ms)[0m  SHOW COLUMNS FROM `users` LIKE 'remember_token'
+(0.000720) SHOW COLUMNS FROM `users` LIKE 'remember_token'
+  [1m[36mSQL (0.619ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'remember_created_at'[0m
+(0.000619) SHOW COLUMNS FROM `users` LIKE 'remember_created_at'
+  [1m[35mSQL (0.642ms)[0m  SHOW COLUMNS FROM `users` LIKE 'reset_password_token'
+(0.000642) SHOW COLUMNS FROM `users` LIKE 'reset_password_token'
+  [1m[36mSQL (0.807ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'sign_in_count'[0m
+(0.000807) SHOW COLUMNS FROM `users` LIKE 'sign_in_count'
+  [1m[35mSQL (1.367ms)[0m  SHOW COLUMNS FROM `users` LIKE 'current_sign_in_at'
+(0.001367) SHOW COLUMNS FROM `users` LIKE 'current_sign_in_at'
+  [1m[36mSQL (0.636ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'last_sign_in_at'[0m
+(0.000636) SHOW COLUMNS FROM `users` LIKE 'last_sign_in_at'
+  [1m[35mSQL (1.041ms)[0m  SHOW COLUMNS FROM `users` LIKE 'current_sign_in_ip'
+(0.001041) SHOW COLUMNS FROM `users` LIKE 'current_sign_in_ip'
+  [1m[36mSQL (0.694ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'last_sign_in_ip'[0m
+(0.000694) SHOW COLUMNS FROM `users` LIKE 'last_sign_in_ip'
+  [1m[35mSQL (2.002ms)[0m  SHOW COLUMNS FROM `users` LIKE 'id'
+(0.002002) SHOW COLUMNS FROM `users` LIKE 'id'
+  [1m[36mSQL (0.722ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'name'[0m
+(0.000722) SHOW COLUMNS FROM `users` LIKE 'name'
+  [1m[35mSQL (0.611ms)[0m  SHOW COLUMNS FROM `users` LIKE 'timezone'
+(0.000611) SHOW COLUMNS FROM `users` LIKE 'timezone'
+  [1m[36mSQL (2.852ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'admin'[0m
+(0.002852) SHOW COLUMNS FROM `users` LIKE 'admin'
+  [1m[35mSQL (0.690ms)[0m  SHOW COLUMNS FROM `users` LIKE 'created_at'
+(0.000690) SHOW COLUMNS FROM `users` LIKE 'created_at'
+  [1m[36mSQL (0.544ms)[0m  [1mSHOW COLUMNS FROM `users` LIKE 'updated_at'[0m
+(0.000544) SHOW COLUMNS FROM `users` LIKE 'updated_at'
+  [1m[35mSQL (0.196ms)[0m  SHOW TABLES LIKE 'sig_class'
+(0.000196) SHOW TABLES LIKE 'sig_class'
+  [1m[36mSQL (21.853ms)[0m  [1mCREATE TABLE `sig_class` (`sig_class_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `sig_class_name` VARCHAR(50), PRIMARY KEY(`sig_class_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci[0m
+(0.021853) CREATE TABLE `sig_class` (`sig_class_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `sig_class_name` VARCHAR(50), PRIMARY KEY(`sig_class_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[35mSQL (0.246ms)[0m  SHOW TABLES LIKE 'detail'
+(0.000246) SHOW TABLES LIKE 'detail'
+  [1m[36mSQL (36.972ms)[0m  [1mCREATE TABLE `detail` (`detail_type` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `detail_text` TEXT, PRIMARY KEY(`detail_type`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci[0m
+(0.036972) CREATE TABLE `detail` (`detail_type` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `detail_text` TEXT, PRIMARY KEY(`detail_type`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[35mSQL (27.466ms)[0m  CREATE INDEX `index_detail_detail_type` ON `detail` (`detail_type`)
+(0.027466) CREATE INDEX `index_detail_detail_type` ON `detail` (`detail_type`)
+  [1m[36mSQL (0.265ms)[0m  [1mSHOW TABLES LIKE 'encoding'[0m
+(0.000265) SHOW TABLES LIKE 'encoding'
+  [1m[35mSQL (20.113ms)[0m  CREATE TABLE `encoding` (`encoding_type` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `encoding_text` TEXT, PRIMARY KEY(`encoding_type`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.020113) CREATE TABLE `encoding` (`encoding_type` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `encoding_text` TEXT, PRIMARY KEY(`encoding_type`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (0.227ms)[0m  [1mSHOW TABLES LIKE 'event'[0m
+(0.000227) SHOW TABLES LIKE 'event'
+  [1m[35mSQL (15.206ms)[0m  CREATE TABLE `event` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `signature` INTEGER, `timestamp` DATETIME, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.015206) CREATE TABLE `event` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `signature` INTEGER, `timestamp` DATETIME, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (0.248ms)[0m  [1mSHOW TABLES LIKE 'icmphdr'[0m
+(0.000248) SHOW TABLES LIKE 'icmphdr'
+  [1m[35mSQL (16.373ms)[0m  CREATE TABLE `icmphdr` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `icmp_type` INTEGER, `icmp_code` INTEGER, `icmp_csum` INTEGER, `icmp_id` INTEGER, `icmp_seq` INTEGER, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.016373) CREATE TABLE `icmphdr` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `icmp_type` INTEGER, `icmp_code` INTEGER, `icmp_csum` INTEGER, `icmp_id` INTEGER, `icmp_seq` INTEGER, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (0.284ms)[0m  [1mSHOW TABLES LIKE 'iphdr'[0m
+(0.000284) SHOW TABLES LIKE 'iphdr'
+  [1m[35mSQL (16.506ms)[0m  CREATE TABLE `iphdr` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `ip_src` INTEGER, `ip_dst` INTEGER, `ip_ver` INTEGER, `ip_hlen` INTEGER, `ip_tos` INTEGER, `ip_len` INTEGER, `ip_id` INTEGER, `ip_flags` INTEGER, `ip_off` INTEGER, `ip_ttl` INTEGER, `ip_proto` INTEGER, `ip_csum` INTEGER, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.016506) CREATE TABLE `iphdr` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `ip_src` INTEGER, `ip_dst` INTEGER, `ip_ver` INTEGER, `ip_hlen` INTEGER, `ip_tos` INTEGER, `ip_len` INTEGER, `ip_id` INTEGER, `ip_flags` INTEGER, `ip_off` INTEGER, `ip_ttl` INTEGER, `ip_proto` INTEGER, `ip_csum` INTEGER, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (0.268ms)[0m  [1mSHOW TABLES LIKE 'iphdr'[0m
+(0.000268) SHOW TABLES LIKE 'iphdr'
+  [1m[35mSQL (1.203ms)[0m  SHOW COLUMNS FROM `iphdr` LIKE 'sid'
+(0.001203) SHOW COLUMNS FROM `iphdr` LIKE 'sid'
+  [1m[36mSQL (0.907ms)[0m  [1mSHOW COLUMNS FROM `iphdr` LIKE 'cid'[0m
+(0.000907) SHOW COLUMNS FROM `iphdr` LIKE 'cid'
+  [1m[35mSQL (1.888ms)[0m  SHOW COLUMNS FROM `iphdr` LIKE 'ip_src'
+(0.001888) SHOW COLUMNS FROM `iphdr` LIKE 'ip_src'
+  [1m[36mSQL (2.397ms)[0m  [1mSHOW COLUMNS FROM `iphdr` LIKE 'ip_dst'[0m
+(0.002397) SHOW COLUMNS FROM `iphdr` LIKE 'ip_dst'
+  [1m[35mSQL (0.870ms)[0m  SHOW COLUMNS FROM `iphdr` LIKE 'ip_ver'
+(0.000870) SHOW COLUMNS FROM `iphdr` LIKE 'ip_ver'
+  [1m[36mSQL (0.682ms)[0m  [1mSHOW COLUMNS FROM `iphdr` LIKE 'ip_hlen'[0m
+(0.000682) SHOW COLUMNS FROM `iphdr` LIKE 'ip_hlen'
+  [1m[35mSQL (1.948ms)[0m  SHOW COLUMNS FROM `iphdr` LIKE 'ip_tos'
+(0.001948) SHOW COLUMNS FROM `iphdr` LIKE 'ip_tos'
+  [1m[36mSQL (2.863ms)[0m  [1mSHOW COLUMNS FROM `iphdr` LIKE 'ip_len'[0m
+(0.002863) SHOW COLUMNS FROM `iphdr` LIKE 'ip_len'
+  [1m[35mSQL (0.757ms)[0m  SHOW COLUMNS FROM `iphdr` LIKE 'ip_id'
+(0.000757) SHOW COLUMNS FROM `iphdr` LIKE 'ip_id'
+  [1m[36mSQL (1.022ms)[0m  [1mSHOW COLUMNS FROM `iphdr` LIKE 'ip_flags'[0m
+(0.001022) SHOW COLUMNS FROM `iphdr` LIKE 'ip_flags'
+  [1m[35mSQL (2.557ms)[0m  SHOW COLUMNS FROM `iphdr` LIKE 'ip_off'
+(0.002557) SHOW COLUMNS FROM `iphdr` LIKE 'ip_off'
+  [1m[36mSQL (1.268ms)[0m  [1mSHOW COLUMNS FROM `iphdr` LIKE 'ip_ttl'[0m
+(0.001268) SHOW COLUMNS FROM `iphdr` LIKE 'ip_ttl'
+  [1m[35mSQL (1.551ms)[0m  SHOW COLUMNS FROM `iphdr` LIKE 'ip_proto'
+(0.001551) SHOW COLUMNS FROM `iphdr` LIKE 'ip_proto'
+  [1m[36mSQL (0.715ms)[0m  [1mSHOW COLUMNS FROM `iphdr` LIKE 'ip_csum'[0m
+(0.000715) SHOW COLUMNS FROM `iphdr` LIKE 'ip_csum'
+  [1m[35mSQL (0.489ms)[0m  SHOW TABLES LIKE 'opt'
+(0.000489) SHOW TABLES LIKE 'opt'
+  [1m[36mSQL (22.292ms)[0m  [1mCREATE TABLE `opt` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `optid` INTEGER NOT NULL, `opt_proto` INTEGER, `opt_code` INTEGER, `opt_len` INTEGER, `opt_data` TEXT, PRIMARY KEY(`sid`, `cid`, `optid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci[0m
+(0.022292) CREATE TABLE `opt` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `optid` INTEGER NOT NULL, `opt_proto` INTEGER, `opt_code` INTEGER, `opt_len` INTEGER, `opt_data` TEXT, PRIMARY KEY(`sid`, `cid`, `optid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[35mSQL (0.270ms)[0m  SHOW TABLES LIKE 'data'
+(0.000270) SHOW TABLES LIKE 'data'
+  [1m[36mSQL (21.271ms)[0m  [1mCREATE TABLE `data` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `data_payload` TEXT, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci[0m
+(0.021271) CREATE TABLE `data` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `data_payload` TEXT, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[35mSQL (0.268ms)[0m  SHOW TABLES LIKE 'reference'
+(0.000268) SHOW TABLES LIKE 'reference'
+  [1m[36mSQL (23.950ms)[0m  [1mCREATE TABLE `reference` (`ref_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `ref_system_id` INTEGER, `ref_tag` TEXT, PRIMARY KEY(`ref_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci[0m
+(0.023950) CREATE TABLE `reference` (`ref_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `ref_system_id` INTEGER, `ref_tag` TEXT, PRIMARY KEY(`ref_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[35mSQL (0.347ms)[0m  SHOW TABLES LIKE 'reference_system'
+(0.000347) SHOW TABLES LIKE 'reference_system'
+  [1m[36mSQL (20.803ms)[0m  [1mCREATE TABLE `reference_system` (`ref_system_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `ref_system_name` VARCHAR(50), PRIMARY KEY(`ref_system_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci[0m
+(0.020803) CREATE TABLE `reference_system` (`ref_system_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `ref_system_name` VARCHAR(50), PRIMARY KEY(`ref_system_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[35mSQL (0.277ms)[0m  SHOW TABLES LIKE 'sensor'
+(0.000277) SHOW TABLES LIKE 'sensor'
+  [1m[36mSQL (23.242ms)[0m  [1mCREATE TABLE `sensor` (`sid` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `hostname` TEXT, `interface` TEXT, `filter` TEXT, `detail` INTEGER, `encoding` INTEGER, `last_cid` INTEGER, PRIMARY KEY(`sid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci[0m
+(0.023242) CREATE TABLE `sensor` (`sid` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `hostname` TEXT, `interface` TEXT, `filter` TEXT, `detail` INTEGER, `encoding` INTEGER, `last_cid` INTEGER, PRIMARY KEY(`sid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[35mSQL (0.278ms)[0m  SHOW TABLES LIKE 'sig_reference'
+(0.000278) SHOW TABLES LIKE 'sig_reference'
+  [1m[36mSQL (16.632ms)[0m  [1mCREATE TABLE `sig_reference` (`sig_id` INTEGER NOT NULL, `ref_seq` INTEGER NOT NULL, `ref_id` INTEGER, `signature_sig_class_id` INTEGER NOT NULL, PRIMARY KEY(`sig_id`, `ref_seq`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci[0m
+(0.016632) CREATE TABLE `sig_reference` (`sig_id` INTEGER NOT NULL, `ref_seq` INTEGER NOT NULL, `ref_id` INTEGER, `signature_sig_class_id` INTEGER NOT NULL, PRIMARY KEY(`sig_id`, `ref_seq`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[35mSQL (19.430ms)[0m  CREATE INDEX `index_sig_reference_signature` ON `sig_reference` (`signature_sig_class_id`)
+(0.019430) CREATE INDEX `index_sig_reference_signature` ON `sig_reference` (`signature_sig_class_id`)
+  [1m[36mSQL (0.229ms)[0m  [1mSHOW TABLES LIKE 'signature'[0m
+(0.000229) SHOW TABLES LIKE 'signature'
+  [1m[35mSQL (16.616ms)[0m  CREATE TABLE `signature` (`sig_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `sig_name` TEXT, `sig_class_id` INTEGER NOT NULL, `sig_priority` INTEGER, `sig_rev` INTEGER, `sig_sid` INTEGER, `sig_gid` INTEGER, PRIMARY KEY(`sig_id`, `sig_class_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.016616) CREATE TABLE `signature` (`sig_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `sig_name` TEXT, `sig_class_id` INTEGER NOT NULL, `sig_priority` INTEGER, `sig_rev` INTEGER, `sig_sid` INTEGER, `sig_gid` INTEGER, PRIMARY KEY(`sig_id`, `sig_class_id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (0.259ms)[0m  [1mSHOW TABLES LIKE 'schema'[0m
+(0.000259) SHOW TABLES LIKE 'schema'
+  [1m[35mSQL (18.164ms)[0m  CREATE TABLE `schema` (`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `vseq` INTEGER, `ctime` DATETIME, `version` VARCHAR(50), PRIMARY KEY(`id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.018164) CREATE TABLE `schema` (`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, `vseq` INTEGER, `ctime` DATETIME, `version` VARCHAR(50), PRIMARY KEY(`id`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (0.278ms)[0m  [1mSHOW TABLES LIKE 'tcphdr'[0m
+(0.000278) SHOW TABLES LIKE 'tcphdr'
+  [1m[35mSQL (15.024ms)[0m  CREATE TABLE `tcphdr` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `tcp_sport` INTEGER, `tcp_dport` INTEGER, `tcp_seq` INTEGER, `tcp_ack` INTEGER, `tcp_off` INTEGER, `tcp_res` INTEGER, `tcp_flags` INTEGER, `tcp_win` INTEGER, `tcp_csum` INTEGER, `tcp_urp` INTEGER, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.015024) CREATE TABLE `tcphdr` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `tcp_sport` INTEGER, `tcp_dport` INTEGER, `tcp_seq` INTEGER, `tcp_ack` INTEGER, `tcp_off` INTEGER, `tcp_res` INTEGER, `tcp_flags` INTEGER, `tcp_win` INTEGER, `tcp_csum` INTEGER, `tcp_urp` INTEGER, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (0.254ms)[0m  [1mSHOW TABLES LIKE 'udphdr'[0m
+(0.000254) SHOW TABLES LIKE 'udphdr'
+  [1m[35mSQL (16.683ms)[0m  CREATE TABLE `udphdr` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `udp_sport` INTEGER, `udp_dport` INTEGER, `udp_len` INTEGER, `udp_csum` INTEGER, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+(0.016683) CREATE TABLE `udphdr` (`sid` INTEGER NOT NULL, `cid` INTEGER NOT NULL, `udp_sport` INTEGER, `udp_dport` INTEGER, `udp_len` INTEGER, `udp_csum` INTEGER, PRIMARY KEY(`sid`, `cid`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+  [1m[36mSQL (0.337ms)[0m  [1mSELECT `id`, `vseq`, `ctime`, `version` FROM `schema` ORDER BY `id` LIMIT 1[0m
+(0.000337) SELECT `id`, `vseq`, `ctime`, `version` FROM `schema` ORDER BY `id` LIMIT 1
+  [1m[35mSQL (0.482ms)[0m  INSERT INTO `schema` (`vseq`, `ctime`, `version`) VALUES (107, '2010-10-09 17:03:53', 'Snorby 2.0.0')
+(0.000482) INSERT INTO `schema` (`vseq`, `ctime`, `version`) VALUES (107, '2010-10-09 17:03:53', 'Snorby 2.0.0')
+  [1m[36mSQL (0.202ms)[0m  [1mSELECT `id` FROM `users` WHERE `email` = 'snorby@snorby.com' ORDER BY `id` LIMIT 1[0m
+(0.000202) SELECT `id` FROM `users` WHERE `email` = 'snorby@snorby.com' ORDER BY `id` LIMIT 1
+  [1m[35mSQL (0.163ms)[0m  SELECT `id` FROM `users` WHERE `email` = 'snorby@snorby.com' ORDER BY `id` LIMIT 1
+(0.000163) SELECT `id` FROM `users` WHERE `email` = 'snorby@snorby.com' ORDER BY `id` LIMIT 1
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+  [1m[36mSQL (0.077ms)[0m  [1mSET sql_auto_is_null = 0[0m
+  [1m[35mSQL (0.063ms)[0m  SET SESSION sql_mode = 'ANSI,NO_BACKSLASH_ESCAPES,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION,NO_UNSIGNED_SUBTRACTION,TRADITIONAL'
+  [1m[36mSQL (0.195ms)[0m  [1mSELECT `id` FROM `users` WHERE `email` = 'snorby@snorby.com' ORDER BY `id` LIMIT 1[0m
+  [1m[35mSQL (0.226ms)[0m  SELECT `id` FROM `users` WHERE `email` = 'snorby@snorby.com' ORDER BY `id` LIMIT 1
+  [1m[36mSQL (0.247ms)[0m  [1mSELECT `id` FROM `users` WHERE `email` = 'snorby@snorby.com' ORDER BY `id` LIMIT 1[0m
+  [1m[35mSQL (0.175ms)[0m  SELECT `id` FROM `users` WHERE `email` = 'snorby@snorby.com' ORDER BY `id` LIMIT 1
+  [1m[36mSQL (0.138ms)[0m  [1mSELECT `id` FROM `users` WHERE `email` = 'snorby@snorby.com' ORDER BY `id` LIMIT 1[0m
+  [1m[35mSQL (0.143ms)[0m  SELECT `id` FROM `users` WHERE `email` = 'snorby@snorby.com' ORDER BY `id` LIMIT 1
+  [1m[36mSQL (0.206ms)[0m  [1mSELECT `id` FROM `users` WHERE `email` = 'snorby@snorby.com' ORDER BY `id` LIMIT 1[0m
+  [1m[35mSQL (0.144ms)[0m  SELECT `id` FROM `users` WHERE `email` = 'snorby@snorby.com' ORDER BY `id` LIMIT 1
+  [1m[36mSQL (0.216ms)[0m  [1mSELECT `id` FROM `users` WHERE `email` = 'snorby@snorby.com' ORDER BY `id` LIMIT 1[0m
+  [1m[35mSQL (0.369ms)[0m  SELECT `id` FROM `users` WHERE `email` = 'snorby@snorby.com' ORDER BY `id` LIMIT 1
+  [1m[36mSQL (1.519ms)[0m  [1mINSERT INTO `users` (`email`, `encrypted_password`, `password_salt`, `sign_in_count`, `name`, `timezone`, `admin`, `created_at`, `updated_at`) VALUES ('snorby@snorby.com', '$2a$10$UOjmfstCfoywTcGIY1IMGO.7mEVD3kT11YW.jvsDcV2w.8XihwOWa', '$2a$10$UOjmfstCfoywTcGIY1IMGO', 0, 'Administrator', 'UTC', TRUE, '2010-10-09 17:06:39', '2010-10-09 17:06:39')[0m

@@ -20,8 +20,8 @@ class User
   # The timezone the user lives in
   property :timezone, String, :default => 'UTC'
   
-  # Define if the user is an admin?
-  property :admin, Boolean
+  # Define if the user has administrative privileges
+  property :admin, Boolean, :default => false
 
   # Define created_at and updated_at timestamps
   timestamps :at
