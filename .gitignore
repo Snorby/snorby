@@ -1,0 +1,21 @@
+## MAC OS
+.DS_Store
+
+## TEXTMATE
+*.tmproj
+tmtags
+
+## VIM
+*.swp
+
+## PROJECT::GENERAL
+coverage
+rdoc
+doc
+.yardoc
+pkg
+
+## PROJECT::SPECIFIC
+example.rb
+.bundle/
+.document

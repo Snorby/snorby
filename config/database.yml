@@ -1,0 +1,15 @@
+defaults: &defaults
+  adapter: mysql
+  username: root
+  password: s3cr3tsauce
+  host: localhost
+
+development:
+  database: snorby
+  <<: *defaults
+test:
+  database: snorby
+  <<: *defaults
+production:
+  database: snorby
+  <<: *defaults
