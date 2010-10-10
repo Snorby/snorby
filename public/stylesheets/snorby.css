@@ -1,7 +1,66 @@
+/* Snorby */
+
+/* @group Reset */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
 body {
-  background-color: #4B7399;
-  font-family: Verdana, Helvetica, Arial;
-  font-size: 14px;
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+ remember to define focus styles! 
+:focus {
+	outline: 0;
+}
+
+ remember to highlight inserts somehow! 
+ins {
+	text-decoration: none;
+}
+del {
+	text-decoration: line-through;
+}
+
+ tables still need 'cellspacing="0"' in the markup 
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* @end */
+
+/* @group Main */
+
+html,body{
+  background-color: #ededed;
+  font-family: Helvetica, Arial;
+  font-size: 12px;
 }
 
 a img {
@@ -18,14 +77,240 @@ a {
   overflow: hidden;
 }
 
-#container {
-  width: 75%;
-  margin: 0 auto;
-  background-color: #FFF;
-  padding: 20px 40px;
-  border: solid 1px black;
-  margin-top: 20px;
+
+
+/* @end */
+
+/* Content */
+
+/* @group Header */
+
+
+#header{
+	display: block;
+	position: relative;
+	overflow: hidden;
+	background: #202325;
+	border-bottom: 1px solid #000;
 }
+
+#header #header-inside{
+	display: block;
+	position: relative;
+	overflow: hidden;
+	height: 90px;
+	border-bottom: 1px solid #5a5a5a;
+}
+
+#header #header-inside #header-content{
+	height: 60px;
+	display: block;
+	position: relative;
+	overflow: hidden;
+	border-bottom: 1px solid #000;
+}
+
+#header #header-inside #header-content #header-top{
+	
+}
+
+#header #header-inside #header-content #header-top #logo{
+	display: block;
+	position: relative;
+	overflow: hidden;
+	height: 60px;
+	text-align: right;
+	background: url(../images/header/logo.png) no-repeat;
+}
+
+#header #header-inside #header-content #header-top #user-menu{
+	display: block;
+	position: relative;
+	overflow: hidden;
+}
+
+#header #header-inside #header-content #header-top #user-menu ul{
+	float: right;
+	display: block;
+	position: relative;
+	overflow: hidden;
+	margin-top: 10px;
+}
+
+#header #header-inside #header-content #header-top #user-menu ul li{
+	color: #d7d7d7;
+	float: left;
+	padding-right: 5px;
+	padding-left: 5px;
+	border-left: 1px solid #4f4f4f;
+}
+
+#header #header-inside #header-content #header-top #user-menu ul li.first{
+	border-left-style: none;
+}
+#header #header-inside #header-content #header-top #user-menu ul li.last{
+	border-right-style: none;
+}
+
+#header #header-inside #header-content #header-top #user-menu ul li a{
+	color: #909090;
+	float: left;
+}
+#header #header-inside #header-content #header-top #user-menu ul li a:hover{
+	color: #fff;
+}
+
+#header #header-inside #menu{
+	border-top: 1px solid #5a5a5a;
+	background: #41464a;
+
+	/*filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#4f575c', endColorstr='#41464a');
+	background:-webkit-gradient(linear, left top, left bottom, from(#4f575c), to(#41464a));
+	background:-moz-linear-gradient(top,  #4f575c,  #41464a);*/
+	
+	display: block;
+	position: relative;
+	overflow: hidden;
+}
+
+#header #header-inside #menu ul{
+
+}
+
+#header #header-inside #menu ul li{
+	height: 30px;
+	line-height: 30px;
+	float: left;
+	overflow: hidden;
+	position: relative;
+	display: block;
+	text-align: center;
+	border-right: 1px solid #616161;
+	border-left: 1px solid #313131;
+}
+
+#header #header-inside #menu ul li:hover{
+	background: #464d4f;
+}
+
+#header #header-inside #menu ul li.blank{
+	width: 1px;
+	padding: 0;
+	margin: 0;
+	border-style: none;
+}
+
+#header #header-inside #menu ul li.blank.first{
+	border-right: 1px solid #616161;
+}
+
+#header #header-inside #menu ul li.blank.last{
+	border-left: 1px solid #313131;
+}
+
+#header #header-inside #menu ul li a{
+	color: #c8c7c9;
+	font-weight: normal;
+	text-decoration: none;
+	font-variant: normal;
+	font-size: 1.1em;
+	font-style: normal;
+	display: block;
+	position: relative;
+	overflow: hidden;
+	padding-right: 20px;
+	padding-left: 20px;
+}
+
+#header #header-inside #menu ul li a:hover{
+	color: #fffeff;
+}
+
+/* @end */
+
+/* @group Body */
+
+#wrapper{
+	background-color: #ededed;
+	padding-top: 20px;
+	border-top: 1px solid #fff;
+}
+
+#wrapper #content{
+	min-height: 500px;
+	background-color: #fff;
+	position: relative;
+	overflow: hidden;
+	display: block;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	border: 1px solid #dcdcdc;
+}
+
+#wrapper #content #page{
+}
+
+
+
+/* @end */
+
+/* @group Sidebar */
+
+#wrapper #content #sidebar{
+	display: block;
+	position: relative;
+	overflow: hidden;
+	background-color: #ededed;
+}
+
+#wrapper #content #sidebar #sidebar-inside{
+	min-height: 500px;
+	display: block;
+	position: relative;
+	overflow: hidden;
+	border: 1px solid #fff;
+}
+
+/* @end */
+
+/* @group Footer */
+
+
+
+/* @end */
+
+/* Other */
+
+/* @group Helpers */
+
+.round {
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+}
+
+.round_top {
+        -moz-border-radius-topright: 4px;
+        -moz-border-radius-topleft: 4px;
+        -webkit-border-top-right-radius: 4px;
+        -webkit-border-top-left-radius: 4px;
+}
+
+.round_bottom {
+        -moz-border-radius-bottomright: 4px;
+        -moz-border-radius-bottomleft: 4px;
+        -webkit-border-bottom-right-radius: 4px;
+        -webkit-border-bottom-left-radius: 4px;
+}
+
+.shadow {
+  -webkit-box-shadow: 0px 1px 5px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0px 1px 5px rgba(0,0,0,0.2);
+  box-shadow: 0px 1px 5px rgba(0,0,0,0.2);
+}
+
+/* @end */
+
+/* @group Message */
 
 #flash_notice, #flash_error, #flash_alert {
   padding: 5px 8px;
@@ -73,3 +358,7 @@ a {
 .error_messages ul {
   margin: 0;
 }
+
+
+
+/* @end */

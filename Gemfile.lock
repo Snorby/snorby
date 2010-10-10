@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/mislav/will_paginate.git
+  revision: 36159385c8a5837fc63fe901ebe0a88205b5ce8d
+  branch: rails3
+  specs:
+    will_paginate (3.0.pre2)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -167,6 +174,7 @@ DEPENDENCIES
   dm-mysql-adapter (~> 1.0.2)
   dm-observer (~> 1.0.2)
   dm-rails (~> 1.0.3)
+  dm-serializer (~> 1.0.2)
   dm-timestamps (~> 1.0.2)
   dm-transactions (~> 1.0.2)
   dm-types (~> 1.0.2)
@@ -176,3 +184,4 @@ DEPENDENCIES
   nifty-generators (~> 0.4.1)
   rails (= 3.0.0)
   railties (~> 3.0.0)
+  will_paginate (~> 3.0)!

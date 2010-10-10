@@ -29,12 +29,14 @@ gem 'dm-aggregates',          DM_VERSION
 gem 'dm-timestamps',          DM_VERSION
 gem 'dm-observer',            DM_VERSION
 gem 'dm-devise',              '~> 1.1.0'
+gem 'dm-serializer',          '~> 1.0.2'
 
 # Deploy with Capistrano
 gem 'capistrano'
 
 # Rails Plugins
 gem 'devise',                 '~> 1.1.3'
+gem 'will_paginate', '~> 3.0', :git => 'git://github.com/mislav/will_paginate.git', :branch => 'rails3'
 
 group(:development, :test) do
   gem 'nifty-generators',     '~> 0.4.1' 

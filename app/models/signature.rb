@@ -6,9 +6,11 @@ class Signature
 
   belongs_to :category, :parent_key => [ :sig_class_id ], :child_key => [ :sig_class_id ], :required => true
 
-  has n, :sig_references, :child_key => [ :sig_id ]
+  has n, :events, :parent_key => :sig_id, :child_key => :signature
+  
+  has n, :sig_references, :child_key => [ :ref_seq ]
 
-  property :sig_id, Serial
+  property :sig_id, Serial, :key => true
 
   property :sig_name, Text
   

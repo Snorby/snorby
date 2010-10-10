@@ -1,29 +1,28 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8">
     
 		<title><%= content_for?(:title) ? yield(:title) : "Snorby #{Snorby::VERSION}" %></title>
 
-    <%= stylesheet_link_tag "snorby" %>
+    <%= stylesheet_link_tag 'grid', 'snorby' %>
     <%= javascript_include_tag 'jquery', 'jquery-ui', 'snorby' %>
     <%= csrf_meta_tag %>
-    
+
 		<%= yield(:head) %>
 
   </head>
   
 	<body>
 		
-    <div id="container">
-      <% flash.each do |name, msg| %>
-        <%= content_tag :div, msg, :id => "flash_#{name}" %>
-      <% end %>
+		<%= render :partial => 'layouts/header' %>
 
-      <%= yield %>
-    </div>
+		<%= render :partial => 'layouts/content' %>
 
-		<%= yield(:head) %>
+		<%= render :partial => 'layouts/footer' %>
+		
+		<%= yield(:footer) %>
   </body>
 
 </html>

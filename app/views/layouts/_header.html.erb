@@ -1,0 +1,46 @@
+<div id="header">
+	<div id="header-inside">
+		<div id="header-content">
+			<div id="header-top" class='container_12'>
+				
+				<div id="logo" class='grid_6'>
+					logo
+				</div>
+				
+				<div id="user-menu" class='grid_6'>
+					
+					<ul>
+						<% if user_signed_in? %>
+							<li class='first'>Welcome <%= current_user.name %></li>
+							<li><%= link_to 'Settings' %></li>
+							<li class='last'><%= link_to 'Log out', logout_path %></li>
+						<% else %>
+							<li class='first'><%= link_to 'Log In' %></li>
+							<li><%= link_to 'Forgot Password?' %></li>
+							<li class='last'><%= link_to 'Request Access' %></li>
+						<% end %>				
+					</ul>
+					
+				</div>
+				
+			</div>
+		</div>
+		
+		
+		<div id="menu">
+
+			<ul class='container_12'>
+				<li class='blank first'></li>
+				<li><%= link_to "Dashboard", '' %></li>
+				<li><%= link_to "Sensors", '' %></li>
+				<li><%= link_to "Events", events_path %></li>
+				<li><%= link_to "My Queue", '' %></li>
+				<li><%= link_to "Search", '' %></li>
+				<li><%= link_to "Settings", '' %></li>
+				<li class='blank last'></li>
+			</ul>
+
+		</div>
+		
+	</div>
+</div>
