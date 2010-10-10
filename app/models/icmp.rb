@@ -12,14 +12,14 @@ class Icmp
   
   property :cid, Integer, :key => true, :index => true
 
-  property :icmp_type, Integer
+  property :icmp_type, Integer, :lazy => true
   
-  property :icmp_code, Integer
+  property :icmp_code, Integer, :lazy => true
   
-  property :icmp_csum, Integer
+  property :icmp_csum, Integer, :lazy => true
   
-  property :icmp_id, Integer
+  property :icmp_id, Integer, :lazy => true
   
-  property :icmp_seq, Integer
+  property :icmp_seq, Integer, :lazy => true
 
 end

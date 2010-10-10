@@ -1,6 +1,7 @@
 class Event
 
   include DataMapper::Resource
+  extend ActionView::Helpers::TextHelper
 
   storage_names[:default] = "event"
 
@@ -26,9 +27,12 @@ class Event
   
   has 1, :opt, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ]
 
-
   def json_time
     "{time:'#{timestamp}'}"
+  end
+  
+  def pretty_time
+    "#{timestamp.strftime('%D %I:%M:%S %p')} #{User.current_user.timezone}"
   end
   
   def self.to_json_since(time)
@@ -38,14 +42,16 @@ class Event
       json[:events] << {
         :sid => event.sid,
         :cid => event.cid,
+        :hostname => event.sensor.hostname,
         :severity => event.signature.severity,
-        :src_ip => event.ip.ip_src.to_s,
+        :ip_src => event.ip.ip_src.to_s,
         :src_port => event.src_port,
-        :dst_ip => event.ip.ip_dst.to_s,
+        :ip_dst => event.ip.ip_dst.to_s,
         :dst_port => event.dst_port,
-        :timestamp => event.timestamp,
-        :message => event.signature.name,
+        :timestamp => event.pretty_time,
+        :message => truncate(event.signature.name, :length => 40, :omission => '...')
       }
+      # :message => truncate(event.signature.name, :length => 40, :omission => '...'),
     end
     return json
   end

@@ -18,11 +18,11 @@ class Signature
   
   property :sig_priority, Integer
     
-  property :sig_rev, Integer
+  property :sig_rev, Integer, :lazy => true
       
-  property :sig_sid, Integer
+  property :sig_sid, Integer, :lazy => true
 
-  property :sig_gid, Integer
+  property :sig_gid, Integer, :lazy => true
 
   def severity
     sig_priority

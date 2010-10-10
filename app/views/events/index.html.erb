@@ -11,10 +11,10 @@
 					if (old_id != data.time) {
 						$.get('events/since', {timestamp: old_id}, function (data) {
 							if (data.events.length != 0) {
-								console.log(data);
-								$.each(data.events, function (index, item) {
-									$('#page').prepend(item);
-								});
+								if ($('div.new_events').length == 0) {
+									$('#events').prepend('<div class="note new_events">New Events Are Available Click here To View Them.</div>');
+								};
+								$('#events table tbody.events').prepend(Snorby.templates.event_table(data));
 								Snorby.notification({title: 'New Events', text: data.events.length + ' Events Added.'});
 							};
 						});
@@ -30,7 +30,7 @@
 	<%= render :partial => 'layouts/notify' %>
 <% end %>
 
-<%- title "Listing Events", do -%>
+<%= title "Listing Events", do -%>
 
 	<li>Hello</li>
 
@@ -39,7 +39,7 @@
 <div id="events">
 	
 	<table border="0" cellspacing="0" cellpadding="0">
-		<tr>
+		<tr>		
 			<th>Sensor</th>
 			<th>Severity</th>
 			<th>Src IP</th>
@@ -47,10 +47,14 @@
 			<th>Dst IP</th>
 			<th>Dst Port</th>
 			<th>Signature</th>
+			<th>Timestamp</th>
 		</tr>
 		<tbody class='events'>
 			<%= render @events %>
 		</tbody>
 	</table>
+	
+	<%= will_paginate(@events, :previous_label => 'Prev', :next_label => 'Next' ) %>
+	<div class="paginate-info"><%= page_entries_info @events %></div>
 	
 </div>

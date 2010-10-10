@@ -246,12 +246,29 @@ a {
 }
 
 #wrapper #content{
-	min-height: 500px;
+	/*min-height: 500px;*/
 	background-color: #fff;
 	position: relative;
 	overflow: hidden;
 	display: block;
 	border: 1px solid #cdcdcd;
+	padding-bottom: 5px;
+}
+
+#wrapper #content div.note{
+	cursor: pointer;
+	border: 1px solid #fdf5a2;
+	padding: 10px 10px 10px 35px;
+	color: #313131;
+	margin-bottom: 10px;
+	text-align: left;
+	font-weight: normal;
+	text-decoration: none;
+	font-variant: normal;
+	text-shadow: #fff 0 1px 0;
+	background: #fefae8 url(../images/icons/note.png) no-repeat 10px center;
+	font-style: normal;
+	font-size: 1.1em;
 }
 
 /* @end */
@@ -311,7 +328,24 @@ a {
 
 /* @group Footer */
 
+#footer{
+	margin-top: 10px;
+	margin-bottom: 30px;
+}
 
+#footer #footer-inside{
+	color: #939393;
+	font-size: 0.9em;
+	text-align: right;
+	height: 25px;
+	line-height: 25px;
+	padding-left: 20px;
+	padding-right: 10px;
+}
+
+#footer #footer-inside a{
+	color: #494949;
+}
 
 /* @end */
 
@@ -421,12 +455,179 @@ a {
 
 /* @end */
 
+/* @group Sensors */
+
+#sensors{
+	display: block;
+	position: relative;
+	padding: 10px 10px 5px;	
+}
+
+/* @end */
+
 /* @group Events */
 
 #events{
 	display: block;
 	position: relative;
 	padding: 10px;
+}
+
+/* @end */
+
+/* @group Table */
+
+table{
+	width: 100%;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border: 5px solid #f3f3f3;
+}
+
+table th{
+	text-align: left;
+	padding-left: 10px;
+	color: #3f3f3f;
+	height: 25px;
+	line-height: 25px;
+	font-weight: bold;
+	text-decoration: none;
+	font-variant: normal;
+	border-bottom: 1px solid #bababa;
+	background-color: #ddd;
+	text-shadow: #fff 0 1px 0;
+	font-size: 0.9em;
+}
+
+table td{
+	padding-left: 10px;
+	height: 30px;
+	line-height: 30px;
+	border-bottom: 1px solid #cdcdcd;
+	color: #474747;
+	background: #fff url(../images/page/table-bg.png) repeat-x 0 bottom;
+}
+
+table td.first{
+	border-left: 1px solid #cdcdcd;
+}
+
+table td.last{
+	border-right: 1px solid #cdcdcd;
+}
+
+table tr:hover td{
+	background-color: #fefeeb;
+}
+
+table td:last{
+	border-bottom-style: none;
+}
+
+
+/* @end */
+
+/* @group Buttons */
+
+.btn{
+	background: #F3F3F3 -webkit-gradient(linear, 0% 0%, 0% 100%, from(white), to(#F3F3F3));
+	background-color: #F3F3F3;
+	border: 1px solid #AAA;
+	color: #333;
+	text-shadow: white 0px 1px 0px;
+}
+
+.btn-small{
+	font-size: 1em;
+	padding: 6px;
+}
+
+/* @end */
+
+/* @group Pagination */
+
+div.paginate-info{
+	display: block;
+	position: relative;
+	overflow: hidden;
+	text-align: center;
+	font-size: 0.9em;
+	font-weight: normal;
+	font-style: normal;
+	text-decoration: none;
+	font-variant: normal;
+	color: #a6a6a6;
+	margin-top: 10px;
+}
+
+div.pagination{
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	display: block;
+	position: relative;
+	overflow: hidden;
+	margin-right: auto;
+	margin-top: 10px;
+	margin-left: auto;
+	background-color: #ededed;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-bottom: 1px solid #fff;
+	border: 1px solid #dedede;
+	text-align: center;
+}
+
+div.pagination span,
+div.pagination em,
+div.pagination a{
+	border-bottom-left-radius: 5px 5px;
+	border-bottom-right-radius: 5px 5px;
+	border-top-left-radius: 5px 5px;
+	border-top-right-radius: 5px 5px;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 1em;
+	font-weight: bold;
+	line-height: 1.25em;
+	overflow: visible;
+	padding: 7px;
+	width: auto;
+	zoom: 1;
+	background: #F3F3F3 -webkit-gradient(linear, 0% 0%, 0% 100%, from(white), to(#F3F3F3));
+	background-color: #F3F3F3;
+	border: 1px solid #AAA;
+	color: #333;
+	text-shadow: white 0px 1px 0px;
+	padding: 6px;
+	text-decoration: none;
+	font-variant: normal;
+	text-align: center;
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+div.pagination span:hover,
+div.pagination a:hover{
+  -webkit-box-shadow: 0px 1px 5px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0px 1px 5px rgba(0,0,0,0.2);
+  box-shadow: 0px 1px 5px rgba(0,0,0,0.2);
+	color: #1b67fb;
+	border: 1px solid #7b7b7b;
+}
+
+div.pagination em{
+	color: #8c8d90;
+	font-weight: normal;
+	text-decoration: none;
+	font-variant: normal;
+	font-style: normal;
+}
+
+div.pagination a.previous_page,
+div.pagination span.previous_page,
+div.pagination span.next_page
+div.pagination a.next_page{
+	width: 3em;	!important
 }
 
 /* @end */

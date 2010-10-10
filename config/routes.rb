@@ -8,6 +8,9 @@ Snorby::Application.routes.draw do
 
   root :to => "page#dashboard"
 
+  resources :sensors do
+  end
+
   resources :events do
     collection do
       get :last

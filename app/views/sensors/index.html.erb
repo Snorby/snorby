@@ -1,0 +1,26 @@
+<%= title "Listing Sensors", do -%>
+
+	<li>Hello</li>
+
+<%- end -%>
+
+<div id="sensors">
+	
+	<table border="0" cellspacing="0" cellpadding="0">
+		<tr>		
+			<th>ID</th>
+			<th>Name</th>
+			<th>Hostname</th>
+			<th>Interface</th>
+			<th>Event Count</th>
+		</tr>
+		<tbody class='sensors'>
+			<%= render @sensors %>
+		</tbody>
+	</table>
+
+
+	<%= will_paginate(@sensors, :previous_label => 'Prev', :next_label => 'Next' ) %>
+	<div class="paginate-info"><%= page_entries_info @sensors %></div>
+	
+</div>

@@ -21,6 +21,7 @@ class ApplicationController < ActionController::Base
         else
           Time.timezone = current_user.timezone
         end
+        User.current_user = current_user
       end
     end
 

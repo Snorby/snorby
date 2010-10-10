@@ -16,20 +16,20 @@ class Tcp
   
   property :tcp_dport, Integer
 
-  property :tcp_seq, Integer
+  property :tcp_seq, Integer, :lazy => true
   
-  property :tcp_ack, Integer
+  property :tcp_ack, Integer, :lazy => true
   
-  property :tcp_off, Integer
+  property :tcp_off, Integer, :lazy => true
   
-  property :tcp_res, Integer
+  property :tcp_res, Integer, :lazy => true
   
-  property :tcp_flags, Integer
+  property :tcp_flags, Integer, :lazy => true
   
-  property :tcp_win, Integer
+  property :tcp_win, Integer, :lazy => true
   
-  property :tcp_csum, Integer
+  property :tcp_csum, Integer, :lazy => true
   
-  property :tcp_urp, Integer
+  property :tcp_urp, Integer, :lazy => true
 
 end

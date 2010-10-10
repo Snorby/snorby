@@ -16,8 +16,8 @@ class Udp
   
   property :udp_dport, Integer
 
-  property :udp_len, Integer
+  property :udp_len, Integer, :lazy => true
   
-  property :udp_csum, Integer
+  property :udp_csum, Integer, :lazy => true
 
 end

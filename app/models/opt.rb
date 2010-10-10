@@ -14,11 +14,11 @@ class Opt
 
   property :optid, Integer, :key => true, :index => true
   
-  property :opt_proto, Integer
+  property :opt_proto, Integer, :lazy => true
   
-  property :opt_code, Integer
+  property :opt_code, Integer, :lazy => true
   
-  property :opt_len, Integer
+  property :opt_len, Integer, :lazy => true
   
   property :opt_data, Text
 

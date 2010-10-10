@@ -19,24 +19,24 @@ class Ip
   
   property :ip_dst, NumericIPAddr
   
-  property :ip_ver, Integer
+  property :ip_ver, Integer, :lazy => true
   
-  property :ip_hlen, Integer
+  property :ip_hlen, Integer, :lazy => true
   
-  property :ip_tos, Integer
+  property :ip_tos, Integer, :lazy => true
   
-  property :ip_len, Integer
+  property :ip_len, Integer, :lazy => true
   
-  property :ip_id, Integer
+  property :ip_id, Integer, :lazy => true
   
-  property :ip_flags, Integer
+  property :ip_flags, Integer, :lazy => true
   
-  property :ip_off, Integer
+  property :ip_off, Integer, :lazy => true
   
-  property :ip_ttl, Integer
+  property :ip_ttl, Integer, :lazy => true
   
-  property :ip_proto, Integer
+  property :ip_proto, Integer, :lazy => true
   
-  property :ip_csum, Integer
+  property :ip_csum, Integer, :lazy => true
 
 end

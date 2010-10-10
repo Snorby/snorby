@@ -8,7 +8,7 @@ class Sensor
 
   property :sid, Serial, :index => true
 
-  property :name, Text, :default => 'Unknown'
+  property :name, String, :default => 'Click To Change Me'
 
   property :hostname, Text, :index => true
 

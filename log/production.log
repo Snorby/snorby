@@ -1,0 +1,773 @@
+
+
+Started GET "/events" for 127.0.0.1 at 2010-10-10 17:32:23 -0400
+  Processing by EventsController#index as HTML
+Rendered layouts/_notify.html.erb (0.5ms)
+Rendered events/_event.html.erb (350.9ms)
+Rendered layouts/_header.html.erb (2.0ms)
+Rendered layouts/_content.html.erb (0.9ms)
+Rendered layouts/_footer.html.erb (0.3ms)
+Rendered events/index.html.erb within layouts/application (367.7ms)
+Completed 200 OK in 412ms (Views: 347.2ms | ActiveRecord: 25.6ms | Models: 25.616ms)
+
+
+Started GET "/stylesheets/grid.css?1286671077" for 127.0.0.1 at 2010-10-10 17:32:24 -0400
+
+ActionController::RoutingError (No route matches "/stylesheets/grid.css"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.5ms)
+
+
+Started GET "/javascripts/jquery.js?1286652025" for 127.0.0.1 at 2010-10-10 17:32:24 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.js"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.1ms)
+
+
+Started GET "/javascripts/jquery-ui.js?1286652026" for 127.0.0.1 at 2010-10-10 17:32:24 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (2.2ms)
+
+
+Started GET "/javascripts/growl.js?1286731809" for 127.0.0.1 at 2010-10-10 17:32:24 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/growl.js"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/javascripts/snorby.js?1286733477" for 127.0.0.1 at 2010-10-10 17:32:24 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/snorby.js"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.2ms)
+
+
+Started GET "/stylesheets/snorby.css?1286745013" for 127.0.0.1 at 2010-10-10 17:32:24 -0400
+
+ActionController::RoutingError (No route matches "/stylesheets/snorby.css"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.3ms)
+
+
+Started GET "/events/last" for 127.0.0.1 at 2010-10-10 17:32:27 -0400
+  Processing by EventsController#last as */*
+Completed 200 OK in 13ms (Views: 9.6ms | ActiveRecord: 0.4ms | Models: 0.442ms)
+
+
+Started GET "/events/since" for 127.0.0.1 at 2010-10-10 17:32:27 -0400
+  Processing by EventsController#since as */*
+Completed 200 OK in 4ms (Views: 0.2ms | ActiveRecord: 0.6ms | Models: 0.582ms)
+
+
+Started GET "/events" for 127.0.0.1 at 2010-10-10 17:32:30 -0400
+  Processing by EventsController#index as HTML
+Rendered layouts/_notify.html.erb (0.0ms)
+Rendered events/_event.html.erb (313.5ms)
+Rendered layouts/_header.html.erb (1.1ms)
+Rendered layouts/_content.html.erb (0.1ms)
+Rendered layouts/_footer.html.erb (0.0ms)
+Rendered events/index.html.erb within layouts/application (320.6ms)
+Completed 200 OK in 358ms (Views: 295.3ms | ActiveRecord: 26.9ms | Models: 26.927ms)
+
+
+Started GET "/stylesheets/snorby.css?1286745013" for 127.0.0.1 at 2010-10-10 17:32:30 -0400
+
+ActionController::RoutingError (No route matches "/stylesheets/snorby.css"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (3.3ms)
+
+
+Started GET "/javascripts/jquery.js?1286652025" for 127.0.0.1 at 2010-10-10 17:32:30 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.js"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (2.0ms)
+
+
+Started GET "/javascripts/jquery-ui.js?1286652026" for 127.0.0.1 at 2010-10-10 17:32:30 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (2.9ms)
+
+
+Started GET "/stylesheets/grid.css?1286671077" for 127.0.0.1 at 2010-10-10 17:32:30 -0400
+
+ActionController::RoutingError (No route matches "/stylesheets/grid.css"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.1ms)
+
+
+Started GET "/javascripts/snorby.js?1286733477" for 127.0.0.1 at 2010-10-10 17:32:30 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/snorby.js"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/javascripts/growl.js?1286731809" for 127.0.0.1 at 2010-10-10 17:32:31 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/growl.js"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.1ms)
+
+
+Started GET "/events" for 127.0.0.1 at 2010-10-10 17:32:45 -0400
+  Processing by EventsController#index as HTML
+Rendered layouts/_notify.html.erb (0.0ms)
+Rendered events/_event.html.erb (314.3ms)
+Rendered layouts/_header.html.erb (0.8ms)
+Rendered layouts/_content.html.erb (0.1ms)
+Rendered layouts/_footer.html.erb (0.0ms)
+Rendered events/index.html.erb within layouts/application (320.6ms)
+Completed 200 OK in 359ms (Views: 297.3ms | ActiveRecord: 25.0ms | Models: 24.972ms)
+
+
+Started GET "/stylesheets/snorby.css?1286745013" for 127.0.0.1 at 2010-10-10 17:32:46 -0400
+
+ActionController::RoutingError (No route matches "/stylesheets/snorby.css"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.1ms)
+
+
+Started GET "/javascripts/jquery-ui.js?1286652026" for 127.0.0.1 at 2010-10-10 17:32:46 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+
+
+Started GET "/javascripts/jquery.js?1286652025" for 127.0.0.1 at 2010-10-10 17:32:46 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.js"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/javascripts/growl.js?1286731809" for 127.0.0.1 at 2010-10-10 17:32:46 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/growl.js"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.5ms)
+
+
+Started GET "/javascripts/snorby.js?1286733477" for 127.0.0.1 at 2010-10-10 17:32:46 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/snorby.js"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.9ms)
+
+
+Started GET "/stylesheets/grid.css?1286671077" for 127.0.0.1 at 2010-10-10 17:32:46 -0400
+
+ActionController::RoutingError (No route matches "/stylesheets/grid.css"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/events/last" for 127.0.0.1 at 2010-10-10 17:32:47 -0400
+  Processing by EventsController#last as */*
+Completed 200 OK in 4ms (Views: 0.6ms | ActiveRecord: 0.6ms | Models: 0.643ms)
+
+
+Started GET "/events?sort=Sensor&direction=asc" for 127.0.0.1 at 2010-10-10 17:32:50 -0400
+  Processing by EventsController#index as HTML
+  Parameters: {"sort"=>"Sensor", "direction"=>"asc"}
+Rendered layouts/_notify.html.erb (0.0ms)
+Rendered events/_event.html.erb (379.8ms)
+Rendered layouts/_header.html.erb (1.0ms)
+Rendered layouts/_content.html.erb (0.1ms)
+Rendered layouts/_footer.html.erb (0.0ms)
+Rendered events/index.html.erb within layouts/application (387.3ms)
+Completed 200 OK in 424ms (Views: 367.8ms | ActiveRecord: 20.8ms | Models: 20.778ms)
+
+
+Started GET "/stylesheets/snorby.css?1286745013" for 127.0.0.1 at 2010-10-10 17:32:51 -0400
+
+ActionController::RoutingError (No route matches "/stylesheets/snorby.css"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (2.9ms)
+
+
+Started GET "/stylesheets/grid.css?1286671077" for 127.0.0.1 at 2010-10-10 17:32:51 -0400
+
+ActionController::RoutingError (No route matches "/stylesheets/grid.css"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (2.2ms)
+
+
+Started GET "/javascripts/growl.js?1286731809" for 127.0.0.1 at 2010-10-10 17:32:51 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/growl.js"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/javascripts/snorby.js?1286733477" for 127.0.0.1 at 2010-10-10 17:32:51 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/snorby.js"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (6.0ms)
+
+
+Started GET "/javascripts/jquery-ui.js?1286652026" for 127.0.0.1 at 2010-10-10 17:32:51 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.1ms)
+
+
+Started GET "/javascripts/jquery.js?1286652025" for 127.0.0.1 at 2010-10-10 17:32:51 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.js"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.1ms)
+
+
+Started GET "/events?sort=src_port&direction=asc" for 127.0.0.1 at 2010-10-10 17:32:54 -0400
+  Processing by EventsController#index as HTML
+  Parameters: {"sort"=>"src_port", "direction"=>"asc"}
+Rendered layouts/_notify.html.erb (0.0ms)
+Rendered events/_event.html.erb (320.5ms)
+Rendered layouts/_header.html.erb (1.0ms)
+Rendered layouts/_content.html.erb (0.1ms)
+Rendered layouts/_footer.html.erb (0.0ms)
+Rendered events/index.html.erb within layouts/application (326.9ms)
+Completed 200 OK in 366ms (Views: 304.9ms | ActiveRecord: 23.4ms | Models: 23.417ms)
+
+
+Started GET "/stylesheets/snorby.css?1286745013" for 127.0.0.1 at 2010-10-10 17:32:54 -0400
+
+ActionController::RoutingError (No route matches "/stylesheets/snorby.css"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.4ms)
+
+
+Started GET "/javascripts/jquery-ui.js?1286652026" for 127.0.0.1 at 2010-10-10 17:32:54 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/javascripts/growl.js?1286731809" for 127.0.0.1 at 2010-10-10 17:32:54 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/growl.js"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/javascripts/snorby.js?1286733477" for 127.0.0.1 at 2010-10-10 17:32:54 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/snorby.js"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.6ms)
+
+
+Started GET "/stylesheets/grid.css?1286671077" for 127.0.0.1 at 2010-10-10 17:32:54 -0400
+
+ActionController::RoutingError (No route matches "/stylesheets/grid.css"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.1ms)
+
+
+Started GET "/javascripts/jquery.js?1286652025" for 127.0.0.1 at 2010-10-10 17:32:54 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.js"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/events?sort=src_port&direction=asc" for 127.0.0.1 at 2010-10-10 17:32:57 -0400
+  Processing by EventsController#index as HTML
+  Parameters: {"sort"=>"src_port", "direction"=>"asc"}
+Rendered layouts/_notify.html.erb (0.0ms)
+Rendered events/_event.html.erb (328.9ms)
+Rendered layouts/_header.html.erb (1.2ms)
+Rendered layouts/_content.html.erb (0.1ms)
+Rendered layouts/_footer.html.erb (0.0ms)
+Rendered events/index.html.erb within layouts/application (336.8ms)
+Completed 200 OK in 377ms (Views: 314.2ms | ActiveRecord: 24.2ms | Models: 24.232ms)
+
+
+Started GET "/stylesheets/snorby.css?1286745013" for 127.0.0.1 at 2010-10-10 17:32:57 -0400
+
+ActionController::RoutingError (No route matches "/stylesheets/snorby.css"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.5ms)
+
+
+Started GET "/javascripts/jquery.js?1286652025" for 127.0.0.1 at 2010-10-10 17:32:57 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.js"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.1ms)
+
+
+Started GET "/javascripts/jquery-ui.js?1286652026" for 127.0.0.1 at 2010-10-10 17:32:58 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/javascripts/growl.js?1286731809" for 127.0.0.1 at 2010-10-10 17:32:58 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/growl.js"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.4ms)
+
+
+Started GET "/javascripts/snorby.js?1286733477" for 127.0.0.1 at 2010-10-10 17:32:58 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/snorby.js"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (5.6ms)
+
+
+Started GET "/stylesheets/grid.css?1286671077" for 127.0.0.1 at 2010-10-10 17:32:58 -0400
+
+ActionController::RoutingError (No route matches "/stylesheets/grid.css"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.8ms)
+
+
+Started GET "/events?sort=src_port&direction=asc" for 127.0.0.1 at 2010-10-10 17:33:00 -0400
+  Processing by EventsController#index as HTML
+  Parameters: {"sort"=>"src_port", "direction"=>"asc"}
+Rendered layouts/_notify.html.erb (0.0ms)
+Rendered events/_event.html.erb (375.3ms)
+Rendered layouts/_header.html.erb (0.9ms)
+Rendered layouts/_content.html.erb (0.1ms)
+Rendered layouts/_footer.html.erb (0.0ms)
+Rendered events/index.html.erb within layouts/application (382.1ms)
+Completed 200 OK in 424ms (Views: 361.0ms | ActiveRecord: 22.8ms | Models: 22.840ms)
+
+
+Started GET "/javascripts/snorby.js?1286733477" for 127.0.0.1 at 2010-10-10 17:33:01 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/snorby.js"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (4.3ms)
+
+
+Started GET "/stylesheets/snorby.css?1286745013" for 127.0.0.1 at 2010-10-10 17:33:01 -0400
+
+ActionController::RoutingError (No route matches "/stylesheets/snorby.css"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.9ms)
+
+
+Started GET "/javascripts/jquery.js?1286652025" for 127.0.0.1 at 2010-10-10 17:33:01 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.js"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/javascripts/jquery-ui.js?1286652026" for 127.0.0.1 at 2010-10-10 17:33:01 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (3.8ms)
+
+
+Started GET "/javascripts/growl.js?1286731809" for 127.0.0.1 at 2010-10-10 17:33:01 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/growl.js"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/stylesheets/grid.css?1286671077" for 127.0.0.1 at 2010-10-10 17:33:01 -0400
+
+ActionController::RoutingError (No route matches "/stylesheets/grid.css"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.3ms)
+
+
+Started GET "/events/last" for 127.0.0.1 at 2010-10-10 17:33:07 -0400
+  Processing by EventsController#last as */*
+Completed 200 OK in 5ms (Views: 0.5ms | ActiveRecord: 0.9ms | Models: 0.924ms)
+
+
+Started GET "/events?sort=src_port&direction=asc" for 127.0.0.1 at 2010-10-10 17:33:25 -0400
+  Processing by EventsController#index as HTML
+  Parameters: {"sort"=>"src_port", "direction"=>"asc"}
+Rendered layouts/_notify.html.erb (0.0ms)
+Rendered events/_event.html.erb (313.2ms)
+Rendered layouts/_header.html.erb (0.9ms)
+Rendered layouts/_content.html.erb (0.1ms)
+Rendered layouts/_footer.html.erb (0.0ms)
+Rendered events/index.html.erb within layouts/application (321.0ms)
+Completed 200 OK in 358ms (Views: 296.2ms | ActiveRecord: 26.4ms | Models: 26.381ms)
+
+
+Started GET "/javascripts/jquery.js?1286652025" for 127.0.0.1 at 2010-10-10 17:33:25 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.js"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.1ms)
+
+
+Started GET "/javascripts/jquery-ui.js?1286652026" for 127.0.0.1 at 2010-10-10 17:33:26 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/jquery-ui.js"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (2.0ms)
+
+
+Started GET "/javascripts/growl.js?1286731809" for 127.0.0.1 at 2010-10-10 17:33:26 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/growl.js"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.2ms)
+
+
+Started GET "/javascripts/snorby.js?1286733477" for 127.0.0.1 at 2010-10-10 17:33:26 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/snorby.js"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (3.4ms)
+
+
+Started GET "/stylesheets/snorby.css?1286745013" for 127.0.0.1 at 2010-10-10 17:33:26 -0400
+
+ActionController::RoutingError (No route matches "/stylesheets/snorby.css"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.3ms)
+
+
+Started GET "/stylesheets/grid.css?1286671077" for 127.0.0.1 at 2010-10-10 17:33:26 -0400
+
+ActionController::RoutingError (No route matches "/stylesheets/grid.css"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (9.8ms)
+
+
+Started GET "/events/last" for 127.0.0.1 at 2010-10-10 17:33:27 -0400
+  Processing by EventsController#last as */*
+Completed 200 OK in 4ms (Views: 0.5ms | ActiveRecord: 0.5ms | Models: 0.488ms)
+
+
+Started GET "/events?sort=src_port&direction=asc" for 127.0.0.1 at 2010-10-10 17:33:39 -0400
+  Processing by EventsController#index as HTML
+  Parameters: {"sort"=>"src_port", "direction"=>"asc"}
+Rendered layouts/_notify.html.erb (0.4ms)
+Rendered events/_event.html.erb (344.7ms)
+Rendered layouts/_header.html.erb (2.0ms)
+Rendered layouts/_content.html.erb (2.4ms)
+Rendered layouts/_footer.html.erb (0.4ms)
+Rendered events/index.html.erb within layouts/application (372.1ms)
+Completed 200 OK in 417ms (Views: 353.4ms | ActiveRecord: 24.2ms | Models: 24.197ms)
+
+
+Started GET "/stylesheets/all.css?1286745013" for 127.0.0.1 at 2010-10-10 17:33:40 -0400
+
+ActionController::RoutingError (No route matches "/stylesheets/all.css"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.1ms)
+
+
+Started GET "/javascripts/all.js?1286733477" for 127.0.0.1 at 2010-10-10 17:33:40 -0400
+
+ActionController::RoutingError (No route matches "/javascripts/all.js"):
+  
+
+Rendered /Users/mephux/.rvm/gems/ruby-1.9.2-p0/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/events/last" for 127.0.0.1 at 2010-10-10 17:33:47 -0400
+  Processing by EventsController#last as */*
+Completed 200 OK in 17ms (Views: 10.4ms | ActiveRecord: 1.1ms | Models: 1.148ms)
+
+
+Started GET "/events/last" for 127.0.0.1 at 2010-10-10 17:34:07 -0400
+  Processing by EventsController#last as */*
+Completed 200 OK in 4ms (Views: 0.4ms | ActiveRecord: 1.0ms | Models: 0.976ms)
+
+
+Started GET "/events/last" for 127.0.0.1 at 2010-10-10 17:34:27 -0400
+  Processing by EventsController#last as */*
+Completed 200 OK in 4ms (Views: 0.6ms | ActiveRecord: 0.7ms | Models: 0.692ms)
+
+
+Started GET "/events/last" for 127.0.0.1 at 2010-10-10 17:34:47 -0400
+  Processing by EventsController#last as */*
+Completed 200 OK in 3ms (Views: 0.3ms | ActiveRecord: 0.6ms | Models: 0.563ms)
+
+
+Started GET "/events/since?timestamp=2010-10-10T17%3A32%3A15-04%3A00" for 127.0.0.1 at 2010-10-10 17:34:47 -0400
+  Processing by EventsController#since as */*
+  Parameters: {"timestamp"=>"2010-10-10T17:32:15-04:00"}
+Completed 200 OK in 45ms (Views: 0.3ms | ActiveRecord: 3.0ms | Models: 3.038ms)
+
+
+Started GET "/events?sort=src_port&direction=asc" for 127.0.0.1 at 2010-10-10 17:35:29 -0400
+  Processing by EventsController#index as HTML
+  Parameters: {"sort"=>"src_port", "direction"=>"asc"}
+Rendered layouts/_notify.html.erb (0.4ms)
+Rendered events/_event.html.erb (341.8ms)
+Rendered layouts/_header.html.erb (1.8ms)
+Rendered layouts/_content.html.erb (0.6ms)
+Rendered layouts/_footer.html.erb (0.6ms)
+Rendered events/index.html.erb within layouts/application (356.7ms)
+Completed 200 OK in 401ms (Views: 341.7ms | ActiveRecord: 20.9ms | Models: 20.924ms)
+
+
+Started GET "/events?sort=src_port&direction=asc" for 127.0.0.1 at 2010-10-10 17:35:32 -0400
+  Processing by EventsController#index as HTML
+  Parameters: {"sort"=>"src_port", "direction"=>"asc"}
+Rendered layouts/_notify.html.erb (0.0ms)
+Rendered events/_event.html.erb (305.6ms)
+Rendered layouts/_header.html.erb (1.1ms)
+Rendered layouts/_content.html.erb (0.1ms)
+Rendered layouts/_footer.html.erb (0.0ms)
+Rendered events/index.html.erb within layouts/application (312.1ms)
+Completed 200 OK in 408ms (Views: 291.1ms | ActiveRecord: 22.8ms | Models: 22.788ms)
+
+
+Started GET "/events" for 127.0.0.1 at 2010-10-10 17:35:37 -0400
+  Processing by EventsController#index as HTML
+Rendered layouts/_notify.html.erb (0.0ms)
+Rendered events/_event.html.erb (316.9ms)
+Rendered layouts/_header.html.erb (0.9ms)
+Rendered layouts/_content.html.erb (0.1ms)
+Rendered layouts/_footer.html.erb (0.0ms)
+Rendered events/index.html.erb within layouts/application (323.5ms)
+Completed 200 OK in 363ms (Views: 301.6ms | ActiveRecord: 23.2ms | Models: 23.248ms)
+
+
+Started GET "/events" for 127.0.0.1 at 2010-10-10 17:35:38 -0400
+  Processing by EventsController#index as HTML
+Rendered layouts/_notify.html.erb (0.0ms)
+Rendered events/_event.html.erb (324.3ms)
+Rendered layouts/_header.html.erb (0.8ms)
+Rendered layouts/_content.html.erb (0.1ms)
+Rendered layouts/_footer.html.erb (0.0ms)
+Rendered events/index.html.erb within layouts/application (390.8ms)
+Completed 200 OK in 432ms (Views: 365.8ms | ActiveRecord: 27.1ms | Models: 27.134ms)
+
+
+Started GET "/events" for 127.0.0.1 at 2010-10-10 17:35:39 -0400
+  Processing by EventsController#index as HTML
+Rendered layouts/_notify.html.erb (0.1ms)
+Rendered events/_event.html.erb (322.1ms)
+Rendered layouts/_header.html.erb (0.9ms)
+Rendered layouts/_content.html.erb (0.1ms)
+Rendered layouts/_footer.html.erb (0.0ms)
+Rendered events/index.html.erb within layouts/application (328.5ms)
+Completed 200 OK in 366ms (Views: 306.4ms | ActiveRecord: 23.6ms | Models: 23.649ms)
+
+
+Started GET "/events" for 127.0.0.1 at 2010-10-10 17:35:40 -0400
+  Processing by EventsController#index as HTML
+Rendered layouts/_notify.html.erb (0.0ms)
+Rendered events/_event.html.erb (417.1ms)
+Rendered layouts/_header.html.erb (0.9ms)
+Rendered layouts/_content.html.erb (0.1ms)
+Rendered layouts/_footer.html.erb (0.0ms)
+Rendered events/index.html.erb within layouts/application (422.9ms)
+Completed 200 OK in 460ms (Views: 391.6ms | ActiveRecord: 32.8ms | Models: 32.779ms)
+
+
+Started GET "/events/last" for 127.0.0.1 at 2010-10-10 17:35:47 -0400
+  Processing by EventsController#last as */*
+Completed 200 OK in 13ms (Views: 9.1ms | ActiveRecord: 0.6ms | Models: 0.621ms)
+
+
+Started GET "/events/since?timestamp=2010-10-10T17%3A34%3A28-04%3A00" for 127.0.0.1 at 2010-10-10 17:35:47 -0400
+  Processing by EventsController#since as */*
+  Parameters: {"timestamp"=>"2010-10-10T17:34:28-04:00"}
+Completed 200 OK in 52ms (Views: 0.3ms | ActiveRecord: 4.3ms | Models: 4.336ms)
+
+
+Started GET "/events/last" for 127.0.0.1 at 2010-10-10 17:36:01 -0400
+  Processing by EventsController#last as */*
+Completed 200 OK in 3ms (Views: 0.4ms | ActiveRecord: 0.5ms | Models: 0.540ms)
+
+
+Started GET "/events/since" for 127.0.0.1 at 2010-10-10 17:36:01 -0400
+  Processing by EventsController#since as */*
+Completed 200 OK in 6ms (Views: 0.2ms | ActiveRecord: 0.6ms | Models: 0.637ms)
+
+
+Started GET "/events/last" for 127.0.0.1 at 2010-10-10 17:36:07 -0400
+  Processing by EventsController#last as */*
+Completed 200 OK in 3ms (Views: 0.3ms | ActiveRecord: 0.6ms | Models: 0.616ms)
+
+
+Started GET "/events/last" for 127.0.0.1 at 2010-10-10 17:36:21 -0400
+  Processing by EventsController#last as */*
+Completed 200 OK in 3ms (Views: 0.3ms | ActiveRecord: 0.4ms | Models: 0.404ms)
+
+
+Started GET "/events/last" for 127.0.0.1 at 2010-10-10 17:36:27 -0400
+  Processing by EventsController#last as */*
+Completed 200 OK in 4ms (Views: 0.4ms | ActiveRecord: 0.5ms | Models: 0.494ms)
+
+
+Started GET "/events/last" for 127.0.0.1 at 2010-10-10 17:36:41 -0400
+  Processing by EventsController#last as */*
+Completed 200 OK in 3ms (Views: 0.3ms | ActiveRecord: 0.4ms | Models: 0.398ms)
+
+
+Started GET "/events/last" for 127.0.0.1 at 2010-10-10 17:36:47 -0400
+  Processing by EventsController#last as */*
+Completed 200 OK in 3ms (Views: 0.4ms | ActiveRecord: 0.4ms | Models: 0.433ms)
+
+
+Started GET "/events/last" for 127.0.0.1 at 2010-10-10 17:37:01 -0400
+  Processing by EventsController#last as */*
+Completed 200 OK in 4ms (Views: 0.4ms | ActiveRecord: 0.5ms | Models: 0.529ms)
+
+
+Started GET "/events/last" for 127.0.0.1 at 2010-10-10 17:37:07 -0400
+  Processing by EventsController#last as */*
+Completed 200 OK in 5ms (Views: 0.4ms | ActiveRecord: 0.5ms | Models: 0.452ms)
+
+
+Started GET "/events/last" for 127.0.0.1 at 2010-10-10 17:37:21 -0400
+  Processing by EventsController#last as */*
+Completed 200 OK in 3ms (Views: 0.4ms | ActiveRecord: 0.4ms | Models: 0.432ms)
+
+
+Started GET "/events/last" for 127.0.0.1 at 2010-10-10 17:37:27 -0400
+  Processing by EventsController#last as */*
+Completed 200 OK in 6ms (Views: 0.6ms | ActiveRecord: 1.5ms | Models: 1.503ms)
+
+
+Started GET "/events/last" for 127.0.0.1 at 2010-10-10 17:37:41 -0400
+  Processing by EventsController#last as */*
+Completed 200 OK in 6ms (Views: 0.6ms | ActiveRecord: 0.7ms | Models: 0.719ms)
+
+
+Started GET "/events/since?timestamp=2010-10-10T17%3A35%3A43-04%3A00" for 127.0.0.1 at 2010-10-10 17:37:41 -0400
+  Processing by EventsController#since as */*
+  Parameters: {"timestamp"=>"2010-10-10T17:35:43-04:00"}
+Completed 200 OK in 165ms (Views: 0.3ms | ActiveRecord: 10.6ms | Models: 10.624ms)
+
+
+Started GET "/events/last" for 127.0.0.1 at 2010-10-10 17:37:47 -0400
+  Processing by EventsController#last as */*
+Completed 200 OK in 3ms (Views: 0.4ms | ActiveRecord: 0.4ms | Models: 0.446ms)
+
+
+Started GET "/events/since?timestamp=2010-10-10T17%3A35%3A43-04%3A00" for 127.0.0.1 at 2010-10-10 17:37:47 -0400
+  Processing by EventsController#since as */*
+  Parameters: {"timestamp"=>"2010-10-10T17:35:43-04:00"}
+Completed 200 OK in 37ms (Views: 0.2ms | ActiveRecord: 2.7ms | Models: 2.653ms)
+
+
+Started GET "/events/last" for 127.0.0.1 at 2010-10-10 17:38:01 -0400
+  Processing by EventsController#last as */*
+Completed 200 OK in 3ms (Views: 0.3ms | ActiveRecord: 0.5ms | Models: 0.457ms)
+
+
+Started GET "/events/last" for 127.0.0.1 at 2010-10-10 17:38:07 -0400
+  Processing by EventsController#last as */*
+Completed 200 OK in 3ms (Views: 0.3ms | ActiveRecord: 0.6ms | Models: 0.550ms)
+
+
+Started GET "/events/last" for 127.0.0.1 at 2010-10-10 17:38:21 -0400
+  Processing by EventsController#last as */*
+Completed 200 OK in 3ms (Views: 0.3ms | ActiveRecord: 0.4ms | Models: 0.418ms)
+
+
+Started GET "/events/last" for 127.0.0.1 at 2010-10-10 17:38:27 -0400
+  Processing by EventsController#last as */*
+Completed 200 OK in 3ms (Views: 0.4ms | ActiveRecord: 0.4ms | Models: 0.439ms)
+
+
+Started GET "/events/last" for 127.0.0.1 at 2010-10-10 17:38:41 -0400
+  Processing by EventsController#last as */*
+Completed 200 OK in 3ms (Views: 0.4ms | ActiveRecord: 0.5ms | Models: 0.524ms)
+
+
+Started GET "/events/last" for 127.0.0.1 at 2010-10-10 17:38:47 -0400
+  Processing by EventsController#last as */*
+Completed 200 OK in 4ms (Views: 0.4ms | ActiveRecord: 0.5ms | Models: 0.543ms)
+
+
+Started GET "/events/last" for 127.0.0.1 at 2010-10-10 17:39:01 -0400
+  Processing by EventsController#last as */*
+Completed 200 OK in 3ms (Views: 0.5ms | ActiveRecord: 0.4ms | Models: 0.442ms)
+
+
+Started GET "/events/last" for 127.0.0.1 at 2010-10-10 17:39:07 -0400
+  Processing by EventsController#last as */*
+Completed 200 OK in 3ms (Views: 0.4ms | ActiveRecord: 0.4ms | Models: 0.414ms)
+
+
+Started GET "/events/last" for 127.0.0.1 at 2010-10-10 17:39:21 -0400
+  Processing by EventsController#last as */*
+Completed 200 OK in 3ms (Views: 0.4ms | ActiveRecord: 0.5ms | Models: 0.548ms)
+
+
+Started GET "/events" for 127.0.0.1 at 2010-10-10 17:39:25 -0400
+  Processing by EventsController#index as HTML
+Rendered layouts/_notify.html.erb (0.0ms)
+Rendered events/_event.html.erb (365.4ms)
+Rendered layouts/_header.html.erb (2.2ms)
+Rendered layouts/_content.html.erb (0.1ms)
+Rendered layouts/_footer.html.erb (0.0ms)
+Rendered events/index.html.erb within layouts/application (373.0ms)
+Completed 200 OK in 414ms (Views: 350.5ms | ActiveRecord: 24.0ms | Models: 24.013ms)
+
+
+Started GET "/events/last" for 127.0.0.1 at 2010-10-10 17:39:27 -0400
+  Processing by EventsController#last as */*
+Completed 200 OK in 3ms (Views: 0.4ms | ActiveRecord: 0.5ms | Models: 0.454ms)
