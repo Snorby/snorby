@@ -9,12 +9,8 @@ class EventsController < ApplicationController
   end
   
   def since
-    @events = Event.all(:timestamp.gt => params[:timestamp])
-    if @events.blank?
-      render :json => {}
-    else
-      render :json => { :events => @events.to_json(:include => [:signature, :ips]), :count => @events.size }
-    end
+    @events = Event.to_json_since(params[:timestamp])
+    render :json => @events.to_json
   end
   
 end

@@ -8,11 +8,11 @@ class Opt
 
   belongs_to :event, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :required => true
 
-  property :sid, Integer, :key => true
+  property :sid, Integer, :key => true, :index => true
   
-  property :cid, Integer, :key => true
+  property :cid, Integer, :key => true, :index => true
 
-  property :optid, Integer, :key => true
+  property :optid, Integer, :key => true, :index => true
   
   property :opt_proto, Integer
   

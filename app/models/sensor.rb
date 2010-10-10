@@ -4,11 +4,13 @@ class Sensor
 
   storage_names[:default] = "sensor"
 
-  has n, :events, :child_key => [ :sid ]
+  has n, :events, :child_key => :sid
 
-  property :sid, Serial
+  property :sid, Serial, :index => true
 
-  property :hostname, Text
+  property :name, Text, :default => 'Unknown'
+
+  property :hostname, Text, :index => true
 
   property :interface, Text
   

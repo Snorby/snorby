@@ -18,8 +18,35 @@
 
 var Snorby = {
 	
+	setup: {
+		
+		defaults: function(){
+
+			$("#growl").notify({
+			    speed: 500,
+			    expires: 3000
+			});
+
+		},
+		
+	},
+	
+	notification: function(message){
+		// title, text
+		$('#growl').notify("create", message,{
+		    expires: 3000,
+		    speed: 500
+		});
+	},
+	
 	helpers: {
 		
 	}
 	
 }
+
+jQuery(document).ready(function($) {
+	
+	Snorby.setup.defaults();
+	
+});

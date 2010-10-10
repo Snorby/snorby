@@ -4,60 +4,85 @@ class Event
 
   storage_names[:default] = "event"
 
-  belongs_to :sensor, :parent_key => :sid, :child_key => :sid, :required => true
+  property :sid, Integer, :key => true, :index => true
   
-  belongs_to :signature, 'Signature', :parent_key => :signature, :child_key => :sig_id, :required => true
-
-  has n, :ips, :child_key => [ :sid, :cid ]
+  property :cid, Integer, :key => true, :index => true
   
-  has n, :icmps, :child_key => [ :sid, :cid ]
-  
-  has n, :tcps, :child_key => [ :sid, :cid ]
-  
-  has n, :udps, :child_key => [ :sid, :cid ]
-  
-  has n, :opts, :child_key => [ :sid, :cid ]
-
-  property :sid, Integer, :key => true
-  
-  property :cid, Integer, :key => true
-  
-  property :signature, Integer
+  property :sig_id, Integer, :field => 'signature', :index => true
   
   property :timestamp, DateTime
+
+  belongs_to :sensor, :parent_key => :sid, :child_key => :sid, :required => true
+  
+  belongs_to :signature, :child_key => :sig_id, :parent_key => :sig_id
+
+  belongs_to :ip, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :required => true
+  
+  has 1, :icmp, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ]
+  
+  has 1, :tcp, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ]
+  
+  has 1, :udp, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ]
+  
+  has 1, :opt, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ]
+
 
   def json_time
     "{time:'#{timestamp}'}"
   end
   
-  # def src_ip
-  #   "0"
-  # end
-  # 
-  # def src_port
-  #   case self
-  #   when icmps
-  #     return 0
-  #   when tcps
-  #     return tcps.src_port
-  #   when udps
-  #     return udps.src_port
-  #   end
-  # end
-  # 
-  # def dst_ip
-  #   "0"
-  # end
-  # 
-  # def dst_port
-  #   case self
-  #   when icmps
-  #     return 0
-  #   when tcps
-  #     return tcps.src_port
-  #   when udps
-  #     return udps.src_port
-  #   end
-  # end
+  def self.to_json_since(time)
+    events = Event.all(:timestamp.gt => time)
+    json = {:events => []}
+    events.each do |event|
+      json[:events] << {
+        :sid => event.sid,
+        :cid => event.cid,
+        :severity => event.signature.severity,
+        :src_ip => event.ip.ip_src.to_s,
+        :src_port => event.src_port,
+        :dst_ip => event.ip.ip_dst.to_s,
+        :dst_port => event.dst_port,
+        :timestamp => event.timestamp,
+        :message => event.signature.name,
+      }
+    end
+    return json
+  end
+
+  def icmp?
+    return true unless icmp.blank?
+    false
+  end
+  
+  def tcp?
+    return true unless tcp.blank?
+    false
+  end
+  
+  def udp?
+    return true unless udp.blank?
+    false
+  end
+  
+  def src_port
+    if icmp?
+      return 0
+    elsif tcp?
+      return tcp.tcp_sport
+    else
+      return udp.udp_sport
+    end
+  end
+  
+  def dst_port
+    if icmp?
+      return 0
+    elsif tcp?
+      return tcp.tcp_dport
+    else
+      return udp.udp_dport
+    end
+  end
 
 end

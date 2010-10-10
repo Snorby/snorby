@@ -8,11 +8,14 @@
 			setInterval (function () {
 				$.get('/events/last', function(data) {
 					var old_id = $('div#wrapper').attr('last_event');
-					if (data && (old_id != data.time)) {
+					if (old_id != data.time) {
 						$.get('events/since', {timestamp: old_id}, function (data) {
-							if (data.events) {
-								console.log(data.events);
-								$('#page').prepend(data.events);
+							if (data.events.length != 0) {
+								console.log(data);
+								$.each(data.events, function (index, item) {
+									$('#page').prepend(item);
+								});
+								Snorby.notification({title: 'New Events', text: data.events.length + ' Events Added.'});
 							};
 						});
 						$('div#wrapper').attr('last_event', data.time)
@@ -22,6 +25,16 @@
 		<% end %>
 	</script>
 <% end %>
+
+<% content_for :footer do %>
+	<%= render :partial => 'layouts/notify' %>
+<% end %>
+
+<%- title "Listing Events", do -%>
+
+	<li>Hello</li>
+
+<%- end -%>
 
 <div id="events">
 	
