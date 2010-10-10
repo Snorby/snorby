@@ -18272,3 +18272,45 @@ Unknown column 'sig_id' in 'field list' (code: 1054, sql state: 42S22, query: SE
   [1m[35mSQL (0.356ms)[0m  SELECT `sig_id`, `sig_class_id`, `sig_priority`, `sig_rev`, `sig_sid`, `sig_gid` FROM `signature` ORDER BY `sig_id` DESC, `sig_class_id` DESC LIMIT 1
   [1m[36mSQL (1.054ms)[0m  [1mSELECT `sid`, `cid`, `signature`, `timestamp` FROM `event` WHERE `signature` = 4 ORDER BY `sid`, `cid`, `signature`[0m
   [1m[35mSQL (2.804ms)[0m  SELECT `sid`, `cid`, `signature`, `timestamp` FROM `event` ORDER BY `sid` DESC, `cid` DESC, `signature` DESC LIMIT 1
+  [1m[36mSQL (0.098ms)[0m  [1mSET sql_auto_is_null = 0[0m
+  [1m[35mSQL (0.139ms)[0m  SET SESSION sql_mode = 'ANSI,NO_BACKSLASH_ESCAPES,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION,NO_UNSIGNED_SUBTRACTION,TRADITIONAL'
+  [1m[36mSQL (0.254ms)[0m  [1mSELECT `sid`, `cid`, `signature`, `timestamp` FROM `event` ORDER BY `sid` DESC, `cid` DESC, `signature` DESC LIMIT 1[0m
+  [1m[35mSQL (0.283ms)[0m  SELECT `sid`, `cid`, `signature`, `timestamp` FROM `event` ORDER BY `sid` DESC, `cid` DESC, `signature` DESC LIMIT 1
+Unknown column 'event_signature' in 'field list' (code: 1054, sql state: 42S22, query: SELECT `sid`, `cid`, `ip_src`, `ip_dst`, `ip_ver`, `ip_hlen`, `ip_tos`, `ip_len`, `ip_id`, `ip_flags`, `ip_off`, `ip_ttl`, `ip_proto`, `ip_csum`, `event_signature` FROM `iphdr` WHERE (`sid` = 1 AND `cid` = 44 AND `event_signature` = 1) ORDER BY `sid`, `cid`, uri: mysql://root:s3cr3tsauce@localhostsnorby)
+  [1m[36mSQL (2.372ms)[0m  [1mSELECT `sid`, `cid`, `signature`, `timestamp` FROM `event` ORDER BY `sid` DESC, `cid` DESC, `signature` DESC LIMIT 1[0m
+  [1m[35mSQL (0.084ms)[0m  SET sql_auto_is_null = 0
+  [1m[36mSQL (0.068ms)[0m  [1mSET SESSION sql_mode = 'ANSI,NO_BACKSLASH_ESCAPES,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION,NO_UNSIGNED_SUBTRACTION,TRADITIONAL'[0m
+  [1m[35mSQL (0.482ms)[0m  SELECT `sid`, `cid`, `signature`, `timestamp` FROM `event` ORDER BY `sid` DESC, `cid` DESC, `signature` DESC LIMIT 1
+Unknown column 'event_signature' in 'field list' (code: 1054, sql state: 42S22, query: SELECT `sid`, `cid`, `ip_src`, `ip_dst`, `ip_ver`, `ip_hlen`, `ip_tos`, `ip_len`, `ip_id`, `ip_flags`, `ip_off`, `ip_ttl`, `ip_proto`, `ip_csum`, `event_signature` FROM `iphdr` WHERE (`sid` = 1 AND `cid` = 44 AND `event_signature` = 1) ORDER BY `sid`, `cid`, uri: mysql://root:s3cr3tsauce@localhostsnorby)
+  [1m[36mSQL (0.446ms)[0m  [1mSELECT `sid`, `cid`, `signature`, `timestamp` FROM `event` ORDER BY `sid` DESC, `cid` DESC, `signature` DESC LIMIT 1[0m
+  [1m[35mSQL (0.540ms)[0m  SELECT `sid`, `cid`, `signature`, `timestamp` FROM `event` ORDER BY `sid` DESC, `cid` DESC, `signature` DESC LIMIT 1
+  [1m[36mSQL (0.260ms)[0m  [1mSELECT `sid`, `cid`, `signature`, `timestamp` FROM `event` ORDER BY `sid` DESC, `cid` DESC, `signature` DESC LIMIT 1[0m
+  [1m[35mSQL (0.440ms)[0m  SELECT `sid`, `cid`, `signature`, `timestamp` FROM `event` ORDER BY `sid` DESC, `cid` DESC, `signature` DESC LIMIT 1
+  [1m[36mSQL (5.634ms)[0m  [1mSELECT `sid`, `cid`, `signature`, `timestamp` FROM `event` ORDER BY `sid` DESC, `cid` DESC, `signature` DESC LIMIT 1[0m
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+  [1m[36mSQL (0.078ms)[0m  [1mSET sql_auto_is_null = 0[0m
+  [1m[35mSQL (0.079ms)[0m  SET SESSION sql_mode = 'ANSI,NO_BACKSLASH_ESCAPES,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION,NO_UNSIGNED_SUBTRACTION,TRADITIONAL'
+Unknown column 'sig_id' in 'field list' (code: 1054, sql state: 42S22, query: SELECT `sid`, `cid`, `signature`, `timestamp`, `sig_id` FROM `event` ORDER BY `sid` DESC, `cid` DESC, `signature` DESC LIMIT 1, uri: mysql://root:s3cr3tsauce@localhostsnorby)
+Unknown column 'sig_id' in 'field list' (code: 1054, sql state: 42S22, query: SELECT `sid`, `cid`, `signature`, `timestamp`, `sig_id` FROM `event` ORDER BY `sid` DESC, `cid` DESC, `signature` DESC LIMIT 1, uri: mysql://root:s3cr3tsauce@localhostsnorby)
+Unknown column 'sig_id' in 'field list' (code: 1054, sql state: 42S22, query: SELECT `sid`, `cid`, `signature`, `timestamp`, `sig_id` FROM `event` ORDER BY `sid` DESC, `cid` DESC, `signature` DESC LIMIT 1, uri: mysql://root:s3cr3tsauce@localhostsnorby)
+  [1m[36mSQL (0.429ms)[0m  [1mSELECT `sid`, `cid`, `signature`, `timestamp` FROM `event` ORDER BY `sid` DESC, `cid` DESC, `signature` DESC LIMIT 1[0m
+  [1m[35mSQL (1.032ms)[0m  SELECT `sid`, `cid`, `signature`, `timestamp` FROM `event` ORDER BY `sid` DESC, `cid` DESC, `signature` DESC LIMIT 1
+Unknown column 'event_signature' in 'field list' (code: 1054, sql state: 42S22, query: SELECT `sid`, `cid`, `ip_src`, `ip_dst`, `ip_ver`, `ip_hlen`, `ip_tos`, `ip_len`, `ip_id`, `ip_flags`, `ip_off`, `ip_ttl`, `ip_proto`, `ip_csum`, `event_signature` FROM `iphdr` WHERE (`sid` = 1 AND `cid` = 52 AND `event_signature` = 2) ORDER BY `sid`, `cid`, uri: mysql://root:s3cr3tsauce@localhostsnorby)
+  [1m[36mSQL (0.310ms)[0m  [1mSELECT `sid`, `cid`, `signature`, `timestamp` FROM `event` ORDER BY `sid` DESC, `cid` DESC, `signature` DESC LIMIT 1[0m
+  [1m[35mSQL (0.970ms)[0m  SELECT `sid`, `cid`, `signature`, `timestamp` FROM `event` ORDER BY `sid` DESC, `cid` DESC, `signature` DESC LIMIT 1
+Unknown column 'event_signature' in 'field list' (code: 1054, sql state: 42S22, query: SELECT `sid`, `cid`, `ip_src`, `ip_dst`, `ip_ver`, `ip_hlen`, `ip_tos`, `ip_len`, `ip_id`, `ip_flags`, `ip_off`, `ip_ttl`, `ip_proto`, `ip_csum`, `event_signature` FROM `iphdr` WHERE (`sid` = 1 AND `cid` = 52 AND `event_signature` = 2) ORDER BY `sid`, `cid`, uri: mysql://root:s3cr3tsauce@localhostsnorby)
+[datamapper] Setting up the "development" environment:
+[datamapper] Setting up :default repository: 'snorby' on mysql
+  [1m[36mSQL (0.154ms)[0m  [1mSET sql_auto_is_null = 0[0m
+  [1m[35mSQL (0.165ms)[0m  SET SESSION sql_mode = 'ANSI,NO_BACKSLASH_ESCAPES,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION,NO_UNSIGNED_SUBTRACTION,TRADITIONAL'
+Unknown column 'sensor_sid' in 'field list' (code: 1054, sql state: 42S22, query: SELECT `sid`, `cid`, `signature`, `timestamp`, `sensor_sid`, `signature_sig_class_id` FROM `event` ORDER BY `sid` DESC, `cid` DESC LIMIT 1, uri: mysql://root:s3cr3tsauce@localhostsnorby)
+  [1m[36mSQL (1.212ms)[0m  [1mSELECT `sid`, `detail`, `encoding`, `last_cid` FROM `sensor` ORDER BY `sid`[0m
+  [1m[35mSQL (0.293ms)[0m  SELECT `sid`, `detail`, `encoding`, `last_cid` FROM `sensor` ORDER BY `sid` DESC LIMIT 1
+Unknown column 'sensor_sid' in 'field list' (code: 1054, sql state: 42S22, query: SELECT `sid`, `cid`, `signature`, `timestamp`, `sensor_sid`, `signature_sig_class_id` FROM `event` WHERE `sid` = 1 ORDER BY `sid`, `cid`, uri: mysql://root:s3cr3tsauce@localhostsnorby)
+  [1m[36mSQL (0.200ms)[0m  [1mSELECT `sid`, `detail`, `encoding`, `last_cid` FROM `sensor` ORDER BY `sid` DESC LIMIT 1[0m
+  [1m[35mSQL (0.379ms)[0m  SELECT `sid`, `cid`, `signature`, `timestamp` FROM `event` WHERE `sid` = 1 ORDER BY `sid`, `cid`
+  [1m[36mSQL (0.227ms)[0m  [1mSELECT `sid`, `detail`, `encoding`, `last_cid` FROM `sensor` ORDER BY `sid` DESC LIMIT 1[0m
+  [1m[35mSQL (0.344ms)[0m  SELECT `sid`, `cid`, `signature`, `timestamp` FROM `event` WHERE `sid` = 1 ORDER BY `sid`, `cid`
+  [1m[36mSQL (0.701ms)[0m  [1mSELECT `sid`, `cid`, `signature`, `timestamp` FROM `event` ORDER BY `sid`, `cid`[0m
+  [1m[35mSQL (0.501ms)[0m  SELECT `sid`, `cid`, `signature`, `timestamp` FROM `event` ORDER BY `sid` DESC, `cid` DESC LIMIT 1

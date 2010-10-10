@@ -6,7 +6,7 @@ class Event
 
   belongs_to :sensor, :parent_key => :sid, :child_key => :sid, :required => true
   
-  belongs_to :signature, :parent_key => :signature, :child_key => :sig_id
+  belongs_to :signature, 'Signature', :parent_key => :signature, :child_key => :sig_id, :required => true
 
   has n, :ips, :child_key => [ :sid, :cid ]
   
@@ -22,7 +22,7 @@ class Event
   
   property :cid, Integer, :key => true
   
-  property :signature, Integer, :key => true
+  property :signature, Integer
   
   property :timestamp, DateTime
 
@@ -30,34 +30,34 @@ class Event
     "{time:'#{timestamp}'}"
   end
   
-  def src_ip
-    "0"
-  end
-  
-  def src_port
-    case self
-    when icmps
-      return 0
-    when tcps
-      return tcps.src_port
-    when udps
-      return udps.src_port
-    end
-  end
-  
-  def dst_ip
-    "0"
-  end
-  
-  def dst_port
-    case self
-    when icmps
-      return 0
-    when tcps
-      return tcps.src_port
-    when udps
-      return udps.src_port
-    end
-  end
+  # def src_ip
+  #   "0"
+  # end
+  # 
+  # def src_port
+  #   case self
+  #   when icmps
+  #     return 0
+  #   when tcps
+  #     return tcps.src_port
+  #   when udps
+  #     return udps.src_port
+  #   end
+  # end
+  # 
+  # def dst_ip
+  #   "0"
+  # end
+  # 
+  # def dst_port
+  #   case self
+  #   when icmps
+  #     return 0
+  #   when tcps
+  #     return tcps.src_port
+  #   when udps
+  #     return udps.src_port
+  #   end
+  # end
 
 end
