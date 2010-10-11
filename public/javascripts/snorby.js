@@ -18,22 +18,38 @@
 
 var Snorby = {
 	
-	setup: {
-		
-		defaults: function(){
+	setup: function(){
 
-			$("#growl").notify({
-			    speed: 500,
-			    expires: 3000
-			});
+		$("#growl").notify({
+		    speed: 500,
+		    expires: 3000
+		});
 
-		},
-		
 	},
 	
 	pages: {
 		
 		events: function(){
+
+			// Row Select
+			// $('table tbody.events tr.event').live('click', function() {
+			// 	var sid = $(this).attr('data-event-sid');
+			// 	var cid = $(this).attr('data-event-cid');
+			// 	var current_row = $(this);
+			// 	
+			// 	if ($('table tbody.events tr#event-data-'+sid+''+cid).is(':visible')) {
+			// 		$('table tbody.events tr#event-data-'+sid+''+cid+' div.event-data-holder').slideUp('fast', function () {
+			// 			$('table tbody.events tr#event-data-'+sid+''+cid).hide();
+			// 		});
+			// 	} else {
+			// 		$.get('/events/show/'+sid+'/'+cid, function (data) {
+			// 			current_row.after(Snorby.templates.event_data(data));
+			// 			$('table tbody.events tr#event-data-'+sid+''+cid+' div.event-data-holder').slideDown('fast');
+			// 		});
+			// 	};
+			// 	
+			// 	return false;
+			// });
 
 			$('div.new_events').live('click', function() {
 				$('#events table tbody.events tr').fadeIn('slow');
@@ -46,16 +62,28 @@ var Snorby = {
 	},
 	
 	templates: {
+		
+		event_data: function(data){
+			var template = " \
+			<tr id='event-data-{{sid}}{{cid}}' class='event-data' data-event-id='{{sid}}{{cid}}' data-event-sid='{{sid}}' data-event-cid='{{cid}}'> \
+				<td class='first last' colspan='7'> \
+				 	<div class='event-data-holder' style='display:none;'> \
+						<pre>{{payload}}</pre>\
+					</div> \
+				</td> \
+			</tr>"
+			return Mustache.to_html(template, data);
+		},
+		
 		event_table: function(data){
 			var template = " \
 			{{#events}} \
 			<tr id='event_{{sid}}{{cid}}' class='event' style='display:none;' data-event-id='{{sid}}{{cid}}' data-event-sid='{{sid}}' data-event-cid='{{cid}}'> \
-				<td class='sensor first'>{{hostname}}</td> \
+				<td class='select first'><input class='event-selector' id='event-selector' name='event-selector' type='checkbox'></td> \
 				<td class='severity'>{{severity}}</td> \
+				<td class='sensor'>{{hostname}}</td> \
 				<td class='src_ip'>{{ip_src}}</td> \
-				<td class='src_port'>{{src_port}}</td> \
 				<td class='dst_ip'>{{ip_dst}}</td> \
-				<td class='dst_port'>{{dst_port}}</td> \
 				<td class='signature'>{{message}}</td> \
 				<td class='timestamp last'>{{timestamp}}</td> \
 			</tr> \
@@ -79,7 +107,7 @@ var Snorby = {
 
 jQuery(document).ready(function($) {
 	
-	Snorby.setup.defaults();
+	Snorby.setup();
 	Snorby.pages.events();
 	
 });

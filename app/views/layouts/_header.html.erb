@@ -7,17 +7,21 @@
 					<%= link_to "Snorby", root_path %>
 				</div>
 				
-				<div id="user-menu" class='grid_6'>
+				<div id="user-menu" class=''>
 					
 					<ul>
 						<% if user_signed_in? %>
+							
 							<li class='first'>Welcome <%= current_user.name %></li>
 							<li><%= link_to 'Settings' %></li>
 							<li class='last'><%= link_to 'Log out', logout_path %></li>
+							
 						<% else %>
+						
 							<li class='first'><%= link_to 'Log In' %></li>
 							<li><%= link_to 'Forgot Password?' %></li>
 							<li class='last'><%= link_to 'Request Access' %></li>
+							
 						<% end %>				
 					</ul>
 					
@@ -31,12 +35,17 @@
 			<ul class='container_12'>
 				<li class='blank first'></li>
 				<li><%= link_to "Dashboard", '' %></li>
-				<li><%= link_to "Sensors", sensors_path %></li>
-				<li><%= link_to "Events", events_path %></li>
 				<li><%= link_to "My Queue", '' %></li>
+				<li><%= link_to "Events", events_path %></li>
+				<li><%= link_to "Investigations", '' %></li>
+				<li><%= link_to "Sensors", sensors_path %></li>
 				<li><%= link_to "Search", '' %></li>
-				<li><%= link_to "Settings", '' %></li>
 				<li class='blank last'></li>
+				
+				<% if current_user.admin %>
+					<li class='administration right'><%= link_to "Administration", '' %></li>
+				<% end %>
+				
 			</ul>
 
 		</div>

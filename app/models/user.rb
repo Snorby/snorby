@@ -11,7 +11,7 @@ class User
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
   # Primary key of the user
-  property :id, Serial
+  property :id, Serial, :key => true, :index => true
 
   # Email of the user
   property :email, String, :required => true, :unique => true

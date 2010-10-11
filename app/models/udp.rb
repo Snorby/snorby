@@ -12,9 +12,9 @@ class Udp
   
   property :cid, Integer, :key => true, :index => true
   
-  property :udp_sport, Integer
+  property :udp_sport, Integer, :index => true
   
-  property :udp_dport, Integer
+  property :udp_dport, Integer, :index => true
 
   property :udp_len, Integer, :lazy => true
   
