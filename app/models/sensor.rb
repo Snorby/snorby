@@ -6,7 +6,7 @@ class Sensor
 
   has n, :events, :child_key => :sid
 
-  property :sid, Serial, :index => true
+  property :sid, Serial, :key => true, :index => true
 
   property :name, String, :default => 'Click To Change Me'
 
@@ -16,10 +16,10 @@ class Sensor
   
   property :filter, Text
 
-  property :detail, Integer
+  property :detail, Integer, :index => true
   
-  property :encoding, Integer
+  property :encoding, Integer, :index => true
   
-  property :last_cid, Integer
+  property :last_cid, Integer, :index => true
 
 end

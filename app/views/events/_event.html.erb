@@ -1,10 +1,10 @@
-<tr id='event_<%= event.sid + event.cid %>' class='event' data-event-id='<%= event.sid + event.cid %>' data-event-sid='<%= event.sid %>' data-event-cid='<%= event.cid %>'>
-	<td class='sensor first'><%= event.sensor.hostname %></td>
-	<td class='severity'><%= event.signature.severity %></td>
+<tr id='event_<%= event.sid %><%= event.cid %>' class='event' data-event-id='<%= event.sid %><%= event.cid %>' data-event-sid='<%= event.sid %>' data-event-cid='<%= event.cid %>'>
+	<td class='select first'><%= check_box_tag 'event-selector', nil, false, :class => 'event-selector' %></td>
+	<td><%= image_tag('icons/star-empty.png') %></td>
+	<td class='severity'><div class='severity sev<%= event.signature.severity %>'><div><%= event.signature.severity %></div></div></td>
+	<td class='sensor'><%= event.sensor.hostname %></td>
 	<td class='src_ip'><%= event.ip.ip_src %></td>
-	<td class='src_port'><%= event.src_port %></td>
 	<td class='dst_ip'><%= event.ip.ip_dst %></td>
-	<td class='dst_port'><%= event.dst_port %></td>
-	<td class='signature'><%= truncate(event.signature.name, :length => 40, :omission => '...') %></td>
+	<td class='signature'><%= truncate(event.signature.name, :length => 80, :omission => '...') %></td>
 	<td class='timestamp last'><%= event.pretty_time %></td>
 </tr>

@@ -4,7 +4,7 @@ class SnortSchema
 
   storage_names[:default] = "schema"
   
-  property :id, Serial
+  property :id, Serial, :key => true, :index => true
 
   property :vseq, Integer
 

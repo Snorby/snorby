@@ -12,11 +12,11 @@ class Signature
 
   property :sig_id, Serial, :key => true, :index => true
 
-  property :sig_class_id, Integer
+  property :sig_class_id, Integer, :index => true
 
   property :sig_name, Text
   
-  property :sig_priority, Integer
+  property :sig_priority, Integer, :index => true
     
   property :sig_rev, Integer, :lazy => true
       

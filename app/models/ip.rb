@@ -1,7 +1,6 @@
 require 'snorby/model'
 
 class Ip
-  
   include Snorby::Model
   include DataMapper::Resource
 

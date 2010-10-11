@@ -12,9 +12,9 @@ class Tcp
   
   property :cid, Integer, :key => true, :index => true
   
-  property :tcp_sport, Integer
+  property :tcp_sport, Integer, :index => true
   
-  property :tcp_dport, Integer
+  property :tcp_dport, Integer, :index => true
 
   property :tcp_seq, Integer, :lazy => true
   

@@ -4,6 +4,7 @@ require 'ipaddr'
 module Snorby
   module Model
     module Types
+      
       class NumericIPAddr < DataMapper::Property::Integer
 
         #

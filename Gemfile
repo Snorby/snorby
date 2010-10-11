@@ -36,7 +36,7 @@ gem 'capistrano'
 
 # Rails Plugins
 gem 'devise',                 '~> 1.1.3'
-gem 'will_paginate', '~> 3.0', :git => 'git://github.com/mislav/will_paginate.git', :branch => 'rails3'
+gem 'will_paginate', '~> 3.0.pre2 '
 
 group(:development, :test) do
   gem 'nifty-generators',     '~> 0.4.1' 

@@ -3,7 +3,12 @@ class EventsController < ApplicationController
   helper_method :sort_column, :sort_direction
   
   def index
-    @events = Event.all.paginate(:page => params[:page], :per_page => 25)
+    @events = Event.all(:order => [:timestamp.desc], :links => [:ip]).paginate(:page => params[:page], :per_page => 25)
+  end
+  
+  def show
+    @event = Event.get(params['sid'], params['cid'])
+    render :json => @event.in_json
   end
   
   def last

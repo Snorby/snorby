@@ -4,7 +4,7 @@ class Reference
 
   storage_names[:default] = "reference"
 
-  property :ref_id, Serial
+  property :ref_id, Serial, :key => true, :index => true
   
   property :ref_system_id, Integer
 

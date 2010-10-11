@@ -2,12 +2,13 @@
 	<script type="text/javascript">
 		<% unless Event.last.blank? %>
 		
-			var last_event = <%= @events.last.json_time %>;
+			var last_event = <%= Event.last.json_time %>;
 			$('div#wrapper').attr({last_event: last_event.time});
 		
 			setInterval (function () {
 				$.get('/events/last', function(data) {
 					var old_id = $('div#wrapper').attr('last_event');
+					console.log(old_id);
 					if (old_id != data.time) {
 						$.get('events/since', {timestamp: old_id}, function (data) {
 							if (data.events.length != 0) {
@@ -38,21 +39,25 @@
 
 <div id="events">
 	
-	<table border="0" cellspacing="0" cellpadding="0">
-		<tr>		
-			<th>Sensor</th>
-			<th>Severity</th>
-			<th>Src IP</th>
-			<th>Src Port</th>
-			<th>Dst IP</th>
-			<th>Dst Port</th>
-			<th>Signature</th>
-			<th>Timestamp</th>
-		</tr>
-		<tbody class='events'>
-			<%= render @events %>
-		</tbody>
-	</table>
+	<%= form_tag '/events/select' do %>
+	
+		<table border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<th><%= check_box_tag 'event-select-all', nil, false, :class => 'event-select-all' %></th>
+				<th></th>
+				<th>Sev.</th>
+				<th>Sensor</th>
+				<th>Src IP</th>
+				<th>Dst IP</th>
+				<th>Signature</th>
+				<th>Event Time</th>
+			</tr>
+			<tbody class='events'>
+				<%= render @events %>
+			</tbody>
+		</table>
+	
+	<% end %>
 	
 	<%= will_paginate(@events, :previous_label => 'Prev', :next_label => 'Next' ) %>
 	<div class="paginate-info"><%= page_entries_info @events %></div>

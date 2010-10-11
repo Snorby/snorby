@@ -171,12 +171,7 @@ a {
 
 #header #header-inside #menu{
 	border-top: 1px solid #5a5a5a;
-	background: #41464a;
-
-	/*filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#4f575c', endColorstr='#41464a');
-	background:-webkit-gradient(linear, left top, left bottom, from(#4f575c), to(#41464a));
-	background:-moz-linear-gradient(top,  #4f575c,  #41464a);*/
-	
+	background: #41464a;	
 	display: block;
 	position: relative;
 	overflow: hidden;
@@ -196,6 +191,21 @@ a {
 	text-align: center;
 	border-right: 1px solid #616161;
 	border-left: 1px solid #313131;
+}
+
+#header #header-inside #menu ul li.administration{
+	background: #941a23;
+	color: #e3e3e3;
+	border-right: 0.9px solid #313131; !important
+	border-left: 1px solid #313131; !important
+}
+#header #header-inside #menu ul li.administration a{
+	color: #e3e3e3;	
+}
+#header #header-inside #menu ul li.administration:hover,
+#header #header-inside #menu ul li.administration:hover a{
+	background: #9d1b24;
+	color: #fff;
 }
 
 #header #header-inside #menu ul li:hover{
@@ -353,9 +363,17 @@ a {
 
 /* @group Helpers */
 
+.right{
+	float: right !important;
+}
+
+.left{
+	float: left;
+}
+
 .round {
-        -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
 }
 
 .round_top {
@@ -499,6 +517,16 @@ table th{
 	font-size: 0.9em;
 }
 
+table th input{
+	vertical-align: middle;
+	margin-left: 4px;
+}
+
+table td img{
+	vertical-align: middle;
+	margin-top: -2px;
+}
+
 table td{
 	padding-left: 10px;
 	height: 30px;
@@ -508,12 +536,22 @@ table td{
 	background: #fff url(../images/page/table-bg.png) repeat-x 0 bottom;
 }
 
+table td.severity{
+	width: 45px;
+}
+
 table td.first{
 	border-left: 1px solid #cdcdcd;
 }
 
 table td.last{
 	border-right: 1px solid #cdcdcd;
+	text-align: left;
+	color: #606060;
+	font-weight: bold;
+	text-decoration: none;
+	font-variant: normal;
+	text-shadow: #fff 0 1px 0;
 }
 
 table tr:hover td{
@@ -628,6 +666,41 @@ div.pagination span.previous_page,
 div.pagination span.next_page
 div.pagination a.next_page{
 	width: 3em;	!important
+}
+
+/* @end */
+
+/* @group Severity */
+
+div.severity{
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+	width: 20px;
+	height: 20px;
+	display: block;
+	position: relative;
+	overflow: hidden;
+	top: 5px;
+}
+
+div.severity div{
+	vertical-align: middle;
+	color: #fffeff;
+	font-size: 1.1em;
+	font-weight: bold;
+	text-decoration: none;
+	font-variant: normal;
+	width: 20px;
+	text-align: center;
+	height: 20px;
+	position: relative;
+	display: block;
+	overflow: hidden;
+	bottom: 4px;
+}
+
+div.severity.sev3{
+	background-color: #4cdc5d;
 }
 
 /* @end */
