@@ -14,6 +14,7 @@ rdoc
 doc
 .yardoc
 pkg
+log/
 
 ## PROJECT::SPECIFIC
 example.rb
