@@ -62,7 +62,7 @@ class Event
         :sid => event.sid,
         :cid => event.cid,
         :hostname => event.sensor.hostname,
-        :severity => event.signature.severity,
+        :severity => event.signature.severity_id,
         :ip_src => event.ip.ip_src.to_s,
         :ip_dst => event.ip.ip_dst.to_s,
         :timestamp => event.pretty_time,

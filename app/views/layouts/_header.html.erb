@@ -45,7 +45,7 @@
 					<li class='blank last'></li>
 
 					<% if current_user.admin %>
-						<li class='administration right'><%= link_to "Administration", '' %></li>
+						<li class='administration right'><%= link_to "Administration", settings_admin_index_path %></li>
 					<% end %>
 				<% else %>
 					<li class='blank first'></li>

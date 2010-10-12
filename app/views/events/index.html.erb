@@ -1,4 +1,4 @@
-<% content_for :head do %>
+<% content_for :header do %>
 	<script type="text/javascript">
 		<% unless Event.last.blank? %>
 		
@@ -8,14 +8,16 @@
 			setInterval (function () {
 				$.get('/events/last', function(data) {
 					var old_id = $('div#wrapper').attr('last_event');
-					console.log(old_id);
+					var page = <%= params[:page].to_i %>;
 					if (old_id != data.time) {
 						$.get('events/since', {timestamp: old_id}, function (data) {
 							if (data.events.length != 0) {
-								if ($('div.new_events').length == 0) {
-									$('#events').prepend('<div class="note new_events">New Events Are Available Click here To View Them.</div>');
+								if (page <= 1) { 
+									if ($('div.new_events').length == 0) {
+										$('#events').prepend('<div class="note new_events">New Events Are Available Click here To View Them.</div>');
+									};
+									$('#events ul.table div.content').prepend(Snorby.templates.event_table(data));
 								};
-								$('#events table tbody.events').prepend(Snorby.templates.event_table(data));
 								Snorby.notification({title: 'New Events', text: data.events.length + ' Events Added.'});
 							};
 						});
@@ -53,13 +55,13 @@
 			<div class='address'>Source IP</div>
 			<div class='address'>Destination IP</div>
 			<div class='signature'>Event Signature</div>
-			<div class='timestamp'>Timestamp</div>
+			<div class='timestamp'>&nbsp;</div>
 			
 		</li>
 		
 		<div class='content'>
 			<%= render @events %>
-		</tbody>
+		</div>
 		
 	</ul>
 	

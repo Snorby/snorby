@@ -52,13 +52,53 @@ var Snorby = {
 			// });
 
 			$('div.new_events').live('click', function() {
-				$('#events table tbody.events tr').fadeIn('slow');
+				$('#events ul.table div.content li').fadeIn('slow');
 				$(this).remove();
 				return false;
 			});
 
 		},
 		
+	},
+	
+	admin: function(){
+		$('#severity-color-bg').ColorPicker({
+			color: '#0000ff',
+			onShow: function (colpkr) {
+				$(colpkr).fadeIn(500);
+				return false;
+			},
+			onHide: function (colpkr) {
+				$(colpkr).fadeOut(500);
+				return false;
+			},
+			onSubmit: function(hsb, hex, rgb, el) {
+					$.post('/admin/severity', {id: 3, severity: { text_color: '#' + hex}});
+					$(el).ColorPickerHide();
+			},
+			onChange: function (hsb, hex, rgb) {
+				$('#severity-color-bg div').css('backgroundColor', '#' + hex);
+			}
+		});
+		
+		$('#severity-color-text').ColorPicker({
+			color: '#0000ff',
+			onShow: function (colpkr) {
+				$(colpkr).fadeIn(500);
+				return false;
+			},
+			onHide: function (colpkr) {
+				$(colpkr).fadeOut(500);				
+				return false;
+			},
+			onSubmit: function(hsb, hex, rgb, el) {
+					$.post('/admin/severity', {id: 3, severity: { bg_color: '#' + hex}});
+					$(el).ColorPickerHide();
+			},
+			onChange: function (hsb, hex, rgb) {
+				$('#severity-color-text div').css('backgroundColor', '#' + hex);
+			}
+		});
 	},
 	
 	templates: {
@@ -78,15 +118,16 @@ var Snorby = {
 		event_table: function(data){
 			var template = " \
 			{{#events}} \
-			<tr id='event_{{sid}}{{cid}}' class='event' style='display:none;' data-event-id='{{sid}}{{cid}}' data-event-sid='{{sid}}' data-event-cid='{{cid}}'> \
-				<td class='select first'><input class='event-selector' id='event-selector' name='event-selector' type='checkbox'></td> \
-				<td class='severity'>{{severity}}</td> \
-				<td class='sensor'>{{hostname}}</td> \
-				<td class='src_ip'>{{ip_src}}</td> \
-				<td class='dst_ip'>{{ip_dst}}</td> \
-				<td class='signature'>{{message}}</td> \
-				<td class='timestamp last'>{{timestamp}}</td> \
-			</tr> \
+			<li id='event_{{sid}}{{cid}}' class='event' style='display:none;' data-event-id='{{sid}}{{cid}}' data-event-sid='{{sid}}' data-event-cid='{{cid}}'> \
+				<div class='select small'><input class='event-selector' id='event-selector' name='event-selector' type='checkbox'></div> \
+				<div class='important small'><img alt='Star-empty' src='/images/icons/star-empty.png'></div> \
+				<div class='severity small'><span class='severity sev{{severity}}'>{{severity}}</span></div> \
+				<div class='sensor address'>{{hostname}}</div> \
+				<div class='src_ip address'>{{ip_src}}</div> \
+				<div class='dst_ip address'>{{ip_dst}}</div> \
+				<div class='signature'>{{message}}</div> \
+				<div class='timestamp'>{{timestamp}}</div> \
+			</li> \
 			{{/events}}"
 			return Mustache.to_html(template, data);
 		},
@@ -108,6 +149,7 @@ var Snorby = {
 jQuery(document).ready(function($) {
 	
 	Snorby.setup();
+	Snorby.admin();
 	Snorby.pages.events();
 	
 });

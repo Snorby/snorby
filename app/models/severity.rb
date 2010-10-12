@@ -9,7 +9,7 @@ class Severity
 
   property :id, Serial, :index => true, :key => true
   
-  property :sig_id, Integer, :index => true, :key => true
+  property :sig_id, Integer, :index => true
   
   # Set the name of the severity
   property :name, String
