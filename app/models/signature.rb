@@ -8,6 +8,8 @@ class Signature
 
   has n, :events, :parent_key => :sig_id, :child_key => :sig_id
   
+  belongs_to :severity, :child_key => :sig_priority, :parent_key => :sig_id
+  
   #has n, :sig_references, :parent_key => :sig_rev, :child_key => [ :ref_seq ]
 
   property :sig_id, Serial, :key => true, :index => true
@@ -24,7 +26,7 @@ class Signature
 
   property :sig_gid, Integer, :lazy => true
 
-  def severity
+  def severity_id
     sig_priority
   end
   

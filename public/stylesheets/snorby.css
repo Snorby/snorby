@@ -488,7 +488,9 @@ a {
 #events{
 	display: block;
 	position: relative;
-	padding: 10px;
+	overflow: hidden;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 
 /* @end */
@@ -560,6 +562,110 @@ table tr:hover td{
 
 table td:last{
 	border-bottom-style: none;
+}
+
+
+/* @end */
+
+/* @group LI Table */
+
+ul.table{
+	width: 990px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border: 5px solid #f3f3f3;
+	margin: 0;
+	padding: 0;
+}
+
+ul.table li.header{
+	text-align: left;
+	color: #3f3f3f;
+	height: 25px;
+	line-height: 25px;
+	font-weight: bold;
+	text-decoration: none;
+	font-variant: normal;
+	border-bottom: 1px solid #bababa;
+	background-color: #ddd;
+	text-shadow: #fff 0 1px 0;
+	font-size: 0.9em;
+}
+
+ul.table li.header div{
+	display: block;
+	position: relative;
+	overflow: hidden;
+	float: left;
+}
+
+ul.table div.content li{
+	height: 30px;
+	line-height: 30px;
+	border-bottom: 1px solid #cdcdcd;
+	color: #474747;
+	background: #fff url(../images/page/table-bg.png) repeat-x 0 bottom;
+	border-left: 1px solid #cdcdcd;
+	border-right: 1px solid #cdcdcd;
+}
+
+ul.table div.content li div{
+	float: left;
+}
+
+ul.table div.content li:hover{
+	background-color: #fcfed7;
+}
+
+ul.table li div img{
+	vertical-align: middle;
+	margin-top: -5px;
+}
+
+ul.table li div.address{
+	width: 100px;
+	padding-left: 12px;
+}
+
+ul.table li div.large{
+	
+}
+
+ul.table li div.timestamp{
+	float: right;
+	width: 100px;
+	display: block;
+	position: absolute;
+	overflow: hidden;
+	color: #b1b1b1;
+	font-weight: bold;
+	text-decoration: none;
+	font-variant: normal;
+	font-size: 0.9em;
+	text-shadow: #fff 0 1px 0;
+	text-align: right;
+	right: 0;
+	padding-right: 15px;
+}
+
+ul.table li div.small{
+	display: block;
+	position: relative;
+	overflow: hidden;
+	min-width: 20px;
+	width: 20px;
+	padding-left: 10px;
+}
+
+ul.table li div.small span.severity{
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+	padding: 3px 6px;
+	color: #fffeff;
+	font-weight: bold;
+	text-decoration: none;
+	font-variant: normal;
+	font-size: 1.1em;
 }
 
 
@@ -672,35 +778,6 @@ div.pagination a.next_page{
 
 /* @group Severity */
 
-div.severity{
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-	width: 20px;
-	height: 20px;
-	display: block;
-	position: relative;
-	overflow: hidden;
-	top: 5px;
-}
 
-div.severity div{
-	vertical-align: middle;
-	color: #fffeff;
-	font-size: 1.1em;
-	font-weight: bold;
-	text-decoration: none;
-	font-variant: normal;
-	width: 20px;
-	text-align: center;
-	height: 20px;
-	position: relative;
-	display: block;
-	overflow: hidden;
-	bottom: 4px;
-}
-
-div.severity.sev3{
-	background-color: #4cdc5d;
-}
 
 /* @end */

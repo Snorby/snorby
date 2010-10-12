@@ -12,6 +12,12 @@
 
 		<%= yield(:head) %>
 
+		<style type="text/css">
+			<%- @severities.each do |sev| -%>
+				<%= "ul.table li div.small span.severity.sev#{sev.sig_id} {background-color: #{sev.bg_color};color: #{sev.text_color};}" %>
+			<%- end -%>
+		</style>
+
   </head>
   
 	<body>

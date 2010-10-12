@@ -10,5 +10,4 @@ class Reference
 
   property :ref_tag, Text
 
-
 end

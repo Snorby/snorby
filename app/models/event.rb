@@ -15,6 +15,8 @@ class Event
   
   property :timestamp, DateTime
 
+  has 1, :severity, :through => :signature, :via => :sig_priority
+
   belongs_to :sensor, :parent_key => :sid, :child_key => :sid, :required => true
   
   belongs_to :signature, :child_key => :sig_id, :parent_key => :sig_id
@@ -37,7 +39,7 @@ class Event
   
   def pretty_time
     return "#{timestamp.strftime('%l:%M %p')}" if timestamp.today?
-    "#{timestamp.strftime('%M/%D/%Y')}"
+    "#{timestamp.strftime('%m/%d/%Y')}"
   end
   
   # 

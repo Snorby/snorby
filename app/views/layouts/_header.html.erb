@@ -33,17 +33,24 @@
 		<div id="menu">
 
 			<ul class='container_12'>
-				<li class='blank first'></li>
-				<li><%= link_to "Dashboard", '' %></li>
-				<li><%= link_to "My Queue", '' %></li>
-				<li><%= link_to "Events", events_path %></li>
-				<li><%= link_to "Investigations", '' %></li>
-				<li><%= link_to "Sensors", sensors_path %></li>
-				<li><%= link_to "Search", '' %></li>
-				<li class='blank last'></li>
-				
-				<% if current_user.admin %>
-					<li class='administration right'><%= link_to "Administration", '' %></li>
+
+				<% if user_signed_in? %>
+					<li class='blank first'></li>
+					<li><%= link_to "Dashboard", '' %></li>
+					<li><%= link_to "My Queue", '' %></li>
+					<li><%= link_to "Events", events_path %></li>
+					<li><%= link_to "Investigations", '' %></li>
+					<li><%= link_to "Sensors", sensors_path %></li>
+					<li><%= link_to "Search", '' %></li>
+					<li class='blank last'></li>
+
+					<% if current_user.admin %>
+						<li class='administration right'><%= link_to "Administration", '' %></li>
+					<% end %>
+				<% else %>
+					<li class='blank first'></li>
+					<li><%= link_to "Log in", '' %></li>
+					<li class='blank last'></li>
 				<% end %>
 				
 			</ul>

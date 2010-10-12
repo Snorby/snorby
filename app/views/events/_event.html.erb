@@ -1,10 +1,10 @@
-<tr id='event_<%= event.sid %><%= event.cid %>' class='event' data-event-id='<%= event.sid %><%= event.cid %>' data-event-sid='<%= event.sid %>' data-event-cid='<%= event.cid %>'>
-	<td class='select first'><%= check_box_tag 'event-selector', nil, false, :class => 'event-selector' %></td>
-	<td><%= image_tag('icons/star-empty.png') %></td>
-	<td class='severity'><div class='severity sev<%= event.signature.severity %>'><div><%= event.signature.severity %></div></div></td>
-	<td class='sensor'><%= event.sensor.hostname %></td>
-	<td class='src_ip'><%= event.ip.ip_src %></td>
-	<td class='dst_ip'><%= event.ip.ip_dst %></td>
-	<td class='signature'><%= truncate(event.signature.name, :length => 80, :omission => '...') %></td>
-	<td class='timestamp last'><%= event.pretty_time %></td>
-</tr>
+<li id='event_<%= event.sid %><%= event.cid %>' class='event' data-event-id='<%= event.sid %><%= event.cid %>' data-event-sid='<%= event.sid %>' data-event-cid='<%= event.cid %>'>
+	<div class='select small'><%= check_box_tag 'event-selector', nil, false, :class => 'event-selector' %></div>
+	<div class='important small'><%= image_tag('icons/star-empty.png') %></div>
+	<div class='severity small'><span class='severity sev<%= event.signature.severity_id %>'><%= event.signature.severity_id %></span></div>
+	<div class='sensor address'><%= event.sensor.hostname %></div>
+	<div class='src_ip address'><%= event.ip.ip_src %></div>
+	<div class='dst_ip address'><%= event.ip.ip_dst %></div>
+	<div class='signature'><%= truncate(event.signature.name, :length => 80, :omission => '...') %></div>
+	<div class='timestamp'><%= event.pretty_time %></div>
+</li>

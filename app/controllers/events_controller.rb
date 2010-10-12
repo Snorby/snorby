@@ -3,6 +3,7 @@ class EventsController < ApplicationController
   helper_method :sort_column, :sort_direction
   
   def index
+    @severities = Severity.all
     @events = Event.all(:order => [:timestamp.desc], :links => [:ip]).paginate(:page => params[:page], :per_page => 25)
   end
   
