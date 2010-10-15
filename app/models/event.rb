@@ -13,7 +13,12 @@ class Event
   
   property :sig_id, Integer, :field => 'signature', :index => true
   
+  property :classification_id, Integer, :index => true, :default => 0
+  
   property :timestamp, DateTime
+
+  has n, :favorites, :child_key => [ :sid, :cid ]
+  has n, :users, :through => :favorites
 
   has 1, :severity, :through => :signature, :via => :sig_priority
 
@@ -70,6 +75,22 @@ class Event
       }
     end
     return json
+  end
+  
+  def favorite?
+    return true if self.users.include?(User.current_user)
+    false
+  end
+  
+  def toggle_favorite
+    if self.favorite?
+      link = Favorite.first(:sid => self.sid, :cid => self.cid, :user_id => User.current_user.id)
+      link.destroy
+    else
+      event = self
+      event.users << User.current_user
+      event.users.save
+    end
   end
   
   def protocol_data

@@ -36,8 +36,36 @@
 
 <%= title "Listing Events", do -%>
 
-	<li>Hello</li>
-
+	<li>&nbsp;</li>
+	<li>
+		<%= link_to "#{image_tag('icons/export.png')} Export".html_safe, '#', :class => 'has_dropdown', :id => 'export' %>
+		<dl id='export' class='drop-down-menu' style='display:none;'>
+			<dd><%= link_to "Export JSON", '#' %></dd>
+			<dd>Export XML</dd>
+			<dd>Export CSV</dd>
+		</dl>
+	</li>
+	
+	<li>
+		<%= link_to "#{image_tag('icons/fp.png')} False Positive".html_safe, '#' %>
+	</li>
+	
+	<li>
+		<%= link_to "#{image_tag('icons/incident.png')} Incident".html_safe, '#', :class => 'has_dropdown', :id => 'incident' %>
+		<dl id='incident' class='drop-down-menu' style='display:none;'>
+			<dd>1</dd>
+			<dd>2</dd>
+			<dd>3</dd>
+			<dd>3</dd>
+			<dd>3</dd>
+			<dd>3</dd>
+			<dd>3</dd>
+			<dd>3</dd>
+		</dl>
+	</li>
+	
+	<li>&nbsp;</li>
+	
 <%- end -%>
 
 <div id="events" class='grid_12'>
@@ -47,16 +75,16 @@
 	<ul class='table'>
 		
 		<li class='header'>
-			
-			<div class='small'><%= check_box_tag 'event-select-all', nil, false, :class => 'event-select-all' %></div>
-			<div class='small'>&nbsp;</div>
-			<div class='small'>Sev.</div>
-			<div class='address'>Sensor</div>
-			<div class='address'>Source IP</div>
-			<div class='address'>Destination IP</div>
-			<div class='signature'>Event Signature</div>
-			<div class='timestamp'>&nbsp;</div>
-			
+			<div class='row'>
+				<div class='small'><%= check_box_tag 'event-select-all', nil, false, :class => 'event-select-all' %></div>
+				<div class='small'>&nbsp;</div>
+				<div class='small'>Sev.</div>
+				<div class='address'>Sensor</div>
+				<div class='address'>Source IP</div>
+				<div class='address'>Destination IP</div>
+				<div class='signature'>Event Signature</div>
+				<div class='timestamp'>&nbsp;</div>
+			</div>
 		</li>
 		
 		<div class='content'>
@@ -67,7 +95,6 @@
 	
 	<% end %>
 	
-	<%= will_paginate(@events, :previous_label => 'Prev', :next_label => 'Next' ) %>
-	<div class="paginate-info"><%= page_entries_info @events %></div>
+	<%= pager(@events) %>
 	
 </div>

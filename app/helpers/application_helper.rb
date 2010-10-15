@@ -9,10 +9,12 @@ module ApplicationHelper
   # @return [String] title html
   # 
   def title(header, &block)
-    title_header = content_tag(:div, header, :id => 'title-header', :class => 'grid_8')
+    show_title(header)
+    title_header = content_tag(:div, header, :id => 'title-header', :class => 'grid_6')
     if block_given?
-      title_menu = content_tag(:ul, capture(&block), :id => 'title-menu', :class => 'grid_4')
-      html = title_header + title_menu
+      menu = content_tag(:ul, capture(&block), :id => 'title-menu')
+      menu_holder = content_tag(:ul, menu, :id => 'title-menu-holder', :class => 'grid_6')
+      html = title_header + menu_holder
     else
       html = title_header
     end 
@@ -24,6 +26,19 @@ module ApplicationHelper
     css_class = column == sort_column ? "current #{sort_direction}" : nil
     direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
     link_to title, {:sort => column, :direction => direction}, {:class => css_class}
+  end
+
+  def counter_box(data)
+    "<a class='spch-bub-inside' href='#'><span class='point'></span><em>#{data}</em></a>".html_safe
+  end
+
+  def pager(collection)
+    %{
+      <div class='pager'>
+        #{will_paginate(collection, :previous_label => 'Prev', :next_label => 'Next' )}
+        <div class="paginate-info">#{page_entries_info(collection)}</div>
+      </div>
+    }.html_safe
   end
 
 end

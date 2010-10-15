@@ -20,7 +20,7 @@ class Payload
 
 
   def to_s
-    Snorby::Packet::Payload.dump(data_payload, :width => 20, :format => :twos, :annotate => :ascii)
+    Snorby::Packet::Payload.dump([data_payload].pack('H*'), :width => 20, :format => :twos, :annotate => :ascii)
   end
 
 end

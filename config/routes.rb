@@ -25,6 +25,7 @@ Snorby::Application.routes.draw do
     #get "/events/show/:sid/:cid", :to => "events#show", :constraints => { :sid => /\d/, :cid => /\d/ }
     
     collection do
+      post :favorite
       get :last
       get :since
     end

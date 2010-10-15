@@ -12,6 +12,11 @@ namespace :snorby do
     User.create(:name => 'Administrator', :password => 'snorby', :password_confirmation => 'snorby', :email => 'snorby@snorby.com', :admin => true)
   end
   
+  desc 'Admin User'
+  task :defaultuser => :environment do
+    User.create(:name => 'Administrator', :password => 'snorby', :password_confirmation => 'snorby', :email => 'snorby@snorby.com', :admin => true)
+  end
+  
   desc 'Reset'
   task :reset => :environment do
     # Drop the snorby database if it exists

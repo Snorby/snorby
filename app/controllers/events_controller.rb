@@ -1,10 +1,12 @@
 class EventsController < ApplicationController
-  
+  respond_to :html, :xml, :json, :js
   helper_method :sort_column, :sort_direction
   
   def index
-    @severities = Severity.all
-    @events = Event.all(:order => [:timestamp.desc], :links => [:ip]).paginate(:page => params[:page], :per_page => 25)
+    @events = Event.all(:order => [:timestamp.desc], :classification_id => 0, :links => [:ip]).paginate(:page => params[:page], :per_page => 25)
+    respond_with(@events) do |format|
+      format.js
+    end
   end
   
   def show
@@ -19,6 +21,12 @@ class EventsController < ApplicationController
   def since
     @events = Event.to_json_since(params[:timestamp])
     render :json => @events.to_json
+  end
+  
+  def favorite
+    @event = Event.get(params[:sid], params[:cid])
+    @event.toggle_favorite
+    render :json => {}
   end
   
   private

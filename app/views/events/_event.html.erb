@@ -1,10 +1,26 @@
 <li id='event_<%= event.sid %><%= event.cid %>' class='event' data-event-id='<%= event.sid %><%= event.cid %>' data-event-sid='<%= event.sid %>' data-event-cid='<%= event.cid %>'>
-	<div class='select small'><%= check_box_tag 'event-selector', nil, false, :class => 'event-selector' %></div>
-	<div class='important small'><%= image_tag('icons/star-empty.png') %></div>
-	<div class='severity small'><span class='severity sev<%= event.signature.severity_id %>'><%= event.signature.severity_id %></span></div>
-	<div class='sensor address'><%= event.sensor.hostname %></div>
-	<div class='src_ip address'><%= event.ip.ip_src %></div>
-	<div class='dst_ip address'><%= event.ip.ip_dst %></div>
-	<div class='signature'><%= truncate(event.signature.name, :length => 80, :omission => '...') %></div>
-	<div class='timestamp'><%= event.pretty_time %></div>
+	
+	<div class='row'>
+		
+		<div class='select small'><%= check_box_tag 'event-selector', nil, false, :class => 'event-selector' %></div>
+		
+		<div class='important small'>
+			<% if event.favorite? %>
+				<div class='destroy-favorite'></div>
+			<% else %>
+				<div class='create-favorite'></div>
+			<% end %>
+		</div>
+		
+		<div class='severity small'><span class='severity sev<%= event.signature.severity_id %>'><%= event.signature.severity_id %></span></div>
+		<div class='click sensor address'><%= event.sensor.hostname %></div>
+		<div class='click src_ip address'><%= event.ip.ip_src %></div>
+		<div class='click dst_ip address'><%= event.ip.ip_dst %></div>
+		<div class='click signature'><%= truncate(event.signature.name, :length => 80, :omission => '...') %></div>
+		<div class='click timestamp'><%= event.pretty_time %></div>
+		
+	</div>
+	
+	<div style='display:none;' class='event-data' data='false'></div>
+
 </li>

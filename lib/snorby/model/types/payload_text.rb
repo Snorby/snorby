@@ -9,15 +9,15 @@ module Snorby
       class PayloadText < DataMapper::Property::Text
 
         def load(payload)
-          [payload].pack('H*')
+          payload
         end
 
         def dump(payload)
-          [payload].pack('H*')
+          payload
         end
 
         def typecast(payload)
-          [payload].pack('H*')
+          payload
         end
 
       end

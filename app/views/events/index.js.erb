@@ -1,0 +1,3 @@
+$('ul.table div.content').html("<%= escape_javascript(render(@events)) %>");
+$('div.pager').replaceWith("<%= escape_javascript(pager(@events)) %>");
+$('div.content').fadeTo(500, 1);

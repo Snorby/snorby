@@ -10,6 +10,9 @@ class User
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
+  has n, :favorites, :child_key => :user_id
+  has n, :events, :through => :favorites
+
   # Primary key of the user
   property :id, Serial, :key => true, :index => true
 
