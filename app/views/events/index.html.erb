@@ -14,7 +14,7 @@
 							if (data.events.length != 0) {
 								if (page <= 1) { 
 									if ($('div.new_events').length == 0) {
-										$('#events').prepend('<div class="note new_events">New Events Are Available Click here To View Them.</div>');
+										$('#events').prepend('<div class="note new_events"><strong>'+data.events.length+'</strong> New Events Are Available Click here To View Them.</div>');
 									};
 									$('#events ul.table div.content').prepend(Snorby.templates.event_table(data));
 								};
@@ -41,8 +41,8 @@
 		<%= link_to "#{image_tag('icons/export.png')} Export".html_safe, '#', :class => 'has_dropdown', :id => 'export' %>
 		<dl id='export' class='drop-down-menu' style='display:none;'>
 			<dd><%= link_to "Export JSON", '#' %></dd>
-			<dd>Export XML</dd>
-			<dd>Export CSV</dd>
+			<dd><%= link_to "Export XML", '#' %></dd>
+			<dd><%= link_to "Export CSV", '#' %></dd>
 		</dl>
 	</li>
 	

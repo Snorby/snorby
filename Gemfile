@@ -1,9 +1,9 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.0'
+gem 'rails', '3.0.1'
 gem 'jquery-rails'
 
-RAILS_VERSION = '~> 3.0.0'
+RAILS_VERSION = '~> 3.0.1'
 DM_VERSION = '~> 1.0.2'
 
 gem 'activesupport',          RAILS_VERSION, :require => 'active_support'
