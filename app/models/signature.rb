@@ -6,7 +6,7 @@ class Signature
 
   #belongs_to :category, :parent_key => :sig_class_id, :child_key => :sig_class_id, :required => true
 
-  has n, :events, :parent_key => :sig_id, :child_key => :sig_id
+  has n, :events, :parent_key => :sig_id, :child_key => :sig_id, :constraint => :destroy
   
   belongs_to :severity, :child_key => :sig_priority, :parent_key => :sig_id
   

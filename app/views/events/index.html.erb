@@ -37,14 +37,7 @@
 <%= title "Listing Events", do -%>
 
 	<li>&nbsp;</li>
-	<li>
-		<%= link_to "#{image_tag('icons/export.png')} Export".html_safe, '#', :class => 'has_dropdown', :id => 'export' %>
-		<dl id='export' class='drop-down-menu' style='display:none;'>
-			<dd><%= link_to "Export JSON", '#' %></dd>
-			<dd><%= link_to "Export XML", '#' %></dd>
-			<dd><%= link_to "Export CSV", '#' %></dd>
-		</dl>
-	</li>
+
 	
 	<li>
 		<%= link_to "#{image_tag('icons/fp.png')} False Positive".html_safe, '#' %>
@@ -64,37 +57,31 @@
 		</dl>
 	</li>
 	
+	<li>
+		<%= link_to "#{image_tag('icons/actions.png')} More Actions".html_safe, '#', :class => 'has_dropdown', :id => 'actions' %>
+		<dl id='actions' class='drop-down-menu' style='display:none;'>
+			<dd>1</dd>
+			<dd>2</dd>
+			<dd>3</dd>
+			<dd>3</dd>
+			<dd>3</dd>
+			<dd>3</dd>
+			<dd>3</dd>
+			<dd>3</dd>
+		</dl>
+	</li>
+	
+	<li>
+		<%= link_to "#{image_tag('icons/export.png')} Export".html_safe, '#', :class => 'has_dropdown', :id => 'export' %>
+		<dl id='export' class='drop-down-menu' style='display:none;'>
+			<dd><%= link_to "Export JSON", '#' %></dd>
+			<dd><%= link_to "Export XML", '#' %></dd>
+			<dd><%= link_to "Export CSV", '#' %></dd>
+		</dl>
+	</li>
+	
 	<li>&nbsp;</li>
 	
 <%- end -%>
 
-<div id="events" class='grid_12'>
-	
-	<%= form_tag '/events/select' do %>
-	
-	<ul class='table'>
-		
-		<li class='header'>
-			<div class='row'>
-				<div class='small'><%= check_box_tag 'event-select-all', nil, false, :class => 'event-select-all' %></div>
-				<div class='small'>&nbsp;</div>
-				<div class='small'>Sev.</div>
-				<div class='address'>Sensor</div>
-				<div class='address'>Source IP</div>
-				<div class='address'>Destination IP</div>
-				<div class='signature'>Event Signature</div>
-				<div class='timestamp'>&nbsp;</div>
-			</div>
-		</li>
-		
-		<div class='content'>
-			<%= render @events %>
-		</div>
-		
-	</ul>
-	
-	<% end %>
-	
-	<%= pager(@events) %>
-	
-</div>
+<%= render :partial => 'events/events' %>

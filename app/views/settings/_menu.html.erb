@@ -1,0 +1,15 @@
+<li>&nbsp;</li>
+
+<li>
+	<%= link_to "#{image_tag('icons/admin.png')} Administrator Menu".html_safe, '#', :class => 'has_dropdown', :id => 'admin' %>
+	<dl id='admin' class='drop-down-menu' style='display:none;'>
+		<dd><%= link_to 'Severities', severities_path %></dd>
+		<dd><%= link_to 'Classifications', '#' %></dd>
+		<dd><%= link_to 'Users', '#' %></dd>
+		<dd><%= link_to 'Sensors', '#' %></dd>
+		<dd><%= link_to 'Investigations', '#' %></dd>
+		<dd><%= link_to 'General Settings', settings_path %></dd>
+	</dl>
+</li>
+
+<li>&nbsp;</li>

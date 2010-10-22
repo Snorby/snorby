@@ -142,6 +142,7 @@ GEM
       rake (>= 0.8.4)
       thor (~> 0.14.0)
     rake (0.8.7)
+    simple_form (1.2.2)
     stringex (1.1.0)
     thor (0.14.3)
     treetop (1.4.8)
@@ -178,4 +179,5 @@ DEPENDENCIES
   nifty-generators (~> 0.4.1)
   rails (= 3.0.1)
   railties (~> 3.0.1)
+  simple_form (~> 1.2.2)
   will_paginate (~> 3.0.pre2)

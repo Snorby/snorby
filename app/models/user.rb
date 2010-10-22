@@ -10,20 +10,21 @@ class User
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
-  has n, :favorites, :child_key => :user_id
+  has n, :favorites, :child_key => :user_id, :constraint => :destroy
+  
   has n, :events, :through => :favorites
 
   # Primary key of the user
   property :id, Serial, :key => true, :index => true
 
   # Email of the user
-  property :email, String, :required => true, :unique => true
+  property :email, String, :required => true, :unique => true, :lazy => true
 
   # Full name of the user
-  property :name, String
+  property :name, String, :lazy => true
 
   # The timezone the user lives in
-  property :timezone, String, :default => 'UTC'
+  property :timezone, String, :default => 'UTC', :lazy => true
   
   # Define if the user has administrative privileges
   property :admin, Boolean, :default => false

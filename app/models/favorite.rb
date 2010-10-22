@@ -3,6 +3,7 @@ class Favorite
   include DataMapper::Resource
 
   belongs_to :user, :child_key => :user_id
+  
   belongs_to :event, :child_key => [ :sid, :cid ]
 
   property :id, Serial, :index => true

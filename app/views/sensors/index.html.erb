@@ -20,7 +20,6 @@
 	</table>
 
 
-	<%= will_paginate(@sensors, :previous_label => 'Prev', :next_label => 'Next' ) %>
-	<div class="paginate-info"><%= page_entries_info @sensors %></div>
+	<%= pager(@sensors) %>
 	
 </div>

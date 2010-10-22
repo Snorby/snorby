@@ -283,6 +283,13 @@ a {
 	font-size: 1.1em;
 }
 
+.page{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	display: block;
+	position: relative;
+}
+
 /* @end */
 
 /* @group Title */
@@ -362,8 +369,8 @@ a {
 
 #wrapper #content #title #title-menu-holder ul#title-menu li a img{
 	vertical-align: middle;
-	padding-right: 5px;
 	margin-top: -5px;
+	margin-right: 5px;
 }
 
 #wrapper #content #title #title-menu-holder ul#title-menu dl.drop-down-menu{
@@ -1011,6 +1018,16 @@ div.pagination a.next_page{
 /* @end */
 
 /* @group Severity */
+
+span.severity-example{
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+	padding: 3px 7px;
+	font-weight: bold;
+	text-decoration: none;
+	font-variant: normal;
+	font-size: 1.1em;
+}
 
 ul.table li div.small span.severity{
     -webkit-border-radius: 5px;

@@ -15,9 +15,9 @@ class Severity
   property :name, String
 
   # Set the severity text color
-  property :text_color, String, :default => '#fff', :index => true
+  property :text_color, String, :default => '#ffffff', :index => true
   
   # Set the severity background color
-  property :bg_color, String, :default => '#ddd', :index => true
+  property :bg_color, String, :default => '#dddddd', :index => true
 
 end

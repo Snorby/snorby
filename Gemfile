@@ -35,8 +35,9 @@ gem 'dm-serializer',          '~> 1.0.2'
 gem 'capistrano'
 
 # Rails Plugins
+gem 'simple_form',            '~> 1.2.2'
 gem 'devise',                 '~> 1.1.3'
-gem 'will_paginate', '~> 3.0.pre2 '
+gem 'will_paginate',          '~> 3.0.pre2 '
 
 group(:development, :test) do
   gem 'nifty-generators',     '~> 0.4.1' 

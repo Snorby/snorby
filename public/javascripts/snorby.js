@@ -49,7 +49,7 @@ var Snorby = {
 		
 		events: function(){
 			
-			$('div.create-favorite').live('click', function() {
+			$('div.create-favorite.enabled').live('click', function() {
 				var sid = $(this).parents('li.event').attr('data-event-sid');
 				var cid = $(this).parents('li.event').attr('data-event-cid');
 				
@@ -62,15 +62,23 @@ var Snorby = {
 				return false;
 			});
 			
-			$('div.destroy-favorite').live('click', function() {
+			$('div.destroy-favorite.enabled').live('click', function() {
 				var sid = $(this).parents('li.event').attr('data-event-sid');
 				var cid = $(this).parents('li.event').attr('data-event-cid');
+				var action = $('div#events').attr('data-action');
 				
 				$(this).removeClass('destroy-favorite').addClass('create-favorite');
 				$.post('/events/favorite', { sid: sid, cid: cid });
 				
 				var count = new Queue();
 				count.down();
+				
+				if (action == 'queue') { 
+					$('div.content').fadeTo(500, 0.4);
+					Snorby.helpers.remove_click_events(true);
+					$('div.destroy-favorite').removeClass('enabled').css('cursor', 'default');
+					$.get('/events/queue', null, null, "script");
+				};
 					
 				return false;
 			});
@@ -146,8 +154,9 @@ var Snorby = {
 	},
 	
 	admin: function(){
+		
 		$('#severity-color-bg').ColorPicker({
-			color: '#0000ff',
+			color: $('input#severity_bg_color').attr('value'),
 			onShow: function (colpkr) {
 				$(colpkr).fadeIn(500);
 				return false;
@@ -157,16 +166,16 @@ var Snorby = {
 				return false;
 			},
 			onSubmit: function(hsb, hex, rgb, el) {
-					$.post('/admin/severity', {id: 3, severity: { text_color: '#' + hex}});
 					$(el).ColorPickerHide();
 			},
 			onChange: function (hsb, hex, rgb) {
+				$('input#severity_bg_color').val('#'+hex);
 				$('#severity-color-bg div').css('backgroundColor', '#' + hex);
 			}
 		});
 		
 		$('#severity-color-text').ColorPicker({
-			color: '#0000ff',
+			color: $('input#severity_text_color').attr('value'),
 			onShow: function (colpkr) {
 				$(colpkr).fadeIn(500);
 				return false;
@@ -176,10 +185,10 @@ var Snorby = {
 				return false;
 			},
 			onSubmit: function(hsb, hex, rgb, el) {
-					$.post('/admin/severity', {id: 3, severity: { bg_color: '#' + hex}});
 					$(el).ColorPickerHide();
 			},
 			onChange: function (hsb, hex, rgb) {
+				$('input#severity_text_color').val('#'+hex);
 				$('#severity-color-text div').css('backgroundColor', '#' + hex);
 			}
 		});
@@ -342,7 +351,7 @@ var Snorby = {
 			<li id='event_{{sid}}{{cid}}' class='event' style='display:none;' data-event-id='{{sid}}{{cid}}' data-event-sid='{{sid}}' data-event-cid='{{cid}}'> \
 				<div class='row'> \
 					<div class='select small'><input class='event-selector' id='event-selector' name='event-selector' type='checkbox'></div> \
-					<div class='important small'><div class='create-favorite'></div></div> \
+					<div class='important small'><div class='create-favorite enabled'></div></div> \
 					<div class='severity small'><span class='severity sev{{severity}}'>{{severity}}</span></div> \
 					<div class='click sensor address'>{{hostname}}</div> \
 					<div class='click src_ip address'>{{ip_src}}</div> \
@@ -398,6 +407,7 @@ var Snorby = {
 				if (current_width < 16) { var current_width = 16 };
 				$(this).addClass('loading').css('width', current_width);
 				$('div.content').fadeTo(500, 0.4);
+				Snorby.helpers.remove_click_events(true);
 				$.get(this.href, null, null, "script");
 				return false;
 			});

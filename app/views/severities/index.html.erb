@@ -1,0 +1,27 @@
+<%= title "Severity Settings", do -%>
+
+	<%= render :partial => 'settings/menu' %>
+
+<%- end -%>
+
+<div id="severities" class='grid_12 page'>
+	
+	<table border="0" cellspacing="0" cellpadding="0">
+		<tr>		
+			<th>ID</th>
+			<th>Name</th>
+			<th>Background</th>
+			<th>Text</th>
+			<th>Example</th>
+		</tr>
+		<tbody class='sensors'>
+			<%= render @severities %>
+		</tbody>
+	</table>
+
+
+	<%= pager(@severities) %>
+	
+	<%= link_to 'New Severity', new_severity_path %>
+	
+</div>

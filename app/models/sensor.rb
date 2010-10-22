@@ -4,7 +4,9 @@ class Sensor
 
   storage_names[:default] = "sensor"
 
-  has n, :events, :child_key => :sid
+  has n, :events, :child_key => :sid, :constraint => :destroy
+  
+  has n, :ips, :child_key => :sid, :constraint => :destroy
 
   property :sid, Serial, :key => true, :index => true
 

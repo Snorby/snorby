@@ -8,15 +8,15 @@ class Ip
 
   belongs_to :sensor, :parent_key => [ :sid ], :child_key => [ :sid ], :required => true
 
-  has n, :events, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ]
+  has n, :events, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :constraint => :destroy
 
   property :sid, Integer, :key => true, :index => true
   
   property :cid, Integer, :key => true, :index => true
 
-  property :ip_src, NumericIPAddr
+  property :ip_src, NumericIPAddr, :index => true, :lazy => true
   
-  property :ip_dst, NumericIPAddr
+  property :ip_dst, NumericIPAddr, :index => true, :lazy => true
   
   property :ip_ver, Integer, :lazy => true
   

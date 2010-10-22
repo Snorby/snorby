@@ -11,20 +11,20 @@ Snorby::Application.routes.draw do
   resources :sensors do
   end
 
+  resources :settings do
+    
+  end
   
-  resources :admin do
-    collection do
-      post :severity# => '/severity/:id'
-      get :settings
-    end
+  resources :severities do
+    
   end
 
   match ':controller(/:action(/:sid/:cid))', :controller => 'Events'
 
   resources :events do
-    #get "/events/show/:sid/:cid", :to => "events#show", :constraints => { :sid => /\d/, :cid => /\d/ }
     
     collection do
+      get :queue
       post :favorite
       get :last
       get :since

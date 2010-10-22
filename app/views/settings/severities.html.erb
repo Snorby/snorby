@@ -1,0 +1,41 @@
+<%= title "Severities Settings", do -%>
+
+	<%= render :partial => 'settings/menu' %>
+	
+<%- end -%>
+
+<div id='severities'>
+	
+	<%= title "Listing Sensors", do -%>
+
+		<li>Hello</li>
+
+	<%- end -%>
+
+	<div id="sensors">
+
+		<table border="0" cellspacing="0" cellpadding="0">
+			<tr>		
+				<th>ID</th>
+				<th>Name</th>
+				<th>Hostname</th>
+				<th>Interface</th>
+				<th>Event Count</th>
+			</tr>
+			<tbody class='sensors'>
+				
+				<% @severities.each do |severity| %>
+					
+					
+					
+				<% end %>
+				
+			</tbody>
+		</table>
+
+
+		<%= pager(@sensors) %>
+
+	</div>
+	
+</div>

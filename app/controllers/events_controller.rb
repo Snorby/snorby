@@ -3,7 +3,14 @@ class EventsController < ApplicationController
   helper_method :sort_column, :sort_direction
   
   def index
-    @events = Event.all(:order => [:timestamp.desc], :classification_id => 0, :links => [:ip]).paginate(:page => params[:page], :per_page => 25)
+    @events = Event.all(:order => [:timestamp.desc], :classification_id => 0).paginate(:page => params[:page], :per_page => 25)
+    respond_with(@events) do |format|
+      format.js
+    end
+  end
+  
+  def queue
+    @events = current_user.events.paginate(:page => params[:page], :per_page => 25)
     respond_with(@events) do |format|
       format.js
     end
