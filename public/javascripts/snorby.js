@@ -204,6 +204,7 @@ var Snorby = {
 				var ip_proto = Snorby.templates.tcp_header(data.proto);
 			} else if (data.type === "udp") {
 				var title = "<div class='section-title'>UDP Header Information</div>";
+				console.log(data.proto);
 				var ip_proto = Snorby.templates.udp_header(data.proto);
 			} else {
 				var title = "<div class='section-title'>ICMP Header Information</div>";
@@ -290,7 +291,6 @@ var Snorby = {
 				<tr> \
 					<th class='first'>Src Port</th> \
 					<th>Dst Port</th> \
-					<th>Ver</th> \
 					<th>Len</th> \
 					<th class='last'>Csum</th> \
 				</tr> \
