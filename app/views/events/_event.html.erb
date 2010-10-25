@@ -1,8 +1,8 @@
-<li id='event_<%= event.sid %><%= event.cid %>' class='event' data-event-id='<%= event.sid %><%= event.cid %>' data-event-sid='<%= event.sid %>' data-event-cid='<%= event.cid %>'>
+<li id='event_<%= event.sid %><%= event.cid %>' class='event' data-event-id='<%= event.id %>' data-event-sid='<%= event.sid %>' data-event-cid='<%= event.cid %>'>
 	
 	<div class='row'>
 		
-		<div class='select small'><%= check_box_tag 'event-selector', nil, false, :class => 'event-selector' %></div>
+		<div class='select small'><%= check_box_tag 'event-selector', nil, false, :class => "check_box_#{event.id}" %></div>
 		
 		<div class='important small'>
 			<% if event.favorite? %>

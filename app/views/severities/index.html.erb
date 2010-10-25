@@ -12,6 +12,7 @@
 			<th>Name</th>
 			<th>Background</th>
 			<th>Text</th>
+			<th>Signature Count</th>
 			<th>Example</th>
 			<th>Edit</th>
 			<th>Destroy</th>
@@ -22,7 +23,7 @@
 	</table>
 
 
-	<%= pager(@severities) %>
+	<%= pager(@severities, '/severities') %>
 	
 	<%= link_to 'New Severity', new_severity_path %>
 	

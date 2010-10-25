@@ -1010,7 +1010,10 @@ ul.pager li.more{
 }
 
 ul.pager li.active a{
-	color: #2a7efc;
+	color: #2578fc;
+	font-weight: bold;
+	text-decoration: none;
+	font-variant: normal;
 }
 
 ul.pager li a{

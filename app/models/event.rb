@@ -39,6 +39,10 @@ class Event
   
   has 1, :opt, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :constraint => :destroy
 
+  def id
+    "#{sid}#{cid}"
+  end
+
   def json_time
     "{time:'#{timestamp}'}"
   end

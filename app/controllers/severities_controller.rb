@@ -3,7 +3,7 @@ class SeveritiesController < ApplicationController
   before_filter :require_administrative_privileges
 
   def index
-    @severities = Severity.all.paginate(:page => params[:page], :per_page => 25)
+    @severities = Severity.all.page(params[:page].to_i, :per_page => 25)
   end
 
   def new

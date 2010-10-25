@@ -16,6 +16,8 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+var selected_events = [];
+
 function Queue() {
   if ( !(this instanceof arguments.callee) ) {
     return new arguments.callee(arguments);
@@ -97,10 +99,10 @@ var Snorby = {
 				var cid = $(this).parents('li').attr('data-event-cid');
 				var parent_row = $('li#event_'+sid+''+cid);
 				
-				if ($('li#event_'+sid+''+cid+' input.event-selector').is(':checked')) {
-					var checked = "<input checked='checked' class='event-selector' id='event-selector' name='event-selector' type='checkbox'>";
+				if ($('li#event_'+sid+''+cid+' input#event-selector').is(':checked')) {
+					var checked = "<input checked='checked' class='check_box_" + sid + "" + cid + " id='event-selector' name='event-selector' type='checkbox'>";
 				} else {
-					var checked = "<input class='event-selector' id='event-selector' name='event-selector' type='checkbox'>";
+					var checked = "<input class='check_box_" + sid + "" + cid + " id='event-selector' name='event-selector' type='checkbox'>";
 				};
 				
 				var current_row = $('li#event_'+sid+''+cid+' div.event-data');
@@ -377,6 +379,12 @@ var Snorby = {
 	helpers: {
 		
 		dropdown: function(){
+			
+			$('dl.drop-down-menu dd a').live('click', function() {
+				$('dl.drop-down-menu').fadeOut('slow');
+				return true;
+			});
+			
 			$('a.has_dropdown').live('click', function() {
 				var id = $(this).attr('id');
 				var dropdown = $(this).parents('li').find('dl#'+id);
@@ -397,6 +405,65 @@ var Snorby = {
 
 				});
 				return false;
+			});
+		},
+		
+		persistence_selections: function() {
+			
+			$('input#event-selector').live('change', function() {
+				
+				var event_id = $(this).parents('li').attr('data-event-id');
+				
+				if ($(this).attr('checked')) {
+					
+					selected_events.push(event_id);
+					$('input#selected_events[type="hidden"]').val(selected_events);
+					
+				} else {
+					
+					var removeItem = event_id;
+					selected_events = jQuery.grep(selected_events, function(value) {
+						return value != removeItem;
+					});
+					
+					$('input#selected_events[type="hidden"]').val(selected_events);
+				};
+				
+			});
+			
+			$('input#event-select-all').live('change', function() {
+				
+				if ($(this).attr('checked')) {
+					
+					$('table.table li input[type="checkbox"]').each(function (index, value) {
+						var event_id = $(this).parents('li').attr('data-event-id');
+						
+						$(this).attr('checked', 'checked');
+						selected_events.push(parseInt(event_id));
+					});
+					
+				} else {
+					
+					$('table.table li input[type="checkbox"]').each(function (index, value) {
+						var removeItem = $(this).parents('li').attr('data-event-id');
+						$(this).attr('checked', '');
+ 						selected_events = jQuery.grep(selected_events, function(value) {
+							return value != removeItem;
+						});
+					});
+				};
+				
+				$('input#event-select-all[type="hidden"]').val(selected_events);
+				
+			});
+			
+		},
+		
+		recheck_selected_events: function(){
+			$('input#selected_events').val(selected_events);
+			console.log(selected_events);
+			$.each(selected_events, function(index, value) {
+				$('input.check_box_' + value).attr('checked', 'checked');
 			});
 		},
 		
@@ -436,6 +503,7 @@ jQuery(document).ready(function($) {
 	Snorby.setup();
 	Snorby.admin();
 	Snorby.helpers.dropdown();
+	Snorby.helpers.persistence_selections();
 	Snorby.helpers.pagenation();
 	Snorby.pages.events();
 	

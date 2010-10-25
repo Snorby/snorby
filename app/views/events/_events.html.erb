@@ -2,6 +2,8 @@
 	
 	<%= form_tag '/events/select' do %>
 	
+	<%= hidden_field_tag :selected_events, [] %>
+	
 	<ul class='table'>
 		
 		<li class='header'>
