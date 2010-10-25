@@ -1,7 +1,9 @@
 <%= title "Severity Settings", do -%>
-
+	
+	<li>&nbsp;</li>
+	<li><%= link_to "#{image_tag('icons/add.png')} Add Severity".html_safe, new_severity_path %></li>
 	<%= render :partial => 'settings/menu' %>
-
+	
 <%- end -%>
 
 <div id="severities" class='grid_12 page'>
@@ -24,7 +26,5 @@
 
 
 	<%= pager(@severities, '/severities') %>
-	
-	<%= link_to 'New Severity', new_severity_path %>
 	
 </div>

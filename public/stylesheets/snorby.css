@@ -254,6 +254,8 @@ a {
 #wrapper{
 	background-color: #ededed;
 	padding-top: 20px;
+	position: relative;
+	display: block;
 	border-top: 1px solid #fff;
 }
 

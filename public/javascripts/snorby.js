@@ -435,16 +435,15 @@ var Snorby = {
 				
 				if ($(this).attr('checked')) {
 					
-					$('table.table li input[type="checkbox"]').each(function (index, value) {
+					$('ul.table li input[type="checkbox"]').each(function (index, value) {
 						var event_id = $(this).parents('li').attr('data-event-id');
-						
 						$(this).attr('checked', 'checked');
-						selected_events.push(parseInt(event_id));
+						selected_events.push(event_id);
 					});
 					
 				} else {
 					
-					$('table.table li input[type="checkbox"]').each(function (index, value) {
+					$('ul.table li input[type="checkbox"]').each(function (index, value) {
 						var removeItem = $(this).parents('li').attr('data-event-id');
 						$(this).attr('checked', '');
  						selected_events = jQuery.grep(selected_events, function(value) {
@@ -453,7 +452,7 @@ var Snorby = {
 					});
 				};
 				
-				$('input#event-select-all[type="hidden"]').val(selected_events);
+				$('input#selected_events[type="hidden"]').val(selected_events);
 				
 			});
 			
@@ -461,7 +460,6 @@ var Snorby = {
 		
 		recheck_selected_events: function(){
 			$('input#selected_events').val(selected_events);
-			console.log(selected_events);
 			$.each(selected_events, function(index, value) {
 				$('input.check_box_' + value).attr('checked', 'checked');
 			});
