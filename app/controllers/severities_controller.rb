@@ -20,8 +20,9 @@ class SeveritiesController < ApplicationController
   end
 
   def update
-    @severity = Severity.get(params[:severity])
+    @severity = Severity.get(params[:id])
     if @severity.update(params[:severity])
+      redirect_to :back
     else
     end
   end
