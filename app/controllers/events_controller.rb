@@ -4,16 +4,10 @@ class EventsController < ApplicationController
   
   def index
     @events = Event.all(:order => [:timestamp.desc], :classification_id => 0).paginate(:page => params[:page], :per_page => 25)
-    respond_with(@events) do |format|
-      format.js
-    end
   end
   
   def queue
-    @events = current_user.events.paginate(:page => params[:page], :per_page => 25)
-    respond_with(@events) do |format|
-      format.js
-    end
+    @events ||= current_user.events.paginate(:page => params[:page], :per_page => 25)
   end
   
   def show

@@ -6,6 +6,8 @@ gem 'jquery-rails'
 RAILS_VERSION = '~> 3.0.1'
 DM_VERSION = '~> 1.0.2'
 
+gem 'newrelic_rpm'
+
 gem 'activesupport',          RAILS_VERSION, :require => 'active_support'
 gem 'actionpack',             RAILS_VERSION, :require => 'action_pack'
 gem 'actionmailer',           RAILS_VERSION, :require => 'action_mailer'
