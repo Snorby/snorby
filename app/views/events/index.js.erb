@@ -1,5 +1,4 @@
-$('ul.table div.content').html("<%= escape_javascript(render(@events)) %>");
-$('div.pager').replaceWith("<%= escape_javascript(pager(@events)) %>");
+$('div#events').html("<%= escape_javascript(render(:partial => 'events/events', :locals => { :events => @events })) %>");
 $('div.content').fadeTo(500, 1);
 Snorby.helpers.remove_click_events(false);
 $.scrollTo('#header', 500);

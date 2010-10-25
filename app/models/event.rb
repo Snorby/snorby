@@ -79,7 +79,7 @@ class Event
   end
   
   def favorite?
-    return true if self.users.include?(User.current_user)
+    return true if User.current_user.events.include?(self)
     false
   end
   

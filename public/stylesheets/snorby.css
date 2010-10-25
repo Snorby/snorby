@@ -943,7 +943,7 @@ div.paginate-info{
 	margin-top: 10px;
 }
 
-div.pagination{
+ul.pager{
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	display: block;
@@ -962,7 +962,7 @@ div.pagination{
 
 div.pagination span,
 div.pagination em,
-div.pagination a{
+ul.pager li{
 	border-bottom-left-radius: 5px 5px;
 	border-bottom-right-radius: 5px 5px;
 	border-top-left-radius: 5px 5px;
@@ -990,17 +990,18 @@ div.pagination a{
 }
 
 div.pagination span:hover,
-div.pagination a:hover{
+ul.pager li:hover{
 	color: #1b67fb;
 	border: 1px solid #7b7b7b;
 }
 
-div.pagination a.loading{
+ul.pager li.loading{
 	text-indent: -9999em;
 	background: #fff url(../images/icons/pager.gif) no-repeat center center;
 }
 
-div.pagination em{
+ul.pager li.more:hover,
+ul.pager li.more{
 	color: #8c8d90;
 	font-weight: normal;
 	text-decoration: none;
@@ -1008,11 +1009,14 @@ div.pagination em{
 	font-style: normal;
 }
 
-div.pagination a.previous_page,
-div.pagination span.previous_page,
-div.pagination span.next_page
-div.pagination a.next_page{
-	width: 3em;	!important
+ul.pager li a{
+	width: 3em;
+	font-weight: normal;
+	text-decoration: none;
+	font-variant: normal;
+	color: #383838;
+	font-size: 1.1em;
+	font-style: normal;
 }
 
 /* @end */
