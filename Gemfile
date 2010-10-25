@@ -6,7 +6,7 @@ gem 'jquery-rails'
 RAILS_VERSION = '~> 3.0.1'
 DM_VERSION = '~> 1.0.2'
 
-gem 'newrelic_rpm'
+# gem 'newrelic_rpm'
 
 gem 'activesupport',          RAILS_VERSION, :require => 'active_support'
 gem 'actionpack',             RAILS_VERSION, :require => 'action_pack'
@@ -22,6 +22,7 @@ gem 'dm-mysql-adapter',       DM_VERSION
 # gem 'dm-oracle-adapter',    DM_VERSION
 # gem 'dm-sqlserver-adapter', DM_VERSION
 
+gem 'dm-pager'#,            DM_VERSION
 gem 'dm-migrations',          DM_VERSION
 gem 'dm-types',               DM_VERSION
 gem 'dm-validations',         DM_VERSION
@@ -39,7 +40,7 @@ gem 'capistrano'
 # Rails Plugins
 gem 'simple_form',            '~> 1.2.2'
 gem 'devise',                 '~> 1.1.3'
-gem 'will_paginate',          '~> 3.0.pre2 '
+#gem 'will_paginate',          '~> 3.0.pre2'
 
 group(:development, :test) do
   gem 'nifty-generators',     '~> 0.4.1' 

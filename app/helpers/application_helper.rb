@@ -32,11 +32,10 @@ module ApplicationHelper
     "<a class='spch-bub-inside' href='#'><span class='point'></span><em>#{data}</em></a>".html_safe
   end
 
-  def pager(collection)
+  def pager(collection, path)
     %{
       <div class='pager'>
-        #{will_paginate(collection, :previous_label => 'Prev', :next_label => 'Next' )}
-        <div class="paginate-info">#{page_entries_info(collection)}</div>
+        #{collection.pager.to_html("#{path}", :size => 9)}
       </div>
     }.html_safe
   end

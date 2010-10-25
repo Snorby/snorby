@@ -2,7 +2,7 @@ class EventsController < ApplicationController
   respond_to :html, :xml, :json, :js
   
   def index
-    @events ||= Event.all(:order => [:timestamp.desc], :classification_id => 0).paginate(:page => params[:page], :per_page => 25)
+    @events = Event.all(:classification_id => 0).page(params[:page].to_i, :per_page => 25, :order => [:timestamp.desc])
   end
   
   def queue

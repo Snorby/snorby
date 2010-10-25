@@ -75,6 +75,9 @@ GEM
       do_mysql (~> 0.10.2)
     dm-observer (1.0.2)
       dm-core (~> 1.0.2)
+    dm-pager (1.1.0)
+      dm-aggregates (>= 0.10.1)
+      dm-core (>= 0.10.1)
     dm-rails (1.0.3)
       actionpack (~> 3.0.0.rc)
       activesupport (~> 3.0.0.rc)
@@ -121,7 +124,6 @@ GEM
     net-ssh (2.0.23)
     net-ssh-gateway (1.0.1)
       net-ssh (>= 1.99.1)
-    newrelic_rpm (2.13.2)
     nifty-generators (0.4.1)
     polyglot (0.3.1)
     rack (1.2.1)
@@ -152,7 +154,6 @@ GEM
     uuidtools (2.1.1)
     warden (0.10.7)
       rack (>= 1.0.0)
-    will_paginate (3.0.pre2)
 
 PLATFORMS
   ruby
@@ -169,6 +170,7 @@ DEPENDENCIES
   dm-migrations (~> 1.0.2)
   dm-mysql-adapter (~> 1.0.2)
   dm-observer (~> 1.0.2)
+  dm-pager
   dm-rails (~> 1.0.3)
   dm-serializer (~> 1.0.2)
   dm-timestamps (~> 1.0.2)
@@ -177,9 +179,7 @@ DEPENDENCIES
   dm-validations (~> 1.0.2)
   jquery-rails
   mysql (= 2.8.1)
-  newrelic_rpm
   nifty-generators (~> 0.4.1)
   rails (= 3.0.1)
   railties (~> 3.0.1)
   simple_form (~> 1.2.2)
-  will_paginate (~> 3.0.pre2)
