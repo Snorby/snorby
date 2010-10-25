@@ -403,12 +403,18 @@ var Snorby = {
 		pagenation: function() {
 			
 			$('ul.pager li').live('click', function() {
-				var current_width = $(this).width();
-				if (current_width < 16) { var current_width = 16 };
-				$(this).addClass('loading').css('width', current_width);
-				$('div.content').fadeTo(500, 0.4);
-				Snorby.helpers.remove_click_events(true);
-				$.getScript($(this).find('a').attr('href'))
+				
+				if (!$(this).hasClass('more')) {
+					
+					var current_width = $(this).width();
+					if (current_width < 16) { var current_width = 16 };
+					$(this).addClass('loading').css('width', current_width);
+					$('div.content').fadeTo(500, 0.4);
+					Snorby.helpers.remove_click_events(true);
+					$.getScript($(this).find('a').attr('href'));
+					
+				};
+				
 				return false;
 			});
 			

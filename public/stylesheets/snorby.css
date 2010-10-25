@@ -1009,6 +1009,10 @@ ul.pager li.more{
 	font-style: normal;
 }
 
+ul.pager li.active a{
+	color: #2a7efc;
+}
+
 ul.pager li a{
 	width: 3em;
 	font-weight: normal;

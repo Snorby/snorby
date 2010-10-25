@@ -6,7 +6,7 @@ class EventsController < ApplicationController
   end
   
   def queue
-    @events ||= current_user.events.paginate(:page => params[:page], :per_page => 25)
+    @events ||= current_user.events.page(params[:page].to_i, :per_page => 25, :order => [:timestamp.desc])
   end
   
   def show
