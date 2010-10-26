@@ -1,0 +1,8 @@
+<tr>
+	<td class='first'><%= classification.id %></td>
+	<td><%= classification.name %></td>
+	<td><%= classification.description %></td>
+	<td><%= classification.events.count %></td>
+	<td><%= link_to "Edit", edit_classification_path(classification) %></td>
+	<td class='last'><%= link_to "Destroy", classification_path(classification), :method => :delete %></td>
+</tr>

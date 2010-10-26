@@ -1,6 +1,9 @@
 require File.expand_path('../boot', __FILE__)
 
-require 'rails/all'
+# require 'rails/all'
+require 'action_controller/railtie'
+require 'dm-rails/railtie'
+require 'action_mailer/railtie'
 
 # If you have a Gemfile, require the gems listed there, including any gems
 # you've limited to :test, :development, or :production.
@@ -40,6 +43,13 @@ module Snorby
     # config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
 
     # Configure the default encoding used in templates for Ruby 1.9.
+    
+    config.generators do |g|
+      g.orm             :data_mapper
+      g.template_engine :erb
+      g.test_framework  :rspec
+    end
+    
     config.encoding = "utf-8"
 
     config.action_mailer.default_url_options = { :host => Snorby::CONFIG[:domain] }

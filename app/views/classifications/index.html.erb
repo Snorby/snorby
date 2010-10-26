@@ -1,0 +1,26 @@
+<%= title "Severity Settings", do -%>
+
+	<%= menu_item "Add Classification", new_classification_path, 'icons/add.png' %>
+	<%= render :partial => 'settings/menu' %>
+	
+<%- end -%>
+
+<div id="classifications" class='grid_12 page'>
+	
+	<table border="0" cellspacing="0" cellpadding="0">
+		<tr>		
+			<th>ID</th>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Event Count</th>
+			<th>Edit</th>
+			<th>Destroy</th>
+		</tr>
+		<tbody class='classifications'>
+			<%= render @classifications %>
+		</tbody>
+	</table>
+
+	<%= pager(@classifications, '/classifications') %>
+	
+</div>

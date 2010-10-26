@@ -12,7 +12,7 @@ module ApplicationHelper
     show_title(header)
     title_header = content_tag(:div, header, :id => 'title-header', :class => 'grid_6')
     if block_given?
-      menu = content_tag(:ul, capture(&block), :id => 'title-menu')
+      menu = content_tag(:ul, "<li>&nbsp;</li>#{capture(&block)}<li>&nbsp;</li>".html_safe, :id => 'title-menu')
       menu_holder = content_tag(:ul, menu, :id => 'title-menu-holder', :class => 'grid_6')
       html = title_header + menu_holder
     else
@@ -28,16 +28,26 @@ module ApplicationHelper
     link_to title, {:sort => column, :direction => direction}, {:class => css_class}
   end
 
-  def counter_box(data)
-    "<a class='spch-bub-inside' href='#'><span class='point'></span><em>#{data}</em></a>".html_safe
+  def pager(collection, path)
+    %{<div class='pager'>#{collection.pager.to_html("#{path}", :size => 9)}</div>}.html_safe
   end
 
-  def pager(collection, path)
-    %{
-      <div class='pager'>
-        #{collection.pager.to_html("#{path}", :size => 9)}
-      </div>
-    }.html_safe
+  def drop_down_for(name, icon_path, id, &block)
+    html = link_to "#{image_tag(icon_path)} #{name}".html_safe, '#', :class => 'has_dropdown', :id => "#{id}"
+    if block_given?
+      html += content_tag(:dl, "#{capture(&block)}".html_safe, :id => "#{id}", :class => 'drop-down-menu', :style => 'display:none;')
+    end
+    "<li>#{html}</li>".html_safe
+  end
+
+  def drop_down_item(name, path='#', options={})
+    image = options[:image] ? "#{image_tag(options[:image])} " : ""
+    %{<dd id='#{options[:id]}' class='#{options[:class]}' style='#{options[:style]}'>#{link_to "#{image}#{name}", path}</dd>}.html_safe
+  end
+
+  def menu_item(name, path='#', image_path=nil, options={})
+    image = image_path ? "#{image_tag(image_path)} " : ""
+    content_tag(:li, "#{link_to "#{image}#{name}".html_safe, path}".html_safe, options)
   end
 
 end

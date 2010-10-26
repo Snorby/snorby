@@ -35,52 +35,32 @@
 <% end %>
 
 <%= title "Listing Events", do -%>
-
-	<li>&nbsp;</li>
-
 	
-	<li>
-		<%= link_to "#{image_tag('icons/fp.png')} False Positive".html_safe, '#' %>
-	</li>
+	<%= menu_item "False Positive", '#', 'icons/fp.png' %>
 	
-	<li>
-		<%= link_to "#{image_tag('icons/incident.png')} Incident".html_safe, '#', :class => 'has_dropdown', :id => 'incident' %>
-		<dl id='incident' class='drop-down-menu' style='display:none;'>
-			<dd>1</dd>
-			<dd>2</dd>
-			<dd>3</dd>
-			<dd>3</dd>
-			<dd>3</dd>
-			<dd>3</dd>
-			<dd>3</dd>
-			<dd>3</dd>
-		</dl>
-	</li>
+	<%= drop_down_for('Incident', 'icons/incident.png', 'incident') do %>
+		<%= drop_down_item "1" %>
+		<%= drop_down_item "2" %>
+		<%= drop_down_item "3" %>
+		<%= drop_down_item "4" %>
+		<%= drop_down_item "5" %>
+		<%= drop_down_item "6" %>
+	<% end %>
 	
-	<li>
-		<%= link_to "#{image_tag('icons/actions.png')} More Actions".html_safe, '#', :class => 'has_dropdown', :id => 'actions' %>
-		<dl id='actions' class='drop-down-menu' style='display:none;'>
-			<dd>1</dd>
-			<dd>2</dd>
-			<dd>3</dd>
-			<dd>3</dd>
-			<dd>3</dd>
-			<dd>3</dd>
-			<dd>3</dd>
-			<dd>3</dd>
-		</dl>
-	</li>
+	<%= drop_down_for('More Actions', 'icons/actions.png', 'actions') do %>
+		<%= drop_down_item "1" %>
+		<%= drop_down_item "2" %>
+		<%= drop_down_item "3" %>
+		<%= drop_down_item "4" %>
+		<%= drop_down_item "5" %>
+		<%= drop_down_item "6" %>
+	<% end %>
 	
-	<li>
-		<%= link_to "#{image_tag('icons/export.png')} Export".html_safe, '#', :class => 'has_dropdown', :id => 'export' %>
-		<dl id='export' class='drop-down-menu' style='display:none;'>
-			<dd><%= link_to "Export JSON", '#' %></dd>
-			<dd><%= link_to "Export XML", '#' %></dd>
-			<dd><%= link_to "Export CSV", '#' %></dd>
-		</dl>
-	</li>
-	
-	<li>&nbsp;</li>
+	<%= drop_down_for('Export', 'icons/export.png', 'export') do %>
+		<%= drop_down_item "Export JSON" %>
+		<%= drop_down_item "Export XML" %>
+		<%= drop_down_item "Export CSV" %>
+	<% end %>
 	
 <%- end -%>
 

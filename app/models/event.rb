@@ -23,6 +23,8 @@ class Event
 
   has 1, :severity, :through => :signature, :via => :sig_priority
 
+  belongs_to :classification
+
   belongs_to :sensor, :parent_key => :sid, :child_key => :sid, :required => true
   
   belongs_to :signature, :child_key => :sig_id, :parent_key => :sig_id

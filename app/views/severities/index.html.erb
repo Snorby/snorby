@@ -1,7 +1,6 @@
 <%= title "Severity Settings", do -%>
-	
-	<li>&nbsp;</li>
-	<li><%= link_to "#{image_tag('icons/add.png')} Add Severity".html_safe, new_severity_path %></li>
+
+	<%= menu_item "Add Severity", new_severity_path, 'icons/add.png' %>
 	<%= render :partial => 'settings/menu' %>
 	
 <%- end -%>
