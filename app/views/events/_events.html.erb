@@ -1,6 +1,6 @@
 <div id="events" class='grid_12' data-action='<%= params[:action] %>'>
 	
-	<%= form_tag '/events/select' do %>
+	<%= form_tag mass_update_events_path do %>
 	
 	<%= hidden_field_tag :selected_events, [] %>
 	

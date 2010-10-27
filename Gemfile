@@ -9,6 +9,8 @@ DM_VERSION = '~> 1.0.2'
 
 # gem 'newrelic_rpm'
 
+gem 'mongrel',               '1.2.0.pre2'
+
 gem 'activesupport',          RAILS_VERSION, :require => 'active_support'
 gem 'actionpack',             RAILS_VERSION, :require => 'action_pack'
 gem 'actionmailer',           RAILS_VERSION, :require => 'action_mailer'

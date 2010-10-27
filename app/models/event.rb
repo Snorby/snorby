@@ -41,8 +41,17 @@ class Event
   
   has 1, :opt, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :constraint => :destroy
 
+  def self.find_by_ids(ids)
+    events = []
+    ids.split(',').collect do |e| 
+      event = e.split('-')
+      events << get(event.first, event.last)
+    end
+    return events
+  end
+
   def id
-    "#{sid}#{cid}"
+    "#{sid}-#{cid}"
   end
 
   def json_time

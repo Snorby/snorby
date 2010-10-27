@@ -40,14 +40,24 @@ module ApplicationHelper
     "<li>#{html}</li>".html_safe
   end
 
-  def drop_down_item(name, path='#', options={})
-    image = options[:image] ? "#{image_tag(options[:image])} " : ""
-    %{<dd id='#{options[:id]}' class='#{options[:class]}' style='#{options[:style]}'>#{link_to "#{image}#{name}", path}</dd>}.html_safe
+  def drop_down_item(name, path='#', image_path=nil, options={})
+    image = image_path ? "#{image_tag(image_path)} " : ""
+    content_tag(:dd, "#{link_to "#{image}#{name}".html_safe, path, options}".html_safe)
   end
 
+  #
+  # Menu Item
+  # 
+  # @param [String] name Menu Item Name
+  # @param [String] path Men Item Path
+  # @param [String] image_path Menu Item Image Path
+  # @param [Hash] options Options to padd to content_tag
+  # 
+  # @return [String] HTMl Menu Item
+  # 
   def menu_item(name, path='#', image_path=nil, options={})
     image = image_path ? "#{image_tag(image_path)} " : ""
-    content_tag(:li, "#{link_to "#{image}#{name}".html_safe, path}".html_safe, options)
+    content_tag(:li, "#{link_to "#{image}#{name}".html_safe, path, options}".html_safe)
   end
 
 end

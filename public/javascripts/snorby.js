@@ -17,6 +17,7 @@
 // Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 var selected_events = [];
+var flash_message = [];
 
 function Queue() {
   if ( !(this instanceof arguments.callee) ) {
@@ -36,6 +37,19 @@ function Queue() {
 
 }
 
+function flash (data) {
+	$('div#flash_message').remove();
+
+	$.each(flash_message, function(index, data) {
+		var message = Snorby.templates.flash(data);
+		$('body').prepend(message);
+		$('div#flash_message').fadeIn('slow').delay(2000).fadeOut("slow");
+		flash_message = [];
+	});
+	
+	return false;
+}
+
 var Snorby = {
 	
 	setup: function(){
@@ -48,6 +62,23 @@ var Snorby = {
 	},
 	
 	pages: {
+		
+		classifications: function(){
+			$('a.classification').live('click', function() {
+				var class_id = $(this).attr('data-classification-id');
+				var selected_events = $('input#selected_events').attr('value');
+				
+				$('div.content').fadeTo(500, 0.4);
+				Snorby.helpers.remove_click_events(true);
+				
+				$.post('events/classify', {events: selected_events, classification: class_id});
+				$.getScript('/events');
+				
+				flash_message.push({type: 'success', message: "Events Classified Successfully"});
+				
+				return false;
+			});
+		},
 		
 		events: function(){
 			
@@ -197,6 +228,14 @@ var Snorby = {
 	},
 	
 	templates: {
+		
+		flash: function(data){
+			var template = " \
+			<div class='{{type}}' id='flash_message' style='display:none;'> \
+				<div class='message {{type}}'>{{message}}</div> \
+			</div>";
+			return Mustache.to_html(template, data);
+		},
 		
 		event_data: function(data){
 			var ip_data = Snorby.templates.ip_header(data);
@@ -435,7 +474,7 @@ var Snorby = {
 				
 				if ($(this).attr('checked')) {
 					
-					$('ul.table li input[type="checkbox"]').each(function (index, value) {
+					$('ul.table div.content li input[type="checkbox"]').each(function (index, value) {
 						var event_id = $(this).parents('li').attr('data-event-id');
 						$(this).attr('checked', 'checked');
 						selected_events.push(event_id);
@@ -443,7 +482,7 @@ var Snorby = {
 					
 				} else {
 					
-					$('ul.table li input[type="checkbox"]').each(function (index, value) {
+					$('ul.table div.content li input[type="checkbox"]').each(function (index, value) {
 						var removeItem = $(this).parents('li').attr('data-event-id');
 						$(this).attr('checked', '');
  						selected_events = jQuery.grep(selected_events, function(value) {
@@ -500,9 +539,12 @@ jQuery(document).ready(function($) {
 	
 	Snorby.setup();
 	Snorby.admin();
+	
 	Snorby.helpers.dropdown();
 	Snorby.helpers.persistence_selections();
 	Snorby.helpers.pagenation();
+	
+	Snorby.pages.classifications();
 	Snorby.pages.events();
 	
 });

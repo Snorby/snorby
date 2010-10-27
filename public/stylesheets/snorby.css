@@ -83,6 +83,49 @@ a {
 
 /* Content */
 
+/* @group Flash */
+
+#flash_message{
+	position: absolute;
+	height: 90px;
+	display: block;
+	overflow: hidden;
+	top: 0;
+	right: 0;
+	left: 0;
+	background-color: rgba(24,31,34,0.79);
+	z-index: 9999999;
+}
+
+#flash_message.success{
+	
+}
+
+#flash_message.notice{
+	
+}
+
+#flash_message.error{
+	
+}
+
+#flash_message div.message{
+	text-shadow: #000 0 0 0;
+	line-height: 90px;
+	width: 960px;
+	margin: auto;
+	color: #fff;
+	font-weight: normal;
+	font-style: normal;
+	text-decoration: none;
+	font-variant: normal;
+	font-size: 2.0em;
+	text-align: center;
+}
+
+
+/* @end */
+
 /* @group Header */
 
 

@@ -14,6 +14,14 @@ class EventsController < ApplicationController
     render :json => @event.in_json
   end
   
+  def classify
+    events = Event.find_by_ids(params[:events])
+    events.each do |event| 
+      event.update(:classification_id => params[:classification]) if event
+    end
+    redirect_to events_path, :notice => 'Event Classified Successfully'
+  end
+  
   def last
     render :json => {:time => Event.last.timestamp}
   end

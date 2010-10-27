@@ -26,6 +26,8 @@ Snorby::Application.routes.draw do
   resources :events do
     
     collection do
+      post :classify
+      post :mass_update
       get :queue
       post :favorite
       get :last
