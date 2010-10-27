@@ -74,7 +74,7 @@ var Snorby = {
 				$.post('events/classify', {events: selected_events, classification: class_id});
 				$.getScript('/events');
 				
-				flash_message.push({type: 'success', message: "Events Classified Successfully"});
+				flash_message.push({type: 'success', message: "Event(s) Classified Successfully"});
 				
 				return false;
 			});

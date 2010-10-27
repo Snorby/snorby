@@ -35,30 +35,7 @@
 <% end %>
 
 <%= title "Listing Events", do -%>
-	
-	<%= menu_item "False Positive", '#', 'icons/fp.png', { :class => 'classification', :"data-classification-id" => 1 } %>
-	
-	<%= drop_down_for('Incident', 'icons/incident.png', 'incident') do %>
-		<% Classification.all.each do |cls| %>
-			<%= drop_down_item cls.name, '#', nil, { :class => 'classification', :"data-classification-id" => cls.id } %>
-		<% end %>
-	<% end %>
-	
-	<%= drop_down_for('More Actions', 'icons/actions.png', 'actions') do %>
-		<%= drop_down_item "1" %>
-		<%= drop_down_item "2" %>
-		<%= drop_down_item "3" %>
-		<%= drop_down_item "4" %>
-		<%= drop_down_item "5" %>
-		<%= drop_down_item "6" %>
-	<% end %>
-	
-	<%= drop_down_for('Export', 'icons/export.png', 'export') do %>
-		<%= drop_down_item "Export JSON" %>
-		<%= drop_down_item "Export XML" %>
-		<%= drop_down_item "Export CSV" %>
-	<% end %>
-	
+	<%= render :partial => 'events/menu' %>
 <%- end -%>
 
 <%= render :partial => 'events/events' %>

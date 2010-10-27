@@ -1,10 +1,6 @@
 <div id="wrapper">
 	
 	<div id="content" class='shadow container_12'>
-		
-		<% flash.each do |name, msg| %>
-      <%= content_tag :div, msg, :id => "flash_#{name}" %>
-    <% end %>
 
     <%= yield %>
 		
