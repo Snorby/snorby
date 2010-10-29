@@ -1,9 +1,7 @@
-require 'snorby/model'
-require 'snorby/packet'
+require 'snorby/payload'
 
 class Payload
   
-  include Snorby::Model
   include DataMapper::Resource
 
   storage_names[:default] = "data"
@@ -16,11 +14,19 @@ class Payload
   
   property :cid, Integer, :key => true, :index => true
   
-  property :data_payload, PayloadText
+  property :data_payload, Text
 
 
   def to_s
-    Snorby::Packet::Payload.dump([data_payload].pack('H*'), :width => 20, :format => :twos, :annotate => :ascii)
+    Snorby::Payload.new([data_payload].pack('H*'), :width => 26).to_s
+  end
+  
+  def to_html
+    Snorby::Payload.new([data_payload].pack('H*'), :width => 26, :html => true).to_s.html_safe
+  end
+  
+  def to_ascii
+    Snorby::Payload.new([data_payload].pack('H*'), :width => 26, :ascii => true).to_s.html_safe
   end
 
 end

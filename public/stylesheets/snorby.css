@@ -933,6 +933,11 @@ ul.table div.content div.event-data div.event-data-holder div.event-data-holder-
 	
 }
 
+ul.table div.content div.event-data div.event-data-holder div.event-data-holder-inside div.payload-ascii{
+	padding: 5px;
+}
+
+ul.table div.content div.event-data div.event-data-holder div.event-data-holder-inside div.payload-ascii,
 ul.table div.content div.event-data div.event-data-holder div.event-data-holder-inside div.payload{
 	background-color: #ededed;
 	border: 1px solid #000;
@@ -944,6 +949,7 @@ ul.table div.content div.event-data div.event-data-holder div.event-data-holder-
 	font-variant: normal;
 	overflow: auto;
 }
+
 ul.table div.content div.event-data div.event-data-holder div.event-data-holder-inside div.payload pre{
 	padding: 10px;
 	border: 1px solid #fff;
@@ -1333,6 +1339,25 @@ a.spch-bub-inside:hover em {
 }
 a.spch-bub-inside:hover .point {
   border-left: 0.5em solid #F00; 
+}
+
+/* @end */
+
+/* @group Payload */
+
+span.payload-number{
+	color: #8a8a8d;
+}
+
+span.payload-hex{
+	color: #343e4b;
+}
+
+span.payload-ascii{
+	color: #505254;
+	font-weight: bold;
+	text-decoration: none;
+	font-variant: normal;
 }
 
 /* @end */

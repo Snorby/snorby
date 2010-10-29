@@ -50,6 +50,12 @@ function flash (data) {
 	return false;
 }
 
+function clear_selected_events () {
+	selected_events = [];
+	$('input#selected_events').val('');
+	return false;
+}
+
 var Snorby = {
 	
 	setup: function(){
@@ -68,13 +74,19 @@ var Snorby = {
 				var class_id = $(this).attr('data-classification-id');
 				var selected_events = $('input#selected_events').attr('value');
 				
-				$('div.content').fadeTo(500, 0.4);
-				Snorby.helpers.remove_click_events(true);
-				
-				$.post('events/classify', {events: selected_events, classification: class_id});
-				$.getScript('/events');
-				
-				flash_message.push({type: 'success', message: "Event(s) Classified Successfully"});
+				if (selected_events.length > 0) {
+					$('div.content').fadeTo(500, 0.4);
+					Snorby.helpers.remove_click_events(true);
+
+					$.post('events/classify', {events: selected_events, classification: class_id});
+					$.getScript('/events');
+					
+					flash_message.push({type: 'success', message: "Event(s) Classified Successfully"});
+					
+				} else {
+					flash_message.push({type: 'error', message: "Please Select Events To Perform This Action"});
+					flash();
+				};
 				
 				return false;
 			});
@@ -260,7 +272,8 @@ var Snorby = {
 					"+title+" \
 					<div class='proto'>"+ip_proto+"</div> \
 					<div class='section-title'>Payload</div> \
-					<div class='round payload'><pre class='round'>{{payload}}</pre></div> \
+					<div class='round payload-ascii' style='display:none;'><pre class='round'>"+data.payload+"</pre></div> \
+					<div class='round payload'><pre class='round'>"+data.payload_html+"</pre></div> \
 					<div class='section-title'>Notes</div> \
 					<div class='notes'> \
 					</div> \

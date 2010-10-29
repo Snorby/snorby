@@ -131,7 +131,8 @@ class Event
       :dst_port => dst_port,
       :type => type,
       :proto => proto,
-      :payload => payload.to_s
+      :payload => payload.to_ascii,
+      :payload_html => payload.to_html
     }
     return json
   end
