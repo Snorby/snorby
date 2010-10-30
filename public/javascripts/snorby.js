@@ -79,17 +79,19 @@ var Snorby = {
 					$('div.content').fadeTo(500, 0.4);
 					Snorby.helpers.remove_click_events(true);
 
-					$.post('/events/classify', {events: selected_events, classification: class_id});
-					
-					if (current_page == "index") {
-						clear_selected_events();
-						$.getScript('/events');
-					} else if (current_page == "queue") {
-						clear_selected_events();
-						$.getScript('/events/queue');
-					};
-					
-					flash_message.push({type: 'success', message: "Event(s) Classified Successfully"});
+					$.post('/events/classify', {events: selected_events, classification: class_id}, function() {
+						
+						if (current_page == "index") {
+							clear_selected_events();
+							$.getScript('/events');
+						} else if (current_page == "queue") {
+							clear_selected_events();
+							$.getScript('/events/queue');
+						};
+
+						flash_message.push({type: 'success', message: "Event(s) Classified Successfully"});
+						
+					});
 					
 				} else {
 					flash_message.push({type: 'error', message: "Please Select Events To Perform This Action"});
@@ -545,13 +547,34 @@ var Snorby = {
 			
 		},
 		
-		remove_click_events: function(hide){
+	remove_click_events: function(hide){
 			if (hide) {
 				$('ul.table div.content div').removeClass('click');
 			} else {
 				$('li.event div.sensor, li.event div.src_ip, li.event div.dst_ip, li.event div.signature, li.event div.timestamp').addClass('click');
 			};			
 		},
+	},
+	
+	callbacks: function(){
+
+		$('body').ajaxError(function (event, xhr, ajaxOptions, thrownError) {
+			
+			$('div.content').fadeTo(500, 1);
+			$('ul.table div.content li input[type="checkbox"]').attr('checked', '');
+			Snorby.helpers.remove_click_events(false);
+			
+			if (xhr['status'] === 404) {
+				flash_message.push({type: 'error', message: "The requested page could not be found."});
+				flash();
+			} else {
+				flash_message.push({type: 'error', message: "The request failed to complete successfully."});
+				flash();
+			};
+			
+			//console.log("XHR Response: " + JSON.stringify(xhr));
+		});
+		
 	}
 	
 }
@@ -560,6 +583,7 @@ jQuery(document).ready(function($) {
 	
 	Snorby.setup();
 	Snorby.admin();
+	Snorby.callbacks();
 	
 	Snorby.helpers.dropdown();
 	Snorby.helpers.persistence_selections();
