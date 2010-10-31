@@ -151,12 +151,7 @@ var Snorby = {
 				var sid = $(this).parents('li').attr('data-event-sid');
 				var cid = $(this).parents('li').attr('data-event-cid');
 				var parent_row = $('li#event_'+sid+''+cid);
-				
-				if ($('li#event_'+sid+''+cid+' input#event-selector').is(':checked')) {
-					var checked = "<input checked='checked' class='check_box_" + sid + "" + cid + " id='event-selector' name='event-selector' type='checkbox'>";
-				} else {
-					var checked = "<input class='check_box_" + sid + "" + cid + " id='event-selector' name='event-selector' type='checkbox'>";
-				};
+				var check_box = $('li#event_'+sid+''+cid+' input#event-selector');
 				
 				var current_row = $('li#event_'+sid+''+cid+' div.event-data');
 				
@@ -180,13 +175,15 @@ var Snorby = {
 						current_row.slideDown('fast');
 					};
 				} else {
+					
+					check_box.hide();
 					$('li.event div.event-data').slideUp('fast');
-					var check_box = parent_row.find('div.select');
-					check_box.html("<img alt='laoding' src='/images/icons/loading.gif'>");
+					parent_row.find('div.select').append("<img alt='laoding' src='/images/icons/loading.gif' class='select-loading'>");
 					$.get('/events/show/'+sid+'/'+cid, function (data) {
 						Snorby.helpers.remove_click_events(false);
 
-						check_box.html(checked);
+						$('.select-loading').remove();
+						check_box.show();
 						
 						current_row.html(Snorby.templates.event_data(data));
 						current_row.attr('data', true);		
