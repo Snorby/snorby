@@ -39,6 +39,9 @@ gem 'dm-serializer',          '~> 1.0.2'
 gem 'capistrano'
 
 # Rails Plugins
+gem 'net-dns',                '~> 0.6.1'
+gem 'whois',                  '~> 1.3.9'
+gem 'stalker',                '~> 0.5.0'
 gem 'simple_form',            '~> 1.2.2'
 gem 'devise',                 '~> 1.1.3'
 

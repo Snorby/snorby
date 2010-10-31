@@ -104,6 +104,14 @@ var Snorby = {
 		
 		events: function(){
 			
+			$('a.lookup').live('click', function() {
+				var address = $(this).attr('data-address');
+				$.fancybox({
+					href: this.href
+				});
+				return false;
+			});
+			
 			$('div.create-favorite.enabled').live('click', function() {
 				var sid = $(this).parents('li.event').attr('data-event-sid');
 				var cid = $(this).parents('li.event').attr('data-event-cid');
@@ -264,7 +272,6 @@ var Snorby = {
 				var ip_proto = Snorby.templates.tcp_header(data.proto);
 			} else if (data.type === "udp") {
 				var title = "<div class='section-title'>UDP Header Information</div>";
-				console.log(data.proto);
 				var ip_proto = Snorby.templates.udp_header(data.proto);
 			} else {
 				var title = "<div class='section-title'>ICMP Header Information</div>";
@@ -386,8 +393,8 @@ var Snorby = {
 				</tr> \
 				<tbody> \
 					<tr> \
-						<td class='first'>{{dst_ip}}</td> \
-						<td>{{src_ip}}</td> \
+						<td class='first'><a href='/events/lookup?address={{src_ip}}' data-address='{{src_ip}}' class='lookup'>{{src_ip}}</a></td> \
+						<td><a href='/events/lookup?address={{dst_ip}}' data-address='{{dst_ip}}' class='lookup'>{{dst_ip}}</a></td> \
 						{{#ip}} \
 						<td>{{ip_ver}}</td> \
 						<td>{{ip_hlen}}</td> \

@@ -25,4 +25,9 @@ namespace :snorby do
     Rake::Task['snorby:setup'].invoke
   end
   
+  desc 'Start Snorby Job Queue'
+  task :jobs => :environment do
+    system("ruby -r #{RAILS_ROOT}/lib/snorby/jobs.rb -e Stalker.work")
+  end
+  
 end

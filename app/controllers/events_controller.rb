@@ -37,4 +37,9 @@ class EventsController < ApplicationController
     render :json => {}
   end
   
+  def lookup
+    @lookup = Snorby::Lookup.new(params[:address])
+    render :layout => false
+  end
+  
 end
