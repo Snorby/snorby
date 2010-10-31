@@ -18,7 +18,7 @@ gem 'railties',               RAILS_VERSION, :require => 'rails'
 
 gem 'dm-rails',               '~> 1.0.3'
 gem 'dm-do-adapter',          DM_VERSION
-gem 'dm-active_model',        DM_VERSION, :git => "git://github.com/datamapper/dm-active_model.git"
+gem 'dm-active_model',        DM_VERSION
 
 gem 'dm-mysql-adapter',       DM_VERSION
 # gem 'dm-sqlite-adapter',    DM_VERSION

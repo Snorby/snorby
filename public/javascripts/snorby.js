@@ -60,6 +60,14 @@ var Snorby = {
 	
 	setup: function(){
 
+		$(window).resize(function() {
+			$.fancybox.center;
+		});
+
+		$(window).scroll(function() {
+			$('#fancybox-wrap').scrollTop(20);
+		});
+
 		$("#growl").notify({
 		    speed: 500,
 		    expires: 3000
@@ -107,6 +115,12 @@ var Snorby = {
 			$('a.lookup').live('click', function() {
 				var address = $(this).attr('data-address');
 				$.fancybox({
+					centerOnScroll: true,
+	        zoomSpeedIn: 300, 
+	        zoomSpeedOut: 300,
+					overlayShow: true,
+					overlayOpacity: 0.5,
+					overlayColor: '#000',
 					href: this.href
 				});
 				return false;

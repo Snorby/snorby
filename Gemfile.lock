@@ -1,11 +1,3 @@
-GIT
-  remote: git://github.com/datamapper/dm-active_model.git
-  revision: 9fc0771cec1a59abb58465ea0c8c054b770d48d5
-  specs:
-    dm-active_model (1.0.3)
-      activemodel (~> 3.0.0)
-      dm-core (~> 1.0.2)
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -68,6 +60,9 @@ GEM
       bcrypt-ruby (~> 2.1.2)
       warden (~> 0.10.7)
     diff-lcs (1.1.2)
+    dm-active_model (1.0.3)
+      activemodel (~> 3.0.0)
+      dm-core (~> 1.0.2)
     dm-aggregates (1.0.2)
       dm-core (~> 1.0.2)
     dm-constraints (1.0.2)
@@ -221,7 +216,7 @@ DEPENDENCIES
   capistrano
   capybara
   devise (~> 1.1.3)
-  dm-active_model (~> 1.0.2)!
+  dm-active_model (~> 1.0.2)
   dm-aggregates (~> 1.0.2)
   dm-constraints (~> 1.0.2)
   dm-devise (~> 1.1.0)

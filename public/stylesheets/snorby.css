@@ -130,6 +130,7 @@ table {
 	width: 100%;
 	height: 100%;
 	background: #fff;
+	border: 10px solid #474747;
 }
 
 #fancybox-content {
@@ -1215,11 +1216,10 @@ ul.table li .row div.small{
 }
 
 table.ip-header td a{
-	color: #45952e;
+	color: #202222;
 	text-decoration: none;
 	font-variant: normal;
-	font-weight: normal;
-	font-style: normal;
+	font-weight: bold;
 }
 
 ul.table div.content div.event-data{

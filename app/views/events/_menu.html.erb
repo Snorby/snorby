@@ -1,6 +1,4 @@
-<%= menu_item "False Positive", '#', 'icons/fp.png', { :class => 'classification', :"data-classification-id" => 2 } %>
-
-<%= drop_down_for('Classify Incident', 'icons/actions.png', 'incident') do %>
+<%= drop_down_for('Classify Event(s)', 'icons/actions.png', 'incident') do %>
 	<% Classification.all.each do |cls| %>
 		<%= drop_down_item cls.name, '#', nil, { :class => 'classification', :"data-classification-id" => cls.id.to_i } %>
 	<% end %>
