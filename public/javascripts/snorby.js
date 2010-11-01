@@ -594,6 +594,39 @@ var Snorby = {
 			//console.log("XHR Response: " + JSON.stringify(xhr));
 		});
 		
+	},
+	
+	hotkeys: function(){
+	
+		if ($('div.pager').is(':visible')) {
+			
+			$(document).bind('keydown', 'ctrl+right', function() {
+				$('div.pager ul.pager li.last a').click();
+				return false;
+			});
+			
+			$(document).bind('keydown', 'right', function() {
+				$('div.pager ul.pager li.next a').click();
+				return false;
+			});
+			
+			$(document).bind('keydown', 'ctrl+left', function() {
+				$('div.pager ul.pager li.first a').click();
+				return false;
+			});
+			
+			$(document).bind('keydown', 'left', function() {
+				$('div.pager ul.pager li.previous a').click();
+				return false;
+			});
+			
+			$(document).bind('keydown', 'ctrl+shift+a', function() {
+				$('input.event-select-all').click().trigger('change');
+				return false;
+			});
+			
+		};
+		
 	}
 	
 }
@@ -603,6 +636,7 @@ jQuery(document).ready(function($) {
 	Snorby.setup();
 	Snorby.admin();
 	Snorby.callbacks();
+	Snorby.hotkeys();
 	
 	Snorby.helpers.dropdown();
 	Snorby.helpers.persistence_selections();
