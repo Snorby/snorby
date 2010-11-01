@@ -1,11 +1,9 @@
-<div id='lookup-box' class='container_10'>
-	<div id='lookup-box-inside'>
-		
-		<div id='lookup-box-content' class=''>
-			
-			<pre id='whois'><%= @lookup.whois %></pre>
-			
-		</div>
-		
+<%= snorby_box('Whois Information') do %>
+
+	<div id='lookup-box-content' class=''>
+
+		<pre id='whois'><%= @lookup.whois %></pre>
+
 	</div>
-</div>
+
+<% end %>

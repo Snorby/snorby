@@ -112,9 +112,10 @@ var Snorby = {
 		
 		events: function(){
 			
-			$('a.lookup').live('click', function() {
-				var address = $(this).attr('data-address');
+			$('a.snorbybox').live('click', function() {
+				$('dl.drop-down-menu').fadeOut('slow');
 				$.fancybox({
+					padding: 0,
 					centerOnScroll: true,
 	        zoomSpeedIn: 300, 
 	        zoomSpeedOut: 300,
@@ -407,8 +408,8 @@ var Snorby = {
 				</tr> \
 				<tbody> \
 					<tr> \
-						<td class='first'><a href='/events/lookup?address={{src_ip}}' data-address='{{src_ip}}' class='lookup'>{{src_ip}}</a></td> \
-						<td><a href='/events/lookup?address={{dst_ip}}' data-address='{{dst_ip}}' class='lookup'>{{dst_ip}}</a></td> \
+						<td class='first'><a href='/events/lookup?address={{src_ip}}' data-address='{{src_ip}}' class='snorbybox'>{{src_ip}}</a></td> \
+						<td><a href='/events/lookup?address={{dst_ip}}' data-address='{{dst_ip}}' class='snorbybox'>{{dst_ip}}</a></td> \
 						{{#ip}} \
 						<td>{{ip_ver}}</td> \
 						<td>{{ip_hlen}}</td> \

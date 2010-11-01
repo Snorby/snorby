@@ -59,5 +59,12 @@ module ApplicationHelper
     image = image_path ? "#{image_tag(image_path)} " : ""
     content_tag(:li, "#{link_to "#{image}#{name}".html_safe, path, options}".html_safe)
   end
+  
+  def snorby_box(title, &block)
+    html = content_tag(:div, title, :id => 'box-title')
+    html += content_tag(:div, capture(&block), :id => 'box-content')
+    html += content_tag(:div, nil, :id => 'box-footer')
+    content_tag(:div, html, :id => 'snorby-box')
+  end
 
 end

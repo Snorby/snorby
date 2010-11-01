@@ -130,7 +130,6 @@ table {
 	width: 100%;
 	height: 100%;
 	background: #fff;
-	border: 10px solid #474747;
 }
 
 #fancybox-content {
@@ -447,6 +446,45 @@ a {
 /* @end */
 
 /* Content */
+
+/* @group Snorby-Box */
+
+#snorby-box{
+	border: 10px solid #242424;
+	display: block;
+	position: relative;
+	overflow: hidden;
+}
+
+#snorby-box #box-content{
+	height: 500px;
+	overflow: auto;
+	display: block;
+	position: relative;
+}
+
+#snorby-box #box-title{
+	padding: 20px 10px;
+	background-color: #474747;
+	color: #fff;
+	font-weight: normal;
+	font-variant: normal;
+	text-decoration: none;
+	font-size: 2.0em;
+	letter-spacing: -1px;
+	text-shadow: #2a2a2a 0 1px 0;
+	font-style: normal;
+}
+
+#snorby-box #box-footer{
+	display: block;
+	position: relative;
+	overflow: hidden;
+	background-color: #ebebeb;
+	padding: 10px;
+}
+
+/* @end */
 
 /* @group Flash */
 
@@ -784,9 +822,9 @@ a {
 }
 
 #wrapper #content #title #title-menu-holder ul#title-menu dl.drop-down-menu{
-  	-webkit-box-shadow: 0px 1px 5px rgba(0,0,0,0.2);
-  	-moz-box-shadow: 0px 1px 5px rgba(0,0,0,0.2);
-  	box-shadow: 0px 1px 5px rgba(0,0,0,0.2);
+  	-webkit-box-shadow: 0px 1px 8px rgba(0,0,0,0.2);
+  	-moz-box-shadow: 0px 1px 8px rgba(0,0,0,0.2);
+  	box-shadow: 0px 1px 8px rgba(0,0,0,0.2);
 	display: block;
 	position: absolute;
 	top: 35px;
@@ -823,6 +861,23 @@ a {
 	font-variant: normal;
 	font-size: 1.0em;
 	color: #000;
+}
+
+#wrapper #content #title #title-menu-holder ul#title-menu dl.drop-down-menu dd a span.shortcut{
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    line-height: 1.4em;
+    vertical-align: middle;
+	float: right;
+	background-color: #424242;
+	color: #fffeff;
+	text-shadow: #000 0 1px 0;
+	display: block;
+	position: relative;
+	overflow: hidden;
+	margin-top: 8px;
+	margin-right: 5px;
+	padding: 3px 5px;
 }
 
 #wrapper #content #title #title-menu-holder ul#title-menu dl.drop-down-menu dd:hover{
@@ -1739,34 +1794,6 @@ span.payload-ascii{
 	font-weight: bold;
 	text-decoration: none;
 	font-variant: normal;
-}
-
-/* @end */
-
-/* @group Lookup */
-
-#lookup-box{
-	display: block;
-	position: relative;
-	overflow: hidden;
-}
-
-#lookup-box #lookup-box-inside{
-	display: block;
-	position: relative;
-	overflow: hidden;
-}
-
-#lookup-box #lookup-box-inside #lookup-box-menu{
-	display: block;
-	position: relative;
-	overflow: hidden;	
-}
-
-#lookup-box #lookup-box-inside #lookup-box-content{
-	display: block;
-	position: relative;
-	overflow: hidden;
 }
 
 /* @end */

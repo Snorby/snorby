@@ -26,10 +26,10 @@ class Cache
   
   property :uniq_dst, Integer
   
-  property :port_metrics, Hash
+  property :port_metrics, Object
   
-  property :classification_metrics, Hash
+  property :classification_metrics, Object
   
-  property :severity_metrics, Hash
+  property :severity_metrics, Object
 
 end
