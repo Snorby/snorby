@@ -10,18 +10,20 @@ Snorby is a new and modern Snort IDS front-end. The basic fundamental concepts b
 
 ## Features
 
-## Synopsis
-
-Coming Soon...
-
 ## Requirements
 
 ## Install
 
-    $ sudo gem install snorby
+    $ ...
 
 ## License
 
+## Snorby Team
+
+* Creator/Designer/Core Developer: Dustin Willis Webber
+* Coming Soon...
+* Coming Soon...
+* Coming Soon...
 
 Snorby - A Web interface for Snort.
 

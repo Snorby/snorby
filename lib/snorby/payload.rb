@@ -1,7 +1,6 @@
-#
 # Props To a2800276 (tim@kuriositaet.de) for the original Hexy Gem
 # This code is a fork of Hexy modified for html output.
-#
+
 module Snorby
 
   class Payload
