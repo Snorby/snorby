@@ -16,14 +16,14 @@ Snorby is a new and modern Snort IDS front-end. The basic fundamental concepts b
 
     $ ...
 
-## License
-
 ## Snorby Team
 
 * Creator/Designer/Core Developer: Dustin Willis Webber
 * Coming Soon...
 * Coming Soon...
 * Coming Soon...
+
+## License
 
 Snorby - A Web interface for Snort.
 
