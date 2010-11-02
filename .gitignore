@@ -17,6 +17,7 @@ pkg
 log/
 
 ## PROJECT::SPECIFIC
+tmp/pids/delayed_job.pid
 example.rb
 .bundle/
 .document
