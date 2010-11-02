@@ -2,6 +2,8 @@ class Cache
 
   include DataMapper::Resource
 
+  has n, :event, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ]
+
   property :id, Serial
 
   property :sid, Integer

@@ -16,18 +16,28 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-require 'snorby/jobs/stats'
-
 module Snorby
-  
   module Jobs
     
-    def self.find
-      Delayed::Backend::DataMapper::Job
-    end
-    
-    def self.run(obj)
-      Delayed::Job.enqueue(obj)
+    class Stats
+      
+      attr_accessor :events, :cache, :last_event
+      
+      def self.perform
+        @events ||= since_last_cache
+        return if @events.blank?
+        @last_event ||= @events.last
+        @cache = Cache.create(:sid => @last_event.sid, :cid => @last_event.cid, :ran_at => @last_event.timestamp) unless defined?(@cache)
+      end
+      
+      private
+      
+      def self.since_last_cache
+        return Event.all if Cache.all.blank?
+        @cache = Cache.last
+        Event.all(:timestamp.gt => @cache.ran_at)
+      end
+      
     end
     
   end
