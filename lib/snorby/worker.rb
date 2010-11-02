@@ -1,76 +1,60 @@
-require 'stalker'
 require 'daemons'
+require 'delayed/command'
 require 'yaml'
 
 module Snorby
-  module Worker
+  
+  class Worker < Struct.new(:action)
 
-    @pid_path = "#{RAILS_ROOT}/tmp/pids/snorby-worker.pid"
+    @@pid_path = "#{RAILS_ROOT}/tmp/pids"
+    @@pid_file = "#{RAILS_ROOT}/tmp/pids/delayed_job.pid"
 
-    def self.start(verbose = false)
-      @verbose = verbose
-      start_worker unless working?
-    end
-    
-    def self.working?
-      return @worker.running? if defined?(@worker)
-      false
-    end
-    
-    def self.workers
-      pids.count.to_i
-    end
-
-    def self.kill
-      file = File.open(@pid_path) if File.exists?(@pid_path)
-      yaml_pids = YAML.load_file(file) if file
-      if yaml_pids.has_key?(:pids)
-        yaml_pids[:pids].collect { |p| `kill #{p}` } unless yaml_pids[:pids].empty?
-        clear_pids
+    def perform
+      
+      case action.to_sym
+      when :start
+        start
+      when :stop
+        stop
+      when :restart
+        restart
+      when :zap
+        zap
       end
+      
+    end
+
+    def self.info
+      return `ps aux |grep delayed_job |grep -v grep`.chomp.strip if running?
     end
 
     def self.pid
-      pids.last
+      File.open(@@pid_file).read.to_i if running?
     end
 
-    def self.pids
-      file = File.open(@pid_path) if File.exists?(@pid_path)
-      if file
-        yaml_pids = YAML.load_file(file)
-        return yaml_pids[:pids] if yaml_pids.has_key?(:pids)
-      else
-        return []
-      end
+    def self.running?
+      return true if File.exists?(@@pid_file)
+      false
     end
 
     private
 
-      def self.start_worker
-        @worker = Daemons.call(:multiple => true, :ontop => @verbose) do
-          $stdout = File.new("#{RAILS_ROOT}/log/snorby-worker.log", 'w+')
-          require 'snorby/jobs.rb'
-          Stalker.work
-        end
-        write_pid
-        @worker
-      end
+    def start(options={})
+      `#{RAILS_ROOT}/script/delayed_job start --pid-dir #{@@pid_path} RAILS_ENV=#{Rails.env}`
+    end
+    
+    def stop(options={})
+      `#{RAILS_ROOT}/script/delayed_job stop --pid-dir #{@@pid_path} RAILS_ENV=#{Rails.env}`
+    end
 
-      def self.clear_pids
-        pids = { :pids => [] }.to_yaml
-        @pid_file = File.open(@pid_path, "w+") do |file|
-          file.write pids
-        end
-      end
-
-      def self.write_pid
-        new_pids = pids
-        new_pids << @worker.pid.pid if @worker
-        pids = { :pids => new_pids }.to_yaml
-        @pid_file = File.open(@pid_path, "w+") do |file|
-          file.write pids
-        end
-      end
+    def restart
+      `#{RAILS_ROOT}/script/delayed_job restart --pid-dir #{@@pid_path} RAILS_ENV=#{Rails.env}`
+    end
+    
+    def zap
+      `#{RAILS_ROOT}/script/delayed_job zap --pid-dir #{@@pid_path} RAILS_ENV=#{Rails.env}`
+    end
 
   end
+  
 end

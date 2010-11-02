@@ -2,6 +2,8 @@ class Event
 
   include DataMapper::Resource
   
+  include DataMapper::CounterCacheable
+  
   # # Included for the truncate helper method.
   extend ActionView::Helpers::TextHelper
 
@@ -23,7 +25,7 @@ class Event
 
   has 1, :severity, :through => :signature, :via => :sig_priority
 
-  belongs_to :classification
+  belongs_to :classification, :counter_cache => true
 
   belongs_to :sensor, :parent_key => :sid, :child_key => :sid, :required => true
   
@@ -76,7 +78,7 @@ class Event
   # @return [Hash] hash of events between range.
   # 
   def self.to_json_since(time)
-    events = Event.all(:timestamp.gt => time)
+    events = Event.all(:timestamp.gt => time, :classification_id => 1)
     json = {:events => []}
     events.each do |event|
       json[:events] << {

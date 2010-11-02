@@ -2,7 +2,9 @@ class Favorite
 
   include DataMapper::Resource
 
-  belongs_to :user, :child_key => :user_id
+  include DataMapper::CounterCacheable
+
+  belongs_to :user, :child_key => :user_id, :counter_cache => true
   
   belongs_to :event, :child_key => [ :sid, :cid ]
 

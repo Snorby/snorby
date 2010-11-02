@@ -39,6 +39,9 @@ gem 'dm-serializer',          '~> 1.0.2'
 gem 'capistrano'
 
 # Rails Plugins
+gem 'delayed_job',            '~> 2.1.0.pre2'
+gem 'delayed_job_data_mapper','~> 1.0.0.rc'
+gem 'dm-counter-cache',       :git => "http://github.com/markiz/dm-counter-cache.git"
 gem 'net-dns',                '~> 0.6.1'
 gem 'whois',                  '~> 1.3.9'
 gem 'stalker',                '~> 0.5.0'

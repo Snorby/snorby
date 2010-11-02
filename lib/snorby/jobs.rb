@@ -1,11 +1,16 @@
-require 'stalker'
-include Stalker
+require 'snorby/jobs/cache'
 
-job 'say.hello' do |args|
-  sleep 10
-  puts "Hello!"
-end
-
-error do |e|
-  Exceptional.handle(e)
+module Snorby
+  
+  module Jobs
+    
+    def self.find
+      Delayed::Backend::DataMapper::Job
+    end
+    
+    def self.run(obj)
+      Delayed::Job.enqueue(obj)
+    end
+    
+  end
 end

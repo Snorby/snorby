@@ -2,13 +2,15 @@ class Classification
 
   include DataMapper::Resource
 
-  property :id, Serial
+  property :id, Serial, :index => true
 
   property :name, String
   
   property :description, Text
   
-  property :hotkey, Integer
+  property :hotkey, Integer, :index => true
+  
+  property :events_count, Integer, :default => 0, :index => true
   
   has n, :events, :constraint => :destroy
 
