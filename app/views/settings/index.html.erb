@@ -3,3 +3,7 @@
 	<%= render :partial => 'settings/menu' %>
 	
 <%- end -%>
+
+
+
+Snorby Worker Status: <%=  Snorby::Worker.running? ? "Alive" : "DEAD!" %>
