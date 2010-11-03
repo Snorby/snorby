@@ -2,7 +2,7 @@ class Cache
 
   include DataMapper::Resource
 
-  has n, :event, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ]
+  has 1, :event, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ]
 
   property :id, Serial
 
@@ -12,26 +12,26 @@ class Cache
 
   property :ran_at, DateTime
   
-  property :event_count, Integer
+  property :event_count, Integer, :default => 0
   
-  property :tcp_count, Integer
+  property :tcp_count, Integer, :default => 0
   
-  property :udp_count, Integer
+  property :udp_count, Integer, :default => 0
   
-  property :icmp_count, Integer
+  property :icmp_count, Integer, :default => 0
   
-  property :total_src, Integer
+  property :total_src, Integer, :default => 0
   
-  property :total_dst, Integer
+  property :total_dst, Integer, :default => 0
   
-  property :uniq_src, Integer
+  property :uniq_src, Integer, :default => 0
   
-  property :uniq_dst, Integer
+  property :uniq_dst, Integer, :default => 0
   
-  property :port_metrics, Object
+  property :port_metrics, Object, :default => {}
   
-  property :classification_metrics, Object
+  property :classification_metrics, Object, :default => {}
   
-  property :severity_metrics, Object
+  property :severity_metrics, Object, :default => {}
 
 end

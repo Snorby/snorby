@@ -16,16 +16,12 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-require 'daemons'
-require 'delayed/command'
-require 'yaml'
-
 module Snorby
   
   class Worker < Struct.new(:action)
 
-    @@pid_path = "#{RAILS_ROOT}/tmp/pids"
-    @@pid_file = "#{RAILS_ROOT}/tmp/pids/delayed_job.pid"
+    @@pid_path = "#{Rails.root}/tmp/pids"
+    @@pid_file = "#{Rails.root}/tmp/pids/delayed_job.pid"
 
     def perform
       
@@ -57,20 +53,20 @@ module Snorby
 
     private
 
-    def start(options={})
-      `#{RAILS_ROOT}/script/delayed_job start --pid-dir #{@@pid_path} RAILS_ENV=#{Rails.env}`
+    def start
+      `#{Rails.root}/script/delayed_job start --pid-dir #{@@pid_path} RAILS_ENV=#{Rails.env}`
     end
     
     def stop(options={})
-      `#{RAILS_ROOT}/script/delayed_job stop --pid-dir #{@@pid_path} RAILS_ENV=#{Rails.env}`
+      `#{Rails.root}/script/delayed_job stop --pid-dir #{@@pid_path} RAILS_ENV=#{Rails.env}`
     end
 
     def restart
-      `#{RAILS_ROOT}/script/delayed_job restart --pid-dir #{@@pid_path} RAILS_ENV=#{Rails.env}`
+      `#{Rails.root}/script/delayed_job restart --pid-dir #{@@pid_path} RAILS_ENV=#{Rails.env}`
     end
     
     def zap
-      `#{RAILS_ROOT}/script/delayed_job zap --pid-dir #{@@pid_path} RAILS_ENV=#{Rails.env}`
+      `#{Rails.root}/script/delayed_job zap --pid-dir #{@@pid_path} RAILS_ENV=#{Rails.env}`
     end
 
   end

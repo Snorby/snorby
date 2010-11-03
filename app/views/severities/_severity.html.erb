@@ -4,6 +4,7 @@
 	<td><%= severity.bg_color %></td>
 	<td><%= severity.text_color %></td>
 	<td><%= severity.signatures.count %></td>
+	<td><%= severity.event_count %></td>
 	<td><span class='severity-example' style='background-color:<%= severity.bg_color %>;color:<%= severity.text_color %>'><%= severity.sig_id %></span></td>
 	<td><%= link_to "Edit", edit_severity_path(severity) %></td>
 	<td class='last'><%= link_to "Destroy", severity_path(severity), :method => :delete %></td>

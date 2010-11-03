@@ -26,8 +26,8 @@ module Snorby
       Delayed::Backend::DataMapper::Job
     end
     
-    def self.run(obj)
-      Delayed::Job.enqueue(obj)
+    def self.run(obj, priority=1, time=Time.now)
+      Delayed::Job.enqueue(obj, priority, time)
     end
     
   end

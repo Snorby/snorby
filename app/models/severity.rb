@@ -11,6 +11,8 @@ class Severity
   
   property :sig_id, Integer, :index => true
   
+  property :event_count, Integer, :index => true, :default => 0
+  
   # Set the name of the severity
   property :name, String
 
