@@ -23,11 +23,12 @@ module Snorby
 
       attr_accessor :events, :last_cache, :cache, :last_event
 
-      @tcp_count = 0
-      @udp_count = 0
-      @icmp_count = 0
-
       def perform
+        
+        @tcp_events = []
+        @udp_events = []
+        @icmp_events = []
+        
         logit 'Looking for events...'
         @events = since_last_cache
 
@@ -88,6 +89,7 @@ module Snorby
                           :icmp_count => fetch_icmp_count,
                           :severity_metrics => fetch_severity_metrics
           })
+          
           # fetch_ip_metrics
           # fetch_port_metrics
           @cache
@@ -104,11 +106,11 @@ module Snorby
            @events.each do |event|
              
              if event.tcp?
-               @tcp_count += 1
-             elsif udp?
-               @udp_count += 1
+               @tcp_events << event
+             elsif event.udp?
+               @udp_events << event
              else
-               @icmp_count += 1
+               @icmp_events << event
              end
              
            end
@@ -116,17 +118,17 @@ module Snorby
 
         def fetch_tcp_count
           logit '- fetch_tcp_count'
-          @tcp_events
+          @tcp_events.size
         end
 
         def fetch_udp_count
           logit '- fetch_udp_count'
-          @udp_events
+          @udp_events.size
         end
 
         def fetch_icmp_count
           logit '- fetch_icmp_count'
-          @icmp_events
+          @icmp_events.size
         end
 
         def fetch_ip_metrics

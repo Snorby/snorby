@@ -17,7 +17,7 @@ class Event
   
   property :sig_id, Integer, :field => 'signature', :index => true
   
-  property :classification_id, Integer, :index => true, :default => 1
+  property :classification_id, Integer, :index => true, :default => 0
   
   property :timestamp, DateTime
 

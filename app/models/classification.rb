@@ -17,7 +17,7 @@ class Classification
   validates_uniqueness_of :hotkey
 
   def shortcut
-    "F#{hotkey}"
+    "f#{hotkey}"
   end
 
 end

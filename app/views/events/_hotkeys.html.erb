@@ -1,0 +1,16 @@
+<% content_for :footer do %>
+	
+	<script type="text/javascript">
+		
+		<% Classification.each do |klass| %>
+		
+			$(document).bind('keydown', '<%= klass.shortcut %>', function() {
+				set_classification(<%= klass.id %>);
+				return false;
+			});
+		
+		<% end %>
+		
+	</script>
+	
+<% end %>

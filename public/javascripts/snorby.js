@@ -56,6 +56,34 @@ function clear_selected_events () {
 	return false;
 }
 
+function set_classification (class_id) {
+	var selected_events = $('input#selected_events').attr('value');
+	var current_page = $('div#events').attr('data-action');
+	
+	if (selected_events.length > 0) {
+		$('div.content').fadeTo(500, 0.4);
+		Snorby.helpers.remove_click_events(true);
+
+		$.post('/events/classify', {events: selected_events, classification: class_id}, function() {
+			
+			if (current_page == "index") {
+				clear_selected_events();
+				$.getScript('/events');
+			} else if (current_page == "queue") {
+				clear_selected_events();
+				$.getScript('/events/queue');
+			};
+
+			flash_message.push({type: 'success', message: "Event(s) Classified Successfully"});
+			
+		});
+		
+	} else {
+		flash_message.push({type: 'error', message: "Please Select Events To Perform This Action"});
+		flash();
+	};
+}
+
 var Snorby = {
 	
 	setup: function(){
@@ -80,32 +108,7 @@ var Snorby = {
 		classifications: function(){
 			$('a.classification').live('click', function() {
 				var class_id = $(this).attr('data-classification-id');
-				var selected_events = $('input#selected_events').attr('value');
-				var current_page = $('div#events').attr('data-action');
-				
-				if (selected_events.length > 0) {
-					$('div.content').fadeTo(500, 0.4);
-					Snorby.helpers.remove_click_events(true);
-
-					$.post('/events/classify', {events: selected_events, classification: class_id}, function() {
-						
-						if (current_page == "index") {
-							clear_selected_events();
-							$.getScript('/events');
-						} else if (current_page == "queue") {
-							clear_selected_events();
-							$.getScript('/events/queue');
-						};
-
-						flash_message.push({type: 'success', message: "Event(s) Classified Successfully"});
-						
-					});
-					
-				} else {
-					flash_message.push({type: 'error', message: "Please Select Events To Perform This Action"});
-					flash();
-				};
-				
+				set_classification(class_id);
 				return false;
 			});
 		},

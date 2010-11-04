@@ -1,0 +1,6 @@
+Classification.create(:id => 1, :name => 'False Positive', :description => "", :hotkey => 1)
+Classification.create(:id => 2, :name => 'Unauthorized Access', :description => "", :hotkey => 2)
+Classification.create(:id => 3, :name => 'Malicious Software', :description => "", :hotkey => 3)
+Classification.create(:id => 4, :name => 'Denial Of Service', :description => "", :hotkey => 4)
+Classification.create(:id => 5, :name => 'Reconnoissance', :description => "", :hotkey => 5)
+Classification.create(:id => 6, :name => 'Policy Violation', :description => "", :hotkey => 6)
