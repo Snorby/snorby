@@ -1,4 +1,8 @@
 Delayed::Worker.destroy_failed_jobs = false
 Delayed::Worker.max_attempts = 3
 
-Thread.new { Snorby::Worker.new(:start).perform } unless Snorby::Worker.running?
+unless Snorby::Worker.running?
+  Thread.new do
+    Snorby::Worker.new(:start).perform
+  end
+end

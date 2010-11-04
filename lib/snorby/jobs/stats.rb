@@ -19,36 +19,47 @@
 module Snorby
   module Jobs
 
-    class Stats < Struct.new(:req)
+    class Stats < Struct.new(:verbose)
 
       attr_accessor :events, :last_cache, :cache, :last_event
 
-      @@tcp_events = []
-
-      @@udp_events = []
-
-      @@icmp_events = []
+      @tcp_count = 0
+      @udp_count = 0
+      @icmp_count = 0
 
       def perform
+        logit 'Looking for events...'
         @events = since_last_cache
 
         unless @events.blank?
           @last_event = @events.last unless @events.blank?
           
+          logit 'Found events - processing...'
+          
           if defined?(@last_cache)
+            logit 'Found last cache...'
             @cache = Cache.create(:sid => @last_event.sid, :cid => @last_event.cid, :ran_at => @last_event.timestamp)
           else
+            logit 'No cache records found - creating first cache record...'
             @last_cache = Cache.create(:sid => @last_event.sid, :cid => @last_event.cid, :ran_at => @last_event.timestamp)
             @cache = @last_cache
           end
           
+          logit 'Building cache attributes'
+          
           build_snorby_cache
+          
+          logit 'Done...'
         end
 
-        Delayed::Job.enqueue(Snorby::Jobs::Stats.new(true), 1, Time.now + 30.minute)
+        Delayed::Job.enqueue(Snorby::Jobs::Stats.new(false), 1, Time.now + 30.minute)
       end
 
       private
+
+        def logit(msg)
+          STDOUT.puts "#{msg}" if verbose
+        end
 
         # property :id, Serial
         # property :sid, Integer
@@ -67,6 +78,9 @@ module Snorby
         # property :severity_metrics, Object
 
         def build_snorby_cache
+          
+          build_proto_counts
+          
           @cache.update({
                           :event_count => fetch_event_count,
                           :tcp_count => fetch_tcp_count,
@@ -80,26 +94,43 @@ module Snorby
         end
 
         def fetch_event_count
+          logit '- fetch_event_count'
           @last_cache.event_count + @events.count
+        end
+        
+        def build_proto_counts
+           logit '- building proto counts'
+           
+           @events.each do |event|
+             
+             if event.tcp?
+               @tcp_count += 1
+             elsif udp?
+               @udp_count += 1
+             else
+               @icmp_count += 1
+             end
+             
+           end
         end
 
         def fetch_tcp_count
-          @events.collect { |x| @@tcp_events << x if x.tcp? }
-          @@tcp_events.size
+          logit '- fetch_tcp_count'
+          @tcp_events
         end
 
         def fetch_udp_count
-          @events.collect { |x| @@udp_events << x if x.udp? }
-          @@udp_events.size
+          logit '- fetch_udp_count'
+          @udp_events
         end
 
         def fetch_icmp_count
-          @events.collect { |x| @@icmp_events << x if x.icmp? }
-          @@icmp_events.size
+          logit '- fetch_icmp_count'
+          @icmp_events
         end
 
         def fetch_ip_metrics
-
+          
         end
 
         def fetch_port_metrics
@@ -107,6 +138,8 @@ module Snorby
         end
 
         def fetch_severity_metrics
+          logit '- fetch_severity_metrics'
+          
           severity = @events.map(&:signature).map(&:sig_priority)
           metrics = {}
           Severity.all.each do |sev|

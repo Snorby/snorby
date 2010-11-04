@@ -21,6 +21,7 @@ module Snorby
   class Worker < Struct.new(:action)
 
     @@pid_path = "#{Rails.root}/tmp/pids"
+    
     @@pid_file = "#{Rails.root}/tmp/pids/delayed_job.pid"
 
     def perform

@@ -4,7 +4,7 @@ class Event
 
   include DataMapper::Resource
   
-  # # Included for the truncate helper method.
+  # Included for the truncate helper method.
   extend ActionView::Helpers::TextHelper
 
   is :counter_cacheable

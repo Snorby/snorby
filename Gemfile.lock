@@ -1,6 +1,6 @@
 GIT
-  remote: git://github.com/postmodern/dm-is-counter_cacheable.git
-  revision: 3e9baa6f789663fc10480c8ec33f670e3a33e2a7
+  remote: https://github.com/postmodern/dm-is-counter_cacheable.git
+  revision: 3e9baa6
   specs:
     dm-is-counter_cacheable (0.1.0)
       activesupport (~> 3.0.0)
