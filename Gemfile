@@ -40,7 +40,7 @@ gem 'capistrano'
 gem 'daemons',                '~> 1.1.0'
 gem 'delayed_job',            '~> 2.1.0.pre2'
 gem 'delayed_job_data_mapper','~> 1.0.0.rc'
-gem 'dm-counter-cache',       :git => "http://github.com/markiz/dm-counter-cache.git"
+git "https://github.com/postmodern/dm-is-counter_cacheable.git", :branch => "master"
 gem 'net-dns',                '~> 0.6.1'
 gem 'whois',                  '~> 1.3.9'
 gem 'stalker',                '~> 0.5.0'

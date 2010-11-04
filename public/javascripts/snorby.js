@@ -598,6 +598,16 @@ var Snorby = {
 	
 	hotkeys: function(){
 	
+		$(document).bind('keydown', 'ctrl+2', function() {
+			window.location = '/events';
+			return false;
+		});
+		
+		$(document).bind('keydown', 'ctrl+1', function() {
+			window.location = '/events/queue';
+			return false;
+		});
+	
 		if ($('div.pager').is(':visible')) {
 			
 			$(document).bind('keydown', 'ctrl+right', function() {

@@ -21,7 +21,7 @@ module Snorby
 
     class Stats < Struct.new(:req)
 
-      attr_accessor :events, :cache, :last_event
+      attr_accessor :events, :last_cache, :cache, :last_event
 
       @@tcp_events = []
 
@@ -31,13 +31,20 @@ module Snorby
 
       def perform
         @events = since_last_cache
-        
+
         unless @events.blank?
           @last_event = @events.last unless @events.blank?
-          @cache = Cache.create(:sid => @last_event.sid, :cid => @last_event.cid, :ran_at => @last_event.timestamp) unless defined?(@cache)
+          
+          if defined?(@last_cache)
+            @cache = Cache.create(:sid => @last_event.sid, :cid => @last_event.cid, :ran_at => @last_event.timestamp)
+          else
+            @last_cache = Cache.create(:sid => @last_event.sid, :cid => @last_event.cid, :ran_at => @last_event.timestamp)
+            @cache = @last_cache
+          end
+          
           build_snorby_cache
         end
-        
+
         Delayed::Job.enqueue(Snorby::Jobs::Stats.new(true), 1, Time.now + 30.minute)
       end
 
@@ -73,7 +80,7 @@ module Snorby
         end
 
         def fetch_event_count
-          @cache.event_count + @events.count
+          @last_cache.event_count + @events.count
         end
 
         def fetch_tcp_count
@@ -112,8 +119,8 @@ module Snorby
 
         def since_last_cache
           return Event.all if Cache.all.blank?
-          @cache = Cache.last
-          Event.all(:timestamp.gt => @cache.ran_at)
+          @last_cache = Cache.last
+          Event.all(:timestamp.gt => @last_cache.ran_at)
         end
 
     end
