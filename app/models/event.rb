@@ -1,11 +1,13 @@
+require 'dm-is-counter_cacheable'
+
 class Event
 
   include DataMapper::Resource
   
-  include DataMapper::CounterCacheable
-  
   # # Included for the truncate helper method.
   extend ActionView::Helpers::TextHelper
+
+  is :counter_cacheable
 
   storage_names[:default] = "event"
 
@@ -24,14 +26,6 @@ class Event
   has n, :users, :through => :favorites
 
   has 1, :severity, :through => :signature, :via => :sig_priority
-
-  belongs_to :classification, :counter_cache => true
-
-  belongs_to :sensor, :parent_key => :sid, :child_key => :sid, :required => true
-  
-  belongs_to :signature, :child_key => :sig_id, :parent_key => :sig_id
-
-  belongs_to :ip, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :required => true
   
   has 1, :payload, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :constraint => :destroy
   
@@ -42,6 +36,16 @@ class Event
   has 1, :udp, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :constraint => :destroy
   
   has 1, :opt, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :constraint => :destroy
+
+  belongs_to :sensor, :parent_key => :sid, :child_key => :sid, :required => true
+  
+  belongs_to :signature, :child_key => :sig_id, :parent_key => :sig_id
+
+  belongs_to :ip, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :required => true
+
+  belongs_to :classification
+
+  counter_cacheable :classification
 
   def self.find_by_ids(ids)
     events = []

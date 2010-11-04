@@ -1,8 +1,9 @@
 GIT
-  remote: http://github.com/markiz/dm-counter-cache.git
-  revision: 14a4fed5e236553f9f5733de2053a9369616d92d
+  remote: git://github.com/postmodern/dm-is-counter_cacheable.git
+  revision: 3e9baa6f789663fc10480c8ec33f670e3a33e2a7
   specs:
-    dm-counter-cache (1.0.3.20100921011510)
+    dm-is-counter_cacheable (0.1.0)
+      activesupport (~> 3.0.0)
       dm-core (~> 1.0.0)
 
 GEM
@@ -239,9 +240,9 @@ DEPENDENCIES
   dm-active_model (~> 1.0.2)
   dm-aggregates (~> 1.0.2)
   dm-constraints (~> 1.0.2)
-  dm-counter-cache!
   dm-devise (~> 1.1.0)
   dm-do-adapter (~> 1.0.2)
+  dm-is-counter_cacheable (~> 0.1.0)!
   dm-migrations (~> 1.0.2)
   dm-mysql-adapter (~> 1.0.2)
   dm-observer (~> 1.0.2)
