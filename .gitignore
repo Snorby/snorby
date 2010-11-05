@@ -17,6 +17,9 @@ pkg
 log/
 
 ## PROJECT::SPECIFIC
+public/javascripts/snorby_packaged.js
+public/javascripts/all.js
+public/stylesheets/snorby_packaged.css
 tmp/pids/
 example.rb
 .bundle/
