@@ -28,10 +28,10 @@ class Cache
   
   property :uniq_dst, Integer, :default => 0
   
-  property :port_metrics, Object, :default => {}
+  property :port_metrics, Object
   
-  property :classification_metrics, Object, :default => {}
+  property :classification_metrics, Object
   
-  property :severity_metrics, Object, :default => {}
+  property :severity_metrics, Object
 
 end

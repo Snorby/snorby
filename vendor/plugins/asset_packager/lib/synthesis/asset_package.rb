@@ -3,18 +3,18 @@ module Synthesis
 
     @asset_base_path    = "#{Rails.root}/public"
     @asset_packages_yml = File.exists?("#{Rails.root}/config/asset_packages.yml") ? YAML.load_file("#{Rails.root}/config/asset_packages.yml") : nil
-
+  
     # singleton methods
     class << self
       attr_accessor :asset_base_path,
                     :asset_packages_yml
 
       attr_writer   :merge_environments
-
+      
       def merge_environments
         @merge_environments ||= ["production"]
       end
-
+      
       def parse_path(path)
         /^(?:(.*)\/)?([^\/]+)$/.match(path).to_a
       end
@@ -88,10 +88,10 @@ module Synthesis
       end
 
     end
-
+    
     # instance methods
     attr_accessor :asset_type, :target, :target_dir, :sources
-
+  
     def initialize(asset_type, package_hash)
       target_parts = self.class.parse_path(package_hash.keys.first)
       @target_dir = target_parts[1].to_s
@@ -102,9 +102,8 @@ module Synthesis
       @extension = get_extension
       @file_name = "#{@target}_packaged.#{@extension}"
       @full_path = File.join(@asset_path, @file_name)
-      @latest_mtime = get_latest_mtime
     end
-
+  
     def package_exists?
       File.exists?(@full_path)
     end
@@ -132,31 +131,20 @@ module Synthesis
           log "Latest version already exists: #{new_build_path}"
         else
           File.open(new_build_path, "w") {|f| f.write(compressed_file) }
-          File.utime(0, @latest_mtime, new_build_path)
           log "Created #{new_build_path}"
         end
       end
 
       def merged_file
         merged_file = ""
-        @sources.each {|s|
-          File.open("#{@asset_path}/#{s}.#{@extension}", "r") { |f|
-            merged_file += f.read + "\n"
+        @sources.each {|s| 
+          File.open("#{@asset_path}/#{s}.#{@extension}", "r") { |f| 
+            merged_file += f.read + "\n" 
           }
         }
         merged_file
       end
-
-      # Store the latest mtime so that we can attach it to the merged archive.
-      # This allows the Rails asset IDs to work as intended for caching purposes -
-      # if none of the files in the archive have been modified since the last build,
-      # then the new build (typically done at deploy time) will keep the same mtime
-      # (and Rails asset ID).
-      #
-      def get_latest_mtime
-        return @sources.collect{ |s| File.mtime("#{@asset_path}/#{s}.#{@extension}") }.max
-      end
-
+    
       def compressed_file
         case @asset_type
           when "javascripts" then compress_js(merged_file)
@@ -164,43 +152,27 @@ module Synthesis
         end
       end
 
-      def compress_js(source, minifier = 'jsmin')
-        case minifier
-          when 'google_closure' then result = compress_google_closure(source)
-        else result = compress_js_min(source)
-        end
+      def compress_js(source)
+        jsmin_path = "#{Rails.root}/vendor/plugins/asset_packager/lib"
+        tmp_path = "#{Rails.root}/tmp/#{@target}_packaged"
+      
+        # write out to a temp file
+        File.open("#{tmp_path}_uncompressed.js", "w") {|f| f.write(source) }
+      
+        # compress file with JSMin library
+        `ruby #{jsmin_path}/jsmin.rb <#{tmp_path}_uncompressed.js >#{tmp_path}_compressed.js \n`
+
+        # read it back in and trim it
+        result = ""
+        File.open("#{tmp_path}_compressed.js", "r") { |f| result += f.read.strip }
+  
+        # delete temp files if they exist
+        File.delete("#{tmp_path}_uncompressed.js") if File.exists?("#{tmp_path}_uncompressed.js")
+        File.delete("#{tmp_path}_compressed.js") if File.exists?("#{tmp_path}_compressed.js")
+
         result
       end
-
-      def compress_js_min(source)
-        require 'jsmin'
-        JSMin.compress(source)
-      end
-
-      def compress_google_closure(source)
-        require 'net/http'
-        require 'uri'
-
-        url = URI.parse('http://closure-compiler.appspot.com/compile')
-        req = Net::HTTP::Post.new(url.path)
-        req.set_form_data(
-        {
-          'js_code'=> source,
-          'compilation_level' => 'SIMPLE_OPTIMIZATIONS',
-          'output_format' => 'text',
-          'output_info' => 'compiled_code'
-        })
-        res = Net::HTTP.new(url.host, url.port).start {|http| http.request(req) }
-        case res
-        when Net::HTTPSuccess, Net::HTTPRedirection
-          result = res.body
-        else
-          log("Error compiling js with Google's Closure Compiler. Falling back on js_min...")
-          result = compress_js_jsmin(source)
-        end
-        result
-      end
-
+  
       def compress_css(source)
         source.gsub!(/\s+/, " ")           # collapse space
         source.gsub!(/\/\*(.*?)\*\//, "")  # remove comments - caution, might want to remove this if using css hacks
@@ -208,23 +180,6 @@ module Synthesis
         source.gsub!(/\n$/, "")            # remove last break
         source.gsub!(/ \{ /, " {")         # trim inside brackets
         source.gsub!(/; \}/, "}")          # trim inside brackets
-        
-        # add timestamps to images in css
-        source.gsub!(/url\(['"]?([^'"\)]+?(?:gif|png|jpe?g))['"]?\)/i) do |match|
-        
-          file = $1
-          path = File.join(Rails.root, 'public')
-          
-          if file.starts_with?('/')
-            path = File.join(path, file) 
-          else
-            path = File.join(path, 'stylesheets', file)
-          end
-          
-          
-          match.gsub(file, "#{file}?#{File.new(path).mtime.to_i}")
-        end
-        
         source
       end
 
@@ -234,11 +189,11 @@ module Synthesis
           when "stylesheets" then "css"
         end
       end
-
+      
       def log(message)
         self.class.log(message)
       end
-
+      
       def self.log(message)
         puts message
       end
@@ -250,6 +205,6 @@ module Synthesis
         file_list.reverse! if extension == "js"
         file_list
       end
-
+   
   end
 end

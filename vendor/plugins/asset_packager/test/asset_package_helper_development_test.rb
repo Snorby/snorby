@@ -1,6 +1,13 @@
-require 'test/test_helper'
+$:.unshift(File.dirname(__FILE__) + '/../lib')
 
-Rails.env = 'development'
+ENV['RAILS_ENV'] = "development"
+require File.dirname(__FILE__) + '/../../../../config/environment'
+require 'test/unit'
+require 'rubygems'
+require 'mocha'
+
+require 'action_controller/test_process'
+
 ActionController::Base.logger = nil
 ActionController::Routing::Routes.reload rescue nil
 
@@ -12,8 +19,8 @@ class AssetPackageHelperDevelopmentTest < Test::Unit::TestCase
   include Synthesis::AssetPackageHelper
 
   def setup
-    Synthesis::AssetPackage.asset_base_path    = "test/assets"
-    Synthesis::AssetPackage.asset_packages_yml = YAML.load_file("test/asset_packages.yml")
+    Synthesis::AssetPackage.asset_base_path    = "#{Rails.root}/vendor/plugins/asset_packager/test/assets"
+    Synthesis::AssetPackage.asset_packages_yml = YAML.load_file("#{Rails.root}/vendor/plugins/asset_packager/test/asset_packages.yml")
 
     Synthesis::AssetPackage.any_instance.stubs(:log)
 

@@ -31,7 +31,8 @@ gem 'dm-aggregates',          DM_VERSION
 gem 'dm-timestamps',          DM_VERSION
 gem 'dm-observer',            DM_VERSION
 gem 'dm-devise',              '~> 1.1.0'
-gem 'dm-serializer',          '~> 1.0.2'
+gem 'dm-serializer',          DM_VERSION
+gem 'dm-is-predefined',       '~> 0.3.0', :require => 'dm-is-predefined'
 
 # Deploy with Capistrano
 gem 'capistrano'

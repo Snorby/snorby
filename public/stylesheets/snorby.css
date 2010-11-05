@@ -421,6 +421,10 @@ table {
 
 /* @group Main */
 
+.boxit{
+	float: none;
+}
+
 html,body{
   background-color: #ededed;
   font-family: Helvetica, Arial;
@@ -700,16 +704,19 @@ a {
 #wrapper{
 	background-color: #ededed;
 	padding-top: 20px;
-	position: relative;
+	clear: both;
 	display: block;
+	position: relative;
+	overflow: visible;
 	border-top: 1px solid #fff;
 }
 
 #wrapper #content{
-	min-height: 300px;
+	visibility: visible;
+	display: block;
 	background-color: #fff;
 	position: relative;
-	overflow: hidden;
+	clear: both;
 	display: block;
 	border: 1px solid #cdcdcd;
 	padding-bottom: 5px;
@@ -822,10 +829,11 @@ a {
 }
 
 #wrapper #content #title #title-menu-holder ul#title-menu dl.drop-down-menu{
+	clear: both;
   	-webkit-box-shadow: 0px 1px 8px rgba(0,0,0,0.2);
   	-moz-box-shadow: 0px 1px 8px rgba(0,0,0,0.2);
   	box-shadow: 0px 1px 8px rgba(0,0,0,0.2);
-	display: block;
+	display: inline-block;
 	position: absolute;
 	top: 35px;
 	z-index: 999999;
@@ -1265,7 +1273,6 @@ ul.table li .row div.small{
 #events{
 	display: block;
 	position: relative;
-	overflow: hidden;
 	padding-top: 10px;
 	padding-bottom: 10px;
 }

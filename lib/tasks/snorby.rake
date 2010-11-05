@@ -12,6 +12,8 @@ namespace :snorby do
     # Load Default Records
     Rake::Task['db:seed'].invoke
     
+    Classification.predefined_names.collect { |x| Classification.send x }
+    
   end
   
   desc 'Reset'

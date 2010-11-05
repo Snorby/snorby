@@ -1,4 +1,11 @@
 GIT
+  remote: http://github.com/postmodern/dm-paperclip.git
+  revision: c93a99c847cc64e6e9c943e7423e3ce4dfff00ee
+  branch: postmodern
+  specs:
+    dm-paperclip (2.4.1)
+
+GIT
   remote: https://github.com/postmodern/dm-is-counter_cacheable.git
   revision: 3e9baa6
   specs:
@@ -98,6 +105,9 @@ GEM
     dm-do-adapter (1.0.2)
       data_objects (~> 0.10.2)
       dm-core (~> 1.0.2)
+    dm-is-predefined (0.3.0)
+      activesupport (~> 3.0.0.beta3)
+      dm-core (~> 1.0.0)
     dm-migrations (1.0.2)
       dm-core (~> 1.0.2)
     dm-mysql-adapter (1.0.2)
@@ -228,6 +238,7 @@ DEPENDENCIES
   actionmailer (~> 3.0.1)
   actionpack (~> 3.0.1)
   activesupport (~> 3.0.1)
+  bundler (~> 1.0.0)
   capistrano
   capybara
   daemons (~> 1.1.0)
@@ -240,10 +251,12 @@ DEPENDENCIES
   dm-devise (~> 1.1.0)
   dm-do-adapter (~> 1.0.2)
   dm-is-counter_cacheable (~> 0.1.0)!
+  dm-is-predefined (~> 0.3.0)
   dm-migrations (~> 1.0.2)
   dm-mysql-adapter (~> 1.0.2)
   dm-observer (~> 1.0.2)
   dm-pager
+  dm-paperclip (~> 2.3)!
   dm-rails (~> 1.0.3)
   dm-serializer (~> 1.0.2)
   dm-timestamps (~> 1.0.2)

@@ -2,7 +2,7 @@ class ClassificationsController < ApplicationController
   # GET /classifications
   # GET /classifications.xml
   def index
-    @classifications = Classification.all.page(params[:page].to_i, :per_page => 25, :order => [:name.desc])
+    @classifications = Classification.all.page(params[:page].to_i, :per_page => 25, :order => [:id.asc])
 
     respond_to do |format|
       format.html # index.html.erb
