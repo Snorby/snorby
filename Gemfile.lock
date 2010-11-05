@@ -164,6 +164,7 @@ GEM
     net-ssh-gateway (1.0.1)
       net-ssh (>= 1.99.1)
     nokogiri (1.4.3.1)
+    pdfkit (0.4.6)
     polyglot (0.3.1)
     rack (1.2.1)
     rack-mount (0.6.13)
@@ -252,6 +253,7 @@ DEPENDENCIES
   dm-visualizer (~> 0.1.0)
   jquery-rails
   net-dns (~> 0.6.1)
+  pdfkit (~> 0.4.6)
   rails (= 3.0.1)
   railties (~> 3.0.1)
   rspec (~> 2.0.0)

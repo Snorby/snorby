@@ -37,6 +37,7 @@ gem 'dm-serializer',          '~> 1.0.2'
 gem 'capistrano'
 
 # Rails Plugins
+gem 'pdfkit',                 '~> 0.4.6'
 gem 'daemons',                '~> 1.1.0'
 gem 'delayed_job',            '~> 2.1.0.pre2'
 gem 'delayed_job_data_mapper','~> 1.0.0.rc'
