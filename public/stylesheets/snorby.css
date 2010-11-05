@@ -712,11 +712,10 @@ a {
 }
 
 #wrapper #content{
-	visibility: visible;
 	display: block;
 	background-color: #fff;
+	min-height: 100px;
 	position: relative;
-	clear: both;
 	display: block;
 	border: 1px solid #cdcdcd;
 	padding-bottom: 5px;
