@@ -1,0 +1,19 @@
+--- 
+javascripts: 
+- snorby: 
+  - jquery
+  - jquery-ui
+  - rails
+  - mustache
+  - easing
+  - fancybox
+  - scrollto
+  - hotkeys
+  - growl
+  - editable
+  - colorpicker
+  - snorby
+stylesheets: 
+- snorby: 
+  - grid
+  - snorby

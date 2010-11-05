@@ -10,7 +10,7 @@
     <meta name="keywords" content="" />
     <link rel="icon" href="/favicon.png" type="image/png" />
 
-    <%= stylesheet_link_tag 'grid', 'snorby', :cache => false %>
+    <%= stylesheet_link_merged :snorby %>
     <%= csrf_meta_tag %>
 
 		<%= yield(:header) %>
@@ -38,8 +38,10 @@
 
 		<%= render :partial => 'layouts/footer' %>
 		
-		<%= javascript_include_tag 'jquery', 'jquery-ui', 'hotkeys', 'easing', 'fancybox', 'mustache', 'growl', 'colorpicker', 'scrollto', 'snorby', :cache => false %>
+		<%= javascript_include_merged :snorby %>
+		
 		<%= yield(:footer) %>
+		
   </body>
 
 </html>

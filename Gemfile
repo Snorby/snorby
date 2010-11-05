@@ -43,7 +43,6 @@ gem 'delayed_job_data_mapper','~> 1.0.0.rc'
 gem 'dm-is-counter_cacheable','~> 0.1.0', :git => 'https://github.com/postmodern/dm-is-counter_cacheable.git'
 gem 'net-dns',                '~> 0.6.1'
 gem 'whois',                  '~> 1.3.9'
-gem 'stalker',                '~> 0.5.0'
 gem 'simple_form',            '~> 1.2.2'
 gem 'devise',                 '~> 1.1.3'
 
