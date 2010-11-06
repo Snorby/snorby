@@ -5,6 +5,7 @@ gem 'jquery-rails'
 
 RAILS_VERSION = '~> 3.0.1'
 RSPEC_VERSION = '~> 2.0.0'
+DATAMAPPER = 'http://github.com/datamapper'
 DM_VERSION = '~> 1.0.2'
 
 gem 'bundler',	'~> 1.0.0'
@@ -13,6 +14,8 @@ gem 'activesupport',          RAILS_VERSION, :require => 'active_support'
 gem 'actionpack',             RAILS_VERSION, :require => 'action_pack'
 gem 'actionmailer',           RAILS_VERSION, :require => 'action_mailer'
 gem 'railties',               RAILS_VERSION, :require => 'rails'
+
+gem 'dm-core',                DM_VERSION, :git => "#{DATAMAPPER}/dm-core.git"
 
 gem 'dm-rails',               '~> 1.0.3'
 gem 'dm-do-adapter',          DM_VERSION
@@ -42,7 +45,7 @@ gem 'ezprint',                :git => 'https://github.com/jstewart/ezprint.git',
 gem 'daemons',                '~> 1.1.0'
 gem 'delayed_job',            '~> 2.1.0.pre2'
 gem 'delayed_job_data_mapper','~> 1.0.0.rc'
-# #gem 'dm-is-counter_cacheable','~> 0.1.0'
+gem 'dm-is-counter_cacheable','~> 0.1.0'
 gem 'dm-paperclip',           '~> 2.3', :git => 'http://github.com/postmodern/dm-paperclip.git', :branch => 'postmodern'
 gem 'net-dns',                '~> 0.6.1'
 gem 'whois',                  '~> 1.3.9'

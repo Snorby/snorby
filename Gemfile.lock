@@ -1,4 +1,12 @@
 GIT
+  remote: http://github.com/datamapper/dm-core.git
+  revision: 89fc6eca3a198468617db6f77d8d157f6a013c52
+  specs:
+    dm-core (1.0.2)
+      addressable (~> 2.2)
+      extlib (~> 0.9.15)
+
+GIT
   remote: http://github.com/postmodern/dm-paperclip.git
   revision: c93a99c847cc64e6e9c943e7423e3ce4dfff00ee
   branch: postmodern
@@ -90,9 +98,6 @@ GEM
     dm-constraints (1.0.2)
       dm-core (~> 1.0.2)
       dm-migrations (~> 1.0.2)
-    dm-core (1.0.2)
-      addressable (~> 2.2)
-      extlib (~> 0.9.15)
     dm-devise (1.1.4)
       bcrypt-ruby (~> 2.1.2)
       devise (~> 1.1.0)
@@ -105,6 +110,8 @@ GEM
     dm-do-adapter (1.0.2)
       data_objects (~> 0.10.2)
       dm-core (~> 1.0.2)
+    dm-is-counter_cacheable (0.1.0)
+      dm-core (~> 1.0.0)
     dm-migrations (1.0.2)
       dm-core (~> 1.0.2)
     dm-mysql-adapter (1.0.2)
@@ -245,8 +252,10 @@ DEPENDENCIES
   dm-active_model (~> 1.0.2)
   dm-aggregates (~> 1.0.2)
   dm-constraints (~> 1.0.2)
+  dm-core (~> 1.0.2)!
   dm-devise (~> 1.1.0)
   dm-do-adapter (~> 1.0.2)
+  dm-is-counter_cacheable (~> 0.1.0)
   dm-migrations (~> 1.0.2)
   dm-mysql-adapter (~> 1.0.2)
   dm-observer (~> 1.0.2)

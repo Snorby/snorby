@@ -10,8 +10,6 @@ class Classification
 
   property :hotkey, Integer, :index => true
 
-  property :events_count, Integer, :default => 0, :index => true
-
   property :locked, Boolean, :default => false, :index => true
 
   has n, :events, :constraint => :destroy

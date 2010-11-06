@@ -104,12 +104,26 @@ var Snorby = {
 		});
 		
 		$('div#flash_message, div#flash_message > *').live('click', function() {
-			$('div#flash_message').stop().slideUp('fast');
+			$('div#flash_message').stop().fadeOut('fast');
 		});
 		
 		$("#growl").notify({
 		    speed: 500,
 		    expires: 3000
+		});
+		
+		$('.edit-sensor-name').editable("/sensors/update_name", {
+			height: '20px',
+			width: '180px',
+			name: "name",
+			indicator: '<img src="/images/icons/pager.gif">',
+			data: function(value, settings) {
+				var retval = value.replace(/<br[\s\/]?>/gi, '\n');
+				return retval;
+			},
+			submitdata : function() {
+				return { id: $(this).attr('data-sensor-id') };
+			}
 		});
 
 	},

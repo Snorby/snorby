@@ -33,7 +33,7 @@ class EventsController < ApplicationController
     @events = Event.find_by_ids(params[:events])
 
     @events.each do |event|
-      event.update(:classification_id => params[:classification])
+      event.update(:classification_id => params[:classification]) if event
     end
 
     render :layout => false, :status => 200
