@@ -1,0 +1,145 @@
+<div class='event-data-holder'>
+	<div class='event-data-holder-inside'>
+
+		<div class='section-title'>IP Header Information</div>
+
+		<div class='ip'>
+
+			<table class='ip-header' border='0' cellspacing='0' cellpadding='0'>
+				<tr>
+					<th class='first'>Src</th>
+					<th>Dst</th>
+					<th>Ver</th>
+					<th>Hlen</th>
+					<th>Tos</th>
+					<th>Len</th>
+					<th>ID</th>
+					<th>Flags</th>
+					<th>Off</th>
+					<th>TTL</th>
+					<th>Proto</th>
+					<th class='last'>Csum</th>
+				</tr>
+				<tbody>
+					<tr>
+						<td class='first'><a href='/events/lookup?address=<%= @event.ip.ip_src %>' data-address='<%= @event.ip.ip_src %>' class='snorbybox'><%= @event.ip.ip_src %></a></td>
+						<td><a href='/events/lookup?address=<%= @event.ip.ip_dst %>' data-address='<%= @event.ip.ip_dst %>' class='snorbybox'><%= @event.ip.ip_dst %></a></td>
+						<td><%= @event.ip.ip_ver %></td>
+						<td><%= @event.ip.ip_hlen %></td>
+						<td><%= @event.ip.ip_tos %></td>
+						<td><%= @event.ip.ip_len %></td>
+						<td><%= @event.ip.ip_id %></td>
+						<td><%= @event.ip.ip_flags %></td>
+						<td><%= @event.ip.ip_off %></td>
+						<td><%= @event.ip.ip_ttl %></td>
+						<td><%= @event.ip.ip_proto %></td>
+						<td class='last'><%= @event.ip.ip_csum %></td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+		
+		<% if @event.tcp? %>
+			
+			<div class='section-title'>TCP Header Information</div>
+
+			<div class='proto'>
+
+				<table class='ip-header' border='0' cellspacing='0' cellpadding='0'>
+					<tr>
+						<th class='first'>Src Port</th>
+						<th>Dst Port</th>
+						<th>Seq</th>
+						<th>Ack</th>
+						<th>Off</th>
+						<th>Res</th>
+						<th>Flags</th>
+						<th>Win</th>
+						<th>Csum</th>
+						<th class='last'>URP</th>
+					</tr>
+					<tbody>
+						<tr>
+							<td class='first'><%= @event.tcp.tcp_sport %></td>
+							<td><%= @event.tcp.tcp_dport %></td>
+							<td><%= @event.tcp.tcp_seq %></td>
+							<td><%= @event.tcp.tcp_ack %></td>
+							<td><%= @event.tcp.tcp_off %></td>
+							<td><%= @event.tcp.tcp_res %></td>
+							<td><%= @event.tcp.tcp_flags %></td>
+							<td><%= @event.tcp.tcp_win %></td>
+							<td><%= @event.tcp.tcp_csum %></td>
+							<td class='last'><%= @event.tcp.tcp_urp %></td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+			
+			
+		<% elsif @event.udp? %>
+			
+			<div class='section-title'>UDP Header Information</div>
+
+			<div class='proto'>
+
+				<table class='ip-header' border='0' cellspacing='0' cellpadding='0'>
+					<tr>
+						<th class='first'>Src Port</th>
+						<th>Dst Port</th>
+						<th>Len</th>
+						<th class='last'>Csum</th>
+					</tr>
+					<tbody>
+						<tr>
+							<td class='first'><%= @event.udp.udp_sport %></td>
+							<td><%= @event.udp.udp_dport %></td>
+							<td><%= @event.udp.udp_len %></td>
+							<td class='last'><%= @event.udp.udp_csum %></td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+			
+		<% else %>
+			
+			<div class='section-title'>ICMP Header Information</div>
+
+			<div class='proto'>
+
+				<table class='ip-header' border='0' cellspacing='0' cellpadding='0'>
+					<tr>
+						<th class='first'>Type</th>
+						<th>Code</th>
+						<th>Csum</th>
+						<th>ID</th>
+						<th class='last'>SEQ</th>
+					</tr>
+					<tbody>
+						<tr>
+							<td class='first'><%= @event.icmp.icmp_type %></td>
+							<td><%= @event.icmp.icmp_code %></td>
+							<td><%= @event.icmp.icmp_csum %></td>
+							<td><%= @event.icmp.icmp_id %></td>
+							<td class='last'><%= @event.icmp.icmp_seq %></td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+			
+		<% end %>
+		
+		<div class='section-title'>Payload</div>
+		
+		<div class='round payload-ascii' style='display:none;'><pre class='round'><%= @event.payload.to_s %></pre></div>
+		
+		<div class='round payload'><pre class='round'><%= @event.payload.to_html %></pre></div>
+		
+		<div class='section-title'>Notes</div>
+		<div class='notes'></div>
+		
+	</div>
+</div>

@@ -20,7 +20,17 @@ module Snorby
   
   class Application < Rails::Application
     
-    config.middleware.use PDFKit::Middleware
+    require 'pdfkit'
+    
+    Mime::Type.register 'application/pdf', :pdf
+        
+    PDFKit.configure do |config|
+      config.wkhtmltopdf = '/Users/mephux/.rvm/gems/ruby-1.9.2-p0/bin/wkhtmltopdf'
+      config.default_options = {
+          :page_size => 'Legal',
+          :print_media_type => true
+        }
+    end
     
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

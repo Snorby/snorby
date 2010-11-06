@@ -5,6 +5,14 @@ GIT
   specs:
     dm-paperclip (2.4.1)
 
+GIT
+  remote: https://github.com/jstewart/ezprint.git
+  revision: 0c49087284784f1d5fc694ac87dec6ab9e36650e
+  branch: rails3
+  specs:
+    ezprint (0.2.0)
+      pdfkit (>= 0.4.1)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -251,6 +259,7 @@ DEPENDENCIES
   dm-types (~> 1.0.2)
   dm-validations (~> 1.0.2)
   dm-visualizer (~> 0.1.0)
+  ezprint!
   jquery-rails
   net-dns (~> 0.6.1)
   pdfkit (~> 0.4.6)
