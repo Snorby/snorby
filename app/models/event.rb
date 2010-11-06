@@ -1,13 +1,9 @@
-require 'dm-is-counter_cacheable'
-
 class Event
 
   include DataMapper::Resource
   
   # Included for the truncate helper method.
   extend ActionView::Helpers::TextHelper
-
-  is :counter_cacheable
 
   storage_names[:default] = "event"
 
@@ -17,9 +13,9 @@ class Event
   
   property :sig_id, Integer, :field => 'signature', :index => true
   
-  property :classification_id, Integer, :index => true
+  property :classification_id, Integer, :index => true, :default => 0
   
-  property :updated_by_id, Integer, :index => true
+  belongs_to :classification
   
   property :timestamp, DateTime
 
@@ -39,17 +35,15 @@ class Event
   
   has 1, :opt, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :constraint => :destroy
 
-  belongs_to :user
-
   belongs_to :sensor, :parent_key => :sid, :child_key => :sid, :required => true
   
   belongs_to :signature, :child_key => :sig_id, :parent_key => :sig_id
 
-  belongs_to :ip, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :required => true
+  belongs_to :ip, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ]
 
-  belongs_to :classification
-
-  counter_cacheable :classification
+  before :save do
+    Rails.logger.info self.classification_id
+  end
 
   def self.find_by_ids(ids)
     events = []
@@ -110,12 +104,11 @@ class Event
   
   def toggle_favorite
     if self.favorite?
-      link = Favorite.first(:sid => self.sid, :cid => self.cid, :user_id => User.current_user.id)
-      link.destroy
+      favorite = User.current_user.favorites.first(:sid => self.sid, :cid => self.cid)
+      favorite.destroy
     else
-      event = self
-      event.users << User.current_user
-      event.users.save
+      users << User.current_user
+      users.save
     end
   end
   

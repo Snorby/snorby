@@ -26,14 +26,12 @@ class EventsController < ApplicationController
   end
   
   def classify
-    events = Event.find_by_ids(params[:events])
-    events.each do |event|
-      if params[:classification].to_i == 0
-        event.update!(:classification_id => params[:classification], :updated_by_id => nil) if event
-      else
-        event.update!(:classification_id => params[:classification], :updated_by_id => current_user.id) if event
-      end
+    @events = Event.find_by_ids(params[:events])
+    
+    @events.each do |event|
+      event.update(:classification_id => params[:classification])
     end
+    
     render :layout => false, :status => 200
   end
   
