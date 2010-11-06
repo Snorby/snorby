@@ -829,9 +829,9 @@ a {
 
 #wrapper #content #title #title-menu-holder ul#title-menu dl.drop-down-menu{
 	clear: both;
-  	-webkit-box-shadow: 0px 1px 8px rgba(0,0,0,0.2);
-  	-moz-box-shadow: 0px 1px 8px rgba(0,0,0,0.2);
-  	box-shadow: 0px 1px 8px rgba(0,0,0,0.2);
+  	-webkit-box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
+  	-moz-box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
+  	box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
 	display: inline-block;
 	position: absolute;
 	top: 35px;
@@ -842,6 +842,13 @@ a {
 	padding: 5px;
 	visibility: visible;
 	overflow: visible;
+	border-bottom: 1px solid #cdcdcd;
+	border-left: 1px solid #cdcdcd;
+	border-right: 1px solid #cdcdcd;
+}
+
+#wrapper #content #title #title-menu-holder ul#title-menu dl.drop-down-menu dd:first-child{
+	border-top-style: none;
 }
 
 #wrapper #content #title #title-menu-holder ul#title-menu dl.drop-down-menu dd{
@@ -884,6 +891,11 @@ a {
 	overflow: hidden;
 	margin-top: 8px;
 	margin-right: 5px;
+	font-weight: normal;
+	text-decoration: none;
+	font-variant: normal;
+	font-style: normal;
+	text-transform: none;
 	padding: 3px 5px;
 }
 

@@ -22,4 +22,9 @@ class Severity
   # Set the severity background color
   property :bg_color, String, :default => '#dddddd', :index => true
 
+  def locked?
+    return true if [1,2,3].include?(id)
+    false
+  end
+
 end

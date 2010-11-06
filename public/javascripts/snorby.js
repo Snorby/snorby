@@ -205,16 +205,13 @@ var Snorby = {
 					check_box.hide();
 					$('li.event div.event-data').slideUp('fast');
 					parent_row.find('div.select').append("<img alt='laoding' src='/images/icons/loading.gif' class='select-loading'>");
-					$.get('/events/show/'+sid+'/'+cid, function (data) {
+					
+					$.get('/events/show/'+sid+'/'+cid, function () {
 						Snorby.helpers.remove_click_events(false);
-
 						$('.select-loading').remove();
 						check_box.show();
-						
-						current_row.html(Snorby.templates.event_data(data));
 						current_row.attr('data', true);		
-						current_row.slideDown('fast');
-					});
+					}, 'script');
 					
 				};
 				
@@ -280,155 +277,6 @@ var Snorby = {
 				<div class='message {{type}}'>{{message}}</div> \
 			</div>";
 			return Mustache.to_html(template, data);
-		},
-		
-		event_data: function(data){
-			var ip_data = Snorby.templates.ip_header(data);
-			
-			if (data.type === "tcp") {
-				var title = "<div class='section-title'>TCP Header Information</div>";
-				var ip_proto = Snorby.templates.tcp_header(data.proto);
-			} else if (data.type === "udp") {
-				var title = "<div class='section-title'>UDP Header Information</div>";
-				var ip_proto = Snorby.templates.udp_header(data.proto);
-			} else {
-				var title = "<div class='section-title'>ICMP Header Information</div>";
-				var ip_proto = Snorby.templates.icmp_header(data.proto);
-			};
-			
-			var template = " \
-			<div class='event-data-holder'> \
-				<div class='event-data-holder-inside'> \
-					<div class='section-title'>IP Header Information</div> \
-					<div class='ip'>"+ip_data+"</div> \
-					"+title+" \
-					<div class='proto'>"+ip_proto+"</div> \
-					<div class='section-title'>Payload</div> \
-					<div class='round payload-ascii' style='display:none;'><pre class='round'>"+data.payload+"</pre></div> \
-					<div class='round payload'><pre class='round'>"+data.payload_html+"</pre></div> \
-					<div class='section-title'>Notes</div> \
-					<div class='notes'> \
-					</div> \
-				</div> \
-			</div> \
-			"
-			return Mustache.to_html(template, data);
-		},
-		
-		icmp_header: function(data){
-			var icmp = " \
-			<table class='ip-header' border='0' cellspacing='0' cellpadding='0'> \
-				<tr> \
-					<th class='first'>Type</th> \
-					<th>Code</th> \
-					<th>Csum</th> \
-					<th>ID</th> \
-					<th class='last'>SEQ</th> \
-				</tr> \
-				<tbody> \
-					<tr> \
-						<td class='first'>{{icmp_type}}</td> \
-						<td>{{icmp_code}}</td> \
-						<td>{{icmp_csum}}</td> \
-						<td>{{icmp_id}}</td> \
-						<td class='last'>{{icmp_seq}}</td> \
-					</tr> \
-				</tbody> \
-			</table>"
-			return Mustache.to_html(icmp, data);
-		},
-		
-		tcp_header: function(data){
-			var tcp = " \
-			<table class='ip-header' border='0' cellspacing='0' cellpadding='0'> \
-				<tr> \
-					<th class='first'>Src Port</th> \
-					<th>Dst Port</th> \
-					<th>Seq</th> \
-					<th>Ack</th> \
-					<th>Off</th> \
-					<th>Res</th> \
-					<th>Flags</th> \
-					<th>Win</th> \
-					<th>Csum</th> \
-					<th class='last'>URP</th> \
-				</tr> \
-				<tbody> \
-					<tr> \
-						<td class='first'>{{tcp_sport}}</td> \
-						<td>{{tcp_dport}}</td> \
-						<td>{{tcp_seq}}</td> \
-						<td>{{tcp_ack}}</td> \
-						<td>{{tcp_off}}</td> \
-						<td>{{tcp_res}}</td> \
-						<td>{{tcp_flags}}</td> \
-						<td>{{tcp_win}}</td> \
-						<td>{{tcp_csum}}</td> \
-						<td class='last'>{{tcp_urp}}</td> \
-					</tr> \
-				</tbody> \
-			</table>"
-			return Mustache.to_html(tcp, data);
-		},
-		
-		udp_header: function(data){
-			var udp = " \
-			<table class='ip-header' border='0' cellspacing='0' cellpadding='0'> \
-				<tr> \
-					<th class='first'>Src Port</th> \
-					<th>Dst Port</th> \
-					<th>Len</th> \
-					<th class='last'>Csum</th> \
-				</tr> \
-				<tbody> \
-					<tr> \
-						<td class='first'>{{udp_sport}}</td> \
-						<td>{{udp_dport}}</td> \
-						<td>{{udp_len}}</td> \
-						<td class='last'>{{udp_csum}}</td> \
-					</tr> \
-				</tbody> \
-			</table>"
-			return Mustache.to_html(udp, data);
-		},
-		
-		ip_header: function(data){
-			var ip = " \
-			<table class='ip-header' border='0' cellspacing='0' cellpadding='0'> \
-				<tr> \
-					<th class='first'>Src</th> \
-					<th>Dst</th> \
-					<th>Ver</th> \
-					<th>Hlen</th> \
-					<th>Tos</th> \
-					<th>Len</th> \
-					<th>ID</th> \
-					<th>Flags</th> \
-					<th>Off</th> \
-					<th>TTL</th> \
-					<th>Proto</th> \
-					<th class='last'>Csum</th> \
-				</tr> \
-				<tbody> \
-					<tr> \
-						<td class='first'><a href='/events/lookup?address={{src_ip}}' data-address='{{src_ip}}' class='snorbybox'>{{src_ip}}</a></td> \
-						<td><a href='/events/lookup?address={{dst_ip}}' data-address='{{dst_ip}}' class='snorbybox'>{{dst_ip}}</a></td> \
-						{{#ip}} \
-						<td>{{ip_ver}}</td> \
-						<td>{{ip_hlen}}</td> \
-						<td>{{ip_tos}}</td> \
-						<td>{{ip_len}}</td> \
-						<td>{{ip_id}}</td> \
-						<td>{{ip_flags}}</td> \
-						<td>{{ip_off}}</td> \
-						<td>{{ip_ttl}}</td> \
-						<td>{{ip_proto}}</td> \
-						<td class='last'>{{ip_csum}}</td> \
-						{{/ip}} \
-					</tr> \
-				</tbody> \
-			</table>"
-			return Mustache.to_html(ip, data);
 		},
 		
 		event_table: function(data){

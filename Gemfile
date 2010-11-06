@@ -32,7 +32,6 @@ gem 'dm-timestamps',          DM_VERSION
 gem 'dm-observer',            DM_VERSION
 gem 'dm-devise',              '~> 1.1.0'
 gem 'dm-serializer',          DM_VERSION
-gem 'dm-is-predefined',       '~> 0.3.0', :require => 'dm-is-predefined'
 
 # Deploy with Capistrano
 gem 'capistrano'
@@ -42,7 +41,7 @@ gem 'pdfkit',                 '~> 0.4.6'
 gem 'daemons',                '~> 1.1.0'
 gem 'delayed_job',            '~> 2.1.0.pre2'
 gem 'delayed_job_data_mapper','~> 1.0.0.rc'
-gem 'dm-is-counter_cacheable','~> 0.1.0', :git => 'https://github.com/postmodern/dm-is-counter_cacheable.git'
+gem 'dm-is-counter_cacheable','~> 0.1.0'
 gem 'dm-paperclip',           '~> 2.3', :git => 'http://github.com/postmodern/dm-paperclip.git', :branch => 'postmodern'
 gem 'net-dns',                '~> 0.6.1'
 gem 'whois',                  '~> 1.3.9'

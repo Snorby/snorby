@@ -11,7 +11,11 @@ class EventsController < ApplicationController
   
   def show
     @event = Event.get(params['sid'], params['cid'])
-    render :json => @event.in_json
+    respond_to do |format|
+      format.html
+      format.js
+      format.json { render :json => @event.in_json }
+    end
   end
   
   def classify

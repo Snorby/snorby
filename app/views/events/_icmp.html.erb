@@ -1,0 +1,25 @@
+
+<div class='section-title'>ICMP Header Information</div>
+
+<div class='proto'>
+
+	<table class='ip-header' border='0' cellspacing='0' cellpadding='0'>
+		<tr>
+			<th class='first'>Type</th>
+			<th>Code</th>
+			<th>Csum</th>
+			<th>ID</th>
+			<th class='last'>SEQ</th>
+		</tr>
+		<tbody>
+			<tr>
+				<td class='first'><%= @event.icmp.icmp_type %></td>
+				<td><%= @event.icmp.icmp_code %></td>
+				<td><%= @event.icmp.icmp_csum %></td>
+				<td><%= @event.icmp.icmp_id %></td>
+				<td class='last'><%= @event.icmp.icmp_seq %></td>
+			</tr>
+		</tbody>
+	</table>
+	
+</div>

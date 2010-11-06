@@ -1,0 +1,24 @@
+<div class='event-data-holder'>
+	<div class='event-data-holder-inside'>
+
+		<%= render :partial => 'events/ip' %>
+		
+		<% if @event.tcp? %>
+			<%= render :partial => 'events/tcp' %>
+		<% elsif @event.udp? %>
+			<%= render :partial => 'events/udp' %>
+		<% else %>
+			<%= render :partial => 'events/icmp' %>
+		<% end %>
+		
+		<div class='section-title'>Payload</div>
+		
+		<div class='round payload-ascii' style='display:none;'><pre class='round'><%= @event.payload.to_s %></pre></div>
+		
+		<div class='round payload'><pre class='round'><%= @event.payload.to_html %></pre></div>
+		
+		<div class='section-title'>Notes</div>
+		<div class='notes'></div>
+		
+	</div>
+</div>
