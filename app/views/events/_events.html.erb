@@ -27,6 +27,7 @@
 	
 	<% end %>
 	
-	<%= pager(@events, '/events') %>
+	<% pager_action = params[:action] ? "/events/#{params[:action]}" : '/events' %>
+	<%= pager(@events, pager_action) %>
 	
 </div>

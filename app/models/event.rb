@@ -17,7 +17,9 @@ class Event
   
   property :sig_id, Integer, :field => 'signature', :index => true
   
-  property :classification_id, Integer, :index => true, :default => 0
+  property :classification_id, Integer, :index => true
+  
+  property :updated_by_id, Integer, :index => true
   
   property :timestamp, DateTime
 
@@ -36,6 +38,8 @@ class Event
   has 1, :udp, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :constraint => :destroy
   
   has 1, :opt, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :constraint => :destroy
+
+  belongs_to :user
 
   belongs_to :sensor, :parent_key => :sid, :child_key => :sid, :required => true
   

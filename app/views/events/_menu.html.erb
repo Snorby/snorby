@@ -1,7 +1,15 @@
 <%= drop_down_for('Classify Event(s)', 'icons/actions.png', 'incident') do %>
-	<% Classification.all.each do |cls| %>
-		<%= drop_down_item "#{cls.name}<span class='shortcut'>#{cls.shortcut}</span>", '#', nil, { :class => 'classification', :"data-classification-id" => cls.id.to_i } %>
+	
+	<% @classifications.each do |cls| %>
+		<% if cls.locked && cls.hotkey %>
+			<%= drop_down_item "#{cls.name}<span class='shortcut'>#{cls.shortcut}</span>", '#', nil, { :class => 'classification', :"data-classification-id" => cls.id.to_i } %>
+		<% else %>
+			<%= drop_down_item "#{cls.name}", '#', nil, { :class => 'classification', :"data-classification-id" => cls.id.to_i } %>
+		<% end %>
 	<% end %>
+	
+	<%= drop_down_item "Unclassified<span class='shortcut'>ctrl+shift+u</span>", '#', nil, { :class => 'classification', :"data-classification-id" => 0 } %>
+	
 <% end %>
 
 <%= drop_down_for('Export', 'icons/export.png', 'export') do %>

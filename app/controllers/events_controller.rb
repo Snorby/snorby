@@ -3,10 +3,12 @@ class EventsController < ApplicationController
   
   def index
     @events = Event.all(:classification_id => 0).page(params[:page].to_i, :per_page => 25, :order => [:timestamp.desc])
+    @classifications ||= Classification.all
   end
   
   def queue
     @events ||= current_user.events.page(params[:page].to_i, :per_page => 25, :order => [:timestamp.desc])
+    @classifications ||= Classification.all
   end
   
   def show
@@ -18,12 +20,21 @@ class EventsController < ApplicationController
     end
   end
   
+  def history
+    @events = Event.all(:updated_by_id => @current_user.id).page(params[:page].to_i, :per_page => 25, :order => [:timestamp.desc])
+    @classifications ||= Classification.all
+  end
+  
   def classify
     events = Event.find_by_ids(params[:events])
-    events.each do |event| 
-      event.update(:classification_id => params[:classification]) if event
+    events.each do |event|
+      if params[:classification].to_i == 0
+        event.update!(:classification_id => params[:classification], :updated_by_id => nil) if event
+      else
+        event.update!(:classification_id => params[:classification], :updated_by_id => current_user.id) if event
+      end
     end
-    redirect_to events_path, :notice => 'Event Classified Successfully'
+    render :layout => false, :status => 200
   end
   
   def last

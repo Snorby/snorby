@@ -72,6 +72,12 @@ function set_classification (class_id) {
 			} else if (current_page == "queue") {
 				clear_selected_events();
 				$.getScript('/events/queue');
+			} else if (current_page == "history") {
+				clear_selected_events();
+				$.getScript('/events/history');
+			} else {
+				// clear_selected_events();
+				// $.getScript('/events');
 			};
 
 			flash_message.push({type: 'success', message: "Event(s) Classified Successfully"});
@@ -460,6 +466,11 @@ var Snorby = {
 		});
 	
 		if ($('div.pager').is(':visible')) {
+			
+			$(document).bind('keydown', 'ctrl+shift+u', function() {
+				set_classification(0);
+				return false;
+			});
 			
 			$(document).bind('keydown', 'ctrl+right', function() {
 				$('div.pager ul.pager li.last a').click();

@@ -2,8 +2,8 @@
 	
 	<script type="text/javascript">
 		
-		<% Classification.each do |klass| %>
-		
+		<% @classifications.each do |klass| %>
+				
 			$(document).bind('keydown', '<%= klass.shortcut %>', function() {
 				set_classification(<%= klass.id %>);
 				return false;
