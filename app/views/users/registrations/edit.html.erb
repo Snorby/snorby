@@ -9,13 +9,19 @@
 	  <%= f.text_field :email, :title => 'E-mail Address...' %></p>
 
 	  <p><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-	  <%= f.password_field :password, :title => 'Password' %></p>
+	  <%= f.password_field :password %></p>
 
 	  <p><%= f.label :password_confirmation %><br />
-	  <%= f.password_field :password_confirmation, :title => 'Password' %></p>
+	  <%= f.password_field :password_confirmation %></p>
 
 	  <p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-	  <%= f.password_field :current_password, :title => 'Password' %></p>
+	  <%= f.password_field :current_password %></p>
+
+		<p>
+			<%= f.label "Items Per Page:" %> <%= f.select :per_page_count, %w[25 45 65 100], { :include_blank => false } %><br />
+			<i>(items to list per page load)</i><br />
+			<br />
+		</p>
 
 		<% if current_user.admin? %>
 

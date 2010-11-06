@@ -35,9 +35,11 @@
 		<%= javascript_include_merged :snorby %>
 		
 		<%- flash.each do |type, message| -%>
+
       <script type="text/javascript" charset="utf-8">
 				flash_message.push({type: "<%= type %>", message: "<%= message %>"}); flash();
       </script>
+
     <%- end -%>
 		
 		<%= yield(:footer) %>

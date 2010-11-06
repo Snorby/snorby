@@ -1,7 +1,4 @@
-require 'snorby/model'
-
 class User
-  include Snorby::Model
   include DataMapper::Resource
   
   cattr_accessor :current_user
@@ -18,10 +15,12 @@ class User
   property :id, Serial, :key => true, :index => true
 
   # Email of the user
-  property :email, String, :required => true, :unique => true, :lazy => true
+#  property :email, String, :required => true, :unique => true
+
+  property :per_page_count, Integer, :index => true, :default => 25
 
   # Full name of the user
-  property :name, String, :lazy => true
+  property :name, String, :lazy => true, :lazy => true
 
   # The timezone the user lives in
   property :timezone, String, :default => 'UTC', :lazy => true

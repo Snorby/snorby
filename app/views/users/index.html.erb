@@ -1,3 +1,27 @@
-<%= current_user.admin %>
+<%= title "User Management" do -%>
 
-HELLO!
+	<%= menu_item "Add User", new_user_path, 'icons/user.png' %>
+	<%= render :partial => 'settings/menu' %>
+
+<% end %>
+
+<div id="users" class='grid_12 page boxit'>
+	
+	<table border="0" cellspacing="0" cellpadding="0">
+		<tr>		
+			<th>ID</th>
+			<th>Name</th>
+			<th>E-mail</th>
+			<th>Administrator</th>
+			<th>Last Login IP</th>
+			<th>Last Login Time</th>
+		</tr>
+		<tbody class='users'>
+			<%= render @users %>
+		</tbody>
+	</table>
+
+
+	<%= pager(@users, 'users') %>
+	
+</div>

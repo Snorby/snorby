@@ -1,6 +1,10 @@
 <%= title "Listing Sensors", do -%>
 
 	<li>Hello</li>
+	
+	<% if current_user.admin %>
+		<%= render :partial => 'settings/menu' %>
+	<% end %>
 
 <%- end -%>
 

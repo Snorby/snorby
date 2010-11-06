@@ -4,5 +4,11 @@
 	<td class='hostname'><%= sensor.hostname %></td>
 	<td class='interface'><%= sensor.interface %></td>
 	<td class='event_count'><%= sensor.events.count %></td>
-	<td class='last_event_time last'><%= sensor.events.last.timestamp.strftime('%m/%d/%Y %l:%M %p') %></td>
+	
+	<% if sensor.events.last.blank? %>
+		<td class='last_event_time last'>N/A</td>
+	<% else %>
+		<td class='last_event_time last'><%= sensor.events.last.timestamp.strftime('%m/%d/%Y %l:%M %p') %></td>
+	<% end %>
+	
 </tr>

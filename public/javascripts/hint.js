@@ -1,4 +1,3 @@
-
 (function($){$.fn.hint=function(blurClass,blankClass){if(!blurClass)blurClass='blur';if(!blankClass)blankClass='blank';return this.each(function(){var $input=$(this),title=$input.attr('title'),$form=$(this.form),$win=$(window),cursor_timeout;function setBlankHint(){$input.val(title).addClass(blankClass).removeClass(blurClass);cursor_timeout=setTimeout(function(){$input.setCursorPosition(0)},10);}
 function remove(){if(this.value===title)
 $input.val('').removeClass(blurClass).removeClass(blankClass);}

@@ -4,15 +4,15 @@ javascripts:
   - jquery
   - jquery-ui
   - rails
+  - hotkeys
   - mustache
   - easing
   - fancybox
-  - scrollto
-  - hotkeys
   - growl
-  - editable
   - colorpicker
+  - editable
   - hint
+  - scrollto
   - snorby
 stylesheets: 
 - snorby: 

@@ -465,6 +465,7 @@ a {
 	overflow: auto;
 	display: block;
 	position: relative;
+	padding: 10px;
 }
 
 #snorby-box #box-title{

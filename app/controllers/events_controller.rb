@@ -2,12 +2,12 @@ class EventsController < ApplicationController
   respond_to :html, :xml, :json, :js
 
   def index
-    @events = Event.all(:classification_id => 0).page(params[:page].to_i, :per_page => 25, :order => [:timestamp.desc])
+    @events = Event.all(:classification_id => 0).page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:timestamp.desc])
     @classifications ||= Classification.all
   end
 
   def queue
-    @events ||= current_user.events.page(params[:page].to_i, :per_page => 25, :order => [:timestamp.desc])
+    @events ||= current_user.events.page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:timestamp.desc])
     @classifications ||= Classification.all
   end
 
@@ -25,7 +25,7 @@ class EventsController < ApplicationController
   end
 
   def history
-    @events = Event.all(:updated_by_id => @current_user.id).page(params[:page].to_i, :per_page => 25, :order => [:timestamp.desc])
+    @events = Event.all(:updated_by_id => @current_user.id).page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:timestamp.desc])
     @classifications ||= Classification.all
   end
 

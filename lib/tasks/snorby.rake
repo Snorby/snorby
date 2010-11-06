@@ -12,8 +12,6 @@ namespace :snorby do
     # Load Default Records
     Rake::Task['db:seed'].invoke
     
-    Classification.predefined_names.collect { |x| Classification.send x }
-    
   end
   
   desc 'Reset'
@@ -24,6 +22,17 @@ namespace :snorby do
     
     # Invoke the snorby:setup rake task
     Rake::Task['snorby:setup'].invoke
+    
+  end
+  
+  desc 'Remove Old CSS/JS packages and re-bundle'
+  task :refresh => :environment do
+    
+    # Drop all css/js packages
+    Rake::Task['asset:packager:delete_all'].invoke
+    
+    # bundle all css/js packages
+    Rake::Task['asset:packager:build_all'].invoke
     
   end
   

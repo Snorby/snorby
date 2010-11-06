@@ -3,7 +3,7 @@ class SeveritiesController < ApplicationController
   before_filter :require_administrative_privileges
 
   def index
-    @severities = Severity.all.page(params[:page].to_i, :per_page => 25, :order => [:id.asc])
+    @severities = Severity.all.page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:id.asc])
   end
 
   def new

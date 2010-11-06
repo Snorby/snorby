@@ -113,11 +113,9 @@ var Snorby = {
 		});
 		
 		$('.edit-sensor-name').editable("/sensors/update_name", {
-			height: '20px',
-			width: '180px',
-			name: "name",
+			height: '20px',width: '180px',name: "name",
 			indicator: '<img src="/images/icons/pager.gif">',
-			data: function(value, settings) {
+			data: function(value) {
 				var retval = value.replace(/<br[\s\/]?>/gi, '\n');
 				return retval;
 			},
@@ -476,7 +474,6 @@ var Snorby = {
 				flash();
 			};
 			
-			//console.log("XHR Response: " + JSON.stringify(xhr));
 		});
 		
 	},
