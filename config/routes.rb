@@ -21,6 +21,9 @@ Snorby::Application.routes.draw do
     
   end
 
+
+  match '/dashboard', :controller => 'Page', :action => 'dashboard'
+  
   match ':controller(/:action(/:sid/:cid))', :controller => 'Events'
 
   resources :events do

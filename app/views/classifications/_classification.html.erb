@@ -2,7 +2,8 @@
 	<td class='first'><%= classification.id %></td>
 	<td><%= classification.name %></td>
 	<td><%= classification.description %></td>
-	<td><%= classification.events_counter %></td>
+	<td><%= classification.events_count %></td>
+	
 	<% if classification.locked %>
 		<td><%= image_tag('icons/lock.png', :size => '16x16') %></td>
 		<td class='last'><%= image_tag('icons/lock.png', :size => '16x16') %></td>
@@ -10,4 +11,5 @@
 		<td><%= link_to "Edit", edit_classification_path(classification) %></td>
 		<td class='last'><%= link_to "Destroy", classification_path(classification), :method => :delete %></td>
 	<% end %>
+	
 </tr>
