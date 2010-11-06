@@ -59,22 +59,23 @@ function clear_selected_events () {
 function set_classification (class_id) {
 	var selected_events = $('input#selected_events').attr('value');
 	var current_page = $('div#events').attr('data-action');
+	var current_page_number = $('div#events').attr('data-page');
 	
 	if (selected_events.length > 0) {
 		$('div.content').fadeTo(500, 0.4);
 		Snorby.helpers.remove_click_events(true);
-
+		
 		$.post('/events/classify', {events: selected_events, classification: class_id}, function() {
 			
 			if (current_page == "index") {
 				clear_selected_events();
-				$.getScript('/events');
+				$.getScript('/events?page=' + current_page_number);
 			} else if (current_page == "queue") {
 				clear_selected_events();
-				$.getScript('/events/queue');
+				$.getScript('/events/queue?page=' + current_page_number);
 			} else if (current_page == "history") {
 				clear_selected_events();
-				$.getScript('/events/history');
+				$.getScript('/events/history?page=' + current_page_number);
 			} else {
 				// clear_selected_events();
 				// $.getScript('/events');
@@ -101,7 +102,11 @@ var Snorby = {
 		$(window).scroll(function() {
 			$('#fancybox-wrap').scrollTop(20);
 		});
-
+		
+		$('div#flash_message, div#flash_message > *').live('click', function() {
+			$('div#flash_message').stop().slideUp('fast');
+		});
+		
 		$("#growl").notify({
 		    speed: 500,
 		    expires: 3000
@@ -316,6 +321,13 @@ var Snorby = {
 	
 	helpers: {
 		
+		input_style: function(){
+
+			$('input').hint();
+			$('input[name=blank]').focus();
+
+		},
+		
 		dropdown: function(){
 			
 			$('dl.drop-down-menu dd a').live('click', function() {
@@ -411,8 +423,10 @@ var Snorby = {
 					
 					var current_width = $(this).width();
 					if (current_width < 16) { var current_width = 16 };
+					
 					$(this).addClass('loading').css('width', current_width);
 					$('div.content').fadeTo(500, 0.4);
+					
 					Snorby.helpers.remove_click_events(true);
 					$.getScript($(this).find('a').attr('href'));
 					
@@ -499,13 +513,6 @@ var Snorby = {
 			
 		};
 		
-	},
-	
-	input_hints: function(){
-		
-		$('#signin input').hint();
-		$('input[name=blank]').focus();
-		
 	}
 	
 }
@@ -516,9 +523,9 @@ jQuery(document).ready(function($) {
 	Snorby.admin();
 	Snorby.callbacks();
 	Snorby.hotkeys();
-	Snorby.input_hints();
 	
 	Snorby.helpers.dropdown();
+	Snorby.helpers.input_style();
 	Snorby.helpers.persistence_selections();
 	Snorby.helpers.pagenation();
 	

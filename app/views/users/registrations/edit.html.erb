@@ -6,21 +6,20 @@
 	  <%= devise_error_messages! %>
 
 	  <p><%= f.label :email %><br />
-	  <%= f.text_field :email %></p>
+	  <%= f.text_field :email, :title => 'E-mail Address...' %></p>
 
 	  <p><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-	  <%= f.password_field :password %></p>
+	  <%= f.password_field :password, :title => 'Password' %></p>
 
 	  <p><%= f.label :password_confirmation %><br />
-	  <%= f.password_field :password_confirmation %></p>
+	  <%= f.password_field :password_confirmation, :title => 'Password' %></p>
 
 	  <p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-	  <%= f.password_field :current_password %></p>
+	  <%= f.password_field :current_password, :title => 'Password' %></p>
 
 		<% if current_user.admin? %>
 
-			<p><%= f.label :admin %><br />
-	  	<%= f.check_box :admin %></p>
+			<p><%= f.label :admin %> <%= f.check_box :admin %></p>
 
 		<% end %>
 

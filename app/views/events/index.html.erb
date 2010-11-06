@@ -12,7 +12,7 @@
 					if (old_id != data.time) {
 						$.get('events/since', {timestamp: old_id}, function (data) {
 							if (data.events.length != 0) {
-								if (page <= 1) { 
+								if (page <= '1') { 
 									
 									if ($('div.new_events').length == 0) {
 										

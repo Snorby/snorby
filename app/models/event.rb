@@ -80,7 +80,7 @@ class Event
   # @return [Hash] hash of events between range.
   # 
   def self.to_json_since(time)
-    events = Event.all(:timestamp.gt => time, :classification_id => 1)
+    events = Event.all(:timestamp.gt => time, :classification_id => 0)
     json = {:events => []}
     events.each do |event|
       json[:events] << {

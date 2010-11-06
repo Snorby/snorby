@@ -493,6 +493,7 @@ a {
 /* @group Flash */
 
 #flash_message{
+	cursor: pointer;
 	position: absolute;
 	height: 90px;
 	display: block;
@@ -1821,14 +1822,25 @@ span.payload-ascii{
 
 /* @end */
 
-/* @group Sign In */
+/* @group Input */
 
-#signin{
-	
+i{
+	color: #a5a5a5;
+	font-style: italic;
+	text-decoration: none;
+	font-variant: normal;
+	font-size: 0.8em;
 }
 
-#signin form.user_new input[type='password'],
-#signin form.user_new input[type='text']{
+#form-actions{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	display: block;
+	position: relative;
+}
+
+input[type='password'],
+input[type='text']{
 	margin-bottom: 10px;
 	font-size: 1.3em;
 	font-weight: bold;
