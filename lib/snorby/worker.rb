@@ -40,7 +40,7 @@ module Snorby
     end
 
     def self.info
-      return `ps aux |grep delayed_job |grep -v grep`.chomp.strip if running?
+      return `ps aux #{Worker.pid} |grep delayed_job |grep -v grep`.chomp.strip if running?
     end
 
     def self.pid
