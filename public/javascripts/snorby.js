@@ -499,6 +499,13 @@ var Snorby = {
 			
 		};
 		
+	},
+	
+	input_hints: function(){
+		
+		$('#signin input').hint();
+		$('input[name=blank]').focus();
+		
 	}
 	
 }
@@ -509,6 +516,7 @@ jQuery(document).ready(function($) {
 	Snorby.admin();
 	Snorby.callbacks();
 	Snorby.hotkeys();
+	Snorby.input_hints();
 	
 	Snorby.helpers.dropdown();
 	Snorby.helpers.persistence_selections();

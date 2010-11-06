@@ -67,4 +67,14 @@ module ApplicationHelper
     content_tag(:div, html, :id => 'snorby-box')
   end
 
+  def form_actions(&block)
+    content_tag(:div, capture(&block), :id => 'form-actions')
+  end
+  
+  def button(name, options={})
+    # <span class="success" style="display:none">✓ saved</span>
+    options[:class] = options[:class] ? options[:class] += " default" : "default"
+    content_tag(:button, "<span>#{name}</span>".html_safe, options)
+  end
+
 end

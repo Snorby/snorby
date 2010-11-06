@@ -12,6 +12,7 @@ javascripts:
   - growl
   - editable
   - colorpicker
+  - hint
   - snorby
 stylesheets: 
 - snorby: 

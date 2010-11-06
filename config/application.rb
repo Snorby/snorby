@@ -21,8 +21,6 @@ module Snorby
   class Application < Rails::Application
     
     require 'pdfkit'
-    
-    Mime::Type.register 'application/pdf', :pdf
         
     PDFKit.configure do |config|
       config.wkhtmltopdf = '/Users/mephux/.rvm/gems/ruby-1.9.2-p0/bin/wkhtmltopdf'

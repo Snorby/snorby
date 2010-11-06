@@ -26,13 +26,6 @@
   
 	<body>
 		
-		<%- flash.each do |type, message| -%>
-      <script type="text/javascript" charset="utf-8">
-				flash_message.push({type: "<%= type %>", message: "<%= message %>"}); flash();
-      </script>
-    <%- end -%>
-    
-		
 		<%= render :partial => 'layouts/header' %>
 
 		<%= render :partial => 'layouts/content' %>
@@ -40,6 +33,12 @@
 		<%= render :partial => 'layouts/footer' %>
 		
 		<%= javascript_include_merged :snorby %>
+		
+		<%- flash.each do |type, message| -%>
+      <script type="text/javascript" charset="utf-8">
+				flash_message.push({type: "<%= type %>", message: "<%= message %>"}); flash();
+      </script>
+    <%- end -%>
 		
 		<%= yield(:footer) %>
 		
