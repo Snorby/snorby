@@ -47,12 +47,24 @@ class Event
     self.classification.down_counter(:events_count)
   end
 
-  before :update do
-    
+  def self.last_month
+    all(:timestamp.gte => 2.month.ago.beginning_of_month, :timestamp.lte => 1.month.ago.end_of_month)
+  end
+
+  def self.last_week
+    all(:timestamp.gte => 2.week.ago.beginning_of_week, :timestamp.lte => 1.week.ago.end_of_week)
   end
   
-  after :update do
-    
+  def self.yesterday
+    all(:timestamp.gte => 1.day.ago.beginning_of_day, :timestamp.lte => 1.day.ago.end_of_day)
+  end
+
+  def self.today
+    all(:timestamp.gte => Time.now.beginning_of_day, :timestamp.lte => Time.now.end_of_day)
+  end
+
+  def self.sensor(sensor_id)
+    all(:sid => sensor_id)
   end
 
   def self.find_by_ids(ids)
@@ -114,12 +126,20 @@ class Event
   
   def toggle_favorite
     if self.favorite?
-      favorite = Favorite.first(:sid => self.sid, :cid => self.cid, :user => User.current_user)
-      favorite.destroy
+      destroy_favorite
     else
-      users << User.current_user
-      users.save
+      create_favorite
     end
+  end
+  
+  def create_favorite
+    users << User.current_user
+    users.save
+  end
+  
+  def destroy_favorite
+    favorite = Favorite.first(:sid => self.sid, :cid => self.cid, :user => User.current_user)
+    favorite.destroy if favorite
   end
   
   def protocol_data
@@ -212,6 +232,13 @@ class Event
       return tcp.tcp_dport
     else
       return udp.udp_dport
+    end
+  end
+  
+  def self.reset_classifications
+    all.update(:classification_id => 0)
+    Classification.all.each do |classification|
+      classification.update(:events_count => 0)
     end
   end
 

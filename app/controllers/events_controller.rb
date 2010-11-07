@@ -47,6 +47,19 @@ class EventsController < ApplicationController
     render :layout => false, :status => 200
   end
 
+
+  def mass_create_favorite
+    @events ||= Event.find_by_ids(params[:events])
+    @events.each { |event| event.create_favorite unless favorite? }
+    render :json => {}
+  end
+  
+  def mass_destroy_favorite
+    @events ||= Event.find_by_ids(params[:events])
+    @events.each { |event| event.destroy_favorite if favorite? }
+    render :json => {}
+  end
+
   def last
     render :json => {:time => Event.last.timestamp}
   end
