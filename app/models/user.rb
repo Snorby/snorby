@@ -11,11 +11,15 @@ class User
   
   has n, :events, :through => :favorites
 
+  property :favorites_count, Integer, :index => true, :default => 0
+
   # Primary key of the user
   property :id, Serial, :key => true, :index => true
 
   # Email of the user
-#  property :email, String, :required => true, :unique => true
+  property :email, String, :required => true, :unique => true
+
+  property :favorites_count, Integer, :index => true, :default => 0
 
   property :per_page_count, Integer, :index => true, :default => 25
 

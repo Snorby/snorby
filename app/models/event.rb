@@ -5,8 +5,6 @@ class Event
   # Included for the truncate helper method.
   extend ActionView::Helpers::TextHelper
 
-  is :counter_cacheable
-
   storage_names[:default] = "event"
 
   property :sid, Integer, :key => true, :index => true
@@ -17,9 +15,9 @@ class Event
   
   property :classification_id, Integer, :index => true, :default => 0
   
-  belongs_to :classification
+  property :users_count, Integer, :index => true, :default => 0
   
-  counter_cacheable :classification, :counter_property => :events_count
+  belongs_to :classification
   
   property :timestamp, DateTime
 
@@ -45,8 +43,8 @@ class Event
 
   belongs_to :ip, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ]
 
-  before :save do
-    Rails.logger.info self.classification_id
+  before :destroy do
+    self.classification.down_counter(:events_count)
   end
 
   def self.find_by_ids(ids)
@@ -108,7 +106,7 @@ class Event
   
   def toggle_favorite
     if self.favorite?
-      favorite = User.current_user.favorites.first(:sid => self.sid, :cid => self.cid)
+      favorite = Favorite.first(:sid => self.sid, :cid => self.cid, :user => User.current_user)
       favorite.destroy
     else
       users << User.current_user

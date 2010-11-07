@@ -2,11 +2,7 @@ class Favorite
 
   include DataMapper::Resource
 
-  is :counter_cacheable
-
   belongs_to :user
-  
-  counter_cacheable :user, :counter_property => :favorites_count
   
   belongs_to :event, :child_key => [ :sid, :cid ]
 
@@ -17,5 +13,20 @@ class Favorite
   property :cid, Integer, :index => true
   
   property :user_id, Integer, :index => true
+
+
+  after :create do
+    event = self.event
+    user = self.user
+    event.update(:users_count => event.users_count + 1)
+    user.update(:favorites_count => user.favorites_count + 1)
+  end
+  
+  before :destroy do
+    event = self.event
+    user = self.user
+    event.update(:users_count => event.users_count - 1)
+    user.update(:favorites_count => user.favorites_count - 1)
+  end
 
 end

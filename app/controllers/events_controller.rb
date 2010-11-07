@@ -30,10 +30,18 @@ class EventsController < ApplicationController
   end
 
   def classify
-    @events = Event.find_by_ids(params[:events])
+    @events ||= Event.find_by_ids(params[:events])
+    @classification ||= Classification.get(params[:classification])
 
     @events.each do |event|
-      event.update(:classification_id => params[:classification]) if event
+      next unless event
+      old_classification = event.classification
+      
+      if event.update(:classification => @classification)
+        @classification.up_counter(:events_count) if @classification
+        old_classification.down_counter(:events_count) if old_classification
+      end
+      
     end
 
     render :layout => false, :status => 200
