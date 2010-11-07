@@ -24,7 +24,7 @@ module Snorby
       attr_accessor :events, :last_cache, :cache, :last_event
 
       def perform
-
+        
         @tcp_events = []
         @udp_events = []
         @icmp_events = []
@@ -44,6 +44,7 @@ module Snorby
             logit 'No cache records found - creating first cache record...'
             @last_cache = Cache.create(:sid => @last_event.sid, :cid => @last_event.cid, :ran_at => @last_event.timestamp)
             @cache = @last_cache
+            reset_counter_cache_columns
           end
 
           logit 'Building cache attributes'
@@ -78,6 +79,11 @@ module Snorby
         # property :classification_metrics, Object
         # property :severity_metrics, Object
 
+        def reset_counter_cache_columns
+          Severity.all.update(:event_count => 0)
+          Sensor.all.update(:events_count => 0)
+        end
+
         def build_snorby_cache
 
           build_proto_counts
@@ -87,6 +93,8 @@ module Snorby
                           :tcp_count => fetch_tcp_count,
                           :udp_count => fetch_udp_count,
                           :icmp_count => fetch_icmp_count,
+                          :sensor_metrics => fetch_sensor_metrics,
+                          :classification_metrics => fetch_classification_metrics,
                           :severity_metrics => fetch_severity_metrics
           })
 
@@ -130,6 +138,16 @@ module Snorby
           logit '- fetch_icmp_count'
           @icmp_events.size
         end
+        
+        def fetch_sensor_metrics
+          metrics = {}
+          Sensor.all.each do |sensor|
+            metrics[sensor.sid] = @events.sensor(sensor.sid).size
+            sensor.events_count = sensor.events_count + metrics[sensor.sid]
+            sensor.save
+          end
+          metrics
+        end
 
         def fetch_ip_metrics
 
@@ -137,6 +155,14 @@ module Snorby
 
         def fetch_port_metrics
 
+        end
+        
+        def fetch_classification_metrics
+           metrics = {}
+           Classification.all.each do |classification|
+             metrics[classification.id] = @events.classification(classification.id).size
+           end
+           metrics
         end
 
         def fetch_severity_metrics
@@ -147,8 +173,8 @@ module Snorby
 
           Severity.all.each do |sev|
             if severity.include?(sev.id)
-              metrics[sev.name.to_sym] = severity.collect { |s| s if s == sev.id }.compact.size
-              sev.event_count = sev.event_count + metrics[sev.name.to_sym]
+              metrics[sev.id] = severity.collect { |s| s if s == sev.id }.compact.size
+              sev.event_count = sev.event_count + metrics[sev.id]
               sev.save
             end
           end

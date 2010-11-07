@@ -3,7 +3,7 @@ class SensorsController < ApplicationController
   before_filter :require_administrative_privileges, :except => [:index]
 
   def index
-    @sensors = Sensor.all.page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:name.desc])
+    @sensors ||= Sensor.all.page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:sid.asc])
   end
   
   def update_name

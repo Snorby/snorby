@@ -3,6 +3,8 @@
 	<td><%= classification.name %></td>
 	<td><%= classification.events_count %></td>
 	
+	<td class='chart'><%= css_chart(classification.event_percentage) %></td>
+	
 	<% if classification.locked %>
 		<td><%= image_tag('icons/lock.png', :size => '16x16') %></td>
 		<td class='last'><%= image_tag('icons/lock.png', :size => '16x16') %></td>

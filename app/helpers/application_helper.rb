@@ -76,5 +76,10 @@ module ApplicationHelper
     options[:class] = options[:class] ? options[:class] += " default" : "default"
     content_tag(:button, "<span>#{name}</span>".html_safe, options)
   end
+  
+  def css_chart(percentage)
+    html = content_tag(:div, "<span>#{percentage}%</span>".html_safe, :style => "width: #{percentage}%")
+    content_tag(:div, html, :class => 'progress-container')    
+  end
 
 end

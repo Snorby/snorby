@@ -63,6 +63,10 @@ class Event
     all(:timestamp.gte => Time.now.beginning_of_day, :timestamp.lte => Time.now.end_of_day)
   end
 
+  def self.classification(classification_id)
+    all(:classification_id => classification_id)
+  end
+
   def self.sensor(sensor_id)
     all(:sid => sensor_id)
   end

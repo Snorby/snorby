@@ -8,7 +8,7 @@
 			setInterval (function () {
 				$.get('/events/last', function(data) {
 					var old_id = $('div#wrapper').attr('last_event');
-					var page = <%= params[:page].to_i %>;
+					var page = parseInt($('.pager li.active a').html());
 					if (old_id != data.time) {
 						$.get('events/since', {timestamp: old_id}, function (data) {
 							if (data.events.length != 0) {

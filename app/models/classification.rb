@@ -36,4 +36,20 @@ class Classification
     end
   end
 
+  def event_percentage
+    begin
+      if Cache.all.blank? &&
+        if self.events_count == 0
+          0
+        else
+          ((self.events_count.to_f / Event.count.to_f) * 100).round(2)
+        end
+      else
+        ((self.events_count.to_f / Cache.last.event_count.to_f) * 100).round(2)
+      end
+    rescue FloatDomainError
+      0
+    end
+  end
+
 end

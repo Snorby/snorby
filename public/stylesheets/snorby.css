@@ -2000,3 +2000,42 @@ button.default:disabled,.button.default.disabled {
 
 
 /* @end */
+
+/* @group CSS Charts */
+
+td.chart{
+	position: relative;
+	width: 200px;
+	padding-left: 10px;
+	padding-bottom: 0;
+}
+
+div.progress-container {
+	vertical-align: middle;
+  	border: 1px solid #ccc;
+  	width: 180px;
+  	padding: 1px; 
+  	float: left; 
+  	background: white;
+	display: block;
+	position: relative;
+	margin: 2px 5px 2px 0;
+	top: 6px;
+}
+
+div.progress-container > div {
+  background-color: #ccd8e0; 
+  height: 12px;
+}
+
+div.progress-container > div > span{
+	height: 12px;
+	font-size: xx-small;
+	color: #000;
+	line-height: 12px;
+	display: block;
+	position: absolute;
+	right: 5px;
+}
+
+/* @end */

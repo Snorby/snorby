@@ -28,6 +28,8 @@ class Cache
   
   property :uniq_dst, Integer, :default => 0
   
+  property :sensor_metrics, Object
+  
   property :port_metrics, Object
   
   property :classification_metrics, Object

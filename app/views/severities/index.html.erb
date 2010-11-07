@@ -5,29 +5,4 @@
 	
 <%- end -%>
 
-<div id="severities" class='grid_12 page boxit'>
-	
-	<table border="0" cellspacing="0" cellpadding="0">
-		
-		<tr>		
-			<th>ID</th>
-			<th>Name</th>
-			<th>Background</th>
-			<th>Text</th>
-			<th>Signature Count</th>
-			<th>Event Count</th>
-			<th>Example</th>
-			<th>Edit</th>
-			<th>Destroy</th>
-		</tr>
-		
-		<tbody class='sensors'>
-			<%= render @severities %>
-		</tbody>
-		
-	</table>
-
-
-	<%= pager(@severities, '/severities') %>
-	
-</div>
+<%= render :partial => 'severities/severities' %>

@@ -1,11 +1,11 @@
 development:
   domain: localhost:3000
-  mailer_sender: 'snorby@example.com'
+  mailer_address: 'snorby@example.com'
 
 test:
   domain: test.host
-  mailer_sender: 'snorby@example.com'
+  mailer_address: 'snorby@example.com'
 
 production:
   domain: example.com
-  mailer_sender: 'snorby@example.com'
+  mailer_address : 'snorby@example.com'
