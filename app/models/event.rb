@@ -47,6 +47,14 @@ class Event
     self.classification.down_counter(:events_count)
   end
 
+  before :update do
+    
+  end
+  
+  after :update do
+    
+  end
+
   def self.find_by_ids(ids)
     events = []
     ids.split(',').collect do |e| 

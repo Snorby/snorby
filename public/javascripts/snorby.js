@@ -305,7 +305,7 @@ var Snorby = {
 		event_table: function(data){
 			var template = " \
 			{{#events}} \
-			<li id='event_{{sid}}{{cid}}' class='event' style='display:none;' data-event-id='{{sid}}{{cid}}' data-event-sid='{{sid}}' data-event-cid='{{cid}}'> \
+			<li id='event_{{sid}}{{cid}}' class='event' style='display:none;' data-event-id='{{sid}}-{{cid}}' data-event-sid='{{sid}}' data-event-cid='{{cid}}'> \
 				<div class='row'> \
 					<div class='select small'><input class='event-selector' id='event-selector' name='event-selector' type='checkbox'></div> \
 					<div class='important small'><div class='create-favorite enabled'></div></div> \
