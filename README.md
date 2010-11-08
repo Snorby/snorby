@@ -6,7 +6,7 @@
 
 ## Description
 
-Snorby is a new and modern Snort IDS front-end. The basic fundamental concepts behind Snorby are simplicity and power. The project goal is to create a free, open source and highly competitive application for network monitoring for both private and enterprise use.
+Snorby is a ruby on rails web application for network security monitoring that interfaces with for popular intrusion detection systems (Snort, Suricata and Saga). The basic fundamental concepts behind Snorby are simplicity, organization and power. The project goal is to create a free, open source and highly competitive application for network monitoring for both private and enterprise use.
 
 ## Features
 
