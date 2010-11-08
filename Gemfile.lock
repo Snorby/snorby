@@ -1,13 +1,13 @@
 GIT
   remote: http://github.com/postmodern/dm-paperclip.git
-  revision: c93a99c847cc64e6e9c943e7423e3ce4dfff00ee
+  revision: c93a99c
   branch: postmodern
   specs:
     dm-paperclip (2.4.1)
 
 GIT
   remote: https://github.com/jstewart/ezprint.git
-  revision: 0c49087284784f1d5fc694ac87dec6ab9e36650e
+  revision: 0c49087
   branch: rails3
   specs:
     ezprint (0.2.0)
