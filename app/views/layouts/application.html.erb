@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 
+<%= render :partial => 'layouts/version' %>
+
 <html>
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
 		<title><%= content_for?(:title) ? yield(:title) : "Snorby #{Snorby::VERSION}" %></title>
-
+		
 		<meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="description" content="Snorby - All About Simplicity" />
-    <meta name="keywords" content="" />
     <link rel="icon" href="/favicon.png" type="image/png" />
 
     <%= stylesheet_link_merged :snorby %>
-		
 		<%= javascript_include_merged :snorby %>
-		
     <%= csrf_meta_tag %>
-
 		<%= yield(:header) %>
 
 		<style type="text/css">
@@ -44,6 +42,5 @@
 		
 		<%= yield(:footer) %>
 		
-  </body>
-
-</html>
+  </body> 
+</html> 

@@ -1380,13 +1380,15 @@ ul.table div.content div.event-data div.event-data-holder div.event-data-holder-
 ul.table div.content div.event-data div.event-data-holder div.event-data-holder-inside div.payload-ascii,
 ul.table div.content div.event-data div.event-data-holder div.event-data-holder-inside div.payload{
 	background-color: #ededed;
-	border: 1px solid #000;
+	border: 5px solid #47494a;
 	color: #242424;
 	font-family: "Courier New", Courier, mono;
 	font-weight: normal;
 	font-style: normal;
 	text-decoration: none;
 	font-variant: normal;
+	overflow: auto;
+	max-height: 300px;
 	overflow: auto;
 }
 
