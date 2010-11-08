@@ -1,6 +1,11 @@
 Snorby::Application.routes.draw do
 
-  resources :jobs
+  resources :jobs do
+    member do
+      get :last_error
+      get :handler
+    end
+  end
 
   resources :classifications
 

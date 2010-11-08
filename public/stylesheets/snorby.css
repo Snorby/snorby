@@ -461,11 +461,12 @@ a {
 }
 
 #snorby-box #box-content{
-	height: 500px;
 	overflow: auto;
 	display: block;
 	position: relative;
 	padding: 10px;
+	height: 500px;
+	width: 750px; !important
 }
 
 #snorby-box #box-title{

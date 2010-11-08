@@ -31,18 +31,14 @@ class Sensor
     return Event.get(sid, last_cid) unless last_cid.blank?
     false
   end
-
+  
+  #
+  #  
+  # 
   def event_percentage
     begin
-      if Cache.all.blank? &&
-        if self.events_count == 0
-          0
-        else
-          ((self.events_count.to_f / Event.count.to_f) * 100).round(2)
-        end
-      else
-        ((self.events_count.to_f / Cache.last.event_count.to_f) * 100).round(2)
-      end
+      total_event_count = Sensor.all.map(&:events_count).sum
+      ((self.events_count.to_f / total_event_count.to_f) * 100).round
     rescue FloatDomainError
       0
     end

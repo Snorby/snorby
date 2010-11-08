@@ -145,6 +145,8 @@ var Snorby = {
 					centerOnScroll: true,
 	        zoomSpeedIn: 300, 
 	        zoomSpeedOut: 300,
+					transitionIn: 'elastic',
+					transitionOut: 'elastic',
 					overlayShow: true,
 					overlayOpacity: 0.5,
 					overlayColor: '#000',
@@ -335,6 +337,11 @@ var Snorby = {
 		
 		input_style: function(){
 
+			$('div#form-actions button.cancel').live('click', function() {
+				window.location = '/';
+				return false;
+			});
+
 			$('input').hint();
 			$('input[name=blank]').focus();
 
@@ -524,6 +531,26 @@ var Snorby = {
 			
 		};
 		
+	},
+	
+	jobs: function(){
+		
+		$('a.view_job_handler, a.view_job_last_error').live('click', function() {
+			$.fancybox({
+				padding: 0,
+				centerOnScroll: true,
+        zoomSpeedIn: 300, 
+        zoomSpeedOut: 300,
+				transitionIn: 'elastic',
+				transitionOut: 'elastic',
+				overlayShow: true,
+				overlayOpacity: 0.5,
+				overlayColor: '#000',
+				href: this.href
+			});
+			return false;
+		});
+		
 	}
 	
 }
@@ -534,6 +561,7 @@ jQuery(document).ready(function($) {
 	Snorby.admin();
 	Snorby.callbacks();
 	Snorby.hotkeys();
+	Snorby.jobs();
 	
 	Snorby.helpers.dropdown();
 	Snorby.helpers.input_style();

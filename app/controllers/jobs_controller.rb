@@ -11,6 +11,16 @@ class JobsController < ApplicationController
     end
   end
 
+  def last_error
+    @job = Snorby::Jobs.find.get(params[:id])
+    render :layout => false
+  end
+  
+  def handler
+    @job = Snorby::Jobs.find.get(params[:id])
+    render :layout => false
+  end
+
   def show
     @job = Snorby::Jobs.find.get(params[:id])
 
