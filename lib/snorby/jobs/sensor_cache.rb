@@ -19,45 +19,69 @@
 module Snorby
   module Jobs
 
-    class Stats < Struct.new(:verbose)
+    class SensorCache < Struct.new(:verbose)
 
       attr_accessor :events, :last_cache, :cache, :last_event
 
       def perform
-        
-        @tcp_events = []
-        @udp_events = []
-        @icmp_events = []
 
-        logit 'Looking for events...'
-        @events = since_last_cache
-
-        unless @events.blank?
-          @last_event = @events.last unless @events.blank?
-
-          logit 'Found events - processing...'
-
-          if defined?(@last_cache)
-            logit 'Found last cache...'
-            @cache = Cache.create(:sid => @last_event.sid, :cid => @last_event.cid, :ran_at => @last_event.timestamp)
-          else
-            logit 'No cache records found - creating first cache record...'
-            @last_cache = Cache.create(:sid => @last_event.sid, :cid => @last_event.cid, :ran_at => @last_event.timestamp)
-            @cache = @last_cache
-            reset_counter_cache_columns
-          end
-
-          logit 'Building cache attributes'
-
-          build_snorby_cache
-
-          logit 'Done...'
+        Sensor.all.each do |sensor|
+          @sensor = sensor
+          
+          logit 'Looking for events...'
+          @pager_events ||= since_last_cache(sensor)
+          @pager = @pager_events.page(0, :per_page => 10000, :order => [:timestamp.asc]).pager
+          
+          split_events_and_process unless @pager.total.zero?
+          
         end
 
-        Delayed::Job.enqueue(Snorby::Jobs::Stats.new(false), 1, Time.now + 30.minute)
+        Delayed::Job.enqueue(Snorby::Jobs::SensorCache.new(false), 1, Time.now + 30.minute)
       end
 
       private
+
+
+        def split_events_and_process
+
+          logit 'Splitting Events for processing...'
+          
+          logit "TOTAL COUNT: #{@pager.total_pages}/#{@pager.total}"
+          
+          @pager.total_pages.times do |count|
+            next if count.zero?
+            
+            @tcp_events = []
+            @udp_events = []
+            @icmp_events = []
+            
+            logit "COUNT: #{count}"
+            
+            @events = @pager_events.page(count, :per_page => 10000, :order => [:timestamp.asc])
+            
+            @last_event = @events.last unless @events.blank?
+
+            logit 'Found events - processing...'
+
+            if defined?(@last_cache)
+              logit 'Found last cache...'
+              @last_cache = Cache.last
+              @cache = Cache.create(:sid => @last_event.sid, :cid => @last_event.cid, :ran_at => @last_event.timestamp)
+            else
+              logit 'No cache records found - creating first cache record...'
+              @last_cache = Cache.create(:sid => @last_event.sid, :cid => @last_event.cid, :ran_at => @last_event.timestamp)
+              @cache = @last_cache
+              reset_counter_cache_columns
+            end
+
+            logit 'Building cache attributes'
+
+            build_snorby_cache
+
+            logit 'Done...'
+          end
+
+        end
 
         def logit(msg)
           STDOUT.puts "#{msg}" if verbose
@@ -80,12 +104,13 @@ module Snorby
         # property :severity_metrics, Object
 
         def reset_counter_cache_columns
-          Severity.all.update(:event_count => 0)
+          Severity.all.update(:events_count => 0)
           Sensor.all.update(:events_count => 0)
         end
 
         def build_snorby_cache
-
+          
+          build_sensor_event_count
           build_proto_counts
 
           @cache.update({
@@ -93,19 +118,19 @@ module Snorby
                           :tcp_count => fetch_tcp_count,
                           :udp_count => fetch_udp_count,
                           :icmp_count => fetch_icmp_count,
-                          :sensor_metrics => fetch_sensor_metrics,
                           :classification_metrics => fetch_classification_metrics,
                           :severity_metrics => fetch_severity_metrics
           })
 
-          # fetch_ip_metrics
-          # fetch_port_metrics
+          # :src_metrics => fetch_src_ip_metrics,
+          # :dst_metrics => fetch_dst_ip_metrics,
+
           @cache
         end
 
         def fetch_event_count
           logit '- fetch_event_count'
-          @last_cache.event_count + @events.count
+          @events.size
         end
 
         def build_proto_counts
@@ -125,48 +150,39 @@ module Snorby
         end
 
         def fetch_tcp_count
-          logit '- fetch_tcp_count'
+          logit '- fetching tcp count'
           @tcp_events.size
         end
 
         def fetch_udp_count
-          logit '- fetch_udp_count'
+          logit '- fetching udp count'
           @udp_events.size
         end
 
         def fetch_icmp_count
-          logit '- fetch_icmp_count'
+          logit '- fetching icmp count'
           @icmp_events.size
         end
-        
-        def fetch_sensor_metrics
+
+        def build_sensor_event_count
+          logit '- fetching sensor metrics'
+          count = @sensor.events_count + @events.size
+          @sensor.update!(:events_count => count)
+          count
+        end
+
+        def fetch_classification_metrics
+          logit '- fetching classification metrics'
+          
           metrics = {}
-          Sensor.all.each do |sensor|
-            metrics[sensor.sid] = @events.sensor(sensor.sid).size
-            sensor.events_count = sensor.events_count + metrics[sensor.sid]
-            sensor.save
+          Classification.all.each do |classification|
+            metrics[classification.id] = @events.classification(classification.id).size
           end
           metrics
         end
 
-        def fetch_ip_metrics
-
-        end
-
-        def fetch_port_metrics
-
-        end
-        
-        def fetch_classification_metrics
-           metrics = {}
-           Classification.all.each do |classification|
-             metrics[classification.id] = @events.classification(classification.id).size
-           end
-           metrics
-        end
-
         def fetch_severity_metrics
-          logit '- fetch_severity_metrics'
+          logit '- fetching severity metrics'
 
           severity = @events.map(&:signature).map(&:sig_priority)
           metrics = {}
@@ -174,18 +190,17 @@ module Snorby
           Severity.all.each do |sev|
             if severity.include?(sev.id)
               metrics[sev.id] = severity.collect { |s| s if s == sev.id }.compact.size
-              sev.event_count = sev.event_count + metrics[sev.id]
-              sev.save
+              sev.update!(:events_count => sev.events_count + metrics[sev.id])
             end
           end
 
           metrics
         end
 
-        def since_last_cache
-          return Event.all if Cache.all.blank?
+        def since_last_cache(sensor)
+          return Event.all.sensor(sensor) if Cache.all.blank?
           @last_cache = Cache.last
-          Event.all(:timestamp.gt => @last_cache.ran_at)
+          Event.all(:timestamp.gt => @last_cache.ran_at).sensor(sensor)
         end
 
     end

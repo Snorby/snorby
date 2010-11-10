@@ -26,6 +26,9 @@ class Sensor
 
   property :events_count, Integer, :index => true, :default => 0
 
+  def caches
+    Cache.all(:sid => sid)
+  end
 
   def last
     return Event.get(sid, last_cid) unless last_cid.blank?

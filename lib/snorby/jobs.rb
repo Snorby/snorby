@@ -16,7 +16,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-require 'snorby/jobs/stats'
+require 'snorby/jobs/sensor_cache'
 
 module Snorby
   
@@ -30,8 +30,8 @@ module Snorby
       Delayed::Job.enqueue(obj, priority, time)
     end
     
-    def self.cache?
-      !Snorby::Jobs.find.first(:handler.like => "%!ruby/struct:Snorby::Jobs::Stats%").blank?
+    def self.sensor_cache?
+      !Snorby::Jobs.find.first(:handler.like => "%!ruby/struct:Snorby::Jobs::SensorCache%").blank?
     end
     
   end

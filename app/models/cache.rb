@@ -2,8 +2,6 @@ class Cache
 
   include DataMapper::Resource
 
-  has 1, :event, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ]
-
   property :id, Serial
 
   property :sid, Integer
@@ -20,20 +18,12 @@ class Cache
   
   property :icmp_count, Integer, :default => 0
   
-  property :total_src, Integer, :default => 0
-  
-  property :total_dst, Integer, :default => 0
-  
-  property :uniq_src, Integer, :default => 0
-  
-  property :uniq_dst, Integer, :default => 0
-  
-  property :sensor_metrics, Object
-  
-  property :port_metrics, Object
-  
   property :classification_metrics, Object
   
   property :severity_metrics, Object
+
+  belongs_to :sensor, :parent_key => :sid, :child_key => :sid
+  
+  has 1, :event, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ]
 
 end

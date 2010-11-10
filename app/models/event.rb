@@ -67,8 +67,8 @@ class Event
     all(:classification_id => classification_id)
   end
 
-  def self.sensor(sensor_id)
-    all(:sid => sensor_id)
+  def self.sensor(sensor)
+    all(:sensor => sensor)
   end
 
   def self.find_by_ids(ids)
