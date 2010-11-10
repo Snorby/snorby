@@ -4,10 +4,6 @@ class Sensor
 
   storage_names[:default] = "sensor"
 
-  has n, :events, :child_key => :sid, :constraint => :destroy
-
-  has n, :ips, :child_key => :sid, :constraint => :destroy
-
   property :sid, Serial, :key => true, :index => true
 
   property :name, String, :default => 'Click To Change Me'
@@ -25,6 +21,12 @@ class Sensor
   property :last_cid, Integer, :index => true
 
   property :events_count, Integer, :index => true, :default => 0
+
+  has n, :events, :child_key => :sid, :constraint => :destroy
+
+  has n, :ips, :child_key => :sid, :constraint => :destroy
+  
+  has n, :notes, :child_key => :sid, :constraint => :destroy
 
   def caches
     Cache.all(:sid => sid)

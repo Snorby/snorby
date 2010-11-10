@@ -14,7 +14,6 @@ class Favorite
   
   property :user_id, Integer, :index => true
 
-
   after :create do
     event = self.event
     user = self.user

@@ -12,7 +12,9 @@ class User
   has n, :events, :through => :favorites
 
   property :favorites_count, Integer, :index => true, :default => 0
-
+  
+  property :notes_count, Integer, :index => true, :default => 0
+  
   # Primary key of the user
   property :id, Serial, :key => true, :index => true
 

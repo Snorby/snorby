@@ -13,6 +13,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.get(params['sid'], params['cid'])
+    @notes = @event.notes.all(:order => [:id.desc])
     respond_to do |format|
       format.html
       format.js

@@ -17,6 +17,8 @@ class Event
   
   property :users_count, Integer, :index => true, :default => 0
   
+  property :notes_count, Integer, :index => true, :default => 0
+  
   belongs_to :classification
   
   property :timestamp, DateTime
@@ -37,6 +39,8 @@ class Event
   
   has 1, :opt, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :constraint => :destroy
 
+  has n, :notes, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :constraint => :destroy
+  
   belongs_to :sensor, :parent_key => :sid, :child_key => :sid, :required => true
   
   belongs_to :signature, :child_key => :sig_id, :parent_key => :sig_id
@@ -45,6 +49,10 @@ class Event
 
   before :destroy do
     self.classification.down_counter(:events_count)
+  end
+
+  def to_param
+    "#{sid},#{cid}"
   end
 
   def self.last_month

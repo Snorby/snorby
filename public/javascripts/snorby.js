@@ -138,6 +138,24 @@ var Snorby = {
 		
 		events: function(){
 			
+			$('button.submit_new_note').live('click', function(e) {
+				e.preventDefault();
+				var event_sid = $(this).parent('div#form-actions').parent('div#new_note').attr('data-event-sid');
+				var event_cid = $(this).parent('div#form-actions').parent('div#new_note').attr('data-event-cid');
+				var note_body = $(this).parent('div#form-actions').parent('div#new_note').find('input#body').val();
+				
+				if (note_body.length > 0) {
+					
+					$.post('/notes/create', { sid: event_sid, cid: event_cid, body: note_body }, null, 'script');
+					
+				} else {
+					flash_message.push({type: "error", message: "The note body cannot be blank!"}); 
+					flash();
+				};
+				
+				return false;
+			});
+			
 			$('a.query-data').live('click', function() {
 				$('pre.query-data-content').hide();
 				$('pre#' + $(this).attr('data-content-name')).show();

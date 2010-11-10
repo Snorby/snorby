@@ -35,6 +35,10 @@ Snorby::Application.routes.draw do
 
   resources :events do
     
+    resources :notes do
+      
+    end
+    
     collection do
       get :lookup
       get :history
@@ -47,6 +51,8 @@ Snorby::Application.routes.draw do
     end
     
   end
+  
+  resources :notes
 
   resources :users do
     

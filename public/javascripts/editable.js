@@ -241,7 +241,7 @@ jQuery.fn.editable = function(target, options, callback) {
             });
         } else {
             jQuery(i).blur(function(e) {
-              /* TODO: maybe something here */
+							//...
             });
         }
 
@@ -278,7 +278,7 @@ jQuery.fn.editable = function(target, options, callback) {
                 /* show the saving indicator */
                 jQuery(self).html(settings.indicator);
                 jQuery.post(settings.target, submitdata, function(str) {
-                    self.innerHTML = str;
+                    self.innerHTML = str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
                     self.editing = false;
                     callback.apply(self, [self.innerHTML, settings]);
                 });
@@ -375,6 +375,7 @@ jQuery.editable = {
                             continue;
                         } 
                         var option = $('<option>').val(key).append(json[key]);
+												
                         select.append(option); 	 
                     }
                     /* TODO: leave only this to content so IE works too! */

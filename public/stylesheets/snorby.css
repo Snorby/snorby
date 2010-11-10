@@ -947,9 +947,9 @@ a {
 
 /* @group Helpers */
 
-.blur 	{	color: #bdbdbd}
+.blur {color: #bdbdbd}
 
-.blank 	{	color: #e5e5e5}
+.blank {color: #e5e5e5}
 
 .right{
 	float: right !important;
@@ -1091,6 +1091,11 @@ table th{
 	background-color: #ddd;
 	text-shadow: #fff 0 1px 0;
 	font-size: 0.9em;
+}
+
+table th img{
+	vertical-align: middle;
+	margin-top: -3px;
 }
 
 table th input{
@@ -1253,6 +1258,11 @@ ul.table li .row div.timestamp{
 	padding-right: 15px;
 }
 
+ul.table li .row div.timestamp img.has-notes{
+	vertical-align: middle;
+	margin-right: 5px;
+}
+
 ul.table li .row div.small{
 	display: block;
 	position: relative;
@@ -1347,7 +1357,7 @@ ul.table div.content div.event-data div.event-data-holder div.event-data-holder-
 	padding: 5px;
 }
 
-ul.table div.content div.event-data div.event-data-holder div.event-data-holder-inside div{
+ul.table div.content div.event-data div.event-data-holder div.event-data-holder-inside div.plus{
 	margin: 10px;
 	display: block;
 	position: relative;
@@ -2015,30 +2025,44 @@ td.chart{
 
 div.progress-container {
 	vertical-align: middle;
-  	border: 1px solid #ccc;
+  	border: 1px solid #c0c0c0;
   	width: 180px;
-  	padding: 1px; 
   	float: left; 
-  	background: white;
+	background: #fff;
 	display: block;
 	position: relative;
-	margin: 2px 5px 2px 0;
 	top: 6px;
+	overflow: hidden;
 }
 
-div.progress-container > div {
-  background-color: #ccd8e0; 
-  height: 12px;
+div.progress-container > div { 
+  	height: 17px;
+	background: transparent url(../images/page/chart-bg-blue.png) repeat-x;
 }
 
 div.progress-container > div > span{
-	height: 12px;
-	font-size: xx-small;
-	color: #000;
-	line-height: 12px;
+	height: 17px;
+	font-size: x-small;
+	color: #545454;
+	line-height: 17px;
 	display: block;
 	position: absolute;
 	right: 5px;
+	font-weight: bold;
+	text-shadow: #fff 0 1px 0;
+}
+
+/* @end */
+
+/* @group Notes */
+
+div.notes{
+	margin: 0px;
+}
+
+div.notes div{
+	margin: 0; !important
+	padding: 0; !important
 }
 
 /* @end */
