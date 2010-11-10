@@ -32,15 +32,15 @@ module Snorby
     end
     
     def whois
-      @whois = Whois::Client.new.query(@address)
+      @whois ||= Whois::Client.new.query(@address)
     end
     
     def hostname
-      @hostname = Socket::getaddrinfo('210.180.98.85',nil)[0][2]
+      @hostname ||= Socket::getaddrinfo(@address,nil)[0][2]
     end
     
     def dns
-      @dns ||= Resolver(@address)
+      @dns ||= Resolver(@hostname)
     end
     
   end

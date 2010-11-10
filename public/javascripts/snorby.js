@@ -138,6 +138,12 @@ var Snorby = {
 		
 		events: function(){
 			
+			$('a.query-data').live('click', function() {
+				$('pre.query-data-content').hide();
+				$('pre#' + $(this).attr('data-content-name')).show();
+				return false;
+			});
+			
 			$('a.snorbybox').live('click', function() {
 				$('dl.drop-down-menu').fadeOut('slow');
 				$.fancybox({
