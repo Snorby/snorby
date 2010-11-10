@@ -1,4 +1,4 @@
 $('div#notes_<%= @event.id %>').prepend("<%= escape_javascript(render(:partial => @note)) %>");
 Snorby.helpers.remove_click_events(false);
-$('div#notes_<%= @event.id %>').find('input#body').val('');
+$('div#notes_<%= @event.id %>').find('textarea#body').val('');
 flash();

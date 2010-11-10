@@ -1,17 +1,17 @@
 GIT
-  remote: http://github.com/postmodern/dm-paperclip.git
-  revision: c93a99c
-  branch: postmodern
-  specs:
-    dm-paperclip (2.4.1)
-
-GIT
   remote: https://github.com/jstewart/ezprint.git
   revision: 0c49087
   branch: rails3
   specs:
     ezprint (0.2.0)
       pdfkit (>= 0.4.1)
+
+GIT
+  remote: https://github.com/solnic/dm-paperclip.git
+  revision: 78b197122adc9ca89aa60dbc4527cbbaf36e2d76
+  branch: master
+  specs:
+    dm-paperclip (2.4.1)
 
 GEM
   remote: http://rubygems.org/

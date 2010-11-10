@@ -1,5 +1,15 @@
-<%= note.sid %>
-<%= note.cid %>
-<%= note.user %>
-<%= note.body %>
-<br />
+<div id='note_<%= note.id %>' class='event-note'>
+	
+	<div class='note-user-name'>
+		<%= note.user %>
+	</div>
+	
+	<div class='note-body'>
+		<%= note.body %>
+	</div>
+	
+	<div class='note-timestamp'>
+		
+	</div>
+	
+</div>

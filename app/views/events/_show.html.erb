@@ -19,20 +19,7 @@
 		
 		<div class='section-title plus'>Notes</div>
 		
-	</div>
-	
-	<div id='notes_<%= @event.id %>' class='notes'>
-		
-		<%= render @notes %>
-		
-		<div id='new_note' class='fake_form' data-event-sid='<%= @event.sid %>' data-event-cid='<%= @event.cid %>'>
-			<%= text_field_tag :body %>
-			
-			<%= form_actions do %>
-				<%= button "Submit Note", :class => 'submit_new_note' %>
-			<% end %>
-			
-		</div>
+		<%= render :partial => 'events/notes' %>
 		
 	</div>
 	

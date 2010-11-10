@@ -142,7 +142,7 @@ var Snorby = {
 				e.preventDefault();
 				var event_sid = $(this).parent('div#form-actions').parent('div#new_note').attr('data-event-sid');
 				var event_cid = $(this).parent('div#form-actions').parent('div#new_note').attr('data-event-cid');
-				var note_body = $(this).parent('div#form-actions').parent('div#new_note').find('input#body').val();
+				var note_body = $(this).parent('div#form-actions').parent('div#new_note').find('textarea#body').val();
 				
 				if (note_body.length > 0) {
 					

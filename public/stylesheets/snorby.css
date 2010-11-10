@@ -2057,12 +2057,48 @@ div.progress-container > div > span{
 /* @group Notes */
 
 div.notes{
-	margin: 0px;
+	display: block;
+	position: relative;
+	overflow: hidden;
 }
 
-div.notes div{
-	margin: 0; !important
-	padding: 0; !important
+div#new_note{
+	margin-top: 20px;
+	display: block;
+	position: relative;
+	overflow: hidden;
+}
+
+div.notes div#new_note textarea#body{
+	outline: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+	height: 150px;
+	background-color: #000;
+	width: 940px;
+	padding: 5px;
+	color: #fff;
+	font-weight: normal;
+	font-style: normal;
+	text-decoration: none;
+	font-variant: normal;
+	letter-spacing: -1px;
+	font-size: 1.2em;
+	border: 4px solid #525252;
+}
+
+.event-note{
+	background: #ededed;
+	padding: 10px;
+	border-top: 1px solid #555;
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+
+div.notes div#new_note textarea#body:focus,
+div.notes div#new_note textarea#body:active{
+	outline: none;
 }
 
 /* @end */
