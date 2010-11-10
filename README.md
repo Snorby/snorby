@@ -24,10 +24,13 @@ Snorby is a ruby on rails web application for network security monitoring that i
 	* Mac OSX: 
 	
 		$ brew install imagemagick
+		
 		$ port install imagemagick
+		
 	* Linux:
 	
 		$ apt-get install imagemagick
+		
 		$ yum install imagemagick
 
 * Install Gem Dependencies
