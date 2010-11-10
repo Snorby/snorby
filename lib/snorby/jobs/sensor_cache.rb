@@ -24,19 +24,23 @@ module Snorby
       attr_accessor :events, :last_cache, :cache, :last_event
 
       def perform
+        begin
 
-        Sensor.all.each do |sensor|
-          @sensor = sensor
-          
-          logit 'Looking for events...'
-          @pager_events ||= since_last_cache(sensor)
-          @pager = @pager_events.page(0, :per_page => 10000, :order => [:timestamp.asc]).pager
-          
-          split_events_and_process unless @pager.total.zero?
-          
+          Sensor.all.each do |sensor|
+            @sensor = sensor
+
+            logit "Looking for events..."
+            @pager_events = since_last_cache
+            @pager = @pager_events.page(0, :per_page => 10000, :order => [:timestamp.asc]).pager
+
+            split_events_and_process
+
+          end
+
+          Delayed::Job.enqueue(Snorby::Jobs::SensorCache.new(false), 1, Time.now + 30.minute)
+        rescue
+          @cache.destroy! if defined?(@cache)
         end
-
-        Delayed::Job.enqueue(Snorby::Jobs::SensorCache.new(false), 1, Time.now + 30.minute)
       end
 
       private
@@ -45,20 +49,23 @@ module Snorby
         def split_events_and_process
 
           logit 'Splitting Events for processing...'
-          
+
           logit "TOTAL COUNT: #{@pager.total_pages}/#{@pager.total}"
-          
-          @pager.total_pages.times do |count|
+
+          # => EEEWWWWWW! - Needs Works
+          total_page_count = @pager.total_pages + 1
+          total_page_count.times do |count|
+            puts count
             next if count.zero?
-            
+
             @tcp_events = []
             @udp_events = []
             @icmp_events = []
-            
+
             logit "COUNT: #{count}"
-            
+
             @events = @pager_events.page(count, :per_page => 10000, :order => [:timestamp.asc])
-            
+
             @last_event = @events.last unless @events.blank?
 
             logit 'Found events - processing...'
@@ -84,7 +91,7 @@ module Snorby
         end
 
         def logit(msg)
-          STDOUT.puts "#{msg}" if verbose
+          STDOUT.puts "Sensor #{@sensor.sid}: #{msg}" if verbose
         end
 
         # property :id, Serial
@@ -109,7 +116,7 @@ module Snorby
         end
 
         def build_snorby_cache
-          
+
           build_sensor_event_count
           build_proto_counts
 
@@ -173,7 +180,7 @@ module Snorby
 
         def fetch_classification_metrics
           logit '- fetching classification metrics'
-          
+
           metrics = {}
           Classification.all.each do |classification|
             metrics[classification.id] = @events.classification(classification.id).size
@@ -197,10 +204,10 @@ module Snorby
           metrics
         end
 
-        def since_last_cache(sensor)
-          return Event.all.sensor(sensor) if Cache.all.blank?
+        def since_last_cache
+          return Event.all.sensor(@sensor) if Cache.all.blank?
           @last_cache = Cache.last
-          Event.all(:timestamp.gt => @last_cache.ran_at).sensor(sensor)
+          Event.all(:timestamp.gt => @last_cache.ran_at).sensor(@sensor)
         end
 
     end
