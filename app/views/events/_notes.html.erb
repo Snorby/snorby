@@ -1,12 +1,19 @@
 <div id='notes_<%= @event.id %>' class='notes plus'>
 	
-	<%= render @notes %>
+	<% if @notes.blank? %>
+		<strong class='no-notes'>
+			This event currently has zero notes - You can add a note by clicking the button below.<br />
+			<br />
+		</strong>
+	<% else %>
+		<%= render @notes %>
+	<% end %>
 	
-	<div id='new_note' style='display:none;' class='fake_form' data-event-sid='<%= @event.sid %>' data-event-cid='<%= @event.cid %>'>
-		<%= text_area_tag :body %>
+	<div id='new_note' class='fake_form' data-event-sid='<%= @event.sid %>' data-event-cid='<%= @event.cid %>'>
+		<%= text_area_tag :body, {}, :style => 'display:none;' %>
 		
 		<%= form_actions do %>
-			<%= button "Submit Note", :class => 'submit_new_note' %>
+			<%= button "Add A Note To This Event", :class => 'add_new_note' %>
 		<% end %>
 		
 	</div>

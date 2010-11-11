@@ -1,15 +1,18 @@
-<%= title "Settings" -%>
+<%= title "User Settings".html_safe -%>
 
-<div id='settings' class='grid_12 page boxit'>
+<div id='settings' class='grid_12 boxit page'>
 	
 	<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :multipart => true }) do |f| %>
 	  <%= devise_error_messages! %>
 
 		<p>
-			<%= f.label :avatar %><br />
-			<%= f.file_field :avatar %><br />
+			<div class='user-show-avatar'>
+				<%= image_tag(@user.avatar.url(:thumb), :class => 'avatar') %>
+				<%= f.label :avatar %><br />
+				<%= f.file_field :avatar %><br />
+			</div>
 		</p>
-		
+
 		<br />
 
 	  <p><%= f.label :email %><br />
@@ -37,11 +40,11 @@
 		<% end %>
 
 		<%= form_actions do %>
-		
+
 			<%= button "Update Settings", :class => 'success' %>
-			
+
 			<%= button "Cancel", :class => 'warning cancel' %>
-		
+
 		<% end %>
 
 	<% end %>

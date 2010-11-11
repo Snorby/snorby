@@ -761,6 +761,11 @@ a {
 	color: #313131;
 }
 
+#wrapper #content #title #title-header img{
+	float: left;
+	vertical-align: middle;
+}
+
 #wrapper #content #title #title-menu-holder{
 	line-height: 35px;
 	height: 35px;
@@ -2062,8 +2067,11 @@ div.notes{
 	overflow: hidden;
 }
 
+strong.no-notes{
+	color: #acacac;
+}
+
 div#new_note{
-	margin-top: 20px;
 	display: block;
 	position: relative;
 	overflow: hidden;
@@ -2074,9 +2082,9 @@ div.notes div#new_note textarea#body{
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
-	height: 150px;
+	height: 130px;
 	background-color: #000;
-	width: 940px;
+	width: 800px;
 	padding: 5px;
 	color: #fff;
 	font-weight: normal;
@@ -2089,16 +2097,105 @@ div.notes div#new_note textarea#body{
 }
 
 .event-note{
-	background: #ededed;
+  -webkit-box-shadow: 0px 1px 5px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0px 1px 5px rgba(0,0,0,0.2);
+  box-shadow: 0px 1px 5px rgba(0,0,0,0.2);
+	display: block;
+	position: relative;
+	overflow: hidden;
+	background-color: #212121;
 	padding: 10px;
-	border-top: 1px solid #555;
-	margin-top: 5px;
+	border: 1px solid #3f3f3f;
 	margin-bottom: 10px;
+}
+
+.event-note:hover{
+	background-color: #242424;	
+}
+
+.event-note .note-avatar-holder{
+	float: left;
+	width: 55px;
+	display: block;
+	position: relative;
+	overflow: hidden;
+}
+
+.event-note .note-avatar-holder img{
+	background: #000;
+	border: 1px solid #3a3a3a;
+	float: left;
+	margin: 1px 10px 0px 0px;
+	padding: 4px;
+	width: 32px;
+	height: 32px;
+}
+
+.event-note .username{
+	font-weight: normal;
+	text-decoration: none;
+	font-variant: normal;
+	color: #bdced6;
+	text-shadow: #000 0 1px 0;
+	margin-bottom: 10px;
+	font-style: normal;
+	font-size: 1.2em;
+}
+
+.event-note .note-body{
+	color: #fff;
+	margin-bottom: 20px;
+}
+
+.event-note .note-options{
+	display: none;
+	visibility: hidden;
+}
+
+.event-note:hover .note-options{
+	text-decoration: none;
+	font-variant: normal;
+	font-size: small;
+	text-align: right;
+	display: block;
+	position: absolute;
+	overflow: hidden;
+	top: 5px;
+	right: 10px;
+	visibility: visible;
+}
+
+.event-note .note-options a{
+	font-size: 0.8em;
+	color: #818488;
+}
+
+.event-note .note-options a:hover{
+	color: red;
 }
 
 div.notes div#new_note textarea#body:focus,
 div.notes div#new_note textarea#body:active{
 	outline: none;
+}
+
+/* @end */
+
+/* @group User Settings */
+
+img.avatar{
+	border: 5px solid #ededed;
+}
+
+#settings .user-show-avatar{
+	position: relative;
+	display: block;
+	overflow: hidden;
+}
+
+#settings .user-show-avatar img{
+	float: left;
+	margin-right: 10px;
 }
 
 /* @end */

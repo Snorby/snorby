@@ -46,7 +46,8 @@ class User
   has_attached_file :avatar,
   :styles => {
     :medium => "300x300>",
-    :thumb => "100x100>"
+    :small => "32x32>",
+    :thumb => "80x80>"
   }
   
   validates_attachment_content_type :avatar, :content_type => ["image/png", "image/gif", "image/jpeg"]

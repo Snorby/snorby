@@ -1,0 +1,2 @@
+$('div#notes_<%= @event.id %>').prepend("<%= escape_javascript(render(:partial => 'notes/add_note')) %>");
+Snorby.helpers.remove_click_events(false);
