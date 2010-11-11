@@ -586,7 +586,7 @@ var Snorby = {
 			});
 			
 			$(document).bind('keydown', 'ctrl+right', function() {
-				$('div.pager ul.pager.main li.last a').click();
+				$('div.pager.main ul.pager li.last a').click();
 				return false;
 			});
 			
@@ -596,12 +596,12 @@ var Snorby = {
 			});
 			
 			$(document).bind('keydown', 'right', function() {
-				$('div.pager ul.pager.main li.next a').click();
+				$('div.pager.main ul.pager li.next a').click();
 				return false;
 			});
 			
 			$(document).bind('keydown', 'ctrl+left', function() {
-				$('div.pager ul.pager.main li.first a').click();
+				$('div.pager.main ul.pager li.first a').click();
 				return false;
 			});
 			
@@ -611,7 +611,7 @@ var Snorby = {
 			});
 			
 			$(document).bind('keydown', 'left', function() {
-				$('div.pager ul.pager.main li.previous a').click();
+				$('div.pager.main ul.pager li.previous a').click();
 				return false;
 			});
 			
