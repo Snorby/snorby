@@ -7,6 +7,7 @@ javascripts:
   - hotkeys
   - mustache
   - easing
+  - tipsy
   - fancybox
   - growl
   - colorpicker

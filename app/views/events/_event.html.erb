@@ -20,7 +20,7 @@
 		
 		<div class='click timestamp'>
 			<% unless event.notes.blank? %>
-				<%= image_tag('icons/notes.png', :class => 'has-notes') %>
+				<span title="This event has <%= pluralize(event.notes_count, 'note') %>" class='add_tipsy round'><%= event.notes_count %></span>
 			<% end %>
 			<%= event.pretty_time %>
 		</div>

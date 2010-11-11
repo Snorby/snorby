@@ -411,6 +411,12 @@ var Snorby = {
 	
 	helpers: {
 		
+		tipsy: function(){
+			
+			$('.add_tipsy').tipsy({fade: true, gravity: 's'});
+			
+		},
+		
 		input_style: function(){
 
 			$('div#form-actions button.cancel').live('click', function() {
@@ -652,6 +658,7 @@ jQuery(document).ready(function($) {
 	Snorby.hotkeys();
 	Snorby.jobs();
 	
+	Snorby.helpers.tipsy();
 	Snorby.helpers.dropdown();
 	Snorby.helpers.input_style();
 	Snorby.helpers.persistence_selections();
