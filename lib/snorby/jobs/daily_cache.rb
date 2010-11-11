@@ -3,9 +3,7 @@ module Snorby
     class DailyCache < Struct.new(:verbose)
       
       def perform
-        
-        
-        
+
       end
       
       def fetch_src_ip_metrics

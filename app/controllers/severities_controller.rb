@@ -13,17 +13,18 @@ class SeveritiesController < ApplicationController
   def create
     @severity = Severity.create(params[:severity])
     if @severity.save
-      redirect_to severities_path
+      redirect_to severities_path, :notice => 'Severity Created Successfully.'
     else
-      render :action => 'new'
+      render :action => 'new', :notice => 'Error: Unable To Create Record.'
     end
   end
 
   def update
     @severity = Severity.get(params[:id])
     if @severity.update(params[:severity])
-      redirect_to severities_path
+      redirect_to severities_path, :notice => 'Severity Updated Successfully.'
     else
+      render :action => 'edit', :notice => 'Error: Unable To Save Record.'
     end
   end
 
@@ -33,6 +34,8 @@ class SeveritiesController < ApplicationController
 
   def destroy
     @severity = Severity.get(params[:id])
+    @severity.destroy
+    redirect_to severities_path, :notice => 'Severity Removed Successfully.'
   end
 
 end

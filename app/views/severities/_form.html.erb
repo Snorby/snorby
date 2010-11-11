@@ -5,15 +5,46 @@
 	</script>
 <% end %>
 
-<%= simple_form_for @severity do |f| %>
-  <%= f.input :name %>
-	<%= f.input :sig_id %>
+<div id='severity-form' class='grid_12 boxit page'>
+	<%= form_for @severity, :html => { :class => 'validate' } do |f| %>
+	  
+		<%= error_messages_for(@severity) %>
 	
-	<div id='severity-color-bg'><div></div></div>
-	<div id='severity-color-text'><div></div></div>
+		<p>
+			<%= f.label 'Severity Name' %><br />
+	  	<%= f.text_field :name, :class => 'required', :autocomplete => :off %>
+		</p>
 		
-  <%= f.input :bg_color, :as => :hidden %>
-  <%= f.input :text_color, :as => :hidden %>
-  <%= f.button :submit %>
-<% end %>
+		<p>
+			<%= f.label 'Severity Priority' %> <i>(The priority of the ids event you want to represent)</i><br />
+	  	<%= f.text_field :sig_id, :class => 'required number', :autocomplete => :off %>
+		</p>
+		
+		<p>
+			<%= f.label 'Example' %>:
+			<span class="severity" style='background-color: <%= @severity.bg_color %>;color: <%= @severity.text_color %>;'>Example</span><br />
+		</p>
+		
+		<br />
+		
+		<p>
+			<%= f.label 'Severity Background' %><br />
+	  	<%= f.text_field :bg_color, :class => 'required hex-color', :id => 'severity-color-bg', :autocomplete => :off %>
+		</p>
+		
+		<p>
+			<%= f.label 'Severity Text' %><br />
+	  	<%= f.text_field :text_color, :class => 'required hex-color', :id => 'severity-color-text', :autocomplete => :off %>
+		</p>
+	
+		<%= form_actions do %>
 
+			<%= button "Save Severity", :class => 'success' %>
+
+			<%= button "Cancel", :class => 'warning cancel' %>
+
+		<% end %>
+	
+	<% end %>
+	
+</div>

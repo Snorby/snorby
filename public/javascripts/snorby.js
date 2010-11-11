@@ -332,7 +332,7 @@ var Snorby = {
 	admin: function(){
 		
 		$('#severity-color-bg').ColorPicker({
-			color: $('input#severity_bg_color').attr('value'),
+			color: $('#severity-color-bg').attr('value'),
 			onShow: function (colpkr) {
 				$(colpkr).fadeIn(500);
 				return false;
@@ -345,13 +345,13 @@ var Snorby = {
 					$(el).ColorPickerHide();
 			},
 			onChange: function (hsb, hex, rgb) {
-				$('input#severity_bg_color').val('#'+hex);
-				$('#severity-color-bg div').css('backgroundColor', '#' + hex);
+				$('#severity-color-bg').val('#'+hex);
+				$('span.severity').css('backgroundColor', '#' + hex);
 			}
 		});
 		
 		$('#severity-color-text').ColorPicker({
-			color: $('input#severity_text_color').attr('value'),
+			color: $('#severity-color-text').attr('value'),
 			onShow: function (colpkr) {
 				$(colpkr).fadeIn(500);
 				return false;
@@ -364,8 +364,8 @@ var Snorby = {
 					$(el).ColorPickerHide();
 			},
 			onChange: function (hsb, hex, rgb) {
-				$('input#severity_text_color').val('#'+hex);
-				$('#severity-color-text div').css('backgroundColor', '#' + hex);
+				$('#severity-color-text').val('#'+hex);
+				$('span.severity').css('color', '#' + hex);
 			}
 		});
 	},
@@ -633,6 +633,16 @@ var Snorby = {
 		
 	},
 	
+	validations: function(){
+		
+		jQuery.validator.addMethod("hex-color", function(value, element, param) {
+			return this.optional(element) || /^#?([a-f]|[A-F]|[0-9]){3}(([a-f]|[A-F]|[0-9]){3})?$/i.test(value); 
+		}, jQuery.validator.messages.url);
+		
+		$('.validate').validate();
+		
+	},
+	
 	jobs: function(){
 		
 		$('a.view_job_handler, a.view_job_last_error').live('click', function() {
@@ -660,6 +670,7 @@ jQuery(document).ready(function($) {
 	Snorby.callbacks();
 	Snorby.hotkeys();
 	Snorby.jobs();
+	Snorby.validations();
 	
 	Snorby.helpers.tipsy();
 	Snorby.helpers.dropdown();

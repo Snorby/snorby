@@ -1,6 +1,8 @@
+
+#
 # Props To a2800276 (tim@kuriositaet.de) for the original Hexy Gem
 # This code is a fork of Hexy modified for html output.
-
+#
 module Snorby
 
   class Payload
@@ -70,7 +72,7 @@ module Snorby
             str << " #{string}" if @annotate == :ascii
             str << "\n"
           end
-          
+
         }
         str << "\n"
         return "<span class='payload-ascii'>#{CGI::escapeHTML(str)}</span>" if @ascii
