@@ -28,8 +28,12 @@ module ApplicationHelper
     link_to title, {:sort => column, :direction => direction}, {:class => css_class}
   end
 
-  def pager(collection, path)
-    %{<div class='pager'>#{collection.pager.to_html("#{path}", :size => 9)}</div>}.html_safe
+  def pager(collection, path, fade_content=true)
+    if fade_content
+      %{<div class='pager main'>#{collection.pager.to_html("#{path}", :size => 9)}</div>}.html_safe
+    else
+      %{<div class='pager notes-pager'>#{collection.pager.to_html("#{path}", :size => 9)}</div>}.html_safe
+    end
   end
 
   def drop_down_for(name, icon_path, id, &block)

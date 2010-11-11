@@ -1,2 +1,4 @@
 $('li#event_<%= @event.sid %><%= @event.cid %> .event-data').html("<%= escape_javascript(render(:partial => 'events/show')) %>");
 $('li#event_<%= @event.sid %><%= @event.cid %> .event-data').slideDown('fast');
+$('div.content').fadeTo(500, 1);
+Snorby.helpers.remove_click_events(false);

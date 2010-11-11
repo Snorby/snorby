@@ -138,6 +138,11 @@ var Snorby = {
 		
 		events: function(){
 			
+			$('button.add_new_note-working').live('click', function(e) {
+				e.preventDefault();
+				return false;
+			});
+			
 			$('button.cancel-note').live('click', function(e) {
 				e.preventDefault();
 				$(this).parents('div#new_note_box').remove();
@@ -152,6 +157,11 @@ var Snorby = {
 				if ($('div#new_note_box').length > 0) {
 					
 				} else {
+					$(this).removeClass('add_new_note').addClass('add_new_note-working');
+					
+					var current_width = $(this).width();
+					$(this).addClass('loading').css('width', current_width);
+					
 					$.get('/notes/new', { sid: event_sid, cid: event_cid }, null, 'script');
 				};
 				
@@ -165,6 +175,9 @@ var Snorby = {
 				var note_body = $(this).parent('div#form-actions').parent('div#new_note').find('textarea#body').val();
 				
 				if (note_body.length > 0) {
+					
+					var current_width = $(this).width();
+					$(this).addClass('loading').css('width', current_width);
 					
 					$.post('/notes/create', { sid: event_sid, cid: event_cid, body: note_body }, null, 'script');
 					
@@ -189,8 +202,6 @@ var Snorby = {
 					centerOnScroll: true,
 	        zoomSpeedIn: 300, 
 	        zoomSpeedOut: 300,
-					transitionIn: 'elastic',
-					transitionOut: 'elastic',
 					overlayShow: true,
 					overlayOpacity: 0.5,
 					overlayColor: '#000',
@@ -488,7 +499,12 @@ var Snorby = {
 					if (current_width < 16) { var current_width = 16 };
 					
 					$(this).addClass('loading').css('width', current_width);
-					$('div.content, tbody.content').fadeTo(500, 0.4);
+					
+					if ($(this).parents('div.pager-notes')) {
+						
+					} else {
+						$('div.content, tbody.content').fadeTo(500, 0.4);
+					};
 					
 					Snorby.helpers.remove_click_events(true);
 					$.getScript($(this).find('a').attr('href'));
@@ -549,22 +565,32 @@ var Snorby = {
 			});
 			
 			$(document).bind('keydown', 'ctrl+right', function() {
-				$('div.pager ul.pager li.last a').click();
+				$('div.pager ul.pager.main li.last a').click();
+				return false;
+			});
+			
+			$(document).bind('keydown', 'shift+right', function() {
+				$('div.pager.notes-pager ul.pager li.next a').click();
 				return false;
 			});
 			
 			$(document).bind('keydown', 'right', function() {
-				$('div.pager ul.pager li.next a').click();
+				$('div.pager ul.pager.main li.next a').click();
 				return false;
 			});
 			
 			$(document).bind('keydown', 'ctrl+left', function() {
-				$('div.pager ul.pager li.first a').click();
+				$('div.pager ul.pager.main li.first a').click();
+				return false;
+			});
+			
+			$(document).bind('keydown', 'shift+left', function() {
+				$('div.pager.notes-pager ul.pager li.previous a').click();
 				return false;
 			});
 			
 			$(document).bind('keydown', 'left', function() {
-				$('div.pager ul.pager li.previous a').click();
+				$('div.pager ul.pager.main li.previous a').click();
 				return false;
 			});
 			
@@ -585,8 +611,6 @@ var Snorby = {
 				centerOnScroll: true,
         zoomSpeedIn: 300, 
         zoomSpeedOut: 300,
-				transitionIn: 'elastic',
-				transitionOut: 'elastic',
 				overlayShow: true,
 				overlayOpacity: 0.5,
 				overlayColor: '#000',

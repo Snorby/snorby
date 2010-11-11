@@ -3,4 +3,5 @@ $('div#new_note_box').remove();
 Snorby.helpers.remove_click_events(false);
 $('div#notes_<%= @event.id %>').find('textarea#body').val('');
 $('strong.no-notes').remove();
+$('button').removeClass('loading');
 flash();

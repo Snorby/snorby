@@ -7,6 +7,9 @@
 		</strong>
 	<% else %>
 		<%= render @notes %>
+		
+		<%= pager(@notes, "/events/show/#{@event.sid}/#{@event.cid}", false) %>
+		
 	<% end %>
 	
 	<div id='new_note' class='fake_form' data-event-sid='<%= @event.sid %>' data-event-cid='<%= @event.cid %>'>

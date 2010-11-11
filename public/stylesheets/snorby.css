@@ -1496,6 +1496,79 @@ ul.pager li{
 	margin-right: 2px;
 }
 
+.notes ul.pager{
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	display: block;
+	position: relative;
+	overflow: hidden;
+	margin-right: auto;
+	margin-top: 10px;
+	margin-left: auto;
+	background-color: #1b1b1b;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-bottom: 1px solid #fff;
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.notes div.pagination span,
+.notes div.pagination em,
+.notes ul.pager li{
+	border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 1em;
+	font-weight: bold;
+	line-height: 1.25em;
+	overflow: visible;
+	padding: 7px;
+	width: auto;
+	zoom: 1;
+	background: #282828 -webkit-gradient(linear, 0% 0%, 0% 100%, from(#282828), to(#000));
+	background-color: #282828;
+	border: 1px solid #000;
+	color: #333;
+	text-shadow: white 0px 1px 0px;
+	padding: 6px;
+	text-decoration: none;
+	font-variant: normal;
+	text-align: center;
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+.notes ul.pager li a{
+	width: 3em;
+	font-weight: normal;
+	text-decoration: none;
+	font-variant: normal;
+	color: #fff;
+	font-size: 1.1em;
+	font-style: normal;
+	text-shadow: #000 0 1px 0;
+}
+
+.notes ul.pager li.active a{
+	color: #fd2516;
+	font-weight: bold;
+	text-decoration: none;
+	font-variant: normal;
+}
+
+.notes div.pagination span:hover,
+.notes ul.pager li:hover{
+	border: 1px solid #424242;
+}
+
+.notes ul.pager li.loading{
+	text-indent: -9999em;
+	background: #000 url(../images/icons/pager.gif) no-repeat center center;
+}
+
 div.pagination span:hover,
 ul.pager li:hover{
 	color: #1b67fb;
@@ -1909,6 +1982,11 @@ button.default,a.button.default {
 	margin-right: 10px;
 }
 
+
+button.default.loading,a.button.default.loading{
+	text-indent: -9999em;
+	background: #575757 url(../images/icons/pager.gif) no-repeat center center;
+}
 
 button.default.warning,a.button.default.warning{
 	color: #fd3f42;
