@@ -413,7 +413,10 @@ var Snorby = {
 		
 		tipsy: function(){
 			
-			$('.add_tipsy').tipsy({fade: true, gravity: 's'});
+			$('.add_tipsy').tipsy({
+				fade: true, 
+				gravity: 's'
+			});
 			
 		},
 		

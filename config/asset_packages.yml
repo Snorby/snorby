@@ -7,13 +7,13 @@ javascripts:
   - hotkeys
   - mustache
   - easing
-  - tipsy
   - fancybox
   - growl
   - colorpicker
   - editable
   - hint
   - scrollto
+  - tipsy
   - snorby
 stylesheets: 
 - snorby: 
