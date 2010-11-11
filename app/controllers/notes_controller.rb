@@ -1,6 +1,7 @@
 class NotesController < ApplicationController
   
-  before_filter :find_event
+  before_filter :require_administrative_privileges, :except => [:destroy, :edit, :update]
+  before_filter :find_event, :only => [:create, :new]
   
   def find_event
     @event = Event.get(params[:sid], params[:cid])
@@ -27,12 +28,19 @@ class NotesController < ApplicationController
   end
   
   def edit
+    @note = Note.get(params[:id])
   end
   
   def update
+    @note = Note.get(params[:id])
+    if @note.update(params[:id])
+      
+    end
   end
   
   def destroy
+    @note = Note.get(params[:id])
+    @note.destroy
   end
 
 end

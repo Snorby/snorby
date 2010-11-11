@@ -137,6 +137,27 @@ var Snorby = {
 		},
 		
 		events: function(){
+		
+			$('a.edit-event-note').live('click', function(e) {
+				e.preventDefault();
+				var note = $(this).parents('div.event-note');
+				var note_id = $(this).attr('data-note-id');
+				$.getScript('/notes/' + note_id + '/edit');
+				return false;
+			});
+			
+			$('a.destroy-event-note').live('click', function(e) {
+				e.preventDefault();
+				var note = $(this).parents('div.event-note');
+				var note_id = $(this).attr('data-note-id');
+				
+				if ( confirm("Are you sure you want to delete this note?") ) {
+					note.fadeOut('slow');
+					$.post('/notes/destroy', { id: note_id, '_method': 'delete' });
+				};
+				
+				return false;
+			});
 			
 			$('button.add_new_note-working').live('click', function(e) {
 				e.preventDefault();

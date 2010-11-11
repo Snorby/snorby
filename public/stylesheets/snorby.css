@@ -1988,6 +1988,12 @@ button.default.loading,a.button.default.loading{
 	background: #575757 url(../images/icons/pager.gif) no-repeat center center;
 }
 
+button.default.loading:hover,a.button.default.loading:hover{
+	text-indent: -9999em;
+	background: #575757 url(../images/icons/pager.gif) no-repeat center center;
+}
+
+
 button.default.warning,a.button.default.warning{
 	color: #fd3f42;
 }
