@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  respond_to :html, :xml, :json, :js
+  respond_to :html, :xml, :json, :js, :csv
 
   def index
     @events = Event.all(:classification_id => 0).page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:timestamp.desc])
@@ -25,6 +25,16 @@ class EventsController < ApplicationController
     end
   end
 
+  def export
+    @events = Event.find_by_ids(params[:events])
+
+    respond_to do |format|
+      format.json { render :json => @events }
+      format.xml { render :xml => @events }
+      format.csv { render :json => @events.to_csv }
+    end
+  end
+
   def history
     @events = Event.all(:updated_by_id => @current_user.id).page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:timestamp.desc])
     @classifications ||= Classification.all
@@ -37,12 +47,12 @@ class EventsController < ApplicationController
     @events.each do |event|
       next unless event
       old_classification = event.classification
-      
+
       if event.update(:classification => @classification)
         @classification.up_counter(:events_count) if @classification
         old_classification.down_counter(:events_count) if old_classification
       end
-      
+
     end
 
     render :layout => false, :status => 200
@@ -54,7 +64,7 @@ class EventsController < ApplicationController
     @events.each { |event| event.create_favorite unless favorite? }
     render :json => {}
   end
-  
+
   def mass_destroy_favorite
     @events ||= Event.find_by_ids(params[:events])
     @events.each { |event| event.destroy_favorite if favorite? }

@@ -137,6 +137,24 @@ var Snorby = {
 		},
 		
 		events: function(){
+			
+			$('a.export').live('click', function(e) {
+				e.preventDefault();
+				var selected_events = $('input#selected_events').attr('value');
+				
+				if (selected_events) {
+					
+					$.post(this.href, { events: selected_events });
+					
+				} else {
+					
+					flash_message.push({type: 'error', message: "Please Select Events To Perform This Action"});
+					flash();
+					
+				};
+				
+				return false;
+			});
 		
 			$('a.edit-event-note').live('click', function(e) {
 				e.preventDefault();
@@ -530,8 +548,8 @@ var Snorby = {
 					
 					$(this).addClass('loading').css('width', current_width);
 					
-					if ($(this).parents('div.pager-notes')) {
-						
+					if ($(this).parents('div').hasClass('notes-pager')) {
+						$('div.notes').fadeTo(500, 0.4);
 					} else {
 						$('div.content, tbody.content').fadeTo(500, 0.4);
 					};
