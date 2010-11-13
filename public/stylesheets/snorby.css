@@ -1095,6 +1095,31 @@ div#note-box.error{
 
 /* @group Table */
 
+table td a{
+	padding: 3px 5px;
+	background-color: #e0e0e0;
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#ffffff',endColorstr='#e0e0e0');
+	background: -webkit-gradient(linear,0% 0,0% 100%,from(#fff),to(#e0e0e0));
+	background: -moz-linear-gradient(-90deg,#fff,#e0e0e0);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+	color: #575757;
+	font-weight: normal;
+	font-style: normal;
+	text-decoration: none;
+	font-variant: normal;
+	border: 1px solid #9a9a9b;
+}
+
+table td a:hover{
+	background-color: #e0e0e0;
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#ffffff',endColorstr='#e0e0e0');
+	background: -webkit-gradient(linear,0% 100%,0% 0,from(#fff),to(#e0e0e0));
+	background: -moz-linear-gradient(90deg,#fff,#e0e0e0);
+	border: 1px solid #9a9a9b;
+}
+
 table{
 	width: 100%;
 	-webkit-border-radius: 5px;
