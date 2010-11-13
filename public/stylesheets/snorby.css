@@ -2049,6 +2049,10 @@ button.default.warning,a.button.default.warning{
 	background: -moz-linear-gradient(-90deg,#fd4f52,#d72219);
 }
 
+div#new_note button.default.warning,div#new_note a.button.default.warning{
+	border: 1px solid #fd462d;
+}
+
 button.default.success,a.button.default.success{
 	color: #fff;
 	text-shadow: -1px -1px 0 rgba(0,0,0,0.3);
@@ -2297,15 +2301,39 @@ div.notes div#new_note textarea#body{
 	top: 5px;
 	right: 10px;
 	visibility: visible;
+	height: 25px;
+	line-height: 25px;
 }
 
-.event-note .note-options a{
+/*.event-note .note-options a{
 	font-size: 0.8em;
 	color: #818488;
+}*/
+
+.event-note .note-options a{
+	padding: 3px 5px;
+	color: #fff;
+	text-shadow: -1px -1px 0 rgba(0,0,0,0.3);
+	background: #d72219;
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#fd4f52',endColorstr='#d72219');
+	background: -webkit-gradient(linear,0% 0,0% 100%,from(#fd4f52),to(#d72219));
+	background: -moz-linear-gradient(-90deg,#fd4f52,#d72219);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+	font-weight: normal;
+	font-style: normal;
+	text-decoration: none;
+	font-variant: normal;
+	border: 1px solid #fd462d;
+	font-size: 0.8em;
 }
 
 .event-note .note-options a:hover{
-	color: red;
+	background: #d72219;
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#fd4f52',endColorstr='#e8433b');
+	background: -webkit-gradient(linear,0% 0,0% 100%,from(#fd4f52),to(#e8433b));
+	background: -moz-linear-gradient(-90deg,#fd4f52,#e8433b);	
 }
 
 div.notes div#new_note textarea#body:focus,
