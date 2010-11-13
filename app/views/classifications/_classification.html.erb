@@ -10,7 +10,7 @@
 		<td class='last'><%= image_tag('icons/lock.png', :size => '16x16') %></td>
 	<% else %>
 		<td><%= link_to "Edit", edit_classification_path(classification) %></td>
-		<td class='last'><%= link_to "Destroy", classification_path(classification), :method => :delete %></td>
+		<td class='last'><%= link_to "Destroy", classification_path(classification), :method => :delete, :confirm => 'Are you sure you want to remove this classification?' %></td>
 	<% end %>
 	
 </tr>
