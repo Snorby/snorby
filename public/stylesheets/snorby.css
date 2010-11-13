@@ -1307,6 +1307,9 @@ ul.table li .row div.timestamp{
 }
 
 ul.table li .row div.timestamp span{
+  -webkit-box-shadow: inset 0px 1px 5px #565e5e;
+  -moz-box-shadow: inset 0px 1px 5px #565e5e;
+  box-shadow: inset 0px 1px 5px #565e5e;
 	color: #fbfefc;
 	background-color: #6e7879;
 	font-weight: normal;
