@@ -17,6 +17,10 @@ class Classification
   has n, :events, :constraint => :destroy
 
   validates_uniqueness_of :hotkey
+  
+  validates_presence_of :name
+  
+  validates_presence_of :description
 
   def shortcut
     "f#{hotkey}"

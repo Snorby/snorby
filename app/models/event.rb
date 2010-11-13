@@ -49,6 +49,7 @@ class Event
 
   before :destroy do
     self.classification.down_counter(:events_count)
+    # Note: Need to decrement Severity, Sensor and User Counts
   end
 
   def to_param

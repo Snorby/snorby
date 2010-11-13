@@ -73,7 +73,7 @@ class ClassificationsController < ApplicationController
   # DELETE /classifications/1.xml
   def destroy
     @classification = Classification.get(params[:id])
-    @classification.destroy
+    @classification.destroy!
 
     respond_to do |format|
       format.html { redirect_to(classifications_url) }

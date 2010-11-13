@@ -122,10 +122,6 @@ var Snorby = {
 		$(window).resize(function() {
 			$.fancybox.center;
 		});
-
-		$(window).scroll(function() {
-			$('#fancybox-wrap').scrollTop(20);
-		});
 		
 		$('div#flash_message, div#flash_message > *').live('click', function() {
 			$('div#flash_message').stop().fadeOut('fast');

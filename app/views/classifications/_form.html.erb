@@ -1,17 +1,26 @@
-<%= form_for(@classification) do |f| %>
-  <% if @classification.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@classification.errors.count, "error") %> prohibited this classification from being saved:</h2>
+<div id='classification-form' class='grid_12 boxit page'>
+	<%= form_for @classification, :html => { :class => 'validate' } do |f| %>
+	  
+		<%= error_messages_for(@classification) %>
+	
+		<p>
+			<%= f.label 'Classification Name' %><br />
+	  	<%= f.text_field :name, :class => 'required', :autocomplete => :off %>
+		</p>
+		
+		<p>
+			<%= f.label 'Classification Description' %><br />
+	  	<%= f.text_field :description, :class => 'required', :autocomplete => :off %>
+		</p>
+	
+		<%= form_actions do %>
 
-      <ul>
-      <% @classification.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+			<%= button "Save Classification", :class => 'success' %>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+			<%= button "Cancel", :class => 'warning cancel' %>
+
+		<% end %>
+	
+	<% end %>
+	
+</div>

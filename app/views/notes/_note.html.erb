@@ -6,8 +6,7 @@
 	
 	<% if current_user.admin %>
 		<div class='note-options'>
-			<%= link_to "Destroy Note", '#', :class => 'destroy-event-note', :"data-note-id" => note.id %> |
-			<%= link_to "Edit Note", '#', :class => 'edit-event-note', :"data-note-id" => note.id %>
+			<%= link_to "Destroy Note", '#', :class => 'destroy-event-note', :"data-note-id" => note.id %>
 		</div>
 	<% end %>
 	
