@@ -1,6 +1,5 @@
 class ClassificationsController < ApplicationController
-  # GET /classifications
-  # GET /classifications.xml
+
   def index
     @classifications = Classification.all.page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:id.asc])
 
@@ -10,8 +9,6 @@ class ClassificationsController < ApplicationController
     end
   end
 
-  # GET /classifications/1
-  # GET /classifications/1.xml
   def show
     @classification = Classification.get(params[:id])
 
@@ -21,8 +18,6 @@ class ClassificationsController < ApplicationController
     end
   end
 
-  # GET /classifications/new
-  # GET /classifications/new.xml
   def new
     @classification = Classification.new
 
@@ -32,13 +27,10 @@ class ClassificationsController < ApplicationController
     end
   end
 
-  # GET /classifications/1/edit
   def edit
     @classification = Classification.get(params[:id])
   end
 
-  # POST /classifications
-  # POST /classifications.xml
   def create
     @classification = Classification.new(params[:classification])
 
@@ -53,8 +45,6 @@ class ClassificationsController < ApplicationController
     end
   end
 
-  # PUT /classifications/1
-  # PUT /classifications/1.xml
   def update
     @classification = Classification.get(params[:id])
 
@@ -69,8 +59,6 @@ class ClassificationsController < ApplicationController
     end
   end
 
-  # DELETE /classifications/1
-  # DELETE /classifications/1.xml
   def destroy
     @classification = Classification.get(params[:id])
     @classification.destroy!
