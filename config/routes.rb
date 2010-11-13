@@ -9,7 +9,7 @@ Snorby::Application.routes.draw do
 
   resources :classifications
 
-  devise_for :users, :path_names => { :sign_in => 'login', :sign_out => 'logout', :sign_up => 'register' } do
+  devise_for :users, :path_names => { :sign_in => 'login', :sign_out => 'logout', :sign_up => 'register' }, :controllers => {:registrations => "registrations"} do
     get "/login" => "devise/sessions#new"
     get '/logout', :to => "devise/sessions#destroy"
     get '/reset/password', :to => "devise/passwords#edit"

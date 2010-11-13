@@ -2,8 +2,9 @@ class User
   include DataMapper::Resource
   include DataMapper::Validate
   include Paperclip::Resource
-  
+
   cattr_accessor :current_user
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
@@ -20,11 +21,11 @@ class User
   property :email, String, :required => true, :unique => true
 
   property :avatar_file_name, String
-  
+
   property :avatar_content_type, String
-  
+
   property :avatar_file_size, Integer
-  
+
   property :avatar_updated_at, DateTime
 
   property :favorites_count, Integer, :index => true, :default => 0
@@ -39,17 +40,17 @@ class User
 
   # Define if the user has administrative privileges
   property :admin, Boolean, :default => false
-  
+
   # Define created_at and updated_at timestamps
   timestamps :at
 
   has_attached_file :avatar,
   :styles => {
+    :large => "500x500>",
     :medium => "300x300>",
-    :small => "32x32>",
-    :thumb => "80x80>"
-  }
-  
+    :small => "100x100#"
+  }, :processors => [:cropper]
+
   validates_attachment_content_type :avatar, :content_type => ["image/png", "image/gif", "image/jpeg"]
 
   has n, :favorites, :child_key => :user_id, :constraint => :destroy
@@ -64,6 +65,19 @@ class User
   #
   def to_s
     self.name.to_s
+  end
+
+  def cropping?
+    !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
+  end
+
+  def avatar_geometry(style = :original)
+    @geometry ||= {}
+    @geometry[style] ||= Paperclip::Geometry.from_file(avatar.path(style))
+  end
+
+  def reprocess_avatar
+    avatar.reprocess! if cropping?
   end
 
 end
