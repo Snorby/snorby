@@ -7,9 +7,11 @@
 	<td><%= severity.events_count %></td>
 	<td><span class='severity-example' style='background-color:<%= severity.bg_color %>;color:<%= severity.text_color %>'><%= severity.sig_id %></span></td>
 	<td><%= link_to "Edit", edit_severity_path(severity) %></td>
+	
 	<% if severity.locked? %>
 		<td class='last'><%= image_tag('icons/lock.png') %></td>
 	<% else %>
 		<td class='last'><%= link_to "Destroy", severity_path(severity), :method => :delete, :confirm => 'Are you sure you want to remove this severity?' %></td>
 	<% end %>
+	
 </tr>

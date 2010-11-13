@@ -44,7 +44,7 @@ class ClassificationsController < ApplicationController
 
     respond_to do |format|
       if @classification.save
-        format.html { redirect_to(@classification, :notice => 'Classification was successfully created.') }
+        format.html { redirect_to(classifications_url, :notice => 'Classification was successfully created.') }
         format.xml  { render :xml => @classification, :status => :created, :location => @classification }
       else
         format.html { render :action => "new" }
@@ -60,7 +60,7 @@ class ClassificationsController < ApplicationController
 
     respond_to do |format|
       if @classification.update(params[:classification])
-        format.html { redirect_to(@classification, :notice => 'Classification was successfully updated.') }
+        format.html { redirect_to(classifications_url, :notice => 'Classification was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
