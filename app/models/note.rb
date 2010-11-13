@@ -32,8 +32,8 @@ class Note
   before :destroy do
     event = self.event
     user = self.user
-    event.update(:notes_count => event.notes_count - 1)
-    user.update(:notes_count => user.notes_count - 1)
+    event.update(:notes_count => event.notes_count - 1) if event
+    user.update(:notes_count => user.notes_count - 1) if user
   end
 
   def html_id

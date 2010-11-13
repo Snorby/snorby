@@ -57,6 +57,7 @@ Snorby::Application.routes.draw do
 
   resources :users do
     collection do
+      post :remove
       post :add
     end
   end

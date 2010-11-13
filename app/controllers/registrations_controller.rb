@@ -1,5 +1,7 @@
 class RegistrationsController < Devise::RegistrationsController
   include Devise::Controllers::InternalHelpers
+  
+  before_filter :require_administrative_privileges, :only => [:create]
 
   def new
     build_resource({})
