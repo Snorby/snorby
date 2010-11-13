@@ -30,6 +30,12 @@
 	  <p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
 	  <%= f.password_field :current_password, :class => 'required password' %></p>
 
+	  <p>
+			<%= f.label 'Time Zone' %> <i>(please select your preferred timezone)</i><br />
+	  	<%= time_zone_select( "user", 'timezone', ActiveSupport::TimeZone.us_zones, :default => "UTC") %><br />
+			<br />
+		</p>
+
 		<p>
 			<%= f.label "Items Per Page:" %> <%= f.select :per_page_count, %w[25 45 65 100], { :include_blank => false } %><br />
 			<i>(items to list per page load)</i><br />
