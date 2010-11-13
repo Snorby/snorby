@@ -91,6 +91,30 @@ function set_classification (class_id) {
 	};
 }
 
+function update_note_count (event_id, data) {
+	
+	var event_row = $('li#'+event_id+' div.row div.timestamp');
+	var notes_count = event_row.find('span.notes-count');
+	
+	var template = '<span class="add_tipsy round notes-count" original-title="{{notes_count_in_words}}">{{notes_count}}</span>'
+	var event_html = Mustache.to_html(template, data);
+	
+	if (data.notes_count == 0) {
+		
+		notes_count.remove();
+		
+	} else {
+		
+		if (notes_count.length > 0) {
+			notes_count.replaceWith(event_html);
+		} else {
+			event_row.prepend(event_html);
+		};
+		
+	};
+	
+}
+
 var Snorby = {
 	
 	setup: function(){
@@ -170,8 +194,8 @@ var Snorby = {
 				var note_id = $(this).attr('data-note-id');
 				
 				if ( confirm("Are you sure you want to delete this note?") ) {
-					note.fadeOut('slow');
-					$.post('/notes/destroy', { id: note_id, '_method': 'delete' });
+					$('div.notes').fadeTo(500, 0.4);
+					$.post('/notes/destroy', { id: note_id, '_method': 'delete' }, null, 'script');
 				};
 				
 				return false;

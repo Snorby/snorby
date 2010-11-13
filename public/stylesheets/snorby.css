@@ -1247,7 +1247,6 @@ ul.table li .row div.large{
 }
 
 ul.table li .row div.timestamp{
-	float: right;
 	width: 100px;
 	display: block;
 	position: absolute;
@@ -1265,7 +1264,7 @@ ul.table li .row div.timestamp{
 
 ul.table li .row div.timestamp span{
 	color: #fbfefc;
-	background-color: #4e9af0;
+	background-color: #6e7879;
 	font-weight: normal;
 	text-decoration: none;
 	font-variant: normal;
@@ -1274,6 +1273,12 @@ ul.table li .row div.timestamp span{
 	font-style: normal;
 	font-size: 1em;
 	padding: 5px 7px;
+	text-align: left;
+	position: absolute;
+	left: 15px;
+	height: 12px;
+	line-height: 12px;
+	top: 4px;
 }
 
 ul.table li .row div.timestamp img.has-notes{

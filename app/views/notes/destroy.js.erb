@@ -1,0 +1,3 @@
+$('div#<%= @note.html_id %>').fadeOut('fast');
+$('div.notes').fadeTo(500, 1);
+update_note_count('<%= @event.html_id %>', {notes_count_in_words: "This event has <%= pluralize(@event.notes_count, 'note') %>", notes_count: <%= @event.notes_count %>});

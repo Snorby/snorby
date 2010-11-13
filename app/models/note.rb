@@ -36,4 +36,8 @@ class Note
     user.update(:notes_count => user.notes_count - 1)
   end
 
+  def html_id
+    "note_#{id}"
+  end
+
 end

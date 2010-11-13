@@ -40,6 +40,7 @@ class NotesController < ApplicationController
   
   def destroy
     @note = Note.get(params[:id])
+    @event = @note.event
     @note.destroy
   end
 

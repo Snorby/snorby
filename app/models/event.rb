@@ -92,6 +92,10 @@ class Event
     "#{sid}-#{cid}"
   end
 
+  def html_id
+    "event_#{sid}#{cid}"
+  end
+
   def json_time
     "{time:'#{timestamp}'}"
   end
