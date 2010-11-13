@@ -1,0 +1,53 @@
+<%= title "Add New User".html_safe -%>
+
+<div id='settings' class='grid_12 boxit page'>
+	
+	<%= form_for(@user, :url => add_users_path(@user), :html => { :method => :put, :multipart => true, :class => 'validate' }) do |f| %>
+
+		<p>
+			<div class='user-show-avatar'>
+				<%= image_tag(@user.avatar.url(:small), :class => 'avatar') %>
+				<%= f.label :avatar %><br />
+				<%= f.file_field :avatar %><br />
+			</div>
+		</p>
+
+		<br />
+		
+		<p><%= f.label :name %><br />
+	  <%= f.text_field :name, :title => 'Full Name...', :class => 'required' %></p>
+
+	  <p><%= f.label :email %><br />
+	  <%= f.text_field :email, :title => 'E-mail Address...', :class => 'required email' %></p>
+
+	  <p><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+	  <%= f.password_field :password, :class => 'required' %></p>
+
+	  <p><%= f.label :password_confirmation %><br />
+	  <%= f.password_field :password_confirmation, :class => 'required' %></p>
+
+	  <p>
+			<%= f.label 'Time Zone' %> <i>(please select your preferred timezone)</i><br />
+	  	<%= time_zone_select( "user", 'timezone', ActiveSupport::TimeZone.us_zones, :default => "UTC") %><br />
+			<br />
+		</p>
+
+		<p>
+			<%= f.label "Items Per Page:" %> <%= f.select :per_page_count, %w[25 45 65 100], { :include_blank => false } %><br />
+			<i>(items to list per page load)</i><br />
+			<br />
+		</p>
+
+		<p><%= f.label :admin %> <%= f.check_box :admin %></p>
+
+		<%= form_actions do %>
+
+			<%= button "Create User", :class => 'success' %>
+
+			<%= button "Cancel", :class => 'warning cancel' %>
+
+		<% end %>
+
+	<% end %>
+	
+</div>

@@ -48,7 +48,7 @@ class EventsController < ApplicationController
       next unless event
       old_classification = event.classification
 
-      if event.update(:classification => @classification)
+      if event.update!(:classification => @classification)
         @classification.up_counter(:events_count) if @classification
         old_classification.down_counter(:events_count) if old_classification
       end

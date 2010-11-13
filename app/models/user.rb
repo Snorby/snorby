@@ -49,7 +49,7 @@ class User
     :large => "500x500>",
     :medium => "300x300>",
     :small => "100x100#"
-  }, :processors => [:cropper]
+  }, :default_url => '/images/default_avatar.png', :processors => [:cropper]
 
   validates_attachment_content_type :avatar, :content_type => ["image/png", "image/gif", "image/jpeg"]
 
