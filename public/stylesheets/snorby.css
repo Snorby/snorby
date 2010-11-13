@@ -494,6 +494,25 @@ a {
 
 /* @group Flash */
 
+div#note-box{
+	padding: 10px;
+	display: block;
+	position: relative;
+	overflow: hidden;
+}
+
+div#note-box img{
+	vertical-align: middle;
+}
+
+div#note-box.error{
+	background-color: #820d06;
+	color: #fff;
+	border: 1px solid #3b0202;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
 #flash_message{
 	cursor: pointer;
 	position: absolute;

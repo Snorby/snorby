@@ -66,6 +66,7 @@ GEM
     celerity (0.8.2)
     childprocess (0.1.3)
       ffi (~> 0.6.3)
+    chronic (0.3.0)
     culerity (0.2.12)
     daemons (1.1.0)
     data_objects (0.10.2)
@@ -240,6 +241,7 @@ DEPENDENCIES
   bundler (~> 1.0.0)
   capistrano
   capybara
+  chronic (~> 0.3.0)
   daemons (~> 1.1.0)
   delayed_job (~> 2.1.0.pre2)
   delayed_job_data_mapper (~> 1.0.0.rc)

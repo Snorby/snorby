@@ -34,5 +34,9 @@ module Snorby
       !Snorby::Jobs.find.first(:handler.like => "%!ruby/struct:Snorby::Jobs::SensorCache%").blank?
     end
     
+    def self.daily_cache?
+      true
+    end
+    
   end
 end

@@ -4,8 +4,48 @@
 	
 <%- end -%>
 
+<div id='general-settings', class='grid_12 page boxit'>
+	
+	<h3>Snorby Worker</h3>
+	
+	<% if Snorby::Worker.running? %>
+		
+		<table border="0" cellspacing="0" cellpadding="0">
 
+			<tr>
+				<th>Status</th>
+				<th class="user">user</th>
+				<th class="pid">pid</th>
+				<th class="cpu">cpu</th>
+				<th class="memory">memory</th>
+				<th class="created_at">created_at</th>
+				<th class="runtime">runtime</th>
+				<th class="command">command</th>
+			</tr>
 
-Snorby Worker Status: <%=  Snorby::Worker.running? ? "Alive" : "DEAD!" %>
+			<tbody class='content process'>
+				<td class='first'>
+					<%= worker_status_image %>
+				</td>
+				<td class="user"><%= @process.user %></td>
+				<td class="pid"><%= @process.pid %></td>
+				<td class="cpu"><%= @process.cpu %></td>
+				<td class="memory"><%= @process.memory %></td>
+				<td class="created_at"><%= @process.created_at %></td>
+				<td class="runtime"><%= @process.runtime %></td>
+				<td class="command last"><%= @process.command %></td>
+			</tbody>
 
-<%= Snorby::Worker.info %>
+		</table>
+	
+	<% else %>
+	
+		<div id='note-box' class='error'>
+			<%= image_tag('icons/note-icon-white.png') %>
+			The Snorby worker is not currently running. It's imperative you start the worker immediately!
+			All backend calculations are performed asynchronously using the Snorby Worker.
+		</div>
+	
+	<% end %>
+	
+</div>

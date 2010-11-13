@@ -38,6 +38,7 @@ gem 'dm-serializer',          DM_VERSION
 gem 'capistrano'
 
 # Rails Plugins
+gem 'chronic',                '~> 0.3.0'
 gem 'pdfkit',                 '~> 0.4.6'
 gem 'ezprint',                :git => 'https://github.com/jstewart/ezprint.git', :branch => 'rails3', :require => 'ezprint'
 gem 'daemons',                '~> 1.1.0'

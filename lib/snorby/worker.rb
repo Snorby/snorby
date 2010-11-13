@@ -39,8 +39,8 @@ module Snorby
       
     end
 
-    def self.info
-      return `ps aux #{Worker.pid} |grep delayed_job |grep -v grep`.chomp.strip if running?
+    def self.process
+      return Snorby::Process.new(`ps aux #{Worker.pid} |grep delayed_job |grep -v grep`.chomp.strip) if running?
     end
 
     def self.pid
