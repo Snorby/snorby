@@ -40,7 +40,7 @@
 					<li><%= link_to "My Queue (<span class='queue-count'>#{current_user.favorites_count}</span>)".html_safe, queue_events_path %></li>
 					<li><%= link_to "Events", events_path %></li>
 					<li><%= link_to "Sensors", sensors_path %></li>
-					<li><%= link_to "Search", '' %></li>
+					<li><%= link_to "Search", search_path %></li>
 					<li class='blank last'></li>
 
 					<% if current_user.admin %>

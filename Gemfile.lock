@@ -1,10 +1,18 @@
 GIT
-  remote: https://github.com/jstewart/ezprint.git
-  revision: 0c49087
+  remote: http://github.com/mephux/ezprint.git
+  revision: 2b789108eb5cc339425173454fc3cdf01b404e82
   branch: rails3
   specs:
     ezprint (0.2.0)
       pdfkit (>= 0.4.1)
+
+GIT
+  remote: https://github.com/datamapper/dm-core.git
+  revision: ea8d92b48af431a3197a8d589730e0f638709cad
+  specs:
+    dm-core (1.0.2)
+      addressable (~> 2.2)
+      extlib (~> 0.9.15)
 
 GIT
   remote: https://github.com/solnic/dm-paperclip.git
@@ -91,9 +99,6 @@ GEM
     dm-constraints (1.0.2)
       dm-core (~> 1.0.2)
       dm-migrations (~> 1.0.2)
-    dm-core (1.0.2)
-      addressable (~> 2.2)
-      extlib (~> 0.9.15)
     dm-devise (1.1.4)
       bcrypt-ruby (~> 2.1.2)
       devise (~> 1.1.0)
@@ -249,6 +254,7 @@ DEPENDENCIES
   dm-active_model (~> 1.0.2)
   dm-aggregates (~> 1.0.2)
   dm-constraints (~> 1.0.2)
+  dm-core (~> 1.0.2)!
   dm-devise (~> 1.1.0)
   dm-do-adapter (~> 1.0.2)
   dm-migrations (~> 1.0.2)

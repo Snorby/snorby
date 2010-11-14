@@ -2,7 +2,7 @@
 	<td class='id first'><%= job.id %></td>
 	<td class='priority'><%= job.priority %></td>
 	<td class='attempts'><%= job.attempts %></td>
-	<td class='handler'><%= link_to truncate(job.handler, :legnth => 50, :omission => '...'), handler_job_path(job), :class => 'view_job_handler' %></td>
+	<td class='handler'><%= link_to truncate(job.handler, :length => 50, :omission => '...'), handler_job_path(job), :class => 'view_job_handler' %></td>
 	<td class='run_at'><%= distance_of_time_in_words(Time.now, job.run_at) %></td>
 	<td class='failed_at'><%= job.failed_at || 'N/A' %></td>
 	<td class='last_error last'><%= job.last_error.blank? ? 'N/A' : (link_to truncate(job.last_error, :length => 10, :omission => '...'), last_error_job_path(job), :class => 'view_job_last_error') %></td>

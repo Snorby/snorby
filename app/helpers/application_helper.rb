@@ -1,5 +1,11 @@
 module ApplicationHelper
 
+  def dropdown_select_tag(collection, value, include_blank=false)
+    options = include_blank ? "<option value=''></option>" : ""
+    collection.collect { |x| options += "<option value='#{x.send(value.to_sym)}'>#{x.name}</option>" }
+    options.html_safe
+  end
+
   #
   # Title
   # 

@@ -26,6 +26,8 @@ class Signature
 
   property :sig_gid, Integer, :lazy => true
 
+  property :events_count, Integer, :index => true, :default => 0
+
   def severity_id
     sig_priority
   end

@@ -30,6 +30,10 @@ module Snorby
       Delayed::Job.enqueue(obj, priority, time)
     end
     
+    def self.sensor_cache
+      Snorby::Jobs.find.first(:handler.like => "%!ruby/struct:Snorby::Jobs::SensorCache%")
+    end
+    
     def self.sensor_cache?
       !Snorby::Jobs.find.first(:handler.like => "%!ruby/struct:Snorby::Jobs::SensorCache%").blank?
     end

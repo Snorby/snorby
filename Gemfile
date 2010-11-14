@@ -15,6 +15,7 @@ gem 'actionpack',             RAILS_VERSION, :require => 'action_pack'
 gem 'actionmailer',           RAILS_VERSION, :require => 'action_mailer'
 gem 'railties',               RAILS_VERSION, :require => 'rails'
 
+gem 'dm-core',                DM_VERSION, :git => "https://github.com/datamapper/dm-core.git"
 gem 'dm-rails',               '~> 1.0.3'
 gem 'dm-do-adapter',          DM_VERSION
 gem 'dm-active_model',        DM_VERSION
@@ -40,7 +41,7 @@ gem 'capistrano'
 # Rails Plugins
 gem 'chronic',                '~> 0.3.0'
 gem 'pdfkit',                 '~> 0.4.6'
-gem 'ezprint',                :git => 'https://github.com/jstewart/ezprint.git', :branch => 'rails3', :require => 'ezprint'
+gem 'ezprint',                :git => 'http://github.com/mephux/ezprint.git', :branch => 'rails3', :require => 'ezprint'
 gem 'daemons',                '~> 1.1.0'
 gem 'delayed_job',            '~> 2.1.0.pre2'
 gem 'delayed_job_data_mapper','~> 1.0.0.rc'

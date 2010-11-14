@@ -21,6 +21,8 @@ class Cache
   property :classification_metrics, Object
   
   property :severity_metrics, Object
+  
+  property :signature_metrics, Object
 
   belongs_to :sensor, :parent_key => :sid, :child_key => :sid
   

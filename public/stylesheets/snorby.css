@@ -1307,11 +1307,11 @@ ul.table li .row div.timestamp{
 }
 
 ul.table li .row div.timestamp span{
-  -webkit-box-shadow: inset 0px 1px 5px #565e5e;
-  -moz-box-shadow: inset 0px 1px 5px #565e5e;
-  box-shadow: inset 0px 1px 5px #565e5e;
-	color: #fbfefc;
-	background-color: #6e7879;
+  -webkit-box-shadow: inset 0px 1px 5px #202325;
+  -moz-box-shadow: inset 0px 1px 5px #202325;
+  box-shadow: inset 0px 1px 5px #202325;
+	color: #fff;
+	background-color: #41464a;
 	font-weight: normal;
 	text-decoration: none;
 	font-variant: normal;

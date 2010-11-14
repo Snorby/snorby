@@ -30,6 +30,8 @@ Snorby::Application.routes.draw do
 
 
   match '/dashboard', :controller => 'Page', :action => 'dashboard'
+  match '/search', :controller => 'Page', :action => 'search'
+  match '/results', :controller => 'Page', :action => 'results'
   
   match ':controller(/:action(/:sid/:cid))', :controller => 'Events'
 
@@ -63,7 +65,10 @@ Snorby::Application.routes.draw do
   end
 
   resources :page do
-
+    collection do
+      get :search
+      get :results
+    end
   end
 
 end

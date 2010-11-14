@@ -1,0 +1,24 @@
+<%= title "Search" %>
+
+<div id='search' class='boxit page grid_12'>
+	
+	<%= form_tag results_path do %>
+
+		<%= select_tag '[search][event][sid][eql]', dropdown_select_tag(Sensor.all, :sid) %>
+		
+		<%= select_tag '[search][event][classification_id][eql]', dropdown_select_tag(Classification.all, :id) %>
+
+		<%= text_field_tag '[search][signature][sig_name][like]' %>
+		
+		<%= text_field_tag '[search][ip][ip_src][like]' %>
+	
+
+		<%= form_actions do %>
+
+			<%= button "Search...", :class => 'success' %>
+
+		<% end %>
+
+	<% end %>
+	
+</div>

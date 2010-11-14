@@ -31,15 +31,19 @@ module Snorby
 
             logit "Looking for events..."
             @pager_events = since_last_cache
+            
+            puts @pager_events.map(&:sid).uniq
+            
             @pager = @pager_events.page(0, :per_page => 10000, :order => [:timestamp.asc]).pager
 
             split_events_and_process
 
           end
-
+          
+          Snorby::Jobs.sensor_cache.destroy! if Snorby::Jobs.sensor_cache?
           Delayed::Job.enqueue(Snorby::Jobs::SensorCache.new(false), 1, Time.now + 30.minute)
-        rescue
-          logit 'AASAAAHAHAHAHHAHAH!!!!!!'
+        rescue => e
+          logit "ERROR - #{e}"
           exit -1
         rescue Interrupt, IRB::Abort
           @cache.destroy! if defined?(@cache)
@@ -63,7 +67,8 @@ module Snorby
                           :udp_count => fetch_udp_count,
                           :icmp_count => fetch_icmp_count,
                           :classification_metrics => fetch_classification_metrics,
-                          :severity_metrics => fetch_severity_metrics
+                          :severity_metrics => fetch_severity_metrics,
+                          :signature_metrics => fetch_signature_metrics
           })
 
           @cache
@@ -117,7 +122,7 @@ module Snorby
           logit '- fetching classification metrics'
           metrics = {}
           Classification.all.each do |classification|
-            metrics[classification.id] = @events.classification(classification.id).size
+            metrics[classification.id] = @events.all(:classification_id => classification.id).size
           end
           metrics
         end
@@ -134,16 +139,28 @@ module Snorby
           end
           metrics
         end
+        
+        def fetch_signature_metrics
+          logit '- fetching signature metrics'
+          metrics = {}
+          Signature.all.each do |sig|
+            sig_count = @events.all(:sig_id => sig.sig_id).size
+            metrics[sig.sig_id] = sig_count
+            sig.update!(:events_count => sig.events_count + sig_count)
+          end
+          metrics
+        end
 
         def since_last_cache
-          return Event.all.sensor(@sensor) if Cache.all.blank?
-          @last_cache = Cache.last
-          Event.all(:timestamp.gt => @last_cache.ran_at).sensor(@sensor)
+          return Event.all(:sid => @sensor.sid) if @sensor.caches.blank?
+          @last_cache = @sensor.caches.last
+          Event.all(:timestamp.gt => @last_cache.ran_at).all(:sid => @sensor.sid)
         end
 
         def reset_counter_cache_columns
-          Severity.update(:events_count => 0)
-          Sensor.update(:events_count => 0)
+          Severity.update!(:events_count => 0)
+          Sensor.update!(:events_count => 0)
+          Signature.update!(:events_count => 0)
         end
 
         #
@@ -175,7 +192,7 @@ module Snorby
 
             if defined?(@last_cache)
               logit 'Found last cache...'
-              @last_cache = Cache.last
+              @last_cache = @sensor.caches.last
               @cache = Cache.create(:sid => @last_event.sid, :cid => @last_event.cid, :ran_at => @last_event.timestamp)
             else
               logit 'No cache records found - creating first cache record...'

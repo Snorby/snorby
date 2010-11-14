@@ -1,0 +1,11 @@
+<%= title "Search Results <i>#{pluralize(@events.pager.total, 'event')} found</i>".html_safe %>
+
+<div id='results' class='boxit page grid_12'>
+	
+	<%= debug params %>
+	
+	<%= debug @events %>
+	
+	<%= @events.pager.inspect %>
+	
+</div>
