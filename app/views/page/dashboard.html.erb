@@ -1,1 +1,12 @@
-<%= title "Dashboard" %>
+<%= title "Dashboard" do %>
+	
+	<%= drop_down_for('Timeline', 'icons/timeline.png', 'timeline') do %>
+
+		<%= drop_down_item "Today <i>#{Time.now.strftime('%D')}</i>", '#', nil, { :class => 'today' } %>
+		<%= drop_down_item "Yesterday <i>#{Time.now.yesterday.strftime('%D')}</i>", '#', nil, { :class => 'yesterday' } %>
+		<%= drop_down_item "Week <i>#{Time.now.beginning_of_week.strftime('%D')} - #{Time.now.strftime('%D')}</i>", '#', nil, { :class => 'last-week' } %>
+		<%= drop_down_item "Month <i>#{Time.now.beginning_of_month.strftime('%D')} - #{Time.now.strftime('%D')}</i>", '#', nil, { :class => 'last-month' } %>
+
+	<% end %>
+	
+<% end %>

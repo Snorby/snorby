@@ -1475,6 +1475,11 @@ ul.table div.content div.event-data div.event-data-holder div.event-data-holder-
 ul.table div.content div.event-data div.event-data-holder div.event-data-holder-inside div.payload pre{
 	padding: 10px;
 	border: 1px solid #fff;
+	line-height: 14px;
+	font-variant: normal;
+	text-decoration: none;
+	font-weight: normal;
+	font-style: normal;
 }
 
 ul.table div.content div.event-data div.event-data-holder div.event-data-holder-inside div.notes{

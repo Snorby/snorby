@@ -23,7 +23,7 @@ module Snorby
       @indent    = config[:indent]    ||= 0
       @html = config[:html] || false
       @ascii = config[:ascii] || false
-      1.upto(@indent) {@prefix += " "}
+      1.upto(@indent) { @prefix += " " }
       end
 
       def to_s
@@ -58,10 +58,12 @@ module Snorby
           else
             @width *2
           end
+
           str << @prefix
+          
           if @html
             str << "<span class='payload-number'>%07X:</span> " % (i) if @numbering == :hex_bytes
-            str << ("%-#{len}s" % "<span class='payload-hex'>#{CGI::escapeHTML(hex)}</span>")
+            str << "<span class='payload-hex'>#{CGI::escapeHTML(("%-#{len}s" % hex))}</span>"
             str << " <span class='payload-ascii'>#{CGI::escapeHTML(string)}</span>" if @annotate == :ascii
             str << "\n"
           elsif @ascii
