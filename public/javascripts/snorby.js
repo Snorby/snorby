@@ -78,7 +78,7 @@ function set_classification (class_id) {
 				$.getScript('/events/history?page=' + current_page_number);
 			} else if (current_page == "results") {
 				clear_selected_events();
-				$.getScript('/results?page=' + current_page_number);
+				$.getScript($('input#current_url').val());
 			} else {
 				// clear_selected_events();
 				// $.getScript('/events');
