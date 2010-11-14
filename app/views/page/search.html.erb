@@ -2,11 +2,11 @@
 
 <div id='search' class='boxit page grid_12'>
 	
-	<%= form_tag results_path do %>
+	<%= form_tag results_path, :method => :get do %>
 
-		<%= select_tag '[search][event][sid][eql]', dropdown_select_tag(Sensor.all, :sid) %>
+		<%= select_tag '[search][event][sid][eql]', dropdown_select_tag(Sensor.all, :sid, true) %>
 		
-		<%= select_tag '[search][event][classification_id][eql]', dropdown_select_tag(Classification.all, :id) %>
+		<%= select_tag '[search][event][classification_id][eql]', dropdown_select_tag(Classification.all, :id, true) %>
 
 		<%= text_field_tag '[search][signature][sig_name][like]' %>
 		

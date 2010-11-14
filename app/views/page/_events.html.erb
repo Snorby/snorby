@@ -1,0 +1,32 @@
+<div id="events" class='grid_12 boxit' data-action='<%= params[:action] %>' data-page='<%= params[:page].to_i %>'>
+	
+	<%= form_tag mass_update_events_path do %>
+	
+	<%= hidden_field_tag :selected_events, [] %>
+	
+	<ul class='table'>
+		
+		<li class='header'>
+			<div class='row'>
+				<div class='small'><%= check_box_tag 'event-select-all', nil, false, :class => 'event-select-all' %></div>
+				<div class='small'>&nbsp;</div>
+				<div class='small'>Sev.</div>
+				<div class='address'>Sensor</div>
+				<div class='address'>Source IP</div>
+				<div class='address'>Destination IP</div>
+				<div class='signature'>Event Signature</div>
+				<div class='timestamp'>&nbsp;</div>
+			</div>
+		</li>
+		
+		<div class='content'>
+			<%= render @events %>
+		</div>
+		
+	</ul>
+	
+	<% end %>
+	
+	<%= pager(@events, request.request_uri) %>
+	
+</div>

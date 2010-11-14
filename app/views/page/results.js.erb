@@ -1,0 +1,6 @@
+$('div#events').replaceWith("<%= escape_javascript(render(:partial => 'page/events', :locals => { :events => @events })) %>");
+$('div.content').fadeTo(500, 1);
+Snorby.helpers.remove_click_events(false);
+Snorby.helpers.recheck_selected_events();
+$.scrollTo('#header', 500);
+flash();
