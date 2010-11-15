@@ -278,6 +278,8 @@ class Event
         data = v.values.first
         next if data.blank?
 
+        data = nil if data == 'null'
+
         if key == "event"
           next unless Event.first.respond_to?(column.to_sym)
         else
