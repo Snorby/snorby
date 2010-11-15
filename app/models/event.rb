@@ -1,7 +1,10 @@
+require 'snorby/model/counter'
+
 class Event
 
   include DataMapper::Resource
-
+  include Snorby::Model::Counter
+  
   # Included for the truncate helper method.
   extend ActionView::Helpers::TextHelper
 
@@ -48,8 +51,8 @@ class Event
   belongs_to :ip, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ]
 
   before :destroy do
-    self.classification.down_counter(:events_count)
-    self.signature.update!(:events_count => self.signature.events_count - 1)
+    self.classification.down(:events_count) if self.classification
+    self.signature.down(:events_count) if self.signature
     # Note: Need to decrement Severity, Sensor and User Counts
   end
 

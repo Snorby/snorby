@@ -1,7 +1,10 @@
+require 'snorby/model/counter'
+
 class Signature
 
   include DataMapper::Resource
-
+  include Snorby::Model::Counter
+  
   storage_names[:default] = "signature"
 
   #belongs_to :category, :parent_key => :sig_class_id, :child_key => :sig_class_id, :required => true

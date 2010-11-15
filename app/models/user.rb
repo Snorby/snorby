@@ -1,7 +1,11 @@
+require 'snorby/model/counter'
+
 class User
+  
   include DataMapper::Resource
   include DataMapper::Validate
   include Paperclip::Resource
+  include Snorby::Model::Counter
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable

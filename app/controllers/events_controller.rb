@@ -56,8 +56,8 @@ class EventsController < ApplicationController
       end
 
       if event.save
-        @classification.up_counter(:events_count) if @classification
-        old_classification.down_counter(:events_count) if old_classification
+        @classification.up(:events_count) if @classification
+        old_classification.down(:events_count) if old_classification
       else
         Rails.logger.info "ERROR: #{event.errors.inspect}"
       end

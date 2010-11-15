@@ -1,6 +1,9 @@
+require 'snorby/model/counter'
+
 class Classification
 
   include DataMapper::Resource
+  include Snorby::Model::Counter
 
   property :id, Serial, :index => true
 
@@ -24,20 +27,6 @@ class Classification
 
   def shortcut
     "f#{hotkey}"
-  end
-  
-  def up_counter(column)
-    if self.respond_to?(column.to_sym)
-      count = self.send(column.to_sym).to_i + 1
-      self.update(column.to_sym => count)
-    end
-  end
-  
-  def down_counter(column)
-    if self.respond_to?(column.to_sym)
-      count = self.send(column.to_sym).to_i - 1
-      self.update(column.to_sym => count)
-    end
   end
 
   #

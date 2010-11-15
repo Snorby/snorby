@@ -1,6 +1,9 @@
-class Favorite
+require 'snorby/model/counter'
 
+class Favorite
+  
   include DataMapper::Resource
+  include Snorby::Model::Counter
 
   belongs_to :user
   
@@ -15,17 +18,13 @@ class Favorite
   property :user_id, Integer, :index => true
 
   after :create do
-    event = self.event
-    user = self.user
-    event.update(:users_count => event.users_count + 1)
-    user.update(:favorites_count => user.favorites_count + 1)
+    self.event.up(:users_count) if self.event
+    self.user.up(:favorites_count) if self.user
   end
   
   before :destroy do
-    event = self.event
-    user = self.user
-    event.update(:users_count => event.users_count - 1)
-    user.update(:favorites_count => user.favorites_count - 1)
+    self.event.down(:users_count) if self.event
+    self.user.down(:favorites_count) if self.user
   end
 
 end
