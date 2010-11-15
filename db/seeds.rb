@@ -8,56 +8,56 @@ User.create(:name => 'Administrator', :email => 'snorby@snorby.org', :password =
 
 Classification.first_or_create({ :name => "Unauthorized Root Access" }, {
   :name => 'Unauthorized Root Access',
-  :description => '',
+  :description => 'Unauthorized Root Access',
   :hotkey => 1,
   :locked => true
 })
 
 Classification.first_or_create({ :name => "Unauthorized User Access" }, {
   :name => 'Unauthorized User Access',
-  :description => '',
+  :description => 'Unauthorized User Access',
   :hotkey => 2,
   :locked => true
 })
 
 Classification.first_or_create({ :name => "Attempted Unauthorized Access" }, {
   :name => 'Attempted Unauthorized Access',
-  :description => '',
+  :description => 'Attempted Unauthorized Access',
   :hotkey => 3,
   :locked => true
 })
 
 Classification.first_or_create({ :name => "Denial of Service Attack" }, {
   :name => 'Denial of Service Attack',
-  :description => '',
+  :description => 'Denial of Service Attack',
   :hotkey => 4,
   :locked => true
 })
 
 Classification.first_or_create({ :name => "Policy Violation" }, {
   :name => 'Policy Violation',
-  :description => '',
+  :description => 'Policy Violation',
   :hotkey => 5,
   :locked => true
 })
 
 Classification.first_or_create({:name => "Reconnaissance"}, {
   :name => 'Reconnaissance',
-  :description => '',
+  :description => 'Reconnaissance',
   :hotkey => 6,
   :locked => true
 })
 
 Classification.first_or_create({:name => "Virus Infection"}, {
   :name => 'Virus Infection',
-  :description => '',
+  :description => 'Virus Infection',
   :hotkey => 7,
   :locked => true
 })
 
 Classification.first_or_create({:name => "False Positive"}, {
   :name => 'False Positive',
-  :description => '',
+  :description => 'False Positive',
   :hotkey => 8,
   :locked => true
 })

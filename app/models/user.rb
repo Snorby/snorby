@@ -3,44 +3,44 @@ class User
   include DataMapper::Validate
   include Paperclip::Resource
 
-  cattr_accessor :current_user
-  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
-
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
+  cattr_accessor :current_user
+  
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+
   property :favorites_count, Integer, :index => true, :default => 0
-
+  
   property :notes_count, Integer, :index => true, :default => 0
-
+  
   # Primary key of the user
   property :id, Serial, :key => true, :index => true
-
+  
   # Email of the user
-  property :email, String, :required => true, :unique => true
-
-  property :avatar_file_name, String
-
-  property :avatar_content_type, String
-
-  property :avatar_file_size, Integer
-
-  property :avatar_updated_at, DateTime
-
-  property :favorites_count, Integer, :index => true, :default => 0
-
+  # 
+  # property :email, String, :required => true, :unique => true
+  #
+  # property :avatar_file_name, String
+  # 
+  # property :avatar_content_type, String
+  # 
+  # property :avatar_file_size, Integer
+  # 
+  # property :avatar_updated_at, DateTime
+  
   property :per_page_count, Integer, :index => true, :default => 25
-
+  
   # Full name of the user
   property :name, String, :lazy => true, :lazy => true
-
+  
   # The timezone the user lives in
   property :timezone, String, :default => 'UTC', :lazy => true
-
+  
   # Define if the user has administrative privileges
   property :admin, Boolean, :default => false
-
+  
   # Define created_at and updated_at timestamps
   timestamps :at
 

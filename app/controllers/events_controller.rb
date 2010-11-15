@@ -2,7 +2,7 @@ class EventsController < ApplicationController
   respond_to :html, :xml, :json, :js, :csv
 
   def index
-    @events = Event.all(:classification_id => 0).page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:timestamp.desc])
+    @events = Event.all(:classification_id => nil).page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:timestamp.desc])
     @classifications ||= Classification.all
   end
 
@@ -41,16 +41,25 @@ class EventsController < ApplicationController
   end
 
   def classify
-    @events ||= Event.find_by_ids(params[:events])
-    @classification ||= Classification.get(params[:classification])
+    @events = Event.find_by_ids(params[:events])
+    @classification = Classification.get(params[:classification].to_i)
 
     @events.each do |event|
       next unless event
-      old_classification = event.classification
+      
+      old_classification = event.classification || false
 
-      if event.update!(:classification => @classification)
+      if @classification.blank?
+        event.classification = nil
+      else
+        event.classification = @classification
+      end
+
+      if event.save
         @classification.up_counter(:events_count) if @classification
         old_classification.down_counter(:events_count) if old_classification
+      else
+        Rails.logger.info "ERROR: #{event.errors.inspect}"
       end
 
     end
