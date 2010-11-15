@@ -1,4 +1,5 @@
 $('div#events').replaceWith("<%= escape_javascript(render(:partial => 'events/events', :locals => { :events => @events })) %>");
+$('i.title-page-count').replaceWith("<i class='title-page-count'>page <%= @events.pager.current_page %> of <%= @events.pager.total_pages %></i>");
 $('div.content').fadeTo(500, 1);
 Snorby.helpers.remove_click_events(false);
 Snorby.helpers.recheck_selected_events();

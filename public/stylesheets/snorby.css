@@ -1231,6 +1231,11 @@ ul.table div.content li .row{
 	border-right: 1px solid #cdcdcd;
 }
 
+ul.table div.content li .row.classified .signature{
+	text-decoration: line-through;
+	color: #aaa;
+}
+
 ul.table div.content li.event.highlight .row{
 	background-color: #414346;
 	border-bottom: 1px solid #414346;

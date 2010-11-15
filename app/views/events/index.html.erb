@@ -43,7 +43,7 @@
 	<%= render :partial => 'layouts/notify' %>
 <% end %>
 
-<%= title "Listing Events", do -%>
+<%= title "Listing Events <i class='title-page-count'>page #{@events.pager.current_page} of #{@events.pager.total_pages}</i>".html_safe, do -%>
 	<%= render :partial => 'events/menu' %>
 <%- end -%>
 
