@@ -71,8 +71,8 @@ module Snorby
         end
 
         def since_last_cache
-          return Event.all(:sid => @sensor.sid) if @sensor.caches.blank?
-          @last_cache = @sensor.caches.last
+          return Event.all(:sid => @sensor.sid) if @sensor.cache.blank?
+          @last_cache = @sensor.cache.last
           Event.all(:timestamp.gt => @last_cache.ran_at).all(:sid => @sensor.sid)
         end
 
@@ -111,7 +111,7 @@ module Snorby
 
             if defined?(@last_cache)
               logit 'Found last cache...'
-              @last_cache = @sensor.caches.last
+              @last_cache = @sensor.cache.last
               @cache = Cache.create(:sid => @last_event.sid, :cid => @last_event.cid, :ran_at => @last_event.timestamp)
             else
               logit 'No cache records found - creating first cache record...'

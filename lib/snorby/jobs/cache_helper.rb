@@ -86,10 +86,8 @@ module Snorby
         severity = @events.map(&:signature).map(&:sig_priority)
         metrics = {}
         Severity.all.each do |sev|
-          if severity.include?(sev.id)
-            metrics[sev.id] = severity.collect { |s| s if s == sev.id }.compact.size
-            sev.update!(:events_count => sev.events_count + metrics[sev.id]) if update_counter
-          end
+          metrics[sev.id] = severity.collect { |s| s if s == sev.id }.compact.size
+          sev.update!(:events_count => sev.events_count + metrics[sev.id]) if update_counter && metrics[sev.id]
         end
         metrics
       end
