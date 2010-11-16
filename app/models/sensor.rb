@@ -28,7 +28,7 @@ class Sensor
   
   has n, :notes, :child_key => :sid, :constraint => :destroy
 
-  def caches
+  def cache
     Cache.all(:sid => sid)
   end
   
