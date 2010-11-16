@@ -31,6 +31,10 @@ class Sensor
   def caches
     Cache.all(:sid => sid)
   end
+  
+  def daily_cache
+    DailyCache.all(:sid => sid)
+  end
 
   def last
     return Event.get(sid, last_cid) unless last_cid.blank?

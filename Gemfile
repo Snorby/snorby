@@ -1,14 +1,13 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.1'
-gem 'jquery-rails'
-
-RAILS_VERSION = '~> 3.0.1'
+RAILS_VERSION = '~> 3.0.2'
 RSPEC_VERSION = '~> 2.0.0'
 DATAMAPPER = 'http://github.com/datamapper'
 DM_VERSION = '~> 1.0.2'
 
-gem 'bundler',	'~> 1.0.0'
+gem 'rails',                  RAILS_VERSION
+gem 'jquery-rails'
+gem 'bundler',                '~> 1.0.0'
 
 gem 'activesupport',          RAILS_VERSION, :require => 'active_support'
 gem 'actionpack',             RAILS_VERSION, :require => 'action_pack'

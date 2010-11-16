@@ -16,7 +16,9 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-require 'snorby/jobs/sensor_cache'
+require 'snorby/jobs/cache_helper'
+require 'snorby/jobs/daily_cache_job'
+require 'snorby/jobs/sensor_cache_job'
 
 module Snorby
   
@@ -31,15 +33,19 @@ module Snorby
     end
     
     def self.sensor_cache
-      Snorby::Jobs.find.first(:handler.like => "%!ruby/struct:Snorby::Jobs::SensorCache%")
+      Snorby::Jobs.find.first(:handler.like => "%!ruby/struct:Snorby::Jobs::SensorCacheJob%")
+    end
+    
+    def daily_cache
+      Snorby::Jobs.find.first(:handler.like => "%!ruby/struct:Snorby::Jobs::DailyCacheJob%")
     end
     
     def self.sensor_cache?
-      !Snorby::Jobs.find.first(:handler.like => "%!ruby/struct:Snorby::Jobs::SensorCache%").blank?
+      !Snorby::Jobs.find.first(:handler.like => "%!ruby/struct:Snorby::Jobs::SensorCacheJob%").blank?
     end
     
     def self.daily_cache?
-      true
+      !Snorby::Jobs.find.first(:handler.like => "%!ruby/struct:Snorby::Jobs::DailyCacheJob%").blank?
     end
     
   end

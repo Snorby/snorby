@@ -1231,6 +1231,10 @@ ul.table div.content li .row{
 	border-right: 1px solid #cdcdcd;
 }
 
+ul.table div.content li .row .signature{
+	width: 430px;	
+}
+
 ul.table div.content li .row.classified .signature{
 	text-decoration: line-through;
 	color: #aaa;
@@ -1287,7 +1291,7 @@ ul.table li .row div img{
 }
 
 ul.table li .row div.address{
-	width: 100px;
+	width: 105px;
 	padding-left: 12px;
 }
 

@@ -87,6 +87,10 @@ class Event
   def self.find_sensor(sensor)
     all(:sensor => sensor)
   end
+  
+  def self.between(start_time, end_time)
+    all(:timestamp.gte => start_time, :timestamp.lte => end_time)
+  end
 
   def self.find_by_ids(ids)
     events = []

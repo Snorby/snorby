@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_filter :require_administrative_privileges, :only => [:index, :add, :new, :remove]
   
   def index
-    @users = User.all.page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:name.desc])
+    @users = User.all.page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:id.asc])
   end
 
   def new

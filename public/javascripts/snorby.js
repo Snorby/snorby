@@ -630,6 +630,21 @@ var Snorby = {
 	
 		if ($('div.pager').is(':visible')) {
 			
+			$(document).bind('keydown', 'ctrl+shift+1', function() {
+				$('span.sev1').parents('div.row').find('input#event-selector').click().trigger('change');
+				return false;
+			});
+			
+			$(document).bind('keydown', 'ctrl+shift+2', function() {
+				$('span.sev2').parents('div.row').find('input#event-selector').click().trigger('change');
+				return false;
+			});
+			
+			$(document).bind('keydown', 'ctrl+shift+3', function() {
+				$('span.sev3').parents('div.row').find('input#event-selector').click().trigger('change');
+				return false;
+			});
+			
 			$(document).bind('keydown', 'ctrl+shift+u', function() {
 				set_classification(0);
 				return false;

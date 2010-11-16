@@ -28,46 +28,44 @@ module Snorby
       
       case action.to_sym
       when :start
-        start
+        Worker.start
       when :stop
-        stop
+        Worker.stop
       when :restart
-        restart
+        Worker.restart
       when :zap
-        zap
+        Worker.zap
       end
       
     end
 
     def self.process
-      return Snorby::Process.new(`ps aux #{Worker.pid} |grep delayed_job |grep -v grep`.chomp.strip) if running?
+      return Snorby::Process.new(`ps aux #{Worker.pid} |grep delayed_job |grep -v grep`.chomp.strip)
     end
 
     def self.pid
-      File.open(@@pid_file).read.to_i if running?
+      File.open(@@pid_file).read.to_i if File.exists?(@@pid_file)
     end
 
     def self.running?
-      return true if File.exists?(@@pid_file)
+      return true if File.exists?(@@pid_file) && !Worker.process.raw.empty?
       false
     end
-
-    private
-
-    def start
+    
+    def self.start
       `#{Rails.root}/script/delayed_job start --pid-dir #{@@pid_path} RAILS_ENV=#{Rails.env}`
-      # Snorby::Jobs::SensorCache.new(false).perform unless Snorby::Jobs.sensor_cache?
+      # Snorby::Jobs::SensorCacheJob.new(false).perform unless Snorby::Jobs.sensor_cache?
     end
     
-    def stop(options={})
+    def self.stop
       `#{Rails.root}/script/delayed_job stop --pid-dir #{@@pid_path} RAILS_ENV=#{Rails.env}`
     end
 
-    def restart
+    def self.restart
       `#{Rails.root}/script/delayed_job restart --pid-dir #{@@pid_path} RAILS_ENV=#{Rails.env}`
     end
     
-    def zap
+    def self.zap
       `#{Rails.root}/script/delayed_job zap --pid-dir #{@@pid_path} RAILS_ENV=#{Rails.env}`
     end
 
