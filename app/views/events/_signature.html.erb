@@ -1,0 +1,24 @@
+<div class='section-title plus'>Signature Information</div>
+
+<div class='signature plus'>
+	
+	<table class='ip-header' border='0' cellspacing='0' cellpadding='0'>
+		<tr>
+			<th class='first'>Generator ID</th>
+			<th>Signature ID</th>
+			<th>Signature Revision</th>
+			<th>Activity (<%= @event.signature.event_percentage(true) %>)</th>
+			<th class='last'></th>
+		</tr>
+		<tbody>
+			<tr>
+				<td class='first'><%= @event.signature.sig_gid %></td>
+				<td><%= @event.signature.sig_sid %></td>
+				<td><%= @event.signature.sig_rev %></td>
+				<td><%= css_chart(@event.signature.event_percentage) %></td>
+				<td style='width:200px;' class='last'><%= link_to "Query Signature Database", '#' %></td>
+			</tr>
+		</tbody>
+	</table>
+	
+</div>

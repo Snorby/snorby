@@ -1136,6 +1136,17 @@ table td a{
 	border: 1px solid #9a9a9b;
 }
 
+table td a.ip-button{
+	height: 15px;
+	line-height: 17px;
+	width: 100px;
+	position: relative;
+	overflow: hidden;
+	display: block;
+	text-align: center;
+	top: 2px;
+}
+
 table td a:hover{
 	background-color: #e0e0e0;
 	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#ffffff',endColorstr='#e0e0e0');
@@ -1408,7 +1419,11 @@ ul.table div.content div.event-data{
 }
 
 ul.table div.content div.event-data table{
-	border: none;
+	background: #47494a;
+	border: 3px solid #47494a;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 
 ul.table div.content div.event-data table th{

@@ -4,8 +4,8 @@
 	
 	<table class='ip-header' border='0' cellspacing='0' cellpadding='0'>
 		<tr>
-			<th class='first'>Src</th>
-			<th>Dst</th>
+			<th class='first'>Source</th>
+			<th>Destination</th>
 			<th>Ver</th>
 			<th>Hlen</th>
 			<th>Tos</th>
@@ -19,8 +19,8 @@
 		</tr>
 		<tbody>
 			<tr>
-				<td class='first'><a href='/events/lookup?address=<%= @event.ip.ip_src %>' data-address='<%= @event.ip.ip_src %>' class='snorbybox'><%= @event.ip.ip_src %></a></td>
-				<td><a href='/events/lookup?address=<%= @event.ip.ip_dst %>' data-address='<%= @event.ip.ip_dst %>' class='snorbybox'><%= @event.ip.ip_dst %></a></td>
+				<td style='width:150px;' class='first'><a href='/events/lookup?address=<%= @event.ip.ip_src %>' data-address='<%= @event.ip.ip_src %>' class='ip-button snorbybox'><%= @event.ip.ip_src %></a></td>
+				<td style='width:150px;'><a href='/events/lookup?address=<%= @event.ip.ip_dst %>' data-address='<%= @event.ip.ip_dst %>' class='ip-button snorbybox'><%= @event.ip.ip_dst %></a></td>
 				<td><%= @event.ip.ip_ver %></td>
 				<td><%= @event.ip.ip_hlen %></td>
 				<td><%= @event.ip.ip_tos %></td>

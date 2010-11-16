@@ -3,6 +3,8 @@
 
 		<%= render :partial => 'events/ip' %>
 		
+		<%= render :partial => 'events/signature' %>
+		
 		<% if @event.tcp? %>
 			<%= render :partial => 'events/tcp' %>
 		<% elsif @event.udp? %>
