@@ -36,7 +36,7 @@ module Snorby
       Snorby::Jobs.find.first(:handler.like => "%!ruby/struct:Snorby::Jobs::SensorCacheJob%")
     end
     
-    def daily_cache
+    def self.daily_cache
       Snorby::Jobs.find.first(:handler.like => "%!ruby/struct:Snorby::Jobs::DailyCacheJob%")
     end
     

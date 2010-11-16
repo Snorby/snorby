@@ -65,7 +65,7 @@ module Snorby
           Snorby::Jobs.daily_cache.destroy! if Snorby::Jobs.daily_cache?
           Delayed::Job.enqueue(Snorby::Jobs::DailyCacheJob.new(false), 1, Time.now.tomorrow.beginning_of_day)
           
-        rescue Interrupt, IRB::Abort
+        rescue Interrupt
           @cache.destroy! if defined?(@cache)
         end
 

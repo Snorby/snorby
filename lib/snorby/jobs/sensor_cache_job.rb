@@ -45,7 +45,7 @@ module Snorby
           Delayed::Job.enqueue(Snorby::Jobs::SensorCacheJob.new(false), 1, Time.now + 30.minute)
         rescue => e
           logit "ERROR - #{e}"
-        rescue Interrupt, IRB::Abort
+        rescue Interrupt
           @cache.destroy! if defined?(@cache)
         end
       end
