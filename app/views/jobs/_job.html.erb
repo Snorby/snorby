@@ -4,6 +4,6 @@
 	<td class='attempts'><%= job.attempts %></td>
 	<td class='run_at'><%= distance_of_time_in_words(Time.now, job.run_at) %></td>
 	<td class='failed_at'><%= job.failed_at || 'N/A' %></td>
-	<td class='last_error'><%= job.last_error.blank? ? 'N/A' : (link_to truncate(job.last_error, :length => 40, :omission => '...'), last_error_job_path(job), :class => 'view_job_last_error') %></td>
-	<td style='width:240px;' class='handler last'><%= link_to truncate(job.handler, :length => 40, :omission => '...'), handler_job_path(job), :class => 'view_job_handler' %></td>
+	<td class='last_error'><%= job.last_error.blank? ? 'N/A' : (link_to truncate(job.last_error, :length => 30, :omission => '...'), last_error_job_path(job), :class => 'view_job_last_error') %></td>
+	<td style='width:240px;' class='handler last'><%= link_to truncate(job.handler, :length => 30, :omission => '...'), handler_job_path(job), :class => 'view_job_handler' %></td>
 </tr>

@@ -1186,6 +1186,10 @@ table td:last{
 	border-bottom-style: none;
 }
 
+table td.last_error,
+table td.handler{
+	font-family: "Courier New", Courier, mono;
+}
 
 /* @end */
 
