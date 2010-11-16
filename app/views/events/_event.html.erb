@@ -19,7 +19,7 @@
 		<div class='click signature'><%= truncate(event.signature.name, :length => 80, :omission => '...') %></div>
 		
 		<div class='click timestamp'>
-			<% unless event.notes.blank? %>
+			<% if event.notes_count > 0 %>
 				<span title="This event has <%= pluralize(event.notes_count, 'note') %>" class='add_tipsy round notes-count'><%= event.notes_count %></span>
 			<% end %>
 			<%= event.pretty_time %>

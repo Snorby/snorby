@@ -10,7 +10,7 @@ class Note
   
   property :user_id, Integer, :index => true
   
-  property :body, Text, :lazy => false
+  property :body, Text, :lazy => true
   
   timestamps :at
   

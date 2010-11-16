@@ -1095,6 +1095,30 @@ div#note-box.error{
 
 /* @group Table */
 
+span.status{
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+	padding: 3px 7px;
+	color: #fff;
+	font-weight: bold;
+	text-decoration: none;
+	font-variant: normal;
+	font-size: 1.1em;
+	background-color: #ddd;
+}
+
+span.status.ok{
+	background: #1ba316;
+}
+
+span.status.warning{
+	background: #fea922;
+}
+
+span.status.fail{
+	background: #fd2516;
+}
+
 table td a{
 	padding: 3px 5px;
 	background-color: #e0e0e0;
