@@ -1241,7 +1241,7 @@ table td:last{
 
 table td.last_error a,
 table td.handler a{
-	font-family: "Courier New", Courier, mono;
+	font-family: mono, Courier, "Courier New";
 }
 
 /* @end */
@@ -2562,7 +2562,7 @@ img.avatar-small{
 
 #dashboard .main .dashboard-menu ul li.active a{
 	z-index: 9999;
-	border-bottom: 3px solid #bdbdbd;
+	border-bottom: 2px solid #bdbdbd;
 	color: #405fa3;
 }
 
@@ -2575,7 +2575,7 @@ img.avatar-small{
 }
 
 #dashboard .main .dashboard-menu ul li a:hover{
-	border-bottom: 3px solid #bdbdbd;
+	border-bottom: 2px solid #bdbdbd;
 	color: #405fa3;
 }
 
@@ -2594,12 +2594,19 @@ img.avatar-small{
 }
 
 #dashboard .main .box-large{
-	width: 730px;
-	border: 1px solid #e4e4e4;
+	width: 724px;
+	border: 4px solid #eee;
 	position: relative;
 	overflow: hidden;
 	display: block;
 	margin-bottom: 10px;	
+}
+
+#dashboard .main .box-large .box-large-inside{
+	position: relative;
+	overflow: hidden;
+	display: block;
+	border: 1px solid #e0e0e0;	
 }
 
 #dashboard .main .box .content{
@@ -2660,7 +2667,7 @@ img.avatar-small{
 	height: 20px;
 	padding-left: 10px;
 	padding-right: 10px;
-	text-align: left;
+	text-align: center;
 	color: #45637a;
 	font-size: 0.9em;
 }

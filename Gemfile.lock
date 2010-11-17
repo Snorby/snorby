@@ -1,6 +1,6 @@
 GIT
   remote: http://github.com/mephux/ezprint.git
-  revision: 2b78910
+  revision: 2b789108eb5cc339425173454fc3cdf01b404e82
   branch: rails3
   specs:
     ezprint (0.2.0)
@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/datamapper/dm-core.git
-  revision: 767246c
+  revision: 44436d54ed415bea9d56edecc546a1d9eeacaac0
   specs:
     dm-core (1.0.2)
       addressable (~> 2.2)
@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: https://github.com/solnic/dm-paperclip.git
-  revision: 78b1971
+  revision: b8f0747924ab22d7f543cafe9ff790ebf2ded037
   branch: master
   specs:
     dm-paperclip (2.4.1)
@@ -52,7 +52,7 @@ GEM
       activesupport (= 3.0.3)
     activesupport (3.0.3)
     addressable (2.2.2)
-    arel (2.0.3)
+    arel (2.0.4)
     bcrypt-ruby (2.1.2)
     builder (2.1.2)
     capistrano (2.5.19)
@@ -160,9 +160,9 @@ GEM
       rails (~> 3.0)
       thor (~> 0.14.4)
     json_pure (1.4.6)
-    mail (2.2.9.1)
+    mail (2.2.10)
       activesupport (>= 2.3.6)
-      i18n (>= 0.4.1)
+      i18n (~> 0.4.1)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.16)
@@ -239,9 +239,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  actionmailer (~> 3.0.3)
-  actionpack (~> 3.0.3)
-  activesupport (~> 3.0.3)
+  actionmailer (~> 3.0.2)
+  actionpack (~> 3.0.2)
+  activesupport (~> 3.0.2)
   bundler (~> 1.0.0)
   capistrano
   capybara
@@ -272,8 +272,8 @@ DEPENDENCIES
   jquery-rails
   net-dns (~> 0.6.1)
   pdfkit (~> 0.4.6)
-  rails (~> 3.0.3)
-  railties (~> 3.0.3)
+  rails (~> 3.0.2)
+  railties (~> 3.0.2)
   rmagick (~> 2.13.1)
   rspec (~> 2.0.0)
   rspec-core (~> 2.0.0)
