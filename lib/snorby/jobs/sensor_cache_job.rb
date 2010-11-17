@@ -33,8 +33,6 @@ module Snorby
             logit "Looking for events..."
             @pager_events = since_last_cache
             
-            puts @pager_events.map(&:sid).uniq
-            
             @pager = @pager_events.page(0, :per_page => 10000, :order => [:timestamp.asc]).pager
 
             split_events_and_process

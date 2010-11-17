@@ -55,4 +55,18 @@ class Cache
     all(:ran_at.gte => Time.now.beginning_of_day, :ran_at.lte => Time.now.end_of_day)
   end
 
+  def self.classification_metrics
+    @cache = self.map(&:classification_metrics)
+    @classifications = []
+    
+    Classification.each do |classification|
+      count = 0
+      @cache.each do |cache|
+        count += cache[classification.id]
+      end
+      @classifications << [classification.name, count]
+    end
+    @classifications
+  end
+
 end

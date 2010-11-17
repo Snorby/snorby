@@ -2481,6 +2481,10 @@ img.avatar-small{
 	overflow: hidden;
 }
 
+#dashboard .main .dashboard-main{
+width: 730px;
+}
+
 #dashboard .secondary ul.box-list{
 	display: block;
 	position: relative;

@@ -110,5 +110,16 @@ module ApplicationHelper
     end
     
   end
+  
+  #
+  #  
+  # 
+  def percentage_for(count, total, round=2)
+    begin
+      ((count.to_f / total.to_f) * 100).round(round)
+    rescue FloatDomainError
+      0
+    end
+  end
 
 end

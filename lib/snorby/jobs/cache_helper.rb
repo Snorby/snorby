@@ -24,7 +24,7 @@ module Snorby
         if show_sensor
           STDOUT.puts "Sensor #{@sensor.sid}: #{msg}" if verbose
         else
-          STDOUT.puts "#{msg}"
+          STDOUT.puts "#{msg}" if verbose
         end
       end
       
