@@ -16,7 +16,7 @@
 		<div class='click sensor address'><%= truncate(event.sensor.sensor_name, :length => 17, :omission => '...') %></div>
 		<div class='click src_ip address'><%= event.ip.ip_src %></div>
 		<div class='click dst_ip address'><%= event.ip.ip_dst %></div>
-		<div class='click signature'><%= truncate(event.signature.name, :length => 80, :omission => '...') %></div>
+		<div class='click signature'><%= truncate(event.signature.name, :length => 75, :omission => '...') %></div>
 		
 		<div class='click timestamp'>
 			<% if event.notes_count > 0 %>
