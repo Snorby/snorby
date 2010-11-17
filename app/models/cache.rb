@@ -34,9 +34,17 @@ class Cache
   def self.last_month
     all(:ran_at.gte => 2.month.ago.beginning_of_month, :ran_at.lte => 1.month.ago.end_of_month)
   end
+  
+  def self.this_month
+    all(:ran_at.gte => Time.now.beginning_of_month, :ran_at.lte => Time.now.end_of_month)
+  end
 
   def self.last_week
     all(:ran_at.gte => 2.week.ago.beginning_of_week, :ran_at.lte => 1.week.ago.end_of_week)
+  end
+  
+  def self.this_week
+    all(:ran_at.gte => Time.now.beginning_of_week, :ran_at.lte => Time.now.end_of_week)
   end
 
   def self.yesterday

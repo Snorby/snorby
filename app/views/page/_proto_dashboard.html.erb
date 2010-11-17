@@ -1,0 +1,81 @@
+<% content_for :footer do %>
+
+	<script type="text/javascript">
+		$('#tcp-graph').sparkline(<%= @tcp %>, {height: 30, type: 'bar', barColor: '#035072'} );
+		$('#udp-graph').sparkline(<%= @udp %>, {height: 30, type: 'bar', barColor: '#035072'} );
+		$('#icmp-graph').sparkline(<%= @icmp %>, {height: 30, type: 'bar', barColor: '#035072'} );
+	</script>
+
+<% end %>
+
+<div class='box grid_3 alpha shadow round'>
+	
+	<div class='content shadow-in'>
+		<div class='data'>
+			
+			<div id='box-count'>
+				<%= @tcp.sum %>
+			</div>
+			
+			<div id="box-title">
+				TCP Event Count
+			</div>
+			
+			<div class='box-graph' id='tcp-graph'></div>
+			
+		</div>
+	</div>
+	
+	<div class='footer'>
+	<span><%= @tcp.sum %> / <%= @event_count %></span> 
+	</div>
+	
+</div>
+
+<div class='box grid_3 alpha shadow round'>
+	
+	<div class='content shadow-in'>
+		<div class='data'>
+			
+			<div id='box-count'>
+				<%= @udp.sum %>
+			</div>
+			
+			<div id="box-title">
+				UDP Event Count
+			</div>
+			
+			<div class='box-graph' id='udp-graph'></div>
+
+		</div>
+	</div>
+	
+	<div class='footer'>
+		<span><%= @udp.sum %> / <%= @event_count %></span> 
+	</div>
+
+</div>
+
+<div class='box grid_3 alpha shadow round'>
+	
+	<div class='content shadow-in'>
+		<div class='data'>
+			
+			<div id='box-count'>
+				<%= @icmp.sum %>
+			</div>
+			
+			<div id="box-title">
+				ICMP Event Count
+			</div>
+			
+			<div class='box-graph' id='icmp-graph'></div>
+
+		</div>
+	</div>
+	
+	<div class='footer'>
+	 	<span><%= @icmp.sum %> / <%= @event_count %></span>
+	</div>
+
+</div>

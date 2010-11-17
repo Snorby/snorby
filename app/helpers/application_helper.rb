@@ -15,8 +15,8 @@ module ApplicationHelper
   # 
   # @return [String] title html
   # 
-  def title(header, &block)
-    show_title(header)
+  def title(header, title=nil, &block)
+    show_title(title ? title : header)
     title_header = content_tag(:div, header, :id => 'title-header', :class => 'grid_6')
     if block_given?
       menu = content_tag(:ul, "<li>&nbsp;</li>#{capture(&block)}<li>&nbsp;</li>".html_safe, :id => 'title-menu')

@@ -39,5 +39,25 @@ class Classification
       0
     end
   end
+  
+  
+  def self.to_graph
+    graph = []
+    all.each do |classification|
+      graph << {
+        :name => classification.name,
+        :data => classification.events_count
+      }
+    end
+    graph
+  end
+  
+  def self.to_pie
+    graph = []
+    all.each do |classification|
+      graph << [classification.name, classification.events_count] unless classification.events_count.zero?
+    end
+    graph
+  end
 
 end

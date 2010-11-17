@@ -32,6 +32,11 @@ class Sensor
     Cache.all(:sid => sid)
   end
   
+  def sensor_name
+    return name unless name == 'Click To Change Me'
+    hostname
+  end
+  
   def daily_cache
     DailyCache.all(:sid => sid)
   end

@@ -1,0 +1,73 @@
+<% content_for :footer do %>
+
+	<script type="text/javascript">
+
+	chart = new Highcharts.Chart({
+	      chart: {
+	         renderTo: 'classification-chart',
+	         margin: [0, 0, 0, 0]
+	      },
+	      title: {
+					 x: 0,
+	         text: ''
+	      },
+	      plotArea: {
+	         shadow: null,
+	         borderWidth: null,
+	         backgroundColor: null
+	      },
+	      tooltip: {
+	         formatter: function() {
+	            return '<b>'+ this.point.name +'</b>: '+ this.y +' %';
+	         }
+	      },
+	      plotOptions: {
+         pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+               enabled: true,
+               color: '#000000',
+               connectorColor: '#000000',
+               formatter: function() {
+                  return '<b>'+ this.point.name +'</b>';
+               }
+            }
+         }
+      },
+	      legend: {
+					enabled: false,
+	         layout: 'vertical',
+	         style: {
+	            left: 'auto',
+	            bottom: 'auto',
+	            right: '5px',
+	            top: '80px'
+	         }
+	      },
+	       series: [{
+	         type: 'pie',
+	         name: 'Browser share',
+	         data: [
+						<%= Classification.to_pie.sort.map(&:to_json).join(',').html_safe %>
+	         ]
+	      }]
+	   });
+	//series: [<%= Classification.to_graph.map(&:to_json).join(',').html_safe %>]
+
+	</script>
+
+<% end %>
+
+
+<div class='box-large alpha'>
+	
+	<div id='title'>
+		<div id="title-header-dashboard">
+			<%= image_tag('icons/chart.png') %> Event Classification
+		</div>
+	</div>
+	
+	<div id='classification-chart'></div>
+	
+</div>

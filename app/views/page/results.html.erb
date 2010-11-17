@@ -1,4 +1,4 @@
-<%= title "Search Results <i>#{pluralize(@events.pager.total, 'event')} found</i>".html_safe do %>
+<%= title "Search Results <i>#{pluralize(@events.pager.total, 'event')} found</i>".html_safe, 'Search Results' do %>
 
 	<%= render :partial => 'events/menu' %>
 

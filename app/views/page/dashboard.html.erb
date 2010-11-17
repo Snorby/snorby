@@ -1,12 +1,64 @@
-<%= title "Dashboard" do %>
-	
-	<%= drop_down_for('Timeline', 'icons/timeline.png', 'timeline') do %>
+<% javascript 'sparkline', 'highcharts' %>
 
-		<%= drop_down_item "Today <i>#{Time.now.strftime('%D')}</i>", '#', nil, { :class => 'today' } %>
-		<%= drop_down_item "Yesterday <i>#{Time.now.yesterday.strftime('%D')}</i>", '#', nil, { :class => 'yesterday' } %>
-		<%= drop_down_item "Week <i>#{Time.now.beginning_of_week.strftime('%D')} - #{Time.now.strftime('%D')}</i>", '#', nil, { :class => 'last-week' } %>
-		<%= drop_down_item "Month <i>#{Time.now.beginning_of_month.strftime('%D')} - #{Time.now.strftime('%D')}</i>", '#', nil, { :class => 'last-month' } %>
+<%= title "Dashboard" %>
 
-	<% end %>
+<div id='dashboard' class=''>
 	
-<% end %>
+	<div class='main grid_9'>
+		
+		<div class='dashboard-menu'>
+
+			<ul>
+
+				<li class='active'><%= link_to "Today", '#' %></li>
+				<li><%= link_to "Yesterday", '#' %></li>
+				<li><%= link_to "This Week", '#' %></li>
+				<li><%= link_to "This Month", '#' %></li>
+				<li><%= link_to "Select Range", '#' %></li>
+
+			</ul>
+
+		</div>
+		
+		<%= render 'page/proto_dashboard' %>
+		
+		<%= render 'classification_dashboard' %>
+		
+	</div>
+	
+	<div class='secondary grid_3 alpha'>
+	
+		<div class='dashboard-header'>
+			<span>Top 5 Sensor</span>
+		</div>
+		
+		<ul class='box-list'>
+			<% @sensors.each do |sensor| %>
+			<li><%= sensor.name %> <span><%= sensor.events_count %></span></li>
+			<% end %>
+		</ul>
+	
+		<div class='dashboard-header'>
+			<span>Top 5 Active Users</span>
+		</div>
+		
+		<ul class='box-list'>
+			<% @favers.each do |user| %>
+			<li><%= image_tag(user.avatar.url(:small), :size => '16x16', :class => 'avatar-small') %> <%= user.name %> <span><%= user.favorites_count %></span></li>
+			<% end %>
+		</ul>
+		
+		
+		<div class='dashboard-header'>
+			<span>Classified Today</span>
+		</div>
+		
+		<ul class='box-list'>
+			<% @classifications.each do |classification| %>
+			<li><%= classification.name %> <span><%= classification.events_count %></span></li>
+			<% end %>
+		</ul>
+	
+	</div>
+	
+</div>
