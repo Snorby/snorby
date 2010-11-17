@@ -239,9 +239,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  actionmailer (~> 3.0.3)
-  actionpack (~> 3.0.3)
-  activesupport (~> 3.0.3)
+  actionmailer (~> 3.0.2)
+  actionpack (~> 3.0.2)
+  activesupport (~> 3.0.2)
   bundler (~> 1.0.0)
   capistrano
   capybara
@@ -272,8 +272,8 @@ DEPENDENCIES
   jquery-rails
   net-dns (~> 0.6.1)
   pdfkit (~> 0.4.6)
-  rails (~> 3.0.3)
-  railties (~> 3.0.3)
+  rails (~> 3.0.2)
+  railties (~> 3.0.2)
   rmagick (~> 2.13.1)
   rspec (~> 2.0.0)
   rspec-core (~> 2.0.0)

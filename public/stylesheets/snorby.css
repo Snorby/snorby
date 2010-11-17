@@ -1271,7 +1271,10 @@ ul.table div.content li .row{
 }
 
 ul.table div.content li .row .signature{
-	width: 420px;	
+	width: 430px;
+	display: block;
+	position: relative;
+	overflow: hidden;
 }
 
 ul.table div.content li .row.classified .signature{
