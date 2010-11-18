@@ -91,6 +91,10 @@ class Event
   def self.between(start_time, end_time)
     all(:timestamp.gte => start_time, :timestamp.lte => end_time)
   end
+  
+  def self.between_time(start_time, end_time)
+    all(:timestamp.gt => start_time, :timestamp.lt => end_time)
+  end
 
   def self.find_by_ids(ids)
     events = []

@@ -26,16 +26,26 @@ module Snorby
 
       def perform
         begin
-
+          
+          current_hour = Time.now.beginning_of_day + Time.now.hour.hours
+          half_past_time = current_hour + 30.minutes
+          
+          if half_past_time > Time.now
+            @stop_time = half_past_time
+          else
+            @stop_time = current_hour
+          end
+          
           Sensor.all.each do |sensor|
             @sensor = sensor
 
             logit "Looking for events..."
-            @pager_events = since_last_cache
-            
-            @pager = @pager_events.page(0, :per_page => 10000, :order => [:timestamp.asc]).pager
+            @since_last_cache = since_last_cache
 
-            split_events_and_process
+            start_time = @since_last_cache.first.timestamp.beginning_of_day + @since_last_cache.first.timestamp.hour.hours
+            end_time = start_time + 30.minute
+
+            split_events_and_process(start_time - 1.second, end_time)
 
           end
           
@@ -86,45 +96,45 @@ module Snorby
         # collections of 10000 then continue with the
         # cache calculations.
         #
-        def split_events_and_process
+        def split_events_and_process(start_time, end_time)
 
           logit 'Splitting Events for processing...'
-          logit "TOTAL COUNT: #{@pager.total_pages}/#{@pager.total}"
+          
+          return if start_time >= @stop_time
+          
+          puts start_time
+          puts end_time
+          
+          @events = @since_last_cache.between_time(start_time, end_time)
 
-          total_page_count = @pager.total_pages + 1
-          total_page_count.times do |count|
-            next if count.zero?
-
-            @tcp_events = []
-            @udp_events = []
-            @icmp_events = []
-
-            logit "COUNT: #{count}"
-
-            @events = @pager_events.page(count, :per_page => 10000, :order => [:timestamp.asc])
-
-            @last_event = @events.last unless @events.blank?
-
-            logit 'Found events - processing...'
-
-            if defined?(@last_cache)
-              logit 'Found last cache...'
-              @last_cache = @sensor.cache.last
-              @cache = Cache.create(:sid => @last_event.sid, :cid => @last_event.cid, :ran_at => @last_event.timestamp)
-            else
-              logit 'No cache records found - creating first cache record...'
-              reset_counter_cache_columns
-              @last_cache = Cache.create(:sid => @last_event.sid, :cid => @last_event.cid, :ran_at => @last_event.timestamp)
-              @cache = @last_cache
-            end
-
-            logit 'Building cache attributes'
-
-            build_snorby_cache
-
+          @tcp_events = []
+          @udp_events = []
+          @icmp_events = []
+          
+          @last_event = @events.last unless @events.blank?
+          
+          logit 'Found events - processing...'
+          
+          if defined?(@last_cache)
+            logit 'Found last cache...'
+            @last_cache = @sensor.cache.last
+            @cache = Cache.create(:sid => @last_event.sid, :cid => @last_event.cid, :ran_at => @last_event.timestamp)
+          else
+            logit 'No cache records found - creating first cache record...'
+            reset_counter_cache_columns
+            @last_cache = Cache.create(:sid => @last_event.sid, :cid => @last_event.cid, :ran_at => @last_event.timestamp)
+            @cache = @last_cache
           end
-
-
+          
+          logit 'Building cache attributes'
+          
+          build_snorby_cache
+          
+          new_start_time = end_time
+          new_end_time = end_time + 30.minutes
+          
+          split_events_and_process(new_start_time, new_end_time)
+          
         end
 
     end

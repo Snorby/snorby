@@ -2497,6 +2497,9 @@ img.avatar-small{
 	overflow: hidden;
 }
 
+#dashboard .main{
+}
+
 #dashboard .main .dashboard-main{
 	width: 730px;
 	display: block;
@@ -2508,17 +2511,19 @@ img.avatar-small{
 	position: relative;
 	overflow: hidden;
 	margin-bottom: 20px;
+	border-top-style: none;
 }
 
 #dashboard .secondary ul.box-list li{
 	height: 30px;
 	line-height: 30px;
 	border-bottom: 1px solid #ededed;
-	color: #154a91;
+	color: #6a7e8d;
 	display: block;
 	position: relative;
 	overflow: hidden;
-	text-transform: capitalize;
+	font-size: 1.0em;
+	text-align: left;
 }
 
 #dashboard .secondary ul.box-list li span{
@@ -2587,8 +2592,6 @@ img.avatar-small{
 }
 
 #dashboard .main .dashboard-menu ul li.active a{
-	z-index: 9999;
-	border-bottom: 2px solid #bdbdbd;
 	color: #405fa3;
 }
 
@@ -2617,7 +2620,7 @@ img.avatar-small{
 	overflow: hidden;
 	display: block;
 	margin-bottom: 15px;
-	background: #e8eee6 url(../images/dashboard/box-bg.png) no-repeat;
+	background: #ededed url(../images/dashboard/box-bg.png) no-repeat;
 }
 
 #dashboard .main .box-large{

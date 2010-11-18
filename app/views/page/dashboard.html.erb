@@ -1,6 +1,14 @@
 <% javascript 'sparkline', 'highcharts' %>
 
-<%= title "Dashboard" %>
+<%= title "Dashboard" do %>
+
+	<%= drop_down_for('More Options', 'icons/filter.png', 'options') do %>
+
+		<%= drop_down_item "Force Cache Update", '#', nil, { :class => 'dashboard' } %>
+
+	<% end %>
+
+<% end %>
 
 <div id='dashboard' class=''>
 	
@@ -24,7 +32,7 @@
 		
 		<%= render 'severity_dashboard' %>
 		
-		<%= render 'page/proto_dashboard' %>
+		<%# render 'page/proto_dashboard' %>
 		
 		<%= render 'events_dashboard' %>
 		
@@ -54,7 +62,16 @@
 			<% end %>
 		</ul>
 		
+		<div class='dashboard-header'>
+			<span>Recent Uniq Events</span>
+		</div>
 		
+		<ul class='box-list'>
+			<% @recent_events.each do |event| %>
+			<li><%= truncate(event.signature.name, :length => 25) %> <span><%= event.signature.events_count %></span></li>
+			<% end %>
+		</ul>
+	
 		<div class='dashboard-header'>
 			<span>Classifications</span>
 		</div>
@@ -62,17 +79,7 @@
 		<ul class='box-list'>
 			<% @classifications.each do |classification| %>
 			
-			<li><%= truncate(classification.name, :length => 30) %> <span><%= classification.events_count %></span></li>
-			<% end %>
-		</ul>
-		
-		<div class='dashboard-header'>
-			<span>Recent Uniq Events</span>
-		</div>
-		
-		<ul class='box-list'>
-			<% @recent_events.each do |event| %>
-			<li><%= truncate(event.signature.name, :length => 30) %> <span><%= event.signature.events_count %></span></li>
+			<li><%= truncate(classification.name, :length => 25) %> <span><%= classification.events_count %></span></li>
 			<% end %>
 		</ul>
 	
