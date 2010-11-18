@@ -15,12 +15,18 @@
 				<li><%= link_to "This Week", '#' %></li>
 				<li><%= link_to "This Month", '#' %></li>
 				<li><%= link_to "Select Range", '#' %></li>
+				
+				<li class='right'><i>Last Updated: <%= @last_cache.strftime('%D %l:%M:%S %p') %></i></li>
 
 			</ul>
 
 		</div>
 		
+		<%= render 'severity_dashboard' %>
+		
 		<%= render 'page/proto_dashboard' %>
+		
+		<%= render 'events_dashboard' %>
 		
 		<%= render 'classification_dashboard' %>
 		
@@ -34,7 +40,7 @@
 		
 		<ul class='box-list'>
 			<% @sensors.each do |sensor| %>
-			<li><%= sensor.name %> <span><%= sensor.events_count %></span></li>
+			<li><%= truncate(sensor.name, :length => 30) %> <span><%= sensor.events_count %></span></li>
 			<% end %>
 		</ul>
 	
@@ -44,7 +50,7 @@
 		
 		<ul class='box-list'>
 			<% @favers.each do |user| %>
-			<li><%= image_tag(user.avatar.url(:small), :size => '16x16', :class => 'avatar-small') %> <%= user.name %> <span><%= user.favorites_count %></span></li>
+			<li><%= image_tag(user.avatar.url(:small), :size => '16x16', :class => 'avatar-small') %> <%= truncate(user.name, :length => 30) %> <span><%= user.favorites_count %></span></li>
 			<% end %>
 		</ul>
 		
@@ -55,7 +61,18 @@
 		
 		<ul class='box-list'>
 			<% @classifications.each do |classification| %>
-			<li><%= classification.name %> <span><%= classification.events_count %></span></li>
+			
+			<li><%= truncate(classification.name, :length => 30) %> <span><%= classification.events_count %></span></li>
+			<% end %>
+		</ul>
+		
+		<div class='dashboard-header'>
+			<span>Recent Uniq Events</span>
+		</div>
+		
+		<ul class='box-list'>
+			<% @recent_events.each do |event| %>
+			<li><%= truncate(event.signature.name, :length => 30) %> <span><%= event.signature.events_count %></span></li>
 			<% end %>
 		</ul>
 	

@@ -1,0 +1,60 @@
+<% content_for :footer do %>
+
+	<script type="text/javascript">
+		
+		chart = new Highcharts.Chart({
+		      chart: {
+		         renderTo: 'events-graph',
+		         defaultSeriesType: 'spline',
+		         marginRight: 80,
+							marginLeft: 80,
+							marginTop: 50,
+		         marginBottom: 50
+		      },
+		      title: {
+		         text: 'Event Count vs Time By Sensor',
+		         x: -20 //center
+		      },
+		      xAxis: {
+		         categories: [<%= 24.times.map(&:to_i).join(',') %>]
+		      },
+		      yAxis: {
+		         title: {
+		            text: 'Event Count'
+		         },
+		         plotLines: [{
+		            value: 0,
+		            width: 1,
+		            color: '#808080'
+		         }]
+		      },
+		      tooltip: {
+		         formatter: function() {
+		                   return '<b>'+ this.series.name +'</b><br/>'+ this.y + ' Events';
+		         }
+		      },
+		      legend: {
+		         layout: 'vertical',
+		         align: 'right',
+		         verticalAlign: 'top',
+		         x: -10,
+		         y: 0,
+		         borderWidth: 0
+		      },
+		      series: <%= @sensor_metrics.to_json.html_safe %>
+		   });
+		
+		
+	</script>
+
+<% end %>
+
+<div class='box-large page boxit round'>
+
+	<div class='box-large-inside'>
+		
+		<div id='events-graph'></div>
+		
+	</div>
+
+</div>

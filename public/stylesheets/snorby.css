@@ -1227,6 +1227,10 @@ table td.first{
 	border-left: 1px solid #cdcdcd;
 }
 
+table tbody.top tr:first-child td{
+	border-top: 1px solid #cdcdcd;
+}
+
 table td.last{
 	border-right: 1px solid #cdcdcd;
 }
@@ -2474,6 +2478,18 @@ img.avatar-small{
 	margin-top: 10px;
 }
 
+#dashboard h2{
+	text-transform: capitalize;
+	color: #6a8092;
+	font-weight: normal;
+	text-decoration: none;
+	font-variant: normal;
+	padding-left: 5px;
+	font-style: normal;
+	font-size: 1.2em;
+	margin-bottom: 5px;
+}
+
 #dashboard .main,
 #dashboard .secondary{
 	position: relative;
@@ -2482,7 +2498,9 @@ img.avatar-small{
 }
 
 #dashboard .main .dashboard-main{
-width: 730px;
+	width: 730px;
+	display: block;
+	position: relative;
 }
 
 #dashboard .secondary ul.box-list{
@@ -2500,6 +2518,7 @@ width: 730px;
 	display: block;
 	position: relative;
 	overflow: hidden;
+	text-transform: capitalize;
 }
 
 #dashboard .secondary ul.box-list li span{
@@ -2597,7 +2616,8 @@ width: 730px;
 	position: relative;
 	overflow: hidden;
 	display: block;
-	margin-bottom: 10px;
+	margin-bottom: 15px;
+	background: #e8eee6 url(../images/dashboard/box-bg.png) no-repeat;
 }
 
 #dashboard .main .box-large{
@@ -2624,7 +2644,7 @@ width: 730px;
 	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#ffffff',endColorstr='#e1e1e1');
 	background: -webkit-gradient(linear,0% 0,0% 100%,from(#fff),to(#e1e1e1));
 	background: -moz-linear-gradient(-90deg,#fff,#e1e1e1);
-	border: 1px solid #fff;
+	border: 1px solid #f7fef4;
 }
 
 #dashboard .main .box .content .data{
@@ -2674,13 +2694,14 @@ width: 730px;
 	height: 20px;
 	padding-left: 10px;
 	padding-right: 10px;
-	text-align: center;
+	text-align: left;
 	color: #45637a;
 	font-size: 0.9em;
+	font-weight: bold;
 }
 
 #dashboard .main .box .footer span{
-	color: #a3a3a3;
+	color: #b2aeb0;
 }
 
 #dashboard .main .box .footer img{

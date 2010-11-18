@@ -11,14 +11,26 @@
     <meta name="description" content="Snorby - All About Simplicity" />
     <link rel="icon" href="/favicon.png" type="image/png" />
 
+		<% @severities ||= Severity.all %>
+
+		<script type="text/javascript">
+			<% @severities.each do |sev| %>
+				var sev<%= sev.sig_id %>_bg_color = '<%= sev.bg_color %>';
+			<% end %>
+		</script>
+
     <%= stylesheet_link_merged :snorby %>
 		<%= javascript_include_merged :snorby %>
     <%= csrf_meta_tag %>
+
 		<%= yield(:header) %>
 
 		<style type="text/css">
-			<%- Severity.all.each do |sev| -%>
-				<%= "ul.table li div.small span.severity.sev#{sev.sig_id} {background-color: #{sev.bg_color};color: #{sev.text_color};}" %>
+			<%- @severities.each do |sev| -%>
+				ul.table li div.small span.severity.sev<%= sev.sig_id %>{
+					background-color: <%= sev.bg_color %>;
+					color: <%= sev.text_color %>;
+				}
 			<%- end -%>
 		</style>
 
