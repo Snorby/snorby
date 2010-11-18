@@ -1,6 +1,6 @@
 GIT
   remote: http://github.com/mephux/ezprint.git
-  revision: 2b789108eb5cc339425173454fc3cdf01b404e82
+  revision: 2b78910
   branch: rails3
   specs:
     ezprint (0.2.0)
@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/datamapper/dm-core.git
-  revision: 44436d54ed415bea9d56edecc546a1d9eeacaac0
+  revision: c58eee0
   specs:
     dm-core (1.0.2)
       addressable (~> 2.2)
@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: https://github.com/solnic/dm-paperclip.git
-  revision: b8f0747924ab22d7f543cafe9ff790ebf2ded037
+  revision: b8f0747
   branch: master
   specs:
     dm-paperclip (2.4.1)
