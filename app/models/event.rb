@@ -93,7 +93,7 @@ class Event
   end
   
   def self.between_time(start_time, end_time)
-    all(:timestamp.gt => start_time, :timestamp.lt => end_time)
+    all(:timestamp.gt => start_time, :timestamp.lt => end_time, :order => [:timestamp.desc])
   end
 
   def self.find_by_ids(ids)

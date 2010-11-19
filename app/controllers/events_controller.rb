@@ -18,7 +18,7 @@ class EventsController < ApplicationController
       format.html
       format.js
       format.pdf do
-        render :pdf => "Event:#{@event.id}", :template => "events/show.pdf.erb", :layout => 'pdf.html.erb'
+        render :pdf => "Event:#{@event.id}", :template => "events/show.pdf.erb", :layout => 'pdf.html.erb', :stylesheets => ["pdf"]
       end
       format.csv { render :json => @event.to_csv }
       format.json { render :json => @event.in_json }

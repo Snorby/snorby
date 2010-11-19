@@ -2,7 +2,7 @@ class PageController < ApplicationController
 
   def dashboard
     
-    @cache ||= Cache.this_month
+    @cache = Cache.today
     
     @tcp ||= @cache.map(&:tcp_count)
     @udp ||= @cache.map(&:udp_count)
@@ -25,6 +25,14 @@ class PageController < ApplicationController
     
     sigs = Event.all(:limit => 5, :order => [:timestamp.desc], :fields => [:sig_id], :unique => true).map(&:signature).map(&:sig_id)
     @recent_events ||= Event.all(:sig_id => sigs).group_by { |x| x.sig_id }.map(&:last).map(&:first)
+    
+    respond_to do |format|
+      format.html
+      format.js
+      format.pdf do
+        render :pdf => "Metrics for #{Time.now}", :template => "page/dashboard.pdf.erb", :layout => 'pdf.html.erb', :stylesheets => ["pdf"]
+      end
+    end
     
   end
   

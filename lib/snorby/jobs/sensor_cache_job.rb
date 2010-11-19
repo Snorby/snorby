@@ -48,8 +48,6 @@ module Snorby
 
             start_time = @since_last_cache.first.timestamp.beginning_of_day + @since_last_cache.first.timestamp.hour.hours
             end_time = start_time + 30.minute
-            
-            next if @since_last_cache.last.timestamp < @stop_time
 
             split_events_and_process(start_time, end_time)
 
@@ -104,8 +102,6 @@ module Snorby
         #
         def split_events_and_process(start_time, end_time)
 
-          puts 'blah'
-
           return if start_time >= @stop_time
 
           logit 'Splitting Events for processing...'
@@ -121,7 +117,11 @@ module Snorby
 
           @last_event = @events.last
 
-          unless @events.blank?
+          if @events.blank?
+            
+             Cache.create(:sid => @sensor.sid, :ran_at => end_time)
+            
+          else
             
             logit 'Found events - processing...'
 
