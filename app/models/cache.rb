@@ -93,7 +93,7 @@ class Cache
     Classification.each do |classification|
       count = 0
       @cache.each do |cache|
-        next if cache.empty?
+        next unless cache
         count += cache[classification.id]
       end
       @classifications << [classification.name, count]

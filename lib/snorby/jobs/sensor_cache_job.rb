@@ -49,7 +49,7 @@ module Snorby
             start_time = @since_last_cache.first.timestamp.beginning_of_day + @since_last_cache.first.timestamp.hour.hours
             end_time = start_time + 30.minute
             
-            next if @since_last_cache.last.timestamp < end_time
+            next if @since_last_cache.last.timestamp < @stop_time
 
             split_events_and_process(start_time, end_time)
 
@@ -87,7 +87,7 @@ module Snorby
         def since_last_cache
           return Event.all(:sid => @sensor.sid) if @sensor.cache.blank?
           @last_cache = @sensor.cache.last
-          Event.all(:timestamp.gt => @last_cache.ran_at).all(:sid => @sensor.sid)
+          Event.all(:timestamp.gte => @last_cache.ran_at).all(:sid => @sensor.sid)
         end
 
         def reset_counter_cache_columns
