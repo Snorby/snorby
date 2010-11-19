@@ -22,9 +22,9 @@ module Snorby
       
       def logit(msg, show_sensor=true)
         if show_sensor
-          STDOUT.puts "Sensor #{@sensor.sid}: #{msg}" if verbose
+          #STDOUT.puts "Sensor #{@sensor.sid}: #{msg}" if verbose
         else
-          STDOUT.puts "#{msg}" if verbose
+          #STDOUT.puts "#{msg}" if verbose
         end
       end
       

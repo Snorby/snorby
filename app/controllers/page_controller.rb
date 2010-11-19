@@ -15,11 +15,7 @@ class PageController < ApplicationController
     @event_count ||= @cache.all.map(&:event_count).sum
     
     @sensor_metrics ||= Cache.sensor_metrics
-    @classification_metrics ||= @cache.classification_metrics.sort
-    
-    @tcp_total ||= DailyCache.all.map(&:tcp_count).sum
-    @udp_total ||= DailyCache.all.map(&:udp_count).sum
-    @icmp_total ||= DailyCache.all.map(&:icmp_count).sum
+    @classification_metrics ||= @cache.classification_metrics.sort! { |x,y| 1 <=> 0 }
     
     @classifications ||= Classification.all(:order => [:events_count.desc])
     @sensors ||= Sensor.all(:limit => 5, :order => [:events_count.desc])

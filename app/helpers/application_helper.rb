@@ -99,10 +99,10 @@ module ApplicationHelper
       return content_tag(:span, "OK", :class => 'status ok add_tipsy', :title => 'Success: Everything Looks Good!')
       #return image_tag('icons/active.png', :class => 'add_tipsy', :title => 'Success: Everything Looks Good!')
     elsif Snorby::Jobs.sensor_cache?
-      return content_tag(:span, "WARNING", :class => 'status warning add_tipsy', :title => 'Warning: The Daily Cache Job Is Not In Running...')
+      return content_tag(:span, "WARNING", :class => 'status warning add_tipsy', :title => 'Warning: The Daily Cache Job Is Not Running...')
       #return image_tag('icons/job-fail.png', :class => 'add_tipsy', :title => 'Warning: The Daily Cache Job Is Not In Running...')
     elsif Snorby::Jobs.daily_cache?
-      return content_tag(:span, "WARNING", :class => 'status warning add_tipsy', :title => 'Warning: The Sensor Cache Job Is Not In Running...')
+      return content_tag(:span, "WARNING", :class => 'status warning add_tipsy', :title => 'Warning: The Sensor Cache Job Is Not Running...')
       #return image_tag('icons/job-fail.png', :class => 'add_tipsy', :title => 'Warning: The Sensor Cache Job Is Not In Running...')
     else
       return content_tag(:span, "FAIL", :class => 'status fail add_tipsy', :title => 'ERROR: Both Cache Jobs Are Not Running...')

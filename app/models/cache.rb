@@ -60,11 +60,11 @@ class Cache
     count = []
     case type.to_sym
     when :high
-      @cache.each { |x| count << (x.has_key?(1) ? x[1] : 0) }
+      @cache.each { |x| count << (x.kind_of?(Hash) ? (x.has_key?(1) ? x[1] : 0) : 0) }
     when :medium
-      @cache.each { |x| count << (x.has_key?(2) ? x[2] : 0) }
+      @cache.each { |x| count << (x.kind_of?(Hash) ? (x.has_key?(2) ? x[2] : 0) : 0) }
     when :low
-      @cache.each { |x| count << (x.has_key?(3) ? x[3] : 0) }
+      @cache.each { |x| count <<( x.kind_of?(Hash) ? (x.has_key?(3) ? x[3] : 0) : 0) }
     end
     count
   end
@@ -89,10 +89,11 @@ class Cache
   def self.classification_metrics
     @cache = self.map(&:classification_metrics)
     @classifications = []
-
+    
     Classification.each do |classification|
       count = 0
       @cache.each do |cache|
+        next if cache.empty?
         count += cache[classification.id]
       end
       @classifications << [classification.name, count]
