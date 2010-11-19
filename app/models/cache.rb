@@ -74,7 +74,7 @@ class Cache
 
     Sensor.all(:limit => 5, :order => [:events_count.desc]).each do |sensor|
       count = Array.new(24) { 0 }
-      blah = sensor.cache.today.group_by { |x| x.ran_at.hour }
+      blah = self.all(:sid => sensor.sid).group_by { |x| x.ran_at.hour }
 
       blah.each do |hour, data|
         count[hour] = data.map(&:event_count).sum

@@ -2,7 +2,7 @@ class PageController < ApplicationController
 
   def dashboard
     
-    @cache ||= Cache.today
+    @cache ||= Cache.this_month
     
     @tcp ||= @cache.map(&:tcp_count)
     @udp ||= @cache.map(&:udp_count)
@@ -14,8 +14,8 @@ class PageController < ApplicationController
     
     @event_count ||= @cache.all.map(&:event_count).sum
     
-    @sensor_metrics ||= Cache.sensor_metrics
-    @classification_metrics ||= @cache.classification_metrics.sort! { |x,y| 1 <=> 0 }
+    @sensor_metrics ||= @cache.sensor_metrics
+    @classification_metrics ||= @cache.classification_metrics.sort! { |x,y| 1 <=> x.last }
     
     @classifications ||= Classification.all(:order => [:events_count.desc])
     @sensors ||= Sensor.all(:limit => 5, :order => [:events_count.desc])

@@ -56,7 +56,7 @@ module Snorby
           end
 
           unless Snorby::Jobs.sensor_cache?
-            Delayed::Job.enqueue(Snorby::Jobs::SensorCacheJob.new(false), 1, Time.now + 30.minute)
+            Delayed::Job.enqueue(Snorby::Jobs::SensorCacheJob.new(false), 1, @stop_time + 30.minute)
           end
 
         rescue Interrupt
