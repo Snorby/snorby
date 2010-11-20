@@ -36,14 +36,12 @@ module Snorby
             @stop_time = current_hour
           end
 
-          puts "Cache Stop Time: #{@stop_time}"
-
           Sensor.all.each do |sensor|
             @sensor = sensor
 
             logit "Looking for events..."
             @since_last_cache = since_last_cache
-            
+
             next if @since_last_cache.blank?
 
             start_time = @since_last_cache.first.timestamp.beginning_of_day + @since_last_cache.first.timestamp.hour.hours
@@ -53,8 +51,11 @@ module Snorby
 
           end
 
+          Snorby::Jobs.sensor_cache.destroy! if Snorby::Jobs.sensor_cache?
           Delayed::Job.enqueue(Snorby::Jobs::SensorCacheJob.new(false), 1, @stop_time + 30.minute)
 
+        rescue => e
+          puts e
         rescue Interrupt
           @cache.destroy! if defined?(@cache)
         end
@@ -102,11 +103,6 @@ module Snorby
 
           return if start_time >= @stop_time
 
-          logit 'Splitting Events for processing...'
-
-          puts "Event Start Time: #{start_time}"
-          puts "Event Stop Time: #{end_time}"
-
           @events = @since_last_cache.between_time(start_time, end_time)
 
           @tcp_events = []
@@ -116,11 +112,11 @@ module Snorby
           @last_event = @events.last
 
           if @events.blank?
-            
-             Cache.create(:sid => @sensor.sid, :ran_at => end_time)
-            
+
+            Cache.create(:sid => @sensor.sid, :ran_at => end_time)
+
           else
-            
+
             logit 'Found events - processing...'
 
             if defined?(@last_cache)
@@ -137,7 +133,7 @@ module Snorby
             logit 'Building cache attributes'
 
             build_snorby_cache
-            
+
           end
 
           new_start_time = end_time

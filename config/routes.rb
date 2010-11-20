@@ -21,7 +21,11 @@ Snorby::Application.routes.draw do
   end
 
   resources :settings do
-    
+    collection do
+      get :start_sensor_cache
+      get :start_daily_cache
+      get :start_worker
+    end
   end
   
   resources :severities do

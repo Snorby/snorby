@@ -69,6 +69,10 @@ class Cache
     count
   end
 
+  def self.get_last
+    first(:order => [:ran_at.desc])
+  end
+
   def self.sensor_metrics
     @metrics = []
 
@@ -77,7 +81,6 @@ class Cache
       blah = self.all(:sid => sensor.sid).group_by { |x| x.ran_at.hour }
 
       blah.each do |hour, data|
-        puts hour
         count[hour] = data.map(&:event_count).sum
       end
 

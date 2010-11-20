@@ -67,7 +67,6 @@ class EventsController < ApplicationController
     render :layout => false, :status => 200
   end
 
-
   def mass_create_favorite
     @events ||= Event.find_by_ids(params[:events])
     @events.each { |event| event.create_favorite unless favorite? }
@@ -98,6 +97,22 @@ class EventsController < ApplicationController
   def lookup
     @lookup = Snorby::Lookup.new(params[:address])
     render :layout => false
+  end
+  
+  def signature
+    
+  end
+  
+  def classification
+    
+  end
+  
+  def sensor
+    
+  end
+  
+  def activity
+    
   end
 
 end
