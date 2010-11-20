@@ -44,7 +44,7 @@ module ApplicationHelper
   end
 
   def drop_down_for(name, icon_path, id, &block)
-    html = link_to "#{image_tag(icon_path, :size => '16x16')} #{name}".html_safe, '#', :class => 'has_dropdown', :id => "#{id}"
+    html = link_to "#{image_tag(icon_path, :size => '16x16')} #{name}".html_safe, '#', :class => 'has_dropdown right-more', :id => "#{id}"
     if block_given?
       html += content_tag(:dl, "#{capture(&block)}".html_safe, :id => "#{id}", :class => 'drop-down-menu', :style => 'display:none;')
     end

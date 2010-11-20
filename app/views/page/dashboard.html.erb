@@ -22,7 +22,7 @@
 				<li><%= link_to "Yesterday", '#' %></li>
 				<li><%= link_to "This Week", '#' %></li>
 				<li><%= link_to "This Month", '#' %></li>
-				<li><%= link_to "Select Range", '#' %></li>
+				<li><%= link_to "This Year", '#' %></li>
 				
 				<li class='right'><i>Last Updated: <%= @last_cache.strftime('%D %l:%M:%S %p') %></i></li>
 
@@ -30,13 +30,23 @@
 
 		</div>
 		
-		<%= render 'severity_dashboard.html.erb' %>
+		<div id='box-holder'>
+			<%= render 'severity_dashboard.html.erb' %>
+		</div>
 		
 		<%# render 'proto_dashboard.html.erb' %>
 		
-		<%= render 'events_dashboard.html.erb' %>
+		<div id="box-tabs">
+
+			<ul id="box-menu">
+				<li><%= link_to "Sensors", '#', :class => 'show_events_graph' %></li>
+				<li><%= link_to "Severities", '#', :class => 'show_severities_graph' %></li>
+				<li><%= link_to "Protocols", '#', :class => 'show_protocol_graph' %></li>
+			</ul>
+
+		</div>
 		
-		<%= render 'classification_dashboard.html.erb' %>
+		<%= render 'graph_dashboard.html.erb' %>
 		
 	</div>
 	
@@ -63,7 +73,7 @@
 		</ul>
 		
 		<div class='dashboard-header'>
-			<span>Recent Uniq Events</span>
+			<span>Recent Unique Events</span>
 		</div>
 		
 		<ul class='box-list'>
@@ -73,7 +83,7 @@
 		</ul>
 	
 		<div class='dashboard-header'>
-			<span>Classifications</span>
+			<span>Analyst Classified Events</span>
 		</div>
 		
 		<ul class='box-list'>

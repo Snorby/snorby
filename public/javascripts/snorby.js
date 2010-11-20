@@ -159,6 +159,28 @@ var Snorby = {
 			});
 		},
 		
+		dashboard: function(){
+			
+			$('a.show_events_graph').live('click', function(e) {
+				e.preventDefault();
+				$('div.dashboard-graph').hide();
+				$('div#events-graph').show();
+			});
+			
+			$('a.show_severities_graph').live('click', function(e) {
+				e.preventDefault();
+				$('div.dashboard-graph').hide();
+				$('div#severity-graph').show();
+			});
+			
+			$('a.show_protocol_graph').live('click', function(e) {
+				e.preventDefault();
+				$('div.dashboard-graph').hide();
+				$('div#protocol-graph').show();
+			});
+			
+		},
+		
 		events: function(){
 			
 			$('a.export').live('click', function(e) {
@@ -735,6 +757,7 @@ jQuery(document).ready(function($) {
 	Snorby.helpers.pagenation();
 	
 	Snorby.pages.classifications();
+	Snorby.pages.dashboard();
 	Snorby.pages.events();
 	
 });

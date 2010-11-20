@@ -1,0 +1,64 @@
+<% content_for :footer do %>
+
+	<script type="text/javascript">
+		
+		chart = new Highcharts.Chart({
+		      chart: {
+		         renderTo: 'protocol-graph',
+		         defaultSeriesType: 'spline',
+		         marginRight: 80,
+							marginLeft: 80,
+							marginTop: 50,
+		         marginBottom: 50
+		      },
+		      title: {
+		         text: 'Protocol Count vs Time',
+		         x: -20 //center
+		      },
+		      xAxis: {
+		         categories: [<%= @axis %>]
+		      },
+		      yAxis: {
+		         title: {
+		            text: 'Protocol Count'
+		         },
+		         plotLines: [{
+		            value: 0,
+		            width: 1,
+		            color: '#808080'
+		         }]
+		      },
+		      tooltip: {
+		         formatter: function() {
+		                   return '<b>'+ this.series.name +'</b><br/>'+ this.y + ' Events';
+		         }
+		      },
+		      legend: {
+		         layout: 'vertical',
+		         align: 'right',
+		         verticalAlign: 'top',
+		         x: 0,
+		         y: 0,
+		         borderWidth: 0,
+						 borderRadius: 0,
+						 borderColor: '#ddd',
+						 backgroundColor: '#fff'
+		      },
+		      series: [{
+						name: 'TCP',
+						data: <%= @tcp %>
+					},{
+						name: 'UDP',
+						data: <%= @udp %>
+					},{
+						name: 'ICMP',
+						data: <%= @icmp %>
+					}]
+		   });
+		
+		
+	</script>
+
+<% end %>
+
+<div id='protocol-graph' style='display:none;' class='dashboard-graph'></div>

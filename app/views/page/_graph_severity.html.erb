@@ -1,0 +1,64 @@
+<% content_for :footer do %>
+
+	<script type="text/javascript">
+		
+		chart = new Highcharts.Chart({
+		      chart: {
+		         renderTo: 'severity-graph',
+		         defaultSeriesType: 'spline',
+		         marginRight: 80,
+							marginLeft: 80,
+							marginTop: 50,
+		         marginBottom: 50
+		      },
+		      title: {
+		         text: 'Severity Count vs Time',
+		         x: -20 //center
+		      },
+		      xAxis: {
+		         categories: [<%= @axis %>]
+		      },
+		      yAxis: {
+		         title: {
+		            text: 'Severity Count'
+		         },
+		         plotLines: [{
+		            value: 0,
+		            width: 1,
+		            color: '#808080'
+		         }]
+		      },
+		      tooltip: {
+		         formatter: function() {
+		                   return '<b>'+ this.series.name +'</b><br/>'+ this.y + ' Events';
+		         }
+		      },
+		      legend: {
+		         layout: 'vertical',
+		         align: 'right',
+		         verticalAlign: 'top',
+		         x: 0,
+		         y: 0,
+		         borderWidth: 0,
+						 borderRadius: 0,
+						 borderColor: '#ddd',
+						 backgroundColor: '#fff'
+		      },
+		      series: [{
+						name: 'High Severity',
+						data: <%= @high %>
+					},{
+						name: 'Medium Severity',
+						data: <%= @medium %>
+					},{
+						name: 'Low Severity',
+						data: <%= @low %>
+					}]
+		   });
+		
+		
+	</script>
+
+<% end %>
+
+<div id='severity-graph' style='display:none;' class='dashboard-graph'></div>

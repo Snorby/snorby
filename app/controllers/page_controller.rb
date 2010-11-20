@@ -3,10 +3,11 @@ class PageController < ApplicationController
   def dashboard
     
     @cache = Cache.today
+    #@cache = DailyCache.this_week
     
-    @tcp ||= @cache.map(&:tcp_count)
-    @udp ||= @cache.map(&:udp_count)
-    @icmp ||= @cache.map(&:icmp_count)
+    @tcp ||= @cache.protocol_count(:tcp)
+    @udp ||= @cache.protocol_count(:udp)
+    @icmp ||= @cache.protocol_count(:icmp)
     
     @high ||= @cache.severity_count(:high)
     @medium ||= @cache.severity_count(:medium)
@@ -15,7 +16,10 @@ class PageController < ApplicationController
     @event_count ||= @cache.all.map(&:event_count).sum
     
     @sensor_metrics ||= @cache.sensor_metrics
-    @classification_metrics ||= @cache.classification_metrics.sort! { |x,y| 1 <=> x.last }
+    
+    @axis ||= @sensor_metrics.last[:range].join(',') #23.times.map(&:to_i).join(',')
+    
+    # @classification_metrics ||= @cache.classification_metrics.sort! { |x,y| 1 <=> x.last }
     
     @classifications ||= Classification.all(:order => [:events_count.desc])
     @sensors ||= Sensor.all(:limit => 5, :order => [:events_count.desc])
@@ -35,6 +39,8 @@ class PageController < ApplicationController
     end
     
   end
+  
+  
   
   def search
   end

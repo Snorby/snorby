@@ -54,20 +54,99 @@ class Cache
   def self.today
     all(:ran_at.gte => Time.now.beginning_of_day, :ran_at.lte => Time.now.end_of_day)
   end
-
-  def self.severity_count(type)
-    @cache = self.map(&:severity_metrics)
+  
+  def self.protocol_count(type)
     count = []
+    @cache = self.group_by { |x| x.ran_at.hour }
+
     case type.to_sym
-    when :high
-      @cache.each { |x| count << (x.kind_of?(Hash) ? (x.has_key?(1) ? x[1] : 0) : 0) }
-    when :medium
-      @cache.each { |x| count << (x.kind_of?(Hash) ? (x.has_key?(2) ? x[2] : 0) : 0) }
-    when :low
-      @cache.each { |x| count <<( x.kind_of?(Hash) ? (x.has_key?(3) ? x[3] : 0) : 0) }
+    when :tcp
+      @cache.each do |hour, data|
+        count[hour] = data.map(&:tcp_count).sum
+      end
+    when :udp
+      @cache.each do |hour, data| 
+        count[hour] = data.map(&:udp_count).sum
+      end
+    when :icmp
+      @cache.each do |hour, data| 
+        count[hour] = data.map(&:icmp_count).sum
+      end
     end
+    
+    Time.now.beginning_of_day.hour.upto(Time.now.end_of_day.hour) do |i|
+      next if count[i]
+      count[i] = 0
+    end
+    
     count
   end
+  
+  def self.severity_count(type)
+    count = []
+    @cache = self.group_by { |x| x.ran_at.hour }
+
+    case type.to_sym
+    when :high
+      @cache.each do |hour, data|
+        high_count = 0
+        data.map(&:severity_metrics).each { |x| high_count += (x.kind_of?(Hash) ? (x.has_key?(1) ? x[1] : 0) : 0) }
+        count[hour] = high_count
+      end
+    when :medium
+      @cache.each do |hour, data| 
+        medium_count = 0
+        data.map(&:severity_metrics).each { |x| medium_count += (x.kind_of?(Hash) ? (x.has_key?(2) ? x[2] : 0) : 0) }
+        count[hour] = medium_count
+      end
+    when :low
+      @cache.each do |hour, data| 
+        low_count = 0
+        data.map(&:severity_metrics).each { |x| low_count += ( x.kind_of?(Hash) ? (x.has_key?(3) ? x[3] : 0) : 0) }
+        count[hour] = low_count
+      end
+    end
+    
+    Time.now.beginning_of_day.hour.upto(Time.now.end_of_day.hour) do |i|
+      next if count[i]
+      count[i] = 0
+    end
+    
+    count
+  end
+  
+  # def self.week_severity_count(type)
+  #   count = []
+  #   @cache = self.group_by { |x| x.ran_at.day }
+  # 
+  #   case type.to_sym
+  #   when :high
+  #     @cache.each do |day,data|
+  #       high_count = 0
+  #       data.map(&:severity_metrics).each do |x|
+  #         (x.kind_of?(Hash) ? (x.has_key?(1) ? high_count += x[1].to_i : high_count += 0) : 0)
+  #       end
+  #       count << high_count
+  #     end
+  #   when :medium
+  #     @cache.each do |day,data|
+  #       medium_count = 0
+  #       data.map(&:severity_metrics).each do |x|
+  #         (x.kind_of?(Hash) ? (x.has_key?(2) ? medium_count += x[2].to_i : medium_count += 0) : 0)
+  #       end
+  #       count << medium_count
+  #     end
+  #   when :low
+  #     @cache.each do |day,data|
+  #       low_count = 0
+  #       data.map(&:severity_metrics).each do |x|
+  #         (x.kind_of?(Hash) ? (x.has_key?(3) ? low_count += x[3].to_i : low_count += 0) : 0)
+  #       end
+  #       count << low_count
+  #     end
+  #   end
+  #   count
+  # end
 
   def self.get_last
     first(:order => [:ran_at.desc])
@@ -84,16 +163,16 @@ class Cache
         count[hour] = data.map(&:event_count).sum
       end
 
-      @metrics << { :name => sensor.name, :data => count }
+      @metrics << { :name => sensor.name, :data => count, :range => 24.times.to_a }
     end
-    
+
     @metrics
   end
 
   def self.classification_metrics
     @cache = self.map(&:classification_metrics)
     @classifications = []
-    
+
     Classification.each do |classification|
       count = 0
       @cache.each do |cache|

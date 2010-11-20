@@ -897,7 +897,7 @@ div#note-box.error{
 	display: block;
 	position: relative;
 	overflow: hidden;
-	/*border-top: 1px solid #e7e7e7;*/
+	border-top: 1px dotted #eee;
 	font-size: 0.9em;
 	color: #222;
 	font-weight: normal;
@@ -938,7 +938,7 @@ div#note-box.error{
 }
 
 #wrapper #content #title #title-menu-holder ul#title-menu dl.drop-down-menu dd:hover{
-	background-color: #f3f3f3;
+	background-color: #f6f6f6;
 }
 
 /* @end */
@@ -1007,11 +1007,20 @@ div#note-box.error{
     border-radius: 5px;
 }
 
+.round-with-tabs{
+	-webkit-border-top-right-radius: 4px;
+	-moz-border-radius-topright: 4px;
+    -moz-border-radius-bottomright: 4px;
+    -moz-border-radius-bottomleft: 4px;
+    -webkit-border-bottom-right-radius: 4px;
+    -webkit-border-bottom-left-radius: 4px;
+}
+
 .round_top {
-        -moz-border-radius-topright: 4px;
-        -moz-border-radius-topleft: 4px;
-        -webkit-border-top-right-radius: 4px;
-        -webkit-border-top-left-radius: 4px;
+   -moz-border-radius-topright: 4px;
+   -moz-border-radius-topleft: 4px;
+   -webkit-border-top-right-radius: 4px;
+  	-webkit-border-top-left-radius: 4px;
 }
 
 .round_bottom {
@@ -1209,6 +1218,13 @@ table td img{
 	vertical-align: middle;
 	margin-top: -2px;
 	margin-right: 5px;
+}
+
+table td img.edit,
+table td img.trash{
+	margin-right: 0px;
+	padding-right: 3px;
+	padding-left: 3px;
 }
 
 table td{
@@ -2479,6 +2495,49 @@ img.avatar-small{
 	margin-top: 10px;
 }
 
+#dashboard #box-tabs{
+	position: relative;
+	display: block;
+	overflow: hidden;
+}
+
+#dashboard #box-tabs ul#box-menu{
+	display: block;
+	position: relative;
+	overflow: hidden;
+	height: 25px;
+	line-height: 25px;
+	padding-left: 10px;
+}
+
+div.dashboard-graph{
+	width: 722px;
+}
+
+#dashboard #box-tabs ul#box-menu li{
+    -moz-border-radius-topright: 4px;
+    -moz-border-radius-topleft: 4px;
+    -webkit-border-top-right-radius: 4px;
+    -webkit-border-top-left-radius: 4px;
+	background-color: #eee;
+	position: relative;
+	overflow: hidden;
+	display: block;
+	float: left;
+	margin-right: 3px;
+}
+
+#dashboard #box-tabs ul#box-menu li a{
+	padding-right: 10px;
+	padding-left: 10px;
+	color: #575757;
+	font-weight: normal;
+	font-style: normal;
+	text-decoration: none;
+	font-variant: normal;
+	display: block;
+}
+
 #dashboard h2{
 	text-transform: capitalize;
 	color: #6a8092;
@@ -2613,8 +2672,13 @@ img.avatar-small{
 	
 }
 
-#dashboard .main .box{
+#dashboard .main #box-holder{
+	display: block;
+	position: relative;
+	overflow: hidden;
+}
 
+#dashboard .main .box{
 	height: 190px;
 	border: 1px solid #dbdbdb;
 	position: relative;
@@ -2685,8 +2749,8 @@ img.avatar-small{
 #dashboard .main .box .content .data .box-graph{
 	position: absolute;
 	bottom: 5px;
-	right: 0;
-	left: 0;
+	right: 5px;
+	left: 5px;
 	display: block;
 	overflow: hidden;
 	text-align: center;

@@ -92,6 +92,10 @@ module Snorby
           Sensor.update!(:events_count => 0)
           Signature.update!(:events_count => 0)
         end
+        
+        def build_empty_cache
+          
+        end
 
         #
         # Do to a stackerror with large collections we

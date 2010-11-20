@@ -4,5 +4,5 @@
 	<td class='admin'><%= user.admin %></td>
 	<td class='last_sign_in_ip'><%= !user.last_sign_in_ip.blank? ? user.last_sign_in_ip : 'N/A' %></td>
 	<td class='last_sign_in_at'><%= !user.last_sign_in_at.blank? ? user.last_sign_in_at.strftime('%m/%d/%Y %l:%M %p') : Time.now.strftime('%m/%d/%Y %l:%M %p') %></td>
-	<td><%= link_to "Destroy", remove_users_path(:id => user), :method => :delete, :confirm => "Are you sure you want to remove #{user.name}?" %></td>
+	<td><%= link_to image_tag("icons/destroy.png", :size => '16x16', :class => 'trash'), remove_users_path(:id => user), :method => :delete, :confirm => "Are you sure you want to remove #{user.name}?" %></td>
 </tr>
