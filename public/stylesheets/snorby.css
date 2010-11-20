@@ -2651,6 +2651,12 @@ div.dashboard-graph{
 	padding-bottom: 5px;
 }
 
+#dashboard .main .dashboard-menu ul li img{
+	vertical-align: middle;
+	margin-top: -3px;
+	margin-left: 10px;
+}
+
 #dashboard .main .dashboard-menu ul li.active a{
 	color: #405fa3;
 }

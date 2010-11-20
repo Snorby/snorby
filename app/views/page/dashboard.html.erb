@@ -18,13 +18,17 @@
 
 			<ul>
 				
-				<li class='<%= "active" if params[:type] == 'today' || nil %>'><%= link_to "Today", dashboard_path(:type => :today) %></li>
-				<li class='<%= "active" if params[:type] == 'yesterday' %>'><%= link_to "Yesterday", dashboard_path(:type => :yesterday) %></li>
-				<li class='<%= "active" if params[:type] == 'week' %>'><%= link_to "This Week", dashboard_path(:type => :week) %></li>
-				<li class='<%= "active" if params[:type] == 'month' %>'><%= link_to "This Month", dashboard_path(:type => :month) %></li>
-				<li class='<%= "active" if params[:type] == 'year' %>'><%= link_to "This Year", dashboard_path(:type => :year) %></li>
+				<li class='<%= "active" if params[:range] == 'today' %>'><%= link_to "Today", dashboard_path(:range => :today) %></li>
+				<li class='<%= "active" if params[:range] == 'yesterday' %>'><%= link_to "Yesterday", dashboard_path(:range => :yesterday) %></li>
+				<li class='<%= "active" if params[:range] == 'week' %>'><%= link_to "This Week", dashboard_path(:range => :week) %></li>
+				<li class='<%= "active" if params[:range] == 'month' %>'><%= link_to "This Month", dashboard_path(:range => :month) %></li>
+				<li class='<%= "active" if params[:range] == 'year' %>'><%= link_to "This Year", dashboard_path(:range => :year) %></li>
 				
-				<li class='right'><i>Last Updated: <%= @last_cache.strftime('%D %l:%M:%S %p') %></i></li>
+				<% if Snorby::Jobs.caching? %>
+					<li class='right'><i>Currently Caching <%= image_tag('icons/pager.gif', :size => '16x11') %></i></li>
+				<% else %>
+					<li class='right'><i>Last Updated: <%= @last_cache.strftime('%D %l:%M:%S %p') %></i></li>
+				<% end %>
 
 			</ul>
 
@@ -42,6 +46,7 @@
 				<li><%= link_to "Sensors", '#', :class => 'show_events_graph' %></li>
 				<li><%= link_to "Severities", '#', :class => 'show_severities_graph' %></li>
 				<li><%= link_to "Protocols", '#', :class => 'show_protocol_graph' %></li>
+				<li><%= link_to "Signatures", '#', :class => 'show_signature_graph' %></li>
 			</ul>
 
 		</div>
