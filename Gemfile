@@ -38,6 +38,7 @@ gem 'dm-serializer',          DM_VERSION
 gem 'capistrano'
 
 # Rails Plugins
+gem "RedCloth",               "~> 4.0", :require => 'redcloth'
 gem 'chronic',                '~> 0.3.0'
 gem 'pdfkit',                 '~> 0.4.6'
 gem 'ezprint',                :git => 'http://github.com/mephux/ezprint.git', :branch => 'rails3', :require => 'ezprint'

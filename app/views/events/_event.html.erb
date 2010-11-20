@@ -20,7 +20,7 @@
 		
 		<div class='click timestamp'>
 			<% if event.notes_count > 0 %>
-				<span title="This event has <%= pluralize(event.notes_count, 'note') %>" class='add_tipsy round notes-count'><%= event.notes_count %></span>
+				<span title="This event has <%= pluralize(event.notes_count, 'note') %>" class='add_tipsy round notes-count'><%= image_tag("icons/notes.png", :size => '16x16') %></span>
 			<% end %>
 			<%= event.pretty_time %>
 		</div>

@@ -12,21 +12,20 @@
 					if (old_id != data.time) {
 						$.get('events/since', {timestamp: old_id}, function (data) {
 							if (data.events.length != 0) {
-								if (page <= '1') { 
+								
+								if ($('div.new_events').length == 0) {
 									
-									if ($('div.new_events').length == 0) {
-										
-										$('#events').prepend('<div class="note new_events"><strong class="new_event_count">'+data.events.length+'</strong> New Events Are Available Click here To View Them.</div>');
-										
-									} else {
-										
-										var new_count = parseInt($('#events div.new_events strong.new_event_count').html()) + data.events.length;
-										$('#events div.new_events').html('<strong class="new_event_count">'+new_count+'</strong> New Events Are Available Click here To View Them.');
-										
-									};
+									$('#events').prepend('<div class="note new_events"><strong class="new_event_count">'+data.events.length+'</strong> New Events Are Available Click here To View Them.</div>');
 									
-									$('#events ul.table div.content').prepend(Snorby.templates.event_table(data));
+								} else {
+									
+									var new_count = parseInt($('#events div.new_events strong.new_event_count').html()) + data.events.length;
+									$('#events div.new_events').html('<strong class="new_event_count">'+new_count+'</strong> New Events Are Available Click here To View Them.');
+									
 								};
+								
+								$('#events ul.table div.content').prepend(Snorby.templates.event_table(data));
+								
 								Snorby.notification({title: 'New Events', text: data.events.length + ' Events Added.'});
 							};
 						});

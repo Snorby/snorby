@@ -1397,11 +1397,7 @@ ul.table li .row div.timestamp{
 }
 
 ul.table li .row div.timestamp span{
-  -webkit-box-shadow: inset 0px 1px 5px #202325;
-  -moz-box-shadow: inset 0px 1px 5px #202325;
-  box-shadow: inset 0px 1px 5px #202325;
 	color: #fff;
-	background-color: #41464a;
 	font-weight: normal;
 	text-decoration: none;
 	font-variant: normal;
@@ -1416,11 +1412,6 @@ ul.table li .row div.timestamp span{
 	height: 12px;
 	line-height: 12px;
 	top: 4px;
-}
-
-ul.table li .row div.timestamp img.has-notes{
-	vertical-align: middle;
-	margin-right: 5px;
 }
 
 ul.table li .row div.small{
@@ -2384,7 +2375,41 @@ div.notes div#new_note textarea#body{
 
 .event-note .note-body{
 	color: #fff;
+	line-height: 17px;
 	margin-bottom: 20px;
+}
+
+.event-note .note-body strong{
+	color: #fc251f;
+	font-weight: bold;
+	text-decoration: none;
+	font-variant: normal;
+	text-transform: capitalize;
+	display: inline-block;
+}
+
+.event-note .note-body p{
+	padding-bottom: 5px;
+}
+
+.event-note .note-body a{
+	color: #fd3640;
+	font-weight: normal;
+	font-style: normal;
+	text-decoration: none;
+	font-variant: normal;
+}
+
+.event-note .note-body sup.footnote{
+	font-size: 0.9em;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.event-note .note-body span.caps{
+	font-weight: bold;
+	color: #d9d9d9;
+	text-decoration: underline;
 }
 
 .event-note .note-options{

@@ -7,6 +7,10 @@ module ApplicationHelper
     options.html_safe
   end
 
+  def format_note_body(text)
+    return text.sub(/(\B\@[a-zA-Z0-9_%]*\b)/, '<strong>\1</strong>').html_safe
+  end
+
   #
   # Title
   # 

@@ -99,7 +99,7 @@ function update_note_count (event_id, data) {
 	var event_row = $('li#'+event_id+' div.row div.timestamp');
 	var notes_count = event_row.find('span.notes-count');
 	
-	var template = '<span class="add_tipsy round notes-count" original-title="{{notes_count_in_words}}">{{notes_count}}</span>'
+	var template = '<span class="add_tipsy round notes-count" title="{{notes_count_in_words}}"><img alt="Notes" height="16" src="/images/icons/notes.png" width="16"></span>'
 	var event_html = Mustache.to_html(template, data);
 	
 	if (data.notes_count == 0) {
@@ -109,9 +109,9 @@ function update_note_count (event_id, data) {
 	} else {
 		
 		if (notes_count.length > 0) {
-			notes_count.replaceWith(event_html);
+			notes_count.replaceWith(event_html).trigger('change');
 		} else {
-			event_row.prepend(event_html);
+			event_row.prepend(event_html).trigger('change');
 		};
 		
 	};
