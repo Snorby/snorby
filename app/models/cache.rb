@@ -55,11 +55,11 @@ class Cache
     all(:ran_at.gte => Time.now.beginning_of_day, :ran_at.lte => Time.now.end_of_day)
   end
   
-  def self.protocol_count(type)
+  def self.protocol_count(protocol, type=nil)
     count = []
     @cache = self.group_by { |x| x.ran_at.hour }
 
-    case type.to_sym
+    case protocol.to_sym
     when :tcp
       @cache.each do |hour, data|
         count[hour] = data.map(&:tcp_count).sum
@@ -82,11 +82,11 @@ class Cache
     count
   end
   
-  def self.severity_count(type)
+  def self.severity_count(severity, type=nil)
     count = []
     @cache = self.group_by { |x| x.ran_at.hour }
 
-    case type.to_sym
+    case severity.to_sym
     when :high
       @cache.each do |hour, data|
         high_count = 0
@@ -114,45 +114,12 @@ class Cache
     
     count
   end
-  
-  # def self.week_severity_count(type)
-  #   count = []
-  #   @cache = self.group_by { |x| x.ran_at.day }
-  # 
-  #   case type.to_sym
-  #   when :high
-  #     @cache.each do |day,data|
-  #       high_count = 0
-  #       data.map(&:severity_metrics).each do |x|
-  #         (x.kind_of?(Hash) ? (x.has_key?(1) ? high_count += x[1].to_i : high_count += 0) : 0)
-  #       end
-  #       count << high_count
-  #     end
-  #   when :medium
-  #     @cache.each do |day,data|
-  #       medium_count = 0
-  #       data.map(&:severity_metrics).each do |x|
-  #         (x.kind_of?(Hash) ? (x.has_key?(2) ? medium_count += x[2].to_i : medium_count += 0) : 0)
-  #       end
-  #       count << medium_count
-  #     end
-  #   when :low
-  #     @cache.each do |day,data|
-  #       low_count = 0
-  #       data.map(&:severity_metrics).each do |x|
-  #         (x.kind_of?(Hash) ? (x.has_key?(3) ? low_count += x[3].to_i : low_count += 0) : 0)
-  #       end
-  #       count << low_count
-  #     end
-  #   end
-  #   count
-  # end
 
   def self.get_last
     first(:order => [:ran_at.desc])
   end
 
-  def self.sensor_metrics
+  def self.sensor_metrics(type=nil)
     @metrics = []
 
     Sensor.all(:limit => 5, :order => [:events_count.desc]).each do |sensor|

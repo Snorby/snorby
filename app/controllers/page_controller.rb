@@ -2,24 +2,34 @@ class PageController < ApplicationController
 
   def dashboard
     
-    @cache = Cache.today
-    #@cache = DailyCache.this_week
+    puts params[:type]
     
-    @tcp ||= @cache.protocol_count(:tcp)
-    @udp ||= @cache.protocol_count(:udp)
-    @icmp ||= @cache.protocol_count(:icmp)
+    case params[:type].to_sym
+    when :today
+      @cache = Cache.today
+    when :yesterday
+      @cache = Cache.yesterday
+    when :week
+      @cache = DailyCache.this_week
+    when :month
+      @cache = DailyCache.this_month
+    when :year
+      @cache = DailyCache.this_year
+    else
+      @cache = Cache.today
+    end
     
-    @high ||= @cache.severity_count(:high)
-    @medium ||= @cache.severity_count(:medium)
-    @low ||= @cache.severity_count(:low)
+    @tcp ||= @cache.protocol_count(:tcp, params[:type].to_sym)
+    @udp ||= @cache.protocol_count(:udp, params[:type].to_sym)
+    @icmp ||= @cache.protocol_count(:icmp, params[:type].to_sym)
+    @high ||= @cache.severity_count(:high, params[:type].to_sym)
+    @medium ||= @cache.severity_count(:medium, params[:type].to_sym)
+    @low ||= @cache.severity_count(:low, params[:type].to_sym)
+    @sensor_metrics ||= @cache.sensor_metrics(params[:type].to_sym)
     
     @event_count ||= @cache.all.map(&:event_count).sum
     
-    @sensor_metrics ||= @cache.sensor_metrics
-    
-    @axis ||= @sensor_metrics.last[:range].join(',') #23.times.map(&:to_i).join(',')
-    
-    # @classification_metrics ||= @cache.classification_metrics.sort! { |x,y| 1 <=> x.last }
+    @axis ||= @sensor_metrics.last[:range].join(',')
     
     @classifications ||= Classification.all(:order => [:events_count.desc])
     @sensors ||= Sensor.all(:limit => 5, :order => [:events_count.desc])
@@ -40,8 +50,6 @@ class PageController < ApplicationController
     
   end
   
-  
-  
   def search
   end
   
@@ -49,6 +57,13 @@ class PageController < ApplicationController
     @search ||= params[:search]
     @events = Event.search(params[:search]).page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:timestamp.desc])
     @classifications ||= Classification.all
+  end
+
+  private
+  
+  def load_records
+    
+    # @classification_metrics ||= @cache.classification_metrics.sort! { |x,y| 1 <=> x.last }
   end
 
 end

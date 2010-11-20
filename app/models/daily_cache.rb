@@ -34,6 +34,10 @@ class DailyCache
   def self.get_last
     first(:order => [:ran_at.desc])
   end
+  
+  def self.this_year
+    all(:ran_at.gte => Time.now.beginning_of_year, :ran_at.lte => Time.now.end_of_year)
+  end
 
   def self.last_month
     all(:ran_at.gte => (Time.now - 2.months).beginning_of_month, :ran_at.lte => (Time.now - 2.months).end_of_month)
@@ -62,10 +66,85 @@ class DailyCache
     end
     severities.to_json
   end
+  
+  def self.protocol_count(protocol, type=:week)
+    count = []
+    
+    if type == :year
+      time_type = :month
+    else
+      time_type = :day
+    end
+    
+    case type.to_sym
+    when :week
+      start_time_method = :beginning_of_week
+      end_time_method = :end_of_week
+      @cache = self.group_by { |x| x.ran_at.day }
+    when :month
+      start_time_method = :beginning_of_month
+      end_time_method = :end_of_month
+      @cache = self.group_by { |x| x.ran_at.day }
+    when :year
+      start_time_method = :beginning_of_year
+      end_time_method = :end_of_year
+      @cache = self.group_by { |x| x.ran_at.month }
+    else
+      start_time_method = :beginning_of_week
+      end_time_method = :end_of_week
+      @cache = self.group_by { |x| x.ran_at.day }
+    end
+
+    case protocol.to_sym
+    when :tcp
+      @cache.each do |day, data|
+        count[day] = data.map(&:tcp_count).sum
+      end
+    when :udp
+      @cache.each do |day, data| 
+        count[day] = data.map(&:udp_count).sum
+      end
+    when :icmp
+      @cache.each do |day, data| 
+        count[day] = data.map(&:icmp_count).sum
+      end
+    end
+
+    Time.now.send(start_time_method).send(time_type).upto(Time.now.send(end_time_method).send(time_type)) do |i|
+      next if count[i]
+      count[i] = 0
+    end
+    
+    count.compact
+  end
 
   def self.severity_count(severity, type=:week)
     count = []
-    @cache = self.group_by { |x| x.ran_at.day }
+    
+    if type == :year
+      time_type = :month
+    else
+      time_type = :day
+    end
+    
+    case type.to_sym
+    when :week
+      start_time_method = :beginning_of_week
+      end_time_method = :end_of_week
+      @cache = self.group_by { |x| x.ran_at.day }
+    when :month
+      start_time_method = :beginning_of_month
+      end_time_method = :end_of_month
+      @cache = self.group_by { |x| x.ran_at.day }
+    when :year
+      start_time_method = :beginning_of_year
+      end_time_method = :end_of_year
+      @cache = self.group_by { |x| x.ran_at.month }
+    else
+      start_time_method = :beginning_of_week
+      end_time_method = :end_of_week
+      @cache = self.group_by { |x| x.ran_at.day }
+    end
 
     case severity.to_sym
     when :high
@@ -87,23 +166,8 @@ class DailyCache
         count[day] = low_count
       end
     end
-    
-    case type.to_sym
-    when :week
-      start_time_method = :beginning_of_week
-      end_time_method = :end_of_week
-    when :month
-      start_time_method = :beginning_of_month
-      end_time_method = :end_of_month
-    else
-      start_time_method = :beginning_of_week
-      end_time_method = :end_of_week
-    end
-    
-    time_range = []
 
-    Time.now.send(start_time_method).day.upto(Time.now.send(end_time_method).day) do |i|
-      time_range << "'#{Time.now.month}/#{i}'"
+    Time.now.send(start_time_method).send(time_type).upto(Time.now.send(end_time_method).send(time_type)) do |i|
       next if count[i]
       count[i] = 0
     end
@@ -116,28 +180,40 @@ class DailyCache
 
     Sensor.all(:limit => 5, :order => [:events_count.desc]).each do |sensor|
       count = []
-      blah = self.all(:sid => sensor.sid).group_by { |x| x.ran_at.day }
-
-      blah.each do |day, data|
-        count[day] = data.map(&:event_count).sum
+      
+      if type == :year
+        time_type = :month
+      else
+        time_type = :day
       end
-
+      
       case type.to_sym
       when :week
         start_time_method = :beginning_of_week
         end_time_method = :end_of_week
+        @cache = self.all(:sid => sensor.sid).group_by { |x| x.ran_at.day }
       when :month
         start_time_method = :beginning_of_month
         end_time_method = :end_of_month
+        @cache = self.all(:sid => sensor.sid).group_by { |x| x.ran_at.day }
+      when :year
+        start_time_method = :beginning_of_year
+        end_time_method = :end_of_year
+        @cache = self.all(:sid => sensor.sid).group_by { |x| x.ran_at.month }
       else
         start_time_method = :beginning_of_week
         end_time_method = :end_of_week
+        @cache = self.all(:sid => sensor.sid).group_by { |x| x.ran_at.day }
+      end
+
+      @cache.each do |day, data|
+        count[day] = data.map(&:event_count).sum
       end
 
       time_range = []
 
-      Time.now.send(start_time_method).day.upto(Time.now.send(end_time_method).day) do |i|
-        time_range << "'#{Time.now.month}/#{i}'"
+      Time.now.send(start_time_method).send(time_type).upto(Time.now.send(end_time_method).send(time_type)) do |i|
+        time_range << "'#{i}'"
         next if count[i]
         count[i] = 0
       end

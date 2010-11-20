@@ -1,9 +1,9 @@
 <% content_for :footer do %>
 
 	<script type="text/javascript">
-		$('#sev1-graph').sparkline(<%= @high %>, {height: 40, type: 'bar', barColor: sev1_bg_color} );
-		$('#sev2-graph').sparkline(<%= @medium %>, {height: 40, type: 'bar', barColor: sev2_bg_color} );
-		$('#sev3-graph').sparkline(<%= @low %>, {height: 40, type: 'bar', barColor: sev3_bg_color} );
+		$('#sev1-graph').sparkline(<%= @high %>, { barWidth: 6, height: 40, type: 'bar', barColor: sev1_bg_color } );
+		$('#sev2-graph').sparkline(<%= @medium %>, { barWidth: 6, height: 40, type: 'bar', barColor: sev2_bg_color } );
+		$('#sev3-graph').sparkline(<%= @low %>, { barWidth: 6, height: 40, type: 'bar', barColor: sev3_bg_color } );
 	</script>
 
 <% end %>

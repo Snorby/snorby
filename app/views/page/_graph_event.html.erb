@@ -16,7 +16,19 @@
 		         x: -20 //center
 		      },
 		      xAxis: {
-		         categories: [<%= @axis %>]
+						categories: [<%= @axis %>],
+		        title: {
+								margin: 10,
+								<% if params[:type] == 'year' %>
+									text: 'Month'
+								<% elsif params[:type] == 'month' %>
+									text: 'Day'
+								<% elsif params[:type] == 'week' %>
+									text: 'Day'
+								<% else %>
+									text: 'Hour'
+								<% end %>
+		         }
 		      },
 		      yAxis: {
 		         title: {

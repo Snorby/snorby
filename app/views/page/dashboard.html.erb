@@ -17,12 +17,12 @@
 		<div class='dashboard-menu'>
 
 			<ul>
-
-				<li class='active'><%= link_to "Today", '#' %></li>
-				<li><%= link_to "Yesterday", '#' %></li>
-				<li><%= link_to "This Week", '#' %></li>
-				<li><%= link_to "This Month", '#' %></li>
-				<li><%= link_to "This Year", '#' %></li>
+				
+				<li class='<%= "active" if params[:type] == 'today' || nil %>'><%= link_to "Today", dashboard_path(:type => :today) %></li>
+				<li class='<%= "active" if params[:type] == 'yesterday' %>'><%= link_to "Yesterday", dashboard_path(:type => :yesterday) %></li>
+				<li class='<%= "active" if params[:type] == 'week' %>'><%= link_to "This Week", dashboard_path(:type => :week) %></li>
+				<li class='<%= "active" if params[:type] == 'month' %>'><%= link_to "This Month", dashboard_path(:type => :month) %></li>
+				<li class='<%= "active" if params[:type] == 'year' %>'><%= link_to "This Year", dashboard_path(:type => :year) %></li>
 				
 				<li class='right'><i>Last Updated: <%= @last_cache.strftime('%D %l:%M:%S %p') %></i></li>
 
