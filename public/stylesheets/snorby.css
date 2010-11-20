@@ -2611,6 +2611,16 @@ div.dashboard-graph{
 	text-align: left;
 }
 
+#dashboard .secondary ul.box-list li a{
+	font-size: 1.0em;
+	color: #6a7e8d;
+	text-align: left;
+	font-weight: normal;
+	font-style: normal;
+	text-decoration: none;
+	font-variant: normal;
+}
+
 #dashboard .secondary ul.box-list li span{
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -2627,6 +2637,12 @@ div.dashboard-graph{
 	text-align: left;
 	color: #575757;
 	text-shadow: #fff 0 1px 0;
+}
+
+#dashboard .secondary ul.box-list li:hover span{
+	background-color: #469dfc;
+	color: #fff;
+	text-shadow: #000 0 1px 0;
 }
 
 #dashboard .secondary ul.box-list li img{

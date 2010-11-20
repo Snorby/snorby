@@ -55,6 +55,10 @@ Snorby::Application.routes.draw do
       post :favorite
       get :last
       get :since
+      get :signature
+      get :classification
+      get :sensor
+      get :activity
     end
     
   end

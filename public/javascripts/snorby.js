@@ -511,9 +511,15 @@ var Snorby = {
 					if (id === $(this).attr('id')) {
 						
 						if ($(this).is(':visible')) {
-							dropdown.slideUp('fast');
+							dropdown.slideUp({
+								duration: 'fast', 
+								easing: 'easeInSine'
+							});
 						} else {
-							dropdown.slideDown('fast');
+							dropdown.slideDown({
+								duration: 'fast', 
+								easing: 'easeOutSine'
+							});
 						};
 						
 					} else {

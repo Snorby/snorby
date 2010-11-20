@@ -63,7 +63,7 @@
 		
 		<ul class='box-list'>
 			<% @sensors.each do |sensor| %>
-			<li><%= truncate(sensor.name, :length => 30) %> <span><%= sensor.events_count %></span></li>
+			<li><%= link_to truncate(sensor.name, :length => 30), sensor_events_path(:sensor => sensor.sid) %> <span><%= sensor.events_count %></span></li>
 			<% end %>
 		</ul>
 	
@@ -73,7 +73,7 @@
 		
 		<ul class='box-list'>
 			<% @favers.each do |user| %>
-			<li><%= image_tag(user.avatar.url(:small), :size => '16x16', :class => 'avatar-small') %> <%= truncate(user.name, :length => 30) %> <span><%= user.favorites_count %></span></li>
+			<li><%= image_tag(user.avatar.url(:small), :size => '16x16', :class => 'avatar-small') %> <%= link_to truncate(user.name, :length => 30), activity_events_path(:user_id => user.id) %> <span><%= user.favorites_count %></span></li>
 			<% end %>
 		</ul>
 		
@@ -83,7 +83,7 @@
 		
 		<ul class='box-list'>
 			<% @recent_events.each do |event| %>
-			<li><%= truncate(event.signature.name, :length => 25) %> <span><%= event.signature.events_count %></span></li>
+			<li><%= link_to truncate(event.signature.name, :length => 25), "/events/show/#{event.sid}/#{event.cid}" %> <span><%= event.signature.events_count %></span></li>
 			<% end %>
 		</ul>
 	
@@ -94,7 +94,7 @@
 		<ul class='box-list'>
 			<% @classifications.each do |classification| %>
 			
-			<li><%= truncate(classification.name, :length => 25) %> <span><%= classification.events_count %></span></li>
+			<li><%= link_to truncate(classification.name, :length => 25), classification_events_path(:classification => classification.id) %> <span><%= classification.events_count %></span></li>
 			<% end %>
 		</ul>
 	
