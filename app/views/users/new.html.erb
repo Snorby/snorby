@@ -6,7 +6,7 @@
 
 		<p>
 			<div class='user-show-avatar'>
-				<%= image_tag(@user.avatar.url(:small), :class => 'avatar') %>
+				<%= image_tag(@user.avatar.url(:small, :size => '100x100'), :class => 'avatar') %>
 				<%= f.label :avatar %><br />
 				<%= f.file_field :avatar %><br />
 			</div>

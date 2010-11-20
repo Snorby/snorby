@@ -897,7 +897,7 @@ div#note-box.error{
 	display: block;
 	position: relative;
 	overflow: hidden;
-	border-top: 1px solid #e7e7e7;
+	/*border-top: 1px solid #e7e7e7;*/
 	font-size: 0.9em;
 	color: #222;
 	font-weight: normal;
@@ -938,7 +938,7 @@ div#note-box.error{
 }
 
 #wrapper #content #title #title-menu-holder ul#title-menu dl.drop-down-menu dd:hover{
-	background-color: #fefed5;
+	background-color: #f3f3f3;
 }
 
 /* @end */
@@ -1208,6 +1208,7 @@ table th input{
 table td img{
 	vertical-align: middle;
 	margin-top: -2px;
+	margin-right: 5px;
 }
 
 table td{

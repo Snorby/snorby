@@ -1,6 +1,5 @@
 <tr id='user_<%= user.id %>' class='user' data-user-id='<%= user.id %>'>
-	<td class='id first'><%= user.id %></td>
-	<td class='name' data-user-id='<%= user.id %>'><%= user.name %></td>
+	<td class='name first' data-user-id='<%= user.id %>'><%= image_tag(user.avatar.url(:small), :size => '16x16', :class => 'avatar-small') %> <%= user.name %></td>
 	<td class='email'><%= user.email %></td>
 	<td class='admin'><%= user.admin %></td>
 	<td class='last_sign_in_ip'><%= !user.last_sign_in_ip.blank? ? user.last_sign_in_ip : 'N/A' %></td>
