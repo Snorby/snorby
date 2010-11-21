@@ -25,6 +25,13 @@
 				<li class='<%= "active" if params[:range] == 'year' %>'><%= link_to "This Year", dashboard_path(:range => :year) %></li>
 				
 				<% if Snorby::Jobs.caching? %>
+					<% content_for :header do %>
+						<script type="text/javascript">
+							setTimeout(function(){
+								location.reload();
+							},50000);
+						</script>
+					<% end %>
 					<li class='right'><i>Currently Caching <%= image_tag('icons/pager.gif', :size => '16x11') %></i></li>
 				<% else %>
 					<li class='right'><i>Last Updated: <%= @last_cache.strftime('%D %l:%M:%S %p') %></i></li>
@@ -47,6 +54,11 @@
 				<li><%= link_to "Severities", '#', :class => 'show_severities_graph' %></li>
 				<li><%= link_to "Protocols", '#', :class => 'show_protocol_graph' %></li>
 				<li><%= link_to "Signatures", '#', :class => 'show_signature_graph' %></li>
+				
+				<% if %w(yesterday week month year).include?(params[:range]) %>
+					<li><%= link_to "Analyst Classified", '#', :class => 'show_classification_graph' %></li>
+				<% end %>
+				
 			</ul>
 
 		</div>

@@ -1,0 +1,46 @@
+<% content_for :footer do %>
+
+	<script type="text/javascript">
+		
+	chart = new Highcharts.Chart({
+	      chart: {
+	         renderTo: 'classification-graph',
+	         margin: [50, 200, 50, 180]
+	      },
+	      title: {
+	         text: ''
+	      },
+	      plotOptions: {
+	         pie: {
+	            allowPointSelect: true,
+	            cursor: 'pointer',
+							dataLabels: {
+								  formatter: function() {
+									return "" + this.point.name.substring(0, 35) + "... (" + Math.round(this.percentage) + "%)"
+								 },
+	                connectorColor: '#888',
+									style: {
+										fontSize: 10
+									}
+	            }
+	         }
+	      },
+		    legend: {
+		        enabled: false
+		    },
+	       series: [{
+	         type: 'pie',
+	         name: 'Analyst Classified Events',
+	         data: [
+						<% @classification_metrics.each do |key,value| %>
+							['<%= truncate(key.to_s, :length => 40) %>', <%= value %>],
+						<% end %>
+	         ]
+	      }]
+	   });
+		
+	</script>
+
+<% end %>
+
+<div id='classification-graph' style='display:none;' class='dashboard-graph'></div>

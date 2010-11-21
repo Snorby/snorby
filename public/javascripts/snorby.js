@@ -179,6 +179,18 @@ var Snorby = {
 				$('div#protocol-graph').show();
 			});
 			
+			$('a.show_signature_graph').live('click', function(e) {
+				e.preventDefault();
+				$('div.dashboard-graph').hide();
+				$('div#signature-graph').show();
+			});
+			
+			$('a.show_classification_graph').live('click', function(e) {
+				e.preventDefault();
+				$('div.dashboard-graph').hide();
+				$('div#classification-graph').show();
+			});
+			
 		},
 		
 		events: function(){

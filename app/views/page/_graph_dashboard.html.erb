@@ -8,6 +8,12 @@
 		
 		<%= render :partial => 'graph_protocol.html.erb' %>
 		
+		<%= render :partial => 'graph_signature.html.erb' %>
+		
+		<% if %w(yesterday week month year).include?(params[:range]) %>
+			<%= render :partial => 'graph_classification.html.erb' %>
+		<% end %>
+		
 	</div>
 
 </div>

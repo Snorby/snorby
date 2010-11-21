@@ -76,7 +76,7 @@ module Snorby
         logit '- fetching classification metrics'
         metrics = {}
         Classification.all.each do |classification|
-          metrics[classification.id] = @events.all(:classification_id => classification.id).size
+          metrics.merge!({classification.id => @events.all(:classification_id => classification.id).size})
         end
         metrics
       end
@@ -97,7 +97,11 @@ module Snorby
         metrics = {}
         Signature.all.each do |sig|
           sig_count = @events.all(:sig_id => sig.sig_id).size
-          metrics[sig.sig_id] = sig_count
+          
+          next if sig_count.zero?
+          
+          metrics.merge!({sig.sig_id => sig_count})
+          
           sig.update!(:events_count => sig.events_count + sig_count) if update_counter
         end
         metrics

@@ -223,6 +223,46 @@ class DailyCache
 
     @metrics
   end
+  
+  def self.signature_metrics
+    @metrics = {}
+    @cache = self
+
+    @cache.map(&:signature_metrics).each do |data|
+      next unless data
+
+      data.each do |id, value|
+        if @metrics.has_key?(id)
+          temp_count = @metrics[id]
+          @metrics.merge!({id => temp_count + value})
+        else
+          @metrics.merge!({Signature.get(id).sig_name.to_sym => value})
+        end
+      end
+    end
+
+    @metrics
+  end
+  
+  def self.classification_metrics
+    @metrics = {}
+    @cache = self
+
+    @cache.map(&:classification_metrics).each do |data|
+      next unless data
+
+      data.each do |id, value|
+        if @metrics.has_key?(id)
+          temp_count = @metrics[id]
+          @metrics.merge!({id => temp_count + value})
+        else
+          @metrics.merge!({Classification.get(id).name.to_sym => value})
+        end
+      end
+    end
+
+    @metrics
+  end
 
   def protos
     protos = []

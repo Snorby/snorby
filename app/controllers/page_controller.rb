@@ -9,12 +9,16 @@ class PageController < ApplicationController
       @cache = Cache.today
     when :yesterday
       @cache = Cache.yesterday
+      @classification_metrics ||= DailyCache.yesterday.classification_metrics
     when :week
       @cache = DailyCache.this_week
+      @classification_metrics ||= @cache.yesterday.classification_metrics
     when :month
       @cache = DailyCache.this_month
+      @classification_metrics ||= @cache.yesterday.classification_metrics
     when :year
       @cache = DailyCache.this_year
+      @classification_metrics ||= @cache.yesterday.classification_metrics
     else
       @cache = Cache.today
     end
@@ -27,6 +31,8 @@ class PageController < ApplicationController
     @low ||= @cache.severity_count(:low, params[:range].to_sym)
     @sensor_metrics ||= @cache.sensor_metrics(params[:range].to_sym)
     
+    @signature_metrics ||= @cache.signature_metrics
+    
     @event_count ||= @cache.all.map(&:event_count).sum
     
     @axis ||= @sensor_metrics.last[:range].join(',')
@@ -36,8 +42,6 @@ class PageController < ApplicationController
     @favers ||= User.all(:limit => 5, :order => [:favorites_count.desc])
     
     @last_cache = @cache.get_last ? @cache.get_last.ran_at : Time.now
-    
-     # @classification_metrics ||= @cache.classification_metrics.sort! { |x,y| 1 <=> x.last }
     
     sigs = Event.all(:limit => 5, :order => [:timestamp.desc], :fields => [:sig_id], :unique => true).map(&:signature).map(&:sig_id)
     @recent_events ||= Event.all(:sig_id => sigs).group_by { |x| x.sig_id }.map(&:last).map(&:first)

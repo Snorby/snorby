@@ -18,8 +18,6 @@ class Cache
 
   property :icmp_count, Integer, :default => 0
 
-  property :classification_metrics, Object
-
   property :severity_metrics, Object
 
   property :signature_metrics, Object
@@ -54,7 +52,7 @@ class Cache
   def self.today
     all(:ran_at.gte => Time.now.beginning_of_day, :ran_at.lte => Time.now.end_of_day)
   end
-  
+
   def self.protocol_count(protocol, type=nil)
     count = []
     @cache = self.group_by { |x| x.ran_at.hour }
@@ -65,23 +63,23 @@ class Cache
         count[hour] = data.map(&:tcp_count).sum
       end
     when :udp
-      @cache.each do |hour, data| 
+      @cache.each do |hour, data|
         count[hour] = data.map(&:udp_count).sum
       end
     when :icmp
-      @cache.each do |hour, data| 
+      @cache.each do |hour, data|
         count[hour] = data.map(&:icmp_count).sum
       end
     end
-    
+
     Time.now.beginning_of_day.hour.upto(Time.now.end_of_day.hour) do |i|
       next if count[i]
       count[i] = 0
     end
-    
+
     count
   end
-  
+
   def self.severity_count(severity, type=nil)
     count = []
     @cache = self.group_by { |x| x.ran_at.hour }
@@ -94,24 +92,24 @@ class Cache
         count[hour] = high_count
       end
     when :medium
-      @cache.each do |hour, data| 
+      @cache.each do |hour, data|
         medium_count = 0
         data.map(&:severity_metrics).each { |x| medium_count += (x.kind_of?(Hash) ? (x.has_key?(2) ? x[2] : 0) : 0) }
         count[hour] = medium_count
       end
     when :low
-      @cache.each do |hour, data| 
+      @cache.each do |hour, data|
         low_count = 0
         data.map(&:severity_metrics).each { |x| low_count += ( x.kind_of?(Hash) ? (x.has_key?(3) ? x[3] : 0) : 0) }
         count[hour] = low_count
       end
     end
-    
+
     Time.now.beginning_of_day.hour.upto(Time.now.end_of_day.hour) do |i|
       next if count[i]
       count[i] = 0
     end
-    
+
     count
   end
 
@@ -136,19 +134,24 @@ class Cache
     @metrics
   end
 
-  def self.classification_metrics
-    @cache = self.map(&:classification_metrics)
-    @classifications = []
+  def self.signature_metrics
+    @metrics = {}
+    @cache = self
 
-    Classification.each do |classification|
-      count = 0
-      @cache.each do |cache|
-        next unless cache
-        count += cache[classification.id]
+    @cache.map(&:signature_metrics).each do |data|
+      next unless data
+
+      data.each do |id, value|
+        if @metrics.has_key?(id)
+          temp_count = @metrics[id]
+          @metrics.merge!({id => temp_count + value})
+        else
+          @metrics.merge!({Signature.get(id).sig_name.to_sym => value})
+        end
       end
-      @classifications << [classification.name, count]
     end
-    @classifications
+
+    @metrics
   end
 
 end

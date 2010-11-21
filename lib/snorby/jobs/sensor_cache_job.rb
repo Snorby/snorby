@@ -73,7 +73,6 @@ module Snorby
                           :tcp_count => fetch_tcp_count,
                           :udp_count => fetch_udp_count,
                           :icmp_count => fetch_icmp_count,
-                          :classification_metrics => fetch_classification_metrics,
                           :severity_metrics => fetch_severity_metrics,
                           :signature_metrics => fetch_signature_metrics
           })
