@@ -2544,7 +2544,7 @@ div.dashboard-graph{
     -moz-border-radius-topleft: 4px;
     -webkit-border-top-right-radius: 4px;
     -webkit-border-top-left-radius: 4px;
-	background-color: #96989d;
+	background-color: #c3c5cb;
 	position: relative;
 	overflow: hidden;
 	display: block;
@@ -2555,7 +2555,7 @@ div.dashboard-graph{
 
 #dashboard #box-tabs ul#box-menu li:hover{
 	top: 0;
-	background-color: #a0a2a7;	
+	background-color: #b3b5bb;	
 }
 
 #dashboard #box-tabs ul#box-menu li.active{
@@ -2570,7 +2570,7 @@ div.dashboard-graph{
 #dashboard #box-tabs ul#box-menu li a{
 	padding-right: 10px;
 	padding-left: 10px;
-	color: #fff;
+	color: #fffeff;
 	font-weight: normal;
 	font-style: normal;
 	text-decoration: none;
