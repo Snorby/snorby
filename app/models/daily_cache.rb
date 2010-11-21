@@ -34,7 +34,7 @@ class DailyCache
   def self.get_last
     first(:order => [:ran_at.desc])
   end
-  
+
   def self.this_year
     all(:ran_at.gte => Time.now.beginning_of_year, :ran_at.lte => Time.now.end_of_year)
   end
@@ -66,16 +66,16 @@ class DailyCache
     end
     severities.to_json
   end
-  
+
   def self.protocol_count(protocol, type=:week)
     count = []
-    
+
     if type == :year
       time_type = :month
     else
       time_type = :day
     end
-    
+
     case type.to_sym
     when :week
       start_time_method = :beginning_of_week
@@ -101,11 +101,11 @@ class DailyCache
         count[day] = data.map(&:tcp_count).sum
       end
     when :udp
-      @cache.each do |day, data| 
+      @cache.each do |day, data|
         count[day] = data.map(&:udp_count).sum
       end
     when :icmp
-      @cache.each do |day, data| 
+      @cache.each do |day, data|
         count[day] = data.map(&:icmp_count).sum
       end
     end
@@ -114,19 +114,19 @@ class DailyCache
       next if count[i]
       count[i] = 0
     end
-    
+
     count.compact
   end
 
   def self.severity_count(severity, type=:week)
     count = []
-    
+
     if type == :year
       time_type = :month
     else
       time_type = :day
     end
-    
+
     case type.to_sym
     when :week
       start_time_method = :beginning_of_week
@@ -154,13 +154,13 @@ class DailyCache
         count[day] = high_count
       end
     when :medium
-      @cache.each do |day, data| 
+      @cache.each do |day, data|
         medium_count = 0
         data.map(&:severity_metrics).each { |x| medium_count += (x.kind_of?(Hash) ? (x.has_key?(2) ? x[2] : 0) : 0) }
         count[day] = medium_count
       end
     when :low
-      @cache.each do |day, data| 
+      @cache.each do |day, data|
         low_count = 0
         data.map(&:severity_metrics).each { |x| low_count += ( x.kind_of?(Hash) ? (x.has_key?(3) ? x[3] : 0) : 0) }
         count[day] = low_count
@@ -171,7 +171,7 @@ class DailyCache
       next if count[i]
       count[i] = 0
     end
-    
+
     count.compact
   end
 
@@ -180,13 +180,13 @@ class DailyCache
 
     Sensor.all(:limit => 5, :order => [:events_count.desc]).each do |sensor|
       count = []
-      
+
       if type == :year
         time_type = :month
       else
         time_type = :day
       end
-      
+
       case type.to_sym
       when :week
         start_time_method = :beginning_of_week
@@ -223,7 +223,7 @@ class DailyCache
 
     @metrics
   end
-  
+
   def self.signature_metrics
     @metrics = {}
     @cache = self
@@ -241,9 +241,17 @@ class DailyCache
       end
     end
 
+    # Hacky..
+    # If hash is greater then 20
+    # remove all values lg the avg.
+    if @metrics.values.length > 20
+      avg = @metrics.values.sum / @metrics.values.length
+      @metrics = @metrics.reject { |k,v| v < avg }
+    end
+    
     @metrics
   end
-  
+
   def self.classification_metrics
     @metrics = {}
     @cache = self

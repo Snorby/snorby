@@ -151,6 +151,14 @@ class Cache
       end
     end
 
+    # Hacky..
+    # If hash is greater then 20
+    # remove all values lg the avg.
+    if @metrics.values.length > 20
+      avg = @metrics.values.sum / @metrics.values.length
+      @metrics = @metrics.reject { |k,v| v < avg }
+    end
+
     @metrics
   end
 

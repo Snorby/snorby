@@ -132,7 +132,7 @@ var Snorby = {
 		
 		$("#growl").notify({
 		    speed: 500,
-		    expires: 3000
+		    expires: 5000
 		});
 		
 		$('.edit-sensor-name').editable("/sensors/update_name", {
