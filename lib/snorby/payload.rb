@@ -17,6 +17,7 @@ module Snorby
       else
         :twos
       end
+      @new_lines = config[:new_lines] || false
       @case      = config[:case]      == :upper ? :upper: :lower
       @annotate  = config[:annotate]  == :none  ? :none : :ascii
       @prefix    = config[:prefix]    ||= ""
@@ -48,7 +49,12 @@ module Snorby
           }
           end
 
-          string.gsub!(/[\000-\040\177-\377]/, ".")
+          if @new_lines
+            string.gsub!(/[\x0a]/, "\n")
+            string.gsub!(/[\040\177-\377]/, '.')
+          else
+            string.gsub!(/[\000-\040\177-\377]/, ".")
+          end
 
           len = case @format
           when :fours
@@ -60,7 +66,7 @@ module Snorby
           end
 
           str << @prefix
-          
+
           if @html
             str << "<span class='payload-number'>%07X:</span> " % (i) if @numbering == :hex_bytes
             str << "<span class='payload-hex'>#{CGI::escapeHTML(("%-#{len}s" % hex))}</span>"
