@@ -3,7 +3,9 @@
 <div id='settings' class='grid_12 boxit page'>
 	
 	<%= form_for(@user, :url => add_users_path(@user), :html => { :method => :put, :multipart => true, :class => 'validate' }) do |f| %>
-
+	
+		<%= error_messages_for(@user) %>
+	
 		<p>
 			<div class='user-show-avatar'>
 				<%= image_tag(@user.avatar.url(:small, :size => '100x100'), :class => 'avatar') %>

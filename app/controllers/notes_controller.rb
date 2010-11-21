@@ -1,6 +1,6 @@
 class NotesController < ApplicationController
   
-  before_filter :require_administrative_privileges, :except => [:destroy, :edit, :update]
+  before_filter :require_administrative_privileges, :only => [:destroy, :edit, :update]
   before_filter :find_event, :only => [:create, :new]
   
   def find_event

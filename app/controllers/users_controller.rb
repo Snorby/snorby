@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to users_path
     else
-      render :action => 'add'
+      render :action => 'new'
     end
   end
   

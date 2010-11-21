@@ -1,6 +1,8 @@
 <tr id='sensor_<%= sensor.sid %>' class='sensor' data-sensor-id='<%= sensor.sid %>'>
 	<td class='id first'><%= sensor.sid %></td>
-	<td class='name edit-sensor-name' data-sensor-id='<%= sensor.sid %>'><%= sensor.name %></td>
+	
+	<td class='name <%= "edit-sensor-name" if current_user.admin %>' data-sensor-id='<%= sensor.sid %>'><%= sensor.name %></td>
+	
 	<td class='hostname'><%= sensor.hostname %></td>
 	<td class='interface'><%= sensor.interface %></td>
 	
