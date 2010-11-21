@@ -23,6 +23,9 @@ class PageController < ApplicationController
       @cache = Cache.today
     end
     
+    @src_metrics ||= @cache.src_metrics
+    @dst_metrics ||= @cache.dst_metrics
+    
     @tcp ||= @cache.protocol_count(:tcp, params[:range].to_sym)
     @udp ||= @cache.protocol_count(:udp, params[:range].to_sym)
     @icmp ||= @cache.protocol_count(:icmp, params[:range].to_sym)

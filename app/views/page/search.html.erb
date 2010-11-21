@@ -4,16 +4,30 @@
 	
 	<%= form_tag results_path, :method => :get do %>
 
-		<%= select_tag '[search][event][sid][eql]', dropdown_select_tag(Sensor.all, :sid, true) %>
-		
-		<%= select_tag '[search][event][classification_id][eql]', dropdown_select_tag(Classification.all, :id, true, ["<option value='null'>Unclassified</option>"]) %>
-		
-		<%= select_tag '[search][signature][sig_priority][eql]', dropdown_select_tag(Severity.all, :sig_id, true) %>
-
-		<%= text_field_tag '[search][signature][sig_name][like]' %>
-		
-		<%= text_field_tag '[search][ip][ip_src][like]' %>
-	
+		<div id='search-box'>
+			
+			<div class='grid_4 alpha'>
+				<%= label_tag 'Sensor' %>
+				<%= select_tag '[search][sid]', dropdown_select_tag(Sensor.all, :sid, true) %>
+			</div>
+			
+			<div class='grid_4 alpha'>
+				<%= select_tag '[search][classification_id]', dropdown_select_tag(Classification.all, :id, true, ["<option value='null'>Unclassified</option>"]) %>
+			</div>
+			
+			<div class='grid_4 alpha'>
+				<%= select_tag '[search][severity]', dropdown_select_tag(Severity.all, :sig_id, true) %>
+			</div>
+			
+			<div class='grid_4 alpha'>
+				<%= text_field_tag '[search][signature_name]', params[:signature_name], :placeholder => 'Signature Name' %>
+			</div>
+			
+			<div class='grid_4 alpha'>
+				<%= text_field_tag '[search][ip_src]', params[:ip_src], :placeholder => 'Source Address' %>
+			</div>
+			
+		</div>
 
 		<%= form_actions do %>
 

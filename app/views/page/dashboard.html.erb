@@ -4,7 +4,7 @@
 
 	<%= drop_down_for('More Options', 'icons/filter.png', 'options') do %>
 
-		<%= drop_down_item "Export To PDF", '#', nil, { :class => 'dashboard' } %>
+		<%= drop_down_item "Export To PDF", dashboard_path(:range => params[:range], :format => :pdf), nil, { :class => 'dashboard' } %>
 
 	<% end %>
 
@@ -58,6 +58,9 @@
 				<li><%= link_to "Severities", '#', :class => 'show_severities_graph' %></li>
 				<li><%= link_to "Protocols", '#', :class => 'show_protocol_graph' %></li>
 				<li><%= link_to "Signatures", '#', :class => 'show_signature_graph' %></li>
+				
+				<li><%= link_to "Sources", '#', :class => 'show_source_ips_graph' %></li>
+				<li><%= link_to "Destinations", '#', :class => 'show_destination_ips_graph' %></li>
 				
 				<% if %w(yesterday week month year).include?(params[:range]) %>
 					<li><%= link_to "Analyst Classified", '#', :class => 'show_classification_graph' %></li>

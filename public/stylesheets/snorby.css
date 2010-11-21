@@ -2847,3 +2847,13 @@ div.dashboard-graph{
 }
 
 /* @end */
+
+/* @group Search */
+
+#search-box{
+	display: block;
+	position: relative;
+	overflow: hidden;
+}
+
+/* @end */

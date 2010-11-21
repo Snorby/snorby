@@ -114,6 +114,8 @@ module Snorby
                         :icmp_count => fetch_icmp_count,
                         :classification_metrics => fetch_classification_metrics,
                         :severity_metrics => fetch_severity_metrics(false),
+                        :src_ips => fetch_src_ip_metrics,
+                        :dst_ips => fetch_dst_ip_metrics,
                         :signature_metrics => fetch_signature_metrics(false)
         })
 

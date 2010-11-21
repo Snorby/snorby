@@ -74,6 +74,8 @@ module Snorby
                           :udp_count => fetch_udp_count,
                           :icmp_count => fetch_icmp_count,
                           :severity_metrics => fetch_severity_metrics,
+                          :src_ips => fetch_src_ip_metrics,
+                          :dst_ips => fetch_dst_ip_metrics,
                           :signature_metrics => fetch_signature_metrics
           })
 
@@ -90,10 +92,6 @@ module Snorby
           Severity.update!(:events_count => 0)
           Sensor.update!(:events_count => 0)
           Signature.update!(:events_count => 0)
-        end
-        
-        def build_empty_cache
-          
         end
 
         #

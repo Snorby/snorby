@@ -201,6 +201,22 @@ var Snorby = {
 				$('div#classification-graph').show();
 			});
 			
+			$('a.show_source_ips_graph').live('click', function(e) {
+				e.preventDefault();
+				$('#box-menu li').removeClass('active');
+				$(this).parent('li').addClass('active');
+				$('div.dashboard-graph').hide();
+				$('div#source-ips-graph').show();
+			});
+			
+			$('a.show_destination_ips_graph').live('click', function(e) {
+				e.preventDefault();
+				$('#box-menu li').removeClass('active');
+				$(this).parent('li').addClass('active');
+				$('div.dashboard-graph').hide();
+				$('div#destination-ips-graph').show();
+			});
+			
 		},
 		
 		events: function(){

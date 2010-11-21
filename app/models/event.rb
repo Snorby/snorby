@@ -4,7 +4,7 @@ class Event
 
   include DataMapper::Resource
   include Snorby::Model::Counter
-  
+
   # Included for the truncate helper method.
   extend ActionView::Helpers::TextHelper
 
@@ -87,11 +87,11 @@ class Event
   def self.find_sensor(sensor)
     all(:sensor => sensor)
   end
-  
+
   def self.between(start_time, end_time)
     all(:timestamp.gte => start_time, :timestamp.lte => end_time)
   end
-  
+
   def self.between_time(start_time, end_time)
     all(:timestamp.gt => start_time, :timestamp.lt => end_time, :order => [:timestamp.desc])
   end
@@ -274,48 +274,25 @@ class Event
       classification.update(:events_count => 0)
     end
   end
-  
+
   def self.search(params)
-    query = {}
-    return [] if Event.blank?
-
-    params.each do |key, value|
-      
-      value.each do |column, v|
-        type = v.keys.first
-        data = v.values.first
-        next if data.blank?
-
-        data = nil if data == 'null'
-
-        if key == "event"
-          next unless Event.first.respond_to?(column.to_sym)
-        else
-          next unless Event.first.respond_to?(key.to_sym)
-          next unless Event.first.send(key.to_sym).respond_to?(column.to_sym)
-          data = IPAddr.new(data) if Event.first.send(key.to_sym).send(column.to_sym).kind_of? IPAddr
-        end
-
-        case type.to_sym
-        when :like
-          data = "%#{data}%" if data.kind_of? String
-        end
-
-        if key == "event"
-          query.merge!({ [column, type].join('.').to_sym => data })
-        else
-          query.merge!({ [key, column, type].join('.').to_sym => data })
-        end
-        
-      end
-
-    end
+    @search = {}
+    @search.merge!({ Event.sid => params[:sid] }) if params[:sid] unless params[:sid].to_i.zero?
     
-    puts "#################### DEBUG"
-    puts query.to_yaml
-    puts "#################### DEBUG"
+    @search.merge!({ :"sig_id" => Signature.all(:sig_priority => params[:severity].to_i).map(&:sig_id) }) unless params[:severity].to_i.zero?
     
-    all(query)
+    @search.merge!({ :"sig_id" => Signature.all(:sig_name.like => "%#{params[:signature_name]}%").map(&:sig_id) }) unless params[:signature_name] == ""
+
+    @search.merge!({ :classification_id => params[:classification_id] }) unless params[:classification_id].to_i.zero?
+
+    @search.merge!({ :"ip.ip_src" => IPAddr.new("#{params[:ip_src]}") }) unless params[:ip_src] == ""
+    
+    @search.merge!({ :notes_count.gt => params[:notes_count] }) if params.has_key?(:notes_count)
+    
+    @search.merge!({ :users_count.gt => params[:users_count] }) if params.has_key?(:users_count)
+
+    puts @search.to_yaml
+    all(@search)
   end
 
 end

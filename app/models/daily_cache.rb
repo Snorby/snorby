@@ -23,6 +23,10 @@ class DailyCache
   property :severity_metrics, Object
 
   property :signature_metrics, Object
+  
+  property :src_ips, Object
+  
+  property :dst_ips, Object
 
   # Define created_at and updated_at timestamps
   timestamps :at
@@ -244,6 +248,48 @@ class DailyCache
     # Hacky..
     # If hash is greater then 20
     # remove all values lg the avg.
+    if @metrics.values.length > 20
+      avg = @metrics.values.sum / @metrics.values.length
+      @metrics = @metrics.reject { |k,v| v < avg }
+    end
+    
+    @metrics
+  end
+  
+  def self.src_metrics
+    @metrics = {}
+    @cache = self.map(&:src_ips).compact
+    @cache.each do |ip_hash|
+      ip_hash.each do |ip, count|
+        if @metrics.has_key?(ip)
+          @metrics[ip] += count
+        else
+          @metrics.merge!({ip => count})
+        end
+      end
+    end
+    
+    if @metrics.values.length > 20
+      avg = @metrics.values.sum / @metrics.values.length
+      @metrics = @metrics.reject { |k,v| v < avg }
+    end
+    
+    @metrics
+  end
+  
+  def self.dst_metrics
+    @metrics = {}
+    @cache = self.map(&:dst_ips).compact
+    @cache.each do |ip_hash|
+      ip_hash.each do |ip, count|
+        if @metrics.has_key?(ip)
+          @metrics[ip] += count
+        else
+          @metrics.merge!({ip => count})
+        end
+      end
+    end
+    
     if @metrics.values.length > 20
       avg = @metrics.values.sum / @metrics.values.length
       @metrics = @metrics.reject { |k,v| v < avg }

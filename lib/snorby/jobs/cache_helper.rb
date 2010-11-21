@@ -109,26 +109,16 @@ module Snorby
       
       def fetch_src_ip_metrics
         logit '- fetching src ip metrics'
-        # SOURCE
-        metrics = {}
-        ips = @events.ip.map(&:ip_src).uniq
-        count = @events.ip.map(&:ip_src).uniq.size
-        ips.each do |ip|
-          @events.ip.all(:ip_src => ip)
-        end
-        metrics.merge!(:total_uniq_count => count)
+        @src_ips = {}
+        @events.group_by { |x| x.ip.ip_src.to_s }.collect { |x,y| @src_ips.merge!({x => y.size}) }
+        @src_ips
       end
 
       def fetch_dst_ip_metrics
         logit '- fetching dst ip metrics'
-        # DESTINATION
-        metrics = {}
-        ips = @events.ip.map(&:ip_dst).uniq
-        count = @events.ip.map(&:ip_dst).uniq.size
-        ips.each do |ip|
-          @events.ip.all(:ip_dst => ip)
-        end
-        metrics.merge!(:total_uniq_count => count)
+        @dst_ips = {}
+        @events.group_by { |x| x.ip.ip_dst.to_s }.collect { |x,y| @dst_ips.merge!({x => y.size}) }
+        @dst_ips
       end
       
     end

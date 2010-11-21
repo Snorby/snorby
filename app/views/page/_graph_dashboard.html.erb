@@ -10,6 +10,10 @@
 		
 		<%= render :partial => 'graph_signature.html.erb' %>
 		
+		<%= render :partial => 'graph_source_ips.html.erb' %>
+		
+		<%= render :partial => 'graph_destination_ips.html.erb' %>
+		
 		<% if %w(yesterday week month year).include?(params[:range]) %>
 			<%= render :partial => 'graph_classification.html.erb' %>
 		<% end %>

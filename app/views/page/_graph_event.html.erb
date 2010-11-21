@@ -19,14 +19,14 @@
 						categories: [<%= @axis %>],
 		        title: {
 								margin: 10,
-								<% if params[:type] == 'year' %>
-									text: 'Month'
-								<% elsif params[:type] == 'month' %>
-									text: 'Day'
-								<% elsif params[:type] == 'week' %>
-									text: 'Day'
+								<% if params[:range] == 'year' %>
+									text: 'Month of Year'
+								<% elsif params[:range] == 'month' %>
+									text: 'Day of Month'
+								<% elsif params[:range] == 'week' %>
+									text: 'Day Of Week'
 								<% else %>
-									text: 'Hour'
+									text: 'Hour of Day'
 								<% end %>
 		         }
 		      },
