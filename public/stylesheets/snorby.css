@@ -2544,18 +2544,28 @@ div.dashboard-graph{
     -moz-border-radius-topleft: 4px;
     -webkit-border-top-right-radius: 4px;
     -webkit-border-top-left-radius: 4px;
-	background-color: #eee;
+	background-color: #adafb5;
 	position: relative;
 	overflow: hidden;
 	display: block;
 	float: left;
 	margin-right: 3px;
+	top: 5px;
+}
+
+#dashboard #box-tabs ul#box-menu li.active{
+	background-color: #eee;
+	top: 0;
+}
+
+#dashboard #box-tabs ul#box-menu li.active a{
+	color: #282828;
 }
 
 #dashboard #box-tabs ul#box-menu li a{
 	padding-right: 10px;
 	padding-left: 10px;
-	color: #575757;
+	color: #fff;
 	font-weight: normal;
 	font-style: normal;
 	text-decoration: none;

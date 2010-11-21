@@ -163,30 +163,40 @@ var Snorby = {
 			
 			$('a.show_events_graph').live('click', function(e) {
 				e.preventDefault();
+				$('#box-menu li').removeClass('active');
+				$(this).parent('li').addClass('active');
 				$('div.dashboard-graph').hide();
 				$('div#events-graph').show();
 			});
 			
 			$('a.show_severities_graph').live('click', function(e) {
 				e.preventDefault();
+				$('#box-menu li').removeClass('active');
+				$(this).parent('li').addClass('active');
 				$('div.dashboard-graph').hide();
 				$('div#severity-graph').show();
 			});
 			
 			$('a.show_protocol_graph').live('click', function(e) {
 				e.preventDefault();
+				$('#box-menu li').removeClass('active');
+				$(this).parent('li').addClass('active');
 				$('div.dashboard-graph').hide();
 				$('div#protocol-graph').show();
 			});
 			
 			$('a.show_signature_graph').live('click', function(e) {
 				e.preventDefault();
+				$('#box-menu li').removeClass('active');
+				$(this).parent('li').addClass('active');
 				$('div.dashboard-graph').hide();
 				$('div#signature-graph').show();
 			});
 			
 			$('a.show_classification_graph').live('click', function(e) {
 				e.preventDefault();
+				$('#box-menu li').removeClass('active');
+				$(this).parent('li').addClass('active');
 				$('div.dashboard-graph').hide();
 				$('div#classification-graph').show();
 			});
