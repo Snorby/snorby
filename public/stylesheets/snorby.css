@@ -2544,13 +2544,18 @@ div.dashboard-graph{
     -moz-border-radius-topleft: 4px;
     -webkit-border-top-right-radius: 4px;
     -webkit-border-top-left-radius: 4px;
-	background-color: #adafb5;
+	background-color: #96989d;
 	position: relative;
 	overflow: hidden;
 	display: block;
 	float: left;
 	margin-right: 3px;
 	top: 5px;
+}
+
+#dashboard #box-tabs ul#box-menu li:hover{
+	top: 0;
+	background-color: #a0a2a7;	
 }
 
 #dashboard #box-tabs ul#box-menu li.active{

@@ -34,7 +34,11 @@
 					<% end %>
 					<li class='right'><i>Currently Caching <%= image_tag('icons/pager.gif', :size => '16x11') %></i></li>
 				<% else %>
-					<li class='right'><i>Last Updated: <%= @last_cache.strftime('%D %l:%M:%S %p') %></i></li>
+				
+					<% unless %w(yesterday week month year).include?(params[:range]) %>
+						<li class='right'><i>Last Updated: <%= @last_cache.strftime('%D %l:%M:%S %p') %></i></li>
+					<% end %>
+					
 				<% end %>
 
 			</ul>
@@ -85,17 +89,21 @@
 		
 		<ul class='box-list'>
 			<% @favers.each do |user| %>
-			<li><%= image_tag(user.avatar.url(:small), :size => '16x16', :class => 'avatar-small') %> <%= link_to truncate(user.name, :length => 30), activity_events_path(:user_id => user.id) %> <span><%= user.favorites_count %></span></li>
+			<li>
+				<%= image_tag(user.avatar.url(:small), :size => '16x16', :class => 'avatar-small') %> 
+				<%= link_to truncate(user.name, :length => 30), activity_events_path(:user_id => user.id) %> 
+				<span><%= user.favorites_count %></span>
+			</li>
 			<% end %>
 		</ul>
 		
 		<div class='dashboard-header'>
-			<span>Recent Unique Events</span>
+			<span>Last 5 Unique Events</span>
 		</div>
 		
 		<ul class='box-list'>
 			<% @recent_events.each do |event| %>
-			<li><%= link_to truncate(event.signature.name, :length => 25), "/events/show/#{event.sid}/#{event.cid}" %> <span><%= event.signature.events_count %></span></li>
+				<li><%= link_to truncate(event.signature.name, :length => 25), "/events/show/#{event.sid}/#{event.cid}" %> <span><%= event.signature.events_count %></span></li>
 			<% end %>
 		</ul>
 	
