@@ -5,7 +5,7 @@
 	chart = new Highcharts.Chart({
 	      chart: {
 	         renderTo: 'signature-graph',
-	         margin: [50, 200, 50, 180]
+	         margin: [50, 165, 50, 160]
 	      },
 	      title: {
 	         text: ''
@@ -17,7 +17,7 @@
 							dataLabels: {
 									distance: 20,
 								  formatter: function() {
-									return "" + this.point.name.substring(0, 35) + "... (" + Math.round(this.percentage) + "%)"
+									return "" + this.point.name.substring(0, 30) + "... (" + Math.round(this.percentage) + "%)"
 								 },
 	                connectorColor: '#888',
 									style: {

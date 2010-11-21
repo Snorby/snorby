@@ -80,16 +80,13 @@ module Snorby
         @udp_events = []
         @icmp_events = []
         
-        if @events.blank?
-          
-          if (day_end + 1.day) >= @stop_date
-            logit "No New Events To Cache..."
-            return
-          else
-            build_cache(day_start + 1.day, day_end + 1.day)
-          end
-          
-        else
+        
+        if day_end >= @stop_date
+          logit "No New Events To Cache..."
+          return
+        end
+        
+        unless @events.blank?
           
           logit "\nNew Day: #{day_start} - #{day_end}", false
           
