@@ -282,7 +282,11 @@ class Event
     if params[:severity].to_i.zero?
       @search.merge!({ :"sig_id" => Signature.all(:sig_name.like => "%#{params[:signature_name]}%").map(&:sig_id) }) unless params[:signature_name] == ""
     else
-      @search.merge!({ :"sig_id" => Signature.all(:sig_name.like => "%#{params[:signature_name]}%", :sig_priority => params[:severity].to_i).map(&:sig_id) }) unless params[:signature_name] == ""
+      if params[:signature_name] == ""
+        @search.merge!({ :"sig_id" => Signature.all(:sig_priority => params[:severity].to_i).map(&:sig_id) })
+      else
+        @search.merge!({ :"sig_id" => Signature.all(:sig_name.like => "%#{params[:signature_name]}%", :sig_priority => params[:severity].to_i).map(&:sig_id) })
+      end
     end
 
     @search.merge!({ :classification_id => params[:classification_id] }) unless params[:classification_id].to_i.zero?
