@@ -695,6 +695,11 @@ var Snorby = {
 			return false;
 		});
 	
+		$(document).bind('keydown', 'ctrl+shift+s', function() {
+			window.location = '/search';
+			return false;
+		});
+	
 		if ($('div.pager').is(':visible')) {
 			
 			$(document).bind('keydown', 'ctrl+shift+1', function() {

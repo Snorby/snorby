@@ -989,6 +989,14 @@ div#note-box.error{
 
 /* @group Helpers */
 
+#snorbybox-holder{
+	position: relative;
+	display: block;
+	height: 700px;
+	overflow: auto;
+	width: 1015px;
+}
+
 .blur {color: #bdbdbd}
 
 .blank {color: #e5e5e5}

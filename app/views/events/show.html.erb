@@ -1,0 +1,15 @@
+<div id='snorbybox-holder'>
+	<ul class='table'>
+
+		<div class='content'>
+			<li id='event_<%= @event.sid %><%= @event.cid %>' class='event' data-event-id='<%= @event.id %>' data-event-sid='<%= @event.sid %>' data-event-cid='<%= @event.cid %>'>
+
+				<div style='' class='event-data' data='false'>
+					<%= render :partial => 'show' %>
+				</div>
+
+			</li>
+		</div>
+
+	</ul>
+</div>

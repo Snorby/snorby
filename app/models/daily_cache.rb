@@ -56,11 +56,11 @@ class DailyCache
   end
 
   def self.this_week
-    all(:ran_at.gt => Time.now.beginning_of_week, :ran_at.lt => Time.now.end_of_week)
+    all(:ran_at.gte => Time.now.beginning_of_week, :ran_at.lte => Time.now.end_of_week)
   end
 
   def self.yesterday
-    all(:ran_at.gt => (Time.now - 1.day).beginning_of_day, :ran_at.lt => (Time.now - 1.day).end_of_day)
+    all(:ran_at.gte => (Time.now - 1.day).beginning_of_day, :ran_at.lte => (Time.now - 1.day).end_of_day)
   end
 
   def severities
@@ -303,7 +303,7 @@ class DailyCache
 
     @cache.map(&:classification_metrics).each do |data|
       next unless data
-
+      
       data.each do |id, value|
         if @metrics.has_key?(id)
           temp_count = @metrics[id]

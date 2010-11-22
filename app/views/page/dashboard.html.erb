@@ -107,7 +107,7 @@
 		
 		<ul class='box-list'>
 			<% @recent_events.each do |event| %>
-				<li><%= link_to truncate(event.signature.name, :length => 25), "/events/show/#{event.sid}/#{event.cid}" %> <span><%= event.signature.events_count %></span></li>
+				<li><%= link_to truncate(event.signature.name, :length => 25), "/events/show/#{event.sid}/#{event.cid}", :class => 'snorbybox' %> <span><%= event.signature.events_count %></span></li>
 			<% end %>
 		</ul>
 	

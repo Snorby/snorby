@@ -15,7 +15,7 @@ class EventsController < ApplicationController
     @event = Event.get(params['sid'], params['cid'])
     @notes = @event.notes.all.page(params[:page].to_i, :per_page => 5, :order => [:id.desc])
     respond_to do |format|
-      format.html
+      format.html {render :layout => false}
       format.js
       format.pdf do
         render :pdf => "Event:#{@event.id}", :template => "events/show.pdf.erb", :layout => 'pdf.html.erb', :stylesheets => ["pdf"]
