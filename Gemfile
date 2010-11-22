@@ -38,6 +38,7 @@ gem 'dm-serializer',          DM_VERSION
 gem 'capistrano'
 
 # Rails Plugins
+gem "mail",                   "2.2.10"
 gem "RedCloth",               "~> 4.0", :require => 'redcloth'
 gem 'chronic',                '~> 0.3.0'
 gem 'pdfkit',                 '~> 0.4.6'
@@ -59,11 +60,6 @@ group(:test) do
   gem 'rspec-core',		RSPEC_VERSION, :require => 'rspec/core'
   gem 'rspec-expectations',	RSPEC_VERSION, :require => 'rspec/expectations'
   gem 'rspec-rails',		RSPEC_VERSION
-end
-
-group :development do
-  # require 'irbtools' in ~/.railsrc
-  gem 'irbtools'
 end
 
 group(:doc) do

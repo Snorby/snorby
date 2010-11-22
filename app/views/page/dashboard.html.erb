@@ -22,6 +22,7 @@
 				<li class='<%= "active" if params[:range] == 'yesterday' %>'><%= link_to "Yesterday", dashboard_path(:range => :yesterday) %></li>
 				<li class='<%= "active" if params[:range] == 'week' %>'><%= link_to "This Week", dashboard_path(:range => :week) %></li>
 				<li class='<%= "active" if params[:range] == 'month' %>'><%= link_to "This Month", dashboard_path(:range => :month) %></li>
+				<li class='<%= "active" if params[:range] == 'quarter' %>'><%= link_to "This Quarter", dashboard_path(:range => :month) %></li>
 				<li class='<%= "active" if params[:range] == 'year' %>'><%= link_to "This Year", dashboard_path(:range => :year) %></li>
 				
 				<% if Snorby::Jobs.caching? %>
