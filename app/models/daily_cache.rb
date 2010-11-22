@@ -228,73 +228,72 @@ class DailyCache
     @metrics
   end
 
-  def self.signature_metrics
+  def self.src_metrics(stop_count=10)
+    @metrics = {}
+    @cache = self.map(&:src_ips).compact
+    count = 0
+    
+    @cache.each do |ip_hash|
+      
+      return @metrics if count > stop_count.to_i
+      
+      ip_hash.each do |ip, count|
+        if @metrics.has_key?(ip)
+          @metrics[ip] += count
+        else
+          @metrics.merge!({ip => count})
+          count += 1
+        end
+      end
+    end
+    
+    @metrics
+  end
+  
+  def self.dst_metrics(stop_count=10)
+    @metrics = {}
+    @cache = self.map(&:dst_ips).compact
+    count = 0
+    
+    @cache.each do |ip_hash|
+      
+      return @metrics if count > stop_count.to_i
+      
+      ip_hash.each do |ip, count|
+        if @metrics.has_key?(ip)
+          @metrics[ip] += count
+        else
+          @metrics.merge!({ip => count})
+          count += 1
+        end
+      end
+    end
+    
+    @metrics
+  end
+
+  def self.signature_metrics(stop_count=10)
     @metrics = {}
     @cache = self
-
+    count = 0
+    
     @cache.map(&:signature_metrics).each do |data|
       next unless data
-
-      data.each do |id, value|
+      
+      return @metrics if count > stop_count.to_i
+      
+      data.sort_by { |k,v| v <=> v }.each do |id, value|
         if @metrics.has_key?(id)
           temp_count = @metrics[id]
           @metrics.merge!({id => temp_count + value})
         else
           @metrics.merge!({Signature.get(id).sig_name.to_sym => value})
+          count += 1
         end
       end
+      
     end
 
-    # Hacky..
-    # If hash is greater then 20
-    # remove all values lg the avg.
-    if @metrics.values.length > 20
-      avg = @metrics.values.sum / @metrics.values.length
-      @metrics = @metrics.reject { |k,v| v < avg }
-    end
-    
-    @metrics
-  end
-  
-  def self.src_metrics
-    @metrics = {}
-    @cache = self.map(&:src_ips).compact
-    @cache.each do |ip_hash|
-      ip_hash.each do |ip, count|
-        if @metrics.has_key?(ip)
-          @metrics[ip] += count
-        else
-          @metrics.merge!({ip => count})
-        end
-      end
-    end
-    
-    if @metrics.values.length > 20
-      avg = @metrics.values.sum / @metrics.values.length
-      @metrics = @metrics.reject { |k,v| v < avg }
-    end
-    
-    @metrics
-  end
-  
-  def self.dst_metrics
-    @metrics = {}
-    @cache = self.map(&:dst_ips).compact
-    @cache.each do |ip_hash|
-      ip_hash.each do |ip, count|
-        if @metrics.has_key?(ip)
-          @metrics[ip] += count
-        else
-          @metrics.merge!({ip => count})
-        end
-      end
-    end
-    
-    if @metrics.values.length > 20
-      avg = @metrics.values.sum / @metrics.values.length
-      @metrics = @metrics.reject { |k,v| v < avg }
-    end
-    
     @metrics
   end
 

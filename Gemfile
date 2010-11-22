@@ -61,6 +61,11 @@ group(:test) do
   gem 'rspec-rails',		RSPEC_VERSION
 end
 
+group :development do
+  # require 'irbtools' in ~/.railsrc
+  gem 'irbtools'
+end
+
 group(:doc) do
   gem 'dm-visualizer',	'~> 0.1.0'
 end
