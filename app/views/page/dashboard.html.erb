@@ -4,6 +4,10 @@
 
 	<%= drop_down_for('More Options', 'icons/filter.png', 'options') do %>
 
+		<%= drop_down_item "Last Week", dashboard_path(:range => :last_week), nil, { :class => 'dashboard' } %>
+		<%= drop_down_item "Last Month", dashboard_path(:range => :last_month), nil, { :class => 'dashboard' } %>
+		<%= drop_down_item "Select Range", dashboard_path(:range => params[:range]), nil, { :class => 'dashboard' } %>
+		
 		<%= drop_down_item "Export To PDF", dashboard_path(:range => params[:range], :format => :pdf), nil, { :class => 'dashboard' } %>
 
 	<% end %>

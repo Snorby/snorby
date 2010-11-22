@@ -2551,6 +2551,7 @@ img.avatar-small{
 }
 
 div.dashboard-graph{
+	height: 400px;
 	width: 722px;
 }
 

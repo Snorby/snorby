@@ -13,7 +13,13 @@ class PageController < ApplicationController
     when :week
       @cache = DailyCache.this_week
       @classification_metrics ||= @cache.yesterday.classification_metrics
+    when :last_week
+      @cache = DailyCache.last_week
+      @classification_metrics ||= @cache.yesterday.classification_metrics
     when :month
+      @cache = DailyCache.last_month
+      @classification_metrics ||= @cache.yesterday.classification_metrics
+    when :last_month
       @cache = DailyCache.this_month
       @classification_metrics ||= @cache.yesterday.classification_metrics
     when :year
