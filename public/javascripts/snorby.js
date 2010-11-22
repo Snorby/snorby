@@ -516,7 +516,8 @@ var Snorby = {
 			
 			$('.add_tipsy').tipsy({
 				fade: true, 
-				gravity: 's'
+				gravity: 's',
+				live: true
 			});
 			
 		},

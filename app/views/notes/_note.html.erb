@@ -12,7 +12,7 @@
 	
 	<div class='username'>
 		<span><%= note.user %></span> 
-		<i><%= time_ago_in_words(note.created_at) %></i>
+		<i><%= note.created_at.strftime('%A, %B %d, %Y at %I:%M %p') %></i>
 		
 	</div>
 	

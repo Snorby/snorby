@@ -1,6 +1,8 @@
 <li id='event_<%= event.sid %><%= event.cid %>' class='event' data-event-id='<%= event.id %>' data-event-sid='<%= event.sid %>' data-event-cid='<%= event.cid %>'>
 	
-	<div class='row<%= event.classification.blank? ? nil : " classified" %>'>
+	<% classification_css = event.classification.blank? ? nil : "classified" %>
+	
+	<div class='row <%= classification_css %>'>
 		
 		<div class='select small'><%= check_box_tag 'event-selector', nil, false, :class => "check_box_#{event.id}" %></div>
 		
@@ -16,13 +18,18 @@
 		<div class='click sensor address'><%= truncate(event.sensor.sensor_name, :length => 17, :omission => '...') %></div>
 		<div class='click src_ip address'><%= event.ip.ip_src %></div>
 		<div class='click dst_ip address'><%= event.ip.ip_dst %></div>
-		<div class='click signature'><%= truncate(event.signature.name, :length => 75, :omission => '...') %></div>
+		
+		<% if classification_css %>
+			<div class='click signature'><span class='add_tipsy' title='Analyst Classified Event: <%= event.classification.name %>'><%= truncate(event.signature.name, :length => 75, :omission => '...') %></span></div>
+		<% else %>
+			<div class='click signature'><%= truncate(event.signature.name, :length => 75, :omission => '...') %></div>
+		<% end %>
 		
 		<div class='click timestamp'>
 			<% if event.notes_count > 0 %>
 				<span title="This event has <%= pluralize(event.notes_count, 'note') %>" class='add_tipsy round notes-count'><%= image_tag("icons/notes.png", :size => '16x16') %></span>
 			<% end %>
-			<b title='<%= event.timestamp.strftime('%A %B %d %Y at %l:%M:%S %z') %>' class='add_tipsy'><%= event.pretty_time %></b>
+			<b title='<%= event.timestamp.strftime('%A, %B %d, %Y at %I:%M %p') %> <%= Time.zone %>' class='add_tipsy'><%= event.pretty_time %></b>
 		</div>
 		
 	</div>
