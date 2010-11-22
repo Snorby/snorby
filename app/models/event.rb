@@ -297,7 +297,6 @@ class Event
     
     @search.merge!({ :users_count.gt => params[:users_count] }) if params.has_key?(:users_count)
 
-    puts @search.to_yaml
     all(@search)
   end
 
