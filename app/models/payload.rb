@@ -21,11 +21,13 @@ class Payload
   end
   
   def to_html
-    Snorby::Payload.new([data_payload].pack('H*'), :width => 26, :html => true).to_s.html_safe
+    return Snorby::Payload.new([data_payload].pack('H*'), :width => 26, :html => true).to_s.html_safe if data_payload
+    nil
   end
   
   def to_ascii
-    Snorby::Payload.new([data_payload].pack('H*'), :width => 26, :ascii => true, :new_lines => true).to_s.html_safe
+    return Snorby::Payload.new([data_payload].pack('H*'), :width => 26, :ascii => true, :new_lines => true).to_s.html_safe if data_payload
+    nil
   end
 
 end

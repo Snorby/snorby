@@ -1001,6 +1001,10 @@ div#note-box.error{
 
 .blank {color: #e5e5e5}
 
+.no-overflow{
+	overflow: hidden;
+}
+
 .right{
 	float: right !important;
 }

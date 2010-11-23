@@ -152,7 +152,6 @@ class DailyCache
       time_range = []
 
       range_for_type(type) do |i|
-        puts i
         time_range << "'#{i}'"
         next if count[i]
         count[i] = 0

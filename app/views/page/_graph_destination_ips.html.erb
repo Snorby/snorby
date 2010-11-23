@@ -10,6 +10,11 @@
 	      title: {
 	         text: ''
 	      },
+	      tooltip: {
+	         formatter: function() {
+	            return "<b>" + this.point.name.substring(0, 30) + "</b>... (" + this.y + " sessions)"
+	         }
+	      },
 	      plotOptions: {
 	         pie: {
 	            allowPointSelect: true,
