@@ -12,19 +12,22 @@ class PageController < ApplicationController
       @classification_metrics ||= DailyCache.yesterday.classification_metrics
     when :week
       @cache = DailyCache.this_week
-      @classification_metrics ||= @cache.yesterday.classification_metrics
+      @classification_metrics ||= @cache.this_week.classification_metrics
     when :last_week
       @cache = DailyCache.last_week
-      @classification_metrics ||= @cache.yesterday.classification_metrics
+      @classification_metrics ||= @cache.last_week.classification_metrics
     when :month
       @cache = DailyCache.this_month
-      @classification_metrics ||= @cache.yesterday.classification_metrics
+      @classification_metrics ||= @cache.this_month.classification_metrics
     when :last_month
       @cache = DailyCache.last_month
-      @classification_metrics ||= @cache.yesterday.classification_metrics
+      @classification_metrics ||= @cache.last_month.classification_metrics
+    when :quarter
+      @cache = DailyCache.this_quarter
+      @classification_metrics ||= @cache.this_quarter.classification_metrics
     when :year
       @cache = DailyCache.this_year
-      @classification_metrics ||= @cache.yesterday.classification_metrics
+      @classification_metrics ||= @cache.this_year.classification_metrics
     else
       @cache = Cache.today
     end

@@ -6,7 +6,7 @@
 
 		<%= drop_down_item "Last Week", dashboard_path(:range => :last_week), nil, { :class => 'dashboard' } %>
 		<%= drop_down_item "Last Month", dashboard_path(:range => :last_month), nil, { :class => 'dashboard' } %>
-		<%= drop_down_item "Select Range", dashboard_path(:range => params[:range]), nil, { :class => 'dashboard' } %>
+		<%= drop_down_item "Select Range", dashboard_path(:range => :quarter), nil, { :class => 'dashboard' } %>
 		
 		<%= drop_down_item "Export To PDF", dashboard_path(:range => params[:range], :format => :pdf), nil, { :class => 'dashboard' } %>
 
@@ -26,7 +26,7 @@
 				<li class='<%= "active" if params[:range] == 'yesterday' %>'><%= link_to "Yesterday", dashboard_path(:range => :yesterday) %></li>
 				<li class='<%= "active" if params[:range] == 'week' %>'><%= link_to "This Week", dashboard_path(:range => :week) %></li>
 				<li class='<%= "active" if params[:range] == 'month' %>'><%= link_to "This Month", dashboard_path(:range => :month) %></li>
-				<li class='<%= "active" if params[:range] == 'quarter' %>'><%= link_to "This Quarter", dashboard_path(:range => :month) %></li>
+				<li class='<%= "active" if params[:range] == 'quarter' %>'><%= link_to "This Quarter", dashboard_path(:range => :quarter) %></li>
 				<li class='<%= "active" if params[:range] == 'year' %>'><%= link_to "This Year", dashboard_path(:range => :year) %></li>
 				
 				<% if Snorby::Jobs.caching? %>
@@ -40,7 +40,7 @@
 					<li class='right'><i>Currently Caching <%= image_tag('icons/pager.gif', :size => '16x11') %></i></li>
 				<% else %>
 				
-					<% unless %w(yesterday week month year).include?(params[:range]) %>
+					<% unless %w(yesterday week last_week month last_month year quarter).include?(params[:range]) %>
 						<li class='right'><i>Last Updated: <%= @last_cache.strftime('%D %l:%M:%S %p') %></i></li>
 					<% end %>
 					
