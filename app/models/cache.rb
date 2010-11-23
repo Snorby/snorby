@@ -59,7 +59,7 @@ class Cache
 
   def self.protocol_count(protocol, type=nil)
     count = []
-    @cache = self.group_by { |x| x.ran_at.hour }
+    @cache = cache_for_type(self, :hour)
 
     case protocol.to_sym
     when :tcp
@@ -76,7 +76,7 @@ class Cache
       end
     end
 
-    Time.now.beginning_of_day.hour.upto(Time.now.end_of_day.hour) do |i|
+    range_for_type(:hour) do |i|
       next if count[i]
       count[i] = 0
     end
@@ -86,7 +86,7 @@ class Cache
 
   def self.severity_count(severity, type=nil)
     count = []
-    @cache = self.group_by { |x| x.ran_at.hour }
+    @cache = cache_for_type(self, :hour)
 
     case severity.to_sym
     when :high
@@ -109,11 +109,11 @@ class Cache
       end
     end
 
-    Time.now.beginning_of_day.hour.upto(Time.now.end_of_day.hour) do |i|
+    range_for_type(:hour) do |i|
       next if count[i]
       count[i] = 0
     end
-
+    
     count
   end
 
@@ -205,6 +205,55 @@ class Cache
     end
 
     @metrics
+  end
+
+  def self.cache_for_type(collection, type=:week, sensor=false)
+    case type.to_sym
+    when :week
+      return collection.group_by { |x| x.ran_at.day } unless sensor
+      return collection.all(:sid => sensor.sid).group_by { |x| x.ran_at.day }
+    when :month
+      return collection.group_by { |x| x.ran_at.day } unless sensor
+      return collection.all(:sid => sensor.sid).group_by { |x| x.ran_at.day }
+    when :year
+      return collection.group_by { |x| x.ran_at.month } unless sensor
+      return collection.all(:sid => sensor.sid).group_by { |x| x.ran_at.month }
+    when :hour
+      return collection.group_by { |x| x.ran_at.hour } unless sensor
+      return collection.all(:sid => sensor.sid).group_by { |x| x.ran_at.hour }
+    else
+      return collection.group_by { |x| x.ran_at.day } unless sensor
+      return collection.all(:sid => sensor.sid).group_by { |x| x.ran_at.day }
+    end
+  end
+  
+  def self.range_for_type(type=:week, &block)
+    
+    case type.to_sym
+    when :hour
+      Time.now.beginning_of_day.hour.upto(Time.now.end_of_day.hour) do |i|
+        block.call(i) if block
+      end
+    when :week
+      Time.now.beginning_of_week.day.upto(Time.now.end_of_week.day) do |i|
+        block.call(i) if block
+      end
+    when :month
+      Time.now.beginning_of_month.day.upto(Time.now.end_of_month.day) do |i|
+        block.call(i) if block
+      end
+    when :year
+      start_time_method = :beginning_of_year
+      end_time_method = :end_of_year
+      Time.now.beginning_of_year.month.upto(Time.now.end_of_year.month) do |i|
+        block.call(i) if block
+      end
+    else
+      Time.now.beginning_of_week.day.upto(Time.now.end_of_week.day) do |i|
+        block.call(i) if block
+      end
+    end
+    
   end
 
 end
