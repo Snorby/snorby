@@ -1,11 +1,30 @@
+<!DOCTYPE html>
 
-
-<div id="wrapper">
+<html>
 	
-	<div id="content" class='shadow container_12'>
-
-    <%= yield %>
+	<head>
 		
-	</div>
+		<%= stylesheet_link_tag 'pdf' %>
+
+		<%= yield(:header) %>
+		
+	</head>
 	
-</div>
+	<body>
+		
+		SNORBY
+		
+		<div id="wrapper">
+
+			<div id="content" class='shadow container_12'>
+
+		    <%= yield %>
+
+			</div>
+
+		</div>
+		
+		<%= yield(:footer) %>
+	</body>
+	
+</html>
