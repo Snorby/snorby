@@ -95,8 +95,12 @@ class EventsController < ApplicationController
   end
 
   def lookup
-    @lookup = Snorby::Lookup.new(params[:address])
-    render :layout => false
+    if Setting.lookups?
+      @lookup = Snorby::Lookup.new(params[:address])
+      render :layout => false
+    else
+      render :text => '<div id="note-box">This feature has be disabled</div>'.html_safe, :notice => 'This feature has be disabled'
+    end
   end
   
   def signature

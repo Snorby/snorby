@@ -16,19 +16,19 @@
 		<br />
 		
 		<p><%= f.label :name %><br />
-	  <%= f.text_field :name, :title => 'Full Name...', :class => 'required' %></p>
+	  <%= f.text_field :name, :placeholder => 'Full Name...', :class => 'required' %></p>
 
 	  <p><%= f.label :email %><br />
-	  <%= f.text_field :email, :title => 'E-mail Address...', :class => 'required email' %></p>
+	  <%= f.text_field :email, :placeholder => 'E-mail Address...', :class => 'required email' %></p>
 
 	  <p><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-	  <%= f.password_field :password %></p>
+	  <%= f.password_field :password, :placeholder => 'Password...' %></p>
 
 	  <p><%= f.label :password_confirmation %><br />
-	  <%= f.password_field :password_confirmation %></p>
+	  <%= f.password_field :password_confirmation, :placeholder => 'Password Confirmation...' %></p>
 
 	  <p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-	  <%= f.password_field :current_password, :class => 'required password' %></p>
+	  <%= f.password_field :current_password, :placeholder => 'Current Password...', :class => 'required password' %></p>
 
 	  <p>
 			<%= f.label 'Time Zone' %> <i>(please select your preferred timezone)</i><br />

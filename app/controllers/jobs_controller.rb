@@ -4,7 +4,8 @@ class JobsController < ApplicationController
 
   def index
     @jobs = Snorby::Jobs.find.all
-
+    @process = Snorby::Worker.process
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @jobs }

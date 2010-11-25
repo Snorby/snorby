@@ -1,19 +1,4 @@
-<%= title "Administrative Settings", do -%>
-
-	<% if Snorby::Worker.problems? %>
-	
-		<%= drop_down_for('Snorby Worker', 'icons/worker.png', 'worker') do %>
-		
-			<% if Snorby::Worker.running? %>
-				<%= drop_down_item "Start Sensor Cache Job", start_sensor_cache_settings_path unless Snorby::Jobs.sensor_cache? && Snorby::Worker.running? %>
-				<%= drop_down_item "Start Daily Cache Job", start_daily_cache_settings_path unless (Snorby::Jobs.daily_cache? && Snorby::Worker.running?) %>
-			<% else %>
-				<%= drop_down_item "Start Worker", start_worker_settings_path %>
-			<% end %>
-			
-		<% end %>
-	
-	<% end %>
+<%= title "General Settings", do -%>
 
 	<%= render :partial => 'settings/menu' %>
 	
@@ -21,45 +6,47 @@
 
 <div id='general-settings', class='grid_12 page boxit'>
 	
-	<h3>Snorby Worker</h3>
+	<%= form_tag '/settings', :multipart => true, :class => 'basic-form' do %>
 	
-	<% if Snorby::Worker.running? %>
+		<p>
+			<%= label_tag 'Organization Name' %><br />
+			<%= text_field_tag '[settings][organization]', (Setting.organization ? Setting.find(:organization) : nil), :placeholder => 'Organization Name...', :autocomplete => :off %>
+		</p>
 		
-		<table border="0" cellspacing="0" cellpadding="0">
-
-			<tr>
-				<th>Status</th>
-				<th class="user">user</th>
-				<th class="pid">pid</th>
-				<th class="cpu">cpu</th>
-				<th class="memory">memory</th>
-				<th class="created_at">created_at</th>
-				<th class="runtime">runtime</th>
-				<th class="command">command</th>
-			</tr>
-
-			<tbody class='content process'>
-				<td class='first'>
-					<%= worker_status %>
-				</td>
-				<td class="user"><%= @process.user %></td>
-				<td class="pid"><%= @process.pid %></td>
-				<td class="cpu"><%= @process.cpu %></td>
-				<td class="memory"><%= @process.memory %></td>
-				<td class="created_at"><%= @process.created_at %></td>
-				<td class="runtime"><%= @process.runtime %></td>
-				<td class="command last"><%= @process.command %></td>
-			</tbody>
-
-		</table>
+		<p>
+			<%= label_tag "Organization Logo: <i>(#{Setting.logo? ? (link_to 'Current Logo', Setting.find(:logo), :class => 'snorbybox') : 'Please Upload A Logo'})</i>".html_safe %><br />
+			<%= file_field_tag '[settings][logo]' %><br />
+			<br />
+		</p>
+		
+		<p>
+			<%= check_box_tag '[settings][daily]', 1, (Setting.daily ? Setting.find(:daily) : nil) %> <%= label_tag 'Enable Daily Reports' %><br />
+		</p>
+		
+		<p>
+			<%= check_box_tag '[settings][weekly]', 1, (Setting.weekly ? Setting.find(:weekly) : nil) %> <%= label_tag 'Enable Weekly Reports' %><br />
+		</p>
+		
+		<p>
+			<%= check_box_tag '[settings][monthly]', 1, (Setting.monthly ? Setting.find(:monthly) : nil) %> <%= label_tag 'Enable Monthly Reports' %><br />
+		</p>
+		
+		<p>
+			<%= check_box_tag '[settings][lookups]', 1, (Setting.lookups ? Setting.find(:lookups) : nil) %> <%= label_tag 'Allow Address Lookups' %><br />
+		</p>
+		
+		<p>
+			<%= check_box_tag '[settings][notes]', 1, Setting.find(:notes) %> <%= label_tag 'Allow Event Notes' %><br />
+			<br />
+		</p>
 	
-	<% else %>
-	
-		<div id='note-box' class='error'>
-			<%= image_tag('icons/note-icon-white.png') %>
-			The Snorby worker is not currently running. It's imperative you start the worker immediately!
-			All backend calculations are performed asynchronously using the Snorby Worker.
-		</div>
+		<%= form_actions do %>
+
+			<%= button "Save Settings", :class => 'success' %>
+
+			<%= button "Cancel", :class => 'warning cancel' %>
+
+		<% end %>
 	
 	<% end %>
 	

@@ -4,10 +4,10 @@
 	
 	<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'validate'}) do |f| %>
 	  <p><%= f.label :email %><br />
-	  <%= f.text_field :email, :title => 'E-mail...', :autocomplete => :off, :class => 'required email' %></p>
+	  <%= f.text_field :email, :placeholder => 'E-mail...', :autocomplete => :off, :class => 'required email' %></p>
 
 	  <p><%= f.label :password %><br />
-	  <%= f.password_field :password, :title => 'Password...', :autocomplete => :off, :class => 'required password' %></p>
+	  <%= f.password_field :password, :placeholder => 'Password...', :autocomplete => :off, :class => 'required password' %></p>
 
 	  <% if devise_mapping.rememberable? -%>
 	    <p><%= f.check_box :remember_me %> <%= f.label :remember_me %></p>

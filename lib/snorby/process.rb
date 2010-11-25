@@ -25,11 +25,11 @@ module Snorby
     end
 
     def cpu
-      "#{@raw[2]}%"
+      "#{@raw[2]}"
     end
 
     def memory
-      "#{@raw[3]}%"
+      "#{@raw[3]}"
     end
 
     def vsv

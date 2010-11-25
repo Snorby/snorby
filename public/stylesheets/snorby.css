@@ -1002,12 +1002,36 @@ div#note-box.error{
 
 /* @group Helpers */
 
+form.validate{
+	
+}
+
+form.validate textarea{
+	height: 140px;
+	width: 600px;
+	padding: 5px;
+}
+
 #snorbybox-holder{
 	position: relative;
 	display: block;
 	height: 700px;
 	overflow: auto;
 	width: 1015px;
+}
+
+h3{
+	font-size: 1.3em;
+	color: #5188e7;
+	margin-bottom: 5px;
+	display: block;
+	position: relative;
+	overflow: hidden;
+	font-weight: bold;
+	text-decoration: none;
+	font-variant: normal;
+	text-transform: lowercase;
+	text-align: left;
 }
 
 .blur {color: #bdbdbd}
@@ -2109,6 +2133,15 @@ span.payload-ascii{
 
 /* @group Input */
 
+form.basic-form{
+	
+}
+
+form.basic-form p{
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
 label.error{
 	display: none;
 	visibility: hidden;
@@ -2934,3 +2967,6 @@ div.dashboard-graph{
 }
 
 /* @end */
+
+
+

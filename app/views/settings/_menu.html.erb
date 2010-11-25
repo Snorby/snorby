@@ -1,8 +1,24 @@
+<% if Snorby::Worker.problems? %>
+
+	<%= drop_down_for('Snorby Worker', 'icons/worker.png', 'worker') do %>
+	
+		<% if Snorby::Worker.running? %>
+			<%= drop_down_item "Start Sensor Cache Job", start_sensor_cache_settings_path unless Snorby::Jobs.sensor_cache? && Snorby::Worker.running? %>
+			<%= drop_down_item "Start Daily Cache Job", start_daily_cache_settings_path unless (Snorby::Jobs.daily_cache? && Snorby::Worker.running?) %>
+		<% else %>
+			<%= drop_down_item "Start Worker", start_worker_settings_path %>
+		<% end %>
+		
+	<% end %>
+
+<% end %>
+
 <%= drop_down_for('Administrator Menu', 'icons/admin.png', 'admin') do %>
-	<%= drop_down_item "Severities", severities_path %>
-	<%= drop_down_item "Classifications", classifications_path %>
-	<%= drop_down_item "Users", users_path %>
-	<%= drop_down_item "Sensors", sensors_path %>
-	<%= drop_down_item "Job Queue", jobs_path %>
 	<%= drop_down_item "General Settings", settings_path %>
+	
+	<%= drop_down_item "Classifications", classifications_path %>
+	<%= drop_down_item "Sensors", sensors_path %>
+	<%= drop_down_item "Severities", severities_path %>
+	<%= drop_down_item "Users", users_path %>
+	<%= drop_down_item "Worker & Job Queue", jobs_path %>
 <% end %>

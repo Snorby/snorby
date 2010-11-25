@@ -167,6 +167,7 @@ var Snorby = {
 				$(this).parent('li').addClass('active');
 				$('div.dashboard-graph').hide();
 				$('div#events-graph').show();
+				return false;
 			});
 			
 			$('a.show_severities_graph').live('click', function(e) {
@@ -175,6 +176,7 @@ var Snorby = {
 				$(this).parent('li').addClass('active');
 				$('div.dashboard-graph').hide();
 				$('div#severity-graph').show();
+				return false;
 			});
 			
 			$('a.show_protocol_graph').live('click', function(e) {
@@ -183,6 +185,7 @@ var Snorby = {
 				$(this).parent('li').addClass('active');
 				$('div.dashboard-graph').hide();
 				$('div#protocol-graph').show();
+				return false;
 			});
 			
 			$('a.show_signature_graph').live('click', function(e) {
@@ -191,6 +194,7 @@ var Snorby = {
 				$(this).parent('li').addClass('active');
 				$('div.dashboard-graph').hide();
 				$('div#signature-graph').show();
+				return false;
 			});
 			
 			$('a.show_classification_graph').live('click', function(e) {
@@ -199,6 +203,7 @@ var Snorby = {
 				$(this).parent('li').addClass('active');
 				$('div.dashboard-graph').hide();
 				$('div#classification-graph').show();
+				return false;
 			});
 			
 			$('a.show_source_ips_graph').live('click', function(e) {
@@ -207,6 +212,7 @@ var Snorby = {
 				$(this).parent('li').addClass('active');
 				$('div.dashboard-graph').hide();
 				$('div#source-ips-graph').show();
+				return false;
 			});
 			
 			$('a.show_destination_ips_graph').live('click', function(e) {
@@ -215,6 +221,7 @@ var Snorby = {
 				$(this).parent('li').addClass('active');
 				$('div.dashboard-graph').hide();
 				$('div#destination-ips-graph').show();
+				return false;
 			});
 			
 		},
@@ -223,12 +230,18 @@ var Snorby = {
 			
 			$('ul.payload-tabs li a').live('click', function(e) {
 				e.preventDefault();
+				
 				var div_class = $(this).attr('data-div');
 				
 				$(this).parents('ul').find('li').removeClass('current');
 				$(this).parent('li').addClass('current');
 				$('div.payload-holder').hide();
+				
+				$('div.'+div_class+' pre').css('opacity', 0);
+				
 				$('div.'+div_class).show();
+				
+				$('div.'+div_class+' pre').stop().animate({"opacity": 1}, 1000);
 				
 				return false;
 			});
@@ -541,8 +554,7 @@ var Snorby = {
 				window.location = '/';
 				return false;
 			});
-
-			$('input').hint();
+			
 			$('input[name=blank]').focus();
 
 		},

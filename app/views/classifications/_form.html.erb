@@ -5,12 +5,12 @@
 	
 		<p>
 			<%= f.label 'Classification Name' %><br />
-	  	<%= f.text_field :name, :class => 'required', :autocomplete => :off %>
+	  	<%= f.text_field :name, :class => 'required', :placeholder => 'Name...', :autocomplete => :off %>
 		</p>
 		
 		<p>
 			<%= f.label 'Classification Description' %><br />
-	  	<%= f.text_area :description, :class => 'required', :autocomplete => :off %>
+	  	<%= f.text_area :description, :class => 'required', :placeholder => 'Description...', :autocomplete => :off %>
 		</p>
 	
 		<%= form_actions do %>

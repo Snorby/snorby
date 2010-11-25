@@ -12,12 +12,12 @@
 	
 		<p>
 			<%= f.label 'Severity Name' %><br />
-	  	<%= f.text_field :name, :class => 'required', :autocomplete => :off %>
+	  	<%= f.text_field :name, :class => 'required', :placeholder => 'Name...', :autocomplete => :off %>
 		</p>
 		
 		<p>
 			<%= f.label 'Severity Priority' %> <i>(The priority of the ids event you want to represent)</i><br />
-	  	<%= f.text_field :sig_id, :class => 'required number', :autocomplete => :off %>
+	  	<%= f.text_field :sig_id, :class => 'required number', :placeholder => 'Priority...', :autocomplete => :off %>
 		</p>
 		
 		<p>
@@ -29,12 +29,12 @@
 		
 		<p>
 			<%= f.label 'Severity Background' %><br />
-	  	<%= f.text_field :bg_color, :class => 'required hex-color', :id => 'severity-color-bg', :autocomplete => :off %>
+	  	<%= f.text_field :bg_color, :class => 'required hex-color', :id => 'severity-color-bg', :placeholder => 'Background Color...', :autocomplete => :off %>
 		</p>
 		
 		<p>
 			<%= f.label 'Severity Text' %><br />
-	  	<%= f.text_field :text_color, :class => 'required hex-color', :id => 'severity-color-text', :autocomplete => :off %>
+	  	<%= f.text_field :text_color, :class => 'required hex-color', :id => 'severity-color-text', :placeholder => 'Text Color...', :autocomplete => :off %>
 		</p>
 	
 		<%= form_actions do %>

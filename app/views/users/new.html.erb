@@ -17,16 +17,16 @@
 		<br />
 		
 		<p><%= f.label :name %><br />
-	  <%= f.text_field :name, :title => 'Full Name...', :class => 'required' %></p>
+	  <%= f.text_field :name, :placeholder => 'Full Name...', :autocomplete => :off, :class => 'required' %></p>
 
 	  <p><%= f.label :email %><br />
-	  <%= f.text_field :email, :title => 'E-mail Address...', :class => 'required email' %></p>
+	  <%= f.text_field :email, :placeholder => 'Email...', :autocomplete => :off, :class => 'required email' %></p>
 
 	  <p><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-	  <%= f.password_field :password, :class => 'required' %></p>
+	  <%= f.password_field :password, :class => 'required', :placeholder => 'Password...', :autocomplete => :off %></p>
 
 	  <p><%= f.label :password_confirmation %><br />
-	  <%= f.password_field :password_confirmation, :class => 'required' %></p>
+	  <%= f.password_field :password_confirmation, :class => 'required', :placeholder => 'Password Confirmation...', :autocomplete => :off %></p>
 
 	  <p>
 			<%= f.label 'Time Zone' %> <i>(please select your preferred timezone)</i><br />

@@ -15,12 +15,11 @@ class NotesController < ApplicationController
   end
   
   def create
-    @note = @event.notes.create({
-      :user => @user,
-      :body => params[:body]
-    })
-    if @note.save
-    else
+    if Setting.notes?
+      @note = @event.notes.create({ :user => @user, :body => params[:body] })
+      if @note.save
+      else
+      end
     end
   end
   
