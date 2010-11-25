@@ -1,11 +1,16 @@
 <%= title "Administrative Settings", do -%>
 
-	<% if Snorby::Worker.running? && !Snorby::Jobs.sensor_cache? || !Snorby::Jobs.daily_cache? %>
-
+	<% if Snorby::Worker.problems? %>
+	
 		<%= drop_down_for('Snorby Worker', 'icons/worker.png', 'worker') do %>
-			<%= drop_down_item "Start Worker", start_worker_settings_path unless Snorby::Worker.running? %>
-			<%= drop_down_item "Start Sensor Cache Job", start_sensor_cache_settings_path unless Snorby::Jobs.sensor_cache? && Snorby::Worker.running? %>
-			<%= drop_down_item "Start Daily Cache Job", start_daily_cache_settings_path unless (Snorby::Jobs.daily_cache? && Snorby::Worker.running?) %>
+		
+			<% if Snorby::Worker.running? %>
+				<%= drop_down_item "Start Sensor Cache Job", start_sensor_cache_settings_path unless Snorby::Jobs.sensor_cache? && Snorby::Worker.running? %>
+				<%= drop_down_item "Start Daily Cache Job", start_daily_cache_settings_path unless (Snorby::Jobs.daily_cache? && Snorby::Worker.running?) %>
+			<% else %>
+				<%= drop_down_item "Start Worker", start_worker_settings_path %>
+			<% end %>
+			
 		<% end %>
 	
 	<% end %>

@@ -46,6 +46,10 @@
 						<li class='administration right'><%= link_to "Administration", settings_path %></li>
 					<% end %>
 					
+					<% unless Snorby::Worker.running? %>
+						<li class='menu-error right'><%= image_tag('icons/note-icon-white.png') %>The Snorby worker is not currently running.</li>
+					<% end %>
+					
 				<% end %>
 				
 			</ul>

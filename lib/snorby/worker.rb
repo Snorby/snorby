@@ -39,6 +39,11 @@ module Snorby
       
     end
 
+    def self.problems?
+      return true if (!Snorby::Worker.running? || !Snorby::Jobs.sensor_cache? || !Snorby::Jobs.daily_cache?)
+      false
+    end
+
     def self.process
       return Snorby::Process.new(`ps aux #{Worker.pid} |grep delayed_job |grep -v grep`.chomp.strip)
     end

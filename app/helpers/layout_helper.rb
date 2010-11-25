@@ -8,7 +8,8 @@ module LayoutHelper
     content_for(:header) { stylesheet_link_tag(*args) }
   end
 
-  def javascript(*args)
+  def javascript(placement=false, *args)
+    return content_for(placement.to_sym) { javascript_include_tag(*args) } if placement
     content_for(:header) { javascript_include_tag(*args) }
   end
   

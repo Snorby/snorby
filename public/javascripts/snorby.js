@@ -221,6 +221,19 @@ var Snorby = {
 		
 		events: function(){
 			
+			$('ul.payload-tabs li a').live('click', function(e) {
+				e.preventDefault();
+				var div_class = $(this).attr('data-div');
+				
+				$(this).parents('ul').find('li').removeClass('current');
+				$(this).parent('li').addClass('current');
+				$('div.payload-holder').hide();
+				$('div.'+div_class).show();
+				
+				return false;
+			});
+			
+			
 			$('a.export').live('click', function(e) {
 				e.preventDefault();
 				var selected_events = $('input#selected_events').attr('value');

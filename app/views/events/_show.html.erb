@@ -9,18 +9,27 @@
 			<%= render :partial => 'events/tcp' %>
 		<% elsif @event.udp? %>
 			<%= render :partial => 'events/udp' %>
-		<% else %>
+		<% elsif @event.icmp? %>
 			<%= render :partial => 'events/icmp' %>
+		<% else %>
+			
 		<% end %>
 		
-		<div class='section-title plus'>Payload</div>
-		
 		<% if @event.payload %>
-			<div class='payload-ascii plus' style=''><pre><%= @event.payload.to_ascii %></pre></div>
+		
+			<ul class='payload-tabs plus-side'>
+				<div id="tab-title">Payload</div>
+				<li class='round_top'><%= link_to "Ascii", '', :"data-div" => 'payload-ascii' %></li>
+				<li class='current round_top'><%= link_to "Hex", '', :"data-div" => 'payload' %></li>
+			</ul>
+		
+			<div class='payload-ascii plus-side payload-holder' style='display:none'><pre><%= @event.payload.to_ascii %></pre></div>
 
-			<div class='payload plus'><pre><%= @event.payload.to_html %></pre></div>
+			<div class='payload plus-side payload-holder'><pre><%= @event.payload.to_html %></pre></div>
 			
 		<% else %>
+		
+			<div class='section-title plus-side bottom-none'>Payload</div>
 		
 			<div class='payload plus no-overflow' style='padding:10px;overflow: hidden;'>No Payload Data Available</div>
 		

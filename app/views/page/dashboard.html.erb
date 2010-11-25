@@ -1,4 +1,4 @@
-<% javascript 'sparkline', 'highcharts' %>
+<% javascript :footer, 'sparkline', 'highcharts' %>
 
 <%= title "Dashboard" do %>
 
@@ -53,8 +53,6 @@
 		<div id='box-holder'>
 			<%= render 'severity_dashboard.html.erb' %>
 		</div>
-		
-		<%# render 'proto_dashboard.html.erb' %>
 		
 		<div id="box-tabs">
 

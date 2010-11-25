@@ -1,0 +1,13 @@
+server {
+   listen 80;
+   server_name www.snorby.org;
+   root /var/www/apps/lookycode/current/public;
+   passenger_enabled on;
+}
+
+server {
+   listen 80;
+   server_name www.orkaoilandgas.org;
+   root /var/www/apps/orka/current/public;
+   passenger_enabled on;
+}

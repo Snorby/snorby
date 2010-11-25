@@ -658,11 +658,24 @@ div#note-box.error{
 	border-left: 1px solid #313131;
 }
 
+#header #header-inside #menu ul li.menu-error{
+	border-style: none;
+	color: #e3e7e7;
+}
+
+#header #header-inside #menu ul li.menu-error img{
+	vertical-align: middle;
+	margin-right: 5px;
+	margin-top: -5px;
+}
+
+
 #header #header-inside #menu ul li.administration{
 	background: transparent url(../images/header/admin-button.png) no-repeat 0 top;
 	color: #e3e3e3;
 	width: 124px;
-	border-style: none; !important
+	border-style: none;
+	margin-left: 10px;
 }
 #header #header-inside #menu ul li.administration:hover{
 	background: transparent url(../images/header/admin-button.png) no-repeat 0 bottom;
@@ -1524,11 +1537,18 @@ ul.table div.content div.event-data div.event-data-holder div.event-data-holder-
 	padding: 5px;
 }
 
-ul.table div.content div.event-data div.event-data-holder div.event-data-holder-inside div.plus{
+ul.table div.content div.event-data div.event-data-holder div.event-data-holder-inside .plus{
 	margin: 10px;
 	display: block;
 	position: relative;
 	overflow: hidden;
+}
+
+ul.table div.content div.event-data div.event-data-holder div.event-data-holder-inside .plus-side{
+	display: block;
+	position: relative;
+	overflow: hidden;
+	margin: 0 10px;
 }
 
 ul.table div.content div.event-data div.event-data-holder .section-title{
@@ -1542,16 +1562,60 @@ ul.table div.content div.event-data div.event-data-holder .section-title{
 	text-shadow: #000 0 1px 0;
 }
 
-ul.table div.content div.event-data div.event-data-holder div.event-data-holder-inside div.ip{
-	
+ul.table div.content div.event-data div.event-data-holder ul div#tab-title{
+	font-size: 1.2em;
+	color: #fffbfe;
+	font-weight: bold;
+	text-decoration: none;
+	font-variant: normal;
+	text-shadow: #000 0 1px 0;
+	float: left;
 }
 
-ul.table div.content div.event-data div.event-data-holder div.event-data-holder-inside div.proto{
-	
+ul.table div.content div.event-data div.event-data-holder .section-title.bottom-none{
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+}
+
+ul.table div.content div.event-data div.event-data-holder div.event-data-holder-inside ul.payload-tabs{
+	display: block;
+	position: relative;
+	overflow: hidden;
+	margin-top: 10px;
+}
+
+ul.table div.content div.event-data div.event-data-holder div.event-data-holder-inside ul.payload-tabs li{
+	float: right;
+	height: 25px;
+	line-height: 25px;
+	margin-right: 5px;
+	background-color: #6e7172;	
+}
+
+ul.table div.content div.event-data div.event-data-holder div.event-data-holder-inside ul.payload-tabs li.current{
+	background-color: #47494a;
+}
+
+ul.table div.content div.event-data div.event-data-holder div.event-data-holder-inside ul.payload-tabs li a{
+	font-weight: normal;
+	text-decoration: none;
+	font-variant: normal;
+	padding: 3px 10px;
+	color: #bdc1c3;
+	font-style: normal;
+	font-size: 0.9em;
+}
+
+ul.table div.content div.event-data div.event-data-holder div.event-data-holder-inside ul.payload-tabs li.current a{
+	color: #fff;
 }
 
 ul.table div.content div.event-data div.event-data-holder div.event-data-holder-inside div.payload-ascii{
 	padding: 5px;
+}
+
+ul.table div.content div.event-data div.event-data-holder div.event-data-holder-inside div.payload-holder{
+	margin-bottom: 12px;
 }
 
 ul.table div.content div.event-data div.event-data-holder div.event-data-holder-inside div.payload-ascii,
@@ -1577,13 +1641,13 @@ ul.table div.content div.event-data div.event-data-holder div.event-data-holder-
 }
 
 ul.table div.content div.event-data div.event-data-holder div.event-data-holder-inside div.payload pre{
-	padding: 10px;
 	border: 1px solid #fff;
 	line-height: 14px;
 	font-variant: normal;
 	text-decoration: none;
 	font-weight: normal;
 	font-style: normal;
+	padding: 10px 10px 0;
 }
 
 ul.table div.content div.event-data div.event-data-holder div.event-data-holder-inside div.notes{
