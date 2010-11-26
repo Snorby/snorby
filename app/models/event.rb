@@ -55,6 +55,14 @@ class Event
     self.signature.down(:events_count) if self.signature
     # Note: Need to decrement Severity, Sensor and User Counts
   end
+  
+  def self.limit(limit=25)
+    all(:limit => limit)
+  end
+  
+  def self.order(column=:timestamp, order=:desc)
+    all(:order => column.to_sym.send(order.to_sym))
+  end
 
   def to_param
     "#{sid},#{cid}"
@@ -292,6 +300,8 @@ class Event
     @search.merge!({ :classification_id => params[:classification_id] }) unless params[:classification_id].to_i.zero?
 
     @search.merge!({ :"ip.ip_src" => IPAddr.new("#{params[:ip_src]}") }) unless (params[:ip_src] == "") || !params.has_key?(:ip_src)
+    
+    @search.merge!({ :"ip.ip_dst" => IPAddr.new("#{params[:ip_dst]}") }) unless (params[:ip_dst] == "") || !params.has_key?(:ip_dst)
     
     @search.merge!({ :notes_count.gt => params[:notes_count] }) if params.has_key?(:notes_count)
     

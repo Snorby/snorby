@@ -7,24 +7,30 @@
 		<div id='search-box'>
 			
 			<div class='grid_4 alpha'>
-				<%= label_tag 'Sensor' %>
-				<%= select_tag '[search][sid]', dropdown_select_tag(Sensor.all, :sid, true) %>
-			</div>
-			
-			<div class='grid_4 alpha'>
-				<%= select_tag '[search][classification_id]', dropdown_select_tag(Classification.all, :id, true, ["<option value='null'>Unclassified</option>"]) %>
-			</div>
-			
-			<div class='grid_4 alpha'>
-				<%= select_tag '[search][severity]', dropdown_select_tag(Severity.all, :sig_id, true) %>
-			</div>
-			
-			<div class='grid_4 alpha'>
 				<%= text_field_tag '[search][signature_name]', params[:signature_name], :placeholder => 'Signature Name' %>
 			</div>
 			
 			<div class='grid_4 alpha'>
 				<%= text_field_tag '[search][ip_src]', params[:ip_src], :placeholder => 'Source Address' %>
+			</div>
+			
+			<div class='grid_4 alpha'>
+				<%= text_field_tag '[search][ip_dst]', params[:ip_dst], :placeholder => 'Destination Address' %>
+			</div>
+			
+			<div class='grid_4 alpha'>
+				<%= label_tag 'Sensor' %><br />
+				<%= select_tag '[search][sid]', dropdown_select_tag(Sensor.all, :sid, true) %>
+			</div>
+			
+			<div class='grid_4 alpha'>
+				<%= label_tag 'Classification' %><br />
+				<%= select_tag '[search][classification_id]', dropdown_select_tag(Classification.all, :id, true, ["<option value='null'>Unclassified</option>"]) %>
+			</div>
+			
+			<div class='grid_4 alpha'>
+				<%= label_tag 'Severity' %><br />
+				<%= select_tag '[search][severity]', dropdown_select_tag(Severity.all, :sig_id, true) %>
 			</div>
 			
 		</div>

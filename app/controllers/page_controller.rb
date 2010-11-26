@@ -72,7 +72,8 @@ class PageController < ApplicationController
   end
   
   def results
-    @events = Event.search(params[:search]).page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:timestamp.desc])
+    limit = params[:limit].to_i.zero? ? @current_user.per_page_count : params[:limit].to_i
+    @events = Event.search(params[:search]).page(params[:page].to_i, :per_page => limit, :order => [:timestamp.desc])
     @classifications ||= Classification.all
   end
 

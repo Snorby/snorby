@@ -1111,6 +1111,7 @@ h3{
   display: inline;
 }
 
+#error_explanation,
 .error_messages {
   width: 400px;
   border: 2px solid #CF0000;
@@ -2147,6 +2148,7 @@ form.basic-form label{
 	color: #4a4a4a;
 }
 
+form.basic-form input[type='password'],
 form.basic-form input[type='text']{
 	width: 300px;
 	padding: 7px;
@@ -2171,10 +2173,10 @@ i{
 }
 
 #form-actions{
-	margin-top: 10px;
 	margin-bottom: 10px;
 	display: block;
 	position: relative;
+	margin-top: 10px;
 }
 
 input[type='password'],
@@ -2615,6 +2617,62 @@ img.avatar-small{
 	position: relative;
 	display: block;
 	overflow: hidden;
+	margin-bottom: 10px;
+	color: #686868;
+	font-weight: normal;
+	font-style: normal;
+	text-decoration: none;
+	font-variant: normal;
+}
+
+#settings .user-show-avatar strong{
+	color: #141414;
+	font-weight: bold;
+	text-decoration: none;
+	font-variant: normal;
+}
+
+#settings .user-show-avatar p{
+	margin: 0 0 7px;
+	padding: 0;
+}
+
+#settings ul#user-info{
+	display: block;
+	position: relative;
+	overflow: hidden;
+	background-color: #ededed;
+	border: 3px solid #ededed;
+}
+
+#settings ul#user-info .inside{
+	padding: 10px;
+	display: block;
+	position: relative;
+	overflow: hidden;
+	background: #fff;
+	border: 1px solid #dcdcdc;
+}
+
+#settings ul#user-info li{
+	height: 25px;
+	line-height: 25px;
+	border-bottom: 1px solid #eeeeee;
+}
+
+#settings ul#user-info li strong{
+	color: #a1a1a1;
+	font-weight: normal;
+	font-style: normal;
+	text-decoration: none;
+	font-variant: normal;
+	width: 120px;
+	display: block;
+	position: relative;
+	overflow: hidden;
+	float: left;
+	text-align: left;
+	margin-right: 10px;
 }
 
 #settings .user-show-avatar img{
