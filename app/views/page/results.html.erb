@@ -1,7 +1,15 @@
-<%= title "Search Results <i>#{pluralize(@events.pager.total, 'event')} found</i>".html_safe, 'Search Results' do %>
-
-	<%= render :partial => 'events/menu' %>
-
+<% if params[:title] %>
+	
+	<%= title "#{params[:title]} <i>#{pluralize(@events.pager.total, 'event')} found</i>".html_safe, "#{params[:title]}" do %>
+		<%= render :partial => 'events/menu' %>
+	<% end %>
+	
+<% else %>
+	
+	<%= title "Search Results <i>#{pluralize(@events.pager.total, 'event')} found</i>".html_safe, 'Search Results' do %>
+		<%= render :partial => 'events/menu' %>
+	<% end %>
+	
 <% end %>
 
 <%= render :partial => 'page/events' %>

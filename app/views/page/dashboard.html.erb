@@ -22,10 +22,15 @@
 			<ul>
 				
 				<li class='<%= "active" if params[:range] == 'today' %>'><%= link_to "Today", dashboard_path(:range => :today) %></li>
+				
 				<li class='<%= "active" if params[:range] == 'yesterday' %>'><%= link_to "Yesterday", dashboard_path(:range => :yesterday) %></li>
+				
 				<li class='<%= "active" if params[:range] == 'week' %>'><%= link_to "This Week", dashboard_path(:range => :week) %></li>
+				
 				<li class='<%= "active" if params[:range] == 'month' %>'><%= link_to "This Month", dashboard_path(:range => :month) %></li>
+				
 				<li class='<%= "active" if params[:range] == 'quarter' %>'><%= link_to "This Quarter", dashboard_path(:range => :quarter) %></li>
+				
 				<li class='<%= "active" if params[:range] == 'year' %>'><%= link_to "This Year", dashboard_path(:range => :year) %></li>
 				
 				<% if Snorby::Jobs.caching? %>
@@ -84,7 +89,7 @@
 		
 		<ul class='box-list'>
 			<% @sensors.each do |sensor| %>
-			<li><%= link_to truncate(sensor.name, :length => 30), sensor_events_path(:sensor => sensor.sid) %> <span><%= sensor.events_count %></span></li>
+			<li><%= link_to truncate(sensor.sensor_name, :length => 30), results_path(:title => "#{sensor.sensor_name}", :search => { :sid => sensor.sid }) %> <span><%= sensor.events_count %></span></li>
 			<% end %>
 		</ul>
 	
@@ -108,7 +113,7 @@
 		
 		<ul class='box-list'>
 			<% @recent_events.each do |event| %>
-				<li><%= link_to truncate(event.signature.name, :length => 25), "/events/show/#{event.sid}/#{event.cid}", :class => 'snorbybox' %> <span><%= event.signature.events_count %></span></li>
+				<li><%= link_to truncate(event.signature.name, :length => 25), results_path(:title => "#{event.signature.name}", :search => {:signature_name => "#{event.signature.name}"}) %> <span><%= event.signature.events_count %></span></li>
 			<% end %>
 		</ul>
 	
@@ -119,7 +124,7 @@
 		<ul class='box-list'>
 			<% @classifications.each do |classification| %>
 			
-			<li><%= link_to truncate(classification.name, :length => 25), classification_events_path(:classification => classification.id) %> <span><%= classification.events_count %></span></li>
+			<li><%= link_to truncate(classification.name, :length => 25), results_path(:title => "#{classification.name}", :search => {:classification_id => "#{classification.id}"}) %> <span><%= classification.events_count %></span></li>
 			<% end %>
 		</ul>
 	

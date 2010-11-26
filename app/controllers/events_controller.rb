@@ -103,18 +103,6 @@ class EventsController < ApplicationController
     end
   end
   
-  def signature
-    @events = Event.all(:sig_id => params[:signature])
-  end
-  
-  def classification
-    @events = Event.all(:classification_id => params[:classification])
-  end
-  
-  def sensor
-    @events = Event.all(:sid => params[:sensor])
-  end
-  
   def activity
     @user = User.get(params[:user_id])
     @events = @user.events

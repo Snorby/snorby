@@ -291,7 +291,7 @@ class Event
 
     @search.merge!({ :classification_id => params[:classification_id] }) unless params[:classification_id].to_i.zero?
 
-    @search.merge!({ :"ip.ip_src" => IPAddr.new("#{params[:ip_src]}") }) unless params[:ip_src] == ""
+    @search.merge!({ :"ip.ip_src" => IPAddr.new("#{params[:ip_src]}") }) unless (params[:ip_src] == "") || !params.has_key?(:ip_src)
     
     @search.merge!({ :notes_count.gt => params[:notes_count] }) if params.has_key?(:notes_count)
     

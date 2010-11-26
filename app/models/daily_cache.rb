@@ -84,7 +84,6 @@ class DailyCache
     when :tcp
       @cache.each do |day, data|
         count[day] = data.map(&:tcp_count).sum
-        puts data.map(&:tcp_count).sum
       end
     when :udp
       @cache.each do |day, data|
