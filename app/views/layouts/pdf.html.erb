@@ -12,7 +12,13 @@
 	
 	<body>
 		
-		SNORBY
+		<div id='header'>
+			
+			<% if Setting.logo? %>
+			 <%= image_tag(Setting.find(:logo), :size => '800x90') %>
+			<% end %>
+			
+		</div>
 		
 		<div id="wrapper">
 
