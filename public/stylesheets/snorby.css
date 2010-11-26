@@ -1006,6 +1006,12 @@ form.validate{
 	
 }
 
+#form-holder{
+	display: block;
+	position: relative;
+	overflow: hidden;
+}
+
 form.validate textarea{
 	height: 140px;
 	width: 600px;
@@ -2137,9 +2143,18 @@ form.basic-form{
 	
 }
 
+form.basic-form label{
+	color: #4a4a4a;
+}
+
+form.basic-form input[type='text']{
+	width: 300px;
+	padding: 7px;
+}
+
 form.basic-form p{
-	margin-top: 5px;
-	margin-bottom: 5px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 label.error{

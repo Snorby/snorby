@@ -8,45 +8,70 @@
 	
 	<%= form_tag '/settings', :multipart => true, :class => 'basic-form' do %>
 	
-		<p>
-			<%= label_tag 'Organization Name' %><br />
-			<%= text_field_tag '[settings][organization]', (Setting.organization ? Setting.find(:organization) : nil), :placeholder => 'Organization Name...', :autocomplete => :off %>
-		</p>
-		
-		<p>
-			<%= label_tag "Organization Logo: <i>(#{Setting.logo? ? (link_to 'Current Logo', Setting.find(:logo), :class => 'snorbybox') : 'Please Upload A Logo'})</i>".html_safe %><br />
-			<%= file_field_tag '[settings][logo]' %><br />
-			<br />
-		</p>
-		
-		<p>
-			<%= check_box_tag '[settings][daily]', 1, (Setting.daily ? Setting.find(:daily) : nil) %> <%= label_tag 'Enable Daily Reports' %><br />
-		</p>
-		
-		<p>
-			<%= check_box_tag '[settings][weekly]', 1, (Setting.weekly ? Setting.find(:weekly) : nil) %> <%= label_tag 'Enable Weekly Reports' %><br />
-		</p>
-		
-		<p>
-			<%= check_box_tag '[settings][monthly]', 1, (Setting.monthly ? Setting.find(:monthly) : nil) %> <%= label_tag 'Enable Monthly Reports' %><br />
-		</p>
-		
-		<p>
-			<%= check_box_tag '[settings][lookups]', 1, (Setting.lookups ? Setting.find(:lookups) : nil) %> <%= label_tag 'Allow Address Lookups' %><br />
-		</p>
-		
-		<p>
-			<%= check_box_tag '[settings][notes]', 1, Setting.find(:notes) %> <%= label_tag 'Allow Event Notes' %><br />
-			<br />
-		</p>
 	
-		<%= form_actions do %>
+	<div id='form-holder'>
+		
+		<div class='grid_6'>
+			<p>
+				<%= label_tag 'Organization Name' %><br />
+				<%= text_field_tag '[settings][organization]', (Setting.organization ? Setting.find(:organization) : nil), :placeholder => 'Organization Name...', :autocomplete => :off %>
+			</p>
 
-			<%= button "Save Settings", :class => 'success' %>
+			<p>
+				<%= label_tag 'Organization Email' %><br />
+				<%= text_field_tag '[settings][organization_email]', (Setting.organization_email ? Setting.find(:organization_email) : nil), :placeholder => 'Organization Email...', :autocomplete => :off %>
+			</p>
 
-			<%= button "Cancel", :class => 'warning cancel' %>
+			<p>
+				<%= label_tag "Organization Logo: <i>(#{Setting.logo? ? (link_to 'Click to view current logo', Setting.find(:logo), :class => 'snorbybox') : 'Please Upload A Logo'})</i>".html_safe %><br />
+				<br />
+				<%= file_field_tag '[settings][logo]' %><br />
+				<br />
+			</p>
 
-		<% end %>
+
+		</div>
+
+		<div class='grid_5'>
+
+			<p>
+				<%= check_box_tag '[settings][daily]', 1, (Setting.daily ? Setting.find(:daily) : nil) %> <%= label_tag 'Enable Daily Reports' %><br />
+				<i>(Send a report summarizing the captured traffic daily.)</i><br />
+			</p>
+
+			<p>
+				<%= check_box_tag '[settings][weekly]', 1, (Setting.weekly ? Setting.find(:weekly) : nil) %> <%= label_tag 'Enable Weekly Reports' %><br />
+				<i>(Send a report summarizing the captured traffic weekly)</i><br />
+			</p>
+
+			<p>
+				<%= check_box_tag '[settings][monthly]', 1, (Setting.monthly ? Setting.find(:monthly) : nil) %> <%= label_tag 'Enable Monthly Reports' %><br />
+				<i>(Send a report summarizing the captured traffic monthly)</i><br />
+			</p>
+
+			<p>
+				<%= check_box_tag '[settings][lookups]', 1, (Setting.lookups ? Setting.find(:lookups) : nil) %> <%= label_tag 'Allow Address Lookups' %><br />
+				<i>(This options enables the analyst to perform basic queries on source & destination addresses using external sources.)</i><br />
+			</p>
+
+			<p>
+				<%= check_box_tag '[settings][notes]', 1, Setting.find(:notes) %> <%= label_tag 'Allow Event Notes' %><br />
+				<i>(Allow analysts to apply notes to events)</i><br />
+				<br/>
+			</p>
+
+		</div>
+		
+	</div>	
+	
+	<%= form_actions do %>
+
+		<%= button "Save Settings", :class => 'success' %>
+
+		<%= button "Cancel", :class => 'warning cancel' %>
+
+	<% end %>
+		
 	
 	<% end %>
 	
