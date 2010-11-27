@@ -5,11 +5,16 @@ SnortSchema.create(:vseq => 107, :ctime => Time.now, :version => "Snorby #{Snorb
 User.create(:name => 'Administrator', :email => 'snorby@snorby.org', :password => 'snorby', :password_confirmation => 'snorby', :admin => true) if User.all.blank?
 
 # Snorby General Settings
-settings = %w(company email daily weekly monthly lookups notes logo)
+settings = %w(company email signature_lookup daily weekly monthly lookups notes logo)
 
-settings.each do |name|
-  Setting.set(name.to_sym, '') unless Setting.find(name.to_sym)
-end
+Setting.set(:company, 'Snorby.org') unless Setting.company?
+Setting.set(:email, 'snorby@snorby.org') unless Setting.email?
+Setting.set(:signature_lookup, 'http://www.snortid.com/snortid.asp?QueryId=$$gid$$:$$sid$$') unless Setting.signature_lookup?
+Setting.set(:daily, 1) unless Setting.daily?
+Setting.set(:weekly, 1) unless Setting.weekly?
+Setting.set(:monthly, 1) unless Setting.monthly?
+Setting.set(:lookups, 1) unless Setting.lookups?
+Setting.set(:notes, 1) unless Setting.notes?
 
 # Load Default Classifications
 

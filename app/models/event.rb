@@ -55,6 +55,16 @@ class Event
     self.signature.down(:events_count) if self.signature
     # Note: Need to decrement Severity, Sensor and User Counts
   end
+  
+  def signature_url
+    if Setting.signature_lookup?
+      url = Setting.find(:signature_lookup)
+      return url.sub(/\$\$sid\$\$/, signature.sig_sid.to_s).sub(/\$\$gid\$\$/, signature.sig_gid.to_s)
+    else
+      url = "http://rootedyour.com/snortsid?sid=$$gid$$-$$sid$$"
+      return url.sub(/\$\$sid\$\$/, signature.sig_sid.to_s).sub(/\$\$gid\$\$/, signature.sig_gid.to_s)
+    end
+  end
 
   def self.limit(limit=25)
     all(:limit => limit)

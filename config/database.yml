@@ -1,4 +1,4 @@
-defaults: &defaults
+snorby: &snorby
   adapter: mysql
   username: root
   password: s3cr3tsauce
@@ -6,10 +6,12 @@ defaults: &defaults
 
 development:
   database: snorby
-  <<: *defaults
+  <<: *snorby
+
 test:
   database: snorby
-  <<: *defaults
+  <<: *snorby
+
 production:
   database: snorby
-  <<: *defaults
+  <<: *snorby

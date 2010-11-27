@@ -9,6 +9,40 @@
 
 			<div class='grid_5'>
 				
+				<p><%= f.label :name %> <i>(please use first and last name)</i><br />
+			  <%= f.text_field :name, :placeholder => 'Full Name...', :class => 'required' %></p>
+
+			  <p><%= f.label :email %> <i>(example: snorby@snorby.org)</i><br />
+			  <%= f.text_field :email, :placeholder => 'E-mail Address...', :class => 'required email' %></p>
+				
+				<p><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+			  <%= f.password_field :password, :placeholder => 'Password...' %></p>
+
+			  <p><%= f.label :password_confirmation %><br />
+			  <%= f.password_field :password_confirmation, :placeholder => 'Password Confirmation...' %></p>
+
+				<p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+			  <%= f.password_field :current_password, :placeholder => 'Current Password...', :class => 'required password' %></p>
+
+				<p>
+					I would like to list <%= f.select :per_page_count, %w[25 45 65 100], { :include_blank => false } %>  <%= f.label "Items Per Page" %><br />
+					<i>(select the default amount of events to list per page view)</i><br />
+					<br />
+				</p>
+
+				<% if current_user.admin? %>
+
+					<p>
+						<%= f.check_box :admin %> <%= f.label "Administrator" %>
+						<i>(should this use have administrative rights?)</i>
+					</p>
+
+				<% end %>
+
+			</div>
+
+			<div class='grid_5 alpha'>
+				
 				<div class='user-show-avatar'>
 					
 					<%= image_tag(@user.avatar.url(:small), :class => 'avatar') %>
@@ -27,57 +61,15 @@
 					
 				</div>
 				
-				<p><%= f.label :name %> <i>(please use first and last name)</i><br />
-			  <%= f.text_field :name, :placeholder => 'Full Name...', :class => 'required' %></p>
-
-			  <p><%= f.label :email %> <i>(example: snorby@snorby.org)</i><br />
-			  <%= f.text_field :email, :placeholder => 'E-mail Address...', :class => 'required email' %></p>
-				
 				<p>
 					<%= f.label 'Change Avatar' %><br />
 					<%= f.file_field :avatar %><br />
 					<br />
 				</p>
 				
-				<% if current_user.admin? %>
-
-					<p>
-						<%= f.check_box :admin %> <%= f.label "Administrator" %>
-						<i>(should this use have administrative rights?)</i>
-					</p>
-
-				<% end %>
-				
 			</div>
-
-			<div class='grid_5'>
-				
-				<p><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-			  <%= f.password_field :password, :placeholder => 'Password...' %></p>
-
-			  <p><%= f.label :password_confirmation %><br />
-			  <%= f.password_field :password_confirmation, :placeholder => 'Password Confirmation...' %></p>
-
-				<p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-			  <%= f.password_field :current_password, :placeholder => 'Current Password...', :class => 'required password' %></p>
-				
-				<p>
-					<%= f.label 'Time Zone' %> <i>(please select your preferred timezone)</i><br />
-			  	<%= time_zone_select( "user", 'timezone', ActiveSupport::TimeZone.us_zones, :default => "UTC") %><br />
-					<br />
-				</p>
-				
-				<p>
-					I would like to list <%= f.select :per_page_count, %w[25 45 65 100], { :include_blank => false } %>  <%= f.label "Items Per Page" %><br />
-					<i>(select the default amount of events to list per page view)</i><br />
-					<br />
-				</p>
-				
-			</div>
-			
-		</div>
 		
-		<br />
+		</div>
 
 		<%= form_actions do %>
 

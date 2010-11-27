@@ -3,9 +3,9 @@ development:
   mailer_address: 'snorby@example.com'
 
 test:
-  domain: test.host
+  domain: localhost:3000
   mailer_address: 'snorby@example.com'
 
 production:
-  domain: example.com
+  domain: mephux.gotdns.com:8080
   mailer_address : 'snorby@example.com'

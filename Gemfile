@@ -14,7 +14,7 @@ gem 'actionpack',             RAILS_VERSION, :require => 'action_pack'
 gem 'actionmailer',           RAILS_VERSION, :require => 'action_mailer'
 gem 'railties',               RAILS_VERSION, :require => 'rails'
 
-gem 'dm-core',                DM_VERSION, :git => "https://github.com/datamapper/dm-core.git"
+gem 'dm-core',                DM_VERSION
 gem 'dm-rails',               '~> 1.0.3'
 gem 'dm-do-adapter',          DM_VERSION
 gem 'dm-active_model',        DM_VERSION
@@ -38,7 +38,7 @@ gem 'dm-serializer',          DM_VERSION
 gem 'capistrano'
 
 # Rails Plugins
-gem "mail",                   "2.2.9"
+gem "mail",                   "2.2.10"
 gem "RedCloth",               "~> 4.0", :require => 'redcloth'
 gem 'chronic',                '~> 0.3.0'
 gem 'pdfkit',                 '~> 0.4.6'

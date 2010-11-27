@@ -18,15 +18,13 @@
 			</p>
 
 			<p>
-				<%= label_tag 'Company Email' %><br />
+				<%= label_tag 'Company Email' %> <i>(this email will be used as the report sender)</i><br />
 				<%= text_field_tag '[settings][email]', (Setting.email ? Setting.find(:email) : nil), :placeholder => 'Company Email...', :autocomplete => :off, :class => 'required email' %>
 			</p>
-
+			
 			<p>
-				<%= label_tag "Company Logo: <i>(#{Setting.logo? ? (link_to 'Click to view current logo', Setting.find(:logo), :class => 'snorbybox') : 'Please Upload A Logo'})</i>".html_safe %><br />
-				<br />
-				<%= file_field_tag '[settings][logo]' %><br />
-				<br />
+				<%= label_tag 'Signature Lookup URL' %> <i>(user $$sid$$ and $$gid$$ for the get request parameters)</i><br />
+				<%= text_field_tag '[settings][signature_lookup]', (Setting.signature_lookup ? Setting.find(:signature_lookup) : nil), :placeholder => 'Signature Lookup URL...', :autocomplete => :off, :class => 'required url' %>
 			</p>
 
 
