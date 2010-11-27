@@ -14,10 +14,6 @@
 		
 		<%= render :partial => 'graph_destination_ips.html.erb' %>
 		
-		<% if %w(yesterday week last_week month last_month year quarter).include?(params[:range]) %>
-			<%= render :partial => 'graph_classification.html.erb' %>
-		<% end %>
-		
 	</div>
 
 </div>
