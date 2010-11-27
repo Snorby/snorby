@@ -13,13 +13,13 @@
 		
 		<div class='grid_6'>
 			<p>
-				<%= label_tag 'Organization Name' %><br />
-				<%= text_field_tag '[settings][organization]', (Setting.organization ? Setting.find(:organization) : nil), :placeholder => 'Organization Name...', :autocomplete => :off %>
+				<%= label_tag 'Company Name' %><br />
+				<%= text_field_tag '[settings][company]', (Setting.company ? Setting.find(:company) : nil), :placeholder => 'Company Name...', :autocomplete => :off %>
 			</p>
 
 			<p>
-				<%= label_tag 'Organization Email' %><br />
-				<%= text_field_tag '[settings][organization_email]', (Setting.organization_email ? Setting.find(:organization_email) : nil), :placeholder => 'Organization Email...', :autocomplete => :off %>
+				<%= label_tag 'Company Email' %><br />
+				<%= text_field_tag '[settings][company_email]', (Setting.company_email ? Setting.find(:company_email) : nil), :placeholder => 'Company Email...', :autocomplete => :off %>
 			</p>
 
 			<p>

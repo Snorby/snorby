@@ -5,7 +5,7 @@ SnortSchema.create(:vseq => 107, :ctime => Time.now, :version => "Snorby #{Snorb
 User.create(:name => 'Administrator', :email => 'snorby@snorby.org', :password => 'snorby', :password_confirmation => 'snorby', :admin => true) if User.all.blank?
 
 # Snorby General Settings
-settings = %w(organization daily weekly monthly lookups notes logo)
+settings = %w(company daily weekly monthly lookups notes logo)
 
 settings.each do |name|
   Setting.set(name.to_sym, '') unless Setting.find(name.to_sym)

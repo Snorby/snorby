@@ -61,7 +61,7 @@ class PageController < ApplicationController
     @recent_events ||= Event.all(:sig_id => sigs).group_by { |x| x.sig_id }.map(&:last).map(&:first)
     
     respond_to do |format|
-      format.html { render :template => 'page/test.html.erb' }
+      format.html { render :template => 'page/dashboard.pdf.erb' }
       format.js
       format.pdf do
         render :pdf => "Metrics for #{Time.now}", :template => "page/dashboard.pdf.erb", :layout => 'pdf.html.erb', :stylesheets => ["pdf"]

@@ -3,24 +3,46 @@
 <html>
 	
 	<head>
-		
-		<%= stylesheet_link_tag 'pdf' %>
+		<% @severities ||= Severity.all %>
+
+		<script type="text/javascript">
+			<% @severities.each do |sev| %>
+				var sev<%= sev.sig_id %>_bg_color = '<%= sev.bg_color %>';
+			<% end %>
+		</script>
+
+		<%= stylesheet_link_tag 'grid', 'pdf' %>
+		<%= javascript_include_merged :snorby %>
+    <%= csrf_meta_tag %>
 
 		<%= yield(:header) %>
+
+		<style type="text/css">
+			<%- @severities.each do |sev| -%>
+				ul.table li div.small span.severity.sev<%= sev.sig_id %>{
+					background-color: <%= sev.bg_color %>;
+					color: <%= sev.text_color %>;
+				}
+			<%- end -%>
+		</style>
 		
 	</head>
 	
 	<body>
 		
-		<div id='header'>
-			
-			<% if Setting.logo? %>
-			 <%= image_tag(Setting.find(:logo), :size => '800x90') %>
-			<% end %>
-			
-		</div>
-		
 		<div id="wrapper">
+
+			<div id='header'>
+
+				<% if Setting.company? %>
+					<h1><%= Setting.find(:company) %></h1>
+				<% else %>
+					<h1>Snorby Reports</h1>
+				<% end %>
+
+				Date: <%= Time.now.strftime('%A %B, %Y at %I:%M %p') %>
+
+			</div>
 
 			<div id="content" class='shadow container_12'>
 

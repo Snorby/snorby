@@ -1,0 +1,138 @@
+<% javascript :footer, 'sparkline', 'highcharts' %>
+
+<% content_for :footer do %>
+
+	<script type="text/javascript">
+	
+		$('#sev1-graph').sparkline(<%= @high %>, { barWidth: 3, height: 25, type: 'bar', barColor: sev1_bg_color } );
+		$('#sev2-graph').sparkline(<%= @medium %>, { barWidth: 3, height: 25, type: 'bar', barColor: sev2_bg_color } );
+		$('#sev3-graph').sparkline(<%= @low %>, { barWidth: 3, height: 25, type: 'bar', barColor: sev3_bg_color } );
+		
+	</script>
+
+<% end %>
+
+<h2>Sensors</h2>
+<table border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<th>Name</th>
+		<th>Event Count</th>
+	</tr>
+	<% @sensor_metrics.sort{|a,b| -1*(a[1]<=>b[1]) }.each do |hash| %>
+	<tr>
+		<td><%= hash[:name] %></td>
+		<td><%= hash[:data].sum %></td>
+	</tr>
+	<% end %>
+</table>
+
+<br />
+
+<h2>Severities</h2>
+<table border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<th>High Severity</th>
+		<th>Medium Severity</th>
+		<th>Low Severity</th>
+		<th>Total</th>
+	</tr>
+	<tr>
+		<td style='width:200px'><%= @medium.sum %> <div id="sev1-graph" style='float:left;'></div></td>
+		<td style='width:200px'><%= @medium.sum %> <div id="sev2-graph" style='float:left;'></div></td>
+		<td style='width:200px'><%= @low.sum %> <div id="sev3-graph" style='float:left;'></div></td>
+		<td style='width:100px'><%= @event_count %></td>
+	</tr>
+</table>
+
+<br />
+
+<h2>Protocols</h2>
+<table border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<th>TCP Count</th>
+		<th>UDP Count</th>
+		<th>ICMP Count</th>
+		<th>Total</th>
+	</tr>
+	<tr>
+		<td style='width:200px'><%= @tcp.sum %></div></td>
+		<td style='width:200px'><%= @udp.sum %></td>
+		<td style='width:200px'><%= @icmp.sum %></td>
+		<td style='width:100px'><%= @event_count %></td>
+	</tr>
+</table>
+
+<br />
+
+<h2>Signatures</h2>
+<table border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<th>Signature Name</th>
+		<th>Percentage</th>
+		<th>Event Count</th>
+	</tr>
+	<% sig_loop_count = 0 %>
+	<% sig_total = @signature_metrics.sort{|a,b| -1*(a[1]<=>b[1]) }.map(&:last).sum %>
+	<% @signature_metrics.sort{|a,b| -1*(a[1]<=>b[1]) }.each do |name, count| %>
+		<% sig_loop_count += 1 %>
+		<% break if sig_loop_count > 15 %>
+		<tr>
+			<td><%= truncate(name.to_s, :length => 72) %></td>
+			<td style='width:100px'><%= percentage_for(count, sig_total) %>%</td>
+			<td style='width:100px'><%= count %></td>
+		</tr>
+	<% end %>
+</table>
+
+<br />
+
+<h2>Source Addresses</h2>
+<table border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<th>Source IP Address</th>
+		<th>Percentage</th>
+		<th>Event Count</th>
+	</tr>
+	<% source_loop_count = 0 %>
+	<% source_total = @src_metrics.sort{|a,b| -1*(a[1]<=>b[1]) }.map(&:last).sum %>
+	
+	<% @src_metrics.sort{|a,b| -1*(a[1]<=>b[1]) }.each do |name, count| %>
+		<% source_loop_count += 1 %>
+		<% break if source_loop_count > 10 %>
+		<tr>
+			<td><%= name %></td>
+			<td style='width:100px'><%= percentage_for(count, source_total) %>%</td>
+			<td style='width:100px'><%=count %></td>
+		</tr>
+	<% end %>
+	
+</table>
+
+<br />
+
+<% if sig_loop_count > 5 && source_loop_count > 5 %>
+	<div class='page-break'></div>
+<% end %>
+
+<h2>Destination Addresses</h2>
+<table border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<th>Destination IP Address</th>
+		<th>Percentage</th>
+		<th>Event Count</th>
+	</tr>
+	<% loop_count = 0 %>
+	<% destination_total = @src_metrics.sort{|a,b| -1*(a[1]<=>b[1]) }.map(&:last).sum %>
+	
+	<% @dst_metrics.sort{|a,b| -1*(a[1]<=>b[1]) }.each do |name, count| %>
+		<% loop_count += 1 %>
+		<% break if loop_count > 10 %>
+		<% next if count < 10 %>
+		<tr>
+			<td><%= name %></td>
+			<td style='width:100px'><%= percentage_for(count, destination_total) %>%</td>
+			<td style='width:100px'><%=count %></td>
+		</tr>
+	<% end %>
+	
+</table>
