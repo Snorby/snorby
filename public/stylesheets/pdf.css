@@ -98,6 +98,13 @@ h2{
 
 /* @group Table */
 
+div.table-holder{
+	page-break-inside: avoid;
+	display: block;
+	position: relative;
+	overflow: hidden;
+}
+
 table{
 	page-break-inside: avoid;
 	width: 100%;

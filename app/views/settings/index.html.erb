@@ -6,7 +6,7 @@
 
 <div id='general-settings', class='grid_12 page boxit'>
 	
-	<%= form_tag '/settings', :multipart => true, :class => 'basic-form' do %>
+	<%= form_tag '/settings', :multipart => true, :class => 'basic-form validate' do %>
 	
 	
 	<div id='form-holder'>
@@ -14,16 +14,16 @@
 		<div class='grid_6'>
 			<p>
 				<%= label_tag 'Company Name' %><br />
-				<%= text_field_tag '[settings][company]', (Setting.company ? Setting.find(:company) : nil), :placeholder => 'Company Name...', :autocomplete => :off %>
+				<%= text_field_tag '[settings][company]', (Setting.company ? Setting.find(:company) : nil), :placeholder => 'Company Name...', :autocomplete => :off, :class => 'required' %>
 			</p>
 
 			<p>
 				<%= label_tag 'Company Email' %><br />
-				<%= text_field_tag '[settings][company_email]', (Setting.company_email ? Setting.find(:company_email) : nil), :placeholder => 'Company Email...', :autocomplete => :off %>
+				<%= text_field_tag '[settings][email]', (Setting.email ? Setting.find(:email) : nil), :placeholder => 'Company Email...', :autocomplete => :off, :class => 'required email' %>
 			</p>
 
 			<p>
-				<%= label_tag "Organization Logo: <i>(#{Setting.logo? ? (link_to 'Click to view current logo', Setting.find(:logo), :class => 'snorbybox') : 'Please Upload A Logo'})</i>".html_safe %><br />
+				<%= label_tag "Company Logo: <i>(#{Setting.logo? ? (link_to 'Click to view current logo', Setting.find(:logo), :class => 'snorbybox') : 'Please Upload A Logo'})</i>".html_safe %><br />
 				<br />
 				<%= file_field_tag '[settings][logo]' %><br />
 				<br />

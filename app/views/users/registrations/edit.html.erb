@@ -9,25 +9,23 @@
 
 			<div class='grid_5'>
 				
-				<p>
-					<div class='user-show-avatar'>
-						
-						<%= image_tag(@user.avatar.url(:small), :class => 'avatar') %>
-						
-						<p><strong>Login Count:</strong> <%= @user.sign_in_count %></p>
-            
-						<p><strong>Current Login IP:</strong> <%= @user.current_sign_in_ip || 'N/A' %></p>
-            
-						<p><strong>Last Login:</strong> <%= @user.last_sign_in_at.blank? ? Time.now.strftime('%a %b, %Y %I:%M %p') : @user.last_sign_in_at.strftime('%a %b, %Y %I:%M %p') %></p>
-            
-						<p><strong>Last Login IP:</strong> <%= @user.last_sign_in_ip || 'N/A' %></p>
-            
-						<p><strong>Queued Event Count:</strong> <%= @user.favorites_count %></p>
-            
-						<p><strong>Notes Count:</strong> <%= @user.notes_count %></p>
-						
-					</div>
-				</p>
+				<div class='user-show-avatar'>
+					
+					<%= image_tag(@user.avatar.url(:small), :class => 'avatar') %>
+					
+					<p><strong>Login Count:</strong> <%= @user.sign_in_count %></p>
+          
+					<p><strong>Current Login IP:</strong> <%= @user.current_sign_in_ip || 'N/A' %></p>
+          
+					<p><strong>Last Login:</strong> <%= @user.last_sign_in_at.blank? ? Time.now.strftime('%a %b, %Y %I:%M %p') : @user.last_sign_in_at.strftime('%a %b, %Y %I:%M %p') %></p>
+          
+					<p><strong>Last Login IP:</strong> <%= @user.last_sign_in_ip || 'N/A' %></p>
+          
+					<p><strong>Queued Event Count:</strong> <%= @user.favorites_count %></p>
+          
+					<p><strong>Notes Count:</strong> <%= @user.notes_count %></p>
+					
+				</div>
 				
 				<p><%= f.label :name %> <i>(please use first and last name)</i><br />
 			  <%= f.text_field :name, :placeholder => 'Full Name...', :class => 'required' %></p>
