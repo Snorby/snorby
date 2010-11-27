@@ -1,7 +1,4 @@
-
-#
 # Snorby Mail Configuration
-#
 
 # Gmail Example:
 # ActionMailer::Base.smtp_settings = {
@@ -15,11 +12,7 @@
 # }
 
 # Sendmail Example:
-ActionMailer::Base.delivery_method = :sendmail
-ActionMailer::Base.sendmail_settings = {
-  :domain => "localhost",
-}
-# Defaults to:
+# ActionMailer::Base.delivery_method = :sendmail
 # ActionMailer::Base.sendmail_settings = {
 #   :location => '/usr/sbin/sendmail',
 #   :arguments => '-i -t'

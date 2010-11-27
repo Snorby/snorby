@@ -11,9 +11,9 @@
 			<% end %>
 		</script>
 
-		<%= stylesheet_link_tag 'grid', 'pdf' %>
-		<%= javascript_include_merged :snorby %>
-    <%= csrf_meta_tag %>
+		<script src="http://<%= Snorby::CONFIG[:domain] %>/javascripts/jquery.js" type="text/javascript"></script>
+		<script src="http://<%= Snorby::CONFIG[:domain] %>/javascripts/sparkline.js" type="text/javascript"></script>
+		<script src="http://<%= Snorby::CONFIG[:domain] %>/javascripts/highcharts.js" type="text/javascript"></script>
 
 		<%= yield(:header) %>
 

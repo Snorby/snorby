@@ -55,6 +55,7 @@ a:link, a:visited {
 	padding: 10px 10px 5px;
 	margin-bottom: 5px;
 	border-bottom: 2px solid #ededed;
+	font-size: 0.8em;
 }
 
 #header img.logo{
@@ -98,6 +99,7 @@ h2{
 /* @group Table */
 
 table{
+	page-break-inside: avoid;
 	width: 100%;
 }
 

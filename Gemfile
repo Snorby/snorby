@@ -38,7 +38,7 @@ gem 'dm-serializer',          DM_VERSION
 gem 'capistrano'
 
 # Rails Plugins
-gem "mail",                   "2.2.10"
+gem "mail",                   "2.2.9"
 gem "RedCloth",               "~> 4.0", :require => 'redcloth'
 gem 'chronic',                '~> 0.3.0'
 gem 'pdfkit',                 '~> 0.4.6'

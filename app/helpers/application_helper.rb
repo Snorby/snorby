@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def pretty_time(time)
-    time.strftime('%A %B, %Y %I:%M %p')
+    time.strftime('%A, %B %d, %Y %I:%M %p')
   end
 
   def format_note_body(text)

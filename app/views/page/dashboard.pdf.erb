@@ -1,8 +1,8 @@
-<% javascript :footer, 'sparkline', 'highcharts' %>
+<% extend ApplicationHelper %>
 
 <% content_for :pdf_header do %>
 	<br />
-	Time Range: <%= pretty_time(@start_time) %> - <%= pretty_time(@end_time) %>
+	Time Range: <%= @start_time.strftime('%A, %B %d, %Y %I:%M %p') %> - <%= @end_time.strftime('%A, %B %d, %Y %I:%M %p') %>
 <% end %>
 
 <% content_for :footer do %>
@@ -69,7 +69,7 @@
 
 <br />
 
-<h2>Signatures</h2>
+<h2>Top 15 Signatures</h2>
 <table border="0" cellspacing="0" cellpadding="0">
 	<tr>
 		<th>Signature Name</th>
@@ -91,7 +91,7 @@
 
 <br />
 
-<h2>Source Addresses</h2>
+<h2>Top 10 Source Addresses</h2>
 <table border="0" cellspacing="0" cellpadding="0">
 	<tr>
 		<th>Source IP Address</th>
@@ -107,7 +107,7 @@
 		<tr>
 			<td><%= name %></td>
 			<td style='width:100px'><%= percentage_for(count, source_total) %>%</td>
-			<td style='width:100px'><%=count %></td>
+			<td style='width:100px'><%= count %></td>
 		</tr>
 	<% end %>
 	
@@ -116,12 +116,15 @@
 <br />
 
 <% if sig_loop_count >= 5 && source_loop_count >= 5 %>
-	<% unless sig_loop_count >= 13 %>
+	<% if sig_loop_count >= 13 %>
+		<% @page_break_count = 0 %>
+	<% else %>
 		<div class='page-break'></div>
+		<% @page_break_count = 1 %>
 	<% end %>
 <% end %>
 
-<h2>Destination Addresses</h2>
+<h2>Top 10 Destination Addresses</h2>
 <table border="0" cellspacing="0" cellpadding="0">
 	<tr>
 		<th>Destination IP Address</th>
@@ -138,8 +141,32 @@
 		<tr>
 			<td><%= name %></td>
 			<td style='width:100px'><%= percentage_for(count, destination_total) %>%</td>
-			<td style='width:100px'><%=count %></td>
+			<td style='width:100px'><%= count %></td>
 		</tr>
 	<% end %>
 	
 </table>
+
+<% unless @page_break_count %>
+	<div class='page-break'></div>
+<% end %>
+
+<br />
+<% unless @classification_metrics.blank? %>
+	<h2>Analyst Classified Events</h2>
+	<table border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<th>Destination IP Address</th>
+			<th>Percentage</th>
+			<th>Event Count</th>
+		</tr>
+		<% @classification_metrics.sort{|a,b| -1*(a[1]<=>b[1]) }.each do |name, count| %>
+			<tr>
+				<td><%= name %></td>
+				<td style='width:100px'><%= percentage_for(count, @event_count) %>%</td>
+				<td style='width:100px'><%= count %></td>
+			</tr>
+		<% end %>
+	
+	</table>
+<% end %>

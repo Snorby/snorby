@@ -62,6 +62,10 @@ module Snorby
             
           end
           
+          send_daily_report if Setting.daily?
+          send_weekly_report if Setting.weekly?
+          send_monthly_report if Setting.monthly?
+          
           Snorby::Jobs.daily_cache.destroy! if Snorby::Jobs.daily_cache?
           Delayed::Job.enqueue(Snorby::Jobs::DailyCacheJob.new(false), 1, Time.now.tomorrow.beginning_of_day)
           
@@ -71,6 +75,17 @@ module Snorby
 
       end
 
+      def send_daily_report
+        #...
+      end
+
+      def send_weekly_report
+        #blah.. if @stop_date.day == @stop_date.end_of_week.day
+      end
+
+      def send_monthly_report
+        #blah.. if @stop_date.day == @stop_date.end_of_month.day
+      end
 
       def build_cache(day_start, day_end)
 
