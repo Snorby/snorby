@@ -18,8 +18,6 @@ class DailyCache
 
   property :icmp_count, Integer, :default => 0
 
-  property :classification_metrics, Object
-
   property :severity_metrics, Object
 
   property :signature_metrics, Object
@@ -27,6 +25,12 @@ class DailyCache
   property :src_ips, Object
   
   property :dst_ips, Object
+  
+  property :top_src_ips, Object
+  
+  property :top_dst_ips, Object
+  
+  property :top_signatures, Object
 
   # Define created_at and updated_at timestamps
   timestamps :at

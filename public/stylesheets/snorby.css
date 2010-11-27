@@ -498,15 +498,17 @@ div#note-box{
 }
 
 div#note-box img{
-	vertical-align: middle;
+	vertical-align: top;
+	margin-right: 5px;
+	margin-top: -3px;
 }
 
 div#note-box.error{
 	background-color: #820d06;
 	color: #fff;
-	border: 1px solid #3b0202;
 	margin-top: 5px;
 	margin-bottom: 5px;
+	border: 2px solid #590602;
 }
 
 #flash_message{

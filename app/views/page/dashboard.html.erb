@@ -69,10 +69,6 @@
 				<li><%= link_to "Sources", '#', :class => 'show_source_ips_graph' %></li>
 				<li><%= link_to "Destinations", '#', :class => 'show_destination_ips_graph' %></li>
 				
-				<% if %w(yesterday week month year).include?(params[:range]) %>
-					<li><%= link_to "Analyst Classified", '#', :class => 'show_classification_graph' %></li>
-				<% end %>
-				
 			</ul>
 
 		</div>

@@ -4,7 +4,7 @@ class ReportMailer < ActionMailer::Base
   
   def daily_report
     @emails = User.all.collect { |user| "#{user.name} <#{user.email}>" }.join(',')
-    report = Snorby::Report.build_report('today')
+    report = Snorby::Report.build_report('yesterday')
     attachments["snorby-daily-report.pdf"] = report[:pdf]
     mail(:to => @emails, :subject => "Snorby Daily Report: #{report[:start_time]} - #{report[:end_time]}")
   end

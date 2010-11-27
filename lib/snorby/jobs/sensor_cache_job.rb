@@ -42,7 +42,21 @@ module Snorby
             logit "Looking for events..."
             @since_last_cache = since_last_cache
 
-            next if @since_last_cache.blank?
+            if @since_last_cache.blank?
+              if @sensor.cache.blank?
+                current_hour = Time.now.beginning_of_day + Time.now.hour.hours
+                half_past_time = current_hour + 30.minutes
+                if half_past_time < Time.now
+                  end_time = half_past_time
+                else
+                  end_time = current_hour
+                end
+              else
+                end_time = @sensor.cache.last.ran_at + 30.minutes
+              end
+              Cache.create(:sid => @sensor.sid, :ran_at => end_time)
+              next
+            end
 
             start_time = @since_last_cache.first.timestamp.beginning_of_day + @since_last_cache.first.timestamp.hour.hours
             end_time = start_time + 30.minute

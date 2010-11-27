@@ -62,7 +62,7 @@ module Snorby
             
           end
           
-          send_daily_report if Setting.daily?
+          ReportMailer.daily_report.deliver if Setting.daily?
           send_weekly_report if Setting.weekly?
           send_monthly_report if Setting.monthly?
           
@@ -74,17 +74,13 @@ module Snorby
         end
 
       end
-
-      def send_daily_report
-        #...
-      end
-
+      
       def send_weekly_report
-        #blah.. if @stop_date.day == @stop_date.end_of_week.day
+        ReportMailer.weekly_report.deliver if @stop_date.day == @stop_date.end_of_week.day
       end
 
       def send_monthly_report
-        #blah.. if @stop_date.day == @stop_date.end_of_month.day
+        ReportMailer.monthly_report.deliver if @stop_date.day == @stop_date.end_of_month.day
       end
 
       def build_cache(day_start, day_end)
@@ -101,7 +97,10 @@ module Snorby
           return
         end
         
-        unless @events.blank?
+        if @events.blank?
+          logit "No New Events To Cache..."
+          return
+        else
           
           logit "\nNew Day: #{day_start} - #{day_end}", false
           
@@ -127,11 +126,13 @@ module Snorby
                         :tcp_count => fetch_tcp_count,
                         :udp_count => fetch_udp_count,
                         :icmp_count => fetch_icmp_count,
-                        :classification_metrics => fetch_classification_metrics,
                         :severity_metrics => fetch_severity_metrics(false),
                         :src_ips => fetch_src_ip_metrics,
                         :dst_ips => fetch_dst_ip_metrics,
-                        :signature_metrics => fetch_signature_metrics(false)
+                        :signature_metrics => fetch_signature_metrics(false),
+                        :top_src_ips => build_top_src_ips,
+                        :top_dst_ips => build_top_dst_ips,
+                        :top_signatures => build_top_signatures
         })
 
         @cache
