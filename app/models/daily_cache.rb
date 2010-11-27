@@ -25,12 +25,6 @@ class DailyCache
   property :src_ips, Object
   
   property :dst_ips, Object
-  
-  property :top_src_ips, Object
-  
-  property :top_dst_ips, Object
-  
-  property :top_signatures, Object
 
   # Define created_at and updated_at timestamps
   timestamps :at
@@ -166,93 +160,85 @@ class DailyCache
     @metrics
   end
 
-  def self.src_metrics(stop_count=10)
+  def self.src_metrics(limit=20)
     @metrics = {}
+    @top = []
     @cache = self.map(&:src_ips).compact
     count = 0
-    
+
     @cache.each do |ip_hash|
-      
-      return @metrics if count > stop_count.to_i
-      
+
       ip_hash.each do |ip, count|
         if @metrics.has_key?(ip)
           @metrics[ip] += count
         else
           @metrics.merge!({ip => count})
-          count += 1
         end
       end
     end
+
+    @metrics.sort{ |a,b| -1*(a[1]<=>b[1]) }.each do |data|
+      break if count >= limit
+      @top << data
+      count += 1
+    end
     
-    @metrics
+    @top
   end
-  
-  def self.dst_metrics(stop_count=10)
+
+  def self.dst_metrics(limit=20)
     @metrics = {}
+    @top = []
     @cache = self.map(&:dst_ips).compact
     count = 0
-    
+
     @cache.each do |ip_hash|
-      
-      return @metrics if count > stop_count.to_i
-      
+
       ip_hash.each do |ip, count|
         if @metrics.has_key?(ip)
           @metrics[ip] += count
         else
           @metrics.merge!({ip => count})
-          count += 1
         end
       end
     end
+
+    @metrics.sort{ |a,b| -1*(a[1]<=>b[1]) }.each do |data|
+      break if count >= limit
+      @top << data
+      count += 1
+    end
     
-    @metrics
+    @top
   end
 
-  def self.signature_metrics(stop_count=10)
+  def self.signature_metrics(limit=20)
     @metrics = {}
+    @top = []
     @cache = self
     count = 0
-    
+
     @cache.map(&:signature_metrics).each do |data|
       next unless data
-      
-      return @metrics if count > stop_count.to_i
-      
-      data.sort_by { |k,v| v <=> v }.each do |id, value|
-        if @metrics.has_key?(id)
-          temp_count = @metrics[id]
-          @metrics.merge!({id => temp_count + value})
-        else
-          @metrics.merge!({Signature.get(id).sig_name.to_sym => value})
-          count += 1
-        end
-      end
-      
-    end
 
-    @metrics
-  end
-
-  def self.classification_metrics
-    @metrics = {}
-    @cache = self
-
-    @cache.map(&:classification_metrics).each do |data|
-      next unless data
-      
       data.each do |id, value|
         if @metrics.has_key?(id)
           temp_count = @metrics[id]
           @metrics.merge!({id => temp_count + value})
         else
-          @metrics.merge!({Classification.get(id).name.to_sym => value})
+          @metrics.merge!({id => value})
         end
       end
+
     end
 
-    @metrics
+    @metrics.sort{ |a,b| -1*(a[1]<=>b[1]) }.each do |data|
+      break if count >= limit
+      @top << data
+      count += 1
+    end
+    
+    @top
   end
 
   def self.cache_for_type(collection, type=:week, sensor=false)

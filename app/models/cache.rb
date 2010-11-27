@@ -21,9 +21,9 @@ class Cache
   property :severity_metrics, Object
 
   property :signature_metrics, Object
-  
+
   property :src_ips, Object
-  
+
   property :dst_ips, Object
 
   # Define created_at and updated_at timestamps
@@ -36,7 +36,7 @@ class Cache
   def self.last_month
     all(:ran_at.gt => (Time.now - 2.months).beginning_of_month, :ran_at.lt => (Time.now - 2.months).end_of_month)
   end
-  
+
   def self.this_quarter
     all(:ran_at.gt => Time.now.beginning_of_quarter, :ran_at.lt => Time.now.end_of_quarter)
   end
@@ -117,7 +117,7 @@ class Cache
       next if count[i]
       count[i] = 0
     end
-    
+
     count
   end
 
@@ -141,74 +141,86 @@ class Cache
 
     @metrics
   end
-  
-  def self.src_metrics(stop_count=10)
+
+  def self.src_metrics(limit=20)
     @metrics = {}
+    @top = []
     @cache = self.map(&:src_ips).compact
     count = 0
-    
+
     @cache.each do |ip_hash|
-      
-      return @metrics if count > stop_count.to_i
-      
+
       ip_hash.each do |ip, count|
         if @metrics.has_key?(ip)
           @metrics[ip] += count
         else
           @metrics.merge!({ip => count})
-          count += 1
         end
       end
     end
-    
-    @metrics
-  end
-  
-  def self.dst_metrics(stop_count=10)
-    @metrics = {}
-    @cache = self.map(&:dst_ips).compact
-    count = 0
-    
-    @cache.each do |ip_hash|
-      
-      return @metrics if count > stop_count.to_i
-      
-      ip_hash.each do |ip, count|
-        if @metrics.has_key?(ip)
-          @metrics[ip] += count
-        else
-          @metrics.merge!({ip => count})
-          count += 1
-        end
-      end
+
+    @metrics.sort{ |a,b| -1*(a[1]<=>b[1]) }.each do |data|
+      break if count >= limit
+      @top << data
+      count += 1
     end
     
-    @metrics
+    @top
   end
 
-  def self.signature_metrics(stop_count=10)
+  def self.dst_metrics(limit=20)
     @metrics = {}
+    @top = []
+    @cache = self.map(&:dst_ips).compact
+    count = 0
+
+    @cache.each do |ip_hash|
+
+      ip_hash.each do |ip, count|
+        if @metrics.has_key?(ip)
+          @metrics[ip] += count
+        else
+          @metrics.merge!({ip => count})
+        end
+      end
+    end
+
+    @metrics.sort{ |a,b| -1*(a[1]<=>b[1]) }.each do |data|
+      break if count >= limit
+      @top << data
+      count += 1
+    end
+    
+    @top
+  end
+
+  def self.signature_metrics(limit=20)
+    @metrics = {}
+    @top = []
     @cache = self
     count = 0
-    
+
     @cache.map(&:signature_metrics).each do |data|
       next unless data
-      
-      return @metrics if count > stop_count.to_i
-      
-      data.sort_by { |k,v| v <=> v }.each do |id, value|
+
+      data.each do |id, value|
         if @metrics.has_key?(id)
           temp_count = @metrics[id]
           @metrics.merge!({id => temp_count + value})
         else
-          @metrics.merge!({Signature.get(id).sig_name.to_sym => value})
-          count += 1
+          @metrics.merge!({id => value})
         end
       end
-      
+
     end
 
-    @metrics
+    @metrics.sort{ |a,b| -1*(a[1]<=>b[1]) }.each do |data|
+      break if count >= limit
+      @top << data
+      count += 1
+    end
+    
+    @top
   end
 
   def self.cache_for_type(collection, type=:week, sensor=false)
@@ -230,9 +242,9 @@ class Cache
       return collection.all(:sid => sensor.sid).group_by { |x| x.ran_at.day }
     end
   end
-  
+
   def self.range_for_type(type=:week, &block)
-    
+
     case type.to_sym
     when :hour
       Time.now.beginning_of_day.hour.upto(Time.now.end_of_day.hour) do |i|
@@ -257,7 +269,7 @@ class Cache
         block.call(i) if block
       end
     end
-    
+
   end
 
 end

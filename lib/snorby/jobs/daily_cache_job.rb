@@ -129,10 +129,7 @@ module Snorby
                         :severity_metrics => fetch_severity_metrics(false),
                         :src_ips => fetch_src_ip_metrics,
                         :dst_ips => fetch_dst_ip_metrics,
-                        :signature_metrics => fetch_signature_metrics(false),
-                        :top_src_ips => build_top_src_ips,
-                        :top_dst_ips => build_top_dst_ips,
-                        :top_signatures => build_top_signatures
+                        :signature_metrics => fetch_signature_metrics(false)
         })
 
         @cache

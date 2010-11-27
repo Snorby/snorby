@@ -91,7 +91,7 @@ module Snorby
           
           next if sig_count.zero?
           
-          @signature_metrics.merge!({sig.sig_id => sig_count})
+          @signature_metrics.merge!({sig.sig_name.to_sym => sig_count})
           
           sig.update!(:events_count => sig.events_count + sig_count) if update_counter
         end
@@ -110,51 +110,6 @@ module Snorby
         @dst_ips = {}
         @events.group_by { |x| x.ip.ip_dst.to_s }.collect { |x,y| @dst_ips.merge!({x => y.size}) }
         @dst_ips
-      end
-      
-      def build_top_src_ips
-        @top_src_ips = {}
-        count = 20
-        @src_ips.sort{|a,b| -1*(a[1]<=>b[1]) }.each do |ip, count|
-          count += 1
-          break if count >= 20
-          
-          @top_src_ips.merge!({
-            ip => count
-          })
-          
-        end
-        @top_src_ips
-      end
-      
-      def build_top_dst_ips
-        @top_dst_ips = {}
-        count = 20
-        @dst_ips.sort{|a,b| -1*(a[1]<=>b[1]) }.each do |ip, count|
-          count += 1
-          break if count >= 20
-          
-          @top_dst_ips.merge!({
-            ip => count
-          })
-          
-        end
-        @top_dst_ips
-      end
-      
-      def build_top_signatures
-        @top_signatures = {}
-        count = 20
-        @signature_metrics.sort{ |a,b| -1*(a[1]<=>b[1]) }.each do |sig, count|
-          count += 1
-          break if count >= 20
-          
-          @top_signatures.merge!({
-            sig => count
-          })
-          
-        end
-        @top_signatures
       end
       
     end

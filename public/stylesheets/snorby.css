@@ -661,6 +661,10 @@ div#note-box.error{
 	color: #e3e7e7;
 }
 
+#header #header-inside #menu ul li.menu-error:hover{
+	background-color: #41464a;
+}
+
 #header #header-inside #menu ul li.menu-error img{
 	vertical-align: middle;
 	margin-right: 5px;
