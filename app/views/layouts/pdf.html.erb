@@ -42,6 +42,8 @@
 
 				Date: <%= Time.now.strftime('%A %B, %Y at %I:%M %p') %>
 
+				<%= yield(:pdf_header) %>
+
 			</div>
 
 			<div id="content" class='shadow container_12'>

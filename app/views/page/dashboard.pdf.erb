@@ -1,5 +1,10 @@
 <% javascript :footer, 'sparkline', 'highcharts' %>
 
+<% content_for :pdf_header do %>
+	<br />
+	Time Range: <%= pretty_time(@start_time) %> - <%= pretty_time(@end_time) %>
+<% end %>
+
 <% content_for :footer do %>
 
 	<script type="text/javascript">
@@ -110,8 +115,10 @@
 
 <br />
 
-<% if sig_loop_count > 5 && source_loop_count > 5 %>
-	<div class='page-break'></div>
+<% if sig_loop_count >= 5 && source_loop_count >= 5 %>
+	<% unless sig_loop_count >= 13 %>
+		<div class='page-break'></div>
+	<% end %>
 <% end %>
 
 <h2>Destination Addresses</h2>

@@ -1,38 +1,10 @@
 class PageController < ApplicationController
-
-  layout 'pdf.html.erb'
-
+  
   def dashboard
     
     params[:range] = 'today' unless params[:range]
     
-    case params[:range].to_sym
-    when :today
-      @cache = Cache.today
-    when :yesterday
-      @cache = Cache.yesterday
-      @classification_metrics ||= DailyCache.yesterday.classification_metrics
-    when :week
-      @cache = DailyCache.this_week
-      @classification_metrics ||= @cache.this_week.classification_metrics
-    when :last_week
-      @cache = DailyCache.last_week
-      @classification_metrics ||= @cache.last_week.classification_metrics
-    when :month
-      @cache = DailyCache.this_month
-      @classification_metrics ||= @cache.this_month.classification_metrics
-    when :last_month
-      @cache = DailyCache.last_month
-      @classification_metrics ||= @cache.last_month.classification_metrics
-    when :quarter
-      @cache = DailyCache.this_quarter
-      @classification_metrics ||= @cache.this_quarter.classification_metrics
-    when :year
-      @cache = DailyCache.this_year
-      @classification_metrics ||= @cache.this_year.classification_metrics
-    else
-      @cache = Cache.today
-    end
+    set_defaults(params[:range])
     
     @src_metrics ||= @cache.src_metrics
     @dst_metrics ||= @cache.dst_metrics
@@ -61,10 +33,10 @@ class PageController < ApplicationController
     @recent_events ||= Event.all(:sig_id => sigs).group_by { |x| x.sig_id }.map(&:last).map(&:first)
     
     respond_to do |format|
-      format.html { render :template => 'page/dashboard.pdf.erb' }
+      format.html
       format.js
       format.pdf do
-        render :pdf => "Metrics for #{Time.now}", :template => "page/dashboard.pdf.erb", :layout => 'pdf.html.erb', :stylesheets => ["pdf"]
+        render :pdf => "Snorby Report - #{@start_time.strftime('%A-%B-%Y-%I-%M-%p')} - #{@end_time.strftime('%A-%B-%Y-%I-%M-%p')}", :template => "page/dashboard.pdf.erb", :layout => 'pdf.html.erb', :stylesheets => ["pdf"]
       end
     end
     
@@ -77,6 +49,66 @@ class PageController < ApplicationController
     limit = params[:limit].to_i.zero? ? @current_user.per_page_count : params[:limit].to_i
     @events = Event.search(params[:search]).page(params[:page].to_i, :per_page => limit, :order => [:timestamp.desc])
     @classifications ||= Classification.all
+  end
+  
+  private
+  
+  def set_defaults(range)
+  
+    case range.to_sym
+    when :today
+      @cache = Cache.today
+      @start_time = Time.now.beginning_of_day
+      @end_time = Time.now.end_of_day
+      
+    when :yesterday
+      @cache = Cache.yesterday
+      @start_time = (Time.now - 1.day).beginning_of_day
+      @end_time = (Time.now - 1.day).end_of_day
+      
+      @classification_metrics ||= DailyCache.yesterday.classification_metrics
+    when :week
+      @cache = DailyCache.this_week
+      @start_time = Time.now.beginning_of_week
+      @end_time = Time.now.end_of_week
+      
+      @classification_metrics ||= @cache.this_week.classification_metrics
+    when :last_week
+      @cache = DailyCache.last_week
+      @start_time = (Time.now - 1.week).beginning_of_week
+      @end_time = (Time.now - 1.week).end_of_week
+      
+      @classification_metrics ||= @cache.last_week.classification_metrics
+    when :month
+      @cache = DailyCache.this_month
+      @start_time = Time.now.beginning_of_month
+      @end_time = Time.now.end_of_month
+      
+      @classification_metrics ||= @cache.this_month.classification_metrics
+    when :last_month
+      @cache = DailyCache.last_month
+      @start_time = (Time.now - 2.months).beginning_of_month
+      @end_time = (Time.now - 2.months).end_of_month
+      
+      @classification_metrics ||= @cache.last_month.classification_metrics
+    when :quarter
+      @cache = DailyCache.this_quarter
+      @start_time = Time.now.beginning_of_quarter
+      @end_time = Time.now.end_of_quarter
+      
+      @classification_metrics ||= @cache.this_quarter.classification_metrics
+    when :year
+      @cache = DailyCache.this_year
+      @start_time = Time.now.beginning_of_year
+      @end_time = Time.now.end_of_year
+      
+      @classification_metrics ||= @cache.this_year.classification_metrics
+    else
+      @cache = Cache.today
+      @start_time = Time.now.beginning_of_day
+      @end_time = Time.now.end_of_day
+    end
+    
   end
 
 end

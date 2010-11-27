@@ -7,6 +7,10 @@ module ApplicationHelper
     options.html_safe
   end
 
+  def pretty_time(time)
+    time.strftime('%A %B, %Y %I:%M %p')
+  end
+
   def format_note_body(text)
     return text.sub(/(\B\@[a-zA-Z0-9_%]*\b)/, '<strong>\1</strong>').html_safe
   end
