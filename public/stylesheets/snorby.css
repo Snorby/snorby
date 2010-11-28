@@ -43,12 +43,6 @@ del {
 	text-decoration: line-through;
 }
 
- tables still need 'cellspacing="0"' in the markup 
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-
 /* @end */
 
 /* @group FancyBox */
@@ -1245,6 +1239,15 @@ table{
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border: 5px solid #f3f3f3;
+}
+
+.table-tooltip{
+	display: block;
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 10px;
+	background: url(../images/table-tooltip.png) no-repeat 95% top;
+	height: 13px;
 }
 
 table th{
