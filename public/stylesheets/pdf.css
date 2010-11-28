@@ -11,7 +11,7 @@ body {
 }
 #menu {
    display: none;
-   }
+}
 #wrapper, #content {
    margin: 0 1%;
    border: 0;
@@ -22,26 +22,19 @@ body {
 }
 div#content {
    padding-top: 1em;
-   }
+}
 div#mast {
    margin-bottom: -8px;
-   }
+}
 div#mast img {
    vertical-align: bottom;
-   }
+}
 a:link, a:visited {
    color: #520;
    background: transparent;
    font-weight: bold;
    text-decoration: underline;
-   }
-#content a:link:after, #content a:visited:after {
-   content: " (" attr(href) ") ";
-   font-size: 90%;
-   }
-#content a[href^="/"]:after {
-   content: " (http://www.alistapart.com" attr(href) ") ";
-   }
+}
 
 /* @end */
 
