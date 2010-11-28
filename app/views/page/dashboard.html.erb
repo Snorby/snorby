@@ -109,7 +109,7 @@
 		
 		<ul class='box-list'>
 			<% @recent_events.each do |event| %>
-				<li><%= link_to truncate(event.signature.name, :length => 25), results_path(:title => "#{event.signature.name}", :search => {:signature_name => "#{event.signature.name}"}) %> <span><%= event.signature.events_count %></span></li>
+				<li><%= link_to truncate(event.signature.name, :length => 25), results_path(:title => "#{truncate(event.signature.name, :length => 40)}", :search => {:signature_name => "#{event.signature.name}"}) %> <span><%= event.signature.events_count %></span></li>
 			<% end %>
 		</ul>
 	

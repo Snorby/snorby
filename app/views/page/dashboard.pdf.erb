@@ -2,7 +2,7 @@
 
 <% content_for :pdf_header do %>
 	<br />
-	Time Range: <%= @start_time.strftime('%A, %B %d, %Y %I:%M %p') %> - <%= @end_time.strftime('%A, %B %d, %Y %I:%M %p') %>
+	<i><%= @start_time.strftime('%A, %B %d, %Y %I:%M %p') %> - <%= @end_time.strftime('%A, %B %d, %Y %I:%M %p') %></i>
 <% end %>
 
 <% content_for :footer do %>
