@@ -31,6 +31,10 @@ Snorby is a ruby on rails web application for network security monitoring that i
 
 	`$ bundle install`
 	
+* Install wkhtmltopdf
+
+	`pdfkit --install-wkhtmltopdf`
+	
 * Get Snorby from the download section or use the latest edge release via git.
 
 	`git clone git://github.com/Snorby/snorby.git`
