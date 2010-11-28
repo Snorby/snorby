@@ -219,7 +219,7 @@
 		<% @sensor_metrics.sort{|a,b| -1*(a[1]<=>b[1]) }.each do |hash| %>
 		<tr>
 			<td><%= hash[:name] %></td>
-			<td><%= hash[:data].sum %></td>
+			<td style='width:100px'><%= hash[:data].sum %></td>
 		</tr>
 		<% end %>
 	</table>

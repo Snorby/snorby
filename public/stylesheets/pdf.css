@@ -103,6 +103,7 @@ div.table-holder{
 	display: block;
 	position: relative;
 	overflow: hidden;
+	padding-bottom: 5px;
 }
 
 table{

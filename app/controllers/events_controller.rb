@@ -105,7 +105,8 @@ class EventsController < ApplicationController
   
   def activity
     @user = User.get(params[:user_id])
-    @events = @user.events
+    @events = @user.events.page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:timestamp.desc])
+    @classifications ||= Classification.all
   end
 
 end
