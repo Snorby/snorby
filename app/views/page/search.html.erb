@@ -1,5 +1,17 @@
 <%= title "Search" %>
 
+<%= stylesheet 'jquery' %>
+<%= javascript :footer, 'daterangepicker' %>
+
+<% content_for :footer do %>
+
+	<script type="text/javascript">
+		$('.datepicker').daterangepicker();
+	</script>
+
+<% end %>
+
+
 <div id='search' class='boxit page grid_12'>
 	
 	<%= form_tag results_path, :method => :get do %>
@@ -23,7 +35,7 @@
 			
 			<div class='grid_4 alpha'>
 				<%= label_tag "Timestamp" %><br />
-				<%= text_field_tag '[search][timestamp]', params[:timestamp], :placeholder => 'Timestamp' %>
+				<%= text_field_tag '[search][timestamp]', params[:timestamp], :placeholder => 'Timestamp', :class => 'datepicker' %>
 			</div>
 			
 			<div class='grid_4 alpha'>
@@ -49,16 +61,6 @@
 			<div class='grid_4 alpha'>
 				<%= label_tag 'Select Severity' %><br />
 				<%= select_tag '[search][severity]', dropdown_select_tag(Severity.all, :sig_id, true) %>
-			</div>
-			
-			<div class='grid_4 alpha'>
-				<%= label_tag 'Show Only Queued Events' %><br />
-				<%= check_box_tag '[search][queued]', 0 %>
-			</div>
-			
-			<div class='grid_4 alpha'>
-				<%= label_tag 'Show Only Events With Notes' %><br />
-				<%= check_box_tag '[search][notes]', 0 %>
 			</div>
 			
 		</div>

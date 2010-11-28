@@ -295,6 +295,16 @@ class Event
 
   def self.search(params)
     @search = {}
+    
+    if !params[:timestamp].to_i.zero?
+      if params[:timestamp] =~ /\s\-\s/
+        start_time, end_time = params[:timestamp].split(' - ')
+        @search.merge!({:conditions => ['timestamp >= ? AND timestamp <= ?', Chronic.parse(start_time).beginning_of_day, Chronic.parse(end_time).end_of_day]})
+      else
+        @search.merge!({:timestamp.gte => Chronic.parse(params[:timestamp]).beginning_of_day})
+      end
+    end
+    
     @search.merge!({ Event.sid => params[:sid] }) if params[:sid] unless params[:sid].to_i.zero?
 
     if params[:severity].to_i.zero?
@@ -313,12 +323,11 @@ class Event
 
     @search.merge!({ :"ip.ip_dst" => IPAddr.new("#{params[:ip_dst]}") }) unless (params[:ip_dst] == "") || !params.has_key?(:ip_dst)
 
-    # Ports
-    # @search.merge!({:conditions => {:"tcp.tcp_sport" => params[:src_port].to_i, :"udp.udp_sport" => params[:src_port].to_i} }) unless params[:src_port].to_i.zero?
-    # @search.merge!({ :"tcp.tcp_dport".like => params[:dst_port].to_i, :"udp.udp_dport".like => params[:dst_port].to_i }) unless params[:dst_port].to_i.zero?
-
     @search.merge!({ :notes_count.gt => params[:notes_count] }) if params.has_key?(:notes_count)
+    
     @search.merge!({ :users_count.gt => params[:users_count] }) if params.has_key?(:users_count)
+    
+    puts @search.to_yaml
     
     return all(@search) if params[:src_port].to_i.zero? && params[:dst_port].to_i.zero?
     
