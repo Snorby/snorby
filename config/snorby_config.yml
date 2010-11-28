@@ -1,11 +1,10 @@
 development:
   domain: localhost:3000
-  mailer_address: 'snorby@example.com'
 
 test:
   domain: localhost:3000
-  mailer_address: 'snorby@example.com'
 
+# You Should Only Need To Set This Option
+# Example: localhost:3000
 production:
   domain: mephux.gotdns.com:8080
-  mailer_address : 'snorby@example.com'

@@ -30,6 +30,9 @@ namespace :snorby do
     # Load Default Records
     Rake::Task['db:seed'].invoke
     
+    # bundle all css/js packages
+    Rake::Task['asset:packager:build_all'].invoke
+    
   end
   
   desc 'Reset'

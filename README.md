@@ -39,7 +39,41 @@ Snorby is a ruby on rails web application for network security monitoring that i
 
 	`$ bundle install`
 	
-* All Done
+* Run The Snorby Setup
+
+	`rake snorby:setup`
+	
+* Edit The Snorby Configuration File
+
+	`snorby/app/config/snorby_config.yml`
+	
+* Edit The Snorby Mail Configurations
+
+	`snorby/app/initializers/mail_config.rb`
+	
+* Once all options have been configured and snorby is up and running
+
+	* Make sure you start the Snorby Worker from the Administration page.
+	* Make sure that both the `DailyCache` and `SensorCache` jobs are running.
+	
+## Helpful Commands
+
+You can open the rails console at anytime and interact with the Snorby environment. Below are a few helpful commands that may be useful:
+
+ * Open the rails console by typing `rails c` in the Snorby root directory
+
+	* Snorby Worker
+
+	`Snorby::Worker.stop 			# Stop The Snorby Worker`
+	`Snorby::Worker.start 		# Start The Snorby Worker`
+	`Snorby::Worker.restart 	# Restart The Snorby Worker`
+
+	* Snorby Cache Jobs
+	
+	`Snorby::Jobs::SensorCacheJob.new(true).perform # This will manually run the sensor cache job - pass true or false for verbose output`
+	`Snorby::Jobs::DailyCacheJob.new(true).perform 	# This will manually run the daily cache job - once again passing true or false for verbose output`
+	`Snorby::Jobs.clear_cache												# Clear All Snorby Cache - You must pass true to this method call for confirmation.`
+	`Snorby::Jobs.run_now!													# If the Snorby worker is running this will start the cache jobs and set the run_at time for the current time.`											
 
 ## Coming Soon
 
