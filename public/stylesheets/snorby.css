@@ -3046,6 +3046,18 @@ div.dashboard-graph{
 	overflow: hidden;
 }
 
+#search-box input{
+	width: 270px;
+}
+
+#search-box select{
+	width: 285px;
+}
+
+#search-box div{
+	margin-bottom: 15px;
+}
+
 /* @end */
 
 /* @group SnorbyBox */

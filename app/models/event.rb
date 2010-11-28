@@ -55,7 +55,7 @@ class Event
     self.signature.down(:events_count) if self.signature
     # Note: Need to decrement Severity, Sensor and User Counts
   end
-  
+
   def signature_url
     if Setting.signature_lookup?
       url = Setting.find(:signature_lookup)
@@ -313,11 +313,22 @@ class Event
 
     @search.merge!({ :"ip.ip_dst" => IPAddr.new("#{params[:ip_dst]}") }) unless (params[:ip_dst] == "") || !params.has_key?(:ip_dst)
 
+    # Ports
+    # @search.merge!({:conditions => {:"tcp.tcp_sport" => params[:src_port].to_i, :"udp.udp_sport" => params[:src_port].to_i} }) unless params[:src_port].to_i.zero?
+    # @search.merge!({ :"tcp.tcp_dport".like => params[:dst_port].to_i, :"udp.udp_dport".like => params[:dst_port].to_i }) unless params[:dst_port].to_i.zero?
+
     @search.merge!({ :notes_count.gt => params[:notes_count] }) if params.has_key?(:notes_count)
-
     @search.merge!({ :users_count.gt => params[:users_count] }) if params.has_key?(:users_count)
-
-    all(@search)
+    
+    return all(@search) if params[:src_port].to_i.zero? && params[:dst_port].to_i.zero?
+    
+    if params[:dst_port].to_i.zero?
+      return all(@search) && all(:"tcp.tcp_sport" => params[:src_port].to_i) | all(:"udp.udp_sport" => params[:src_port].to_i)
+    elsif params[:src_port].to_i.zero?
+      return all(@search) && all(:"tcp.tcp_dport" => params[:dst_port].to_i) | all(:"udp.udp_dport" => params[:dst_port].to_i)
+    else
+      return all(@search) && (all(:"tcp.tcp_sport" => params[:src_port].to_i) | all(:"udp.udp_sport" => params[:src_port].to_i) & all(:"tcp.tcp_dport" => params[:dst_port].to_i) | all(:"udp.udp_dport" => params[:dst_port].to_i))
+    end
   end
 
 end

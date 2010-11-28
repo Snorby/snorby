@@ -7,30 +7,58 @@
 		<div id='search-box'>
 			
 			<div class='grid_4 alpha'>
+				<%= label_tag "Signature" %><br />
 				<%= text_field_tag '[search][signature_name]', params[:signature_name], :placeholder => 'Signature Name' %>
 			</div>
 			
 			<div class='grid_4 alpha'>
+				<%= label_tag "Source Address" %><br />
 				<%= text_field_tag '[search][ip_src]', params[:ip_src], :placeholder => 'Source Address' %>
 			</div>
 			
 			<div class='grid_4 alpha'>
+				<%= label_tag "Destination Address" %><br />
 				<%= text_field_tag '[search][ip_dst]', params[:ip_dst], :placeholder => 'Destination Address' %>
 			</div>
 			
 			<div class='grid_4 alpha'>
-				<%= label_tag 'Sensor' %><br />
+				<%= label_tag "Timestamp" %><br />
+				<%= text_field_tag '[search][timestamp]', params[:timestamp], :placeholder => 'Timestamp' %>
+			</div>
+			
+			<div class='grid_4 alpha'>
+				<%= label_tag "Source Port" %><br />
+				<%= text_field_tag '[search][src_port]', params[:src_port], :placeholder => 'Source Port' %>
+			</div>
+			
+			<div class='grid_4 alpha'>
+				<%= label_tag "Destination Port" %><br />
+				<%= text_field_tag '[search][dst_port]', params[:dst_port], :placeholder => 'Destination Port' %>
+			</div>
+			
+			<div class='grid_4 alpha'>
+				<%= label_tag 'Select Sensor' %><br />
 				<%= select_tag '[search][sid]', dropdown_select_tag(Sensor.all, :sid, true) %>
 			</div>
 			
 			<div class='grid_4 alpha'>
-				<%= label_tag 'Classification' %><br />
+				<%= label_tag 'Select Classification' %><br />
 				<%= select_tag '[search][classification_id]', dropdown_select_tag(Classification.all, :id, true, ["<option value='null'>Unclassified</option>"]) %>
 			</div>
 			
 			<div class='grid_4 alpha'>
-				<%= label_tag 'Severity' %><br />
+				<%= label_tag 'Select Severity' %><br />
 				<%= select_tag '[search][severity]', dropdown_select_tag(Severity.all, :sig_id, true) %>
+			</div>
+			
+			<div class='grid_4 alpha'>
+				<%= label_tag 'Show Only Queued Events' %><br />
+				<%= check_box_tag '[search][queued]', 0 %>
+			</div>
+			
+			<div class='grid_4 alpha'>
+				<%= label_tag 'Show Only Events With Notes' %><br />
+				<%= check_box_tag '[search][notes]', 0 %>
 			</div>
 			
 		</div>
