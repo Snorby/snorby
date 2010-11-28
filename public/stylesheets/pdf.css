@@ -91,7 +91,11 @@ h1{
 h2{
 	margin: 0;
 	padding: 0;
-	font-size: 1.0em;
+	font-size: 1.2em;
+	color: #3d3e41;
+	font-weight: bold;
+	text-decoration: none;
+	font-variant: normal;
 }
 
 /* @end */
@@ -103,7 +107,7 @@ div.table-holder{
 	display: block;
 	position: relative;
 	overflow: hidden;
-	padding-bottom: 5px;
+	margin-bottom: 10px;
 }
 
 table{
