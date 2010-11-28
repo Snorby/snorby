@@ -21,19 +21,19 @@ Snorby is a ruby on rails web application for network security monitoring that i
 
 	* Mac OSX:
 	
-		`$ brew install imagemagick`
+		`brew install imagemagick`
 
 	* Linux:
 	
-		`$ apt-get install imagemagick`
+		`apt-get install imagemagick`
 
 * Install Gem Dependencies
 
-	`$ bundle install`
+	`bundle install`
 	
 * Install wkhtmltopdf
 
-	`pdfkit --install-wkhtmltopdf`
+	`pdfkit --install-wkhtmltopdf # If this fails - visit http://code.google.com/p/wkhtmltopdf/ for more information`
 	
 * Get Snorby from the download section or use the latest edge release via git.
 
