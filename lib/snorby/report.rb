@@ -61,12 +61,13 @@ module Snorby
 
       pdf = PDFKit.new(av.render(:template => "page/dashboard.pdf.erb", :layout => 'layouts/pdf.html.erb'))
       pdf.stylesheets << Rails.root.join("public/stylesheets/pdf.css")
-      #pdf.to_file(Rails.root.join("tmp/blah.pdf"))
+      
       data = {
         :start_time => @start_time,
         :end_time => @end_time,
         :pdf => pdf.to_pdf
       }
+      
       return data
     end
 
