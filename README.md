@@ -72,13 +72,17 @@ You can open the rails console at anytime and interact with the Snorby environme
 
 	* Snorby Cache Jobs
 	
-	`Snorby::Jobs::SensorCacheJob.new(true).perform # This will manually run the sensor cache job - pass true or false for verbose output`
+	# This will manually run the sensor cache job - pass true or false for verbose output
+	Snorby::Jobs::SensorCacheJob.new(true).perform`
 	
-	`Snorby::Jobs::DailyCacheJob.new(true).perform 	# This will manually run the daily cache job - once again passing true or false for verbose output`
+	# This will manually run the daily cache job - once again passing true or false for verbose output
+	Snorby::Jobs::DailyCacheJob.new(true).perform
 	
-	`Snorby::Jobs.clear_cache												# Clear All Snorby Cache - You must pass true to this method call for confirmation.`
+	# Clear All Snorby Cache - You must pass true to this method call for confirmation.
+	Snorby::Jobs.clear_cache
 	
-	`Snorby::Jobs.run_now!													# If the Snorby worker is running this will start the cache jobs and set the run_at time for the current time.`											
+	# If the Snorby worker is running this will start the cache jobs and set the run_at time for the current time.
+	Snorby::Jobs.run_now!								
 
 ## Coming Soon
 
