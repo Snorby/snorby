@@ -710,6 +710,20 @@ var Snorby = {
 	
 	hotkeys: function(){
 	
+		$(document).bind('keydown', 'ctrl+shift+h', function() {
+			$.fancybox({
+				padding: 0,
+				centerOnScroll: true,
+        zoomSpeedIn: 300, 
+        zoomSpeedOut: 300,
+				overlayShow: true,
+				overlayOpacity: 0.5,
+				overlayColor: '#000',
+				href: '/events/hotkey'
+			});
+			return false;
+		});
+	
 		$(document).bind('keydown', 'ctrl+2', function() {
 			window.location = '/events';
 			return false;

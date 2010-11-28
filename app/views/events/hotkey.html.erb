@@ -1,0 +1,62 @@
+<%= snorby_box("Snorby Hotkeys") do %>
+
+	<div id='snorbybox-content' class=''>
+			
+		<div id="hotkey-section">
+			<h2>Events</h2>
+			
+			<dl>
+				
+				<dd><span class='hotkey'>← <strong>or</strong> →</span> Paginate Left & Right</dd>
+				
+				<dd><span class='hotkey'>ctrl <em>+</em> ← <strong>or</strong> ctrl <em>+</em> →</span> Move To First & Last Page</dd>
+				
+				<dd><span class='hotkey'>ctrl <em>+</em> shift <em>+</em> a</span> Select All Events on Page</dd>
+				
+				<dd><span class='hotkey'>ctrl <em>+</em> shift <em>+</em> 1</span> Select All High Severity Events</dd>
+				
+				<dd><span class='hotkey'>ctrl <em>+</em> shift <em>+</em> 2</span> Select All Medium Severity Events</dd>
+				
+				<dd><span class='hotkey'>ctrl <em>+</em> shift <em>+</em> 3</span> Select All Low Severity Events</dd>
+				
+				<dd><span class='hotkey'>shift <em>+</em> ← <strong>or</strong> shift <em>+</em> →</span> Paginate Notes Left & Right</dd>
+				
+			</dl>
+			
+		</div>
+		
+		<div id="hotkey-section">
+			<h2>Classifications</h2>
+			
+			<dl>
+				
+				<% @classifications.each do |klass| %>
+
+				<dd><span class='hotkey'><%= klass.shortcut %></span> <%= klass.name %></dd>
+
+				<% end %>
+				
+			</dl>
+			
+		</div>
+		
+		<div id="hotkey-section">
+			<h2>Other</h2>
+			
+			<dl>
+				
+				<dd><span class='hotkey'>ctrl <em>+</em> shift <em>+</em> h</span> This Help Menu</dd>
+				
+				<dd><span class='hotkey'>ctrl <em>+</em> 1</span> Your Event Queue</dd>
+				
+				<dd><span class='hotkey'>ctrl <em>+</em> 2</span> Event Listing</dd>
+				
+				<dd><span class='hotkey'>ctrl <em>+</em> shift <em>+</em> s</span> Search</dd>
+				
+			</dl>
+			
+		</div>
+
+	</div>
+
+<% end %>

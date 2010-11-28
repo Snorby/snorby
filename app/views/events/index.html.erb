@@ -43,7 +43,8 @@
 	<%= render :partial => 'layouts/notify' %>
 <% end %>
 
-<%= title "Listing Events <i class='title-page-count'>#{@events.pager.per_page * @events.pager.current_page} of #{@events.pager.total}</i>".html_safe, 'Listing Events' do -%>
+<%= title "Listing Events".html_safe, 'Listing Events' do -%>
+	<%= menu_item "Hotkeys", hotkey_events_path, 'events/keyboard.png', :class => 'snorbybox' %>
 	<%= render :partial => 'events/menu' %>
 <%- end -%>
 

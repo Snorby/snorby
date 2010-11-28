@@ -3048,5 +3048,78 @@ div.dashboard-graph{
 
 /* @end */
 
+/* @group SnorbyBox */
+
+#snorbybox-content{
+	display: block;
+	overflow: hidden;
+	position: relative;
+}
+
+#snorbybox-content h2{
+	font-size: 1.4em;
+	color: #1f1f1f;
+	font-weight: bold;
+	text-decoration: none;
+	font-variant: normal;
+	margin-bottom: 10px;
+}
+
+#snorbybox-content #hotkey-section{
+	width: 365px;
+	float: left;
+	margin-bottom: 15px;
+}
+
+#snorbybox-content #hotkey-section dl{
+	display: block;
+	position: relative;
+	overflow: hidden;
+}
+
+#snorbybox-content #hotkey-section dl dd{
+	display: block;
+	overflow: hidden;
+	position: relative;
+	height: 30px;
+	line-height: 30px;
+	color: #2e2e2e;
+	font-weight: bold;
+	text-decoration: none;
+	font-variant: normal;
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+#snorbybox-content #hotkey-section dl dd span.hotkey{
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+	padding: 5px;
+	background-color: #2774fb;
+	color: #fff;
+	font-weight: bold;
+	text-decoration: none;
+	font-variant: normal;
+	margin-right: 10px;
+	text-shadow: #000 0 1px 0;
+}
+
+#snorbybox-content #hotkey-section dl dd span.hotkey strong{
+	color: #c9c8ce;
+	text-transform: uppercase;
+}
+
+#snorbybox-content #hotkey-section dl dd span.hotkey em{
+	color: #c3c3c3;
+	font-weight: normal;
+	text-decoration: none;
+	font-variant: normal;
+	text-shadow: none;
+	font-style: normal;
+}
+
+/* @end */
+
 
 

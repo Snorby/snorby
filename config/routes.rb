@@ -46,6 +46,7 @@ Snorby::Application.routes.draw do
     end
     
     collection do
+      get :hotkey
       post :export
       get :lookup
       get :history
