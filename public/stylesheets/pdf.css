@@ -52,10 +52,13 @@ a:link, a:visited {
 	position: relative;
 	overflow: hidden;
 	text-align: left;
-	padding: 10px 10px 5px;
 	margin-bottom: 5px;
 	border-bottom: 2px solid #ededed;
 	font-size: 0.8em;
+	padding-bottom: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-top: 0;
 }
 
 #header img.logo{
@@ -78,7 +81,7 @@ a:link, a:visited {
 
 h1{
 	font-size: 3.0em;
-	color: #313131;
+	color: #000;
 	font-weight: bold;
 	text-decoration: none;
 	font-variant: normal;
@@ -86,6 +89,7 @@ h1{
 	margin-top: 0;
 	padding-bottom: 0;
 	margin-bottom: 0;
+	padding-top: 0;
 }
 
 h2{

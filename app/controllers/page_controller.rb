@@ -2,7 +2,7 @@ class PageController < ApplicationController
   
   def dashboard
     
-    @range = params[:range] || 'today'
+    @range = params[:range].blank? ? 'today' : params[:range]
     
     set_defaults
     
