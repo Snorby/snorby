@@ -1,4 +1,4 @@
-# Snorby - A Web interface for Snort.
+# Snorby - All About Simplicity.
 # 
 # Copyright (c) 2010 Dustin Willis Webber (dustin.webber at gmail.com)
 # 

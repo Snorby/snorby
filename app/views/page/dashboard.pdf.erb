@@ -8,7 +8,199 @@
 <% content_for :footer do %>
 
 	<script type="text/javascript">
+		
+	chart = new Highcharts.Chart({
+	      chart: {
+	         renderTo: 'events-graph',
+	         defaultSeriesType: 'spline',
+	         marginRight: 80,
+						marginLeft: 80,
+						marginTop: 50,
+	         marginBottom: 50
+	      },
+	      title: {
+	         text: 'Event Count vs Time By Sensor',
+	         x: -20 //center
+	      },
+				plotOptions: { series: { enableMouseTracking: false, shadow: false, animation: false } },
+	      xAxis: {
+					categories: [<%= @axis %>],
+	        title: {
+							margin: 10,
+							<% if (@range == 'year' || @range == 'quarter') %>
+								text: 'Month of Year'
+							<% elsif (@range == 'month' || @range == 'last_month') %>
+								text: 'Date of Month'
+							<% elsif (@range == 'week' || @range == 'last_week') %>
+								text: 'Date Of Week'
+							<% else %>
+								text: 'Hour of Day'
+							<% end %>
+	         }
+	      },
+	      yAxis: {
+	         title: {
+	            text: 'Event Count'
+	         },
+	         plotLines: [{
+	            value: 0,
+	            width: 1,
+	            color: '#808080'
+	         }]
+	      },
+	      tooltip: {
+		       formatter: function() {
+	                   return '<b>'+ this.series.name +'</b><br/>'+ this.y + ' Events';
+	         }
+        },
+	      legend: {
+	         layout: 'vertical',
+	         align: 'right',
+	         verticalAlign: 'top',
+	         x: 0,
+	         y: 0,
+	         borderWidth: 0,
+					 borderRadius: 0,
+					 borderColor: '#ddd',
+					 backgroundColor: '#fff'
+	      },
+	      series: <%= @sensor_metrics.to_json.html_safe %>
+	   });
 	
+		chart2 = new Highcharts.Chart({
+		      chart: {
+		         renderTo: 'protocol-graph',
+		         defaultSeriesType: 'spline',
+		         marginRight: 80,
+							marginLeft: 80,
+							marginTop: 50,
+		         marginBottom: 50
+		      },
+		      title: {
+		         text: 'Protocol Count vs Time',
+		         x: -20 //center
+		      },
+		      xAxis: {
+						categories: [<%= @axis %>],
+		        title: {
+								margin: 10,
+								<% if (@range == 'year' || @range == 'quarter') %>
+									text: 'Month of Year'
+								<% elsif (@range == 'month' || @range == 'last_month') %>
+									text: 'Date of Month'
+								<% elsif (@range == 'week' || @range == 'last_week') %>
+									text: 'Date Of Week'
+								<% else %>
+									text: 'Hour of Day'
+								<% end %>
+		         }
+		      },
+					plotOptions: { series: { enableMouseTracking: false, shadow: false, animation: false } },
+		      yAxis: {
+		         title: {
+		            text: 'Protocol Count'
+		         },
+		         plotLines: [{
+		            value: 0,
+		            width: 1,
+		            color: '#808080'
+		         }]
+		      },
+		      tooltip: {
+		         formatter: function() {
+		                   return '<b>'+ this.series.name +'</b><br/>'+ this.y + ' Events';
+		         }
+		      },
+		      legend: {
+		         layout: 'vertical',
+		         align: 'right',
+		         verticalAlign: 'top',
+		         x: 0,
+		         y: 0,
+		         borderWidth: 0,
+						 borderRadius: 0,
+						 borderColor: '#ddd',
+						 backgroundColor: '#fff'
+		      },
+		      series: [{
+						name: 'TCP',
+						data: <%= @tcp %>
+					},{
+						name: 'UDP',
+						data: <%= @udp %>
+					},{
+						name: 'ICMP',
+						data: <%= @icmp %>
+					}]
+		   });
+		
+			chart3 = new Highcharts.Chart({
+			      chart: {
+			         renderTo: 'severity-graph',
+			         defaultSeriesType: 'spline',
+			         marginRight: 80,
+								marginLeft: 80,
+								marginTop: 50,
+			         marginBottom: 50
+			      },
+			      title: {
+			         text: 'Severity Count vs Time',
+			         x: -20 //center
+			      },
+						plotOptions: { series: { enableMouseTracking: false, shadow: false, animation: false } },
+			      xAxis: {
+							categories: [<%= @axis %>],
+			        title: {
+									margin: 10,
+									<% if (@range == 'year' || @range == 'quarter') %>
+										text: 'Month of Year'
+									<% elsif (@range == 'month' || @range == 'last_month') %>
+										text: 'Date of Month'
+									<% elsif (@range == 'week' || @range == 'last_week') %>
+										text: 'Date Of Week'
+									<% else %>
+										text: 'Hour of Day'
+									<% end %>
+			         }
+			      },
+			      yAxis: {
+			         title: {
+			            text: 'Severity Count'
+			         },
+			         plotLines: [{
+			            value: 0,
+			            width: 1,
+			            color: '#808080'
+			         }]
+			      },
+			      tooltip: {
+			         formatter: function() {
+			                   return '<b>'+ this.series.name +'</b><br/>'+ this.y + ' Events';
+			         }
+			      },
+			      legend: {
+			         layout: 'vertical',
+			         align: 'right',
+			         verticalAlign: 'top',
+			         x: 0,
+			         y: 0,
+			         borderWidth: 0,
+							 borderRadius: 0,
+							 borderColor: '#ddd',
+							 backgroundColor: '#fff'
+			      },
+			      series: [{
+							name: 'High Severity',
+							data: <%= @high %>
+						},{
+							name: 'Medium Severity',
+							data: <%= @medium %>
+						},{
+							name: 'Low Severity',
+							data: <%= @low %>
+						}]
+			   });
+		
 		$('#sev1-graph').sparkline(<%= @high %>, { barWidth: 3, height: 25, type: 'bar', barColor: sev1_bg_color } );
 		$('#sev2-graph').sparkline(<%= @medium %>, { barWidth: 3, height: 25, type: 'bar', barColor: sev2_bg_color } );
 		$('#sev3-graph').sparkline(<%= @low %>, { barWidth: 3, height: 25, type: 'bar', barColor: sev3_bg_color } );
@@ -31,6 +223,9 @@
 		</tr>
 		<% end %>
 	</table>
+	
+	<div id='events-graph' style='' class='dashboard-graph'></div>
+	
 </div>
 
 <br />
@@ -51,6 +246,9 @@
 			<td style='width:100px'><%= @event_count %></td>
 		</tr>
 	</table>
+	
+	<div id='severity-graph' style='' class='dashboard-graph'></div>
+	
 </div>
 
 <br />
@@ -71,6 +269,9 @@
 			<td style='width:100px'><%= @event_count %></td>
 		</tr>
 	</table>
+	
+	<div id='protocol-graph' style='' class='dashboard-graph'></div>
+	
 </div>
 
 <br />
@@ -106,12 +307,18 @@
 		</tr>
 
 		<% source_total = @src_metrics.sort{|a,b| -1*(a[1]<=>b[1]) }.map(&:last).sum %>
+		<% src_count = 0 %>
 		<% @src_metrics.sort{|a,b| -1*(a[1]<=>b[1]) }.each do |name, count| %>
+		
+		<% break if src_count >= 10 %>
 			<tr>
 				<td><%= name %></td>
 				<td style='width:100px'><%= percentage_for(count, source_total) %>%</td>
 				<td style='width:100px'><%= count %></td>
 			</tr>
+			
+			<% src_count += 1 %>
+			
 		<% end %>
 
 	</table>
@@ -129,12 +336,18 @@
 		</tr>
 
 		<% destination_total = @src_metrics.sort{|a,b| -1*(a[1]<=>b[1]) }.map(&:last).sum %>
+		<% dst_count = 0 %>
 		<% @dst_metrics.sort{|a,b| -1*(a[1]<=>b[1]) }.each do |name, count| %>
+		
+		<% break if dst_count >= 10 %>
 			<tr>
 				<td><%= name %></td>
 				<td style='width:100px'><%= percentage_for(count, destination_total) %>%</td>
 				<td style='width:100px'><%= count %></td>
 			</tr>
+			
+			<% dst_count += 1 %>
+			
 		<% end %>
 
 	</table>

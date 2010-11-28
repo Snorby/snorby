@@ -1,3 +1,21 @@
+# Snorby - All About Simplicity.
+# 
+# Copyright (c) 2010 Dustin Willis Webber (dustin.webber at gmail.com)
+# 
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
 module Snorby
   
   module Report
@@ -5,23 +23,20 @@ module Snorby
     include Rails.application.routes.url_helpers # brings ActionDispatch::Routing::UrlFor
     include ActionView::Helpers::TagHelper
     
-    def self.build_report(range='today')
-
-      params = {:format => :pdf}
-      params[:range] = range
-
-      set_defaults(params[:range])
+    def self.build_report(range='yesterday')
+      @range = range
+      set_defaults
 
       @src_metrics = @cache.src_metrics
       @dst_metrics = @cache.dst_metrics
 
-      @tcp = @cache.protocol_count(:tcp, params[:range].to_sym)
-      @udp = @cache.protocol_count(:udp, params[:range].to_sym)
-      @icmp = @cache.protocol_count(:icmp, params[:range].to_sym)
-      @high = @cache.severity_count(:high, params[:range].to_sym)
-      @medium = @cache.severity_count(:medium, params[:range].to_sym)
-      @low = @cache.severity_count(:low, params[:range].to_sym)
-      @sensor_metrics = @cache.sensor_metrics(params[:range].to_sym)
+      @tcp = @cache.protocol_count(:tcp, @range.to_sym)
+      @udp = @cache.protocol_count(:udp, @range.to_sym)
+      @icmp = @cache.protocol_count(:icmp, @range.to_sym)
+      @high = @cache.severity_count(:high, @range.to_sym)
+      @medium = @cache.severity_count(:medium, @range.to_sym)
+      @low = @cache.severity_count(:low, @range.to_sym)
+      @sensor_metrics = @cache.sensor_metrics(@range.to_sym)
 
       @signature_metrics = @cache.signature_metrics
 
@@ -73,9 +88,9 @@ module Snorby
 
     private
 
-      def self.set_defaults(range)
+      def self.set_defaults
 
-        case range.to_sym
+        case @range.to_sym
         when :today
           @cache = Cache.today
           @start_time = Time.now.beginning_of_day

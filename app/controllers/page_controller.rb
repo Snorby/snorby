@@ -1,21 +1,21 @@
 class PageController < ApplicationController
   
   def dashboard
-
-    params[:range] = 'today' unless params[:range]
     
-    set_defaults(params[:range])
+    @range = params[:range] || 'today'
+    
+    set_defaults
     
     @src_metrics = @cache.src_metrics
     @dst_metrics = @cache.dst_metrics
     
-    @tcp = @cache.protocol_count(:tcp, params[:range].to_sym)
-    @udp = @cache.protocol_count(:udp, params[:range].to_sym)
-    @icmp = @cache.protocol_count(:icmp, params[:range].to_sym)
-    @high = @cache.severity_count(:high, params[:range].to_sym)
-    @medium = @cache.severity_count(:medium, params[:range].to_sym)
-    @low = @cache.severity_count(:low, params[:range].to_sym)
-    @sensor_metrics = @cache.sensor_metrics(params[:range].to_sym)
+    @tcp = @cache.protocol_count(:tcp, @range.to_sym)
+    @udp = @cache.protocol_count(:udp, @range.to_sym)
+    @icmp = @cache.protocol_count(:icmp, @range.to_sym)
+    @high = @cache.severity_count(:high, @range.to_sym)
+    @medium = @cache.severity_count(:medium, @range.to_sym)
+    @low = @cache.severity_count(:low, @range.to_sym)
+    @sensor_metrics = @cache.sensor_metrics(@range.to_sym)
     
     @signature_metrics = @cache.signature_metrics
     
@@ -33,7 +33,7 @@ class PageController < ApplicationController
     @recent_events = Event.all(:sig_id => sigs).group_by { |x| x.sig_id }.map(&:last).map(&:first)
     
     respond_to do |format|
-      format.html
+      format.html # { render :template => 'page/dashboard.pdf.erb', :layout => 'pdf.html.erb' }
       format.js
       format.pdf do
         render :pdf => "Snorby Report - #{@start_time.strftime('%A-%B-%d-%Y-%I-%M-%p')} - #{@end_time.strftime('%A-%B-%d-%Y-%I-%M-%p')}", :template => "page/dashboard.pdf.erb", :layout => 'pdf.html.erb', :stylesheets => ["pdf"]
@@ -53,9 +53,9 @@ class PageController < ApplicationController
   
   private
   
-  def set_defaults(range)
+  def set_defaults
   
-    case range.to_sym
+    case @range.to_sym
     when :today
       @cache = Cache.today
       @start_time = Time.now.beginning_of_day

@@ -15,9 +15,6 @@ module Snorby
   raw_config = File.read("config/snorby_config.yml")
   CONFIG = YAML.load(raw_config)[Rails.env].symbolize_keys
   
-  # Snorby Version
-  VERSION = '2.0.0'
-  
   class Application < Rails::Application
     
     require 'pdfkit'

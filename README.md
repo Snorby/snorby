@@ -51,7 +51,7 @@ Snorby is a ruby on rails web application for network security monitoring that i
 
 ## License
 
-Snorby - A Web interface for Snort.
+Snorby - All About Simplicity.
 
 Copyright (c) 2010 Dustin Willis Webber (dustin.webber at gmail.com)
 

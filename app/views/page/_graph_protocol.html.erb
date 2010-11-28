@@ -16,14 +16,14 @@
 		         x: -20 //center
 		      },
 		      xAxis: {
-		        categories: [<%= @axis %>],
+						categories: [<%= @axis %>],
 		        title: {
 								margin: 10,
-								<% if (params[:range] == 'year' || params[:range] == 'quarter') %>
+								<% if (@range == 'year' || @range == 'quarter') %>
 									text: 'Month of Year'
-								<% elsif (params[:range] == 'month' || params[:range] == 'last_month') %>
+								<% elsif (@range == 'month' || @range == 'last_month') %>
 									text: 'Date of Month'
-								<% elsif (params[:range] == 'week' || params[:range] == 'last_week') %>
+								<% elsif (@range == 'week' || @range == 'last_week') %>
 									text: 'Date Of Week'
 								<% else %>
 									text: 'Hour of Day'

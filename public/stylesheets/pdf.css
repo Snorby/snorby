@@ -147,6 +147,17 @@ table td div{
 
 /* @group Helpers */
 
+.dashboard-graph{
+	display: block;
+	position: relative;
+	overflow: hidden;
+	background-color: #fff;
+	margin-top: 20px;
+	margin-bottom: 5px;
+	width: 680px;
+	height: 300px;
+}
+
 .page-break  { display:block; page-break-before:always; }
 
 /* @end */
