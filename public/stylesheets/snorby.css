@@ -1246,8 +1246,10 @@ table{
 	position: relative;
 	overflow: hidden;
 	margin-bottom: 10px;
-	background: url(../images/table-tooltip.png) no-repeat 95% top;
-	height: 13px;
+	background: url(../images/table-tooltip.png) repeat-x 0 top;
+	height: 9px;
+	margin-left: 8px;
+	margin-right: 6px;
 }
 
 table th{
