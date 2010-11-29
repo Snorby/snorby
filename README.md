@@ -31,7 +31,7 @@ http://dl.dropbox.com/u/38088/snorby2.png
 	
 		`apt-get install imagemagick`
 
-* Install Gem Dependencies
+* Install Gem Dependencies (make sure you have bundler installed: `gem install bundler`)
 
 	`bundle install`
 	
