@@ -31,7 +31,7 @@ http://dl.dropbox.com/u/38088/snorby2.png
 	
 		`apt-get install imagemagick`
 
-* Install Gem Dependencies (make sure you have bundler installed: `gem install bundlerg`)
+* Install Gem Dependencies (make sure you have bundler installed: `gem install bundler`)
 
 	`bundle install`
 	
@@ -50,6 +50,9 @@ http://dl.dropbox.com/u/38088/snorby2.png
 * Run The Snorby Setup
 
 	`rake snorby:setup`
+	
+	** Note ** If you get the follow error `No such file or directory - /root/snorby/tmp/snorby_packaged_uncompressed.js`
+	please mkdir log/ and tmp/ in the Snorby root directory.
 	
 * Edit The Snorby Configuration File
 
