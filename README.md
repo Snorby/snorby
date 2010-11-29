@@ -67,19 +67,21 @@ http://dl.dropbox.com/u/38088/snorby2.png
 	* Make sure you start the Snorby Worker from the Administration page.
 	* Make sure that both the `DailyCache` and `SensorCache` jobs are running.
 	
-## Helpful Commands
+# Helpful Commands
 
 You can open the rails console at anytime and interact with the Snorby environment. Below are a few helpful commands that may be useful:
 
  * Open the rails console by typing `rails c` in the Snorby root directory
+ * You should never really need to run the below commands. They are all available within the
+	Snorby interface but documented here just in case.
 
-# Snorby Worker
+**Snorby Worker**
 
 	Snorby::Worker.stop      # Stop The Snorby Worker
 	Snorby::Worker.start     # Start The Snorby Worker
 	Snorby::Worker.restart   # Restart The Snorby Worker
 
-# Snorby Cache Jobs
+**Snorby Cache Jobs**
 	
 	# This will manually run the sensor cache job - pass true or false for verbose output
 	Snorby::Jobs::SensorCacheJob.new(true).perform`
