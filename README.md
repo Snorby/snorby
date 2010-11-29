@@ -51,8 +51,8 @@ http://dl.dropbox.com/u/38088/snorby2.png
 
 	`rake snorby:setup`
 	
-	** Note ** If you get the follow error `No such file or directory - /root/snorby/tmp/snorby_packaged_uncompressed.js`
-	please mkdir log/ and tmp/ in the Snorby root directory.
+	** Note ** If you get the following error: `No such file or directory - /root/snorby/tmp/snorby_packaged_uncompressed.js`
+	Create the following directories in the Snorby root dir: `log/` & `tmp/`
 	
 * Edit The Snorby Configuration File
 
