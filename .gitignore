@@ -14,7 +14,8 @@ rdoc
 doc
 .yardoc
 pkg
-log/
+log/*
+tmp/*
 
 ## PROJECT::SPECIFIC
 public/system/
