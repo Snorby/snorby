@@ -8,6 +8,10 @@
 
 Snorby is a ruby on rails web application for network security monitoring that interfaces with current popular intrusion detection systems (Snort, Suricata and Saga). The basic fundamental concepts behind Snorby are simplicity, organization and power. The project goal is to create a free, open source and highly competitive application for network monitoring for both private and enterprise use.
 
+## Screenshot
+
+http://dl.dropbox.com/u/38088/snorby2.png
+
 ## Requirements
 
 * Snort
