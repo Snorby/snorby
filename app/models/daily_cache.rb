@@ -282,8 +282,6 @@ class DailyCache
         block.call(i) if block
       end
     when :year
-      start_time_method = :beginning_of_year
-      end_time_method = :end_of_year
       Time.now.beginning_of_year.month.upto(Time.now.end_of_year.month) do |i|
         block.call(i) if block
       end
