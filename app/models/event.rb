@@ -164,7 +164,7 @@ class Event
         :ip_src => event.ip.ip_src.to_s,
         :ip_dst => event.ip.ip_dst.to_s,
         :timestamp => event.pretty_time,
-        :message => truncate(event.signature.name, :length => 75, :omission => '...')
+        :message => truncate(event.signature.name, :length => 65, :omission => '...')
       }
     end
     return json
