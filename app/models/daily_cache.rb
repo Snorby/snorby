@@ -262,8 +262,8 @@ class DailyCache
     
     case type.to_sym
     when :week
-      Time.now.beginning_of_week.day.upto(Time.now.end_of_week.day) do |i|
-        block.call(i) if block
+      ((Time.now.beginning_of_week.to_date)..(Time.now.end_of_week.to_date)).to_a.each do |i|
+        block.call(i.day) if block
       end
     when :last_week
       ((Time.now - 1.week).beginning_of_week).day.upto((Time.now - 1.week).end_of_week.day) do |i|

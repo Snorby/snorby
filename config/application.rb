@@ -20,7 +20,7 @@ module Snorby
     require 'pdfkit'
         
     PDFKit.configure do |config|
-      #config.wkhtmltopdf = 'path_to_wkhtmltopdf'
+      config.wkhtmltopdf = Snorby::CONFIG[:wkhtmltopdf]
       config.default_options = {
           :page_size => 'Legal',
           :print_media_type => true
