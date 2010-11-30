@@ -20,7 +20,7 @@ module Snorby
     require 'pdfkit'
         
     PDFKit.configure do |config|
-      config.wkhtmltopdf = '/Users/mephux/.rvm/gems/ruby-1.9.2-p0/bin/wkhtmltopdf'
+      #config.wkhtmltopdf = 'path_to_wkhtmltopdf'
       config.default_options = {
           :page_size => 'Legal',
           :print_media_type => true
