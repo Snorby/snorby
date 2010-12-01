@@ -9,7 +9,7 @@ settings = %w(company email signature_lookup daily weekly monthly lookups notes 
 
 Setting.set(:company, 'Snorby.org') unless Setting.company?
 Setting.set(:email, 'snorby@snorby.org') unless Setting.email?
-Setting.set(:signature_lookup, 'http://www.snortid.com/snortid.asp?QueryId=$$gid$$:$$sid$$') unless Setting.signature_lookup?
+Setting.set(:signature_lookup, 'http://rootedyour.com/snortsid?sid=$$gid$$:$$sid$$') unless Setting.signature_lookup?
 Setting.set(:daily, 1) unless Setting.daily?
 Setting.set(:weekly, 1) unless Setting.weekly?
 Setting.set(:monthly, 1) unless Setting.monthly?
