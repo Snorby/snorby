@@ -149,9 +149,10 @@ class DailyCache
         
         range_for_type(type) do |i|
           time_range << "'#{i}'"
-
-          if @cache.has_key?(i.day)
-            count << @cache[i.day].map(&:event_count).sum
+          puts @cache.keys
+          
+          if @cache.has_key?(i)
+            count << @cache[i].map(&:event_count).sum
           else
             count << 0
           end
