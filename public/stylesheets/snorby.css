@@ -2736,7 +2736,7 @@ div.dashboard-graph{
 }
 
 div.dashboard-graph.no-pie-data{
-	background: #fff url(../images/dashboard/pie-no-data.png) no-repeat;
+	background: #fff url(../images/dashboard/pie-no-data.png) no-repeat center;
 	display: block;
 	position: relative;
 	overflow: hidden;
