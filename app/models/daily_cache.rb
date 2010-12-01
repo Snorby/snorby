@@ -46,7 +46,7 @@ class DailyCache
   end
 
   def self.last_month
-    all(:ran_at.gt => (Time.now - 2.months).beginning_of_month, :ran_at.lt => (Time.now - 2.months).end_of_month)
+    all(:ran_at.gt => (Time.now - 1.months).beginning_of_month, :ran_at.lt => (Time.now - 1.months).end_of_month)
   end
 
   def self.this_month
@@ -143,15 +143,20 @@ class DailyCache
       
       @cache = cache_for_type(self, type, sensor)
 
+      puts @cache
+
       if @cache.empty?
+        
         range_for_type(type) do |i|
           time_range << "'#{i}'"
           count << 0
         end
+        
       else
         
         range_for_type(type) do |i|
           time_range << "'#{i}'"
+          puts i
           if @cache.has_key?(i)
             count << @cache[i].map(&:event_count).sum
           else
