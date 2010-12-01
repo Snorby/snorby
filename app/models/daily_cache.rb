@@ -143,14 +143,15 @@ class DailyCache
       
       @cache = cache_for_type(self, type, sensor)
 
-      if @cache.empty?
-        count << range_for_type(type).map(&:day).fill(0)
+      if !@cache.empty?
+        range_for_type(type) do |i|
+          time_range << "'#{i}'"
+          count << 0
+        end
       else
         
         range_for_type(type) do |i|
           time_range << "'#{i}'"
-          puts @cache.keys
-          
           if @cache.has_key?(i)
             count << @cache[i].map(&:event_count).sum
           else
@@ -271,33 +272,47 @@ class DailyCache
 
     case type.to_sym
     when :week
+      
       ((Time.now.beginning_of_week.to_date)..(Time.now.end_of_week.to_date)).to_a.each do |i|
         block.call(i.day) if block
       end
+      
     when :last_week
-      ((Time.now - 1.week).beginning_of_week).day.upto((Time.now - 1.week).end_of_week.day) do |i|
-        block.call(i) if block
+      
+      (((Time.now - 1.week).beginning_of_week.to_date)..((Time.now - 1.week).end_of_week.to_date)).to_a.each do |i|
+        block.call(i.day) if block
       end
+
     when :month
-      Time.now.beginning_of_month.day.upto(Time.now.end_of_month.day) do |i|
-        block.call(i) if block
+      
+      ((Time.now.beginning_of_month.to_date)..(Time.now.end_of_month.to_date)).to_a.each do |i|
+        block.call(i.day) if block
       end
+      
     when :last_month
-      ((Time.now - 1.month).beginning_of_month).day.upto((Time.now - 1.month).end_of_month.day) do |i|
+      
+      (((Time.now - 1.month).beginning_of_month.to_date)..((Time.now - 1.month).end_of_month.to_date)).to_a.each do |i|
+        block.call(i.day) if block
+      end
+
+    when :quarter
+      
+      ((Time.now.beginning_of_quarter.month)..(Time.now.end_of_quarter.month)).to_a.each do |i|
         block.call(i) if block
       end
-    when :quarter
+
+    when :year
+      
       Time.now.beginning_of_quarter.month.upto(Time.now.end_of_quarter.month) do |i|
         block.call(i) if block
       end
-    when :year
-      Time.now.beginning_of_year.month.upto(Time.now.end_of_year.month) do |i|
-        block.call(i) if block
-      end
+
     else
-      Time.now.beginning_of_week.day.upto(Time.now.end_of_week.day) do |i|
-        block.call(i) if block
+      
+      ((Time.now.beginning_of_week.to_date)..(Time.now.end_of_week.to_date)).to_a.each do |i|
+        block.call(i.day) if block
       end
+      
     end
 
   end
