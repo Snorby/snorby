@@ -142,19 +142,24 @@ class DailyCache
 
       @cache = cache_for_type(self, type, sensor)
 
-      @cache.each do |day, data|
-        count[day] = data.map(&:event_count).sum
+      unless @cache.empty?
+        @cache.each do |day, data|
+          count << data.map(&:event_count).sum.to_i
+        end
+      else
+        count << range_for_type(type).map(&:day).fill(0)
       end
 
       time_range = []
-
+      
       range_for_type(type) do |i|
         time_range << "'#{i}'"
-        next if count[i]
-        count[i] = 0
+        
+        # next if count[i]
+        # count[i] = 0
       end
 
-      @metrics << { :name => sensor.name, :data => count.compact, :range => time_range }
+      @metrics << { :name => sensor.name, :data => count, :range => time_range }
     end
 
     @metrics
