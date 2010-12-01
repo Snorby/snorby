@@ -143,7 +143,7 @@ class DailyCache
       
       @cache = cache_for_type(self, type, sensor)
 
-      if !@cache.empty?
+      if @cache.empty?
         range_for_type(type) do |i|
           time_range << "'#{i}'"
           count << 0
@@ -303,7 +303,7 @@ class DailyCache
 
     when :year
       
-      Time.now.beginning_of_quarter.month.upto(Time.now.end_of_quarter.month) do |i|
+      Time.now.beginning_of_year.month.upto(Time.now.end_of_year.month) do |i|
         block.call(i) if block
       end
 
