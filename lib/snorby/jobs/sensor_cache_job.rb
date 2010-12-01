@@ -47,14 +47,14 @@ module Snorby
                 current_hour = Time.now.beginning_of_day + Time.now.hour.hours
                 half_past_time = current_hour + 30.minutes
                 if half_past_time < Time.now
-                  end_time = half_past_time
+                  start_time = half_past_time
                 else
-                  end_time = current_hour
+                  start_time = current_hour
                 end
               else
-                end_time = @sensor.cache.last.ran_at + 30.minutes
+                start_time = @sensor.cache.last.ran_at + 30.minutes
               end
-              Cache.create(:sid => @sensor.sid, :ran_at => end_time)
+              Cache.create(:sid => @sensor.sid, :ran_at => start_time)
               next
             end
 
@@ -128,7 +128,7 @@ module Snorby
 
           if @events.blank?
 
-            Cache.create(:sid => @sensor.sid, :ran_at => end_time)
+            Cache.create(:sid => @sensor.sid, :ran_at => start_time)
 
           else
 
@@ -137,11 +137,11 @@ module Snorby
             if defined?(@last_cache)
               logit 'Found last cache...'
               @last_cache = @sensor.cache.last
-              @cache = Cache.create(:sid => @last_event.sid, :cid => @last_event.cid, :ran_at => end_time)
+              @cache = Cache.create(:sid => @last_event.sid, :cid => @last_event.cid, :ran_at => start_time)
             else
               logit 'No cache records found - creating first cache record...'
               reset_counter_cache_columns
-              @last_cache = Cache.create(:sid => @last_event.sid, :cid => @last_event.cid, :ran_at => end_time)
+              @last_cache = Cache.create(:sid => @last_event.sid, :cid => @last_event.cid, :ran_at => start_time)
               @cache = @last_cache
             end
 
