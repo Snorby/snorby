@@ -139,7 +139,8 @@ class DailyCache
 
     Sensor.all(:limit => 5, :order => [:events_count.desc]).each do |sensor|
       count = []
-
+      time_range = []
+      
       @cache = cache_for_type(self, type, sensor)
 
       if @cache.empty?
