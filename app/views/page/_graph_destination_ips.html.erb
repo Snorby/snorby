@@ -1,52 +1,60 @@
-<% content_for :footer do %>
+<% if @dst_metrics.empty? %>
 
-	<script type="text/javascript">
-		
-	chart = new Highcharts.Chart({
-	      chart: {
-	         renderTo: 'destination-ips-graph',
-	         margin: [50, 165, 50, 160]
-	      },
-	      title: {
-	         text: ''
-	      },
-	      tooltip: {
-	         formatter: function() {
-	            return "<b>" + this.point.name.substring(0, 30) + "</b>... (" + this.y + " sessions)"
-	         }
-	      },
-	      plotOptions: {
-	         pie: {
-	            allowPointSelect: true,
-	            cursor: 'pointer',
-							dataLabels: {
-									distance: 20,
-								  formatter: function() {
-									return "" + this.point.name.substring(0, 30) + "... (" + Math.round(this.percentage) + "%)"
-								 },
-	                connectorColor: '#888',
-									style: {
-										fontSize: 10
-									}
-	            }
-	         }
-	      },
-		    legend: {
-		        enabled: false
-		    },
-	       series: [{
-	         type: 'pie',
-	         name: 'Unique Destination Addresses',
-	         data: [
-						<% @dst_metrics.each do |key,value| %>
-							['<%= key.to_s %>', <%= value %>],
-						<% end %>
-	         ]
-	      }]
-	   });
-		
-	</script>
+	<div id='destination-ips-graph' style='display:none;' class='dashboard-graph no-pie-data'></div>
+
+<% else %>
+
+	<% content_for :footer do %>
+
+		<script type="text/javascript">
+
+		chart = new Highcharts.Chart({
+		      chart: {
+		         renderTo: 'destination-ips-graph',
+		         margin: [50, 165, 50, 160]
+		      },
+		      title: {
+		         text: ''
+		      },
+		      tooltip: {
+		         formatter: function() {
+		            return "<b>" + this.point.name.substring(0, 30) + "</b>... (" + this.y + " sessions)"
+		         }
+		      },
+		      plotOptions: {
+		         pie: {
+		            allowPointSelect: true,
+		            cursor: 'pointer',
+								dataLabels: {
+										distance: 20,
+									  formatter: function() {
+										return "" + this.point.name.substring(0, 30) + "... (" + Math.round(this.percentage) + "%)"
+									 },
+		                connectorColor: '#888',
+										style: {
+											fontSize: 10
+										}
+		            }
+		         }
+		      },
+			    legend: {
+			        enabled: false
+			    },
+		       series: [{
+		         type: 'pie',
+		         name: 'Unique Destination Addresses',
+		         data: [
+							<% @dst_metrics.each do |key,value| %>
+								['<%= key.to_s %>', <%= value %>],
+							<% end %>
+		         ]
+		      }]
+		   });
+
+		</script>
+
+	<% end %>
+
+	<div id='destination-ips-graph' style='display:none;' class='dashboard-graph'></div>
 
 <% end %>
-
-<div id='destination-ips-graph' style='display:none;' class='dashboard-graph'></div>

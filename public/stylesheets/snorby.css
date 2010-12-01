@@ -2735,6 +2735,13 @@ div.dashboard-graph{
 	width: 722px;
 }
 
+div.dashboard-graph.no-pie-data{
+	background: #fff url(../images/dashboard/pie-no-data.png) no-repeat;
+	display: block;
+	position: relative;
+	overflow: hidden;
+}
+
 #dashboard #box-tabs ul#box-menu li{
     -moz-border-radius-topright: 4px;
     -moz-border-radius-topleft: 4px;

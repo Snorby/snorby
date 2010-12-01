@@ -1,54 +1,62 @@
-<% content_for :footer do %>
-	<% source_data = [] %>
-	<% @src_metrics.each do |key,value| %>
-		<% source_data << "['#{key.to_s}', #{value}]" %>
+<% if @src_metrics.empty? %>
+
+	<div id='source-ips-graph' style='display:none;' class='dashboard-graph no-pie-data'></div>
+	
+<% else %>
+
+	<% content_for :footer do %>
+		<% source_data = [] %>
+		<% @src_metrics.each do |key,value| %>
+			<% source_data << "['#{key.to_s}', #{value}]" %>
+		<% end %>
+
+		<script type="text/javascript">
+
+		chart = new Highcharts.Chart({
+		      chart: {
+		         renderTo: 'source-ips-graph',
+		         margin: [50, 165, 50, 160]
+		      },
+		      title: {
+		         text: ''
+		      },
+		      tooltip: {
+		         formatter: function() {
+		            return "<b>" + this.point.name.substring(0, 30) + "</b>... (" + Math.round(this.percentage) + " sessions)"
+		         }
+		      },
+		      plotOptions: {
+		         pie: {
+		            allowPointSelect: true,
+		            cursor: 'pointer',
+								dataLabels: {
+										distance: 20,
+									  formatter: function() {
+										return "" + this.point.name.substring(0, 30) + "... (" + Math.round(this.percentage) + "%)"
+									 },
+		                connectorColor: '#888',
+										style: {
+											fontSize: 10
+										}
+		            }
+		         }
+		      },
+			    legend: {
+			        enabled: false
+			    },
+		       series: [{
+		         type: 'pie',
+		         name: 'Unique Source Addresses',
+		         data: [
+							<%= source_data.join(',') %>
+		         ]
+		      }]
+		   });
+
+		</script>
+
 	<% end %>
 
-	<script type="text/javascript">
-		
-	chart = new Highcharts.Chart({
-	      chart: {
-	         renderTo: 'source-ips-graph',
-	         margin: [50, 165, 50, 160]
-	      },
-	      title: {
-	         text: ''
-	      },
-	      tooltip: {
-	         formatter: function() {
-	            return "<b>" + this.point.name.substring(0, 30) + "</b>... (" + Math.round(this.percentage) + " sessions)"
-	         }
-	      },
-	      plotOptions: {
-	         pie: {
-	            allowPointSelect: true,
-	            cursor: 'pointer',
-							dataLabels: {
-									distance: 20,
-								  formatter: function() {
-									return "" + this.point.name.substring(0, 30) + "... (" + Math.round(this.percentage) + "%)"
-								 },
-	                connectorColor: '#888',
-									style: {
-										fontSize: 10
-									}
-	            }
-	         }
-	      },
-		    legend: {
-		        enabled: false
-		    },
-	       series: [{
-	         type: 'pie',
-	         name: 'Unique Source Addresses',
-	         data: [
-						<%= source_data.join(',') %>
-	         ]
-	      }]
-	   });
-		
-	</script>
+	<div id='source-ips-graph' style='display:none;' class='dashboard-graph'></div>
 
 <% end %>
-
-<div id='source-ips-graph' style='display:none;' class='dashboard-graph'></div>
