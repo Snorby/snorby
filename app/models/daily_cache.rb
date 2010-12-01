@@ -21,9 +21,9 @@ class DailyCache
   property :severity_metrics, Object
 
   property :signature_metrics, Object
-  
+
   property :src_ips, Object
-  
+
   property :dst_ips, Object
 
   # Define created_at and updated_at timestamps
@@ -72,12 +72,12 @@ class DailyCache
     end
     severities.to_json
   end
-  
+
   def self.protocol_count(protocol, type=:week)
     count = []
-  
+
     @cache = cache_for_type(self, type)
-  
+
     case protocol.to_sym
     when :tcp
       @cache.each do |day, data|
@@ -92,19 +92,19 @@ class DailyCache
         count[day] = data.map(&:icmp_count).sum
       end
     end
-  
+
     range_for_type(type) do |i|
       next if count[i]
       count[i] = 0
     end
-  
+
     count.compact
   end
 
   def self.severity_count(severity, type=:week)
     count = []
     @cache = cache_for_type(self, type)
-    
+
     case severity.to_sym
     when :high
       @cache.each do |day, data|
@@ -125,12 +125,12 @@ class DailyCache
         count[day] = low_count
       end
     end
-    
+
     range_for_type(type) do |i|
       next if count[i]
       count[i] = 0
     end
-    
+
     count.compact
   end
 
@@ -142,21 +142,23 @@ class DailyCache
 
       @cache = cache_for_type(self, type, sensor)
 
-      unless @cache.empty?
-        @cache.each do |day, data|
-          count << data.map(&:event_count).sum.to_i
-        end
-      else
+      if @cache.empty?
         count << range_for_type(type).map(&:day).fill(0)
-      end
-
-      time_range = []
-      
-      range_for_type(type) do |i|
-        time_range << "'#{i}'"
+      else
         
-        # next if count[i]
-        # count[i] = 0
+        range_for_type(type) do |i|
+          time_range << "'#{i}'"
+
+          if @cache.has_key?(i.day)
+            count << @cache[i.day].map(&:event_count).sum
+          else
+            count << 0
+          end
+
+          # next if count[i]
+          # count[i] = 0
+        end
+
       end
 
       @metrics << { :name => sensor.name, :data => count, :range => time_range }
@@ -187,7 +189,7 @@ class DailyCache
       @top << data
       count += 1
     end
-    
+
     @top
   end
 
@@ -213,7 +215,7 @@ class DailyCache
       @top << data
       count += 1
     end
-    
+
     @top
   end
 
@@ -242,7 +244,7 @@ class DailyCache
       @top << data
       count += 1
     end
-    
+
     @top
   end
 
@@ -262,9 +264,9 @@ class DailyCache
       return collection.all(:sid => sensor.sid).group_by { |x| x.ran_at.day }
     end
   end
-  
+
   def self.range_for_type(type=:week, &block)
-    
+
     case type.to_sym
     when :week
       ((Time.now.beginning_of_week.to_date)..(Time.now.end_of_week.to_date)).to_a.each do |i|
@@ -295,7 +297,7 @@ class DailyCache
         block.call(i) if block
       end
     end
-    
+
   end
 
   def protos
