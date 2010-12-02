@@ -14,7 +14,7 @@ Snorby is a ruby on rails web application for network security monitoring that i
 
 ## Screenshot
 
-http://dl.dropbox.com/u/38088/snorby2.png
+	http://dl.dropbox.com/u/38088/snorby2.png
 
 ## Requirements
 
