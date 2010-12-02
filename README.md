@@ -73,8 +73,8 @@ http://dl.dropbox.com/u/38088/snorby2.png
 	
 * Default User Credentials
 
-	* E-mail: snorby@snorby.org
-	* Password: snorby
+	* E-mail: **snorby@snorby.org**
+	* Password: **snorby**
 	
 # Helpful Commands
 

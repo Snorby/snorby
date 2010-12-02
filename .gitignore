@@ -18,6 +18,9 @@ log/*
 tmp/*
 log/*
 
+!tmp/.gitignore
+!log/.gitignore
+
 ## PROJECT::SPECIFIC
 public/system/
 public/javascripts/snorby_packaged.js
