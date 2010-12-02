@@ -45,7 +45,7 @@
 				<% else %>
 				
 					<% unless %w(yesterday week last_week month last_month year quarter).include?(params[:range]) %>
-						<li class='right'><i>Last Updated: <%= @last_cache.cache_time.strftime('%D %l:%M:%S %p') %></i></li>
+						<li class='right'><i>Last Updated: <%= (@last_cache + 30.minute).strftime('%D %l:%M:%S %p') %></i></li>
 					<% end %>
 					
 				<% end %>

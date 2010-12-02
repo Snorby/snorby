@@ -60,9 +60,13 @@ class Cache
   def self.today
     all(:ran_at.gt => Time.now.beginning_of_day, :ran_at.lt => Time.now.end_of_day)
   end
-
+  
   def cache_time
-    run_at + 30.minute
+    if (time = get_last)
+      return time.run_at + 30.minute
+    else
+      Time.now - 30.minute
+    end
   end
 
   def self.protocol_count(protocol, type=nil)
