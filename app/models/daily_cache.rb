@@ -81,25 +81,23 @@ class DailyCache
     count = []
 
     @cache = cache_for_type(self, type)
-    
+
     if @cache.empty?
-      
+
       range_for_type(type) do |i|
         count << 0
       end
-      
+
     else
-      
+
       range_for_type(type) do |i|
         if @cache.has_key?(i)
-          @cache.each do |day, data|
-            count << data.map(&:"#{protocol}_count").sum
-          end
+          count << @cache[i].map(&:"#{protocol}_count").sum
         else
           count << 0
         end
       end
-      
+
     end
 
     count
@@ -123,19 +121,17 @@ class DailyCache
 
       range_for_type(type) do |i|
 
+        puts i
+
         if @cache.has_key?(i)
+          sev_count = 0
           
-          @cache.each do |day, data|
-            sev_count = 0
-            
-            data.map(&:severity_metrics).each do |x|
-              sev_count += (x.kind_of?(Hash) ? (x.has_key?(severity_type[severity.to_sym]) ? x[severity_type[severity.to_sym]] : 0) : 0)
-            end
-            
-            count << sev_count
-            
+          @cache[i].map(&:severity_metrics).each do |x|
+            sev_count += (x.kind_of?(Hash) ? (x.has_key?(severity_type[severity.to_sym]) ? x[severity_type[severity.to_sym]] : 0) : 0)
           end
-          
+
+          count << sev_count
+
         else
           count << 0
         end
