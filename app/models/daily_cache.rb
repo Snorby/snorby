@@ -77,28 +77,28 @@ class DailyCache
     count = []
 
     @cache = cache_for_type(self, type)
-
-    case protocol.to_sym
-    when :tcp
-      @cache.each do |day, data|
-        count[day] = data.map(&:tcp_count).sum
+    
+    if @cache.empty?
+      
+      range_for_type(type) do |i|
+        count << 0
       end
-    when :udp
-      @cache.each do |day, data|
-        count[day] = data.map(&:udp_count).sum
+      
+    else
+      
+      range_for_type(type) do |i|
+        if @cache.has_key?(i)
+          @cache.each do |day, data|
+            count << data.map(&:"#{protocol}_count").sum
+          end
+        else
+          count << 0
+        end
       end
-    when :icmp
-      @cache.each do |day, data|
-        count[day] = data.map(&:icmp_count).sum
-      end
+      
     end
 
-    range_for_type(type) do |i|
-      next if count[i]
-      count[i] = 0
-    end
-
-    count.compact
+    count
   end
 
   def self.severity_count(severity, type=:week)
@@ -112,25 +112,30 @@ class DailyCache
     }
 
     if @cache.empty?
-
       range_for_type(type) do |i|
         count << 0
       end
-
     else
 
-      @cache.each do |day, data|
-        sev_count = 0
-        
-        if @cache.has_key?(day)          
-          data.map(&:severity_metrics).each do |x|
-            sev_count += (x.kind_of?(Hash) ? (x.has_key?(severity_type[severity.to_sym]) ? x[severity_type[severity.to_sym]] : 0) : 0)
-          end          
-          count << sev_count
+      range_for_type(type) do |i|
+
+        if @cache.has_key?(i)
+          
+          @cache.each do |day, data|
+            sev_count = 0
+            
+            data.map(&:severity_metrics).each do |x|
+              sev_count += (x.kind_of?(Hash) ? (x.has_key?(severity_type[severity.to_sym]) ? x[severity_type[severity.to_sym]] : 0) : 0)
+            end
+            
+            count << sev_count
+            
+          end
+          
         else
           count << 0
         end
-        
+
       end
     end
 
@@ -157,13 +162,13 @@ class DailyCache
 
         range_for_type(type) do |i|
           time_range << "'#{i}'"
-          
+
           if @cache.has_key?(i)
             count << @cache[i].map(&:event_count).sum
           else
             count << 0
           end
-          
+
         end
 
       end
