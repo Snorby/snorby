@@ -27,7 +27,7 @@ class PageController < ApplicationController
     @sensors = Sensor.all(:limit => 5, :order => [:events_count.desc])
     @favers = User.all(:limit => 5, :order => [:favorites_count.desc])
     
-    @last_cache = @cache.get_last ? @cache.get_last.ran_at : Time.now
+    @last_cache = @cache.cache_time
     
     sigs = Event.all(:limit => 5, :order => [:timestamp.desc], :fields => [:sig_id], :unique => true).map(&:signature).map(&:sig_id)
     @recent_events = Event.all(:sig_id => sigs).group_by { |x| x.sig_id }.map(&:last).map(&:first)
