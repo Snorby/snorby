@@ -281,7 +281,7 @@
 		<% sig_total = @signature_metrics.sort{|a,b| -1*(a[1]<=>b[1]) }.map(&:last).sum %>
 		<% @signature_metrics.sort{|a,b| -1*(a[1]<=>b[1]) }.each do |name, count| %>
 			<tr>
-				<td><%= truncate(name.to_s, :length => 72) %></td>
+				<td><%= truncate(name.to_s, :length => 65) %></td>
 				<td style='width:100px'><%= percentage_for(count, sig_total) %>%</td>
 				<td style='width:100px'><%= count %></td>
 			</tr>
