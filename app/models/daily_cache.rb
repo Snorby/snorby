@@ -105,7 +105,7 @@ class DailyCache
     count = []
     @cache = cache_for_type(self, type)
 
-    severity = {
+    severity_type = {
       :high => 1,
       :medium => 2,
       :low => 3
@@ -124,7 +124,7 @@ class DailyCache
         if @cache.has_key?(day)
           
           data.map(&:severity_metrics).each do |x|
-            sev_count += (x.kind_of?(Hash) ? (x.has_key?(severity[severity.to_sym]) ? x[severity[severity.to_sym]] : 0) : 0)
+            sev_count += (x.kind_of?(Hash) ? (x.has_key?(severity_type[severity.to_sym]) ? x[severity_type[severity.to_sym]] : 0) : 0)
           end
           count = sev_count
           
@@ -133,17 +133,10 @@ class DailyCache
           count << 0
           
         end
-        
       end
-
     end
 
-    range_for_type(type) do |i|
-      next if count[i]
-      count[i] = 0
-    end
-
-    count.compact
+    count
   end
 
   def self.sensor_metrics(type=:week)
