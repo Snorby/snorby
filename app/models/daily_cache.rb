@@ -34,7 +34,7 @@ class DailyCache
   has 1, :event, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ]
 
   def self.cache_time
-    return get_last.run_at if get_last
+    return get_last.ran_at if get_last
   end
 
   def self.get_last
