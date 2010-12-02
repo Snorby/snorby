@@ -126,7 +126,8 @@ class DailyCache
           data.map(&:severity_metrics).each do |x|
             sev_count += (x.kind_of?(Hash) ? (x.has_key?(severity_type[severity.to_sym]) ? x[severity_type[severity.to_sym]] : 0) : 0)
           end
-          count = sev_count
+          
+          count << sev_count
           
         else
           
@@ -147,8 +148,6 @@ class DailyCache
       time_range = []
 
       @cache = cache_for_type(self, type, sensor)
-
-      puts @cache
 
       if @cache.empty?
 
