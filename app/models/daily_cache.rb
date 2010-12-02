@@ -105,25 +105,37 @@ class DailyCache
     count = []
     @cache = cache_for_type(self, type)
 
-    case severity.to_sym
-    when :high
-      @cache.each do |day, data|
-        high_count = 0
-        data.map(&:severity_metrics).each { |x| high_count += (x.kind_of?(Hash) ? (x.has_key?(1) ? x[1] : 0) : 0) }
-        count[day] = high_count
+    severity = {
+      :high => 1,
+      :medium => 2,
+      :low => 3
+    }
+
+    if @cache.empty?
+
+      range_for_type(type) do |i|
+        count << 0
       end
-    when :medium
+
+    else
+
       @cache.each do |day, data|
-        medium_count = 0
-        data.map(&:severity_metrics).each { |x| medium_count += (x.kind_of?(Hash) ? (x.has_key?(2) ? x[2] : 0) : 0) }
-        count[day] = medium_count
+        sev_count = 0
+        if @cache.has_key?(day)
+          
+          data.map(&:severity_metrics).each do |x|
+            sev_count += (x.kind_of?(Hash) ? (x.has_key?(severity[severity.to_sym]) ? x[severity[severity.to_sym]] : 0) : 0)
+          end
+          count = sev_count
+          
+        else
+          
+          count << 0
+          
+        end
+        
       end
-    when :low
-      @cache.each do |day, data|
-        low_count = 0
-        data.map(&:severity_metrics).each { |x| low_count += ( x.kind_of?(Hash) ? (x.has_key?(3) ? x[3] : 0) : 0) }
-        count[day] = low_count
-      end
+
     end
 
     range_for_type(type) do |i|
@@ -140,31 +152,29 @@ class DailyCache
     Sensor.all(:limit => 5, :order => [:events_count.desc]).each do |sensor|
       count = []
       time_range = []
-      
+
       @cache = cache_for_type(self, type, sensor)
 
       puts @cache
 
       if @cache.empty?
-        
+
         range_for_type(type) do |i|
           time_range << "'#{i}'"
           count << 0
         end
-        
+
       else
-        
+
         range_for_type(type) do |i|
           time_range << "'#{i}'"
-          puts i
+          
           if @cache.has_key?(i)
             count << @cache[i].map(&:event_count).sum
           else
             count << 0
           end
-
-          # next if count[i]
-          # count[i] = 0
+          
         end
 
       end
@@ -277,47 +287,47 @@ class DailyCache
 
     case type.to_sym
     when :week
-      
+
       ((Time.now.beginning_of_week.to_date)..(Time.now.end_of_week.to_date)).to_a.each do |i|
         block.call(i.day) if block
       end
-      
+
     when :last_week
-      
+
       (((Time.now - 1.week).beginning_of_week.to_date)..((Time.now - 1.week).end_of_week.to_date)).to_a.each do |i|
         block.call(i.day) if block
       end
 
     when :month
-      
+
       ((Time.now.beginning_of_month.to_date)..(Time.now.end_of_month.to_date)).to_a.each do |i|
         block.call(i.day) if block
       end
-      
+
     when :last_month
-      
+
       (((Time.now - 1.month).beginning_of_month.to_date)..((Time.now - 1.month).end_of_month.to_date)).to_a.each do |i|
         block.call(i.day) if block
       end
 
     when :quarter
-      
+
       ((Time.now.beginning_of_quarter.month)..(Time.now.end_of_quarter.month)).to_a.each do |i|
         block.call(i) if block
       end
 
     when :year
-      
+
       Time.now.beginning_of_year.month.upto(Time.now.end_of_year.month) do |i|
         block.call(i) if block
       end
 
     else
-      
+
       ((Time.now.beginning_of_week.to_date)..(Time.now.end_of_week.to_date)).to_a.each do |i|
         block.call(i.day) if block
       end
-      
+
     end
 
   end
