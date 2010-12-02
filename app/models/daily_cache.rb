@@ -121,19 +121,16 @@ class DailyCache
 
       @cache.each do |day, data|
         sev_count = 0
-        if @cache.has_key?(day)
-          
+        
+        if @cache.has_key?(day)          
           data.map(&:severity_metrics).each do |x|
             sev_count += (x.kind_of?(Hash) ? (x.has_key?(severity_type[severity.to_sym]) ? x[severity_type[severity.to_sym]] : 0) : 0)
-          end
-          
+          end          
           count << sev_count
-          
         else
-          
           count << 0
-          
         end
+        
       end
     end
 
