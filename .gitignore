@@ -16,6 +16,7 @@ doc
 pkg
 log/*
 tmp/*
+log/*
 
 ## PROJECT::SPECIFIC
 public/system/

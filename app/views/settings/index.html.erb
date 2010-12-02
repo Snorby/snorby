@@ -33,27 +33,27 @@
 		<div class='grid_5'>
 
 			<p>
-				<%= check_box_tag '[settings][daily]', 1, (Setting.daily ? Setting.find(:daily) : nil) %> <%= label_tag 'Enable Daily Reports' %><br />
+				<%= check_box_tag '[settings][daily]', 1, (Setting.daily ? Setting.find(:daily) : nil) %> <%= label_tag 'Daily Reports' %><br />
 				<i>(Send a report summarizing the captured traffic daily.)</i><br />
 			</p>
 
 			<p>
-				<%= check_box_tag '[settings][weekly]', 1, (Setting.weekly ? Setting.find(:weekly) : nil) %> <%= label_tag 'Enable Weekly Reports' %><br />
+				<%= check_box_tag '[settings][weekly]', 1, (Setting.weekly ? Setting.find(:weekly) : nil) %> <%= label_tag 'Weekly Reports' %><br />
 				<i>(Send a report summarizing the captured traffic weekly)</i><br />
 			</p>
 
 			<p>
-				<%= check_box_tag '[settings][monthly]', 1, (Setting.monthly ? Setting.find(:monthly) : nil) %> <%= label_tag 'Enable Monthly Reports' %><br />
+				<%= check_box_tag '[settings][monthly]', 1, (Setting.monthly ? Setting.find(:monthly) : nil) %> <%= label_tag 'Monthly Reports' %><br />
 				<i>(Send a report summarizing the captured traffic monthly)</i><br />
 			</p>
 
 			<p>
-				<%= check_box_tag '[settings][lookups]', 1, (Setting.lookups ? Setting.find(:lookups) : nil) %> <%= label_tag 'Allow Address Lookups' %><br />
-				<i>(This options enables the analyst to perform basic queries on source & destination addresses using external sources.)</i><br />
+				<%= check_box_tag '[settings][lookups]', 1, (Setting.lookups ? Setting.find(:lookups) : nil) %> <%= label_tag 'Address Lookups' %><br />
+				<i>(This option enables the analyst to perform basic queries on source & destination addresses using external sources.)</i><br />
 			</p>
 
 			<p>
-				<%= check_box_tag '[settings][notes]', 1, Setting.find(:notes) %> <%= label_tag 'Allow Event Notes' %><br />
+				<%= check_box_tag '[settings][notes]', 1, Setting.find(:notes) %> <%= label_tag 'Event Notes' %><br />
 				<i>(Allow analysts to apply notes to events)</i><br />
 				<br/>
 			</p>

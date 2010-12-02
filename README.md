@@ -71,6 +71,11 @@ http://dl.dropbox.com/u/38088/snorby2.png
 	* Make sure you start the Snorby Worker from the Administration page.
 	* Make sure that both the `DailyCache` and `SensorCache` jobs are running.
 	
+* Default User Credentials
+
+	* E-mail: snorby@snorby.org
+	* Password: snorby
+	
 # Helpful Commands
 
 You can open the rails console at anytime and interact with the Snorby environment. Below are a few helpful commands that may be useful:
