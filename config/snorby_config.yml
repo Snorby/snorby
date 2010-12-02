@@ -1,13 +1,12 @@
 development:
   domain: localhost:3000
   wkhtmltopdf: /usr/local/bin/wkhtmltopdf
+  # wkhtmltopdf: /Users/mephux/.rvm/gems/ruby-1.9.2-p0/bin/wkhtmltopdf
 
 test:
   domain: localhost:3000
   wkhtmltopdf: /usr/local/bin/wkhtmltopdf
 
-# You Should Only Need To Set This Option
-# Example: localhost:3000
 production:
   domain: localhost:3000
   wkhtmltopdf: /usr/local/bin/wkhtmltopdf
