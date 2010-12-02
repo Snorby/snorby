@@ -29,7 +29,7 @@
 				<td class="pid"><%= @process.pid %></td>
 				<td class="created_at"><%= @process.created_at %></td>
 				<td class="runtime"><%= @process.runtime %></td>
-				<td class="command"><%= @process.command %></td>
+				<td class="command"><%= truncate(@process.command, :length => 35, :omission => '...') %></td>
 				<td class="cpu" style='width:200px'><%= css_chart(percentage_for(@process.cpu, 100)) %></td>
 				<td class="memory last" style='width:200px'><%= css_chart(percentage_for(@process.memory, 100)) %></td>
 			</tbody>
