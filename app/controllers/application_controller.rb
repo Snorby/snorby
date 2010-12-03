@@ -16,11 +16,11 @@ class ApplicationController < ActionController::Base
 
     def timezone
       if user_signed_in?
-        if Time.respond_to?(:zone)
-          Time.zone = current_user.timezone
-        else
-          Time.timezone = current_user.timezone
-        end
+        # if Time.respond_to?(:zone)
+        #   Time.zone = current_user.timezone
+        # else
+        #   Time.timezone = current_user.timezone
+        # end
         User.current_user = current_user
       end
     end
