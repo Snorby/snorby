@@ -10,29 +10,29 @@ class Ip
   
   property :cid, Integer, :key => true, :index => true
 
-  property :ip_src, NumericIPAddr, :index => true
+  property :ip_src, NumericIPAddr, :index => true, :min => 0, :required => true, :default => 0
   
-  property :ip_dst, NumericIPAddr, :index => true
+  property :ip_dst, NumericIPAddr, :index => true, :min => 0, :required => true, :default => 0
   
-  property :ip_ver, Integer, :lazy => true
+  property :ip_ver, Integer, :lazy => true, :min => 0, :required => true, :default => 0
   
-  property :ip_hlen, Integer, :lazy => true
+  property :ip_hlen, Integer, :lazy => true, :min => 0, :required => true, :default => 0
   
-  property :ip_tos, Integer, :lazy => true
+  property :ip_tos, Integer, :lazy => true, :min => 0, :required => true, :default => 0
   
-  property :ip_len, Integer, :lazy => true
+  property :ip_len, Integer, :lazy => true, :min => 0, :required => true, :default => 0
   
-  property :ip_id, Integer, :lazy => true
+  property :ip_id, Integer, :lazy => true, :min => 0, :required => true, :default => 0
   
-  property :ip_flags, Integer, :lazy => true
+  property :ip_flags, Integer, :lazy => true, :min => 0, :required => true, :default => 0
   
-  property :ip_off, Integer, :lazy => true
+  property :ip_off, Integer, :lazy => true, :min => 0, :required => true, :default => 0
   
-  property :ip_ttl, Integer, :lazy => true
+  property :ip_ttl, Integer, :lazy => true, :min => 0, :required => true, :default => 0
   
-  property :ip_proto, Integer, :lazy => true
+  property :ip_proto, Integer, :lazy => true, :min => 0, :required => true, :default => 0
   
-  property :ip_csum, Integer, :lazy => true
+  property :ip_csum, Integer, :lazy => true, :min => 0, :required => true, :default => 0
   
   belongs_to :sensor, :parent_key => [ :sid ], :child_key => [ :sid ], :required => true
 
