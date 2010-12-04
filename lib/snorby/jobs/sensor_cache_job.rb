@@ -67,7 +67,7 @@ module Snorby
 
             # Prevent Duplicate Cache Records
             unless @sensor.cache.blank?
-              next if (start_time == @sensor.cache.last.ran_at)
+              next unless (start_time > @sensor.cache.last.ran_at)
             end
 
             split_events_and_process(start_time, end_time)

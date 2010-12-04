@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @notification.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @notification.description %>
+</p>
+
+<p>
+  <b>Sig:</b>
+  <%= @notification.sig_id %>
+</p>
+
+<p>
+  <b>Ip src:</b>
+  <%= @notification.ip_src %>
+</p>
+
+<p>
+  <b>Ip dst:</b>
+  <%= @notification.ip_dst %>
+</p>
+
+<p>
+  <b>User ids:</b>
+  <%= @notification.user_ids %>
+</p>
+
+<p>
+  <b>Sensor ids:</b>
+  <%= @notification.sensor_ids %>
+</p>
+
+
+<%= link_to 'Edit', edit_notification_path(@notification) %> |
+<%= link_to 'Back', notifications_path %>
