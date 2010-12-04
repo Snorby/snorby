@@ -1,7 +1,7 @@
 class NotificationsController < ApplicationController
 
   def index
-    @notifications = Notification.all
+    @notifications = Notification.all.page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:created_at])
 
     respond_to do |format|
       format.html # index.html.erb

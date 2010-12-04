@@ -21,4 +21,7 @@ class Notification
   
   property :sensor_ids, Object
 
+  # Define created_at and updated_at timestamps
+  timestamps :at
+
 end

@@ -1,0 +1,12 @@
+<tr id='notification_<%= notification.id %>' class='notification' data-notification-id='<%= notification.id %>'>
+	<td class='id first'><%= notification.signature.sig_name %></td>
+	<td class=''><%= notification.sensor_ids %></td>
+	<td class=''><%= notification.user_ids %></td>
+	<td class=''><%= notification.ip_src %></td>
+	<td class='last'><%= notification.ip_dst %></td>
+	
+	<td class='chart last'>
+		<%= truncate(notification.description) %>
+	</td>
+	
+</tr>
