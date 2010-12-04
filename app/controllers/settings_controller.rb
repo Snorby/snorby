@@ -46,4 +46,9 @@ class SettingsController < ApplicationController
     redirect_to jobs_path
   end
 
+  def restart_worker
+    Snorby::Worker.restart if Snorby::Worker.running?
+    redirect_to jobs_path
+  end
+
 end

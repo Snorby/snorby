@@ -1,5 +1,9 @@
 <%= title "Worker & Job Queue" do -%>
 
+	<% if Snorby::Worker.running? %>
+		<%= menu_item "Restart Worker", restart_worker_settings_path, 'icons/restart.png', :confirm => "Are you sure you want to restart the worker process?" %>
+	<% end %>
+
 	<%= render :partial => 'settings/menu' %>
 	
 <%- end -%>

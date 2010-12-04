@@ -67,9 +67,7 @@ module Snorby
       def build_sensor_event_count(update_counter=true)
         logit '- fetching sensor metrics'
         @sensor.reload
-        count = @sensor.events_count + @events.size
-        @sensor.update!(:events_count => count) if update_counter
-        count
+        @sensor.events_count + @events.size
       end
 
       def fetch_severity_metrics(update_counter=true)

@@ -18,7 +18,7 @@ class NotesController < ApplicationController
     if Setting.notes?
       @note = @event.notes.create({ :user => @user, :body => params[:body] })
       if @note.save
-      else
+        Delayed::Job.enqueue(Snorby::Jobs::NoteNotification.new(@note.id))
       end
     end
   end

@@ -17,7 +17,7 @@ class User
 
   property :favorites_count, Integer, :index => true, :default => 0
   
-  property :accept_notes, Enum[ :yes, :mine, :no ], :default => :no
+  property :accept_notes, Integer, :default => 1
   
   property :notes_count, Integer, :index => true, :default => 0
   
@@ -73,6 +73,23 @@ class User
   #
   def to_s
     self.name.to_s
+  end
+
+  def accepts_note_notifications?(event=false)
+    if accept_notes == 1
+      return true
+    elsif accept_notes == 3
+      return false unless event
+      return true if added_notes_for_event?(event)
+      return false
+    else
+      return false
+    end
+  end
+  
+  def added_notes_for_event?(event)
+    return true if event.notes.map(&:user_id).include?(id)
+    false
   end
 
   def cropping?

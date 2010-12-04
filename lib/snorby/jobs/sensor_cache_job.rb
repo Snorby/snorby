@@ -79,7 +79,7 @@ module Snorby
 
         def build_snorby_cache
 
-          build_sensor_event_count
+          @sensor.update!(:events_count => build_sensor_event_count)
           build_proto_counts
 
           @cache.update({

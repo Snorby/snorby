@@ -1,6 +1,6 @@
 <% if Snorby::Worker.problems? %>
 
-	<%= drop_down_for('Snorby Worker', 'icons/worker.png', 'worker') do %>
+	<%= drop_down_for('Worker Options', 'icons/worker.png', 'worker') do %>
 	
 		<% if Snorby::Worker.running? %>
 			<%= drop_down_item "Start Sensor Cache Job", start_sensor_cache_settings_path unless Snorby::Jobs.sensor_cache? && Snorby::Worker.running? %>
