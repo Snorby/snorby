@@ -62,12 +62,13 @@ module Snorby
               next
             end
 
-            start_time = @since_last_cache.first.timestamp.beginning_of_day + @since_last_cache.first.timestamp.hour.hours
-            end_time = start_time + 30.minute
-
             # Prevent Duplicate Cache Records
-            unless @sensor.cache.blank?
-              next unless (start_time > @sensor.cache.last.ran_at)
+            if @sensor.cache.blank?
+              start_time = @since_last_cache.first.timestamp.beginning_of_day + @since_last_cache.first.timestamp.hour.hours
+              end_time = start_time + 30.minute
+            else
+              start_time = @sensor.cache.last.ran_at + 30.minute
+              end_time = start_time + 30.minute
             end
 
             split_events_and_process(start_time, end_time)
