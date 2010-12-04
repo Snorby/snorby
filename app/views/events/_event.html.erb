@@ -22,7 +22,7 @@
 		<% if classification_css %>
 			<div class='click signature'><span class='add_tipsy' title='Analyst Classified Event: <%= event.classification.name %>'><%= truncate(event.signature.name, :length => 65, :omission => '...') %></span></div>
 		<% else %>
-			<div class='click signature'><%= truncate(event.signature.name, :length => 65, :omission => '...') %></div>
+			<div class='click signature'><span title='<%= event.signature.name %>'><%= truncate(event.signature.name, :length => 65, :omission => '...') %></span></div>
 		<% end %>
 		
 		<div class='click timestamp'>
