@@ -25,19 +25,17 @@
 			  <%= f.password_field :current_password, :placeholder => 'Current Password...', :class => 'required password' %></p>
 
 				<p>
+					<%= f.label 'Note Notifications:' %>
+					<%= f.select :accept_notes, [['Yes', 1], ['No', 2], ['Only events I\'ve noted', 3]], { :include_blank => false } %><br />
+					<i>(Would you like to receive notifications when new notes are added?)</i><br />
+					<br />
+				</p>
+
+				<p>
 					I would like to list <%= f.select :per_page_count, %w[25 45 65 100], { :include_blank => false } %>  <%= f.label "Items Per Page" %><br />
 					<i>(select the default amount of events to list per page view)</i><br />
 					<br />
 				</p>
-
-				<% if current_user.admin? %>
-
-					<p>
-						<%= f.check_box :admin %> <%= f.label "Administrator" %>
-						<i>(should this use have administrative rights?)</i>
-					</p>
-
-				<% end %>
 
 			</div>
 
@@ -64,8 +62,17 @@
 				<p>
 					<%= f.label 'Change Avatar' %><br />
 					<%= f.file_field :avatar %><br />
-					<br />
 				</p>
+				
+				<% if current_user.admin? %>
+
+					<p>
+						<br />
+						<%= f.check_box :admin %> <%= f.label "Administrator" %>
+						<i>(should this use have administrative rights?)</i>
+					</p>
+
+				<% end %>
 				
 			</div>
 		

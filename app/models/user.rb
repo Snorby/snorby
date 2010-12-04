@@ -17,6 +17,8 @@ class User
 
   property :favorites_count, Integer, :index => true, :default => 0
   
+  property :accept_notes, Enum[ :yes, :mine, :no ], :default => :no
+  
   property :notes_count, Integer, :index => true, :default => 0
   
   # Primary key of the user

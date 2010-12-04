@@ -1099,6 +1099,10 @@ h3{
   box-shadow: inset 0px 1px 10px #fbfbfb;	
 }
 
+.no-wrap{
+	white-space:nowrap;
+}
+
 /* @end */
 
 /* @group Message */
@@ -1373,6 +1377,7 @@ ul.table div.content li .row{
 }
 
 ul.table div.content li .row .signature{
+	white-space:nowrap;
 	display: block;
 	width: 430px;
 	position: relative;
@@ -2167,8 +2172,12 @@ form.basic-form p{
 }
 
 label.error{
-	display: none;
 	visibility: hidden;
+	display: none;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	overflow: hidden;
 }
 
 i{
