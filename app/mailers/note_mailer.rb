@@ -5,8 +5,10 @@ class NoteMailer < ActionMailer::Base
     @event = @note.event
     @emails = User.all.collect { |user| user.accepts_note_notifications?(@event) ? "#{user.name} <#{user.email}>" : "" }.join(',')
 
-    return if @emails.blank?
-    mail(:to => @emails, :from => (Setting.email? ? Setting.find(:email) : "snorby@snorby.org"), :subject => "[Snorby] New Event Note Added")
+    @from = (Setting.email? ? Setting.find(:email) : "snorby@snorby.org")
+    @to = (@emails.blank? ? @from : @emails)
+
+    mail(:to => @to, :from => @from, :subject => "[Snorby] New Event Note Added")
   end
 
 end
