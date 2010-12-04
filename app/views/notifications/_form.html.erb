@@ -18,12 +18,12 @@
 			
 			<div id='snorbybox-form'>
 		    <%= check_box_tag("use_ip_src", 1) %> <%= f.label "Source Address: #{@event.ip.ip_src} <i>(optional)</i>".html_safe %><br />
-				<%= f.hidden_field :ip_src, @event.ip.ip_src.to_i %>
+				<%= f.hidden_field :ip_src, "#{@event.ip.ip_src.to_i}" %>
 			</div>
 
 			<div id='snorbybox-form'>
 				<%= check_box_tag("use_ip_dst", 1) %> <%= f.label "Destination Address: #{@event.ip.ip_dst} <i>(optional)</i>".html_safe %><br />
-		    <%= f.hidden_field :ip_dst, @event.ip.ip_dst.to_i %>
+		    <%= f.hidden_field :ip_dst, "#{@event.ip.ip_dst.to_i}" %>
 			</div>
 
 			<div id='snorbybox-form'>
