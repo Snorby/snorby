@@ -1,35 +1,22 @@
-<h1>Listing notifications</h1>
+<%= title "Notifications" -%>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Description</th>
-    <th>Sig</th>
-    <th>Ip src</th>
-    <th>Ip dst</th>
-    <th>User ids</th>
-    <th>Sensor ids</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div id="notifications" class='grid_12 page boxit'>
+	
+	<table border="0" cellspacing="0" cellpadding="0">
+		<tr>		
+			<th>Signature</th>
+			<th>Sensors</th>
+			<th>Recipients</th>
+			<th>Source Address</th>
+			<th>Destination Address</th>
+			<th>Description</th>
+		</tr>
+		<tbody class='notifications'>
+			<%= render @notifications %>
+		</tbody>
+	</table>
 
-<% @notifications.each do |notification| %>
-  <tr>
-    <td><%= notification.title %></td>
-    <td><%= notification.description %></td>
-    <td><%= notification.sig_id %></td>
-    <td><%= notification.ip_src %></td>
-    <td><%= notification.ip_dst %></td>
-    <td><%= notification.user_ids %></td>
-    <td><%= notification.sensor_ids %></td>
-    <td><%= link_to 'Show', notification %></td>
-    <td><%= link_to 'Edit', edit_notification_path(notification) %></td>
-    <td><%= link_to 'Destroy', notification, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
 
-<br />
-
-<%= link_to 'New Notification', new_notification_path %>
+	<%= pager(@notifications, request.fullpath) %>
+	
+</div>
