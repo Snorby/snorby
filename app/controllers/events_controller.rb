@@ -24,6 +24,14 @@ class EventsController < ApplicationController
       format.json { render :json => @event.in_json }
     end
   end
+  
+  def create_mass_action
+    
+  end
+
+  def mass_action
+    
+  end
 
   def export
     @events = Event.find_by_ids(params[:events])

@@ -1,0 +1,35 @@
+<h1>Listing notifications</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Sig</th>
+    <th>Ip src</th>
+    <th>Ip dst</th>
+    <th>User ids</th>
+    <th>Sensor ids</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @notifications.each do |notification| %>
+  <tr>
+    <td><%= notification.title %></td>
+    <td><%= notification.description %></td>
+    <td><%= notification.sig_id %></td>
+    <td><%= notification.ip_src %></td>
+    <td><%= notification.ip_dst %></td>
+    <td><%= notification.user_ids %></td>
+    <td><%= notification.sensor_ids %></td>
+    <td><%= link_to 'Show', notification %></td>
+    <td><%= link_to 'Edit', edit_notification_path(notification) %></td>
+    <td><%= link_to 'Destroy', notification, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Notification', new_notification_path %>

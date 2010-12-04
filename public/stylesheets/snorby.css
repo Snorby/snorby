@@ -3137,6 +3137,37 @@ div.dashboard-graph.no-pie-data{
 	position: relative;
 }
 
+#snorbybox-content #snorbybox-form-holder{
+	display: block;
+	position: relative;
+	overflow: hidden;
+}
+
+#snorbybox-content #snorbybox-form-holder #snorbybox-form{
+	width: 320px;
+	float: left;
+	display: block;
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 20px;
+}
+
+#snorbybox-content #snorbybox-form-holder #snorbybox-form select#user_select,
+#snorbybox-content #snorbybox-form-holder #snorbybox-form select#sensor_select{
+	width: 300px;
+}
+
+#snorbybox-content #snorbybox-form-full{
+	display: block;
+	position: relative;
+	overflow: hidden;	
+}
+
+#snorbybox-content #snorbybox-form-full textarea{
+	height: 200px;
+	width: 610px;
+}
+
 #snorbybox-content h2{
 	font-size: 1.4em;
 	color: #1f1f1f;

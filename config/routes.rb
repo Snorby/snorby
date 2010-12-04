@@ -1,5 +1,7 @@
 Snorby::Application.routes.draw do
 
+  resources :notifications
+
   resources :jobs do
     member do
       get :last_error
@@ -47,6 +49,8 @@ Snorby::Application.routes.draw do
     end
     
     collection do
+      get :create_mass_action
+      post :mass_action
       get :hotkey
       post :export
       get :lookup
