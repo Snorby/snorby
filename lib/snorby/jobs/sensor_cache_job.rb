@@ -1,17 +1,17 @@
 # Snorby - All About Simplicity.
-# 
+#
 # Copyright (c) 2010 Dustin Willis Webber (dustin.webber at gmail.com)
-# 
+#
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 2 of the License, or
 # (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
@@ -44,29 +44,31 @@ module Snorby
 
             if @since_last_cache.blank?
               if @sensor.cache.blank?
-                
+
                 current_hour = Time.now.beginning_of_day + Time.now.hour.hours
                 half_past_time = current_hour + 30.minutes
-                
+
                 if half_past_time < Time.now
                   start_time = half_past_time
                 else
                   start_time = current_hour
                 end
-                
+
               else
                 start_time = @sensor.cache.last.ran_at + 30.minutes
               end
-              
+
               Cache.create(:sid => @sensor.sid, :ran_at => start_time)
               next
             end
 
             start_time = @since_last_cache.first.timestamp.beginning_of_day + @since_last_cache.first.timestamp.hour.hours
             end_time = start_time + 30.minute
-            
+
             # Prevent Duplicate Cache Records
-            next if start_time == @sensor.cache.last.ran_at
+            unless @sensor.cache.blank?
+              next if (start_time == @sensor.cache.last.ran_at)
+            end
 
             split_events_and_process(start_time, end_time)
 
