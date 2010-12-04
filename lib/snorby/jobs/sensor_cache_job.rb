@@ -44,22 +44,29 @@ module Snorby
 
             if @since_last_cache.blank?
               if @sensor.cache.blank?
+                
                 current_hour = Time.now.beginning_of_day + Time.now.hour.hours
                 half_past_time = current_hour + 30.minutes
+                
                 if half_past_time < Time.now
                   start_time = half_past_time
                 else
                   start_time = current_hour
                 end
+                
               else
                 start_time = @sensor.cache.last.ran_at + 30.minutes
               end
+              
               Cache.create(:sid => @sensor.sid, :ran_at => start_time)
               next
             end
 
             start_time = @since_last_cache.first.timestamp.beginning_of_day + @since_last_cache.first.timestamp.hour.hours
             end_time = start_time + 30.minute
+            
+            # Prevent Duplicate Cache Records
+            next if start_time == @sensor.cache.last.ran_at
 
             split_events_and_process(start_time, end_time)
 
@@ -79,7 +86,7 @@ module Snorby
 
         def build_snorby_cache
 
-          @sensor.update!(:events_count => build_sensor_event_count)
+          build_sensor_event_count
           build_proto_counts
 
           @cache.update({
