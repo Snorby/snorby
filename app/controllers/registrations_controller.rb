@@ -2,6 +2,11 @@ class RegistrationsController < Devise::RegistrationsController
   include Devise::Controllers::InternalHelpers
   
   before_filter :require_administrative_privileges, :only => [:create]
+  before_filter :check_for_demo_user, :only => [:new, :create, :edit, :update, :destroy]
+
+  def check_for_demo_user
+    redirect_to :back, :notice => 'The Demo Account cannot modify system settings.' if @current_user.demo?
+  end
 
   def new
     build_resource({})

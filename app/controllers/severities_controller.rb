@@ -1,6 +1,11 @@
 class SeveritiesController < ApplicationController
 
   before_filter :require_administrative_privileges
+  before_filter :check_for_demo_user, :only => [:new, :create, :edit, :update, :destroy]
+
+  def check_for_demo_user
+    redirect_to :back, :notice => 'The Demo Account cannot modify system settings.' if @current_user.demo?
+  end
 
   def index
     @severities = Severity.all.page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:id.asc])

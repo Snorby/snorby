@@ -1,6 +1,11 @@
 class SettingsController < ApplicationController
 
   before_filter :require_administrative_privileges
+  before_filter :check_for_demo_user, :only => [:start_worker, :start_sensor_cache, :start_daily_cache, :restart_worker, :create]
+
+  def check_for_demo_user
+    redirect_to :back, :notice => 'The Demo Account cannot modify system settings.' if @current_user.demo?
+  end
 
   def index
   end
