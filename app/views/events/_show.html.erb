@@ -5,9 +5,7 @@
 			
 			<ul>
 				
-				<li><%= link_to "Mass Actions", create_mass_action_events_path, :class => 'dark-button' %></li>
-				
-				<li><%= link_to "Create Notification", new_notification_path(:sid => @event.sid, :cid => @event.cid), :class => 'dark-button snorbybox' %></li>
+				<li><%= link_to "Perform Mass Classification", create_mass_action_events_path(:sid => @event.sid, :cid => @event.cid), :class => 'snorbybox dark-button' %></li>
 				
 			</ul>
 			

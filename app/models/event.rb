@@ -66,6 +66,23 @@ class Event
     end
   end
 
+  def matches_notification?
+    Notification.each do |notify|
+      
+      next unless notify.sig_id == sig_id
+      
+      puts 'Hello'
+      
+      send_notification if notify.check(self)
+      
+    end
+    nil
+  end
+  
+  def send_notification
+    Delayed::Job.enqueue(Snorby::Jobs::AlertNotifications.new(self.sid, self.cid))
+  end
+
   def self.limit(limit=25)
     all(:limit => limit)
   end

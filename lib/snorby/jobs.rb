@@ -16,9 +16,11 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+require 'snorby/jobs/alert_notifications'
 require 'snorby/jobs/cache_helper'
 require 'snorby/jobs/daily_cache_job'
 require 'snorby/jobs/note_notification'
+require 'snorby/jobs/mass_classification'
 require 'snorby/jobs/sensor_cache_job'
 
 module Snorby

@@ -228,6 +228,28 @@ var Snorby = {
 		
 		events: function(){
 			
+			$('button.mass-action').live('click', function(e) {
+				e.preventDefault();
+				var nform = $('form#mass-action-form');
+				$('a#fancybox-close').click();
+				$.post('/events/mass_action', nform.serialize(), null, "script");
+				return false;
+			});
+			
+			$('button.create-notification').live('click', function(e) {
+				e.preventDefault();
+				var nform = $('form#new_notification');
+				$.post('/notifications', nform.serialize(), null, "script");
+				$('a#fancybox-close').click();
+				return false;
+			});
+			
+			$('button.cancel-snorbybox').live('click', function(e) {
+				e.preventDefault();
+				$('a#fancybox-close').click();
+				return false;
+			});
+			
 			$('ul.payload-tabs li a').live('click', function(e) {
 				e.preventDefault();
 				

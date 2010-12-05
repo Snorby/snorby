@@ -38,6 +38,8 @@ module Snorby
 
         @events.each do |event|
 
+          #event.matches_notification?
+
           if event.tcp?
             @tcp_events << event
           elsif event.udp?
