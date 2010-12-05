@@ -71,6 +71,7 @@ Snorby::Application.routes.draw do
 
   resources :users do
     collection do
+      post :toggle_settings
       post :remove
       post :add
     end

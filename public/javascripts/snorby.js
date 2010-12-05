@@ -161,6 +161,12 @@ var Snorby = {
 		
 		dashboard: function(){
 			
+			$('#box-holder div.box').live('click', function(e) {
+				e.preventDefault();
+				window.location = $(this).attr('data-url');
+				return false;
+			});
+			
 			$('a.show_events_graph').live('click', function(e) {
 				e.preventDefault();
 				$('#box-menu li').removeClass('active');
@@ -479,6 +485,24 @@ var Snorby = {
 	},
 	
 	admin: function(){
+		
+		$('#users input#enabled').live('click', function(e) {
+			var user_id = $(this).parent('td').attr('data-user');
+			if ($(this).attr('checked')) {
+				$.post('/users/toggle_settings', { user_id: user_id, user: { enabled: true } });
+			} else {
+				$.post('/users/toggle_settings', { user_id: user_id, user: { enabled: false } });
+			};
+		});
+		
+		$('#users input#admin').live('click', function(e) {
+			var user_id = $(this).parent('td').attr('data-user');
+			if ($(this).attr('checked')) {
+				$.post('/users/toggle_settings', { user_id: user_id, user: { admin: true } });
+			} else {
+				$.post('/users/toggle_settings', { user_id: user_id, user: { admin: false } });
+			};
+		});
 		
 		$('#severity-color-bg').ColorPicker({
 			color: $('#severity-color-bg').attr('value'),

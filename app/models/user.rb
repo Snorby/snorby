@@ -47,6 +47,9 @@ class User
   # Define if the user has administrative privileges
   property :admin, Boolean, :default => false
   
+  # Define if the user has been enabled/disabled
+  property :enabled, Boolean, :default => true
+  
   # Define created_at and updated_at timestamps
   timestamps :at
 

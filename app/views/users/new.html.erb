@@ -28,15 +28,6 @@
 					<br />
 				</p>
 
-				<% if current_user.admin? %>
-
-					<p>
-						<%= f.check_box :admin %> <%= f.label "Administrator" %>
-						<i>(should this user have administrative rights?)</i>
-					</p>
-
-				<% end %>
-
 			</div>
 
 			<div class='grid_5 alpha'>
@@ -64,6 +55,15 @@
 					<%= f.file_field :avatar %><br />
 					<br />
 				</p>
+				
+				<% if current_user.admin? %>
+
+					<p>
+						<%= f.check_box :admin %> <%= f.label "Administrator" %>
+						<i>(should this user have administrative rights?)</i>
+					</p>
+
+				<% end %>
 				
 			</div>
 		

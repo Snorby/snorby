@@ -1103,6 +1103,10 @@ h3{
 	white-space:nowrap;
 }
 
+#box-holder div.box{
+	cursor: pointer;
+}
+
 /* @end */
 
 /* @group Message */
@@ -3236,6 +3240,22 @@ div.dashboard-graph.no-pie-data{
 	font-variant: normal;
 	text-shadow: none;
 	font-style: normal;
+}
+
+/* @end */
+
+/* @group Forms */
+
+form#new_severity p{
+	margin-bottom: 5px;
+}
+
+form#new_classification p{
+	margin-bottom: 5px;	
+}
+
+form#new_classification textarea{
+	width: 450px;
 }
 
 /* @end */
