@@ -1,6 +1,7 @@
 Snorby::Application.routes.draw do
 
-  resources :notifications
+  # This feature is not ready yet
+  # resources :notifications
 
   resources :jobs do
     member do
