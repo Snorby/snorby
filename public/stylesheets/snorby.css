@@ -3239,3 +3239,19 @@ div.dashboard-graph.no-pie-data{
 }
 
 /* @end */
+
+/* @group Forms */
+
+form#new_severity p{
+	margin-bottom: 5px;
+}
+
+form#new_classification p{
+	margin-bottom: 5px;	
+}
+
+form#new_classification textarea{
+	width: 450px;
+}
+
+/* @end */
