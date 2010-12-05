@@ -11,6 +11,8 @@ class Signature
 
   has n, :events, :parent_key => :sig_id, :child_key => :sig_id, :constraint => :destroy
   
+  has n, :notifications, :child_key => :sig_id, :parent_key => :sig_id
+  
   belongs_to :severity, :child_key => :sig_priority, :parent_key => :sig_id
   
   #has n, :sig_references, :parent_key => :sig_rev, :child_key => [ :ref_seq ]

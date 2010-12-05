@@ -1,4 +1,4 @@
-<%= form_for(@notification, :class => 'basic-form') do |f| %>
+<%= form_for(@notification, :html => { :class => 'basic-form validate' }) do |f| %>
 
 	<div id='snorbybox-content' class=''>
 		
@@ -16,38 +16,40 @@
 		
 		<div id='snorbybox-form-holder'>
 			
+			<%= f.hidden_field :sig_id, :value => @event.signature.sig_id %>
+			
 			<div id='snorbybox-form'>
 		    <%= check_box_tag("use_ip_src", 1) %> <%= f.label "Source Address: #{@event.ip.ip_src} <i>(optional)</i>".html_safe %><br />
-				<%= f.hidden_field :ip_src, :value => @event.ip.ip_src.to_i %>
+				<%= f.hidden_field :ip_src, :value => @event.ip.ip_src.to_s %>
 			</div>
 
 			<div id='snorbybox-form'>
 				<%= check_box_tag("use_ip_dst", 1) %> <%= f.label "Destination Address: #{@event.ip.ip_dst} <i>(optional)</i>".html_safe %><br />
-		    <%= f.hidden_field :ip_dst, :value => @event.ip.ip_dst.to_i %>
+		    <%= f.hidden_field :ip_dst, :value => @event.ip.ip_dst.to_s %>
 			</div>
 
 			<div id='snorbybox-form'>
 		    <%= f.label 'Select Sensors <i>(optional)</i>'.html_safe %><br />
-		    <%= select_tag :sensor_ids, options_from_collection_for_select(Sensor.all, :sid, :name), { :multiple => true, :size => 10, :id => "sensor_select" } %>
+		    <%= select_tag '[notification][sensor_ids]', options_from_collection_for_select(Sensor.all, :sid, :name), { :multiple => true, :size => 10, :id => "sensor_select" } %>
 			</div>
 
 			<div id='snorbybox-form'>
 				<%= f.label 'Recipients' %><br />
-		    <%= select_tag :user_ids, options_from_collection_for_select(User.all, :id, :name), { :multiple => true, :size => 10, :id => "user_select" } %>
+		    <%= select_tag '[notification][user_ids]', options_from_collection_for_select(User.all, :id, :name), { :multiple => true, :size => 10, :id => "user_select" } %>
 			</div>
 			
 		</div>
 		
 		<div id='snorbybox-form-full'>
 			<%= f.label 'Notification Description' %><br />
-	    <%= f.text_area :description %>
+	    <%= f.text_area :description, :placeholder => 'Please document the signature and notification purpose.', :class => 'required' %>
 		</div>
 	
 		<%= form_actions do %>
 
-			<%= button "Create Notification", :class => 'success' %>
+			<%= button "Create Notification", :class => 'success create-notification' %>
 
-			<%= button "Cancel", :class => 'warning cancel' %>
+			<%= button "Cancel", :class => 'warning cancel-snorbybox' %>
 
 		<% end %>
 	

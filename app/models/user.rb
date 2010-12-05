@@ -59,6 +59,8 @@ class User
 
   validates_attachment_content_type :avatar, :content_type => ["image/png", "image/gif", "image/jpeg"]
 
+  has n, :notifications, :constraint => :destroy
+
   has n, :favorites, :child_key => :user_id, :constraint => :destroy
 
   has n, :notes, :child_key => :user_id, :constraint => :destroy

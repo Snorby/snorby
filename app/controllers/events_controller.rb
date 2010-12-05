@@ -26,11 +26,27 @@ class EventsController < ApplicationController
   end
   
   def create_mass_action
-    
+    @event = Event.get(params[:sid], params[:cid])
+    render :layout => false
   end
 
   def mass_action
+    options = {}
     
+    options.merge!({:sig_id => params[:sig_id].to_i})
+    options.merge!({:"ip.ip_src" => IPAddr.new(params[:ip_src].to_i,Socket::AF_INET)}) if params[:use_ip_src]
+    options.merge!({:"ip.ip_dst" => IPAddr.new(params[:ip_dst].to_i,Socket::AF_INET)}) if params[:use_ip_dst]
+    
+    if params.has_key?(:sensor_ids)
+      options.merge!({:"sid" => params[:sensor_ids].map(&:to_i)})
+    end
+    
+    # Snorby::Jobs::MassClassification.new(params[:classification_id], options)
+    Delayed::Job.enqueue(Snorby::Jobs::MassClassification.new(params[:classification_id], options))
+    respond_to do |format|
+      format.html { render :layout => false }
+      format.js
+    end
   end
 
   def export

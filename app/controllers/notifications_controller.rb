@@ -35,14 +35,27 @@ class NotificationsController < ApplicationController
   end
 
   def create
-    @notification = Notification.new(params[:notification])
-    @notification.ip_src = nil if params[:use_ip_src].to_i.zero?
-    @notification.ip_dst = nil if params[:use_ip_src].to_i.zero?
+    @notification = Notification.create(params[:notification])
     
-    if @notification.save
-      redirect_to events_path, :notice => 'Notification was successfully created.'
+    if params[:use_ip_src]
+      @notification.ip_src = params[:notification][:ip_src]
     else
-      #redirect_to events_path, :notice => 'Notification was successfully created.'
+      @notification.ip_src = nil
+    end
+    
+    if params[:use_ip_dst]
+      @notification.ip_dst = params[:notification][:ip_dst]
+    else
+      @notification.ip_dst = nil
+    end
+    
+    @notification.user = @current_user
+    
+    @notification.save
+    
+    respond_to do |format|
+      format.html { render :layout => false }
+      format.js
     end
     
   end
@@ -66,7 +79,7 @@ class NotificationsController < ApplicationController
     @notification.destroy
 
     respond_to do |format|
-      format.html { redirect_to(notifications_url) }
+      format.html { redirect_to(notifications_url, :notice => 'Notification removed successfully.') }
       format.xml  { head :ok }
     end
   end

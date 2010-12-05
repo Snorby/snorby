@@ -1,12 +1,13 @@
 <tr id='notification_<%= notification.id %>' class='notification' data-notification-id='<%= notification.id %>'>
-	<td class='id first'><%= notification.signature.sig_name %></td>
-	<td class=''><%= notification.sensor_ids %></td>
-	<td class=''><%= notification.user_ids %></td>
-	<td class=''><%= notification.ip_src %></td>
-	<td class='last'><%= notification.ip_dst %></td>
+	<td class='id first'><span title='<%= notification.signature.sig_name %>'><%= truncate(notification.signature.sig_name, :length => 65, :omission => '...') %></span></td>
+	<td class=''><%= notification.ip_src || 'N/A' %></td>
+	<td class=''><%= notification.ip_dst || 'N/A' %></td>
 	
-	<td class='chart last'>
-		<%= truncate(notification.description) %>
-	</td>
+	<td class=''><%= link_to "More Information", '#', :class => 'snorbybox' %></td>
 	
+	<% if @current_user.admin || @current_user == notification.user %>
+		<td class='last'><%= link_to image_tag("icons/destroy.png", :size => '16x16', :class => 'trash'), notification_path(notification), :method => :delete, :confirm => "Are you sure you want to remove this notification?" %></td>
+	<% else %>
+		<td class='last'><%= image_tag('icons/lock.png') %></td>
+	<% end %>
 </tr>

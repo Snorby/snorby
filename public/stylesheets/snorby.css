@@ -3152,9 +3152,9 @@ div.dashboard-graph.no-pie-data{
 	margin-bottom: 20px;
 }
 
-#snorbybox-content #snorbybox-form-holder #snorbybox-form select#user_select,
-#snorbybox-content #snorbybox-form-holder #snorbybox-form select#sensor_select{
-	width: 300px;
+#snorbybox-content select#user_select,
+#snorbybox-content select#sensor_select{
+	width: 610px;
 }
 
 #snorbybox-content #snorbybox-form-full{
