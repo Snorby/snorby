@@ -26,11 +26,21 @@
 				<%= label_tag 'Signature Lookup URL' %> <i>(user $$sid$$ and $$gid$$ for the get request parameters)</i><br />
 				<%= text_field_tag '[settings][signature_lookup]', (Setting.signature_lookup ? Setting.find(:signature_lookup) : nil), :placeholder => 'Signature Lookup URL...', :autocomplete => :off, :class => 'required url' %>
 			</p>
+			
+			<p>
+				<%= label_tag 'OpenFPC Extract URL' %><br /><i>(for full packet capture please supply the OpenFPC extract URL and enable OpenFPC support.)</i><br />
+				<%= text_field_tag '[settings][openfpc_url]', (Setting.openfpc_url ? Setting.find(:openfpc_url) : nil), :placeholder => 'OpenFPC Extract URL...', :autocomplete => :off, :class => 'required url' %>
+			</p>
 
 
 		</div>
 
 		<div class='grid_5'>
+
+			<p>
+				<%= check_box_tag '[settings][openfpc]', 0, (Setting.openfpc ? Setting.find(:openfpc) : nil) %> <%= label_tag 'Enable OpenFPC Support' %><br />
+				<i>(Enable the Snorby OpenFPC Plugin)</i><br />
+			</p>
 
 			<p>
 				<%= check_box_tag '[settings][daily]', 1, (Setting.daily ? Setting.find(:daily) : nil) %> <%= label_tag 'Daily Reports' %><br />
