@@ -1103,6 +1103,10 @@ h3{
 	white-space:nowrap;
 }
 
+#box-holder div.box{
+	cursor: pointer;
+}
+
 /* @end */
 
 /* @group Message */

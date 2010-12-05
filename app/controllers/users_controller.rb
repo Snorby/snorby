@@ -25,4 +25,15 @@ class UsersController < ApplicationController
     redirect_to users_path, :notice => "Successfully Delete User"
   end
 
+  def toggle_settings
+    @user = User.get(params[:user_id])
+    
+    if @user.update(params[:user])
+      render :json => {:success => 'User updated successfully.'}
+    else
+      render :json => {:error => 'Error while changing user attributes.'}
+    end
+    
+  end
+
 end

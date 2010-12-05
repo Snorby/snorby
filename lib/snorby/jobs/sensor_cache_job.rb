@@ -66,9 +66,11 @@ module Snorby
             if @sensor.cache.blank?
               start_time = @since_last_cache.first.timestamp.beginning_of_day + @since_last_cache.first.timestamp.hour.hours
               end_time = start_time + 30.minute
+              next if start_time >= @stop_time
             else
               start_time = @sensor.cache.last.ran_at + 30.minute
               end_time = start_time + 30.minute
+              next if start_time >= @stop_time
             end
 
             split_events_and_process(start_time, end_time)
