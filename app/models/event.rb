@@ -56,6 +56,45 @@ class Event
     # Note: Need to decrement Severity, Sensor and User Counts
   end
 
+  def openfpc_url
+    if Setting.openfpc_url?
+      if tcp?
+        return "#{Setting.find(:openfpc_url)}?sip=#{ip.ip_src}&dip=#{ip.ip_dst} \
+        &filename=snorby-tcp-#{ip.ip_src.to_i}#{ip.ip_dst.to_i} \
+        &spt=#{tcp.tcp_sport} \
+        &dst=#{tcp.tcp_dport} \
+        &stime=#{(timestamp - 1.hour).strftime('%D:&H:%M')}"
+      elsif udp?
+        return "#{Setting.find(:openfpc_url)}?sip=#{ip.ip_src}&dip=#{ip.ip_dst} \
+        &filename=snorby-udp-#{ip.ip_src.to_i}#{ip.ip_dst.to_i} \
+        &spt=#{udp.udp_sport} \
+        &dst=#{udp.udp_dport} \
+        &stime=#{(timestamp - 1.hour).strftime('%D:&H:%M')}"
+      else
+        return "#{Setting.find(:openfpc_url)}?sip=#{ip.ip_src}&dip=#{ip.ip_dst}&filename=snorby-#{ip.ip_src.to_i}#{ip.ip_dst.to_i}&stime=#{(timestamp - 1.hour).strftime('%D:&H:%M')}"
+      end
+    else
+      return '#'
+    end
+    # filename => 0,
+    # sumtype =>0,
+    # password => $config{'GUIPASS'},
+    # action => "fetch",
+    # device => 0,
+    # logtype => 0,
+    # filetype => 0,
+    # logline => 0,
+    # sip => 0,
+    # dip => 0,
+    # spt => 0,
+    # dpt => 0,
+    # proto => 0,
+    # timestamp => 0,
+    # stime => 0,
+    # etime => 0,
+    # comment => 0,
+  end
+
   def signature_url
     if Setting.signature_lookup?
       url = Setting.find(:signature_lookup)
@@ -68,14 +107,14 @@ class Event
 
   def matches_notification?
     Notification.each do |notify|
-      
+
       next unless notify.sig_id == sig_id
       send_notification if notify.check(self)
-      
+
     end
     nil
   end
-  
+
   def send_notification
     Delayed::Job.enqueue(Snorby::Jobs::AlertNotifications.new(self.sid, self.cid))
   end
@@ -309,7 +348,7 @@ class Event
 
   def self.search(params)
     @search = {}
-    
+
     if !params[:timestamp].to_i.zero?
       if params[:timestamp] =~ /\s\-\s/
         start_time, end_time = params[:timestamp].split(' - ')
@@ -318,7 +357,7 @@ class Event
         @search.merge!({:timestamp.gte => Chronic.parse(params[:timestamp]).beginning_of_day})
       end
     end
-    
+
     @search.merge!({ Event.sid => params[:sid] }) if params[:sid] unless params[:sid].to_i.zero?
 
     if params[:severity].to_i.zero?
@@ -338,13 +377,13 @@ class Event
     @search.merge!({ :"ip.ip_dst" => IPAddr.new("#{params[:ip_dst]}") }) unless (params[:ip_dst] == "") || !params.has_key?(:ip_dst)
 
     @search.merge!({ :notes_count.gt => params[:notes_count] }) if params.has_key?(:notes_count)
-    
+
     @search.merge!({ :users_count.gt => params[:users_count] }) if params.has_key?(:users_count)
-    
+
     puts @search.to_yaml
-    
+
     return all(@search) if params[:src_port].to_i.zero? && params[:dst_port].to_i.zero?
-    
+
     if params[:dst_port].to_i.zero?
       return all(@search) && all(:"tcp.tcp_sport" => params[:src_port].to_i) | all(:"udp.udp_sport" => params[:src_port].to_i)
     elsif params[:src_port].to_i.zero?

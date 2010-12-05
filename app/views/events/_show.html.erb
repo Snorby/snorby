@@ -6,6 +6,9 @@
 			<ul>
 				
 				<li><%= link_to "Perform Mass Classification", create_mass_action_events_path(:sid => @event.sid, :cid => @event.cid), :class => 'snorbybox dark-button' %></li>
+				<% if Setting.openfpc? %>
+					<li><%= link_to "Packet Capture", @event.openfpc_url, :class => 'dark-button' %></li>
+				<% end %>
 				
 			</ul>
 			

@@ -5,7 +5,8 @@ class Setting
     :weekly,
     :monthly,
     :lookups,
-    :notes
+    :notes,
+    :openfpc
   ]
 
   include DataMapper::Resource
