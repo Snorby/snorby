@@ -59,17 +59,9 @@ class Event
   def openfpc_url
     if Setting.openfpc_url?
       if tcp?
-        return "#{Setting.find(:openfpc_url)}?sip=#{ip.ip_src}&dip=#{ip.ip_dst} \
-        &filename=snorby-tcp-#{ip.ip_src.to_i}#{ip.ip_dst.to_i} \
-        &spt=#{tcp.tcp_sport} \
-        &dst=#{tcp.tcp_dport} \
-        &stime=#{(timestamp - 1.hour).strftime('%D:&H:%M')}"
+        return "#{Setting.find(:openfpc_url)}?sip=#{ip.ip_src}&dip=#{ip.ip_dst}&filename=snorby-tcp-#{ip.ip_src.to_i}#{ip.ip_dst.to_i}&spt=#{tcp.tcp_sport}&dst=#{tcp.tcp_dport}&stime=#{(timestamp - 1.hour).strftime('%D:&H:%M')}"
       elsif udp?
-        return "#{Setting.find(:openfpc_url)}?sip=#{ip.ip_src}&dip=#{ip.ip_dst} \
-        &filename=snorby-udp-#{ip.ip_src.to_i}#{ip.ip_dst.to_i} \
-        &spt=#{udp.udp_sport} \
-        &dst=#{udp.udp_dport} \
-        &stime=#{(timestamp - 1.hour).strftime('%D:&H:%M')}"
+        return "#{Setting.find(:openfpc_url)}?sip=#{ip.ip_src}&dip=#{ip.ip_dst}&filename=snorby-udp-#{ip.ip_src.to_i}#{ip.ip_dst.to_i}&spt=#{udp.udp_sport}&dst=#{udp.udp_dport}&stime=#{(timestamp - 1.hour).strftime('%D:&H:%M')}"
       else
         return "#{Setting.find(:openfpc_url)}?sip=#{ip.ip_src}&dip=#{ip.ip_dst}&filename=snorby-#{ip.ip_src.to_i}#{ip.ip_dst.to_i}&stime=#{(timestamp - 1.hour).strftime('%D:&H:%M')}"
       end

@@ -28,7 +28,7 @@
 			</p>
 			
 			<p>
-				<%= label_tag 'OpenFPC Extract URL' %><br /><i>(for full packet capture please supply the OpenFPC extract URL and enable OpenFPC support.)</i><br />
+				<%= label_tag 'OpenFPC Extract URL' %><br /><i>(OpenFPC extract URL - full packet capture support)</i><br />
 				<%= text_field_tag '[settings][openfpc_url]', (Setting.openfpc_url ? Setting.find(:openfpc_url) : nil), :placeholder => 'OpenFPC Extract URL...', :autocomplete => :off, :class => 'required url' %>
 			</p>
 
