@@ -70,9 +70,6 @@ class Event
     Notification.each do |notify|
       
       next unless notify.sig_id == sig_id
-      
-      puts 'Hello'
-      
       send_notification if notify.check(self)
       
     end

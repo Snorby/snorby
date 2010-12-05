@@ -2682,6 +2682,13 @@ img.avatar-small{
 	border: 3px solid #ededed;	
 }
 
+#settings .crop-holder{
+	display: block;
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 20px;
+}
+
 #settings .user-show-avatar{
 	position: relative;
 	display: block;
@@ -3149,7 +3156,7 @@ div.dashboard-graph.no-pie-data{
 	display: block;
 	position: relative;
 	overflow: hidden;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 
 #snorbybox-content select#user_select,
