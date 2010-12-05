@@ -35,6 +35,24 @@ namespace :snorby do
     
   end
   
+  desc 'Update Snorby'
+  task :update => :environment do
+    
+    # Drop all css/js packages
+    Rake::Task['asset:packager:delete_all'].invoke
+    
+    # bundle all css/js packages
+    Rake::Task['asset:packager:build_all'].invoke
+    
+    # Setup the snorby database
+    Rake::Task['db:autoupgrade'].invoke
+    
+    # Load Default Records
+    Rake::Task['db:seed'].invoke
+    
+  end
+  
+  
   desc 'Remove Old CSS/JS packages and re-bundle'
   task :refresh => :environment do
     

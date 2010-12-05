@@ -7,17 +7,7 @@
 		<%= form_tag '/events/mass_action', :id => 'mass-action-form' do %>
 		
 				<div id='snorbybox-form-full'>
-					<strong>Signature:</strong> <%= @event.signature.sig_name %>
-				</div>
-
-				<br />
-
-				<div id="snorbybox-form-full">
-					Note:
-					<i>
-						Selecting a source or destination address will scope the mass action by your selection. 
-						If both source and destination addresses are left unchecked the mass action  will be applied at all addresses matching this signature. 
-					</i>
+					<strong>Signature:</strong> <%= @event.signature.sig_name %><br />
 				</div>
 
 				<br />
@@ -42,10 +32,22 @@
 					</div>
 
 				</div>
-
+				
+				<br />
+				
 				<div id='snorbybox-form-full'>
 			    <%= label_tag 'Select Sensors <i>(optional - Blank = All)</i>'.html_safe %><br />
 			    <%= select_tag :sensor_ids, options_from_collection_for_select(Sensor.all, :sid, :name), { :multiple => true, :size => 10, :id => "sensor_select" } %>
+				</div>
+
+				<br />
+
+				<div id="snorbybox-form-full">
+					Note:
+					<i>
+						Selecting a source or destination address will scope the mass action by your selection. 
+						If both source and destination addresses are left unchecked the mass action  will be applied at all addresses matching this signature. 
+					</i>
 				</div>
 
 				<br />

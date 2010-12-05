@@ -34,23 +34,23 @@ class Cache
   has 1, :event, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ]
 
   def self.last_month
-    all(:ran_at.gt => (Time.now - 2.months).beginning_of_month, :ran_at.lt => (Time.now - 2.months).end_of_month)
+    all(:ran_at.gte => (Time.now - 2.months).beginning_of_month, :ran_at.lte => (Time.now - 2.months).end_of_month)
   end
 
   def self.this_quarter
-    all(:ran_at.gt => Time.now.beginning_of_quarter, :ran_at.lt => Time.now.end_of_quarter)
+    all(:ran_at.gte => Time.now.beginning_of_quarter, :ran_at.lte => Time.now.end_of_quarter)
   end
 
   def self.this_month
-    all(:ran_at.gt => Time.now.beginning_of_month, :ran_at.lt => Time.now.end_of_month)
+    all(:ran_at.gte => Time.now.beginning_of_month, :ran_at.lte => Time.now.end_of_month)
   end
 
   def self.last_week
-    all(:ran_at.gt => (Time.now - 1.weeks).beginning_of_week, :ran_at.lt => (Time.now - 1.weeks).end_of_week)
+    all(:ran_at.gte => (Time.now - 1.weeks).beginning_of_week, :ran_at.lte => (Time.now - 1.weeks).end_of_week)
   end
 
   def self.this_week
-    all(:ran_at.gt => Time.now.beginning_of_week, :ran_at.lt => Time.now.end_of_week)
+    all(:ran_at.gte => Time.now.beginning_of_week, :ran_at.lte => Time.now.end_of_week)
   end
 
   def self.yesterday

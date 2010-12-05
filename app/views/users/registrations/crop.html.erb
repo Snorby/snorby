@@ -1,3 +1,5 @@
+<%= title "Image Crop" -%>
+
 <% content_for(:header) do %>
 
 <%= stylesheet_link_tag "Jcrop" %>
@@ -32,15 +34,26 @@ function update_crop(coords) {
 <% end %>
 
 <div id='settings' class='grid_12 boxit page'>
-	
-	<%= image_tag @user.avatar.url(:large), :id => "cropbox" %>
 
-	<h4>Preview:</h4>
-	<div style="width:100px; height:100px; overflow:hidden">
-	  <%= image_tag @user.avatar.url(:large), :id => "preview" %>
+	<div class='crop-holder'>
+			
+		<div class='grid_7 omega'>
+			<h4>Original:</h4>
+			<%= image_tag @user.avatar.url(:large), :id => "cropbox" %>
+		</div>
+		
+		<div class='grid_2 alpha'>
+
+			<h4>Preview:</h4>
+			
+			<div style="width:100px; height:100px; overflow:hidden">
+			  <%= image_tag @user.avatar.url(:large), :id => "preview" %>
+			</div>
+
+		</div>
+		
 	</div>
-	
-	
+
 	<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :multipart => true, :class => 'validate' }) do |f| %>
 	  <%= devise_error_messages! %>
 
