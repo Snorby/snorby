@@ -114,13 +114,10 @@ You can open the rails console at anytime and interact with the Snorby environme
 	# If the Snorby worker is running this will start the cache jobs and set the run_at time for the current time.
 	Snorby::Jobs.run_now!								
 
-## Coming Soon
-
-* Full Packet Capture (OpenFPC)
-
 ## Snorby Team
 
-* Dustin Willis Webber
+* Dustin Willis Webber (design, backend code and creator)
+* Jason Meller (Insta-Snorby)
 
 ## License
 
