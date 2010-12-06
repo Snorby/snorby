@@ -15,7 +15,9 @@ Snorby is a ruby on rails web application for network security monitoring that i
 ## Demo
 
 URL: http://demo.snorby.org
+
 User: demo@snorby.org
+
 Pass: snorby
 
 **NOTE** For the full packet capture HTTP basic AUTH use the same credentials.
