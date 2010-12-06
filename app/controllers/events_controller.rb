@@ -31,6 +31,11 @@ class EventsController < ApplicationController
     end
   end
   
+  def view
+    @events = Event.all(:sid => params['sid'], :cid => params['cid']).page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:timestamp.desc])
+    @classifications ||= Classification.all
+  end
+  
   def create_mass_action
     @event = Event.get(params[:sid], params[:cid])
     render :layout => false
