@@ -54,7 +54,7 @@ class Cache
   end
 
   def self.yesterday
-    all(:ran_at.gte => Time.now.yesterday.beginning_of_day, :ran_at.lte => Time.now.yesterday.end_of_day)
+    all(:ran_at.gte => Time.now.yesterday.beginning_of_day, :ran_at.lt => Time.now.yesterday.end_of_day)
   end
 
   def self.today
