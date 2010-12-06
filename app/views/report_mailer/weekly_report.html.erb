@@ -1,16 +1,14 @@
 All,<br />
 
-<br />
-
 <p>
 	<% if Setting.company? %>
-		<h1><%= Setting.find(:company) %> weekly report via Snorby.</h1>
+		<%= Setting.find(:company) %> weekly report via Snorby.<br />
 	<% else %>
-		<h1>Weekly report via Snorby.</h1>
+		Weekly report via Snorby.<br />
 	<% end %>
 </p>
 
 <p>
-----------------------------------------
-This is a weekly email from Snorby.  You received this email because you requested the report to be sent to you.  You will receive the next report next week.
+----------------------------------------<br />
+This is a weekly email from Snorby.  You received this email because you requested the report to be sent to you.  You will receive the next report next week.<br />
 </p>
