@@ -1,6 +1,17 @@
 <tr id='user_<%= user.id %>' class='user' data-user-id='<%= user.id %>'>
-	<td class='enabled first' data-user='<%= user.id %>'><%= check_box_tag :enabled, 1, user.enabled %></td>
-	<td class='admin' data-user='<%= user.id %>'><%= check_box_tag :admin, 1, user.admin %></td>
+	
+	<% if current_user.id == user.id %>
+		
+		<td class='first' data-user='<%= user.id %>'><%= image_tag("icons/lock.png", :size => '16x16', :class => 'trash') %></td>
+		<td class='' data-user='<%= user.id %>'><%= image_tag("icons/lock.png", :size => '16x16', :class => 'trash') %></td>
+	
+	<% else %>
+	
+		<td class='enabled first' data-user='<%= user.id %>'><%= check_box_tag :enabled, 1, user.enabled %></td>
+		<td class='admin' data-user='<%= user.id %>'><%= check_box_tag :admin, 1, user.admin %></td>
+		
+	<% end %>
+	
 	<td class='name' data-user-id='<%= user.id %>'><%= image_tag(user.avatar.url(:small), :size => '16x16', :class => 'avatar-small') %> <%= user.name %></td>
 	<td class='email'><%= user.email %></td>
 	<td class='last_sign_in_ip'><%= !user.last_sign_in_ip.blank? ? user.last_sign_in_ip : 'N/A' %></td>

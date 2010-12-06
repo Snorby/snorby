@@ -103,33 +103,33 @@ module Snorby
 
         when :week
           @cache = DailyCache.this_week
-          @start_time = Time.now.beginning_of_week
-          @end_time = Time.now.end_of_week
+          @start_time = Time.yesterday.beginning_of_week
+          @end_time = Time.yesterday.end_of_week
 
         when :last_week
           @cache = DailyCache.last_week
-          @start_time = (Time.now - 1.week).beginning_of_week
-          @end_time = (Time.now - 1.week).end_of_week
+          @start_time = (Time.yesterday - 1.week).beginning_of_week
+          @end_time = (Time.yesterday - 1.week).end_of_week
 
         when :month
           @cache = DailyCache.this_month
-          @start_time = Time.now.beginning_of_month
-          @end_time = Time.now.end_of_month
+          @start_time = Time.yesterday.beginning_of_month
+          @end_time = Time.yesterday.end_of_month
 
         when :last_month
           @cache = DailyCache.last_month
-          @start_time = (Time.now - 2.months).beginning_of_month
-          @end_time = (Time.now - 2.months).end_of_month
+          @start_time = (Time.yesterday - 2.months).beginning_of_month
+          @end_time = (Time.yesterday - 2.months).end_of_month
 
         when :quarter
           @cache = DailyCache.this_quarter
-          @start_time = Time.now.beginning_of_quarter
-          @end_time = Time.now.end_of_quarter
+          @start_time = Time.yesterday.beginning_of_quarter
+          @end_time = Time.yesterday.end_of_quarter
 
         when :year
           @cache = DailyCache.this_year
-          @start_time = Time.now.beginning_of_year
-          @end_time = Time.now.end_of_year
+          @start_time = Time.yesterday.beginning_of_year
+          @end_time = Time.yesterday.end_of_year
 
         else
           @cache = Cache.today
