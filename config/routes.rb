@@ -49,11 +49,8 @@ Snorby::Application.routes.draw do
       
     end
     
-    member do
-      get :view
-    end
-    
     collection do
+      get :view
       get :create_mass_action
       post :mass_action
       get :hotkey

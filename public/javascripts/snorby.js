@@ -475,6 +475,7 @@ var Snorby = {
 			});
 
 			$('div.new_events').live('click', function() {
+				//if (true) {};
 				$('#events ul.table div.content li').fadeIn('slow');
 				$(this).remove();
 				return false;
