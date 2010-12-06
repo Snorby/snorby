@@ -1,3 +1,9 @@
 All,
 
-<%= @note.user.name %> has added a new note to event <%= @event.sid %>.<%= @event.cid %>.
+<br />
+
+<strong><%= @note.user.name %></strong> has added a new note to event <%= @event.sid %>.<%= @event.cid %>.<br />
+
+<br />
+
+<strong>Event:</strong> <%= view_events_url(:sid => @event.sid, :cid => @note.cid) %><br />
