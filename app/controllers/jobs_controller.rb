@@ -51,11 +51,16 @@ class JobsController < ApplicationController
 
   def destroy
     @job = Snorby::Jobs.find.get(params[:id])
-    @job.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(jobs_url) }
-      format.xml  { head :ok }
+    
+    if @job.blank?
+      redirect_to jobs_url
+    else
+      @job.destroy
+      respond_to do |format|
+        format.html { redirect_to(jobs_url) }
+        format.xml  { head :ok }
+      end
     end
+    
   end
 end
