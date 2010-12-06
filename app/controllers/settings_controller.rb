@@ -52,7 +52,7 @@ class SettingsController < ApplicationController
   end
 
   def restart_worker
-    Snorby::Worker.restart if Snorby::Worker.running?
+    Snorby::Worker.restart if Snorby::Worker.running? && !@current_user.demo?
     redirect_to jobs_path
   end
 
