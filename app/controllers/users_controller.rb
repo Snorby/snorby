@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   before_filter :require_administrative_privileges, :only => [:index, :add, :new, :remove]
-  before_filter :check_for_demo_user, :only => [:new, :index, :add, :remove]
+  before_filter :check_for_demo_user, :only => [:new, :index, :add, :remove, :toggle_settings]
 
   def check_for_demo_user
     redirect_to :back, :notice => 'The Demo Account cannot modify system settings.' if @current_user.demo?
