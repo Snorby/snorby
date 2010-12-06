@@ -14,7 +14,7 @@ Snorby is a ruby on rails web application for network security monitoring that i
 
 ## Demo
 
-URL: http://demo.snorby.org
+URL: [http://demo.snorby.org](http://demo.snorby.org)
 
 User: demo@snorby.org
 
