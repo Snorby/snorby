@@ -475,9 +475,12 @@ var Snorby = {
 			});
 
 			$('div.new_events').live('click', function() {
-				//if (true) {};
-				$('#events ul.table div.content li').fadeIn('slow');
 				$(this).remove();
+				if (parseInt($('strong.new_event_count').html()) > 100) {
+					window.location = '/events'
+				} else {
+					$('#events ul.table div.content li').fadeIn('slow');
+				};
 				return false;
 			});
 
