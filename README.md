@@ -116,9 +116,9 @@ You can open the rails console at anytime and interact with the Snorby environme
 
 ## Snorby Team
 
-* **Dustin Willis Webber** (design, backend code and creator)
-* **Jason Meller** (Insta-Snorby)
-* **JJ Cummings** (QC, Testing and Support)
+ * **Dustin Willis Webber** (Design, Backend Code)
+ * **Jason Meller** (InstaSnorby VM)
+ * **JJ Cummings** (QC, Testing and Support)
 
 ## License
 
