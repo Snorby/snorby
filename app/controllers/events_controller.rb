@@ -1,6 +1,12 @@
 class EventsController < ApplicationController
   respond_to :html, :xml, :json, :js, :csv
 
+  before_filter :check_for_demo_user, :only => [:mass_action]
+
+  def check_for_demo_user
+    redirect_to :back, :notice => 'The Demo Account cannot modify system settings.' if @current_user.demo?
+  end
+
   def index
     @events = Event.all(:classification_id => nil).page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:timestamp.desc])
     @classifications ||= Classification.all

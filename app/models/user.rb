@@ -80,6 +80,11 @@ class User
     self.name.to_s
   end
 
+  def demo?
+    return true if email == 'demo@snorby.org'
+    false
+  end
+
   def accepts_note_notifications?(event=false)
     if accept_notes == 1
       return true

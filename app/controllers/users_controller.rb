@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
 
   before_filter :require_administrative_privileges, :only => [:index, :add, :new, :remove]
+  before_filter :check_for_demo_user, :only => [:new, :index, :add, :remove, :toggle_settings]
+
+  def check_for_demo_user
+    redirect_to :back, :notice => 'The Demo Account cannot modify system settings.' if @current_user.demo?
+  end
   
   def index
     @users = User.all.page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:id.asc])
