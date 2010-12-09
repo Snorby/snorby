@@ -12,6 +12,16 @@ Snorby is currently in alpha stages and is **not** ready for production environm
 
 Snorby is a ruby on rails web application for network security monitoring that interfaces with current popular intrusion detection systems (Snort, Suricata and Saga). The basic fundamental concepts behind Snorby are simplicity, organization and power. The project goal is to create a free, open source and highly competitive application for network monitoring for both private and enterprise use.
 
+## Demo
+
+URL: [http://demo.snorby.org](http://demo.snorby.org)
+
+User: demo@snorby.org
+
+Pass: snorby
+
+**NOTE** For the full packet capture HTTP basic AUTH use the same credentials.
+
 ## Screenshot
 
 	http://dl.dropbox.com/u/38088/snorby2.png
@@ -104,13 +114,11 @@ You can open the rails console at anytime and interact with the Snorby environme
 	# If the Snorby worker is running this will start the cache jobs and set the run_at time for the current time.
 	Snorby::Jobs.run_now!								
 
-## Coming Soon
-
-* Full Packet Capture (OpenFPC)
-
 ## Snorby Team
 
-* Dustin Willis Webber
+ * **Dustin Willis Webber** (Design, Backend Code)
+ * **Jason Meller** (InstaSnorby VM)
+ * **JJ Cummings** (QC, Testing and Support)
 
 ## License
 

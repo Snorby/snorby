@@ -78,7 +78,7 @@ module Snorby
           end
 
           Snorby::Jobs.sensor_cache.destroy! if Snorby::Jobs.sensor_cache?
-          Delayed::Job.enqueue(Snorby::Jobs::SensorCacheJob.new(false), 1, @stop_time + 31.minute)
+          Delayed::Job.enqueue(Snorby::Jobs::SensorCacheJob.new(false), :priority => 1, :run_at => @stop_time + 31.minute)
 
         rescue => e
           puts e
