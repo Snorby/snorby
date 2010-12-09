@@ -36,13 +36,13 @@ class SettingsController < ApplicationController
 
   def start_sensor_cache
     Snorby::Jobs.sensor_cache.destroy! if Snorby::Jobs.sensor_cache?
-    Delayed::Job.enqueue(Snorby::Jobs::SensorCacheJob.new(false), 1)
+    Delayed::Job.enqueue(Snorby::Jobs::SensorCacheJob.new(false), :priority => 1)
     redirect_to jobs_path
   end
 
   def start_daily_cache
     Snorby::Jobs.daily_cache.destroy! if Snorby::Jobs.daily_cache?
-    Delayed::Job.enqueue(Snorby::Jobs::DailyCacheJob.new(false), 1, Time.now.tomorrow.beginning_of_day)
+    Delayed::Job.enqueue(Snorby::Jobs::DailyCacheJob.new(false), :priority => 1, :run_at => Time.now.tomorrow.beginning_of_day)
     redirect_to jobs_path
   end
 

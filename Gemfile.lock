@@ -1,6 +1,6 @@
 GIT
   remote: http://github.com/Snorby/delayed_job.git
-  revision: be8de9f4e69779e5a876159359c7174c179ddbb1
+  revision: be8de9f
   branch: master
   specs:
     delayed_job (2.1.2)
@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: http://github.com/Snorby/delayed_job_data_mapper.git
-  revision: 94aa4b039d76e8d270438e1dd08dc70744b2cb6c
+  revision: 94aa4b0
   specs:
     delayed_job_data_mapper (1.0.0.rc)
       delayed_job (~> 2.1)
@@ -19,7 +19,7 @@ GIT
 
 GIT
   remote: http://github.com/mephux/ezprint.git
-  revision: c231df760dae8a2d4bc906888285c6d314de4cf6
+  revision: c231df7
   branch: rails3
   specs:
     ezprint (0.2.0)
@@ -27,7 +27,7 @@ GIT
 
 GIT
   remote: https://github.com/solnic/dm-paperclip.git
-  revision: 8b8781397d81f43f7e4446966ff44f4b939a5a2b
+  revision: 8b87813
   branch: master
   specs:
     dm-paperclip (2.4.1)

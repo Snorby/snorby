@@ -30,12 +30,17 @@ module Snorby
         begin
 
           if DailyCache.all.blank?
-            day_start = Event.first.timestamp.beginning_of_day
-            day_end = Event.first.timestamp.end_of_day
+            
+            unless Event.all.blank?
+              
+              day_start = Event.first.timestamp.beginning_of_day
+              day_end = Event.first.timestamp.end_of_day
 
-            Sensor.all.each do |sensor|
-              @sensor = sensor
-              build_cache(day_start, day_end)
+              Sensor.all.each do |sensor|
+                @sensor = sensor
+                build_cache(day_start, day_end)
+              end
+              
             end
 
           else
@@ -71,7 +76,7 @@ module Snorby
           end
 
           Snorby::Jobs.daily_cache.destroy! if Snorby::Jobs.daily_cache?
-          Delayed::Job.enqueue(Snorby::Jobs::DailyCacheJob.new(false), 1, Time.now.tomorrow.beginning_of_day)
+          Delayed::Job.enqueue(Snorby::Jobs::DailyCacheJob.new(false), :priority => 1, :run_at => Time.now.tomorrow.beginning_of_day)
 
         rescue Interrupt
           @cache.destroy! if defined?(@cache)

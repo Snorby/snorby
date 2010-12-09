@@ -32,7 +32,7 @@ module Snorby
     end
 
     def self.run(obj, priority=1, time=Time.now)
-      Delayed::Job.enqueue(obj, priority, time)
+      Delayed::Job.enqueue(obj, :priority => priority, :run_at => time)
     end
 
     def self.start
