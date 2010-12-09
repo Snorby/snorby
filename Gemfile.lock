@@ -26,8 +26,8 @@ GIT
       pdfkit (>= 0.4.1)
 
 GIT
-  remote: https://github.com/solnic/dm-paperclip.git
-  revision: 8b87813
+  remote: http://github.com/solnic/dm-paperclip.git
+  revision: 8b8781397d81f43f7e4446966ff44f4b939a5a2b
   branch: master
   specs:
     dm-paperclip (2.4.1)
