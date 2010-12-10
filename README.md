@@ -4,10 +4,6 @@
 * [github.com/Snorby/snorby/issues](http://github.com/Snorby/snorby/issues)
 * irc.freenode.net #snorby
 
-## Important Note
-
-Snorby is currently in alpha stages and is **not** ready for production environments. (11/30/2010)
-
 ## Description
 
 Snorby is a ruby on rails web application for network security monitoring that interfaces with current popular intrusion detection systems (Snort, Suricata and Saga). The basic fundamental concepts behind Snorby are simplicity, organization and power. The project goal is to create a free, open source and highly competitive application for network monitoring for both private and enterprise use.
@@ -85,6 +81,16 @@ Pass: snorby
 
 	* E-mail: **snorby@snorby.org**
 	* Password: **snorby**
+	
+## Updating Snorby
+
+In the root Snorby directory type the following command:
+
+	`git pull`
+	
+Once the pull has competed successfully run the snorby update rake task:
+
+	`rake snorby:update`
 	
 # Helpful Commands
 
