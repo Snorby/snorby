@@ -1,6 +1,6 @@
 <% if params[:title] %>
 	
-	<%= title "#{truncate(params[:title])} <i>#{pluralize(@events.pager.total, 'event')} found</i>".html_safe, "#{params[:title]}" do %>
+	<%= title "#{truncate(h(params[:title]))} <i>#{pluralize(@events.pager.total, 'event')} found</i>".html_safe, "#{h(params[:title])}" do %>
 		<%= render :partial => 'events/menu' %>
 	<% end %>
 	

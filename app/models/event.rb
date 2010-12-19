@@ -340,48 +340,51 @@ class Event
 
   def self.search(params)
     @search = {}
-
-    if !params[:timestamp].to_i.zero?
-      if params[:timestamp] =~ /\s\-\s/
-        start_time, end_time = params[:timestamp].split(' - ')
-        @search.merge!({:conditions => ['timestamp >= ? AND timestamp <= ?', Chronic.parse(start_time).beginning_of_day, Chronic.parse(end_time).end_of_day]})
-      else
-        @search.merge!({:timestamp.gte => Chronic.parse(params[:timestamp]).beginning_of_day})
+    begin
+      unless params[:timestamp].to_i.zero?
+        if params[:timestamp] =~ /\s\-\s/
+          start_time, end_time = params[:timestamp].split(' - ')
+          @search.merge!({:conditions => ['timestamp >= ? AND timestamp <= ?', Chronic.parse(start_time).beginning_of_day, Chronic.parse(end_time).end_of_day]})
+        else
+          @search.merge!({:timestamp.gte => Chronic.parse(params[:timestamp]).beginning_of_day})
+        end
       end
-    end
 
-    @search.merge!({ Event.sid => params[:sid] }) if params[:sid] unless params[:sid].to_i.zero?
+      @search.merge!({ Event.sid => params[:sid] }) if params[:sid] unless params[:sid].to_i.zero?
 
-    if params[:severity].to_i.zero?
-      @search.merge!({ :"sig_id" => Signature.all(:sig_name.like => "%#{params[:signature_name]}%").map(&:sig_id) }) unless params[:signature_name] == ""
-    else
-      if params[:signature_name] == ""
-        @search.merge!({ :"sig_id" => Signature.all(:sig_priority => params[:severity].to_i).map(&:sig_id) })
+      if params[:severity].to_i.zero?
+        @search.merge!({ :"sig_id" => Signature.all(:sig_name.like => "%#{params[:signature_name]}%").map(&:sig_id) }) unless params[:signature_name] == ""
       else
-        @search.merge!({ :"sig_id" => Signature.all(:sig_name.like => "%#{params[:signature_name]}%", :sig_priority => params[:severity].to_i).map(&:sig_id) })
+        if params[:signature_name] == ""
+          @search.merge!({ :"sig_id" => Signature.all(:sig_priority => params[:severity].to_i).map(&:sig_id) })
+        else
+          @search.merge!({ :"sig_id" => Signature.all(:sig_name.like => "%#{params[:signature_name]}%", :sig_priority => params[:severity].to_i).map(&:sig_id) })
+        end
       end
-    end
 
-    @search.merge!({ :classification_id => params[:classification_id] }) unless params[:classification_id].to_i.zero?
+      @search.merge!({ :classification_id => params[:classification_id] }) unless params[:classification_id].to_i.zero?
 
-    @search.merge!({ :"ip.ip_src" => IPAddr.new("#{params[:ip_src]}") }) unless (params[:ip_src] == "") || !params.has_key?(:ip_src)
+      @search.merge!({ :"ip.ip_src" => IPAddr.new("#{params[:ip_src]}") }) unless (params[:ip_src] == "") || !params.has_key?(:ip_src)
 
-    @search.merge!({ :"ip.ip_dst" => IPAddr.new("#{params[:ip_dst]}") }) unless (params[:ip_dst] == "") || !params.has_key?(:ip_dst)
+      @search.merge!({ :"ip.ip_dst" => IPAddr.new("#{params[:ip_dst]}") }) unless (params[:ip_dst] == "") || !params.has_key?(:ip_dst)
 
-    @search.merge!({ :notes_count.gt => params[:notes_count] }) if params.has_key?(:notes_count)
+      @search.merge!({ :notes_count.gt => params[:notes_count] }) if params.has_key?(:notes_count)
 
-    @search.merge!({ :users_count.gt => params[:users_count] }) if params.has_key?(:users_count)
+      @search.merge!({ :users_count.gt => params[:users_count] }) if params.has_key?(:users_count)
 
-    puts @search.to_yaml
+      puts @search.to_yaml
 
-    return all(@search) if params[:src_port].to_i.zero? && params[:dst_port].to_i.zero?
+      return all(@search) if params[:src_port].to_i.zero? && params[:dst_port].to_i.zero?
 
-    if params[:dst_port].to_i.zero?
-      return all(@search) && all(:"tcp.tcp_sport" => params[:src_port].to_i) | all(:"udp.udp_sport" => params[:src_port].to_i)
-    elsif params[:src_port].to_i.zero?
-      return all(@search) && all(:"tcp.tcp_dport" => params[:dst_port].to_i) | all(:"udp.udp_dport" => params[:dst_port].to_i)
-    else
-      return all(@search) && (all(:"tcp.tcp_sport" => params[:src_port].to_i) | all(:"udp.udp_sport" => params[:src_port].to_i) & all(:"tcp.tcp_dport" => params[:dst_port].to_i) | all(:"udp.udp_dport" => params[:dst_port].to_i))
+      if params[:dst_port].to_i.zero?
+        return all(@search) && all(:"tcp.tcp_sport" => params[:src_port].to_i) | all(:"udp.udp_sport" => params[:src_port].to_i)
+      elsif params[:src_port].to_i.zero?
+        return all(@search) && all(:"tcp.tcp_dport" => params[:dst_port].to_i) | all(:"udp.udp_dport" => params[:dst_port].to_i)
+      else
+        return all(@search) && (all(:"tcp.tcp_sport" => params[:src_port].to_i) | all(:"udp.udp_sport" => params[:src_port].to_i) & all(:"tcp.tcp_dport" => params[:dst_port].to_i) | all(:"udp.udp_dport" => params[:dst_port].to_i))
+      end
+    rescue
+      all(@search)
     end
   end
 
