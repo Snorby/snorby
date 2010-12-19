@@ -71,6 +71,22 @@ module Snorby
       false
     end
 
+    def self.reset_cache(type, verbose=true)
+      case type.to_sym
+      when :sensor
+        Cache.all.destroy!
+        Snorby::Jobs::SensorCacheJob.new(verbose).perform
+      when :daily
+        DailyCache.all.destroy!
+        Snorby::Jobs::DailyCacheJob.new(verbose).perform
+      when :all
+        Cache.all.destroy!
+        DailyCache.all.destroy!
+        Snorby::Jobs::SensorCacheJob.new(verbose).perform
+        Snorby::Jobs::DailyCacheJob.new(verbose).perform
+      end
+    end
+
     def self.run_now!
       Jobs.sensor_cache.update(:run_at => Time.now + 10.second) if Jobs.sensor_cache?
       Jobs.daily_cache.update(:run_at => Time.now + 10.second) if Jobs.daily_cache?

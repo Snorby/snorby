@@ -22,8 +22,8 @@ module Snorby
     class MassClassification < Struct.new(:classification_id, :options)
 
       def perform
-        @events = Event.all(options)
-        @classification = Classification.get(classification_id)
+        @events ||= Event.all(options)
+        @classification ||= Classification.get(classification_id)
 
         @events.each do |event|
           next unless event
