@@ -135,7 +135,7 @@ module Snorby
         build_proto_counts
 
         @cache.update({
-                        :event_count => fetch_event_count,
+                        :event_count => fetch_event_count(true),
                         :tcp_count => fetch_tcp_count,
                         :udp_count => fetch_udp_count,
                         :icmp_count => fetch_icmp_count,
