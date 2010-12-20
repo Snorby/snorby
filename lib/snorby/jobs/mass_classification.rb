@@ -18,30 +18,11 @@
 
 module Snorby
   module Jobs
-
     class MassClassification < Struct.new(:classification_id, :options)
 
       def perform
         @events ||= Event.all(options)
-        @classification ||= Classification.get(classification_id)
-
-        @events.each do |event|
-          next unless event
-
-          old_classification = event.classification || false
-
-          if @classification.blank?
-            event.classification = nil
-          else
-            event.classification = @classification
-          end
-
-          if event.save
-            @classification.up(:events_count) if @classification
-            old_classification.down(:events_count) if old_classification
-          end
-
-        end
+        Event.classify_from_collection(@events, classification_id)
       end
 
     end
