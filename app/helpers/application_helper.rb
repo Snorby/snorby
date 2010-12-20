@@ -42,7 +42,17 @@ module ApplicationHelper
     direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
     link_to title, {:sort => column, :direction => direction}, {:class => css_class}
   end
-
+  
+  #
+  # Pager
+  #
+  # Setup pager and return helper
+  # html for view display
+  #
+  # @param [String] collection
+  # @param [String] parent pager path
+  # @param [Boolean] fade_content
+  #
   def pager(collection, path, fade_content=true)
     if fade_content
       %{<div class='pager main'>#{collection.pager.to_html("#{path}", :size => 9)}</div>}.html_safe
