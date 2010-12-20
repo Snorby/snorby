@@ -111,6 +111,30 @@ class Event
     Delayed::Job.enqueue(Snorby::Jobs::AlertNotifications.new(self.sid, self.cid))
   end
 
+  def self.classify_from_collection(collection, classification)
+    @classification = Classification.get(classification)
+
+    collection.each do |event|
+      next unless event
+      old_classification = event.classification || false
+
+      next if old_classification == @classification
+
+      if @classification.blank?
+        event.classification = nil
+      else
+        event.classification = @classification
+      end
+
+      if event.save
+        @classification.up(:events_count) if @classification
+        old_classification.down(:events_count) if old_classification
+      else
+        Rails.logger.info "ERROR: #{event.errors.inspect}"
+      end
+    end
+  end
+
   def self.limit(limit=25)
     all(:limit => limit)
   end

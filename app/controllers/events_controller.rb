@@ -77,28 +77,7 @@ class EventsController < ApplicationController
 
   def classify
     @events = Event.find_by_ids(params[:events])
-    @classification = Classification.get(params[:classification].to_i)
-
-    @events.each do |event|
-      next unless event
-      
-      old_classification = event.classification || false
-
-      if @classification.blank?
-        event.classification = nil
-      else
-        event.classification = @classification
-      end
-
-      if event.save
-        @classification.up(:events_count) if @classification
-        old_classification.down(:events_count) if old_classification
-      else
-        Rails.logger.info "ERROR: #{event.errors.inspect}"
-      end
-
-    end
-
+    Event.classify_from_collection(@events, params[:classification].to_i)
     render :layout => false, :status => 200
   end
 
