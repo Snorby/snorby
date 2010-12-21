@@ -176,7 +176,7 @@ class Event
   end
 
   def self.between(start_time, end_time)
-    all(:timestamp.gte => start_time, :timestamp.lte => end_time)
+    all(:timestamp.gte => start_time, :timestamp.lte => end_time, :order => [:timestamp.desc])
   end
 
   def self.between_time(start_time, end_time)

@@ -30,11 +30,7 @@ module Snorby
       
       def fetch_event_count(from_database=false)
         logit '- fetch_event_count'
-        if from_database
-          Event.count
-        else
-          @events.size
-        end
+        @events.size
       end
 
       def build_proto_counts

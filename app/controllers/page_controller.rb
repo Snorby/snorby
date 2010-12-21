@@ -12,9 +12,11 @@ class PageController < ApplicationController
     @tcp = @cache.protocol_count(:tcp, @range.to_sym)
     @udp = @cache.protocol_count(:udp, @range.to_sym)
     @icmp = @cache.protocol_count(:icmp, @range.to_sym)
+    
     @high = @cache.severity_count(:high, @range.to_sym)
     @medium = @cache.severity_count(:medium, @range.to_sym)
     @low = @cache.severity_count(:low, @range.to_sym)
+    
     @sensor_metrics = @cache.sensor_metrics(@range.to_sym)
 
     @signature_metrics = @cache.signature_metrics
