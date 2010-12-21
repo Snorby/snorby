@@ -121,7 +121,9 @@ module Snorby
           create_cache_record
 
           new_time = @events.last.timestamp.end_of_day + 1.day
+          
           new_start_day = new_time.beginning_of_day
+          
           new_end_day = new_time.end_of_day
 
           build_cache(new_start_day, new_end_day)
