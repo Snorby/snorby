@@ -31,14 +31,16 @@ gem 'dm-transactions',        DM_VERSION
 gem 'dm-aggregates',          DM_VERSION
 gem 'dm-timestamps',          DM_VERSION
 gem 'dm-observer',            DM_VERSION
-gem 'dm-devise',              '~> 1.1.0'
 gem 'dm-serializer',          DM_VERSION
 
 # Deploy with Capistrano
 gem 'capistrano'
+# gem 'ruby-debug19'
 
 # Rails Plugins
-gem "mail",                   "2.2.10"
+gem 'devise',                 '~> 1.1.3'
+gem 'dm-devise',              '~> 1.1.5', :git => 'http://github.com/jm81/dm-devise.git', :branch => 'v1.1'
+gem "mail",                   '~> 2.2.10'
 gem "RedCloth",               "~> 4.0", :require => 'redcloth'
 gem 'chronic',                '~> 0.3.0'
 gem 'pdfkit',                 '~> 0.4.6'
@@ -51,7 +53,6 @@ gem 'dm-paperclip',           '~> 2.3', :git => 'http://github.com/solnic/dm-pap
 gem 'net-dns',                '~> 0.6.1'
 gem 'whois',                  '~> 1.3.9'
 gem 'simple_form',            '~> 1.2.2'
-gem 'devise',                 '~> 1.1.3'
 
 group(:test) do
   gem 'capybara'

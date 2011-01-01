@@ -1434,9 +1434,13 @@ ul.table div.content li .row div.click{
 	cursor: pointer;
 }
 
-ul.table div.content li .row:hover{
-	background-color: #fcfed7;
+ul.table div.content li.currently-over .row{
+	background-color: #fcfed7;	
 }
+
+/*ul.table div.content li .row:hover{
+	background-color: #fcfed7;
+}*/
 
 ul.table li .row div img{
 	vertical-align: middle;
@@ -1517,7 +1521,6 @@ table.ip-header td a{
 ul.table div.content div.event-data{
 	display: block;
 	position: relative;
-	overflow: hidden;
 	float: none; !important
 	clear: none;
 	width: 100%;
@@ -1570,7 +1573,6 @@ ul.table div.content div.event-data div.event-data-holder{
 	float: none; !important
 	display: block;
 	position: relative;
-	overflow: hidden;
 	border: 1px solid #cdcdcd;
 	background-color: #2d2f31;
 	border-top-style: none;
@@ -1579,16 +1581,15 @@ ul.table div.content div.event-data div.event-data-holder{
 ul.table div.content div.event-data div.event-data-holder div.event-data-holder-inside{
 	position: relative;
 	display: block;
-	overflow: hidden;
 	border-top-style: none;
 	padding: 5px;
+	overflow: visible;
 }
 
 ul.table div.content div.event-data div.event-data-holder div.event-data-holder-inside .plus{
 	margin: 10px;
 	display: block;
 	position: relative;
-	overflow: hidden;
 }
 
 ul.table div.content div.event-data div.event-data-holder div.event-data-holder-inside .plus-side{
@@ -1607,6 +1608,7 @@ ul.table div.content div.event-data div.event-data-holder .section-title{
 	text-decoration: none;
 	font-variant: normal;
 	text-shadow: #000 0 1px 0;
+	width: 500px;
 }
 
 ul.table div.content div.event-data div.event-data-holder ul div#tab-title{
@@ -1620,6 +1622,7 @@ ul.table div.content div.event-data div.event-data-holder ul div#tab-title{
 }
 
 a.dark-button{
+	cursor: pointer;
 	padding: 3px 5px;
 	background-color: #5f6264;
 	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#787c7e',endColorstr='#5f6264');
@@ -1657,10 +1660,52 @@ ul.table div.content #event-menu{
 	position: relative;
 }
 
+ul.table div.content #event-menu dl#packet-capture-menu{
+	display: block;
+	position: absolute;
+	z-index: 99999;
+	
+	background-color: #363636;
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#000000',endColorstr='#363636');
+	background: -webkit-gradient(linear,0% 100%,0% 0,from(#000000),to(#363636));
+	background: -moz-linear-gradient(90deg,#000000,#363636);
+	
+	color: #fffeff;
+	width: 200px;
+	border: 1px solid #222;
+	padding: 5px;
+}
+
+ul.table div.content #event-menu dl#packet-capture-menu dd{
+	padding: 0 5px;
+}
+
+ul.table div.content #event-menu dl#packet-capture-menu dd a{
+	color: #fff;
+	text-shadow: #000 0 1px 0;
+	font-weight: normal;
+	font-style: normal;
+	text-decoration: none;
+	font-variant: normal;
+	display: block;
+	position: relative;
+}
+
+ul.table div.content #event-menu dl#packet-capture-menu dd:hover{
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+	background-color: #790908;
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#790908',endColorstr='#a90d0b');
+	background: -webkit-gradient(linear,0% 100%,0% 0,from(#790908),to(#a90d0b));
+	background: -moz-linear-gradient(90deg,#790908,#a90d0b);
+	color: #fff;
+	text-shadow: #000 0 1px 0;
+}
+
 ul.table div.content #event-menu ul{
 	display: block;
 	position: relative;
-	overflow: hidden;
 }
 
 ul.table div.content #event-menu ul li{
@@ -2209,6 +2254,19 @@ span.payload-ascii{
 
 /* @group Input */
 
+label{
+	text-transform: capitalize;
+}
+
+input.error{
+	border: 1px solid #fd2e3f;
+}
+
+input[disabled]{
+	opacity: 0.9;
+	color: #e6e6e6;
+}
+
 form.basic-form{
 	
 }
@@ -2684,6 +2742,19 @@ img.avatar{
 
 img.avatar-small{
 	border: 3px solid #ededed;	
+}
+
+#general-settings div.pc-settings{
+	background-color: #fbfbfb;
+	display: block;
+	position: relative;
+	overflow: hidden;
+	border: 1px solid #dfdfdf;
+}
+
+#general-settings div.pc-settings p{
+	padding-top: 3px;
+	padding-bottom: 3px;
 }
 
 #settings .crop-holder{
