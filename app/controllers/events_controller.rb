@@ -124,5 +124,10 @@ class EventsController < ApplicationController
       format.js
     end
   end
+  
+  def packet_capture
+    @event = Event.get(params[:sid], params[:cid])
+    render :layout => false
+  end
 
 end

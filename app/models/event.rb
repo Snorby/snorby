@@ -56,35 +56,15 @@ class Event
     # Note: Need to decrement Severity, Sensor and User Counts
   end
 
-  def openfpc_url
-    if Setting.openfpc_url?
-      if tcp?
-        return "#{Setting.find(:openfpc_url)}?sip=#{ip.ip_src}&dip=#{ip.ip_dst}&filename=snorby-tcp-#{ip.ip_src.to_i}#{ip.ip_dst.to_i}&spt=#{tcp.tcp_sport}&dst=#{tcp.tcp_dport}&stime=#{(timestamp - 1.hour).strftime('%D:&H:%M')}"
-      elsif udp?
-        return "#{Setting.find(:openfpc_url)}?sip=#{ip.ip_src}&dip=#{ip.ip_dst}&filename=snorby-udp-#{ip.ip_src.to_i}#{ip.ip_dst.to_i}&spt=#{udp.udp_sport}&dst=#{udp.udp_dport}&stime=#{(timestamp - 1.hour).strftime('%D:&H:%M')}"
-      else
-        return "#{Setting.find(:openfpc_url)}?sip=#{ip.ip_src}&dip=#{ip.ip_dst}&filename=snorby-#{ip.ip_src.to_i}#{ip.ip_dst.to_i}&stime=#{(timestamp - 1.hour).strftime('%D:&H:%M')}"
-      end
+  def packet_capture(params={})
+    case Setting.find(:packet_capture_type).to_sym
+    when :openfpc
+      Snorby::Plugins::OpenFPC.new(self,params).to_s
+    when :solera
+      Snorby::Plugins::Solera.new(self,params).to_s
     else
-      return '#'
+      nil
     end
-    # filename => 0,
-    # sumtype =>0,
-    # password => $config{'GUIPASS'},
-    # action => "fetch",
-    # device => 0,
-    # logtype => 0,
-    # filetype => 0,
-    # logline => 0,
-    # sip => 0,
-    # dip => 0,
-    # spt => 0,
-    # dpt => 0,
-    # proto => 0,
-    # timestamp => 0,
-    # stime => 0,
-    # etime => 0,
-    # comment => 0,
   end
 
   def signature_url
@@ -260,6 +240,18 @@ class Event
   def destroy_favorite
     favorite = Favorite.first(:sid => self.sid, :cid => self.cid, :user => User.current_user)
     favorite.destroy if favorite
+  end
+
+  def protocol
+    if tcp?
+      return :tcp
+    elsif udp?
+      return :udp
+    elsif icmp?
+      return :icmp
+    else
+      nil
+    end
   end
 
   def protocol_data
