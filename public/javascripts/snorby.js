@@ -246,7 +246,7 @@ var Snorby = {
 		events: function(){
 			
 			$('dl#packet-capture-menu a').live('click', function(e) {
-				$('dl#packet-capture-menu').fadeOut();
+				$('dl#packet-capture-menu').hide();
 			});
 			
 			$('a.packet-capture-menu').live('click', function(e) {
@@ -451,6 +451,9 @@ var Snorby = {
 			});
 			
 			$('ul.table div.content li.event div.click').live('click', function() {
+				
+				$('dl#packet-capture-menu').hide();
+				
 				var sid = $(this).parents('li').attr('data-event-sid');
 				var cid = $(this).parents('li').attr('data-event-cid');
 				var parent_row = $('li#event_'+sid+''+cid);
@@ -725,13 +728,13 @@ var Snorby = {
 		
 		pagenation: function() {
 			
-			if (history && history.pushState) {
-				$(window).bind("popstate", function() {
-		      $.getScript(location.href);
-		    });
-			};
-			
 			$('ul.pager li').live('click', function() {
+				
+				if (history && history.pushState) {
+					$(window).bind("popstate", function() {
+						$.getScript(location.href);
+			    });
+				};
 				
 				if (!$(this).hasClass('more')) {
 					
