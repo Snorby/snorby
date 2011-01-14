@@ -57,12 +57,16 @@ gem 'simple_form',            '~> 1.2.2'
 group(:test) do
   gem 'capybara'
 
-  gem 'rspec',			RSPEC_VERSION
-  gem 'rspec-core',		RSPEC_VERSION, :require => 'rspec/core'
-  gem 'rspec-expectations',	RSPEC_VERSION, :require => 'rspec/expectations'
-  gem 'rspec-rails',		RSPEC_VERSION
+  gem 'rspec',                RSPEC_VERSION
+  gem 'rspec-core',		        RSPEC_VERSION, :require => 'rspec/core'
+  gem 'rspec-expectations',	  RSPEC_VERSION, :require => 'rspec/expectations'
+  gem 'rspec-rails',		      RSPEC_VERSION
 end
 
 group(:doc) do
   gem 'dm-visualizer',	'~> 0.1.0'
 end
+
+
+
+

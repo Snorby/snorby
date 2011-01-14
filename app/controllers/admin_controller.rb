@@ -3,6 +3,7 @@ class AdminController < ApplicationController
   before_filter :require_administrative_privileges
 
   def settings 
+    # ...
   end
 
   def severity
