@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :authenticate_user!
   before_filter :user_setup
-
+  
   protected
 
     def require_administrative_privileges
