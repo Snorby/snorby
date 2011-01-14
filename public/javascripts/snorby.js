@@ -451,7 +451,6 @@ var Snorby = {
 			});
 			
 			$('ul.table div.content li.event div.click').live('click', function() {
-				
 				$('dl#packet-capture-menu').hide();
 				
 				var sid = $(this).parents('li').attr('data-event-sid');
