@@ -29,7 +29,9 @@
 			<% if event.notes_count > 0 %>
 				<span title="This event has <%= pluralize(event.notes_count, 'note') %>" class='add_tipsy round notes-count'><%= image_tag("icons/notes.png", :size => '16x16') %></span>
 			<% end %>
+			
 			<b title='<%= event.timestamp.strftime('%A, %b %d, %Y at %I:%M:%S %p') %>' class='add_tipsy'><%= event.pretty_time %></b>
+			
 		</div>
 		
 	</div>

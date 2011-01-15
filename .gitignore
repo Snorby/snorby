@@ -1,5 +1,5 @@
 # Snorby .gitignore 
-
+*.rbc
 .DS_Store
 *.tmproj
 tmtags
