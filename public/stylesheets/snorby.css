@@ -457,6 +457,15 @@ a {
 	width: 750px; !important
 }
 
+#snorby-box #box-content-small{
+	overflow: auto;
+	display: block;
+	position: relative;
+	padding: 10px;
+	height: auto;
+	width: 750px; !important	
+}
+
 #snorby-box #box-title{
 	padding: 20px 10px;
 	background-color: #474747;
@@ -1861,7 +1870,7 @@ button.default,a.button.default {
 	cursor: pointer;
 	-webkit-font-smoothing: subpixel-antialiased!important;
 	border: 1px solid #cbcbcb;
-	margin-right: 10px;
+	margin-right: 5px;
 }
 
 
@@ -2741,6 +2750,7 @@ img.avatar-small{
 	position: relative;
 	overflow: hidden;
 	border: 1px solid #d1d1d1;
+	margin-bottom: 15px;
 }
 
 #general-settings div.pc-settings p{

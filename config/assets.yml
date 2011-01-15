@@ -1,0 +1,27 @@
+package_assets: on
+compress_assets: on
+gzip_assets: on
+javascript_compressor: closure
+embed_assets: on
+
+javascripts:
+  snorby:
+    - public/javascripts/jquery
+    - public/javascripts/jquery-ui
+    - public/javascripts/rails
+    - public/javascripts/hotkeys
+    - public/javascripts/mustache
+    - public/javascripts/easing
+    - public/javascripts/fancybox
+    - public/javascripts/growl
+    - public/javascripts/colorpicker
+    - public/javascripts/editable
+    - public/javascripts/scrollto
+    - public/javascripts/validate
+    - public/javascripts/tipsy
+    - public/javascripts/snorby
+
+stylesheets:
+  snorby:
+    - public/stylesheets/grid
+    - public/stylesheets/snorby

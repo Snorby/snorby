@@ -100,9 +100,15 @@ module ApplicationHelper
     content_tag(:li, "#{link_to "#{image}#{name}".html_safe, path, options}".html_safe)
   end
 
-  def snorby_box(title, &block)
+  def snorby_box(title, normal_size=true, &block)
     html = content_tag(:div, title, :id => 'box-title')
-    html += content_tag(:div, capture(&block), :id => 'box-content')
+    
+    if normal_size
+      html += content_tag(:div, capture(&block), :id => 'box-content')
+    else
+      html += content_tag(:div, capture(&block), :id => 'box-content-small')
+    end
+    
     html += content_tag(:div, nil, :id => 'box-footer')
     content_tag(:div, html, :id => 'snorby-box')
   end

@@ -10,6 +10,13 @@ class EventsController < ApplicationController
     @events ||= current_user.events.page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:timestamp.desc])
     @classifications ||= Classification.all
   end
+  
+  def request_packet_capture
+    respond_to do |format|
+      format.html {render :layout => false}
+      format.js
+    end
+  end
 
   def show
     @event = Event.get(params['sid'], params['cid'])

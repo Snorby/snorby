@@ -245,6 +245,12 @@ var Snorby = {
 		
 		events: function(){
 			
+			$('button.request_packet_capture').live('click', function(e) {
+		    e.preventDefault();
+				$.post('/events/request_packet_capture', $('form.request_packet_capture').serialize(), null, "script");
+				return false;
+			});
+			
 			$('dl#event-sub-menu a').live('click', function(e) {
 				$('dl#event-sub-menu:visible').hide();
 			});

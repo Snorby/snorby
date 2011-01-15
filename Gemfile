@@ -38,6 +38,7 @@ gem 'capistrano'
 # gem 'ruby-debug19'
 
 # Rails Plugins
+gem 'jammit',                 '~> 0.5.4'
 gem 'devise',                 '~> 1.1.3'
 gem 'dm-devise',              '~> 1.1.5', :git => 'http://github.com/jm81/dm-devise.git', :branch => 'v1.1'
 gem "mail",                   '~> 2.2.10'
