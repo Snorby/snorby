@@ -845,7 +845,7 @@ var Snorby = {
 			return false;
 		});
 	
-		$('ul.table div.content li.event').hover(function() {
+		$('ul.table div.content li.event').live('hover', function() {
 			$('ul.table div.content li.event').removeClass('currently-over');
 			$(this).addClass('currently-over');
 		}, function() {
