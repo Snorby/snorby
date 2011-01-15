@@ -6,22 +6,22 @@ embed_assets: on
 
 javascripts:
   snorby:
-    - public/javascripts/jquery
-    - public/javascripts/jquery-ui
-    - public/javascripts/rails
-    - public/javascripts/hotkeys
-    - public/javascripts/mustache
-    - public/javascripts/easing
-    - public/javascripts/fancybox
-    - public/javascripts/growl
-    - public/javascripts/colorpicker
-    - public/javascripts/editable
-    - public/javascripts/scrollto
-    - public/javascripts/validate
-    - public/javascripts/tipsy
-    - public/javascripts/snorby
+    - public/javascripts/jquery.js
+    - public/javascripts/jquery-ui.js
+    - public/javascripts/rails.js
+    - public/javascripts/hotkeys.js
+    - public/javascripts/mustache.js
+    - public/javascripts/easing.js
+    - public/javascripts/fancybox.js
+    - public/javascripts/growl.js
+    - public/javascripts/colorpicker.js
+    - public/javascripts/editable.js
+    - public/javascripts/scrollto.js
+    - public/javascripts/validate.js
+    - public/javascripts/tipsy.js
+    - public/javascripts/snorby.js
 
 stylesheets:
   snorby:
-    - public/stylesheets/grid
-    - public/stylesheets/snorby
+    - public/stylesheets/grid.css
+    - public/stylesheets/snorby.css
