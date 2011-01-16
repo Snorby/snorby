@@ -24,7 +24,7 @@ module Snorby
 
       PLUGIN_PARAMS = {
         :source_ip => :sip,
-        :destination_id => :dip,
+        :destination_ip => :dip,
         :start_time => :stime,
         :end_time => :etime,
         :protocol => :proto,
