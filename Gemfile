@@ -1,4 +1,3 @@
-
 source 'http://rubygems.org'
 
 RAILS_VERSION = '~> 3.0.3'
@@ -39,8 +38,9 @@ gem 'capistrano'
 # gem 'ruby-debug19'
 
 # Rails Plugins
-gem 'devise',                 '~> 1.2.rc'
-gem 'dm-devise',              '~> 1.2.0.pre', :git => 'http://github.com/jm81/dm-devise.git', :branch => 'master'
+gem 'jammit',                 '~> 0.5.4'
+gem 'devise',                 '~> 1.1.3'
+gem 'dm-devise',              '~> 1.1.5', :git => 'http://github.com/jm81/dm-devise.git', :branch => 'v1.1'
 gem "mail",                   '~> 2.2.10'
 gem "RedCloth",               "~> 4.0", :require => 'redcloth'
 gem 'chronic',                '~> 0.3.0'
