@@ -68,6 +68,8 @@ class User
 
   has n, :notes, :child_key => :user_id, :constraint => :destroy
 
+  has n, :events
+
   has n, :events, :through => :favorites
 
   #

@@ -20,6 +20,8 @@ class Event
 
   property :users_count, Integer, :index => true, :default => 0
 
+  property :user_id, Integer, :index => true, :required => false
+  
   property :notes_count, Integer, :index => true, :default => 0
 
   belongs_to :classification
@@ -27,6 +29,8 @@ class Event
   property :timestamp, DateTime
 
   has n, :favorites, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :constraint => :destroy
+
+  has n, :users
 
   has n, :users, :through => :favorites
 
