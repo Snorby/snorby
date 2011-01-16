@@ -1,12 +1,14 @@
 # Snorby
 
+* [snorby.org](http://www.snorby.org)
 * [github.com/Snorby/snorby](http://github.com/Snorby/snorby/)
 * [github.com/Snorby/snorby/issues](http://github.com/Snorby/snorby/issues)
+* [github.com/Snorby/snorby/wiki](http://github.com/Snorby/snorby/wiki)
 * irc.freenode.net #snorby
 
 ## Description
 
-Snorby is a ruby on rails web application for network security monitoring that interfaces with current popular intrusion detection systems (Snort, Suricata and Saga). The basic fundamental concepts behind Snorby are simplicity, organization and power. The project goal is to create a free, open source and highly competitive application for network monitoring for both private and enterprise use.
+Snorby is a ruby on rails web application for network security monitoring that interfaces with current popular intrusion detection systems (Snort, Suricata and Sagan). The basic fundamental concepts behind Snorby are simplicity, organization and power. The project goal is to create a free, open source and highly competitive application for network monitoring for both private and enterprise use.
 
 ## Demo
 
@@ -57,12 +59,11 @@ Pass: snorby
 
 	`$ bundle install`
 	
+	* NOTE: If you get missing gem issues in production use `bundle install --path vendor/cache`
+	
 * Run The Snorby Setup
 
 	`rake snorby:setup`
-	
-	** Note ** If you get the following error: `No such file or directory - /root/snorby/tmp/snorby_packaged_uncompressed.js`
-	Create the following directories in the Snorby root dir: `log/` & `tmp/`
 	
 * Edit The Snorby Configuration File
 
@@ -82,13 +83,17 @@ Pass: snorby
 	* E-mail: **snorby@snorby.org**
 	* Password: **snorby**
 	
+* NOTE - If you do not run Snorby with passenger (http://www.modrails.com) people remember to start rails in production mode.
+
+	`rails -e production`
+	
 ## Updating Snorby
 
 In the root Snorby directory type the following command:
 
-	`git pull`
+	`git pull origin master`
 	
-Once the pull has competed successfully run the snorby update rake task:
+Once the pull has competed successfully run the Snorby update rake task:
 
 	`rake snorby:update`
 	
