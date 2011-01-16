@@ -1,0 +1,72 @@
+<%= snorby_box("Packet Capture Builder", false) do %>
+
+	<div id='snorbybox-content' class=''>
+		
+		<%= form_tag '/request_packet_capture', :class => 'request_packet_capture' do %>
+		
+		<div class='grid_5'>
+			
+			<br />
+			
+			<p>
+				<%= label_tag 'Source Address' %> <i>(Source Address : Source Port)</i><br />
+				<%= text_field_tag :source_ip, @event.ip.ip_src %> : <%= text_field_tag :source_port, event_port_number(@event, :sport), :maxlength => 5, :size => 5 %><br />
+			</p>
+			
+			<br />
+			
+			<br />
+			
+			<p>
+				<%= label_tag 'Destination Address' %> <i>(Destination Address : Destination Port)</i><br />
+				<%= text_field_tag :destination_ip, @event.ip.ip_src %> : <%= text_field_tag :destination_port, event_port_number(@event, :dport), :maxlength => 5, :size => 5 %><br />
+			</p>
+			
+			<br />
+			
+		</div>
+		
+		
+		<div class="grid_5">
+			
+			<br />
+			
+			<p>
+				<%= label_tag 'Protocol:' %><br />
+				<%= select_tag :protocol, select_options([['tcp', 'TCP'], ['udp', 'UDP'], ['icmp', 'ICMP']], :include_blank => true, :selected => @event.protocol) %>
+			</p>
+			
+			<br />
+			
+			<p>
+				<%= label_tag 'Start Time' %> <i>(default is 30 minutes before the event start time)</i><br />
+				<%= datetime_select :start_time, nil, :default => @event.timestamp - 30.minutes %><br />
+			</p>
+			
+			<br />
+			
+			<p>
+				<%= label_tag 'End Time' %> <i>(default is 30 minutes after the event end time)</i><br />
+				<%= datetime_select :end_time, nil, :default => @event.timestamp + 30.minutes %><br />
+			</p>
+			
+			<br />
+			
+		</div>
+		
+		<% end %>
+		
+	</div>
+
+	<div class='pad-left'>
+		
+		<%= form_actions do %>
+			<%= button "Fetch Packet", :class => 'success request_packet_capture' %>
+			<%= button "Cancel", :class => 'warning cancel-snorbybox' %>
+		<% end %>
+		
+	</div>
+
+	<br />
+
+<% end %>

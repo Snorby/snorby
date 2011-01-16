@@ -16,6 +16,13 @@ class EventsController < ApplicationController
     @events ||= current_user.events.page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:timestamp.desc])
     @classifications ||= Classification.all
   end
+  
+  def request_packet_capture
+    respond_to do |format|
+      format.html {render :layout => false}
+      format.js
+    end
+  end
 
   def show
     @event = Event.get(params['sid'], params['cid'])
@@ -53,7 +60,7 @@ class EventsController < ApplicationController
     end
     
     # Snorby::Jobs::MassClassification.new(params[:classification_id], options)
-    Delayed::Job.enqueue(Snorby::Jobs::MassClassification.new(params[:classification_id], options))
+    Delayed::Job.enqueue(Snorby::Jobs::MassClassification.new(params[:classification_id], options, User.current_user.id))
     respond_to do |format|
       format.html { render :layout => false }
       format.js
@@ -71,34 +78,13 @@ class EventsController < ApplicationController
   end
 
   def history
-    @events = Event.all(:updated_by_id => @current_user.id).page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:timestamp.desc])
+    @events = Event.all(:user_id => @current_user.id).page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:timestamp.desc])
     @classifications ||= Classification.all
   end
 
   def classify
     @events = Event.find_by_ids(params[:events])
-    @classification = Classification.get(params[:classification].to_i)
-
-    @events.each do |event|
-      next unless event
-      
-      old_classification = event.classification || false
-
-      if @classification.blank?
-        event.classification = nil
-      else
-        event.classification = @classification
-      end
-
-      if event.save
-        @classification.up(:events_count) if @classification
-        old_classification.down(:events_count) if old_classification
-      else
-        Rails.logger.info "ERROR: #{event.errors.inspect}"
-      end
-
-    end
-
+    Event.classify_from_collection(@events, params[:classification].to_i, User.current_user.id)
     render :layout => false, :status => 200
   end
 
@@ -150,6 +136,11 @@ class EventsController < ApplicationController
       format.html {render :layout => false}
       format.js
     end
+  end
+  
+  def packet_capture
+    @event = Event.get(params[:sid], params[:cid])
+    render :layout => false
   end
 
 end

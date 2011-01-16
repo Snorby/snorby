@@ -28,7 +28,7 @@ module Snorby
         end
       end
       
-      def fetch_event_count
+      def fetch_event_count(from_database=false)
         logit '- fetch_event_count'
         @events.size
       end

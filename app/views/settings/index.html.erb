@@ -28,19 +28,14 @@
 			</p>
 			
 			<p>
-				<%= label_tag 'OpenFPC Extract URL' %><br /><i>(OpenFPC extract URL - full packet capture support)</i><br />
-				<%= text_field_tag '[settings][openfpc_url]', (Setting.openfpc_url ? Setting.find(:openfpc_url) : nil), :placeholder => 'OpenFPC Extract URL...', :autocomplete => :off, :class => 'url' %>
+				<%= check_box_tag '[settings][packet_capture]', 0, (Setting.packet_capture ? Setting.find(:packet_capture) : nil) %> <%= label_tag 'Enable Packet Capture Support' %><br />
+				<i>(Enable the Snorby Packet Capture Plugin)</i><br />
 			</p>
 
 
 		</div>
 
 		<div class='grid_5'>
-
-			<p>
-				<%= check_box_tag '[settings][openfpc]', 0, (Setting.openfpc ? Setting.find(:openfpc) : nil) %> <%= label_tag 'Enable OpenFPC Support' %><br />
-				<i>(Enable the Snorby OpenFPC Plugin)</i><br />
-			</p>
 
 			<p>
 				<%= check_box_tag '[settings][daily]', 1, (Setting.daily ? Setting.find(:daily) : nil) %> <%= label_tag 'Daily Reports' %><br />
@@ -71,6 +66,48 @@
 		</div>
 		
 	</div>	
+	
+	<div class='pc-settings shadow'>
+		
+		<div class='grid_6'>
+
+			<p class='pc-settings'>
+				<%= label_tag 'Packet Capture Plugin:' %>
+				<%= select_tag '[settings][packet_capture_type]', "<option value='openfpc'>OpenFPC</option><option value='solera'>Solera Networks</option>".html_safe, 
+				{ :class => 'require', :packet_capture_plugin => Setting.find(:packet_capture_type) } %><br />
+			</p>
+
+			<p class='pc-settings'>
+				<%= check_box_tag '[settings][packet_capture_auto_auth]', 1, (Setting.packet_capture_auto_auth ? Setting.find(:packet_capture_auto_auth) : nil) %> 
+				<%= label_tag 'Packet Capture Auto-Authenticate' %><br />
+				<i>(Pass the credentials in the get request)</i><br />
+			</p>
+
+			<p class='pc-settings'>
+				<%= label_tag 'Packet Capture Extract URL' %> <i>(Packet Capture extract URL)</i><br />
+				<%= text_field_tag '[settings][packet_capture_url]', (Setting.packet_capture_url ? Setting.find(:packet_capture_url) : nil), 
+				:placeholder => 'Packet Capture Extract URL', :autocomplete => :off, :class => 'url' %>
+			</p>
+
+		</div>
+
+		<div class='grid_5 pad-left omega'>
+
+			<p class='pc-settings'>
+				<%= label_tag 'API User' %> <i>(User name for Packet Capture API)</i><br />
+				<%= text_field_tag '[settings][packet_capture_user]', (Setting.packet_capture_user ? Setting.find(:packet_capture_user) : nil), 
+				:placeholder => 'Packet Capture User', :autocomplete => :off, :class => '' %>
+			</p>
+
+			<p class='pc-settings'>
+				<%= label_tag 'API Password' %> <i>(Password for Packet Capture API)</i><br />
+				<%= password_field_tag '[settings][packet_capture_password]', (Setting.packet_capture_password ? Setting.find(:packet_capture_password) : nil), 
+				:placeholder => 'Packet Capture Password', :autocomplete => :off, :class => '' %>
+			</p>
+
+		</div>
+		
+	</div>
 	
 	<%= form_actions do %>
 

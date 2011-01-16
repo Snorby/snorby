@@ -30,9 +30,9 @@ module Snorby
         begin
 
           if DailyCache.all.blank?
-            
+
             unless Event.all.blank?
-              
+
               day_start = Event.first.timestamp.beginning_of_day
               day_end = Event.first.timestamp.end_of_day
 
@@ -40,7 +40,7 @@ module Snorby
                 @sensor = sensor
                 build_cache(day_start, day_end)
               end
-              
+
             end
 
           else
@@ -68,11 +68,15 @@ module Snorby
           end
 
           begin
+
             ReportMailer.daily_report.deliver if Setting.daily?
             send_weekly_report if Setting.weekly?
             send_monthly_report if Setting.monthly?
+             
           rescue PDFKit::NoExecutableError => e
             logit "#{e}"
+          rescue
+            logit "Error: Unable to send report - please make sure your mail configurations are correct."
           end
 
           Snorby::Jobs.daily_cache.destroy! if Snorby::Jobs.daily_cache?
@@ -117,7 +121,9 @@ module Snorby
           create_cache_record
 
           new_time = @events.last.timestamp.end_of_day + 1.day
+          
           new_start_day = new_time.beginning_of_day
+          
           new_end_day = new_time.end_of_day
 
           build_cache(new_start_day, new_end_day)
@@ -131,7 +137,7 @@ module Snorby
         build_proto_counts
 
         @cache.update({
-                        :event_count => fetch_event_count,
+                        :event_count => fetch_event_count(true),
                         :tcp_count => fetch_tcp_count,
                         :udp_count => fetch_udp_count,
                         :icmp_count => fetch_icmp_count,

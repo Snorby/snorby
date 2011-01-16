@@ -2,8 +2,8 @@
 	
 	<% if current_user.id == user.id %>
 		
-		<td class='first' data-user='<%= user.id %>'><%= image_tag("icons/lock.png", :size => '16x16', :class => 'trash') %></td>
-		<td class='' data-user='<%= user.id %>'><%= image_tag("icons/lock.png", :size => '16x16', :class => 'trash') %></td>
+		<td class='first' data-user='<%= user.id %>'><%= check_box_tag :disabled, 1, user.admin, :disabled => 'disabled' %></td>
+		<td class='' data-user='<%= user.id %>'><%= check_box_tag :disabled, 1, user.admin, :disabled => 'disabled' %></td>
 	
 	<% else %>
 	
@@ -14,6 +14,7 @@
 	
 	<td class='name' data-user-id='<%= user.id %>'><%= image_tag(user.avatar.url(:small), :size => '16x16', :class => 'avatar-small') %> <%= user.name %></td>
 	<td class='email'><%= user.email %></td>
+	<td class='email'><%= user.sign_in_count %></td>
 	<td class='last_sign_in_ip'><%= !user.last_sign_in_ip.blank? ? user.last_sign_in_ip : 'N/A' %></td>
 	<td class='last_sign_in_at'><%= !user.last_sign_in_at.blank? ? user.last_sign_in_at.strftime('%m/%d/%Y %l:%M %p') : Time.now.strftime('%m/%d/%Y %l:%M %p') %></td>
 	<td><%= link_to image_tag("icons/destroy.png", :size => '16x16', :class => 'trash'), remove_users_path(:id => user), :method => :delete, :confirm => "Are you sure you want to remove #{user.name}?" %></td>

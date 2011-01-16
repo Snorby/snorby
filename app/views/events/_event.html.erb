@@ -20,7 +20,7 @@
 		<div class='click dst_ip address'><%= event.ip.ip_dst %></div>
 		
 		<% if classification_css %>
-			<div class='click signature'><span class='add_tipsy' title='Analyst Classified Event: <%= event.classification.name %>'><%= truncate(event.signature.name, :length => 65, :omission => '...') %></span></div>
+			<div class='click signature'><span class='add_tipsy' title='<%= event.user.nil? ? '???' : event.user.name %> classified event as <%= event.classification.name %>'><%= truncate(event.signature.name, :length => 65, :omission => '...') %></span></div>
 		<% else %>
 			<div class='click signature'><span title='<%= event.signature.name %>'><%= truncate(event.signature.name, :length => 65, :omission => '...') %></span></div>
 		<% end %>
@@ -29,7 +29,9 @@
 			<% if event.notes_count > 0 %>
 				<span title="This event has <%= pluralize(event.notes_count, 'note') %>" class='add_tipsy round notes-count'><%= image_tag("icons/notes.png", :size => '16x16') %></span>
 			<% end %>
+			
 			<b title='<%= event.timestamp.strftime('%A, %b %d, %Y at %I:%M:%S %p') %>' class='add_tipsy'><%= event.pretty_time %></b>
+			
 		</div>
 		
 	</div>

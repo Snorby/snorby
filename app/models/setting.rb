@@ -6,7 +6,8 @@ class Setting
     :monthly,
     :lookups,
     :notes,
-    :openfpc
+    :packet_capture,
+    :packet_capture_auto_auth
   ]
 
   include DataMapper::Resource

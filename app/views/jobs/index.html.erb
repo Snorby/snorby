@@ -1,6 +1,19 @@
-<%= title "Worker & Job Queue" do -%>
+<%= title "Worker & Job Queue <i>(automatically refreshes)</i>".html_safe do -%>
 
 	<% if Snorby::Worker.running? %>
+		
+		<% content_for :footer do %>
+		
+			<script type="text/javascript">
+				setTimeout(function(){
+					$.get('/jobs', function(data, textStatus, xhr) {
+					  $('html').html(data);
+					});
+				},15000);
+			</script>
+			
+		<% end %>
+	
 		<%= menu_item "Restart Worker", restart_worker_settings_path, 'icons/restart.png', :confirm => "Are you sure you want to restart the worker process?" %>
 	<% end %>
 
