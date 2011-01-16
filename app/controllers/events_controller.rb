@@ -54,7 +54,7 @@ class EventsController < ApplicationController
     end
     
     # Snorby::Jobs::MassClassification.new(params[:classification_id], options)
-    Delayed::Job.enqueue(Snorby::Jobs::MassClassification.new(params[:classification_id], options))
+    Delayed::Job.enqueue(Snorby::Jobs::MassClassification.new(params[:classification_id], options, User.current_user.id))
     respond_to do |format|
       format.html { render :layout => false }
       format.js
@@ -72,13 +72,13 @@ class EventsController < ApplicationController
   end
 
   def history
-    @events = Event.all(:updated_by_id => @current_user.id).page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:timestamp.desc])
+    @events = Event.all(:user_id => @current_user.id).page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:timestamp.desc])
     @classifications ||= Classification.all
   end
 
   def classify
     @events = Event.find_by_ids(params[:events])
-    Event.classify_from_collection(@events, params[:classification].to_i)
+    Event.classify_from_collection(@events, params[:classification].to_i, User.current_user.id)
     render :layout => false, :status => 200
   end
 

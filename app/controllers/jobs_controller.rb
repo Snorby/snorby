@@ -7,7 +7,8 @@ class JobsController < ApplicationController
     @process = Snorby::Worker.process
     
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
+      format.js
       format.xml  { render :xml => @jobs }
     end
   end

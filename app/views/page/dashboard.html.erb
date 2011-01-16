@@ -34,7 +34,7 @@
 				<li class='<%= "active" if @range == 'year' %>'><%= link_to "This Year", dashboard_path(:range => :year) %></li>
 				
 				<% if Snorby::Jobs.caching? %>
-					<% content_for :header do %>
+					<% content_for :footer do %>
 						<script type="text/javascript">
 							setTimeout(function(){
 								location.reload();

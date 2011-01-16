@@ -30,8 +30,6 @@ class Event
 
   has n, :favorites, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :constraint => :destroy
 
-  has n, :users
-
   has n, :users, :through => :favorites
 
   has 1, :severity, :through => :signature, :via => :sig_priority
@@ -47,6 +45,8 @@ class Event
   has 1, :opt, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :constraint => :destroy
 
   has n, :notes, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :constraint => :destroy
+
+  belongs_to :user
 
   belongs_to :sensor, :parent_key => :sid, :child_key => :sid, :required => true
 
@@ -332,27 +332,31 @@ class Event
     end
   end
   
-  def self.classify_from_collection(collection, classification)
-    @classification = Classification.get(classification)
+  def self.classify_from_collection(collection, classification, user)
+    @classification ||= Classification.get(classification)
+    @user ||= User.get(user)
 
     collection.each do |event|
       next unless event
       old_classification = event.classification || false
-
+      
       next if old_classification == @classification
-
+      
+      event.user = @user
+      
       if @classification.blank?
         event.classification = nil
       else
         event.classification = @classification
       end
-
+      
       if event.save
         @classification.up(:events_count) if @classification
         old_classification.down(:events_count) if old_classification
       else
         Rails.logger.info "ERROR: #{event.errors.inspect}"
       end
+      
     end
   end
 

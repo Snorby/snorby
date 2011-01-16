@@ -815,8 +815,9 @@ div#note-box.error{
 }
 
 #wrapper #content #title #title-header img{
-	float: left;
 	vertical-align: middle;
+	margin-top: -5px;
+	margin-right: 10px;
 }
 
 #wrapper #content #title #title-menu-holder{
