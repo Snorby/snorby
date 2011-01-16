@@ -3,12 +3,14 @@
 	<div id='snorbybox-content' class=''>
 		
 		<%= form_tag '/request_packet_capture' do %>
-		
-			<%= text_field_tag :source_ip, @event.ip.ip_src %> : <%= text_field_tag :source_port, event_port_number(@event, :sport), :maxlength => 5, :size => 5 %>
+	
+			<%= text_field_tag :source_ip, @event.ip.ip_src %> : 
+			<%= text_field_tag :source_port, event_port_number(@event, :sport), :maxlength => 5, :size => 5 %>
 			
 			<br />
 			
-			<%= text_field_tag :destination_ip, @event.ip.ip_src %> : <%= text_field_tag :destination_port, event_port_number(@event, :dport), :maxlength => 5, :size => 5 %>
+			<%= text_field_tag :destination_ip, @event.ip.ip_src %> : 
+			<%= text_field_tag :destination_port, event_port_number(@event, :dport), :maxlength => 5, :size => 5 %>
 		
 			<br />
 			
@@ -20,7 +22,8 @@
 		
 			<br />
 			
-			<%= select_tag :protocol, select_options([['tcp', 'TCP'], ['udp', 'UDP'], ['icmp', 'ICMP']], :include_blank => true, :selected => @event.protocol) %>
+			<%= select_tag :protocol, select_options([['tcp', 'TCP'], ['udp', 'UDP'], ['icmp', 'ICMP']], 
+			:include_blank => true, :selected => @event.protocol) %>
 		
 		<% end %>
 		
