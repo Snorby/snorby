@@ -22,7 +22,7 @@ Pass: snorby
 
 ## Screenshot
 
-	http://dl.dropbox.com/u/38088/snorby2.png
+	[Snorby 2.0.0](http://snorby.org/snorby.png)
 
 ## Requirements
 
