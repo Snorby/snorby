@@ -252,7 +252,7 @@ var Snorby = {
 			});
 			
 			$('dl#event-sub-menu a').live('click', function(e) {
-				$('dl#event-sub-menu:visible').hide();
+				$('dl#event-sub-menu').hide();
 			});
 			
 			$('a.has-event-menu').live('click', function(e) {

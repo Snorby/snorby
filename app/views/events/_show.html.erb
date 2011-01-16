@@ -37,12 +37,14 @@
 					<li>
 						<%= link_to "Event Export Options", '#', :class => 'dark-button has-event-menu' %>
 						<dl id='event-sub-menu' class='round shadow' style='display:none;'>
-							<dd><%= link_to "XML", '#', :class => '' %></dd>
-							<dd><%= link_to "JSON", '#', :class => '' %></dd>
-							<dd><%= link_to "CSV", '#', :class => '' %></dd>
+							<dd><%= link_to "XML", "/events/show/#{@event.sid}/#{@event.cid}.xml", :class => '' %></dd>
+							<dd><%= link_to "JSON", "/events/show/#{@event.sid}/#{@event.cid}.json", :class => '' %></dd>
+							<dd><%= link_to "CSV", "/events/show/#{@event.sid}/#{@event.cid}.csv", :class => '' %></dd>
 							<dd><%= link_to "E-mail Event", '#', :class => '' %></dd>
 						</dl>
 					</li>
+					
+					<li><%= link_to "Permalink", view_events_url(:sid => @event.sid, :cid => @event.cid), :class => 'dark-button' %></li>
 					
 				<% end %>
 				

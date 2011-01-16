@@ -39,10 +39,7 @@ namespace :snorby do
   task :update => :environment do
     
     # Drop all css/js packages
-    Rake::Task['asset:packager:delete_all'].invoke
-    
-    # bundle all css/js packages
-    Rake::Task['asset:packager:build_all'].invoke
+    Rake::Task['snorby:refresh'].invoke
     
     # Setup the snorby database
     Rake::Task['db:autoupgrade'].invoke
@@ -55,13 +52,7 @@ namespace :snorby do
   
   desc 'Remove Old CSS/JS packages and re-bundle'
   task :refresh => :environment do
-    
-    # Drop all css/js packages
-    Rake::Task['asset:packager:delete_all'].invoke
-    
-    # bundle all css/js packages
-    Rake::Task['asset:packager:build_all'].invoke
-    
+    `jammit`
   end
   
   desc 'Reset'

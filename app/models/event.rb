@@ -237,9 +237,31 @@ class Event
       return [:tcp, self.tcp]
     elsif udp?
       return [:udp, self.udp]
-    else
+    elsif icmp?
       return [:icmp, self.icmp]
+    else
+      false
     end
+  end
+  
+  def source_port
+    if protocol_data.first == :icmp
+      nil
+    else
+      protocol_data.last.send(:"#{protocol_data.first}_sport")
+    end
+  end
+  
+  def destination_port
+    if protocol_data.first == :icmp
+      nil
+    else
+      protocol_data.last.send(:"#{protocol_data.first}_dport")
+    end
+  end
+  
+  def in_xml
+    %{<snorby>#{to_xml}#{user.to_xml if user}#{ip.to_xml}#{protocol_data.last.to_xml if protocol_data}#{classification.to_xml if classification}#{payload.to_xml if payload}#{notes.to_xml}</snorby>}
   end
 
   def in_json
