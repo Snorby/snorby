@@ -278,6 +278,7 @@ var Snorby = {
 			
 			$('button.request_packet_capture').live('click', function(e) {
 		    e.preventDefault();
+				if ($(this).attr('data-deepsee')) { $('form.request_packet_capture input#method').val('deepsee') };
 				$.post('/events/request_packet_capture', $('form.request_packet_capture').serialize(), null, "script");
 				return false;
 			});
