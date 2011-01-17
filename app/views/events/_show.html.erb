@@ -15,19 +15,19 @@
 							
 							<dd>
 								<%= link_to "Source (1 Hour)", "#{@event.packet_capture(:source_ip => @event.ip.ip_src.to_s,
-								:start_time => (@event.timestamp - 30.minute).to_i, 
-								:end_time => (@event.timestamp + 30.minute).to_i)}" %>
+								:start_time => (@event.timestamp - 30.minute), 
+								:end_time => (@event.timestamp + 30.minute))}" %>
 							</dd>
 							
 							<dd><%= link_to "Destination (1 Hour)", "#{@event.packet_capture(:destination_ip => @event.ip.ip_dst.to_s,
-								:start_time => (@event.timestamp - 30.minute).to_i, 
-								:end_time => (@event.timestamp + 30.minute).to_i)}" %>
+								:start_time => (@event.timestamp - 30.minute), 
+								:end_time => (@event.timestamp + 30.minute))}" %>
 							</dd>
 							
 							<dd><%= link_to "Source & Destination (1 Hour)", "#{@event.packet_capture(:source_ip => @event.ip.ip_src.to_s, 
 								:destination_ip => @event.ip.ip_dst.to_s, 
-								:start_time => (@event.timestamp - 30.minute).to_i, 
-								:end_time => (@event.timestamp + 30.minute).to_i)}" %>
+								:start_time => (@event.timestamp - 30.minute), 
+								:end_time => (@event.timestamp + 30.minute))}" %>
 							</dd>
 							
 							<dd><%= link_to "Custom", packet_capture_events_path(:sid => @event.sid, :cid => @event.cid), :class => 'snorbybox' %></dd>

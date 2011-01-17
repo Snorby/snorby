@@ -63,6 +63,9 @@ module Snorby
           @params.merge!(:filename => "snorby-#{@event.ip.ip_src.to_i}#{@event.ip.ip_dst.to_i}")
         end
         
+        @params[:stime] = @params[:stime].to_i
+        @params[:etime] = @params[:etime].to_i
+        
         convert_to_params
       end
 

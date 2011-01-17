@@ -27,15 +27,15 @@ module Snorby
         @plugin_params = {
           :source_ip => :ipv4_source,
           :destination_ip => :ipv4_destination,
-          :start_time => :stime,
-          :end_time => :etime,
+          :start_time => :start_time,
+          :end_time => :end_time,
           :protocol => :ethernet_protocol,
           :source_port => :spt,
           :destination_port => :dpt
         }
 
         @event = event
-        
+
         if @event.tcp?
           @plugin_params[:source_port] = :tcp_source_port
           @plugin_params[:destination_port] = :tcp_destination_port
@@ -48,9 +48,9 @@ module Snorby
         end
 
         @params = standardize_parameters(params, @plugin_params)
-        
+
         puts @params
-        
+
         @url = Setting.packet_capture_url? ? Setting.find(:packet_capture_url) : '#'
       end
 
@@ -66,6 +66,10 @@ module Snorby
             @params.merge!(:user => Setting.find(:packet_capture_user)) if Setting.packet_capture_user?
             @params.merge!(:password => Setting.find(:packet_capture_password)) if Setting.packet_capture_password?
           end
+
+          @params.merge!(:timespan => "#{@params[:start_time].strftime('%m.%d.%Y.%H.%M.%S')}.#{@params[:end_time].strftime('%m.%d.%Y.%H.%M.%S')}") if @params[:start_time] && @params[:end_time]
+          @params.delete(:start_time)
+          @params.delete(:end_time)
 
           convert_to_params
         end

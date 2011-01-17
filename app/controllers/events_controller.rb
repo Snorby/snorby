@@ -18,9 +18,9 @@ class EventsController < ApplicationController
     puts params[:end_time]
     
     data = {}
-    #:start_time => params[:start_time], 
-    #:end_time => params[:end_time],
-    data.merge!(:source_ip => params[:source_ip],
+    data.merge!(:start_time => params[:start_time], 
+    :end_time => params[:end_time],
+    :source_ip => params[:source_ip],
     :destination_ip => params[:destination_ip],
     :source_port => params[:source_port],
     :destination_port => params[:destination_port],
