@@ -34,7 +34,11 @@ All,<br />
 	<br />
 	
 	<strong>Payload</strong>:<br />
-	<pre><%= @event.payload.to_html %></pre>
-	
+
+	<% if @event.payload %>
+		<pre><%= @event.payload.to_html %></pre>
+	<% else %>
+		<pre>No Payload Data Available</pre>
+	<% end %>
 
 <strong>For more information see:</strong> <%= view_events_url(:sid => @event.sid, :cid => @event.cid) %><br />
