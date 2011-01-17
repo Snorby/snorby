@@ -12,6 +12,21 @@ class EventsController < ApplicationController
   end
   
   def request_packet_capture
+    @event = Event.get(params['sid'], params['cid'])
+    
+    puts params[:start_time]
+    puts params[:end_time]
+    
+    data = {}
+    #:start_time => params[:start_time], 
+    #:end_time => params[:end_time],
+    data.merge!(:source_ip => params[:source_ip],
+    :destination_ip => params[:destination_ip],
+    :source_port => params[:source_port],
+    :destination_port => params[:destination_port],
+    :protocol => params[:protocol])
+    
+    @packet = @event.packet_capture(data)
     respond_to do |format|
       format.html {render :layout => false}
       format.js

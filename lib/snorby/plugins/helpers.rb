@@ -2,7 +2,12 @@ module Snorby
   module Plugins
     module Helpers
       
-      def standardize_parameters(params={}, plugin_params={})
+      def standardize_parameters(params={}, plugin_params={})  
+        
+        plugin_params.each do |key, value|
+          params.delete(key.to_sym) if params[key.to_sym] == ''
+        end
+        
         param_keys = params.keys
         
         param_keys.each do |key,value|

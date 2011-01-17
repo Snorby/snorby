@@ -49,7 +49,6 @@ module Snorby
 
         @params = standardize_parameters(params, @plugin_params)
         
-        
         puts @params
         
         @url = Setting.packet_capture_url? ? Setting.find(:packet_capture_url) : '#'

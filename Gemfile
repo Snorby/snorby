@@ -15,7 +15,7 @@ gem 'actionmailer',           RAILS_VERSION, :require => 'action_mailer'
 gem 'railties',               RAILS_VERSION, :require => 'rails'
 
 gem 'dm-core',                DM_VERSION
-gem 'dm-rails',               '~> 1.0.3'
+gem 'dm-rails',               '~> 1.0.4', :git => 'http://github.com/datamapper/dm-rails.git', :branch => 'rails-3.0.x'
 gem 'dm-do-adapter',          DM_VERSION
 gem 'dm-active_model',        DM_VERSION
 
