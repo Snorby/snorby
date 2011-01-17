@@ -62,6 +62,7 @@
 		<div class='grid_5'>
 			<%= form_actions do %>
 				<%= button "Fetch Packet", :class => 'success request_packet_capture' %>
+				<%= button "Goto DeepSea", :class => 'success request_packet_capture' if Setting.find(:packet_capture_type) == 'solera' %>
 				<%= button "Cancel", :class => 'warning cancel-snorbybox' %>
 			<% end %>
 		</div>
