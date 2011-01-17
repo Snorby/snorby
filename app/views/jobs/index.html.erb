@@ -7,7 +7,7 @@
 			<script type="text/javascript">
 				setTimeout(function(){
 					$.get('/jobs', function(data, textStatus, xhr) {
-					  $('html').replaceWith(data);
+					  $('html').html(data);
 					});
 				},15000);
 			</script>
