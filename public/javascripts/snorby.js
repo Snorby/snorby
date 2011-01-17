@@ -446,18 +446,7 @@ var Snorby = {
 						$(document).unbind('keydown', 'ctrl+left');
 					},
 					onClosed: function() {
-						$(document).bind('keydown', 'esc', function() {
-							$('ul.table div.content li.event.highlight div.row div.click').click();
-							return false;
-						});
-						$(document).bind('keydown', 'right', function() {
-							$('div.pager.main ul.pager li.next a').click();
-							return false;
-						});
-						$(document).bind('keydown', 'ctrl+left', function() {
-							$('div.pager.main ul.pager li.first a').click();
-							return false;
-						});
+						Snorby.hotkeys();
 					}
 				});
 				return false;

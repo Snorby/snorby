@@ -17,12 +17,12 @@
 				<p>
 					<%= label_tag 'Recipients:' %> <i>(separate email addresses by comma. Example: demo@snorby.org, example@example.com)</i><br />
 					
-					<div class='grid_4'>
-						<%= select_tag 'ignore', dropdown_select_tag(User.all, :email, false, ['<option value=''>Select A User</option>']), :class => 'email-user-select' %>
+					<div class='grid_4 alpha' style='padding-top:7px;'>
+						<%= select_tag 'ignore', dropdown_select_tag(User.all, :email, false, ['<option value=''>Please Select A User</option>']), :class => 'email-user-select' %>
 					</div>
 					
 					<div class='grid_10'>
-						<%= text_field_tag 'email[to]', nil, :class => 'input-small required', :style => 'width:500px;' %>
+						<%= text_field_tag 'email[to]', nil, :class => 'input-small required', :style => 'width:480px;' %>
 					</div>
 					
 				</p>
