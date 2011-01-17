@@ -67,9 +67,13 @@ module Snorby
             @params.merge!(:password => Setting.find(:packet_capture_password)) if Setting.packet_capture_password?
           end
 
-          @params.merge!(:timespan => "#{@params[:start_time].strftime('%m.%d.%Y.%H.%M.%S')}.#{@params[:end_time].strftime('%m.%d.%Y.%H.%M.%S')}") if @params[:start_time] && @params[:end_time]
-          @params.delete(:start_time)
-          @params.delete(:end_time)
+          if @params[:start_time].kind_of?(DateTime) || @params[:start_time].kind_of?(Time)
+            @params[:start_time] = @params[:start_time].strftime('%m.%d.%Y.%H.%M.%S') if @params.has_key?(:start_time)
+          end
+          
+          if @params[:end_time].kind_of?(DateTime) || @params[:end_time].kind_of?(Time)
+            @params[:end_time] = @params[:end_time].strftime('%m.%d.%Y.%H.%M.%S') if @params.has_key?(:end_time)
+          end
 
           convert_to_params
         end
