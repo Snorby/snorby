@@ -49,13 +49,25 @@ namespace :snorby do
     
   end
   
-  
   desc 'Remove Old CSS/JS packages and re-bundle'
   task :refresh => :environment do
     `jammit`
   end
   
-  desc 'Reset'
+  desc 'Soft Reset - Reset Snorby metrics'
+  task :soft_reset => :environment do
+    
+    # Reset Counter Cache Columns
+    puts 'Reseting Snorby metrics and counter cache columns'
+    Severity.update!(:events_count => 0)
+    Sensor.update!(:events_count => 0)
+    Signature.update!(:events_count => 0)
+
+    puts 'This could take awhile. Please wait while the Snorby cache is rebuilt.'
+    Snorby::Worker.reset_cache(:all, true)
+  end
+  
+  desc 'Hard Reset - Rebuild Snorby Database'
   task :hard_reset => :environment do
     
     # Drop the snorby database if it exists
