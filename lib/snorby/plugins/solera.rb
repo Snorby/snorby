@@ -102,7 +102,7 @@ module Snorby
           build_protocol_params
           build_ip_params
           
-          @url += ';reportIndex=0'
+          @url += '/;reportIndex=0'
         end
 
         def build_url_parameters
