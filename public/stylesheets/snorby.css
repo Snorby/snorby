@@ -1650,6 +1650,12 @@ a.dark-button{
 	text-shadow: #787c7e 0 1px 0;
 }
 
+a.dark-button img{
+	vertical-align: middle;
+	margin-top: -2px;
+	padding: 0;
+}
+
 a.dark-button:hover{
 	background-color: #6b6f71;
 	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#929597',endColorstr='#6b6f71');
