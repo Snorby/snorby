@@ -71,6 +71,22 @@ module Snorby
       return true if (Jobs.sensor_caching? || Jobs.daily_caching?)
       false
     end
+    
+    def self.reset_counters
+      Sensor.all.each do |sensor|
+        sensor.update(:events_count => Event.all(:sid => sensor.sid).count)
+      end
+      Signature.all.each do |sig|
+        sig.update(:events_count => Event.all(:sig_id => sig.sig_id).count)
+      end
+      Classification.all.each do |classification|
+        classification.update(:events_count => Event.all(:classification_id => classification.id).count)
+      end
+      Severity.all.each do |sev|
+        sev.update(:events_count => Event.all(:"signature.sig_priority" => sev.sig_id).count)
+      end
+      nil
+    end
 
     def self.reset_cache(type, verbose=true)
       case type.to_sym
