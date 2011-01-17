@@ -29,7 +29,7 @@ All,<br />
 	
 	<br />
 	
-	<strong>Type</strong>: <%= @event.protocol.kink_of?(String) ? @event.protocol.capitalize : 'N/A' %><br />
+	<strong>Type</strong>: <%= @event.protocol.is_a?(String) ? @event.protocol.capitalize : 'N/A' %><br />
 	
 	<br />
 	
