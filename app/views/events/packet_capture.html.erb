@@ -22,7 +22,7 @@
 			
 			<p>
 				<%= label_tag 'Destination Address' %> <i>(Destination Address : Destination Port)</i><br />
-				<%= text_field_tag :destination_ip, @event.ip.ip_src %> : <%= text_field_tag :destination_port, event_port_number(@event, :dport), :maxlength => 5, :size => 5 %><br />
+				<%= text_field_tag :destination_ip, @event.ip.ip_dst %> : <%= text_field_tag :destination_port, event_port_number(@event, :dport), :maxlength => 5, :size => 5 %><br />
 			</p>
 			
 			<br />

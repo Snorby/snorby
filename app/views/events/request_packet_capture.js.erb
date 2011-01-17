@@ -1,4 +1,5 @@
 window.location = '<%= @packet %>';
+//console.log('<%= @packet %>');
 flash_message.push({type: 'success', message: "Sending packet capture request, please wait..."});
 flash();
 $.scrollTo('#header', 500);
