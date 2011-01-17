@@ -1,5 +1,5 @@
-window.location = '<%= @packet %>';
-//console.log('<%= @packet %>');
+console.log('<%= @packet.html_safe %>');
+//window.location = "<%= @packet.html_safe %>";
 flash_message.push({type: 'success', message: "Sending packet capture request, please wait..."});
 flash();
 $.scrollTo('#header', 500);
