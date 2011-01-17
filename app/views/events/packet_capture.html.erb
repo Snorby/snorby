@@ -8,6 +8,7 @@
 			
 			<%= hidden_field_tag :sid, params[:sid] %>
 			<%= hidden_field_tag :cid, params[:cid] %>
+			<%= hidden_field_tag :method, :pcap %>
 			
 			<br />
 			
@@ -62,7 +63,7 @@
 		<div class='grid_5'>
 			<%= form_actions do %>
 				<%= button "Fetch Packet", :class => 'success request_packet_capture' %>
-				<%= button "Goto DeepSea", :class => 'success request_packet_capture' if Setting.find(:packet_capture_type) == 'solera' %>
+				<%= button "Goto DeepSee", :class => 'success request_packet_capture', :"data-deepsee" => true if Setting.find(:packet_capture_type) == 'solera' %>
 				<%= button "Cancel", :class => 'warning cancel-snorbybox' %>
 			<% end %>
 		</div>
