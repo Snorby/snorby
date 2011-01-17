@@ -33,7 +33,7 @@ All,<br />
 	
 	<br />
 	
-	<strong>Type</strong>: <%= @event.protocol.is_a?(Symbol) ? @event.protocol.capitalize : 'N/A' %><br />
+	<strong>Type</strong>: <%= @event.protocol.is_a?(Symbol) ? @event.protocol.to_s.upcase : 'N/A' %><br />
 	
 	<br />
 	
