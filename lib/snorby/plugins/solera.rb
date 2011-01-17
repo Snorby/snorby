@@ -23,59 +23,85 @@ module Snorby
       include Snorby::Plugins::Helpers
 
       def initialize(event, params={})
+        @url = ""
 
         @plugin_params = {
-          :source_ip => :ipv4_source,
-          :destination_ip => :ipv4_destination,
+          :source_ip => :source_ip,
+          :destination_ip => :destination_ip,
           :start_time => :start_time,
           :end_time => :end_time,
-          :protocol => :ethernet_protocol,
-          :source_port => :spt,
-          :destination_port => :dpt
+          :protocol => :protocol,
+          :source_port => :source_port,
+          :destination_port => :destination_port
         }
 
         @event = event
-
-        if @event.tcp?
-          @plugin_params[:source_port] = :tcp_source_port
-          @plugin_params[:destination_port] = :tcp_destination_port
-        elsif @event.udp?
-          @plugin_params[:source_port] = :udp_source_port
-          @plugin_params[:destination_port] = :udp_destination_port
-        else
-          @plugin_params.delete(:source_port)
-          @plugin_params.delete(:destination_port)
-        end
-
         @params = standardize_parameters(params, @plugin_params)
-
-        puts @params
-
-        @url = Setting.packet_capture_url? ? Setting.find(:packet_capture_url) : '#'
       end
 
       def to_s
-        "#{@url}?#{build_url_parameters}"
+        "#{Setting.packet_capture_url? ? Setting.find(:packet_capture_url) : '#'}#{build_url_parameters}"
       end
 
       private
 
+        def build_solera_pcap_url
+          @url += "/ws/pcap?method=deepsee"
+          @url += "&path=/timespan/#{@params[:start_time].strftime('%m.%d.%Y.%H.%M.%S')}-#{@params[:end_time].strftime('%m.%d.%Y.%H.%M.%S')}"
+
+          if @params[:source_port] && @params[:destination_port]
+            case @event.protocol.to_sym
+            when :tcp
+              @url += "/tcp_port"
+              @url += "/#{@params[:source_port]}_and_#{@params[:destination_port]}"
+            when :udp
+              @url += "/udp_port"
+              @url += "/#{@params[:source_port]}_and_#{@params[:destination_port]}"
+            end
+          end
+
+          if @params[:source_ip] && @params[:destination_ip]
+            @url += "/ipv4_address/#{@params[:source_ip]}_and_#{@params[:destination_ip]}"
+          else
+            unless (@params[:source_ip].nil? && @params[:destination_ip].nil?)
+              @url += "/ipv4_address/"
+              @url += "#{@params[:source_ip]}" if @params[:source_ip]
+              @url += "#{@params[:destination_ip]}" if @params[:destination_ip]
+            end
+          end
+
+          @url += "/data.pcap"
+        end
+
+        def build_solera_deepsee_url
+          @url += "/deepsee_reports?"
+        end
+
         def build_url_parameters
 
+          @params[:method] ||= :pcap
+
+          case @params[:method].to_sym
+          when :deepsee
+            build_solera_deepsee_url
+          when :pcap
+            build_solera_pcap_url
+          else
+            build_solera_pcap_url
+          end
+
           if Setting.packet_capture_auto_auth?
-            @params.merge!(:user => Setting.find(:packet_capture_user)) if Setting.packet_capture_user?
-            @params.merge!(:password => Setting.find(:packet_capture_password)) if Setting.packet_capture_password?
+            @url += "&user=#{Setting.find(:packet_capture_user)}" if Setting.packet_capture_user?
+            @url += "&password=#{Setting.find(:packet_capture_password)}" if Setting.packet_capture_password?
           end
 
-          if @params[:start_time].kind_of?(DateTime) || @params[:start_time].kind_of?(Time)
-            @params[:start_time] = @params[:start_time].strftime('%m.%d.%Y.%H.%M.%S') if @params.has_key?(:start_time)
-          end
-          
-          if @params[:end_time].kind_of?(DateTime) || @params[:end_time].kind_of?(Time)
-            @params[:end_time] = @params[:end_time].strftime('%m.%d.%Y.%H.%M.%S') if @params.has_key?(:end_time)
-          end
+          # PCAP:
+          # https://$host:$port/ws/pcap?method=deepsee&path=/timespan/$start-$stop/$ipproto_port/$srcport_and_$dstport/ipv4_address/$srcip_and_$dstip/data.pcap&user=$usr&password=$pwd
 
-          convert_to_params
+          # DeepSee:
+          # https://$host:$port/deepsee_reports?user=$usr&password=$pwd#pathString=/timespan/$start-$stop/$ipproto_port/$srcport_and_$dstport/ipv4_address/$srcip_and_$dstip/;reportIndex=0
+
+          @url
         end
 
     end
