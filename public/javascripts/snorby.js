@@ -266,6 +266,7 @@ var Snorby = {
 					$.scrollTo('#header', 500);
 				} else {
 					if ($('input#email_subject').val() == '') {
+						console.log($('input#email_subject'));
 						flash_message.push({type: 'error', message: "The email subject cannot be blank."});flash();
 						$.scrollTo('#header', 500);
 					} else {

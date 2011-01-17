@@ -1,5 +1,5 @@
 window.location = '<%= @packet %>';
-flash_message.push({type: 'notice', message: "Sending packet capture request, please wait..."});
+flash_message.push({type: 'success', message: "Sending packet capture request, please wait..."});
 flash();
 $.scrollTo('#header', 500);
 $('a#fancybox-close').click();
