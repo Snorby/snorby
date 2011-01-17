@@ -73,19 +73,3 @@ module Snorby
     end
   end
 end
-
-# require 'rubygems'
-# require 'soleranetworks'
-#
-#      options = {
-#              :host                 =>    '192.168.20.20',
-#              :user                 =>    'admin',
-#              :pass                 =>    'somePassword',
-#              :ipv4_address =>      '1.2.3.4',
-#              :timespan             => (Time.now.getlocal-(60*5)).strftime('%m.%d.%Y.%H.%M.%S')+"."+Time.now.getlocal.strftime('%m.%d.%Y.%H.%M.%S')
-#      }
-#      request = SoleraNetworks.new(options)
-#
-#      # Generate API Call URI
-#      puts request.uri
-#      # https://192.168.20.20/ws/pcap?method=deepsee&user=admin&password=somePassword&path=%2Ftimespan%2F03.25.2010.14.14.37.03.25.2010.14.19.37%2Fipv4_address%2F1.2.3.4%2Fdata.pcap
