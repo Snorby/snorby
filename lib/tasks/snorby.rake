@@ -39,7 +39,7 @@ namespace :snorby do
   task :update => :environment do
     
     # Drop all css/js packages
-    Rake::Task['snorby:refresh'].invoke
+    # Rake::Task['snorby:refresh'].invoke
     
     # Setup the snorby database
     Rake::Task['db:autoupgrade'].invoke
