@@ -16,6 +16,15 @@ class EventsController < ApplicationController
     @events ||= current_user.events.page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:timestamp.desc])
     @classifications ||= Classification.all
   end
+  
+  def request_packet_capture
+    @event = Event.get(params['sid'], params['cid'])    
+    @packet = @event.packet_capture(params)
+    respond_to do |format|
+      format.html {render :layout => false}
+      format.js
+    end
+  end
 
   def show
     @event = Event.get(params['sid'], params['cid'])
@@ -26,7 +35,8 @@ class EventsController < ApplicationController
       format.pdf do
         render :pdf => "Event:#{@event.id}", :template => "events/show.pdf.erb", :layout => 'pdf.html.erb', :stylesheets => ["pdf"]
       end
-      format.csv { render :json => @event.to_csv }
+      format.xml { render :xml => @event.in_xml }
+      format.csv { render :text => @event.to_csv }
       format.json { render :json => @event.in_json }
     end
   end
@@ -34,6 +44,20 @@ class EventsController < ApplicationController
   def view
     @events = Event.all(:sid => params['sid'], :cid => params['cid']).page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:timestamp.desc])
     @classifications ||= Classification.all
+  end
+  
+  def create_email
+    @event = Event.get(params[:sid], params[:cid])
+    render :layout => false
+  end
+  
+  def email
+    #EventMailer.event_information(@event, email[:to], email[:subject], email[:body], @user).deliver
+    Delayed::Job.enqueue(Snorby::Jobs::EventMailerJob.new(params[:sid], params[:cid], params[:email]))
+    respond_to do |format|
+      format.html { render :layout => false }
+      format.js
+    end
   end
   
   def create_mass_action
@@ -53,7 +77,7 @@ class EventsController < ApplicationController
     end
     
     # Snorby::Jobs::MassClassification.new(params[:classification_id], options)
-    Delayed::Job.enqueue(Snorby::Jobs::MassClassification.new(params[:classification_id], options))
+    Delayed::Job.enqueue(Snorby::Jobs::MassClassification.new(params[:classification_id], options, User.current_user.id))
     respond_to do |format|
       format.html { render :layout => false }
       format.js
@@ -71,13 +95,13 @@ class EventsController < ApplicationController
   end
 
   def history
-    @events = Event.all(:updated_by_id => @current_user.id).page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:timestamp.desc])
+    @events = Event.all(:user_id => @current_user.id).page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:timestamp.desc])
     @classifications ||= Classification.all
   end
 
   def classify
     @events = Event.find_by_ids(params[:events])
-    Event.classify_from_collection(@events, params[:classification].to_i)
+    Event.classify_from_collection(@events, params[:classification].to_i, User.current_user.id)
     render :layout => false, :status => 200
   end
 
@@ -129,6 +153,11 @@ class EventsController < ApplicationController
       format.html {render :layout => false}
       format.js
     end
+  end
+  
+  def packet_capture
+    @event = Event.get(params[:sid], params[:cid])
+    render :layout => false
   end
 
 end

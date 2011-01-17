@@ -5,7 +5,7 @@
 snorby: &snorby
   adapter: mysql
   username: root
-  password: s3cr3tsauce
+  password: s3cr3tsauce #MYSQLPASS
   host: localhost
 
 development:

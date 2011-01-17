@@ -39,10 +39,7 @@ namespace :snorby do
   task :update => :environment do
     
     # Drop all css/js packages
-    Rake::Task['asset:packager:delete_all'].invoke
-    
-    # bundle all css/js packages
-    Rake::Task['asset:packager:build_all'].invoke
+    Rake::Task['snorby:refresh'].invoke
     
     # Setup the snorby database
     Rake::Task['db:autoupgrade'].invoke
@@ -52,19 +49,25 @@ namespace :snorby do
     
   end
   
-  
   desc 'Remove Old CSS/JS packages and re-bundle'
   task :refresh => :environment do
-    
-    # Drop all css/js packages
-    Rake::Task['asset:packager:delete_all'].invoke
-    
-    # bundle all css/js packages
-    Rake::Task['asset:packager:build_all'].invoke
-    
+    `jammit`
   end
   
-  desc 'Reset'
+  desc 'Soft Reset - Reset Snorby metrics'
+  task :soft_reset => :environment do
+    
+    # Reset Counter Cache Columns
+    puts 'Reseting Snorby metrics and counter cache columns'
+    Severity.update!(:events_count => 0)
+    Sensor.update!(:events_count => 0)
+    Signature.update!(:events_count => 0)
+
+    puts 'This could take awhile. Please wait while the Snorby cache is rebuilt.'
+    Snorby::Worker.reset_cache(:all, true)
+  end
+  
+  desc 'Hard Reset - Rebuild Snorby Database'
   task :hard_reset => :environment do
     
     # Drop the snorby database if it exists

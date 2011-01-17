@@ -19,8 +19,8 @@
 			<% end %>
 		</script>
 
-    <%= stylesheet_link_merged :snorby %>
-		<%= javascript_include_merged :snorby %>
+		<%= include_stylesheets :snorby, :media => 'all' %>
+		<%= include_javascripts :snorby %>
     <%= csrf_meta_tag %>
 
 		<%= yield(:header) %>

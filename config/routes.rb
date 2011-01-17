@@ -53,9 +53,12 @@ Snorby::Application.routes.draw do
       get :view
       get :create_mass_action
       post :mass_action
+      get :create_email
+      post :email
       get :hotkey
       post :export
       get :lookup
+      get :packet_capture
       get :history
       post :classify
       post :mass_update

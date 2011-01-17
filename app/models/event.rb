@@ -20,6 +20,8 @@ class Event
 
   property :users_count, Integer, :index => true, :default => 0
 
+  property :user_id, Integer, :index => true, :required => false
+  
   property :notes_count, Integer, :index => true, :default => 0
 
   belongs_to :classification
@@ -44,6 +46,8 @@ class Event
 
   has n, :notes, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :constraint => :destroy
 
+  belongs_to :user
+
   belongs_to :sensor, :parent_key => :sid, :child_key => :sid, :required => true
 
   belongs_to :signature, :child_key => :sig_id, :parent_key => :sig_id
@@ -56,35 +60,15 @@ class Event
     # Note: Need to decrement Severity, Sensor and User Counts
   end
 
-  def openfpc_url
-    if Setting.openfpc_url?
-      if tcp?
-        return "#{Setting.find(:openfpc_url)}?sip=#{ip.ip_src}&dip=#{ip.ip_dst}&filename=snorby-tcp-#{ip.ip_src.to_i}#{ip.ip_dst.to_i}&spt=#{tcp.tcp_sport}&dst=#{tcp.tcp_dport}&stime=#{(timestamp - 1.hour).strftime('%D:&H:%M')}"
-      elsif udp?
-        return "#{Setting.find(:openfpc_url)}?sip=#{ip.ip_src}&dip=#{ip.ip_dst}&filename=snorby-udp-#{ip.ip_src.to_i}#{ip.ip_dst.to_i}&spt=#{udp.udp_sport}&dst=#{udp.udp_dport}&stime=#{(timestamp - 1.hour).strftime('%D:&H:%M')}"
-      else
-        return "#{Setting.find(:openfpc_url)}?sip=#{ip.ip_src}&dip=#{ip.ip_dst}&filename=snorby-#{ip.ip_src.to_i}#{ip.ip_dst.to_i}&stime=#{(timestamp - 1.hour).strftime('%D:&H:%M')}"
-      end
+  def packet_capture(params={})
+    case Setting.find(:packet_capture_type).to_sym
+    when :openfpc
+      Snorby::Plugins::OpenFPC.new(self,params).to_s
+    when :solera
+      Snorby::Plugins::Solera.new(self,params).to_s
     else
-      return '#'
+      nil
     end
-    # filename => 0,
-    # sumtype =>0,
-    # password => $config{'GUIPASS'},
-    # action => "fetch",
-    # device => 0,
-    # logtype => 0,
-    # filetype => 0,
-    # logline => 0,
-    # sip => 0,
-    # dip => 0,
-    # spt => 0,
-    # dpt => 0,
-    # proto => 0,
-    # timestamp => 0,
-    # stime => 0,
-    # etime => 0,
-    # comment => 0,
   end
 
   def signature_url
@@ -99,40 +83,14 @@ class Event
 
   def matches_notification?
     Notification.each do |notify|
-
       next unless notify.sig_id == sig_id
       send_notification if notify.check(self)
-
     end
     nil
   end
 
   def send_notification
     Delayed::Job.enqueue(Snorby::Jobs::AlertNotifications.new(self.sid, self.cid))
-  end
-
-  def self.classify_from_collection(collection, classification)
-    @classification = Classification.get(classification)
-
-    collection.each do |event|
-      next unless event
-      old_classification = event.classification || false
-
-      next if old_classification == @classification
-
-      if @classification.blank?
-        event.classification = nil
-      else
-        event.classification = @classification
-      end
-
-      if event.save
-        @classification.up(:events_count) if @classification
-        old_classification.down(:events_count) if old_classification
-      else
-        Rails.logger.info "ERROR: #{event.errors.inspect}"
-      end
-    end
   end
 
   def self.limit(limit=25)
@@ -262,14 +220,48 @@ class Event
     favorite.destroy if favorite
   end
 
+  def protocol
+    if tcp?
+      return :tcp
+    elsif udp?
+      return :udp
+    elsif icmp?
+      return :icmp
+    else
+      nil
+    end
+  end
+
   def protocol_data
     if tcp?
       return [:tcp, self.tcp]
     elsif udp?
       return [:udp, self.udp]
-    else
+    elsif icmp?
       return [:icmp, self.icmp]
+    else
+      false
     end
+  end
+  
+  def source_port
+    if protocol_data.first == :icmp
+      nil
+    else
+      protocol_data.last.send(:"#{protocol_data.first}_sport")
+    end
+  end
+  
+  def destination_port
+    if protocol_data.first == :icmp
+      nil
+    else
+      protocol_data.last.send(:"#{protocol_data.first}_dport")
+    end
+  end
+  
+  def in_xml
+    %{<snorby>#{to_xml}#{user.to_xml if user}#{ip.to_xml}#{protocol_data.last.to_xml if protocol_data}#{classification.to_xml if classification}#{payload.to_xml if payload}#{notes.to_xml}</snorby>}
   end
 
   def in_json
@@ -359,6 +351,34 @@ class Event
     all.update(:classification_id => 0)
     Classification.all.each do |classification|
       classification.update(:events_count => 0)
+    end
+  end
+  
+  def self.classify_from_collection(collection, classification, user)
+    @classification ||= Classification.get(classification)
+    @user ||= User.get(user)
+
+    collection.each do |event|
+      next unless event
+      old_classification = event.classification || false
+      
+      next if old_classification == @classification
+      
+      event.user = @user
+      
+      if @classification.blank?
+        event.classification = nil
+      else
+        event.classification = @classification
+      end
+      
+      if event.save
+        @classification.up(:events_count) if @classification
+        old_classification.down(:events_count) if old_classification
+      else
+        Rails.logger.info "ERROR: #{event.errors.inspect}"
+      end
+      
     end
   end
 

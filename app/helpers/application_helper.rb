@@ -1,5 +1,16 @@
 module ApplicationHelper
 
+  def select_options(options, attributes={})
+    select_options = ""
+    options.each do |data|
+      content = content_tag(:option, data.last, :value => data.first)
+      content = content_tag(:option, data.last, :value => data.first, :selected => 'selected') if attributes[:selected].to_s == data.first.to_s
+      select_options += content
+    end
+    select_options = "<option value=''></option>#{select_options}" if attributes[:include_blank]
+    select_options.html_safe
+  end
+
   def dropdown_select_tag(collection, value, include_blank=false, custom=[])
     options = include_blank ? "<option value=''></option>" : ""
     custom.collect { |x| options += x }
@@ -17,12 +28,12 @@ module ApplicationHelper
 
   #
   # Title
-  # 
+  #
   # @param [String] header
   # @param [Block] yield for title-menu items
-  # 
+  #
   # @return [String] title html
-  # 
+  #
   def title(header, title=nil, &block)
     show_title(title ? title : header)
     title_header = content_tag(:div, header, :id => 'title-header', :class => 'grid_6')
@@ -32,7 +43,7 @@ module ApplicationHelper
       html = title_header + menu_holder
     else
       html = title_header
-    end 
+    end
     return content_tag(:div, html, :id => 'title')
   end
 
@@ -42,7 +53,7 @@ module ApplicationHelper
     direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
     link_to title, {:sort => column, :direction => direction}, {:class => css_class}
   end
-  
+
   #
   # Pager
   #
@@ -76,43 +87,49 @@ module ApplicationHelper
 
   #
   # Menu Item
-  # 
+  #
   # @param [String] name Menu Item Name
   # @param [String] path Men Item Path
   # @param [String] image_path Menu Item Image Path
   # @param [Hash] options Options to padd to content_tag
-  # 
+  #
   # @return [String] HTMl Menu Item
-  # 
+  #
   def menu_item(name, path='#', image_path=nil, options={})
     image = image_path ? "#{image_tag(image_path)} " : ""
     content_tag(:li, "#{link_to "#{image}#{name}".html_safe, path, options}".html_safe)
   end
-  
-  def snorby_box(title, &block)
+
+  def snorby_box(title, normal_size=true, &block)
     html = content_tag(:div, title, :id => 'box-title')
-    html += content_tag(:div, capture(&block), :id => 'box-content')
+    
+    if normal_size
+      html += content_tag(:div, capture(&block), :id => 'box-content')
+    else
+      html += content_tag(:div, capture(&block), :id => 'box-content-small')
+    end
+    
     html += content_tag(:div, nil, :id => 'box-footer')
-    content_tag(:div, html, :id => 'snorby-box')
+    content_tag(:div, html, :id => 'snorby-box', :class => 'snorby-box')
   end
 
   def form_actions(&block)
     content_tag(:div, capture(&block), :id => 'form-actions')
   end
-  
+
   def button(name, options={})
     # <span class="success" style="display:none">✓ saved</span>
     options[:class] = options[:class] ? options[:class] += " default" : "default"
     content_tag(:button, "<span>#{name}</span>".html_safe, options)
   end
-  
+
   def css_chart(percentage)
     html = content_tag(:div, "<span>#{percentage}%</span>".html_safe, :style => "width: #{percentage}%")
-    content_tag(:div, html, :class => 'progress-container')    
+    content_tag(:div, html, :class => 'progress-container')
   end
-  
+
   def worker_status(show_image=false)
-    
+
     if Snorby::Jobs.sensor_cache? && Snorby::Jobs.daily_cache?
       return content_tag(:span, "OK", :class => 'status ok add_tipsy', :title => 'Success: Everything Looks Good!')
       #return image_tag('icons/active.png', :class => 'add_tipsy', :title => 'Success: Everything Looks Good!')
@@ -126,15 +143,28 @@ module ApplicationHelper
       return content_tag(:span, "FAIL", :class => 'status fail add_tipsy', :title => 'ERROR: Both Cache Jobs Are Not Running...')
       #return image_tag('icons/dead.png', :class => 'add_tipsy', :title => 'ERROR: Both Cache Jobs Are Not Running...')
     end
-    
+
   end
-  
+
   #
-  #  
+  # Percentage Helper
+  # 
+  # Used for generating customized 
+  # percentages used in the view and pdf
+  # reports. This method will protect
+  # impossible percentages.
+  #
+  # @param [Integer] count Count from total
+  # @param [Integer] total The total count
+  # @param [Integer] round Rounding Option
+  # 
+  # @return [Integer] percentage
   # 
   def percentage_for(count, total, round=2)
     begin
-      ((count.to_f / total.to_f) * 100).round(round)
+      percentage = ((count.to_f / total.to_f) * 100).round(round)
+      return 100.round(round) if percentage.round > 100
+      percentage
     rescue FloatDomainError
       0
     end
