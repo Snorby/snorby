@@ -46,8 +46,8 @@ class EventsController < ApplicationController
   end
   
   def email
-    
-    #Delayed::Job.enqueue(Snorby::Jobs::MassClassification.new(params[:classification_id], options, User.current_user.id))
+    #EventMailer.event_information(@event, email[:to], email[:subject], email[:body], @user).deliver
+    Delayed::Job.enqueue(Snorby::Jobs::EventMailerJob.new(params[:sid], params[:cid], params[:email]))
     respond_to do |format|
       format.html { render :layout => false }
       format.js

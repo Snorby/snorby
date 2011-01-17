@@ -270,6 +270,7 @@ var Snorby = {
 						flash_message.push({type: 'error', message: "The email subject cannot be blank."});flash();
 						$.scrollTo('#header', 500);
 					} else {
+						$('a#fancybox-close').click();
 						$.post('/events/email', $('form.email-event-information').serialize(), null, "script");
 					};
 				};
@@ -865,6 +866,11 @@ var Snorby = {
 				overlayColor: '#000',
 				href: '/events/hotkey'
 			});
+			return false;
+		});
+		
+		$(document).bind('keydown', 'ctrl+3', function() {
+			window.location = '/jobs';
 			return false;
 		});
 	

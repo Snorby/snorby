@@ -11,11 +11,14 @@
 				<%= hidden_field_tag :sid, params[:sid] %>
 
 				<%= hidden_field_tag :cid, params[:cid] %>
+				
+				<%= hidden_field_tag 'email[user_id]', @current_user.id %>
 
 				<br />
 
 				<p>
 					<%= label_tag 'Recipients:' %> <i>(separate email addresses by comma. Example: demo@snorby.org, example@example.com)</i><br />
+					<br />
 					
 					<div class='grid_4 alpha' style='padding-top:7px;'>
 						<%= select_tag 'ignore', dropdown_select_tag(User.all, :email, false, ['<option value=''>Please Select A User</option>']), :class => 'email-user-select' %>

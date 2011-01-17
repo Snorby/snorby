@@ -19,6 +19,7 @@
 require 'snorby/jobs/alert_notifications'
 require 'snorby/jobs/cache_helper'
 require 'snorby/jobs/daily_cache_job'
+require 'snorby/jobs/event_mailer_job'
 require 'snorby/jobs/note_notification'
 require 'snorby/jobs/mass_classification'
 require 'snorby/jobs/sensor_cache_job'

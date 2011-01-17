@@ -4,7 +4,11 @@
 	<td class='attempts'><%= job.attempts %></td>
 	
 	<% if ((job.run_at < Time.now) && job.locked_at) %>
-		<td class='run_at currently_running'><%= image_tag('icons/pager.gif') %>(in progress)</td>
+		<% if job.last_error %>
+			<td class='run_at fail'>failed</td>
+		<% else %>
+			<td class='run_at currently_running'><%= image_tag('icons/pager.gif') %>(in progress)</td>
+		<% end %>
 	<% else %>
 		<td class='run_at'><%= distance_of_time_in_words(Time.now, job.run_at) %></td>
 	<% end %>
