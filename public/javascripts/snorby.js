@@ -85,7 +85,6 @@ function set_classification (class_id) {
 			};
 
 			flash_message.push({type: 'success', message: "Event(s) Classified Successfully"});
-			$.scrollTo('#header', 500);
 			
 		});
 		
