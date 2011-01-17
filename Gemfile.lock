@@ -18,18 +18,6 @@ GIT
       dm-observer
 
 GIT
-  remote: http://github.com/datamapper/dm-rails.git
-  revision: d0a0e26f69a0c54634c3ba22c6d59c5804e023ca
-  branch: rails-3.0.x
-  specs:
-    dm-rails (1.0.4)
-      actionpack (~> 3.0.0)
-      activesupport (~> 3.0.0)
-      dm-active_model (~> 1.0.3)
-      dm-core (~> 1.0.0)
-      railties (~> 3.0.0)
-
-GIT
   remote: http://github.com/jm81/dm-devise.git
   revision: eb15f47
   branch: v1.1
@@ -146,6 +134,12 @@ GEM
     dm-pager (1.1.0)
       dm-aggregates (>= 0.10.1)
       dm-core (>= 0.10.1)
+    dm-rails (1.0.4)
+      actionpack (~> 3.0.0)
+      activesupport (~> 3.0.0)
+      dm-active_model (~> 1.0.3)
+      dm-core (~> 1.0.0)
+      railties (~> 3.0.0)
     dm-serializer (1.0.2)
       dm-core (~> 1.0.2)
       fastercsv (~> 1.5.3)
@@ -286,7 +280,7 @@ DEPENDENCIES
   dm-observer (~> 1.0.2)
   dm-pager
   dm-paperclip (~> 2.3)!
-  dm-rails (~> 1.0.4)!
+  dm-rails (~> 1.0.4)
   dm-serializer (~> 1.0.2)
   dm-timestamps (~> 1.0.2)
   dm-transactions (~> 1.0.2)

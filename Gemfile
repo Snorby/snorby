@@ -15,12 +15,10 @@ gem 'actionmailer',           RAILS_VERSION, :require => 'action_mailer'
 gem 'railties',               RAILS_VERSION, :require => 'rails'
 
 gem 'dm-core',                DM_VERSION
-gem 'dm-rails',               '~> 1.0.4', :git => 'http://github.com/datamapper/dm-rails.git', :branch => 'rails-3.0.x'
+gem 'dm-rails',               '~> 1.0.4'
 gem 'dm-do-adapter',          DM_VERSION
 gem 'dm-active_model',        DM_VERSION
-
 gem 'dm-mysql-adapter',       DM_VERSION
-# gem 'dm-sqlite-adapter',    DM_VERSION
 
 gem 'dm-pager'
 gem 'dm-migrations',          DM_VERSION
@@ -35,7 +33,6 @@ gem 'dm-serializer',          DM_VERSION
 
 # Deploy with Capistrano
 gem 'capistrano'
-# gem 'ruby-debug19'
 
 # Rails Plugins
 gem 'jammit',                 '~> 0.5.4'

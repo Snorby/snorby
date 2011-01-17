@@ -53,23 +53,19 @@
 				<%= datetime_select :end_time, nil, :default => @event.timestamp + 30.minutes %><br />
 			</p>
 			
-			<br />
+			<br /><br />
 			
 		</div>
 		
 		<% end %>
 		
-	</div>
-
-	<div class='pad-left'>
-		
-		<%= form_actions do %>
-			<%= button "Fetch Packet", :class => 'success request_packet_capture' %>
-			<%= button "Cancel", :class => 'warning cancel-snorbybox' %>
-		<% end %>
+		<div class='grid_5'>
+			<%= form_actions do %>
+				<%= button "Fetch Packet", :class => 'success request_packet_capture' %>
+				<%= button "Cancel", :class => 'warning cancel-snorbybox' %>
+			<% end %>
+		</div>
 		
 	</div>
-
-	<br />
 
 <% end %>

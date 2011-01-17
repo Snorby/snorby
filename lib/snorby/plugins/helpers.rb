@@ -4,9 +4,8 @@ module Snorby
       
       def standardize_parameters(params={}, plugin_params={})  
         
-        plugin_params.each do |key, value|
-          params.delete(key.to_sym) if params[key.to_sym] == ''
-        end
+        params.each { |key, value| params.delete(key.to_sym) unless plugin_params.has_key?(key.to_sym) }
+        plugin_params.each { |key, value| params.delete(key.to_sym) if params[key.to_sym] == '' }
         
         params[:start_time] = params_to_datetime_object(params[:start_time]) unless (params[:start_time].kind_of?(Time) || params[:start_time].kind_of?(DateTime))
         params[:end_time] = params_to_datetime_object(params[:end_time]) unless (params[:end_time].kind_of?(Time) || params[:end_time].kind_of?(DateTime))

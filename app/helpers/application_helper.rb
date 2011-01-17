@@ -110,7 +110,7 @@ module ApplicationHelper
     end
     
     html += content_tag(:div, nil, :id => 'box-footer')
-    content_tag(:div, html, :id => 'snorby-box')
+    content_tag(:div, html, :id => 'snorby-box', :class => 'snorby-box')
   end
 
   def form_actions(&block)

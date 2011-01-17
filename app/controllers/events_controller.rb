@@ -12,21 +12,8 @@ class EventsController < ApplicationController
   end
   
   def request_packet_capture
-    @event = Event.get(params['sid'], params['cid'])
-    
-    puts params[:start_time]
-    puts params[:end_time]
-    
-    data = {}
-    data.merge!(:start_time => params[:start_time], 
-    :end_time => params[:end_time],
-    :source_ip => params[:source_ip],
-    :destination_ip => params[:destination_ip],
-    :source_port => params[:source_port],
-    :destination_port => params[:destination_port],
-    :protocol => params[:protocol])
-    
-    @packet = @event.packet_capture(data)
+    @event = Event.get(params['sid'], params['cid'])    
+    @packet = @event.packet_capture(params)
     respond_to do |format|
       format.html {render :layout => false}
       format.js
@@ -51,6 +38,20 @@ class EventsController < ApplicationController
   def view
     @events = Event.all(:sid => params['sid'], :cid => params['cid']).page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:timestamp.desc])
     @classifications ||= Classification.all
+  end
+  
+  def create_email
+    @event = Event.get(params[:sid], params[:cid])
+    render :layout => false
+  end
+  
+  def email
+    
+    #Delayed::Job.enqueue(Snorby::Jobs::MassClassification.new(params[:classification_id], options, User.current_user.id))
+    respond_to do |format|
+      format.html { render :layout => false }
+      format.js
+    end
   end
   
   def create_mass_action

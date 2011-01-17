@@ -85,6 +85,7 @@ function set_classification (class_id) {
 			};
 
 			flash_message.push({type: 'success', message: "Event(s) Classified Successfully"});
+			$.scrollTo('#header', 500);
 			
 		});
 		
@@ -99,6 +100,7 @@ function set_classification (class_id) {
 			
 			flash_message.push({type: 'error', message: "Please Select Events To Perform This Action"});
 			flash();
+			$.scrollTo('#header', 500);
 			
 		};
 		
@@ -245,6 +247,34 @@ var Snorby = {
 		
 		events: function(){
 			
+			$('select.email-user-select').live('change', function(e) {
+				var email = $('select.email-user-select').val();
+				
+				if (email != '') {
+					if ($('input#email_to').val() == '') {
+						$('input#email_to').val(email);
+					} else {
+						$('input#email_to').val($('input#email_to').val() + ', ' + email);
+					};
+				};
+			});
+			
+			$('button.email-event-information').live('click', function(e) {
+		    e.preventDefault();
+				if ($('input#email_to').val() == '') {
+					flash_message.push({type: 'error', message: "The email recipients cannot be blank."});flash();
+					$.scrollTo('#header', 500);
+				} else {
+					if ($('input#email_subject').val() == '') {
+						flash_message.push({type: 'error', message: "The email subject cannot be blank."});flash();
+						$.scrollTo('#header', 500);
+					} else {
+						$.post('/events/email', $('form.email-event-information').serialize(), null, "script");
+					};
+				};
+				return false;
+			});
+			
 			$('button.request_packet_capture').live('click', function(e) {
 		    e.preventDefault();
 				$.post('/events/request_packet_capture', $('form.request_packet_capture').serialize(), null, "script");
@@ -312,10 +342,8 @@ var Snorby = {
 					$.post(this.href, { events: selected_events });
 					
 				} else {
-					
 					flash_message.push({type: 'error', message: "Please Select Events To Perform This Action"});
 					flash();
-					
 				};
 				
 				return false;
@@ -388,6 +416,7 @@ var Snorby = {
 				} else {
 					flash_message.push({type: "error", message: "The note body cannot be blank!"}); 
 					flash();
+					$.scrollTo('#header', 500);
 				};
 				
 				return false;
@@ -409,7 +438,26 @@ var Snorby = {
 					overlayShow: true,
 					overlayOpacity: 0.5,
 					overlayColor: '#000',
-					href: this.href
+					href: this.href,
+					onStart: function() {
+						$(document).unbind('keydown', 'right');
+						$(document).unbind('keydown', 'esc');
+						$(document).unbind('keydown', 'ctrl+left');
+					},
+					onClosed: function() {
+						$(document).bind('keydown', 'esc', function() {
+							$('ul.table div.content li.event.highlight div.row div.click').click();
+							return false;
+						});
+						$(document).bind('keydown', 'right', function() {
+							$('div.pager.main ul.pager li.next a').click();
+							return false;
+						});
+						$(document).bind('keydown', 'ctrl+left', function() {
+							$('div.pager.main ul.pager li.first a').click();
+							return false;
+						});
+					}
 				});
 				return false;
 			});

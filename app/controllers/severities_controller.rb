@@ -9,7 +9,7 @@ class SeveritiesController < ApplicationController
   def new
     @severity = Severity.new
   end
-  
+
   def create
     @severity = Severity.create(params[:severity])
     if @severity.save
