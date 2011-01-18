@@ -61,19 +61,21 @@ class EventsController < ApplicationController
   def mass_action
     options = {}
     
-    options.merge!({:sig_id => params[:sig_id].to_i})
+    options.merge!({:sig_id => params[:sig_id].to_i}) if params[:use_sig_id]
     options.merge!({:"ip.ip_src" => IPAddr.new(params[:ip_src].to_i,Socket::AF_INET)}) if params[:use_ip_src]
     options.merge!({:"ip.ip_dst" => IPAddr.new(params[:ip_dst].to_i,Socket::AF_INET)}) if params[:use_ip_dst]
     
     if params.has_key?(:sensor_ids)
       options.merge!({:"sid" => params[:sensor_ids].map(&:to_i)})
     end
-    
-    # Snorby::Jobs::MassClassification.new(params[:classification_id], options)
-    Delayed::Job.enqueue(Snorby::Jobs::MassClassification.new(params[:classification_id], options, User.current_user.id))
-    respond_to do |format|
-      format.html { render :layout => false }
-      format.js
+    if options.empty?
+      render :js => "flash_message.push({type: 'error', message: 'No classification options were submitted...'});flash();"
+    else
+      Delayed::Job.enqueue(Snorby::Jobs::MassClassification.new(params[:classification_id], options, User.current_user.id))
+      respond_to do |format|
+        format.html { render :layout => false }
+        format.js
+      end
     end
   end
 
