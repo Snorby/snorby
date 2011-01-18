@@ -40,8 +40,6 @@
 					<%= link_to "Event Export Options", '#', :class => 'dark-button has-event-menu' %>
 					<dl id='event-sub-menu' class='round shadow' style='display:none;'>
 						<dd><%= link_to "XML", "/events/show/#{@event.sid}/#{@event.cid}.xml", :class => '' %></dd>
-						<dd><%= link_to "JSON", "/events/show/#{@event.sid}/#{@event.cid}.json", :class => '' %></dd>
-						<dd><%= link_to "CSV", "/events/show/#{@event.sid}/#{@event.cid}.csv", :class => '' %></dd>
 						<dd><%= link_to "E-mail Event", create_email_events_path(:sid => @event.sid, :cid => @event.cid), :class => 'snorbybox' %></dd>
 					</dl>
 				</li>
