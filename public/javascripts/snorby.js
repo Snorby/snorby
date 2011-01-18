@@ -708,10 +708,7 @@ var Snorby = {
 					if (id === $(this).attr('id')) {
 						
 						if ($(this).is(':visible')) {
-							dropdown.slideUp({
-								duration: 'fast', 
-								easing: 'easeInSine'
-							});
+							dropdown.fadeOut('fast');
 						} else {
 							dropdown.slideDown({
 								duration: 'fast', 

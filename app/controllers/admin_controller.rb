@@ -7,8 +7,8 @@ class AdminController < ApplicationController
     redirect_to :back, :notice => 'The Demo Account cannot modify system settings.' if @current_user.demo?
   end
 
-  def settings
-    
+  def settings 
+    # ...
   end
 
   def severity

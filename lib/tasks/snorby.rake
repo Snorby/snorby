@@ -30,16 +30,10 @@ namespace :snorby do
     # Load Default Records
     Rake::Task['db:seed'].invoke
     
-    # bundle all css/js packages
-    Rake::Task['asset:packager:build_all'].invoke
-    
   end
   
   desc 'Update Snorby'
   task :update => :environment do
-    
-    # Drop all css/js packages
-    # Rake::Task['snorby:refresh'].invoke
     
     # Setup the snorby database
     Rake::Task['db:autoupgrade'].invoke

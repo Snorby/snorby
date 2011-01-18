@@ -1,20 +1,17 @@
 <% if Snorby::Worker.running? %>
 
-	<%= snorby_box("Mass Action Events") do %>
+	<%= snorby_box("Mass Action Events", false) do %>
 
 		<div id='snorbybox-content' class=''>
 		
 		<%= form_tag '/events/mass_action', :id => 'mass-action-form' do %>
-		
-				<div id='snorbybox-form-full'>
-					<strong>Signature:</strong> <%= @event.signature.sig_name %><br />
-				</div>
-
-				<br />
 
 				<div id="snorbybox-form-holder">
 
-					<%= hidden_field_tag :sig_id, @event.signature.sig_id %>
+					<div id='snorbybox-form-full'>
+						<%= check_box_tag("use_sig_id", 1, 1) %> <%= label_tag "Only for this signature: <strong>#{@event.signature.sig_name}</strong>".html_safe %><br />
+						<%= hidden_field_tag :sig_id, @event.signature.sig_id.to_i %><br />
+					</div>
 
 					<div id="snorbybox-form">
 						<%= check_box_tag("use_ip_src", 1) %> <%= label_tag "Only for source address #{@event.ip.ip_src}".html_safe %><br />
