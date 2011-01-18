@@ -355,7 +355,7 @@ class Event
   end
   
   def self.classify_from_collection(collection, classification, user)
-    @classification ||= Classification.get(classification)
+    @classification = Classification.get(classification)
     @user ||= User.get(user)
 
     collection.each do |event|

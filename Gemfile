@@ -49,7 +49,7 @@ gem 'delayed_job_data_mapper','~> 1.0.0.rc', :git => 'http://github.com/Snorby/d
 gem 'rmagick',                '~> 2.13.1'
 gem 'dm-paperclip',           '~> 2.3', :git => 'http://github.com/solnic/dm-paperclip.git', :branch => 'master'
 gem 'net-dns',                '~> 0.6.1'
-gem 'whois',                  '~> 1.3.9'
+gem 'whois',                  '~> 1.6.6'
 gem 'simple_form',            '~> 1.2.2'
 
 group(:test) do
