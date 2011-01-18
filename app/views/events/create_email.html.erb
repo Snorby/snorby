@@ -1,0 +1,76 @@
+<% if Snorby::Worker.running? %>
+
+	<%= snorby_box("Email Event Information", false) do %>
+
+		<div id='snorbybox-content' class='grid_10'>
+
+			<%= form_tag '/email', :class => 'email-event-information validate' do %>
+
+			<div class='grid_17'>
+
+				<%= hidden_field_tag :sid, params[:sid] %>
+
+				<%= hidden_field_tag :cid, params[:cid] %>
+				
+				<%= hidden_field_tag 'email[user_id]', @current_user.id %>
+
+				<br />
+
+				<p>
+					<%= label_tag 'Recipients:' %> <i>(separate email addresses by comma. Example: demo@snorby.org, example@example.com)</i><br />
+					<br />
+					
+					<div class='grid_4 alpha' style='padding-top:7px;'>
+						<%= select_tag 'ignore', dropdown_select_tag(User.all, :email, false, ['<option value=''>Please Select A User</option>']), :class => 'email-user-select' %>
+					</div>
+					
+					<div class='grid_10'>
+						<%= text_field_tag 'email[to]', nil, :class => 'input-small required', :style => 'width:480px;', :placeholder => 'demo@snorby.org, example@example.com' %>
+					</div>
+					
+				</p>
+
+				<br />
+
+				<p>
+					<%= label_tag 'Email Subject:' %><br />
+					<%= text_field_tag 'email[subject]', "#{@event.timestamp.strftime('%D %H:%M')} - #{@event.signature.sig_name}", :class => 'input-small required', :style => 'width:640px;' %>
+				</p>
+
+				<br />
+
+				<p>
+					<%= label_tag 'Email Body:' %><br />
+					<%= text_area_tag 'email[body]', nil, :style => 'width:650px;height:250px' %><br />
+				</p>
+
+				<br />
+
+			</div>
+
+			<% end %>
+
+			<%= form_actions do %>
+				<%= button "Email Event Information", :class => 'success email-event-information' %>
+				<%= button "Cancel", :class => 'warning cancel-snorbybox' %>
+			<% end %>
+
+			<br />
+
+		</div>
+
+	<% end %>
+
+<% else %>
+
+	<%= snorby_box("The Snorby Worker Is Not Running!") do %>
+		
+		<div id='note-box' class='error'>
+			<%= image_tag('icons/note-icon-white.png') %>
+			The Snorby worker is not currently running. It's imperative you start the worker immediately!
+			All backend calculations are performed asynchronously using the Snorby Worker.
+		</div>
+		
+	<% end %>
+
+<% end %>

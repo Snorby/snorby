@@ -1,14 +1,9 @@
-## MAC OS
+# Snorby .gitignore 
+*.rbc
 .DS_Store
-
-## TEXTMATE
 *.tmproj
 tmtags
-
-## VIM
 *.swp
-
-## PROJECT::GENERAL
 coverage
 rdoc
 doc
@@ -17,11 +12,8 @@ pkg
 log/*
 tmp/*
 log/*
-
 !tmp/.gitignore
 !log/.gitignore
-
-## PROJECT::SPECIFIC
 public/system/
 public/javascripts/snorby_packaged.js
 public/javascripts/all.js

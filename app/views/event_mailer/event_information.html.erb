@@ -1,0 +1,48 @@
+All,<br />
+<br />
+
+<%= @user.name %> forwarded you the following Snorby Event.<br />
+
+<br />
+
+<em><%= @note %></em><br />
+
+<br />
+
+	<strong>Rule</strong>: <%= @event.signature.sig_name %><br />
+	
+	<br />
+	
+	<strong>Sensor</strong>: <%= @event.sensor.name %><br />
+	
+	<br />
+	
+	<strong>Timestamp</strong>: <%= @event.timestamp %><br />
+	
+	<br />
+	
+	<strong>Severity</strong>: <%= @event.severity.name %><br />
+	
+	<br />
+	
+	<strong>Destination</strong>: <%= @event.ip.ip_dst %><br />
+	
+	<br />
+	
+	<strong>Source</strong>: <%= @event.ip.ip_src %><br />
+	
+	<br />
+	
+	<strong>Type</strong>: <%= @event.protocol.is_a?(Symbol) ? @event.protocol.to_s.upcase : 'N/A' %><br />
+	
+	<br />
+	
+	<strong>Payload</strong>:<br />
+
+	<% if @event.payload %>
+		<pre><%= @event.payload.to_html %></pre>
+	<% else %>
+		<pre>No Payload Data Available</pre>
+	<% end %>
+
+<strong>For more information see:</strong> <%= view_events_url(:sid => @event.sid, :cid => @event.cid) %><br />

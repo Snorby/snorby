@@ -7,11 +7,11 @@ class User
   include Paperclip::Resource
   include Snorby::Model::Counter
 
+  cattr_accessor :current_user
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
-
-  cattr_accessor :current_user
   
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 
@@ -67,6 +67,8 @@ class User
   has n, :favorites, :child_key => :user_id, :constraint => :destroy
 
   has n, :notes, :child_key => :user_id, :constraint => :destroy
+
+  has n, :events
 
   has n, :events, :through => :favorites
 

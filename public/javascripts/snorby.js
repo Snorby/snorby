@@ -89,8 +89,20 @@ function set_classification (class_id) {
 		});
 		
 	} else {
-		flash_message.push({type: 'error', message: "Please Select Events To Perform This Action"});
-		flash();
+		
+		if ($('ul.table div.content li.event.currently-over.highlight').is(':visible')) {
+			
+			$('ul.table div.content li.event.currently-over.highlight .row div.select input#event-selector').click().trigger('change');
+			set_classification(class_id);
+			
+		} else {
+			
+			flash_message.push({type: 'error', message: "Please Select Events To Perform This Action"});
+			flash();
+			$.scrollTo('#header', 500);
+			
+		};
+		
 	};
 }
 
@@ -121,7 +133,7 @@ function update_note_count (event_id, data) {
 var Snorby = {
 	
 	setup: function(){
-
+		
 		$(window).resize(function() {
 			$.fancybox.center;
 		});
@@ -234,6 +246,54 @@ var Snorby = {
 		
 		events: function(){
 			
+			$('select.email-user-select').live('change', function(e) {
+				var email = $('select.email-user-select').val();
+				
+				if (email != '') {
+					if ($('input#email_to').val() == '') {
+						$('input#email_to').val(email);
+					} else {
+						$('input#email_to').val($('input#email_to').val() + ', ' + email);
+					};
+				};
+			});
+			
+			$('button.email-event-information').live('click', function(e) {
+		    e.preventDefault();
+				if ($('input#email_to').val() == '') {
+					flash_message.push({type: 'error', message: "The email recipients cannot be blank."});flash();
+					$.scrollTo('#header', 500);
+				} else {
+					if ($('input#email_subject').val() == '') {
+						console.log($('input#email_subject'));
+						flash_message.push({type: 'error', message: "The email subject cannot be blank."});flash();
+						$.scrollTo('#header', 500);
+					} else {
+						$('a#fancybox-close').click();
+						$.post('/events/email', $('form.email-event-information').serialize(), null, "script");
+					};
+				};
+				return false;
+			});
+			
+			$('button.request_packet_capture').live('click', function(e) {
+		    e.preventDefault();
+				if ($(this).attr('data-deepsee')) { $('form.request_packet_capture input#method').val('deepsee') };
+				$.post('/events/request_packet_capture', $('form.request_packet_capture').serialize(), null, "script");
+				return false;
+			});
+			
+			$('dl#event-sub-menu a').live('click', function(e) {
+				$('dl#event-sub-menu').hide();
+			});
+			
+			$('a.has-event-menu').live('click', function(e) {
+				e.preventDefault();
+				var menu = $(this).parent('li').find('dl#event-sub-menu');
+				if (menu.is(':visible')) { menu.fadeOut('fast') } else { $('dl#event-sub-menu').hide(); menu.fadeIn('fast') };
+				return false;
+			});
+			
 			$('button.mass-action').live('click', function(e) {
 				e.preventDefault();
 				var nform = $('form#mass-action-form');
@@ -284,10 +344,8 @@ var Snorby = {
 					$.post(this.href, { events: selected_events });
 					
 				} else {
-					
 					flash_message.push({type: 'error', message: "Please Select Events To Perform This Action"});
 					flash();
-					
 				};
 				
 				return false;
@@ -360,6 +418,7 @@ var Snorby = {
 				} else {
 					flash_message.push({type: "error", message: "The note body cannot be blank!"}); 
 					flash();
+					$.scrollTo('#header', 500);
 				};
 				
 				return false;
@@ -381,7 +440,15 @@ var Snorby = {
 					overlayShow: true,
 					overlayOpacity: 0.5,
 					overlayColor: '#000',
-					href: this.href
+					href: this.href,
+					onStart: function() {
+						$(document).unbind('keydown', 'right');
+						$(document).unbind('keydown', 'esc');
+						$(document).unbind('keydown', 'ctrl+left');
+					},
+					onClosed: function() {
+						Snorby.hotkeys();
+					}
 				});
 				return false;
 			});
@@ -430,6 +497,8 @@ var Snorby = {
 			});
 			
 			$('ul.table div.content li.event div.click').live('click', function() {
+				$('dl#event-sub-menu').hide();
+				
 				var sid = $(this).parents('li').attr('data-event-sid');
 				var cid = $(this).parents('li').attr('data-event-cid');
 				var parent_row = $('li#event_'+sid+''+cid);
@@ -611,12 +680,26 @@ var Snorby = {
 		
 		dropdown: function(){
 			
+			$(document).click(function() {
+				$('dl.drop-down-menu:visible').hide();
+			});
+			
 			$('dl.drop-down-menu dd a').live('click', function() {
 				$('dl.drop-down-menu').fadeOut('slow');
 				return true;
 			});
+
+			$('dl.drop-down-menu').hover(function() {
+		    var timeout = $(this).data("timeout");
+		    if(timeout) clearTimeout(timeout);
+		  }, function() {
+		      $(this).data("timeout", setTimeout($.proxy(function() {
+		          $(this).fadeOut('fast');
+		      }, this), 500));
+		  });
 			
 			$('a.has_dropdown').live('click', function() {
+				
 				var id = $(this).attr('id');
 				var dropdown = $(this).parents('li').find('dl#'+id);
 				
@@ -706,6 +789,12 @@ var Snorby = {
 			
 			$('ul.pager li').live('click', function() {
 				
+				if (history && history.pushState) {
+					$(window).bind("popstate", function() {
+						$.getScript(location.href);
+			    });
+				};
+				
 				if (!$(this).hasClass('more')) {
 					
 					var current_width = $(this).width();
@@ -720,7 +809,13 @@ var Snorby = {
 					};
 					
 					Snorby.helpers.remove_click_events(true);
-					$.getScript($(this).find('a').attr('href'));
+					
+					if (history && history.pushState) {
+						$.getScript($(this).find('a').attr('href'));
+						history.pushState(null, document.title, $(this).find('a').attr('href'));
+					} else {
+						$.getScript($(this).find('a').attr('href'));
+					};
 					
 				};
 				
@@ -773,6 +868,11 @@ var Snorby = {
 			});
 			return false;
 		});
+		
+		$(document).bind('keydown', 'ctrl+3', function() {
+			window.location = '/jobs';
+			return false;
+		});
 	
 		$(document).bind('keydown', 'ctrl+2', function() {
 			window.location = '/events';
@@ -789,7 +889,42 @@ var Snorby = {
 			return false;
 		});
 	
+		$('ul.table div.content li.event').live('hover', function() {
+			$('ul.table div.content li.event').removeClass('currently-over');
+			$(this).addClass('currently-over');
+		}, function() {
+			$(this).removeClass('currently-over');
+		});
+	
 		if ($('div.pager').is(':visible')) {
+			
+			$(document).bind('keydown', 'ctrl+down', function() {
+				if ($('ul.table div.content li.event.currently-over').is(':visible')) {
+					$('ul.table div.content li.event.currently-over').removeClass('currently-over').next().addClass('currently-over');
+				} else {
+					$('ul.table div.content li.event:first').addClass('currently-over');
+				};
+				return false;
+			});
+
+			$(document).bind('keydown', 'ctrl+up', function() {
+				if ($('ul.table div.content li.event.currently-over').is(':visible')) {
+					$('ul.table div.content li.event.currently-over').removeClass('currently-over').prev().addClass('currently-over');
+				} else {
+					$('ul.table div.content li.event:last').addClass('currently-over');
+				};
+				return false;
+			});
+			
+			$(document).bind('keydown', 'ctrl+o', function() {
+				$('ul.table div.content li.event.currently-over div.row div.click').click();
+				return false;
+			});
+			
+			$(document).bind('keydown', 'esc', function() {
+				$('ul.table div.content li.event.highlight div.row div.click').click();
+				return false;
+			});
 			
 			$(document).bind('keydown', 'ctrl+shift+1', function() {
 				$('span.sev1').parents('div.row').find('input#event-selector').click().trigger('change');
@@ -860,6 +995,52 @@ var Snorby = {
 		
 	},
 	
+	settings: function(){
+		
+		if ($('div#general-settings').length > 0) {
+			
+			if ($('input#_settings_packet_capture:checked').length > 0) {
+				$('div.pc-settings').show();
+				$('p.pc-settings input[type="text"], p.pc-settings select').addClass('required');
+			} else {
+				$('div.pc-settings').hide();
+				$('p.pc-settings input[type="text"], p.pc-settings select').removeClass('required');
+			};
+
+			if ($('input#_settings_packet_capture_auto_auth:checked').length == 0) {
+				$('input#_settings_packet_capture_user, input#_settings_packet_capture_password').attr('disabled', 'disabled');
+				$('input#_settings_packet_capture_user, input#_settings_packet_capture_password').removeClass('required');
+			} else {
+				$('input#_settings_packet_capture_user, input#_settings_packet_capture_password').attr('disabled', '');
+			};
+			
+			var packet_capture_plugin = $('select#_settings_packet_capture_type').attr('packet_capture_plugin');
+			$('select#_settings_packet_capture_type option[value="'+packet_capture_plugin+'"]').attr('selected', 'selected');
+			
+		};
+
+		$('input#_settings_packet_capture').live('click', function() {
+			if ($('input#_settings_packet_capture:checked').length > 0) {
+				$('div.pc-settings').show();
+				$('p.pc-settings input[type="text"], p.pc-settings select').addClass('required');
+			} else {
+				$('div.pc-settings').hide();
+				$('p.pc-settings input[type="text"], p.pc-settings select').removeClass('required');
+			};
+		});
+		
+		$('input#_settings_packet_capture_auto_auth').live('click', function() {
+			if ($('input#_settings_packet_capture_auto_auth:checked').length > 0) {
+				$('input#_settings_packet_capture_user, input#_settings_packet_capture_password').addClass('required');
+				$('input#_settings_packet_capture_user, input#_settings_packet_capture_password').attr('disabled', '');
+			} else {
+				$('input#_settings_packet_capture_user, input#_settings_packet_capture_password').removeClass('required');
+				$('input#_settings_packet_capture_user, input#_settings_packet_capture_password').attr('disabled', 'disabled');
+			};
+		});
+		
+	},
+	
 	jobs: function(){
 		
 		$('a.view_job_handler, a.view_job_last_error').live('click', function() {
@@ -887,6 +1068,7 @@ jQuery(document).ready(function($) {
 	Snorby.callbacks();
 	Snorby.hotkeys();
 	Snorby.jobs();
+	Snorby.settings();
 	Snorby.validations();
 	
 	Snorby.helpers.tipsy();

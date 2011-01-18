@@ -1,23 +1,31 @@
 <div id='note_<%= note.id %>' class='event-note round'>
 	
 	<div class='note-avatar-holder'>
+		
 		<%= image_tag note.user.avatar.url(:small) %>
+		
 	</div>
 	
 	<% if current_user.admin %>
+		
 		<div class='note-options'>
 			<%= link_to "Destroy Note", '#', :class => 'destroy-event-note', :"data-note-id" => note.id %>
 		</div>
+		
 	<% end %>
 	
 	<div class='username'>
+		
 		<span><%= note.user %></span> 
+		
 		<i><%= note.created_at.strftime('%A, %B %d, %Y at %I:%M %p') %></i>
 		
 	</div>
 	
 	<div class='note-body'>
+		
 		<%= RedCloth.new(format_note_body(note.body), [:filter_styles]).to_html.html_safe %>
+		
 	</div>
 	
 </div>

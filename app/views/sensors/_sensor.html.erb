@@ -14,8 +14,10 @@
 	
 	<td class='event_count'><%= sensor.events_count %></td>
 	
-	<td class='chart last'>
+	<td class='chart'>
 		<%= css_chart(sensor.event_percentage) %>
 	</td>
+	
+	<td class='last'><%= link_to 'View', results_path(:title => "#{sensor.sensor_name}", :search => { :sid => sensor.sid }) %></td>
 	
 </tr>

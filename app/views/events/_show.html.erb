@@ -6,9 +6,47 @@
 			<ul>
 				
 				<li><%= link_to "Perform Mass Classification", create_mass_action_events_path(:sid => @event.sid, :cid => @event.cid), :class => 'snorbybox dark-button' %></li>
-				<% if Setting.openfpc? %>
-					<li><%= link_to "Packet Capture", @event.openfpc_url, :class => 'dark-button' %></li>
+				
+				<% if Setting.packet_capture? %>
+				
+					<li>
+						<%= link_to "Packet Capture Options", '#', :class => 'dark-button has-event-menu' %>
+						<dl id='event-sub-menu' class='round shadow' style='display:none;'>
+							
+							<dd>
+								<%= link_to "Source (1 Hour)", "#{@event.packet_capture(:source_ip => @event.ip.ip_src.to_s,
+								:start_time => (@event.timestamp - 30.minute), 
+								:end_time => (@event.timestamp + 30.minute))}" %>
+							</dd>
+							
+							<dd><%= link_to "Destination (1 Hour)", "#{@event.packet_capture(:destination_ip => @event.ip.ip_dst.to_s,
+								:start_time => (@event.timestamp - 30.minute), 
+								:end_time => (@event.timestamp + 30.minute))}" %>
+							</dd>
+							
+							<dd><%= link_to "Source & Destination (1 Hour)", "#{@event.packet_capture(:source_ip => @event.ip.ip_src.to_s, 
+								:destination_ip => @event.ip.ip_dst.to_s, 
+								:start_time => (@event.timestamp - 30.minute), 
+								:end_time => (@event.timestamp + 30.minute))}" %>
+							</dd>
+							
+							<dd><%= link_to "Custom", packet_capture_events_path(:sid => @event.sid, :cid => @event.cid), :class => 'snorbybox' %></dd>
+						</dl>
+					</li>
+					
 				<% end %>
+				
+				<li>
+					<%= link_to "Event Export Options", '#', :class => 'dark-button has-event-menu' %>
+					<dl id='event-sub-menu' class='round shadow' style='display:none;'>
+						<dd><%= link_to "XML", "/events/show/#{@event.sid}/#{@event.cid}.xml", :class => '' %></dd>
+						<dd><%= link_to "JSON", "/events/show/#{@event.sid}/#{@event.cid}.json", :class => '' %></dd>
+						<dd><%= link_to "CSV", "/events/show/#{@event.sid}/#{@event.cid}.csv", :class => '' %></dd>
+						<dd><%= link_to "E-mail Event", create_email_events_path(:sid => @event.sid, :cid => @event.cid), :class => 'snorbybox' %></dd>
+					</dl>
+				</li>
+				
+				<li><%= link_to "Permalink", view_events_url(:sid => @event.sid, :cid => @event.cid), :class => 'dark-button' %></li>
 				
 			</ul>
 			

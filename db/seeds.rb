@@ -14,9 +14,17 @@ Setting.set(:monthly, 1) unless Setting.monthly?
 Setting.set(:lookups, 1) unless Setting.lookups?
 Setting.set(:notes, 1) unless Setting.notes?
 
-# OpenFPC Support
-Setting.set(:openfpc_url, nil) unless Setting.openfpc_url?
-Setting.set(:openfpc, nil) unless Setting.openfpc?
+# Remove Legacy Settings
+Setting.get(:openfpc) ? Setting.get(:openfpc).destroy! : nil
+Setting.get(:openfpc_url) ? Setting.get(:openfpc_url).destroy! : nil
+
+# Full Packet Capture Support
+Setting.set(:packet_capture_url, nil) unless Setting.packet_capture_url?
+Setting.set(:packet_capture, nil) unless Setting.packet_capture?
+Setting.set(:packet_capture_type, 'openfpc') unless Setting.packet_capture_type?
+Setting.set(:packet_capture_auto_auth, 1) unless Setting.packet_capture_auto_auth?
+Setting.set(:packet_capture_user, nil) unless Setting.packet_capture_user?
+Setting.set(:packet_capture_password, nil) unless Setting.packet_capture_password?
 
 # Load Default Classifications
 

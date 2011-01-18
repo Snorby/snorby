@@ -298,7 +298,7 @@
 			<th>Event Count</th>
 		</tr>
 
-		<% source_total = @src_metrics.sort{|a,b| -1*(a[1]<=>b[1]) }.map(&:last).sum %>
+		<% source_total = @src_metrics.map(&:last).sum %>
 		<% src_count = 0 %>
 		<% @src_metrics.sort{|a,b| -1*(a[1]<=>b[1]) }.each do |name, count| %>
 		
@@ -325,11 +325,11 @@
 			<th>Event Count</th>
 		</tr>
 
-		<% destination_total = @src_metrics.sort{|a,b| -1*(a[1]<=>b[1]) }.map(&:last).sum %>
+		<% destination_total = @src_metrics.map(&:last).sum %>
 		<% dst_count = 0 %>
 		<% @dst_metrics.sort{|a,b| -1*(a[1]<=>b[1]) }.each do |name, count| %>
-		
 		<% break if dst_count >= 10 %>
+		
 			<tr>
 				<td><%= name %></td>
 				<td style='width:100px'><%= percentage_for(count, destination_total) %>%</td>
