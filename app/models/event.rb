@@ -354,7 +354,7 @@ class Event
     end
   end
   
-  def self.classify_from_collection(collection, classification, user)
+  def self.classify_from_collection(collection, classification, user, reclassify=false)
     @classification = Classification.get(classification)
     @user ||= User.get(user)
 
@@ -364,14 +364,16 @@ class Event
       
       next if old_classification == @classification
       
-      event.user = @user
+      next if (old_classification && reclassify == false)
       
+      event.user = @user
+
       if @classification.blank?
         event.classification = nil
       else
         event.classification = @classification
       end
-      
+
       if event.save
         @classification.up(:events_count) if @classification
         old_classification.down(:events_count) if old_classification
@@ -416,7 +418,8 @@ class Event
 
       @search.merge!({ :users_count.gt => params[:users_count] }) if params.has_key?(:users_count)
 
-      puts @search.to_yaml
+      # Debug
+      # puts @search.to_yaml
 
       return all(@search) if params[:src_port].to_i.zero? && params[:dst_port].to_i.zero?
 

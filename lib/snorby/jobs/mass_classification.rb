@@ -18,11 +18,11 @@
 
 module Snorby
   module Jobs
-    class MassClassification < Struct.new(:classification_id, :options, :user_id)
+    class MassClassification < Struct.new(:classification_id, :options, :user_id, :reclassify)
 
       def perform
-        @events ||= Event.all(options)
-        Event.classify_from_collection(@events, classification_id, user_id)
+        events = Event.all(options)
+        Event.classify_from_collection(events, classification_id, user_id, reclassify)
       end
 
     end
