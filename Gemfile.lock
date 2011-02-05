@@ -60,6 +60,8 @@ GEM
       ffi (~> 0.6.3)
     chronic (0.3.0)
     closure-compiler (0.3.3)
+    composite_primary_keys (3.1.1)
+      activerecord (>= 3.0.3)
     culerity (0.2.14)
     daemons (1.1.0)
     delayed_job (2.1.3)
@@ -166,6 +168,7 @@ DEPENDENCIES
   capistrano
   capybara
   chronic (~> 0.3.0)
+  composite_primary_keys (~> 3.1.1)
   daemons (~> 1.1.0)
   delayed_job (~> 2.1.3)
   devise (~> 1.1.3)

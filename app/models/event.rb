@@ -1,63 +1,50 @@
 require 'snorby/model/counter'
 
-class Event
-
-  include DataMapper::Resource
+class Event < ActiveRecord::Base
   include Snorby::Model::Counter
+  set_table_name 'event'
+  
+  set_primary_keys :sid, :cid
 
   # Included for the truncate helper method.
   extend ActionView::Helpers::TextHelper
 
-  storage_names[:default] = "event"
-
-  property :sid, Integer, :key => true, :index => true
-
-  property :cid, Integer, :key => true, :index => true
-
-  property :sig_id, Integer, :field => 'signature', :index => true
-
-  property :classification_id, Integer, :index => true, :required => false
-
-  property :users_count, Integer, :index => true, :default => 0
-
-  property :user_id, Integer, :index => true, :required => false
-  
-  property :notes_count, Integer, :index => true, :default => 0
-
   belongs_to :classification
 
-  property :timestamp, DateTime
+  has_many :favorites, :dependent => :destroy
 
-  has n, :favorites, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :constraint => :destroy
+  has_many :users, :through => :favorites
 
-  has n, :users, :through => :favorites
+  has_one :severity, :through => :signature
 
-  has 1, :severity, :through => :signature, :via => :sig_priority
+  has_one :payload, :dependent => :destroy
 
-  has 1, :payload, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :constraint => :destroy
+  has_one :icmp, :dependent => :destroy
 
-  has 1, :icmp, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :constraint => :destroy
+  has_one :tcp, :dependent => :destroy
 
-  has 1, :tcp, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :constraint => :destroy
+  has_one :udp, :dependent => :destroy
 
-  has 1, :udp, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :constraint => :destroy
+  has_one :opt, :dependent => :destroy
 
-  has 1, :opt, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :constraint => :destroy
-
-  has n, :notes, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :constraint => :destroy
+  has_many :notes, :dependent => :destroy
 
   belongs_to :user
 
-  belongs_to :sensor, :parent_key => :sid, :child_key => :sid, :required => true
+  belongs_to :sensor
 
-  belongs_to :signature, :child_key => :sig_id, :parent_key => :sig_id
+  belongs_to :sig, :class_name => "Signature", :foreign_key => 'signature'
 
-  belongs_to :ip, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ]
+  belongs_to :ip, :dependent => :destroy
 
-  before :destroy do
+  before_destroy do
     self.classification.down(:events_count) if self.classification
     self.signature.down(:events_count) if self.signature
     # Note: Need to decrement Severity, Sensor and User Counts
+  end
+  
+  def sig_id
+    signature.to_i
   end
 
   def packet_capture(params={})
