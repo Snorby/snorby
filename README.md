@@ -127,10 +127,12 @@ You can open the rails console at anytime and interact with the Snorby environme
 
  * Snorby
  	* **Dustin Willis Webber** (Creator, Designer and Backend Code)
- 	* **JJ Cummings** (Snorby QA/Testing)
 
  * Insta-Snorby 
- 	* **Jason Meller** (Insta-Snorby Creator and Maintainer) [/Snorby/insta-snorby](https://github.com/Snorby/insta-snorby)
+ 	* **Jason Meller** (Insta-Snorby Creator and Maintainer) [https://github.com/Snorby/insta-snorby](https://github.com/Snorby/insta-snorby)
+
+ * Snorby QA/Testing
+ 	* **JJ Cummings** (Snorby QA/Testing)
 
 ## License
 
