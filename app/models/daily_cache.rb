@@ -1,37 +1,8 @@
 class DailyCache
+  
+  belongs_to :sensor
 
-  include DataMapper::Resource
-
-  property :id, Serial
-
-  property :sid, Integer
-
-  property :cid, Integer
-
-  property :ran_at, DateTime
-
-  property :event_count, Integer, :default => 0
-
-  property :tcp_count, Integer, :default => 0
-
-  property :udp_count, Integer, :default => 0
-
-  property :icmp_count, Integer, :default => 0
-
-  property :severity_metrics, Object
-
-  property :signature_metrics, Object
-
-  property :src_ips, Object
-
-  property :dst_ips, Object
-
-  # Define created_at and updated_at timestamps
-  timestamps :at
-
-  belongs_to :sensor, :parent_key => :sid, :child_key => :sid
-
-  has 1, :event, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ]
+  has_one :event
 
   def self.cache_time
     return get_last.ran_at if get_last
