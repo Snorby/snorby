@@ -4,9 +4,11 @@ class Payload
 
   set_table_name "data"
   
-  belongs_to :sensor, :required => true
-  
-  belongs_to :event, :required => true
+  belongs_to :sensor  
+  belongs_to :event
+
+  validates_presence_of :sensor
+  validates_presence_of :event
 
   def to_s
     Snorby::Payload.new([data_payload].pack('H*'), :width => 26).to_s

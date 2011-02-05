@@ -2,8 +2,10 @@ class Opt
 
   set_table_name "opt"
 
-  belongs_to :sensor, :required => true
+  belongs_to :sensor
+  belongs_to :event
 
-  belongs_to :event, :required => true
+  validates_presence_of :sensor
+  validates_presence_of :event
 
 end

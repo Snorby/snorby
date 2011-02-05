@@ -2,9 +2,12 @@ class Note
 
   belongs_to :user
   
-  belongs_to :sensor, :required => true
+  belongs_to :sensor
   
-  belongs_to :event, :required => true
+  belongs_to :event
+
+  validates_presence_of :sensor
+  validates_presence_of :event
   
   validates_presence_of :body
 
