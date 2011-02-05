@@ -1,37 +1,8 @@
 class Cache
 
-  include DataMapper::Resource
+  belongs_to :sensor
 
-  property :id, Serial
-
-  property :sid, Integer
-
-  property :cid, Integer
-
-  property :ran_at, DateTime
-
-  property :event_count, Integer, :default => 0
-
-  property :tcp_count, Integer, :default => 0
-
-  property :udp_count, Integer, :default => 0
-
-  property :icmp_count, Integer, :default => 0
-
-  property :severity_metrics, Object
-
-  property :signature_metrics, Object
-
-  property :src_ips, Object
-
-  property :dst_ips, Object
-
-  # Define created_at and updated_at timestamps
-  timestamps :at
-
-  belongs_to :sensor, :parent_key => :sid, :child_key => :sid
-
-  has 1, :event, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ]
+  has_one :event
 
   def self.last_month
     all(:ran_at.gte => (Time.now - 2.months).beginning_of_month, :ran_at.lte => (Time.now - 2.months).end_of_month)
