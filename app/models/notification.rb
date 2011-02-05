@@ -2,31 +2,10 @@ require 'snorby/model'
 
 class Notification
   include Snorby::Model
-  include DataMapper::Validate
-  include DataMapper::Resource
-
-  property :id, Serial
-  
-  property :description, Text
-  
-  property :sig_id, Integer
-  
-  property :ip_src, String
-  
-  property :ip_dst, String
-  
-  property :user_id, Integer
-  
-  property :user_ids, Object
-  
-  property :sensor_ids, Object
-
-  # Define created_at and updated_at timestamps
-  timestamps :at
 
   belongs_to :user
 
-  belongs_to :signature, :child_key => :sig_id, :parent_key => :sig_id
+  belongs_to :signature
 
   def check(event)
     

@@ -10,12 +10,6 @@ class Setting
     :packet_capture_auto_auth
   ]
 
-  include DataMapper::Resource
-
-  property :name, String, :key => true, :index => true, :required => false
-
-  property :value, Object
-
   def checkbox?
     return true if CHECKBOXES.include?(name.to_sym)
     false

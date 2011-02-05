@@ -1,32 +1,12 @@
 class Sensor
 
-  include DataMapper::Resource
+  set_table_name "sensor"
 
-  storage_names[:default] = "sensor"
+  has_many :events, :dependent => :destroy
 
-  property :sid, Serial, :key => true, :index => true
-
-  property :name, String, :default => 'Click To Change Me'
-
-  property :hostname, Text, :index => true
-
-  property :interface, Text
-
-  property :filter, Text
-
-  property :detail, Integer, :index => true
-
-  property :encoding, Integer, :index => true
-
-  property :last_cid, Integer, :index => true
-
-  property :events_count, Integer, :index => true, :default => 0
-
-  has n, :events, :child_key => :sid, :constraint => :destroy
-
-  has n, :ips, :child_key => :sid, :constraint => :destroy
+  has_many :ips, :dependent => :destroy
   
-  has n, :notes, :child_key => :sid, :constraint => :destroy
+  has_many :notes, :dependent => :destroy
 
   def cache
     Cache.all(:sid => sid)
