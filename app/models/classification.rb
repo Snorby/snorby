@@ -2,22 +2,9 @@ require 'snorby/model/counter'
 
 class Classification
 
-  include DataMapper::Resource
   include Snorby::Model::Counter
 
-  property :id, Serial, :index => true
-
-  property :name, String
-
-  property :description, Text
-
-  property :hotkey, Integer, :index => true
-
-  property :locked, Boolean, :default => false, :index => true
-
-  property :events_count, Integer, :index => true, :default => 0
-
-  has n, :events, :constraint => :destroy
+  has_many :events, :dependent => :destroy
 
   validates_uniqueness_of :hotkey
   
