@@ -1,8 +1,8 @@
 class Cache
 
-  belongs_to :sensor
+  belongs_to :sensor, :foreign_key => [:sid]
 
-  has_one :event
+  has_one :event, :foreign_key => [:sid, :cid]
 
   def self.last_month
     all(:ran_at.gte => (Time.now - 2.months).beginning_of_month, :ran_at.lte => (Time.now - 2.months).end_of_month)

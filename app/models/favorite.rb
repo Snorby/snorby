@@ -6,7 +6,7 @@ class Favorite
 
   belongs_to :user
   
-  belongs_to :event
+  belongs_to :event, :foreign_key => [:sid, :cid]
 
   after :create do
     self.event.up(:users_count) if self.event

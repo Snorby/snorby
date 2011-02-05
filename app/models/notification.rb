@@ -5,7 +5,7 @@ class Notification
 
   belongs_to :user
 
-  belongs_to :signature
+  belongs_to :signature, :foreign_key => [:sig_id]
 
   def check(event)
     

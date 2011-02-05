@@ -4,7 +4,7 @@ class Severity
   
   include Snorby::Model
 
-  has_many :signatures
+  has_many :signatures, :foreign_key => [:sig_id, :sig_priority]
 
   validates_presence_of :sig_id, :name, :text_color
   validates_uniqueness_of :sig_id

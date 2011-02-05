@@ -5,8 +5,8 @@ class Ip
 
   set_table_name "iphdr"
   
-  belongs_to :sensor
-  has_many :events, :dependent => :destroy
+  belongs_to :sensor, :foreign_key => [:sid]
+  has_many :events, :dependent => :destroy, :foreign_key => [:sid, :cid]
 
   validates_presence_of :sensor
 

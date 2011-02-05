@@ -1,8 +1,8 @@
 class DailyCache
   
-  belongs_to :sensor
+  belongs_to :sensor, :foreign_key => [:sid]
 
-  has_one :event
+  has_one :event, :foreign_key => [:sid, :cid]
 
   def self.cache_time
     return get_last.ran_at if get_last

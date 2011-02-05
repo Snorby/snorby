@@ -8,11 +8,11 @@ class Signature
 
   #belongs_to :category, :parent_key => :sig_class_id, :child_key => :sig_class_id, :required => true
 
-  has_many :events, :dependent => :destroy
+  has_many :events, :dependent => :destroy, :foreign_key => [:sig_id]
   
-  has_many :notifications
+  has_many :notifications, :foreign_key => [:sig_id]
   
-  belongs_to :severity  
+  belongs_to :severity, :foreign_key => [:sig_id, :sig_priority]  
 
   #has n, :sig_references, :parent_key => :sig_rev, :child_key => [ :ref_seq ]
 

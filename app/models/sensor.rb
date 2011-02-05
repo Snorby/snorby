@@ -2,11 +2,11 @@ class Sensor
 
   set_table_name "sensor"
 
-  has_many :events, :dependent => :destroy
+  has_many :events, :dependent => :destroy, :foreign_key => [:sid]
 
-  has_many :ips, :dependent => :destroy
+  has_many :ips, :dependent => :destroy, :foreign_key => [:sid]
   
-  has_many :notes, :dependent => :destroy
+  has_many :notes, :dependent => :destroy, :foreign_key => [:sid]
 
   def cache
     Cache.all(:sid => sid)
