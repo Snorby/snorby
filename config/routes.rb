@@ -1,7 +1,5 @@
 Snorby::Application.routes.draw do
 
-  devise_for :users
-
   # This feature is not ready yet
   # resources :notifications
 
