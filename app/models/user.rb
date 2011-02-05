@@ -1,57 +1,16 @@
 require 'snorby/model/counter'
 
-class User
-  
-  include DataMapper::Resource
-  include DataMapper::Validate
-  include Paperclip::Resource
+class User < ActiveRecord::Base
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me
   include Snorby::Model::Counter
 
   cattr_accessor :current_user
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
-  
-  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
-
-  property :favorites_count, Integer, :index => true, :default => 0
-  
-  property :accept_notes, Integer, :default => 1
-  
-  property :notes_count, Integer, :index => true, :default => 0
-  
-  # Primary key of the user
-  property :id, Serial, :key => true, :index => true
-  
-  # Email of the user
-  # 
-  # property :email, String, :required => true, :unique => true
-  #
-  # property :avatar_file_name, String
-  # 
-  # property :avatar_content_type, String
-  # 
-  # property :avatar_file_size, Integer
-  # 
-  # property :avatar_updated_at, DateTime
-  
-  property :per_page_count, Integer, :index => true, :default => 25
-  
-  # Full name of the user
-  property :name, String, :lazy => true, :lazy => true
-  
-  # The timezone the user lives in
-  property :timezone, String, :default => 'UTC', :lazy => true
-  
-  # Define if the user has administrative privileges
-  property :admin, Boolean, :default => false
-  
-  # Define if the user has been enabled/disabled
-  property :enabled, Boolean, :default => true
-  
-  # Define created_at and updated_at timestamps
-  timestamps :at
 
   has_attached_file :avatar,
   :styles => {
@@ -62,15 +21,15 @@ class User
 
   validates_attachment_content_type :avatar, :content_type => ["image/png", "image/gif", "image/jpeg"]
 
-  has n, :notifications, :constraint => :destroy
+  has_many :notifications, :dependent => :destroy
 
-  has n, :favorites, :child_key => :user_id, :constraint => :destroy
+  has_many :favorites, :dependent => :destroy
 
-  has n, :notes, :child_key => :user_id, :constraint => :destroy
+  has_many :events, :through => :favorites
 
-  has n, :events
+  has_many :notes, :dependent => :destroy
 
-  has n, :events, :through => :favorites
+  has_many :events
 
   #
   # Converts the user to a String.

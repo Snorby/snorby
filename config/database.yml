@@ -3,9 +3,9 @@
 # Please set your database password/user below
 #
 snorby: &snorby
-  adapter: mysql
+  adapter: mysql2
   username: root
-  password: MYSQLPASS
+  password: s3cr3tsauce
   host: localhost
 
 development:

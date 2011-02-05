@@ -1,5 +1,7 @@
 Snorby::Application.routes.draw do
 
+  devise_for :users
+
   # This feature is not ready yet
   # resources :notifications
 
@@ -11,14 +13,6 @@ Snorby::Application.routes.draw do
   end
 
   resources :classifications
-
-  devise_for :users, :path_names => { :sign_in => 'login', :sign_out => 'logout', :sign_up => 'register' }, :controllers => {:registrations => "registrations"} do
-    get "/login" => "devise/sessions#new"
-    get '/logout', :to => "devise/sessions#destroy"
-    get '/reset/password', :to => "devise/passwords#edit"
-  end
-
-  root :to => "page#dashboard"
 
   resources :sensors do
   end
@@ -73,6 +67,12 @@ Snorby::Application.routes.draw do
   
   resources :notes
 
+  devise_for :users, :path_names => { :sign_in => 'login', :sign_out => 'logout', :sign_up => 'register' }, :controllers => {:registrations => "registrations"} do
+    get "/login" => "devise/sessions#new"
+    get '/logout', :to => "devise/sessions#destroy"
+    get '/reset/password', :to => "devise/passwords#edit"
+  end
+  
   resources :users do
     collection do
       post :toggle_settings
@@ -87,5 +87,7 @@ Snorby::Application.routes.draw do
       get :results
     end
   end
+
+  root :to => "page#dashboard"
 
 end
