@@ -121,13 +121,18 @@ You can open the rails console at anytime and interact with the Snorby environme
 	Snorby::Jobs.clear_cache
 
 	# If the Snorby worker is running this will start the cache jobs and set the run_at time for the current time.
-	Snorby::Jobs.run_now!								
+	Snorby::Jobs.run_now!
 
 ## Snorby Team
 
- * **Dustin Willis Webber** (Design, Backend Code)
- * **Jason Meller** (InstaSnorby VM)
- * **JJ Cummings** (QC, Testing and Support)
+ * Snorby
+ 	* **Dustin Willis Webber** (Creator, Designer and Backend Code)
+
+ * Insta-Snorby 
+ 	* **Jason Meller** (Insta-Snorby Creator and Maintainer) [https://github.com/Snorby/insta-snorby](https://github.com/Snorby/insta-snorby)
+
+ * Snorby QA/Testing
+ 	* **JJ Cummings** (Snorby QA/Testing)
 
 ## License
 

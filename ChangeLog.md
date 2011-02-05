@@ -1,3 +1,19 @@
+# Snorby 2.2.2
+
+## Bugfixes since 2.1.1
+
+* Fixed issue with nil ip addrs from event show views
+
+* Added titles for all truncated text on hover
+
+* Fixed blue border on pdf graphs
+
+* Updated the delayed_job gems and fixed exception logging
+
+* Fixed "Export to pdf" to show the proper DateTime for file names and headers
+
+* Numerous CSS/JS fixes and optimizations
+
 # Snorby 2.2.1
 
 ## New Features since 2.1.0

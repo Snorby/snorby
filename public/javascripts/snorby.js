@@ -445,6 +445,7 @@ var Snorby = {
 						$(document).unbind('keydown', 'right');
 						$(document).unbind('keydown', 'esc');
 						$(document).unbind('keydown', 'ctrl+left');
+						$('dl#event-sub-menu').hide();
 					},
 					onClosed: function() {
 						Snorby.hotkeys();
@@ -660,7 +661,8 @@ var Snorby = {
 		tipsy: function(){
 			
 			$('.add_tipsy').tipsy({
-				fade: true, 
+				fade: true,
+				html: true,
 				gravity: 's',
 				live: true
 			});

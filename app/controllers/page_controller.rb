@@ -61,6 +61,10 @@ class PageController < ApplicationController
     def set_defaults
 
       case @range.to_sym
+      when :now
+        @cache = Cache.today
+        @start_time = Time.now.beginning_of_day
+        @end_time = Time.now
       when :today
         @cache = Cache.today
         @start_time = Time.now.beginning_of_day
@@ -106,7 +110,6 @@ class PageController < ApplicationController
         @start_time = Time.now.beginning_of_day
         @end_time = Time.now.end_of_day
       end
-
     end
 
 end
