@@ -1,4 +1,4 @@
-class CreateCache < ActiveRecord::Migration
+class CreateCaches < ActiveRecord::Migration
   def self.up
     create_table(:cache) do |t|
       t.integer :sid
