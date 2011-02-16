@@ -1,3 +1,18 @@
+# Snorby 2.2.4
+
+* Fixed issue with Snorby worker crashing unexpectedly due to
+ 	some hostnames exceeding the lock_by column size.
+
+**NOTE** Due to some issues with the current snorby ORM we
+cannot update the affected column automatically. For all new
+installs this issue has been resolved however, for snorby
+installs > 2.2.4 must update the locked_by column in the 
+dealyed_jobs table manually. We are sorry for any inconvenience.
+
+# Snorby 2.2.3
+
+* Updated delayed_job to 2.1.4
+
 # Snorby 2.2.2
 
 ## Bugfixes since 2.1.1
