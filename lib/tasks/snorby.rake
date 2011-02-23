@@ -21,6 +21,8 @@ namespace :snorby do
   desc 'Setup'
   task :setup => :environment do
     
+    Rake::Task['secret'].invoke
+    
     # Create the snorby database if it does not currently exist
     Rake::Task['db:create'].invoke
     

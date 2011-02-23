@@ -3,7 +3,6 @@
 *.rbc
 *.tmproj
 *.swp
-*.lock
 log/*
 tmp/*
 log/*
