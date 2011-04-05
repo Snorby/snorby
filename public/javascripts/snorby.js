@@ -18,6 +18,7 @@
 
 var selected_events = [];
 var flash_message = [];
+var csrf = $('meta[name="csrf-token"]').attr('content');
 
 function Queue() {
   if ( !(this instanceof arguments.callee) ) {
@@ -65,7 +66,7 @@ function set_classification (class_id) {
 		$('div.content').fadeTo(500, 0.4);
 		Snorby.helpers.remove_click_events(true);
 		
-		$.post('/events/classify', {events: selected_events, classification: class_id}, function() {
+		$.post('/events/classify', {events: selected_events, classification: class_id, authenticity_token: csrf}, function() {
 			
 			if (current_page == "index") {
 				clear_selected_events();
@@ -155,7 +156,7 @@ var Snorby = {
 				return retval;
 			},
 			submitdata : function() {
-				return { id: $(this).attr('data-sensor-id') };
+				return { id: $(this).attr('data-sensor-id'), authenticity_token: csrf };
 			}
 		});
 
@@ -265,7 +266,6 @@ var Snorby = {
 					$.scrollTo('#header', 500);
 				} else {
 					if ($('input#email_subject').val() == '') {
-						console.log($('input#email_subject'));
 						flash_message.push({type: 'error', message: "The email subject cannot be blank."});flash();
 						$.scrollTo('#header', 500);
 					} else {
@@ -341,7 +341,7 @@ var Snorby = {
 				
 				if (selected_events) {
 					
-					$.post(this.href, { events: selected_events });
+					$.post(this.href, { events: selected_events, authenticity_token: csrf});
 					
 				} else {
 					flash_message.push({type: 'error', message: "Please Select Events To Perform This Action"});
@@ -366,7 +366,7 @@ var Snorby = {
 				
 				if ( confirm("Are you sure you want to delete this note?") ) {
 					$('div.notes').fadeTo(500, 0.4);
-					$.post('/notes/destroy', { id: note_id, '_method': 'delete' }, null, 'script');
+					$.post('/notes/destroy', { id: note_id, authenticity_token: csrf, '_method': 'delete' }, null, 'script');
 				};
 				
 				return false;
@@ -396,7 +396,7 @@ var Snorby = {
 					var current_width = $(this).width();
 					$(this).addClass('loading').css('width', current_width);
 					
-					$.get('/notes/new', { sid: event_sid, cid: event_cid }, null, 'script');
+					$.get('/notes/new', { sid: event_sid, cid: event_cid, authenticity_token: csrf}, null, 'script');
 				};
 				
 				return false;
@@ -413,7 +413,7 @@ var Snorby = {
 					var current_width = $(this).width();
 					$(this).addClass('loading').css('width', current_width);
 					
-					$.post('/notes/create', { sid: event_sid, cid: event_cid, body: note_body }, null, 'script');
+					$.post('/notes/create', { sid: event_sid, cid: event_cid, body: note_body, authenticity_token: csrf}, null, 'script');
 					
 				} else {
 					flash_message.push({type: "error", message: "The note body cannot be blank!"}); 
@@ -459,7 +459,7 @@ var Snorby = {
 				var cid = $(this).parents('li.event').attr('data-event-cid');
 				
 				$(this).removeClass('create-favorite').addClass('destroy-favorite');
-				$.post('/events/favorite', { sid: sid, cid: cid });
+				$.post('/events/favorite', { sid: sid, cid: cid, authenticity_token: csrf});
 				
 				var count = new Queue();
 				count.up();
@@ -473,7 +473,7 @@ var Snorby = {
 				var action = $('div#events').attr('data-action');
 				
 				$(this).removeClass('destroy-favorite').addClass('create-favorite');
-				$.post('/events/favorite', { sid: sid, cid: cid });
+				$.post('/events/favorite', { sid: sid, cid: cid, authenticity_token: csrf});
 				
 				var count = new Queue();
 				count.down();
@@ -563,18 +563,18 @@ var Snorby = {
 		$('#users input#enabled').live('click', function(e) {
 			var user_id = $(this).parent('td').attr('data-user');
 			if ($(this).attr('checked')) {
-				$.post('/users/toggle_settings', { user_id: user_id, user: { enabled: true } });
+				$.post('/users/toggle_settings', { user_id: user_id, user: { enabled: true }, authenticity_token: csrf});
 			} else {
-				$.post('/users/toggle_settings', { user_id: user_id, user: { enabled: false } });
+				$.post('/users/toggle_settings', { user_id: user_id, user: { enabled: false }, authenticity_token: csrf});
 			};
 		});
 		
 		$('#users input#admin').live('click', function(e) {
 			var user_id = $(this).parent('td').attr('data-user');
 			if ($(this).attr('checked')) {
-				$.post('/users/toggle_settings', { user_id: user_id, user: { admin: true } });
+				$.post('/users/toggle_settings', { user_id: user_id, user: { admin: true }, authenticity_token: csrf});
 			} else {
-				$.post('/users/toggle_settings', { user_id: user_id, user: { admin: false } });
+				$.post('/users/toggle_settings', { user_id: user_id, user: { admin: false }, authenticity_token: csrf});
 			};
 		});
 		

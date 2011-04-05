@@ -1,7 +1,6 @@
 class SensorsController < ApplicationController
 
   before_filter :require_administrative_privileges, :except => [:index, :update_name]
-  skip_before_filter :verify_authenticity_token, :only => [:update_name]
   
   def index
     @sensors ||= Sensor.all.page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:sid.asc])

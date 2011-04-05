@@ -1,3 +1,14 @@
+# Snorby 2.2.6
+
+* updated rails to 2.0.5
+* fixed all csrf in snorby.js
+* updated README for highcharts license
+
+# Snorby 2.2.5
+
+* Bug fixes
+* revert rails 2.0.4 due to csrf token issues
+
 # Snorby 2.2.4
 
 * Fixed issue with Snorby worker crashing unexpectedly due to
