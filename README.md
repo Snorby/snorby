@@ -131,8 +131,8 @@ You can open the rails console at anytime and interact with the Snorby environme
  * Insta-Snorby 
  	* **Jason Meller** (Insta-Snorby Creator and Maintainer) [https://github.com/Snorby/insta-snorby](https://github.com/Snorby/insta-snorby)
 
- * Snorby QA/Testing
- 	* **JJ Cummings** (Snorby QA/Testing)
+ * Team Cool
+ 	* **JJ Cummings** (Super Badass)
 
 ## License
 
