@@ -45,7 +45,7 @@ module Snorby
     end
 
     def self.process
-      return Snorby::Process.new(`ps aux #{Worker.pid} |grep delayed_job |grep -v grep`.chomp.strip)
+      return Snorby::Process.new(`ps aux -p #{Worker.pid} |grep delayed_job |grep -v grep`.chomp.strip)
     end
 
     def self.pid
