@@ -1,3 +1,8 @@
+# Snorby 2.2.7
+
+* fixed issue with dashboard charts taking a lot memory.
+* updated highcharts current version 2.1.5.
+
 # Snorby 2.2.6
 
 * updated rails to 2.0.5
