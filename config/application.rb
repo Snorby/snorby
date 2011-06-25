@@ -16,8 +16,6 @@ module Snorby
   CONFIG = YAML.load(raw_config)[Rails.env].symbolize_keys
   
   class Application < Rails::Application
-    
-    require 'pdfkit'
         
     PDFKit.configure do |config|
       config.wkhtmltopdf = Snorby::CONFIG[:wkhtmltopdf]

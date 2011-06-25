@@ -19,9 +19,10 @@
 			<% end %>
 		</script>
 
+		<%= csrf_meta_tag %>
+		
 		<%= include_stylesheets :snorby, :media => 'all' %>
 		<%= include_javascripts :snorby %>
-    <%= csrf_meta_tag %>
 
 		<%= yield(:header) %>
 

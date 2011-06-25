@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-RAILS_VERSION = '~> 3.0.3'
+RAILS_VERSION = '3.0.5'
 RSPEC_VERSION = '~> 2.0.0'
 DATAMAPPER = 'http://github.com/datamapper'
 DM_VERSION = '~> 1.0.2'
@@ -37,14 +37,14 @@ gem 'capistrano'
 # Rails Plugins
 gem 'jammit',                 '~> 0.5.4'
 gem 'devise',                 '~> 1.1.3'
-gem 'dm-devise',              '~> 1.1.5', :git => 'http://github.com/jm81/dm-devise.git', :branch => 'v1.1'
+gem 'dm-devise',              '~> 1.1.6'
 gem "mail",                   '~> 2.2.10'
 gem "RedCloth",               "~> 4.0", :require => 'redcloth'
 gem 'chronic',                '~> 0.3.0'
 gem 'pdfkit',                 '~> 0.4.6'
 gem 'ezprint',                :git => 'http://github.com/mephux/ezprint.git', :branch => 'rails3', :require => 'ezprint'
 gem 'daemons',                '~> 1.1.0'
-gem 'delayed_job',            '~> 2.1.0.pre2', :git => 'http://github.com/Snorby/delayed_job.git', :branch => 'master'
+gem 'delayed_job',            '~> 2.1.4'
 gem 'delayed_job_data_mapper','~> 1.0.0.rc', :git => 'http://github.com/Snorby/delayed_job_data_mapper.git'
 gem 'rmagick',                '~> 2.13.1'
 gem 'dm-paperclip',           '~> 2.3', :git => 'http://github.com/solnic/dm-paperclip.git', :branch => 'master'
@@ -64,7 +64,3 @@ end
 group(:doc) do
   gem 'dm-visualizer',	'~> 0.1.0'
 end
-
-
-
-

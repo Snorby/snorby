@@ -7,7 +7,8 @@
 		<%= drop_down_item "Last Week", dashboard_path(:range => :last_week), nil, { :class => 'dashboard' } %>
 		<%= drop_down_item "Last Month", dashboard_path(:range => :last_month), nil, { :class => 'dashboard' } %>
 		
-		<%= drop_down_item "Export To PDF", dashboard_path(:range => params[:range], :format => :pdf), nil, { :class => 'dashboard' } %>
+		<%= drop_down_item "Export To PDF", 
+		dashboard_path(:range => params[:range] == 'today' ? 'now' : params[:range], :format => :pdf), nil, { :class => 'dashboard' } %>
 
 	<% end %>
 
@@ -85,7 +86,8 @@
 		
 		<ul class='box-list'>
 			<% @sensors.each do |sensor| %>
-			<li><%= link_to truncate(sensor.sensor_name, :length => 30), results_path(:title => "#{sensor.sensor_name}", :search => { :sid => sensor.sid }) %> <span><%= sensor.events_count %></span></li>
+			<li><%= link_to truncate(sensor.sensor_name, :length => 30), results_path(:title => "#{sensor.sensor_name}", 
+			:search => { :sid => sensor.sid }), :title => sensor.sensor_name %> <span><%= sensor.events_count %></span></li>
 			<% end %>
 		</ul>
 	
@@ -97,7 +99,7 @@
 			<% @favers.each do |user| %>
 			<li>
 				<%= image_tag(user.avatar.url(:small), :size => '16x16', :class => 'avatar-small') %> 
-				<%= link_to truncate(user.name, :length => 30), activity_events_path(:user_id => user.id) %> 
+				<%= link_to truncate(user.name, :length => 30), activity_events_path(:user_id => user.id), :title => user.name %> 
 				<span><%= user.favorites_count %></span>
 			</li>
 			<% end %>
@@ -109,7 +111,8 @@
 		
 		<ul class='box-list'>
 			<% @recent_events.each do |event| %>
-				<li><%= link_to truncate(event.signature.name, :length => 25), results_path(:title => "#{truncate(event.signature.name, :length => 40)}", :search => {:signature_name => "#{event.signature.name}"}) %> <span><%= event.signature.events_count %></span></li>
+				<li><%= link_to truncate(event.signature.name, :length => 25), results_path(:title => "#{truncate(event.signature.name, :length => 40)}", 
+				:search => {:signature_name => "#{event.signature.name}"}), :title => event.signature.name %> <span><%= event.signature.events_count %></span></li>
 			<% end %>
 		</ul>
 	
@@ -120,7 +123,8 @@
 		<ul class='box-list'>
 			<% @classifications.each do |classification| %>
 			
-			<li><%= link_to truncate(classification.name, :length => 25), results_path(:title => "#{classification.name}", :search => {:classification_id => "#{classification.id}"}) %> <span><%= classification.events_count %></span></li>
+			<li><%= link_to truncate(classification.name, :length => 25), results_path(:title => "#{classification.name}", 
+			:search => {:classification_id => "#{classification.id}"}), :title => classification.name %> <span><%= classification.events_count %></span></li>
 			<% end %>
 		</ul>
 	

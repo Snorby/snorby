@@ -1,15 +1,6 @@
 GIT
-  remote: http://github.com/Snorby/delayed_job.git
-  revision: be8de9f
-  branch: master
-  specs:
-    delayed_job (2.1.2)
-      activesupport (~> 3.0)
-      daemons
-
-GIT
   remote: http://github.com/Snorby/delayed_job_data_mapper.git
-  revision: 94aa4b0
+  revision: b77c0ae4c777fca19d1bc9c6c501edad7f2ec8b0
   specs:
     delayed_job_data_mapper (1.0.0.rc)
       delayed_job (~> 2.1)
@@ -18,23 +9,8 @@ GIT
       dm-observer
 
 GIT
-  remote: http://github.com/jm81/dm-devise.git
-  revision: eb15f47
-  branch: v1.1
-  specs:
-    dm-devise (1.1.6)
-      bcrypt-ruby (~> 2.1.2)
-      devise (~> 1.1.0)
-      dm-core (~> 1.0.0)
-      dm-migrations (~> 1.0.0)
-      dm-rails (>= 1.0.3)
-      dm-serializer (~> 1.0.0)
-      dm-timestamps (~> 1.0.0)
-      sugar-high (~> 0.2.10)
-
-GIT
   remote: http://github.com/mephux/ezprint.git
-  revision: c231df7
+  revision: c231df760dae8a2d4bc906888285c6d314de4cf6
   branch: rails3
   specs:
     ezprint (0.2.0)
@@ -42,7 +18,7 @@ GIT
 
 GIT
   remote: http://github.com/solnic/dm-paperclip.git
-  revision: 8b87813
+  revision: 8b8781397d81f43f7e4446966ff44f4b939a5a2b
   branch: master
   specs:
     dm-paperclip (2.4.1)
@@ -50,45 +26,54 @@ GIT
 GEM
   remote: http://rubygems.org/
   specs:
-    RedCloth (4.2.3)
+    POpen4 (0.1.4)
+      Platform (>= 0.4.0)
+      open4
+    Platform (0.4.0)
+    RedCloth (4.2.7)
     abstract (1.0.0)
-    actionmailer (3.0.3)
-      actionpack (= 3.0.3)
-      mail (~> 2.2.9)
-    actionpack (3.0.3)
-      activemodel (= 3.0.3)
-      activesupport (= 3.0.3)
+    actionmailer (3.0.5)
+      actionpack (= 3.0.5)
+      mail (~> 2.2.15)
+    actionpack (3.0.5)
+      activemodel (= 3.0.5)
+      activesupport (= 3.0.5)
       builder (~> 2.1.2)
       erubis (~> 2.6.6)
       i18n (~> 0.4)
       rack (~> 1.2.1)
       rack-mount (~> 0.6.13)
-      rack-test (~> 0.5.6)
+      rack-test (~> 0.5.7)
       tzinfo (~> 0.3.23)
-    activemodel (3.0.3)
-      activesupport (= 3.0.3)
+    activemodel (3.0.5)
+      activesupport (= 3.0.5)
       builder (~> 2.1.2)
       i18n (~> 0.4)
-    activerecord (3.0.3)
-      activemodel (= 3.0.3)
-      activesupport (= 3.0.3)
+    activerecord (3.0.5)
+      activemodel (= 3.0.5)
+      activesupport (= 3.0.5)
       arel (~> 2.0.2)
       tzinfo (~> 0.3.23)
-    activeresource (3.0.3)
-      activemodel (= 3.0.3)
-      activesupport (= 3.0.3)
-    activesupport (3.0.3)
-    addressable (2.2.2)
-    arel (2.0.7)
+    activeresource (3.0.5)
+      activemodel (= 3.0.5)
+      activesupport (= 3.0.5)
+    activesupport (3.0.5)
+    addressable (2.2.4)
+    arel (2.0.9)
     bcrypt-ruby (2.1.4)
     builder (2.1.2)
-    capistrano (2.5.19)
+    capistrano (2.5.20)
+      highline
       highline
       net-scp (>= 1.0.0)
+      net-scp
+      net-sftp
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
+      net-ssh
+      net-ssh-gateway
       net-ssh-gateway (>= 1.0.0)
-    capybara (0.4.0)
+    capybara (0.4.1.2)
       celerity (>= 0.7.9)
       culerity (>= 0.2.4)
       mime-types (>= 1.16)
@@ -96,17 +81,20 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       selenium-webdriver (>= 0.0.27)
-      xpath (~> 0.1.2)
-    celerity (0.8.7)
-    childprocess (0.1.6)
-      ffi (~> 0.6.3)
+      xpath (~> 0.1.3)
+    celerity (0.8.9)
+    childprocess (0.1.8)
+      ffi (~> 1.0.6)
     chronic (0.3.0)
-    closure-compiler (0.3.3)
-    culerity (0.2.14)
-    daemons (1.1.0)
-    data_objects (0.10.2)
+    closure-compiler (1.1.1)
+    culerity (0.2.15)
+    daemons (1.1.2)
+    data_objects (0.10.3)
       addressable (~> 2.1)
-    devise (1.1.5)
+    delayed_job (2.1.4)
+      activesupport (~> 3.0)
+      daemons
+    devise (1.1.9)
       bcrypt-ruby (~> 2.1.2)
       warden (~> 1.0.2)
     diff-lcs (1.1.2)
@@ -121,6 +109,15 @@ GEM
     dm-core (1.0.2)
       addressable (~> 2.2)
       extlib (~> 0.9.15)
+    dm-devise (1.1.8)
+      bcrypt-ruby (~> 2.1.2)
+      devise (~> 1.1.0)
+      dm-core (~> 1.0.0)
+      dm-migrations (~> 1.0.0)
+      dm-rails (>= 1.0.3)
+      dm-serializer (~> 1.0.0)
+      dm-timestamps (~> 1.0.0)
+      sugar-high (~> 0.2.10)
     dm-do-adapter (1.0.2)
       data_objects (~> 0.10.2)
       dm-core (~> 1.0.2)
@@ -160,58 +157,58 @@ GEM
       dm-core (>= 0.10.2)
       ruby-graphviz (>= 0.9.10)
       thor (>= 0.13.4)
-    do_mysql (0.10.2)
-      data_objects (= 0.10.2)
+    do_mysql (0.10.3)
+      data_objects (= 0.10.3)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     extlib (0.9.15)
     fastercsv (1.5.4)
-    ffi (0.6.3)
+    ffi (1.0.7)
       rake (>= 0.8.7)
     highline (1.6.1)
     i18n (0.5.0)
     jammit (0.5.4)
       closure-compiler (>= 0.1.0)
       yui-compressor (>= 0.9.1)
-    jquery-rails (0.2.6)
+    jquery-rails (0.2.7)
       rails (~> 3.0)
       thor (~> 0.14.4)
-    json_pure (1.4.6)
-    mail (2.2.14)
+    json_pure (1.5.1)
+    mail (2.2.15)
       activesupport (>= 2.3.6)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.16)
-    mocha (0.9.10)
-      rake
+    mocha (0.9.12)
     net-dns (0.6.1)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
       net-ssh (>= 2.0.9)
-    net-ssh (2.0.24)
+    net-ssh (2.1.4)
     net-ssh-gateway (1.0.1)
       net-ssh (>= 1.99.1)
     nokogiri (1.4.4)
+    open4 (1.0.1)
     pdfkit (0.4.6)
     polyglot (0.3.1)
-    rack (1.2.1)
-    rack-mount (0.6.13)
+    rack (1.2.2)
+    rack-mount (0.6.14)
       rack (>= 1.0.0)
     rack-test (0.5.7)
       rack (>= 1.0)
-    rails (3.0.3)
-      actionmailer (= 3.0.3)
-      actionpack (= 3.0.3)
-      activerecord (= 3.0.3)
-      activeresource (= 3.0.3)
-      activesupport (= 3.0.3)
+    rails (3.0.5)
+      actionmailer (= 3.0.5)
+      actionpack (= 3.0.5)
+      activerecord (= 3.0.5)
+      activeresource (= 3.0.5)
+      activesupport (= 3.0.5)
       bundler (~> 1.0)
-      railties (= 3.0.3)
-    railties (3.0.3)
-      actionpack (= 3.0.3)
-      activesupport (= 3.0.3)
+      railties (= 3.0.5)
+    railties (3.0.5)
+      actionpack (= 3.0.5)
+      activesupport (= 3.0.5)
       rake (>= 0.8.7)
       thor (~> 0.14.4)
     rake (0.8.7)
@@ -229,11 +226,11 @@ GEM
       rspec-expectations (~> 2.0.1)
     rspec-rails (2.0.1)
       rspec (~> 2.0.0)
-    ruby-graphviz (0.9.20)
+    ruby-graphviz (0.9.21)
     rubyzip (0.9.4)
-    selenium-webdriver (0.1.2)
-      childprocess (~> 0.1.5)
-      ffi (~> 0.6.3)
+    selenium-webdriver (0.1.4)
+      childprocess (>= 0.1.7)
+      ffi (>= 1.0.7)
       json_pure
       rubyzip
     simple_form (1.2.2)
@@ -244,36 +241,37 @@ GEM
     thor (0.14.6)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
-    tzinfo (0.3.24)
-    uuidtools (2.1.1)
+    tzinfo (0.3.26)
+    uuidtools (2.1.2)
     warden (1.0.3)
       rack (>= 1.0.0)
     whois (1.6.6)
     xpath (0.1.3)
       nokogiri (~> 1.3)
-    yui-compressor (0.9.1)
+    yui-compressor (0.9.6)
+      POpen4 (>= 0.1.4)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   RedCloth (~> 4.0)
-  actionmailer (~> 3.0.3)
-  actionpack (~> 3.0.3)
-  activesupport (~> 3.0.3)
+  actionmailer (= 3.0.5)
+  actionpack (= 3.0.5)
+  activesupport (= 3.0.5)
   bundler (~> 1.0.0)
   capistrano
   capybara
   chronic (~> 0.3.0)
   daemons (~> 1.1.0)
-  delayed_job (~> 2.1.0.pre2)!
+  delayed_job (~> 2.1.4)
   delayed_job_data_mapper (~> 1.0.0.rc)!
   devise (~> 1.1.3)
   dm-active_model (~> 1.0.2)
   dm-aggregates (~> 1.0.2)
   dm-constraints (~> 1.0.2)
   dm-core (~> 1.0.2)
-  dm-devise (~> 1.1.5)!
+  dm-devise (~> 1.1.6)
   dm-do-adapter (~> 1.0.2)
   dm-migrations (~> 1.0.2)
   dm-mysql-adapter (~> 1.0.2)
@@ -293,8 +291,8 @@ DEPENDENCIES
   mail (~> 2.2.10)
   net-dns (~> 0.6.1)
   pdfkit (~> 0.4.6)
-  rails (~> 3.0.3)
-  railties (~> 3.0.3)
+  rails (= 3.0.5)
+  railties (= 3.0.5)
   rmagick (~> 2.13.1)
   rspec (~> 2.0.0)
   rspec-core (~> 2.0.0)

@@ -13,6 +13,8 @@
 						<%= link_to "Packet Capture Options", '#', :class => 'dark-button has-event-menu' %>
 						<dl id='event-sub-menu' class='round shadow' style='display:none;'>
 							
+							<% if @event.ip.present? %>
+							
 							<dd>
 								<%= link_to "Source (1 Hour)", "#{@event.packet_capture(:source_ip => @event.ip.ip_src.to_s,
 								:start_time => (@event.timestamp - 30.minute), 
@@ -29,6 +31,8 @@
 								:start_time => (@event.timestamp - 30.minute), 
 								:end_time => (@event.timestamp + 30.minute))}" %>
 							</dd>
+							
+							<% end %>
 							
 							<dd><%= link_to "Custom", packet_capture_events_path(:sid => @event.sid, :cid => @event.cid), :class => 'snorbybox' %></dd>
 						</dl>
@@ -50,7 +54,7 @@
 			
 		</div>
 
-		<%= render :partial => 'events/ip' %>
+		<%= render :partial => 'events/ip' if @event.ip.present? %>
 		
 		<%= render :partial => 'events/signature' %>
 		
