@@ -58,13 +58,13 @@
 		      },
 		      series: [{
 						name: 'TCP',
-						data: <%= @tcp %>
+						data: [<%= @tcp.join(', ') %>]
 					},{
 						name: 'UDP',
-						data: <%= @udp %>
+						data: [<%= @udp.join(', ') %>]
 					},{
 						name: 'ICMP',
-						data: <%= @icmp %>
+						data: [<%= @icmp.join(', ') %>]
 					}]
 		   });
 		

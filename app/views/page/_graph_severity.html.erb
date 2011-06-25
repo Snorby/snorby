@@ -58,13 +58,13 @@
 		      },
 		      series: [{
 						name: 'High Severity',
-						data: <%= @high %>
+						data: [<%= @high.join(', ') %>]
 					},{
 						name: 'Medium Severity',
-						data: <%= @medium %>
+						data: [<%= @medium.join(', ') %>]
 					},{
 						name: 'Low Severity',
-						data: <%= @low %>
+						data: [<%= @low.join(', ') %>]
 					}]
 		   });
 		
