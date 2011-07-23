@@ -674,10 +674,16 @@ div#note-box.error{
 	border-left: 1px solid #313131;
 }
 
-#header #header-inside #menu ul li.menu-error{
+#header #header-inside #menu ul li.menu-error.admin{
 	border-style: none;
 	color: #e3e7e7;
 	margin-right: 135px;
+}
+
+#header #header-inside #menu ul li.menu-error{
+	border-style: none;
+	color: #e3e7e7;
+	margin-right: 5px	
 }
 
 #header #header-inside #menu ul li.menu-error:hover{
@@ -974,6 +980,7 @@ dl#admin-menu dd a{
 
 #wrapper #content #title #title-menu-holder ul#title-menu li:hover{
 	background-color: rgba(255,254,255,0.7);
+	border-bottom: 1px solid #fff;
 }
 
 #wrapper #content #title #title-menu-holder ul#title-menu li:first-child {

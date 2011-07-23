@@ -5,6 +5,8 @@ RSPEC_VERSION = '~> 2.0.0'
 DATAMAPPER = 'http://github.com/datamapper'
 DM_VERSION = '~> 1.0.2'
 
+gem 'rake', '0.9.2'
+
 gem 'rails',                  RAILS_VERSION
 gem 'jquery-rails'
 gem 'bundler',                '~> 1.0.0'
