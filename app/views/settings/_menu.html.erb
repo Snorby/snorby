@@ -12,13 +12,3 @@
 	<% end %>
 
 <% end %>
-
-<%= drop_down_for('Administrator Menu', 'icons/admin.png', 'admin') do %>
-	<%= drop_down_item "General Settings", settings_path %>
-	
-	<%= drop_down_item "Classifications", classifications_path %>
-	<%= drop_down_item "Sensors", sensors_path %>
-	<%= drop_down_item "Severities", severities_path %>
-	<%= drop_down_item "Users", users_path %>
-	<%= drop_down_item "Worker & Job Queue <span class='shortcut'>ctrl+3</span>".html_safe, jobs_path %>
-<% end %>

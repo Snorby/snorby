@@ -121,8 +121,6 @@ class DailyCache
 
       range_for_type(type) do |i|
 
-        puts i
-
         if @cache.has_key?(i)
           sev_count = 0
           

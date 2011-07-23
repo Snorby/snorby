@@ -34,16 +34,46 @@
 			<ul class='container_12'>
 
 				<% if user_signed_in? %>
-					<li class='blank first'></li>
-					<li><%= link_to "Dashboard", dashboard_path %></li>
-					<li><%= link_to "My Queue (<span class='queue-count'>#{current_user.favorites_count}</span>)".html_safe, queue_events_path %></li>
-					<li><%= link_to "Events", events_path %></li>
-					<li><%= link_to "Sensors", sensors_path %></li>
-					<li><%= link_to "Search", search_path %></li>
-					<li class='blank last'></li>
+					<li class='item blank first'></li>
+					<li class='item'><%= link_to "Dashboard", dashboard_path %></li>
+					<li class='item'><%= link_to "My Queue (<span class='queue-count'>#{current_user.favorites_count}</span>)".html_safe, queue_events_path %></li>
+					<li class='item'><%= link_to "Events", events_path %></li>
+					<li class='item'><%= link_to "Sensors", sensors_path %></li>
+					<li class='item'><%= link_to "Search", search_path %></li>
+					<li class='item blank last'></li>
 
 					<% if current_user.admin %>
-						<li class='administration right'><%= link_to "Administration", settings_path %></li>
+            <li class='administration right'><%= link_to "Administration", settings_path %></li>
+
+            <dl id="admin-menu" style='display:none;'>
+              <div class="admin-arrow"></div>
+
+              <dd>
+                <%= link_to "General Settings", settings_path %>
+              </dd>
+
+              <dd>
+                <%= link_to "Classifications", classifications_path %>
+              </dd>
+
+              <dd>
+                <%= link_to "Sensors", sensors_path %>
+              </dd>
+
+              <dd>
+                <%= link_to "Severities", severities_path %>
+              </dd>
+
+              <dd>
+                <%= link_to "Users", users_path %>
+              </dd>
+
+              <dd>
+                <%= link_to "Worker & Job Queue <span class='shortcut'>ctrl+3</span>".html_safe, jobs_path %>
+              </dd>
+
+            </dl>
+
 					<% end %>
 					
 					<% unless Snorby::Worker.running? %>

@@ -444,7 +444,7 @@ var Snorby = {
 					onStart: function() {
 						$(document).unbind('keydown', 'right');
 						$(document).unbind('keydown', 'esc');
-						$(document).unbind('keydown', 'ctrl+left');
+						$(document).unbind('keydown', 'shift+left');
 						$('dl#event-sub-menu').hide();
 					},
 					onClosed: function() {
@@ -897,7 +897,7 @@ var Snorby = {
 	
 		if ($('div.pager').is(':visible')) {
 			
-			$(document).bind('keydown', 'ctrl+down', function() {
+			$(document).bind('keydown', 'shift+down', function() {
 				if ($('ul.table div.content li.event.currently-over').is(':visible')) {
 					$('ul.table div.content li.event.currently-over').removeClass('currently-over').next().addClass('currently-over');
 				} else {
@@ -906,7 +906,7 @@ var Snorby = {
 				return false;
 			});
 
-			$(document).bind('keydown', 'ctrl+up', function() {
+			$(document).bind('keydown', 'shift+up', function() {
 				if ($('ul.table div.content li.event.currently-over').is(':visible')) {
 					$('ul.table div.content li.event.currently-over').removeClass('currently-over').prev().addClass('currently-over');
 				} else {
@@ -945,30 +945,30 @@ var Snorby = {
 				return false;
 			});
 			
-			$(document).bind('keydown', 'ctrl+right', function() {
+			$(document).bind('keydown', 'shift+right', function() {
 				$('div.pager.main ul.pager li.last a').click();
 				return false;
 			});
 			
-			$(document).bind('keydown', 'shift+right', function() {
-				$('div.pager.notes-pager ul.pager li.next a').click();
-				return false;
-			});
+      $(document).bind('keydown', 'alt+right', function() {
+        $('div.pager.notes-pager ul.pager li.next a').click();
+        return false;
+      });
 			
 			$(document).bind('keydown', 'right', function() {
 				$('div.pager.main ul.pager li.next a').click();
 				return false;
 			});
 			
-			$(document).bind('keydown', 'ctrl+left', function() {
+			$(document).bind('keydown', 'shift+left', function() {
 				$('div.pager.main ul.pager li.first a').click();
 				return false;
 			});
 			
-			$(document).bind('keydown', 'shift+left', function() {
-				$('div.pager.notes-pager ul.pager li.previous a').click();
-				return false;
-			});
+      $(document).bind('keydown', 'alt+left', function() {
+        $('div.pager.notes-pager ul.pager li.previous a').click();
+        return false;
+      });
 			
 			$(document).bind('keydown', 'left', function() {
 				$('div.pager.main ul.pager li.previous a').click();
@@ -1061,7 +1061,24 @@ var Snorby = {
 }
 
 jQuery(document).ready(function($) {
-	
+
+
+  $('li.administration a').live('click', function(event) {
+    var self = this;
+    event.preventDefault();
+    $('dl#admin-menu').toggle();
+  });
+
+  $('dl#admin-menu a').live('click', function(event) {
+    $(this).parents('dl').fadeOut('fast');
+  });
+
+  $('#wrapper').live('click', function() {
+    if ($('dl#admin-menu').is(':visible')) {
+      $('dl#admin-menu').fadeOut('fast');
+    };
+  });
+
 	Snorby.setup();
 	Snorby.admin();
 	Snorby.callbacks();

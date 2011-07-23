@@ -1,3 +1,16 @@
+# Snorby 2.3.0 (codename: fixme)
+
+* Backend
+  * Cache logic now processes in chunks to prevent blowing the stack
+  * Fixed issues with daily cache not processing when events return nil
+
+* UI/UX
+  * Admin menu move to sub menu bar for UX reasons.
+  * Change hotkeys that conflict with macosx bindings
+  * Box titles now built with css
+  * Content headers now built with css and window menus now
+    align correctly.
+
 # Snorby 2.2.7
 
 * fixed issue with dashboard charts taking a lot memory.
