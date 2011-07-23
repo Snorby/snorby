@@ -27,7 +27,45 @@ module Snorby
           STDOUT.puts "#{msg}" if verbose
         end
       end
-      
+
+      def merged_records(records)
+        data = {
+          :event_count => records.collect {|x| x[:event_count] }.inject { |sum,item| sum + item },
+          :tcp_count => records.collect {|x| x[:tcp_count] }.inject { |sum,item| sum + item },
+          :udp_count => records.collect {|x| x[:udp_count] }.inject { |sum,item| sum + item },
+          :icmp_count => records.collect {|x| x[:icmp_count] }.inject { |sum,item| sum + item },
+          :severity_metrics => {},
+          :src_ips => {},
+          :dst_ips => {},
+          :signature_metrics => {}
+        }
+        
+        [
+          :severity_metrics, 
+          :src_ips, 
+          :dst_ips, 
+          :signature_metrics
+        ].each do |item|
+          
+          records.collect { |x| x[item] }.inject do |x,y|
+          merge = {}
+          keys = x.merge(y).keys
+          
+          keys.each do |key|
+            if x.has_key?(key)
+              merge[key] = y.has_key?(key) ? y[key] + x[key] : x[key]
+            else
+              merge[key] = y[key]
+            end
+          end
+
+            data[item] = merge
+          end
+        end
+
+        data
+      end
+
       def fetch_event_count(from_database=false)
         logit '- fetch_event_count'
         @events.size
@@ -53,17 +91,17 @@ module Snorby
 
       def fetch_tcp_count
         logit '- fetching tcp count'
-        @tcp_events.size
+        @tcp_events.length
       end
 
       def fetch_udp_count
         logit '- fetching udp count'
-        @udp_events.size
+        @udp_events.length
       end
 
       def fetch_icmp_count
         logit '- fetching icmp count'
-        @icmp_events.size
+        @icmp_events.length
       end
 
       def build_sensor_event_count(update_counter=true)

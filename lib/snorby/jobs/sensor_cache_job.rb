@@ -64,7 +64,10 @@ module Snorby
 
             # Prevent Duplicate Cache Records
             if @sensor.cache.blank?
-              start_time = @since_last_cache.first.timestamp.beginning_of_day + @since_last_cache.first.timestamp.hour.hours
+
+              start_time = @since_last_cache.first.timestamp.beginning_of_day + 
+                @since_last_cache.first.timestamp.hour.hours
+
               end_time = start_time + 30.minute
               next if start_time >= @stop_time
             else
@@ -78,7 +81,9 @@ module Snorby
           end
 
           Snorby::Jobs.sensor_cache.destroy! if Snorby::Jobs.sensor_cache?
-          Delayed::Job.enqueue(Snorby::Jobs::SensorCacheJob.new(false), :priority => 1, :run_at => @stop_time + 31.minute)
+          
+          Delayed::Job.enqueue(Snorby::Jobs::SensorCacheJob.new(false), 
+          :priority => 1, :run_at => @stop_time + 31.minute)
 
         rescue => e
           puts e
@@ -130,37 +135,72 @@ module Snorby
 
           return if start_time >= @stop_time
 
-          @events = @since_last_cache.between_time(start_time, end_time)
+          all_events = @since_last_cache.between_time(start_time, end_time)
 
           @tcp_events = []
           @udp_events = []
           @icmp_events = []
 
-          @last_event = @events.last
+          @last_event = all_events.last
 
-          if @events.blank?
+          if all_events.blank?
 
             Cache.create(:sid => @sensor.sid, :ran_at => start_time)
 
           else
 
-            logit 'Found events - processing...'
-
             if defined?(@last_cache)
               logit 'Found last cache...'
               @last_cache = @sensor.cache.last
-              @cache = Cache.create(:sid => @last_event.sid, :cid => @last_event.cid, :ran_at => start_time)
+
+              @cache = Cache.create(:sid => @last_event.sid, 
+              :cid => @last_event.cid, :ran_at => start_time)
+
             else
               logit 'No cache records found - creating first cache record...'
               reset_counter_cache_columns
-              @last_cache = Cache.create(:sid => @last_event.sid, :cid => @last_event.cid, :ran_at => start_time)
+              
+              @last_cache = Cache.create(:sid => @last_event.sid, 
+              :cid => @last_event.cid, :ran_at => start_time)
+
               @cache = @last_cache
             end
 
-            logit 'Building cache attributes'
+            logit "\nNew Day: #{start_time} - #{end_time}", false
+            logit "#{all_events.length} events found. Processing."
 
-            build_snorby_cache
+            records = []
+            batch = 0
 
+            all_events.each_chunk(1000) do |chunk|
+              @events = chunk
+              
+              logit "\nProcessing Batch #{batch += 1} of " + 
+              "#{(all_events.length / 1000) + 1}...", false
+              
+              build_sensor_event_count
+              build_proto_counts
+
+              data = {
+                :event_count => fetch_event_count,
+                :tcp_count => fetch_tcp_count,
+                :udp_count => fetch_udp_count,
+                :icmp_count => fetch_icmp_count,
+                :severity_metrics => fetch_severity_metrics,
+                :src_ips => fetch_src_ip_metrics,
+                :dst_ips => fetch_dst_ip_metrics,
+                :signature_metrics => fetch_signature_metrics
+              }
+
+              records << data
+            end
+
+            if records.length > 1
+              results = merged_records(records)
+              @cache.update(results)
+            else
+              @cache.update(records.first)
+            end
           end
 
           new_start_time = end_time
