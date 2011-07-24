@@ -478,6 +478,7 @@ a {
 }
 
 #snorby-box #box-title{
+	cursor: move;
 	padding: 20px 10px;
 	color: #fff;
 	font-weight: normal;
@@ -2002,7 +2003,7 @@ ul.table div.content div.event-data div.event-data-holder div.event-data-holder-
 }
 
 button.default,a.button.default {
-	height: 25px;
+	height: 27px;
 	padding: 0;
 	position: relative;
 	top: 1px;
@@ -2112,9 +2113,9 @@ a.button.default {
 
 button.default span,a.button.default span {
 	display: block;
-	height: 25px;
+	height: 27px;
 	padding: 0 10px;
-	line-height: 25px;
+	line-height: 27px;
 }
 
 button.default:hover,a.button.default:hover {
@@ -3167,6 +3168,9 @@ div.dashboard-graph.no-pie-data{
 	font-style: normal;
 	text-decoration: none;
 	font-variant: normal;
+	position: relative;
+	display: block;
+	overflow: visible;
 }
 
 #dashboard .secondary ul.box-list li span{	
@@ -3181,11 +3185,12 @@ div.dashboard-graph.no-pie-data{
 	padding: 3px 5px;
 	top: 5px;
 	display: block;
-	position: relative;
+	position: absolute;
 	font-size: 0.9em;
 	text-align: left;
 	color: #868686;
 	text-shadow: #fffeff 0 1px 0;
+	right: 0;
 }
 
 #dashboard .secondary ul.box-list li:hover span{
