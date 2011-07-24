@@ -130,7 +130,7 @@ del {
 	position: relative;
 	overflow: hidden;
 	z-index: 1102;
-	background-color: transparent;
+	background-color: #fff;
 }
 
 #fancybox-hide-sel-frame {
