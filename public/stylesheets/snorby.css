@@ -547,6 +547,10 @@ div#note-box.error{
 	height: 61px;
 }
 
+#login #flash_message{
+	border-bottom: 1px solid #1f1f1f;
+}
+
 #flash_message div.message{
 	cursor: pointer;
 	text-shadow: #000 0 0 0;
@@ -924,10 +928,6 @@ dl#admin-menu dd a{
 /* @group Title */
 
 #wrapper #content #title{
-   -moz-border-radius-topright: 3px;
-   -moz-border-radius-topleft: 3px;
-   -webkit-border-top-right-radius: 3px;
-  	-webkit-border-top-left-radius: 3px;
 	height: 35px;
 	background: #ededed
 	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#fff',endColorstr='#ededed');
@@ -2607,7 +2607,7 @@ label{
 }
 
 input.error{
-	border: 2px solid #fd2e3f;
+	border: 2px solid #fd2e3f !important;
 }
 
 input[disabled]{
@@ -3524,6 +3524,151 @@ form#new_classification p{
 
 form#new_classification textarea{
 	width: 450px;
+}
+
+/* @end */
+
+/* @group Login */
+
+html.login,body.login{
+  	font-family: Helvetica, Arial;
+  	font-size: 12px;
+	background: #202325 url(../images/header/header-bg.png) repeat;
+}
+
+#login{
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	overflow: hidden;
+}
+
+#login #wrapper{
+	width: 960px;
+	display: block;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	overflow: hidden;
+	border-style: none;
+	top: 0;
+	margin: auto;
+}
+
+#login #login-logo{
+	width: 960px;
+	height: 600px;
+	background: url(../images/login.png) no-repeat 130px 30px;
+	overflow: hidden;
+	position: absolute;
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: auto;
+}
+
+#login #wrapper #content{
+  -webkit-box-shadow: 0px 1px 20px rgba(0,0,0,0.5);
+  -moz-box-shadow: 0px 1px 20px rgba(0,0,0,0.5);
+  box-shadow: 0px 1px 20px rgba(0,0,0,0.5);
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+	width: 555px;
+	border: 1px solid #000;
+	background-color: #181718;
+	position: relative;
+	display: block;
+	overflow: hidden;
+	height: 225px;
+	margin-top: 240px;
+	margin-left: 176px;
+}
+
+#login #wrapper #content #title{
+   -moz-border-radius-topright: 5px;
+   -moz-border-radius-topleft: 5px;
+   -webkit-border-top-right-radius: 5px;
+  	-webkit-border-top-left-radius: 5px;
+}
+
+#login #content form p{
+	margin-bottom: 2px;
+}
+
+#login #content form input[type='text'],
+#login #content form input[type='password']{
+	width:  515px;
+	padding: 9px;
+	color: #000;
+	margin-left: -1px;
+}
+
+#login #wrapper #content #signin,
+#login #wrapper #content #password{
+	width: 555px;
+	background-color: #fff;
+	margin: 0;
+	padding: 0;
+}
+
+#login #wrapper #content form{
+	margin: 0;
+	padding: 11px 10px 10px;
+	height: 149px;
+	display: block;
+	position: relative;
+	overflow: visible;
+    -moz-border-radius-bottomright: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+}
+
+#login #wrapper #content #form-actions{
+    -moz-border-radius-bottomright: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+	width: 535px;
+	display: block;
+	position: absolute;
+	overflow: hidden;
+	bottom: -9px;
+	right: 0;
+	left: 10px;
+}
+
+#login #wrapper #content #password input,
+#login #wrapper #content #password .field_with_errors input{
+	margin-top: 5px;
+	margin-bottom: 69px !important;
+	position: relative;
+	display: block;
+	overflow: visible;
+}
+
+#login #wrapper #content #password br {
+	display:none;
+}
+
+#login #wrapper #content #password p lable{
+	margin-top: 5px;	
+}
+
+#login #wrapper #content #form-actions p{
+	position: absolute;
+	display: block;
+	overflow: hidden;
+	bottom: 0;
+	margin: 0;
+	padding: 0;
+	top: 13px;
+	right: 20px;
 }
 
 /* @end */

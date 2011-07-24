@@ -1064,6 +1064,14 @@ jQuery(document).ready(function($) {
 
 //box-title
 
+  $('#login button.forgot-my-password').live('click', function(event) {
+    event.preventDefault();
+    $.get('/users/password/new', function(data) {
+      var content = $(data).find('#content').html();
+      $('#content').html(content);
+    });
+  });
+
   $('#fancybox-wrap').draggable({
     handle: 'box-title',
     cursor: 'move'

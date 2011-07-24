@@ -2,11 +2,14 @@ development:
   domain: localhost:3000
   #wkhtmltopdf: /usr/local/bin/wkhtmltopdf
   wkhtmltopdf: /Users/mephux/.rvm/gems/ruby-1.9.2-p0/bin/wkhtmltopdf
+  mailer_sender: 'snorby@snorby.org'
 
 test:
   domain: localhost:3000
   wkhtmltopdf: /usr/local/bin/wkhtmltopdf
+  mailer_sender: 'snorby@snorby.org'
 
 production:
   domain: localhost:3000
   wkhtmltopdf: /usr/local/bin/wkhtmltopdf
+  mailer_sender: 'snorby@snorby.org'
