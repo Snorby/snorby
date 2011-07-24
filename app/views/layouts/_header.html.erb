@@ -36,7 +36,7 @@
 				<% if user_signed_in? %>
 					<li class='item blank first'></li>
 					<li class='item'><%= link_to "Dashboard", dashboard_path %></li>
-					<li class='item'><%= link_to "My Queue (<span class='queue-count'>#{current_user.favorites_count}</span>)".html_safe, queue_events_path %></li>
+					<li class='item'><%= link_to "My Queue (<span class='queue-count'>#{current_user.favorites_count}</span>)".html_safe, queue_events_path %></liü>
 					<li class='item'><%= link_to "Events", events_path %></li>
 					<li class='item'><%= link_to "Sensors", sensors_path %></li>
 					<li class='item'><%= link_to "Search", search_path %></li>

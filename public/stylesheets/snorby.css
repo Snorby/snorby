@@ -748,7 +748,10 @@ dl#admin-menu{
 	display: block;
 	overflow: visible;
 	position: absolute;
-	background-color: rgba(34,34,34,0.95);
+	background: #111;
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#2b2b2b',endColorstr='#111');
+	background: -webkit-gradient(linear,0% 0,0% 100%,from(#2b2b2b),to(#111));
+	background: -moz-linear-gradient(-90deg,#2b2b2b,#111);
 	z-index: 99999;
 	border: 1px solid #151515;
 	top: 40px;

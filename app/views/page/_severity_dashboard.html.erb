@@ -1,15 +1,15 @@
 <% content_for :footer do %>
 
 	<script type="text/javascript">
-    $('#sev1-graph').sparkline(<%= @high %>, { 
+    $('#sev1-graph').sparkline([<%= @high.join(',') %>], { 
         barWidth: 6, height: 40, type: 'bar', barColor: sev1_bg_color 
      });
     
-    $('#sev2-graph').sparkline(<%= @medium %>, { 
+    $('#sev2-graph').sparkline([<%= @medium.join(',') %>], { 
       barWidth: 6, height: 40, type: 'bar', barColor: sev2_bg_color 
     });
 
-    $('#sev3-graph').sparkline(<%= @low %>, { 
+    $('#sev3-graph').sparkline([<%= @low.join(',') %>], { 
       barWidth: 6, height: 40, type: 'bar', barColor: sev3_bg_color 
     });
 	</script>
