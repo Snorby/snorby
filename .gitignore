@@ -23,6 +23,7 @@ public/system/
 public/javascripts/all.js
 public/javascripts/snorby_packaged.js
 public/stylesheets/snorby_packaged.css
+public/assets/*
 
 !tmp/.gitignore
 !log/.gitignore
