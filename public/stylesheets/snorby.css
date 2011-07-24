@@ -674,10 +674,16 @@ div#note-box.error{
 	border-left: 1px solid #313131;
 }
 
-#header #header-inside #menu ul li.menu-error{
+#header #header-inside #menu ul li.menu-error.admin{
 	border-style: none;
 	color: #e3e7e7;
 	margin-right: 135px;
+}
+
+#header #header-inside #menu ul li.menu-error{
+	border-style: none;
+	color: #e3e7e7;
+	margin-right: 5px	
 }
 
 #header #header-inside #menu ul li.menu-error:hover{
@@ -742,7 +748,10 @@ dl#admin-menu{
 	display: block;
 	overflow: visible;
 	position: absolute;
-	background-color: rgba(34,34,34,0.95);
+	background: #111;
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#2b2b2b',endColorstr='#111');
+	background: -webkit-gradient(linear,0% 0,0% 100%,from(#2b2b2b),to(#111));
+	background: -moz-linear-gradient(-90deg,#2b2b2b,#111);
 	z-index: 99999;
 	border: 1px solid #151515;
 	top: 40px;
@@ -974,6 +983,7 @@ dl#admin-menu dd a{
 
 #wrapper #content #title #title-menu-holder ul#title-menu li:hover{
 	background-color: rgba(255,254,255,0.7);
+	border-bottom: 1px solid #fff;
 }
 
 #wrapper #content #title #title-menu-holder ul#title-menu li:first-child {
