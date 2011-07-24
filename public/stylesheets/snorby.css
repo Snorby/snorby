@@ -528,7 +528,6 @@ div#note-box.error{
 #flash_message{
 	cursor: pointer;
 	position: absolute;
-	height: 90px;
 	display: block;
 	overflow: hidden;
 	top: 0;
@@ -536,12 +535,13 @@ div#note-box.error{
 	left: 0;
 	background-color: rgba(24,31,34,0.79);
 	z-index: 9999999;
+	height: 61px;
 }
 
 #flash_message div.message{
 	cursor: pointer;
 	text-shadow: #000 0 0 0;
-	line-height: 90px;
+	line-height: 60px;
 	width: 960px;
 	margin: auto;
 	color: #fff;
