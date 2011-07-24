@@ -55,18 +55,21 @@
 				</div>
 
 				<br />
-
-				<%= form_actions do %>
-
-					<%= button "Perform Mass Action", :class => 'success mass-action' %>
-
-					<%= button "Cancel", :class => 'warning cancel-snorbybox' %>
-
-				<% end %>
-
+        
 			</div>
 		
 		<% end %>
+
+
+    <%= snorby_box_footer do %>
+
+      <%= form_actions do %>
+        <%= button "Perform Mass Action", :class => 'success mass-action' %>
+        <%= button "Cancel", :class => 'warning cancel-snorbybox' %>
+      <% end %>
+
+    <% end %>
+
 
 	<% end %>
 	

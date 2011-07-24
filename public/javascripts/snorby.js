@@ -1062,6 +1062,12 @@ var Snorby = {
 
 jQuery(document).ready(function($) {
 
+//box-title
+
+  $('#fancybox-wrap').draggable({
+    handle: 'box-title',
+    cursor: 'move'
+  });
 
   $('li.administration a').live('click', function(event) {
     var self = this;

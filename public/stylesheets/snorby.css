@@ -425,9 +425,9 @@ del {
 }
 
 html,body{
-  background-color: #ededed;
   font-family: Helvetica, Arial;
   font-size: 12px;
+	background: #ededed url(../images/page/body-bg.png) repeat;
 }
 
 a img {
@@ -454,7 +454,7 @@ a {
 	border: 10px solid rgba(36,36,36,0.9);
 	display: block;
 	position: relative;
-	overflow: hidden;
+	overflow: visible;
 }
 
 #snorby-box #box-content{
@@ -473,7 +473,8 @@ a {
 	position: relative;
 	padding: 10px;
 	height: auto;
-	width: 750px; !important	
+	width: 750px;
+	background-color: #fff;
 }
 
 #snorby-box #box-title{
@@ -495,9 +496,16 @@ a {
 #snorby-box #box-footer{
 	display: block;
 	position: relative;
-	overflow: hidden;
-	background-color: #ebebeb;
-	padding: 10px;
+	overflow: visible;
+	background: #ededed
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#fff',endColorstr='#ededed');
+	background: -webkit-gradient(linear,0% 0,0% 100%,from(#fff),to(#ededed));
+	background: -moz-linear-gradient(-90deg,#fff,#ededed);
+	border-top: 1px solid #dbdbdb;
+	margin-left: -10px;
+	margin-right: -10px;
+	margin-bottom: -10px;
+	padding: 10px 10px 12px;
 }
 
 /* @end */
@@ -533,7 +541,7 @@ div#note-box.error{
 	top: 0;
 	right: 0;
 	left: 0;
-	background-color: rgba(24,31,34,0.79);
+	background-color: rgba(24,31,34,0.9);
 	z-index: 9999999;
 	height: 61px;
 }
@@ -566,7 +574,7 @@ div#note-box.error{
 	display: block;
 	position: relative;
 	overflow: visible;
-	background: #202325;
+	background: #202325 url(../images/header/header-bg.png) repeat;
 	border-bottom: 1px solid #000;
 }
 
@@ -582,14 +590,14 @@ div#note-box.error{
 	height: 60px;
 	display: block;
 	position: relative;
-	overflow: hidden;
+	overflow: visible;
 	border-bottom: 1px solid #000;
 }
 
 #header #header-inside #header-content #header-top{
 	display: block;
 	position: relative;
-	overflow: hidden;
+	overflow: visible;
 }
 
 #header #header-inside #header-content #header-top #logo{
@@ -597,6 +605,12 @@ div#note-box.error{
 	text-align: right;
 	background: url(../images/header/logo.png) no-repeat;
 	text-indent: -99999em;
+	position: absolute;
+	display: block;
+	overflow: visible;
+	top: 0;
+	left: -55px;
+	bottom: 0;
 }
 
 #header #header-inside #header-content #header-top #logo a{
@@ -755,7 +769,7 @@ dl#admin-menu{
 	z-index: 99999;
 	border: 1px solid #151515;
 	top: 40px;
-	right: -3.5%;
+	right: -32.5px;
 }
 
 dl#admin-menu div.admin-arrow{
@@ -860,7 +874,6 @@ dl#admin-menu dd a{
 /* @group Body */
 
 #wrapper{
-	background-color: #ededed;
 	padding-top: 15px;
 	clear: both;
 	display: block;
@@ -1958,8 +1971,6 @@ ul.table div.content div.event-data div.event-data-holder div.event-data-holder-
 
 /* @group Buttons */
 
-
-
 .form-actions {
 	text-align: right;
 	padding-bottom: 2px;
@@ -1991,7 +2002,7 @@ ul.table div.content div.event-data div.event-data-holder div.event-data-holder-
 }
 
 button.default,a.button.default {
-	height: 30px;
+	height: 25px;
 	padding: 0;
 	position: relative;
 	top: 1px;
@@ -2007,12 +2018,12 @@ button.default,a.button.default {
 	background: -webkit-gradient(linear,0% 0,0% 100%,from(#fff),to(#e1e1e1));
 	background: -moz-linear-gradient(-90deg,#fff,#e1e1e1);
 	border-bottom: 1px solid #ebebeb;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.3);
-	-moz-box-shadow: 0 1px 2px rgba(0,0,0,0.3);
-	box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	-webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+	box-shadow: 0 1px 4px rgba(0,0,0,0.2);
 	cursor: pointer;
 	-webkit-font-smoothing: subpixel-antialiased!important;
 	border: 1px solid #cbcbcb;
@@ -2048,23 +2059,21 @@ div#new_note button.default.warning,div#new_note a.button.default.warning{
 button.default.success,a.button.default.success{
 	color: #fff;
 	text-shadow: -1px -1px 0 rgba(0,0,0,0.3);
-	border: 1px solid #1fc021;
-	border-bottom-color: #1aa31b;
-	background: #23c926;
-	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#1ef727',endColorstr='#23c926');
-	background: -webkit-gradient(linear,0% 0,0% 100%,from(#1ef727),to(#23c926));
-	background: -moz-linear-gradient(-90deg,#1ef727,#23c926);
+	border: 1px solid #159117;
+	background: #1fb322;
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#23c926',endColorstr='#1fb322');
+	background: -webkit-gradient(linear,0% 0,0% 100%,from(#23c926),to(#1fb322));
+	background: -moz-linear-gradient(-90deg,#23c926,#1fb322);
 }
 
 button.default.success:hover,a.button.default.success:hover{
 	color: #fff;
 	text-shadow: -1px -1px 0 rgba(0,0,0,0.3);
-	border: 1px solid #1fc021;
-	border-bottom-color: #1aa31b;
-	background: #27de29;
-	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#1ef727',endColorstr='#27de29');
-	background: -webkit-gradient(linear,0% 0,0% 100%,from(#1ef727),to(#27de29));
-	background: -moz-linear-gradient(-90deg,#1ef727,#27de29);	
+	background: #1fb322;
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#08da10',endColorstr='#23c926');
+	background: -webkit-gradient(linear,0% 0,0% 100%,from(#08da10),to(#23c926));
+	background: -moz-linear-gradient(-90deg,#08da10,#23c926);
+	border: 1px solid #159117;
 }
 
 button.default.success:active,a.button.default.success:active{
@@ -2072,10 +2081,11 @@ button.default.success:active,a.button.default.success:active{
 	text-shadow: -1px -1px 0 rgba(0,0,0,0.3);
 	border: 1px solid #1ef727;
 	border-bottom-color: #1ef727;
-	background: #23c926;
-	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#1ef727',endColorstr='#23c926');
-	background: -webkit-gradient(linear,0% 100%,0% 0,from(#1ef727),to(#23c926));
-	background: -moz-linear-gradient(90deg,#1ef727,#23c926);	
+	background: #1fb322;
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#1fb322',endColorstr='#23c926');
+	background: -webkit-gradient(linear,0% 0,0% 100%,from(#1fb322),to(#23c926));
+	background: -moz-linear-gradient(-90deg,#1fb322,#23c926);
+	border: 1px solid #159117;
 }
 
 button.default.warning:hover,a.button.default.warning:hover{
@@ -2102,9 +2112,9 @@ a.button.default {
 
 button.default span,a.button.default span {
 	display: block;
-	height: 30px;
+	height: 25px;
 	padding: 0 10px;
-	line-height: 30px;
+	line-height: 25px;
 }
 
 button.default:hover,a.button.default:hover {
@@ -2431,8 +2441,6 @@ ul.table li div.small span.severity{
 	background-color: transparent;
 	border: 1px solid transparent;
 	position: absolute;
-	font-size: 10px;
-	font-family: Arial, Helvetica, sans-serif;
 	color: #898989;
 	top: 4px;
 	right: 11px;
@@ -2440,6 +2448,8 @@ ul.table li div.small span.severity{
 	margin: 0;
 	padding: 0;
 	height: 11px;
+	font: normal normal 10px Arial, Helvetica, sans-serif;
+	text-decoration: none;
 }
 .colorpicker_hex {
 	position: absolute;
@@ -2592,7 +2602,7 @@ span.payload-ascii{
 /* @group Input */
 
 label{
-	text-transform: capitalize;
+	text-transform: none;
 }
 
 input.error{
@@ -2641,9 +2651,31 @@ i{
 }
 
 #form-actions{
-	margin-bottom: 10px;
 	display: block;
-	margin-top: 10px;
+	background: #ededed
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#fff',endColorstr='#ededed');
+	background: -webkit-gradient(linear,0% 0,0% 100%,from(#fff),to(#ededed));
+	background: -moz-linear-gradient(-90deg,#fff,#ededed);
+	margin: 10px -10px -15px;
+	border-top: 1px solid #e7e7e7;
+	padding: 7px 10px 9px;
+}
+
+#box-footer #form-actions{
+	background: none;
+	margin: 0;
+	border-style: none;
+	padding: 0;
+}
+
+div.note-body #form-actions{
+	margin-left: 45px !important;
+}
+
+div.notes #form-actions{
+	background: none;
+	margin: 0;
+	border-style: none;
 }
 
 input[type='password'],
@@ -2714,7 +2746,9 @@ strong.no-notes{
 div#new_note{
 	display: block;
 	position: relative;
-	overflow: hidden;
+	overflow: visible;
+	padding: 0;
+	margin: 0;
 }
 
 div.notes div#new_note textarea#body{
@@ -2785,7 +2819,7 @@ div.notes div#new_note textarea#body{
 .event-note .note-body{
 	color: #fff;
 	line-height: 17px;
-	margin-bottom: 20px;
+	margin-bottom: 5px;
 }
 
 .event-note .note-body strong{
@@ -2976,6 +3010,8 @@ img.avatar-small{
 }
 
 #settings .user-show-avatar img{
+	min-height: 100px;
+	min-width: 100px;
 	float: left;
 	margin-right: 10px;
 }
@@ -3133,10 +3169,11 @@ div.dashboard-graph.no-pie-data{
 	font-variant: normal;
 }
 
-#dashboard .secondary ul.box-list li span{
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+#dashboard .secondary ul.box-list li span{	
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    
 	line-height: 1.4em; !important
 	display: block;
 	float: right;
@@ -3147,8 +3184,8 @@ div.dashboard-graph.no-pie-data{
 	position: relative;
 	font-size: 0.9em;
 	text-align: left;
-	color: #575757;
-	text-shadow: #fff 0 1px 0;
+	color: #868686;
+	text-shadow: #fffeff 0 1px 0;
 }
 
 #dashboard .secondary ul.box-list li:hover span{
@@ -3364,8 +3401,14 @@ div.dashboard-graph.no-pie-data{
 
 #snorbybox-content{
 	display: block;
-	overflow: hidden;
+	overflow: visible;
 	position: relative;
+}
+
+#snorbybox-content form{
+	display: block;
+	overflow: hidden;
+	position: relative;	
 }
 
 #snorbybox-content #snorbybox-form-holder{

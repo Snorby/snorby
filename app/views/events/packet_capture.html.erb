@@ -59,14 +59,14 @@
 		</div>
 		
 		<% end %>
-		
-		<div class='grid_5'>
-			<%= form_actions do %>
-				<%= button "Fetch Packet", :class => 'success request_packet_capture' %>
-				<%= button "Goto DeepSee", :class => 'success request_packet_capture', :"data-deepsee" => true if Setting.find(:packet_capture_type) == 'solera' %>
-				<%= button "Cancel", :class => 'warning cancel-snorbybox' %>
-			<% end %>
-		</div>
+
+    <%= snorby_box_footer do %>
+      <%= form_actions do %>
+        <%= button "Fetch Packet", :class => 'success request_packet_capture' %>
+        <%= button "Goto DeepSee", :class => 'success request_packet_capture', :"data-deepsee" => true if Setting.find(:packet_capture_type) == 'solera' %>
+        <%= button "Cancel", :class => 'warning cancel-snorbybox' %>
+      <% end %>
+    <% end %>
 		
 	</div>
 
