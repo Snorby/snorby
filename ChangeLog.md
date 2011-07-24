@@ -3,6 +3,7 @@
 * Backend
   * Cache logic now processes in chunks to prevent blowing the stack
   * Fixed issues with daily cache not processing when events return nil
+  * Epic amounts of other bug fixes
 
 * UI/UX
   * Admin menu move to sub menu bar for UX reasons.
@@ -10,6 +11,7 @@
   * Box titles now built with css
   * Content headers now built with css and window menus now
     align correctly.
+  * Flash message now covers only the top header.
 
 # Snorby 2.2.7
 
