@@ -39,8 +39,8 @@ gem 'capistrano'
 
 # Rails Plugins
 gem 'jammit',                 '~> 0.5.4'
-gem 'devise',                 '~> 1.1.3'
-gem 'dm-devise',              '~> 1.1.6'
+gem 'devise',                 '~> 1.4'
+gem 'dm-devise',              '~> 1.4'
 gem "mail",                   '~> 2.2.10'
 gem "RedCloth",               "~> 4.0", :require => 'redcloth'
 gem 'chronic',                '~> 0.3.0'

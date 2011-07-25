@@ -26,10 +26,10 @@ Devise.setup do |config|
   # config.params_authenticatable = true
 
   # Tell if authentication through HTTP Basic Auth is enabled. True by default.
-  # config.http_authenticatable = true
+  config.http_authenticatable = false
 
   # Set this to true to use Basic Auth for AJAX requests.  True by default.
-  # config.http_authenticatable_on_xhr = true
+  config.http_authenticatable_on_xhr = false
 
   # The realm used in Http Basic Authentication
   config.http_authentication_realm = "Snorby"
@@ -43,7 +43,7 @@ Devise.setup do |config|
   # from others authentication tools as :clearance_sha1, :authlogic_sha512 (then
   # you should set stretches above to 20 for default behavior) and :restful_authentication_sha1
   # (then you should set stretches to 10, and copy REST_AUTH_SITE_KEY to pepper)
-  # config.encryptor = :bcrypt
+  config.encryptor = :bcrypt
 
   # Setup a pepper to generate the encrypted password.
   config.pepper = "f5c0f3c477c5d0dfb1bb4b6037ebc3bc216e7d6dfb06079d4bf096869c33c4b0ac7ef688ce69ec81752542947b20f5012634bafbc03a1901c2521c3e9a2fcf18"
@@ -124,13 +124,13 @@ Devise.setup do |config|
   # access, but formats like :xml or :json, should return 401.
   # If you have any extra navigational formats, like :iphone or :mobile, you
   # should add them to the navigational formats lists. Default is [:html]
-  # config.navigational_formats = [:html, :iphone]
+  config.navigational_formats = [:html, :json]
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not (yet) supported by Devise,
   # you can configure them inside the config.warden block. The example below
   # allows you to setup OAuth, using http://github.com/roman/warden_oauth
-  #
+  
   # config.warden do |manager|
   #   manager.oauth(:twitter) do |twitter|
   #     twitter.consumer_secret = <YOUR CONSUMER SECRET>
