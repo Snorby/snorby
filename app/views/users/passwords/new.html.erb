@@ -2,16 +2,23 @@
 
 <div id='password' class='grid_12 page boxit'>
 	
-	<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :class => 'validate' }) do |f| %>
-	  <%= devise_error_messages! %>
+  <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :class => 'validate' }) do |f| %>
 
-	  <p><%= f.label :email %><br />
-	  <%= f.text_field :email, :title => 'E-mail...', :autocomplete => :off, :class => 'required email' %></p>
+    <div class='note'>
+      Please enter your email and snorby will send you a reset url. You will
+      be prompted to submit a new password and confirmation.
+    </div>
+
+    <p class='item'>
+      <%= f.label :email %><br />
+      <%= f.text_field :email, :title => 'E-mail...', :placeholder => 'example@example.com', :autocomplete => :off, :class => 'required email' %>
+    </p>
 
 		<%= form_actions do %>
 		
 			<%= button "Send me reset password instructions", :class => 'success' %>
-		
+      <%= button "Cancel", :class => 'warning cancel' %>
+
 		<% end %>
 	<% end %>
 	

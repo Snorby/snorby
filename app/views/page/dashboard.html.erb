@@ -97,7 +97,7 @@
 		
 		<ul class='box-list'>
 			<% @favers.each do |user| %>
-			<li>
+			<li class='has-image'>
 				<%= image_tag(user.avatar.url(:small), :size => '16x16', :class => 'avatar-small') %> 
 				<%= link_to truncate(user.name, :length => 30), activity_events_path(:user_id => user.id), :title => user.name %> 
 				<span><%= user.favorites_count %></span>

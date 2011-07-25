@@ -1,3 +1,7 @@
+# Snorby 2.3.1
+
+* Numerous UI enhancements.
+
 # Snorby 2.3.0 (codename: fixme)
 
 * Backend

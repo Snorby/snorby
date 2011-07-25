@@ -2,7 +2,7 @@
 
 	<%= snorby_box("Email Event Information", false) do %>
 
-		<div id='snorbybox-content' class='grid_10'>
+		<div id='snorbybox-content' class=''>
 
 			<%= form_tag '/email', :class => 'email-event-information validate' do %>
 
@@ -56,12 +56,13 @@
 
 			<% end %>
 
-			<%= form_actions do %>
-				<%= button "Email Event Information", :class => 'success email-event-information' %>
-				<%= button "Cancel", :class => 'warning cancel-snorbybox' %>
-			<% end %>
 
-			<br />
+      <%= snorby_box_footer do %>
+        <%= form_actions do %>
+          <%= button "Email Event Information", :class => 'success email-event-information' %>
+          <%= button "Cancel", :class => 'warning cancel-snorbybox' %>
+        <% end %>
+      <% end %>
 
 		</div>
 

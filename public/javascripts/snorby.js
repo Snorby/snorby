@@ -1062,6 +1062,56 @@ var Snorby = {
 
 jQuery(document).ready(function($) {
 
+  $('#login form#user_new').submit(function(event) {
+    event.preventDefault();
+    var self = $('#login');
+    var that = this;
+    
+    if ($('input#user_password', that).attr('value').length > 1) {
+      if ($('input#user_email', that).attr('value').length > 5) {
+
+        $.post(that.action, $(that).serialize(), function(data) {
+            if (data.success) {
+
+              flash_message.push({
+                type: 'success', 
+                message: "Loading - Authentication Successful!"
+              });
+              flash();
+              $.get(data.redirect, function(data) {
+                self.fadeOut('slow', function() {
+                  document.open();
+                  document.write(data);
+                  document.close();
+                  history.pushState(null, 'Snorby - Dashboard', '/');
+                });
+              });
+            } else {
+              flash_message.push({
+                type: 'error', 
+                message: "Fail - Authentication Failure!"
+              });
+              flash();
+            };
+        });
+
+      };
+    };
+  });
+
+  $('#login button.forgot-my-password').live('click', function(event) {
+    event.preventDefault();
+    $.get('/users/password/new', function(data) {
+      var content = $(data).find('#content').html();
+      $('#content').html(content);
+      history.pushState(null, 'Snorby - Password Reset', '/users/password/new');
+    });
+  });
+
+  $('#fancybox-wrap').draggable({
+    handle: 'box-title',
+    cursor: 'move'
+  });
 
   $('li.administration a').live('click', function(event) {
     var self = this;

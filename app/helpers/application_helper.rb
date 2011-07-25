@@ -108,9 +108,14 @@ module ApplicationHelper
     else
       html += content_tag(:div, capture(&block), :id => 'box-content-small')
     end
-    
-    html += content_tag(:div, nil, :id => 'box-footer')
+
     content_tag(:div, html, :id => 'snorby-box', :class => 'snorby-box')
+  end
+  
+  def snorby_box_footer(&block)
+    html = ''
+    html = capture(&block) if block
+    content_tag(:div, html, :id => 'box-footer')
   end
 
   def form_actions(&block)
