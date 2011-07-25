@@ -1083,6 +1083,7 @@ jQuery(document).ready(function($) {
                   document.open();
                   document.write(data);
                   document.close();
+                  history.pushState(null, 'Snorby - Dashboard', '/');
                 });
               });
             } else {
