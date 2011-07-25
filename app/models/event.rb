@@ -201,7 +201,7 @@ class Event
     return true if User.current_user.events.include?(self)
     false
   end
-
+  
   def toggle_favorite
     if self.favorite?
       destroy_favorite
@@ -211,13 +211,12 @@ class Event
   end
 
   def create_favorite
-    users << User.current_user
-    users.save
+    favorite = Favorite.create(:sid => self.sid, :cid => self.cid, :user => User.current_user)
   end
 
   def destroy_favorite
-    favorite = Favorite.first(:sid => self.sid, :cid => self.cid, :user => User.current_user)
-    favorite.destroy if favorite
+    favorite = User.current_user.favorites.first(:sid => self.sid, :cid => self.cid)
+    favorite.destroy! if favorite
   end
 
   def protocol

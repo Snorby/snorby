@@ -36,7 +36,10 @@ module Snorby
           else
             self.update(column.to_sym => count)
           end
+
+          self.save!
         end
+
       end
 
     end

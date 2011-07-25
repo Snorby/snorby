@@ -22,7 +22,8 @@ class Favorite
     self.user.up(:favorites_count) if self.user
   end
   
-  before :destroy do
+  before :destroy! do
+    puts 'in favorite down'
     self.event.down(:users_count) if self.event
     self.user.down(:favorites_count) if self.user
   end

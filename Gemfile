@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 RAILS_VERSION = '3.0.5'
 RSPEC_VERSION = '~> 2.0.0'
 DATAMAPPER = 'http://github.com/datamapper'
-DM_VERSION = '~> 1.0.2'
+DM_VERSION = '~> 1.1.0'
 
 gem 'rake', '0.9.2'
 
@@ -17,7 +17,7 @@ gem 'actionmailer',           RAILS_VERSION, :require => 'action_mailer'
 gem 'railties',               RAILS_VERSION, :require => 'rails'
 
 gem 'dm-core',                DM_VERSION
-gem 'dm-rails',               '~> 1.0.4'
+gem 'dm-rails',               DM_VERSION
 gem 'dm-do-adapter',          DM_VERSION
 gem 'dm-active_model',        DM_VERSION
 gem 'dm-mysql-adapter',       DM_VERSION
