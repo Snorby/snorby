@@ -20,6 +20,25 @@ var selected_events = [];
 var flash_message = [];
 var csrf = $('meta[name="csrf-token"]').attr('content');
 
+function HCloader(element) {
+  var $holder = $('div#' + element);
+  
+  $holder.fadeTo('slow', 0.2);
+  
+  var $el = $('<div class="cover-loader" />');
+  
+  $el.css({
+    top: $holder.offset().top,
+    left: $holder.offset().left,
+    height: $holder.height(),
+    width: $holder.width(),
+    'padding-top': $holder.height() / 2
+  }).html('Loading...');
+  
+  $el.appendTo('body');
+
+};
+
 function Queue() {
   if ( !(this instanceof arguments.callee) ) {
     return new arguments.callee(arguments);
