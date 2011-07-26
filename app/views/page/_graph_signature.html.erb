@@ -23,6 +23,12 @@
 		      },
 		      plotOptions: {
 		         pie: {
+              events: {
+                click: function(event) {
+                  HCloader(event.toElement.offsetParent.id);
+                  document.location = '/results?search[signature_name]=' + event.point.name;
+                }
+              },
 		            allowPointSelect: true,
 		            cursor: 'pointer',
 								dataLabels: {

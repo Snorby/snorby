@@ -1163,6 +1163,21 @@ dl#admin-menu dd a{
 
 /* @group Helpers */
 
+div.cover-loader{
+	vertical-align: middle;
+	position: absolute;
+	overflow: hidden;
+	display: block;
+	z-index: 99999;
+	text-align: center;
+	font-weight: bold;
+	text-decoration: none;
+	font-variant: normal;
+	color: #222;
+	font-size: 2.0em;
+	text-shadow: #fff 0 1px 0;
+}
+
 div.pad-left{
 	margin-left: 10px;
 }

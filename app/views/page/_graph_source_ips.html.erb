@@ -27,6 +27,12 @@
 		      },
 		      plotOptions: {
 		         pie: {
+             events: {
+                click: function(event) {
+                  HCloader(event.toElement.offsetParent.id);
+                  document.location = '/results?search[ip_src]=' + event.point.name;
+                 },
+              },
 		            allowPointSelect: true,
 		            cursor: 'pointer',
 								dataLabels: {
