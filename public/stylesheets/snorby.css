@@ -723,10 +723,10 @@ body.login #flash_message.success{
 
 
 #header #header-inside #menu ul li.administration{
-	background: #921812
-	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#b10205',endColorstr='#921812');
-	background: -webkit-gradient(linear,0% 0,0% 100%,from(#b10205),to(#921812));
-	background: -moz-linear-gradient(-90deg,#b10205,#921812);
+	background: #7b140f
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#980204',endColorstr='#7b140f');
+	background: -webkit-gradient(linear,0% 0,0% 100%,from(#980204),to(#7b140f));
+	background: -moz-linear-gradient(-90deg,#980204,#7b140f);
 	color: #fffeff;
 	width: 124px;
 	border-style: none;
@@ -736,23 +736,23 @@ body.login #flash_message.success{
 	right: 0;
 	top: -1px;
 	bottom: 0;
-	border-top: 1px solid #c72d38;
+	border-top: 1px solid #a7222b;
 	text-shadow: #6f0a0b 0 1px 0;
 	border-bottom: 1px solid #580e13;
 }
 
 #header #header-inside #menu ul li.administration:hover{
-	background: #a81b15
-	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#ca0305',endColorstr='#a81b15');
-	background: -webkit-gradient(linear,0% 0,0% 100%,from(#ca0305),to(#a81b15));
-	background: -moz-linear-gradient(-90deg,#ca0305,#a81b15);
+	background: #921812
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#b10205',endColorstr='#921812');
+	background: -webkit-gradient(linear,0% 0,0% 100%,from(#b10205),to(#921812));
+	background: -moz-linear-gradient(-90deg,#b10205,#921812);
 }
 
 #header #header-inside #menu ul li.administration:active{
-	background: #b10205
-	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#921812',endColorstr='#b10205');
-	background: -webkit-gradient(linear,0% 0,0% 100%,from(#921812),to(#b10205));
-	background: -moz-linear-gradient(-90deg,#921812,#b10205);
+	background: #7b140f
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#7b140f',endColorstr='#980204');
+	background: -webkit-gradient(linear,0% 0,0% 100%,from(#7b140f),to(#980204));
+	background: -moz-linear-gradient(-90deg,#7b140f,#980204);
 	border-top: 1px solid #b11b13;
 }
 #header #header-inside #menu ul li.administration a{
