@@ -45,14 +45,12 @@ class PageController < ApplicationController
   def search
   end
 
-  def results
-    begin
+  def results    
       limit = params[:limit].to_i.zero? ? @current_user.per_page_count : params[:limit].to_i
-      @events = Event.search(params[:search]).page(params[:page].to_i, :per_page => limit, :order => [:timestamp.desc])
+      @events = Event.search(params[:search], params[:page].to_i, limit, [:timestamp, :desc])
       @classifications ||= Classification.all
-    rescue ArgumentError
-      redirect_to :back, :notice => 'Please double check you search parameters and make sure they are valid.'
-    end
+  #rescue ArgumentError
+    #redirect_to :back, :notice => 'Please double check you search parameters and make sure they are valid.'
   end
 
   private

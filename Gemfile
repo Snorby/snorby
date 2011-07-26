@@ -22,7 +22,7 @@ gem 'dm-do-adapter',          DM_VERSION
 gem 'dm-active_model',        DM_VERSION
 gem 'dm-mysql-adapter',       DM_VERSION
 
-gem 'dm-pager'
+gem 'dm-pager',               DM_VERSION
 gem 'dm-migrations',          DM_VERSION
 gem 'dm-types',               DM_VERSION
 gem 'dm-validations',         DM_VERSION
@@ -62,6 +62,10 @@ group(:test) do
   gem 'rspec-core',		        RSPEC_VERSION, :require => 'rspec/core'
   gem 'rspec-expectations',	  RSPEC_VERSION, :require => 'rspec/expectations'
   gem 'rspec-rails',		      RSPEC_VERSION
+end
+
+group(:development) do
+  gem 'ruby-debug19'
 end
 
 group(:doc) do
