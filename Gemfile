@@ -64,10 +64,6 @@ group(:test) do
   gem 'rspec-rails',		      RSPEC_VERSION
 end
 
-group(:development) do
-  gem 'ruby-debug19'
-end
-
 group(:doc) do
   gem 'dm-visualizer',	'~> 0.1.0'
 end
