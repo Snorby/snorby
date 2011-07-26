@@ -1,3 +1,9 @@
+# Snorby 2.3.2
+
+* updated DM deps
+* fixed all issues with search params
+* pie charts can now be clicked to search plot data
+
 # Snorby 2.3.1
 
 * Numerous UI enhancements.
