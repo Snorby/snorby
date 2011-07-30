@@ -67,7 +67,7 @@ module ApplicationHelper
 
     link_to title, link, {
       :class => css_class, 
-      :title => "Sort `#{sort_column}` #{direction}"}
+      :title => "Sort `#{title}` #{direction}"}
   end
 
   #
