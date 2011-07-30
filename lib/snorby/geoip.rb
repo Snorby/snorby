@@ -16,39 +16,26 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-require 'dm-core'
-require 'snorby/extensions/ip_addr'
+require 'geoip'
 
 module Snorby
-  module Model
-    module Types
-      
-      class NumericIPAddr < DataMapper::Property::Integer
+  module Geoip
+   
+    PATH = File.join(Rails.root.to_s, 'config', 'snorby-geoip.dat')
 
-        def load(ip)
-          case ip
-          when nil, 0
-            nil
-          else
-            ::IPAddr.new(ip,Socket::AF_INET)
-          end
-        end
-
-        def dump(ip)
-          ip.to_i unless ip.nil?
-        end
-
-        def typecast(ip)
-          if ip.kind_of?(Integer)
-            ::IPAddr.new(ip,Socket::AF_INET)
-          elsif (ip.kind_of?(String) && !(ip.empty?))
-            ::IPAddr.new(ip)
-          elsif ip.kind_of?(::IPAddr)
-            ip
-          end
-        end
-
-      end
+    def self.database?
+      return false unless File.exists?(PATH)
+      File.open(PATH)
     end
+
+    def self.lookup(ip)
+      database = self.database?
+      return {} unless database
+      lookup = GeoIP.new(database).country(ip)
+      lookup.to_hash
+    rescue ArgumentError => e
+      {}
+    end
+
   end
 end

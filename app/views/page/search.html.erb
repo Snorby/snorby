@@ -6,11 +6,13 @@
 <% content_for :footer do %>
 
 	<script type="text/javascript">
-		$('.datepicker').daterangepicker();
+    $('.datepicker').daterangepicker({
+      dateStart: 'Today', 
+      dateEnd: 'Today'
+    });
 	</script>
 
 <% end %>
-
 
 <div id='search' class='boxit page grid_12'>
 	
@@ -25,12 +27,12 @@
 			
 			<div class='grid_4 alpha'>
 				<%= label_tag "Source Address" %><br />
-				<%= text_field_tag '[search][ip_src]', params[:ip_src], :placeholder => 'Source Address' %>
+				<%= text_field_tag '[search][ip_src]', params[:ip_src], :placeholder => 'Source or CIDR notation' %>
 			</div>
 			
 			<div class='grid_4 alpha'>
 				<%= label_tag "Destination Address" %><br />
-				<%= text_field_tag '[search][ip_dst]', params[:ip_dst], :placeholder => 'Destination Address' %>
+				<%= text_field_tag '[search][ip_dst]', params[:ip_dst], :placeholder => 'Destination or CIDR notation' %>
 			</div>
 			
 			<div class='grid_4 alpha'>

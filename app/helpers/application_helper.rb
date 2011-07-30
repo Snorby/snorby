@@ -39,7 +39,7 @@ module ApplicationHelper
     title_header = content_tag(:div, header, :id => 'title-header', :class => 'grid_6')
     if block_given?
       menu = content_tag(:ul, "<li>&nbsp;</li>#{capture(&block)}<li>&nbsp;</li>".html_safe, :id => 'title-menu')
-      menu_holder = content_tag(:ul, menu, :id => 'title-menu-holder', :class => 'grid_6')
+      menu_holder = content_tag(:ul, menu, :id => 'title-menu-holder', :class => '')
       html = title_header + menu_holder
     else
       html = title_header
@@ -49,9 +49,25 @@ module ApplicationHelper
 
   def sortable(column, title = nil)
     title ||= column.titleize
-    css_class = column == sort_column ? "current #{sort_direction}" : nil
-    direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
-    link_to title, {:sort => column, :direction => direction}, {:class => css_class}
+    css_class = column == sort_column ? "current #{sort_direction} add_tipsy" : 'add_tipsy'
+    direction = column == sort_column && sort_direction == :asc ? :desc : :asc
+    
+    link = {
+      :sort => column,
+      :direction => direction
+    }
+
+    if params.has_key?(:search)
+      link[:search] = params[:search]
+    end
+
+    if params.has_key?(:page)
+      link[:page] = params[:page].to_i
+    end
+
+    link_to title, link, {
+      :class => css_class, 
+      :title => "Sort `#{sort_column}` #{direction}"}
   end
 
   #
@@ -97,7 +113,9 @@ module ApplicationHelper
   #
   def menu_item(name, path='#', image_path=nil, options={})
     image = image_path ? "#{image_tag(image_path)} " : ""
-    content_tag(:li, "#{link_to "#{image}#{name}".html_safe, path, options}".html_safe)
+    unless (name || path).blank?
+      content_tag(:li, "#{link_to "#{image}#{name}".html_safe, path, options}".html_safe)
+    end 
   end
 
   def snorby_box(title, normal_size=true, &block)

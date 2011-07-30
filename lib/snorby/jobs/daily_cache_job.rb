@@ -68,9 +68,9 @@ module Snorby
 
           begin
 
-            ReportMailer.daily_report.deliver if Setting.daily?
             send_weekly_report if Setting.weekly?
             send_monthly_report if Setting.monthly?
+            ReportMailer.daily_report.deliver if Setting.daily?
              
           rescue PDFKit::NoExecutableError => e
             logit "#{e}"
@@ -79,7 +79,10 @@ module Snorby
           end
 
           Snorby::Jobs.daily_cache.destroy! if Snorby::Jobs.daily_cache?
-          Delayed::Job.enqueue(Snorby::Jobs::DailyCacheJob.new(false), :priority => 1, :run_at => Time.now.tomorrow.beginning_of_day)
+
+          Delayed::Job.enqueue(Snorby::Jobs::DailyCacheJob.new(false), 
+                               :priority => 1, 
+                               :run_at => Time.now.tomorrow.beginning_of_day)
 
         rescue Interrupt
           @cache.destroy! if defined?(@cache)

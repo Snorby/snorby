@@ -57,7 +57,11 @@
 		<%= render :partial => 'events/ip' if @event.ip.present? %>
 		
 		<%= render :partial => 'events/signature' %>
-		
+
+    <% if Snorby::Geoip.database? && Setting.geoip? %>
+      <%= render :partial => 'events/geoip' %>
+    <% end %>
+
 		<% if @event.tcp? %>
 			<%= render :partial => 'events/tcp' %>
 		<% elsif @event.udp? %>

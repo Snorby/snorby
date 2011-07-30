@@ -246,15 +246,15 @@
 	<h2>Severities</h2>
 	<table border="0" cellspacing="0" cellpadding="0">
 		<tr>
-			<th>High Severity</th>
-			<th>Medium Severity</th>
-			<th>Low Severity</th>
+			<th>High Severity (<%= @high.sum %>)</th>
+			<th>Medium Severity (<%= @medium.sum %>)</th>
+			<th>Low Severity (<%= @low.sum %>)</th>
 			<th>Total</th>
 		</tr>
 		<tr>
-			<td style='width:200px'><%= @high.sum %> <div id="sev1-graph" style='float:left;'></div></td>
-			<td style='width:200px'><%= @medium.sum %> <div id="sev2-graph" style='float:left;'></div></td>
-			<td style='width:200px'><%= @low.sum %> <div id="sev3-graph" style='float:left;'></div></td>
+			<td style='width:200px'><div id="sev1-graph" style='float:left;'></div></td>
+			<td style='width:200px'><div id="sev2-graph" style='float:left;'></div></td>
+			<td style='width:200px'><div id="sev3-graph" style='float:left;'></div></td>
 			<td style='width:100px'><%= @event_count %></td>
 		</tr>
 	</table>

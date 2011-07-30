@@ -1,4 +1,5 @@
 require 'snorby/model/counter'
+require 'snorby/extensions/ip_addr'
 
 class Event
 
@@ -58,6 +59,44 @@ class Event
     self.classification.down(:events_count) if self.classification
     self.signature.down(:events_count) if self.signature
     # Note: Need to decrement Severity, Sensor and User Counts
+  end
+
+   SORT = { 
+    :sig_priority => 'signature',
+    :sid => 'event',
+    :ip_src => 'ip',
+    :ip_dst => 'ip',
+    :sig_name => 'signature',
+    :timestamp => 'event',
+    :user_count => 'event'
+  }
+
+  def self.sorty(params={})
+    p params
+
+    sort = params[:sort]
+    direction = params[:direction]
+
+    page = {
+      :per_page => User.current_user.per_page_count
+    }
+
+    if SORT[sort].downcase == 'event'
+      page.merge!(:order => sort.send(direction))
+    else
+      page.merge!(
+        :order => [Event.send(SORT[sort].to_sym).send(sort).send(direction), :timestamp.send(direction)],
+        :links => [Event.relationships[SORT[sort].to_s].inverse]
+      )
+    end
+    
+    if params.has_key?(:search)
+      page.merge!(search(params[:search]))
+    else
+      page.merge!(:classification_id => nil)
+    end
+
+    page(params[:page].to_i, page)
   end
 
   def packet_capture(params={})
@@ -383,20 +422,57 @@ class Event
     end
   end
 
-  def self.search(params, page, per_page, order)
+  def self.search(params)
     @search = {}
 
     @search.merge!({:sid => params[:sid].to_i}) unless params[:sid].blank?
 
-    @search.merge!({:classification_id => params[:classification_id].to_i}) unless params[:classification_id].blank?
+    unless params[:classification_id].blank?
+      @search.merge!({:classification_id => params[:classification_id].to_i})
+    end
 
-    @search.merge!({:"signature.sig_name".like => "%#{params[:signature_name]}%"}) unless params[:signature_name].blank?
-    @search.merge!({:"tcp.tcp_sport" => params[:src_port].to_i}) unless params[:src_port].blank?
-    @search.merge!({:"tcp.tcp_dport" => params[:dst_port].to_i}) unless params[:dst_port].blank?
-    @search.merge!({:"ip.ip_src" => IPAddr.new("#{params[:ip_src]}")}) unless params[:ip_src].blank?
-    @search.merge!({:"ip.ip_dst" => IPAddr.new("#{params[:ip_dst]}")}) unless params[:ip_dst].blank?
+    unless params[:signature_name].blank?
+      @search.merge!({
+        :"signature.sig_name".like => "%#{params[:signature_name]}%"
+      })  
+    end
+    
+    unless params[:src_port].blank?
+      @search.merge!({:"tcp.tcp_sport" => params[:src_port].to_i})
+    end
+     
+    unless params[:dst_port].blank?
+      @search.merge!({:"tcp.tcp_dport" => params[:dst_port].to_i})
+    end
 
-    @search.merge!({:"signature.sig_priority" => params[:severity].to_i}) unless params[:severity].blank?
+    ### IPAddr
+    unless params[:ip_src].blank?
+      if params[:ip_src].match(/\d+\/\d+/)
+        range = IPAddr.each("#{params[:ip_src]}").to_a
+        @search.merge!({
+          :"ip.ip_src".gte => IPAddr.new(range.first),
+          :"ip.ip_src".lte => IPAddr.new(range.last),
+        })
+      else
+        @search.merge!({:"ip.ip_src".like => IPAddr.new("#{params[:ip_src]}")})
+      end 
+    end
+
+    unless params[:ip_dst].blank?
+      if params[:ip_dst].match(/\d+\/\d+/)
+        range = IPAddr.each("#{params[:ip_dst]}").to_a
+        @search.merge!({
+          :"ip.ip_dst".gte => IPAddr.new(range.first),
+          :"ip.ip_dst".lte => IPAddr.new(range.last),
+        })
+      else
+        @search.merge!({:"ip.ip_dst".like => IPAddr.new("#{params[:ip_dst]}")})
+      end
+    end
+
+    unless params[:severity].blank?
+      @search.merge!({:"signature.sig_priority" => params[:severity].to_i})
+    end
 
     unless params[:timestamp].blank?
       if params[:timestamp] =~ /\s\-\s/
@@ -410,13 +486,15 @@ class Event
       end
     end
 
+    unless params[:severity].blank?
+      @search.merge!({:"signature.sig_priority" => params[:severity].to_i})
+    end
+  
+    @search
 
-    @search.merge!({:"signature.sig_priority" => params[:severity].to_i}) unless params[:severity].blank?
-
-    @search = all(@search).page(page, :per_page => per_page, 
-      :order => [order.first.send(order.last)]
-    )
-
+  rescue ArgumentError => e
+    p e
+    {}
   end
 
 end

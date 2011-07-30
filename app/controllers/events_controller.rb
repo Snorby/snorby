@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
   respond_to :html, :xml, :json, :js, :csv
+  
+  helper_method :sort_column, :sort_direction
 
   before_filter :check_for_demo_user, :only => [:mass_action]
 
@@ -8,7 +10,10 @@ class EventsController < ApplicationController
   end
 
   def index
-    @events = Event.all(:classification_id => nil).page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:timestamp.desc])
+    params[:sort] = sort_column
+    params[:direction] = sort_direction
+
+    @events = Event.sorty(params)
     @classifications ||= Classification.all
   end
 
@@ -149,7 +154,8 @@ class EventsController < ApplicationController
 
   def activity
     @user = User.get(params[:user_id])
-    @events = @user.events.page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:timestamp.desc])
+    @events = @user.events.page(params[:page].to_i, :per_page => @current_user.per_page_count, 
+              :order => [:timestamp.desc])
     @classifications ||= Classification.all
   end
 
@@ -164,6 +170,18 @@ class EventsController < ApplicationController
   def packet_capture
     @event = Event.get(params[:sid], params[:cid])
     render :layout => false
+  end
+
+  private
+
+  def sort_column
+    return :timestamp unless params.has_key?(:sort)
+    return params[:sort].to_sym if Event::SORT.has_key?(params[:sort].to_sym)
+    :timestamp
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction].to_s) ? params[:direction].to_sym : :desc
   end
 
 end

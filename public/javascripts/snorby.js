@@ -207,6 +207,15 @@ var Snorby = {
 				$('div#events-graph').show();
 				return false;
 			});
+
+      $('a.show_map_graph').live('click', function(e) {
+				e.preventDefault();
+				$('#box-menu li').removeClass('active');
+				$(this).parent('li').addClass('active');
+				$('div.dashboard-graph').hide();
+				$('div#geoip-graph').show();
+				return false;
+			});
 			
 			$('a.show_severities_graph').live('click', function(e) {
 				e.preventDefault();
@@ -917,8 +926,13 @@ var Snorby = {
 		if ($('div.pager').is(':visible')) {
 			
 			$(document).bind('keydown', 'shift+down', function() {
-				if ($('ul.table div.content li.event.currently-over').is(':visible')) {
-					$('ul.table div.content li.event.currently-over').removeClass('currently-over').next().addClass('currently-over');
+        var item = $('ul.table div.content li.event.currently-over');
+				if (item.is(':visible')) {
+          if (item.next().length != 0) {
+            item.removeClass('currently-over').next().addClass('currently-over');
+          } else {
+            $('ul.table div.content li.event:first').addClass('currently-over');
+          };
 				} else {
 					$('ul.table div.content li.event:first').addClass('currently-over');
 				};
@@ -926,15 +940,20 @@ var Snorby = {
 			});
 
 			$(document).bind('keydown', 'shift+up', function() {
-				if ($('ul.table div.content li.event.currently-over').is(':visible')) {
-					$('ul.table div.content li.event.currently-over').removeClass('currently-over').prev().addClass('currently-over');
+        var item = $('ul.table div.content li.event.currently-over');
+				if (item.is(':visible')) {
+          if (item.prev().length != 0) {
+            item.removeClass('currently-over').prev().addClass('currently-over');
+          } else {
+            $('ul.table div.content li.event:last').addClass('currently-over');
+          };
 				} else {
 					$('ul.table div.content li.event:last').addClass('currently-over');
 				};
 				return false;
 			});
 			
-			$(document).bind('keydown', 'ctrl+o', function() {
+			$(document).bind('keydown', 'shift+return', function() {
 				$('ul.table div.content li.event.currently-over div.row div.click').click();
 				return false;
 			});

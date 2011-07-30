@@ -29,7 +29,7 @@
 			
 			<p>
 				<%= check_box_tag '[settings][packet_capture]', 0, (Setting.packet_capture ? Setting.find(:packet_capture) : nil) %> <%= label_tag 'Enable Packet Capture Support' %><br />
-				<i>(Enable the Snorby Packet Capture Plugin)</i><br />
+				<i>(Enable the Snorby Packet Capture Plugin)</i>
 			</p>
 
 
@@ -60,6 +60,11 @@
 			<p>
 				<%= check_box_tag '[settings][notes]', 1, Setting.find(:notes) %> <%= label_tag 'Event Notes' %><br />
 				<i>(Allow analysts to apply notes to events)</i><br />
+			</p>
+
+			<p>
+				<%= check_box_tag '[settings][geoip]', 1, Setting.find(:geoip) %> <%= label_tag 'Enable GeoIP Support' %><br />
+				<i>(Allow analysts to view the source and destination coordinates)</i><br />
 				<br/>
 			</p>
 
