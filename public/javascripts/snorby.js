@@ -1054,6 +1054,14 @@ var Snorby = {
 			var packet_capture_plugin = $('select#_settings_packet_capture_type').attr('packet_capture_plugin');
 			$('select#_settings_packet_capture_type option[value="'+packet_capture_plugin+'"]').attr('selected', 'selected');
 			
+      if ($('input#_settings_autodrop:checked').length > 0) {
+        $('select#_settings_autodrop_count').attr('disabled', '');
+      } else {
+        $('select#_settings_autodrop_count').attr('disabled', 'disabled');
+      };
+
+      var autodrop_count = $('select#_settings_autodrop_count').attr('autodrop_count');
+			$('select#_settings_autodrop_count option[value="'+autodrop_count+'"]').attr('selected', 'selected');
 		};
 
 		$('input#_settings_packet_capture').live('click', function() {
@@ -1065,7 +1073,16 @@ var Snorby = {
 				$('p.pc-settings input[type="text"], p.pc-settings select').removeClass('required');
 			};
 		});
-		
+
+    $('input#_settings_autodrop').live('click', function() {
+      console.log('w0ots!')
+      if ($(this).is(':checked')) {
+        $('select#_settings_autodrop_count').attr('disabled', '');
+      } else {
+        $('select#_settings_autodrop_count').attr('disabled', 'disabled');
+      };
+    });
+
 		$('input#_settings_packet_capture_auto_auth').live('click', function() {
 			if ($('input#_settings_packet_capture_auto_auth:checked').length > 0) {
 				$('input#_settings_packet_capture_user, input#_settings_packet_capture_password').addClass('required');

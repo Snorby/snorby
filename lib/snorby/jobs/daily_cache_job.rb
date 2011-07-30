@@ -78,6 +78,14 @@ module Snorby
             logit "Error: Unable to send report - please make sure your mail configurations are correct."
           end
 
+          # Autodrop Logic
+          if Setting.autodrop?
+            if Event.count > Setting.autodrop_count.to_i
+              autodrop = Event.all(:limit => Setting.autodrop_count.value.to_i, :order => :timestamp.asc)
+              autodrop.destroy
+            end
+          end
+
           Snorby::Jobs.daily_cache.destroy! if Snorby::Jobs.daily_cache?
 
           Delayed::Job.enqueue(Snorby::Jobs::DailyCacheJob.new(false), 

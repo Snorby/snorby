@@ -16,6 +16,7 @@ class SettingsController < ApplicationController
 
     @settings.each do |setting|
       name = setting.name
+      
       if @params.keys.include?(name)
         if @params[name].kind_of?(ActionDispatch::Http::UploadedFile)
           Setting.file(name, @params[name])
