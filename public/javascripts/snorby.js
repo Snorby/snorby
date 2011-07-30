@@ -29,10 +29,10 @@ function HCloader(element) {
   
   $el.css({
     top: $holder.offset().top,
-    left: $holder.offset().left,
+    left: '462px',
     height: $holder.height(),
     width: $holder.width(),
-    'padding-top': $holder.height() / 2
+    'padding-top': '190px' 
   }).html('Loading...');
   
   $el.appendTo('body');
