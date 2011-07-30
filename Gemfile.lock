@@ -79,6 +79,7 @@ GEM
       ffi (~> 1.0.6)
     chronic (0.3.0)
     closure-compiler (1.1.1)
+    combinatorics (0.3.1)
     daemons (1.1.4)
     data_objects (0.10.6)
       addressable (~> 2.1)
@@ -256,6 +257,7 @@ DEPENDENCIES
   capistrano
   capybara
   chronic (~> 0.3.0)
+  combinatorics (~> 0.3.1)
   daemons (~> 1.1.0)
   delayed_job (~> 2.1.4)
   delayed_job_data_mapper (~> 1.0.0.rc)!

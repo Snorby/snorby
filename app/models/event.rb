@@ -1,4 +1,5 @@
 require 'snorby/model/counter'
+require 'snorby/extensions/ip_addr'
 
 class Event
 
@@ -426,15 +427,52 @@ class Event
 
     @search.merge!({:sid => params[:sid].to_i}) unless params[:sid].blank?
 
-    @search.merge!({:classification_id => params[:classification_id].to_i}) unless params[:classification_id].blank?
+    unless params[:classification_id].blank?
+      @search.merge!({:classification_id => params[:classification_id].to_i})
+    end
 
-    @search.merge!({:"signature.sig_name".like => "%#{params[:signature_name]}%"}) unless params[:signature_name].blank?
-    @search.merge!({:"tcp.tcp_sport" => params[:src_port].to_i}) unless params[:src_port].blank?
-    @search.merge!({:"tcp.tcp_dport" => params[:dst_port].to_i}) unless params[:dst_port].blank?
-    @search.merge!({:"ip.ip_src" => IPAddr.new("#{params[:ip_src]}")}) unless params[:ip_src].blank?
-    @search.merge!({:"ip.ip_dst" => IPAddr.new("#{params[:ip_dst]}")}) unless params[:ip_dst].blank?
+    unless params[:signature_name].blank?
+      @search.merge!({
+        :"signature.sig_name".like => "%#{params[:signature_name]}%"
+      })  
+    end
+    
+    unless params[:src_port].blank?
+      @search.merge!({:"tcp.tcp_sport" => params[:src_port].to_i})
+    end
+     
+    unless params[:dst_port].blank?
+      @search.merge!({:"tcp.tcp_dport" => params[:dst_port].to_i})
+    end
 
-    @search.merge!({:"signature.sig_priority" => params[:severity].to_i}) unless params[:severity].blank?
+    ### IPAddr
+    unless params[:ip_src].blank?
+      if params[:ip_src].match(/\d+\/\d+/)
+        range = IPAddr.each("#{params[:ip_src]}").to_a
+        @search.merge!({
+          :"ip.ip_src".gte => IPAddr.new(range.first),
+          :"ip.ip_src".lte => IPAddr.new(range.last),
+        })
+      else
+        @search.merge!({:"ip.ip_src".like => IPAddr.new("#{params[:ip_src]}")})
+      end 
+    end
+
+    unless params[:ip_dst].blank?
+      if params[:ip_dst].match(/\d+\/\d+/)
+        range = IPAddr.each("#{params[:ip_dst]}").to_a
+        @search.merge!({
+          :"ip.ip_dst".gte => IPAddr.new(range.first),
+          :"ip.ip_dst".lte => IPAddr.new(range.last),
+        })
+      else
+        @search.merge!({:"ip.ip_dst".like => IPAddr.new("#{params[:ip_dst]}")})
+      end
+    end
+
+    unless params[:severity].blank?
+      @search.merge!({:"signature.sig_priority" => params[:severity].to_i})
+    end
 
     unless params[:timestamp].blank?
       if params[:timestamp] =~ /\s\-\s/
@@ -448,10 +486,15 @@ class Event
       end
     end
 
-
-    @search.merge!({:"signature.sig_priority" => params[:severity].to_i}) unless params[:severity].blank?
-
+    unless params[:severity].blank?
+      @search.merge!({:"signature.sig_priority" => params[:severity].to_i})
+    end
+  
     @search
+
+  rescue ArgumentError => e
+    p e
+    {}
   end
 
 end
