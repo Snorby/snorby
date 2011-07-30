@@ -148,7 +148,8 @@ class EventsController < ApplicationController
 
   def activity
     @user = User.get(params[:user_id])
-    @events = @user.events.page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:timestamp.desc])
+    @events = @user.events.page(params[:page].to_i, :per_page => @current_user.per_page_count, 
+              :order => [:timestamp.desc])
     @classifications ||= Classification.all
   end
 
@@ -174,7 +175,7 @@ class EventsController < ApplicationController
   end
   
   def sort_direction
-    %w[asc desc].include?(params[:direction].to_s) ? params[:direction].to_sym : :asc
+    %w[asc desc].include?(params[:direction].to_s) ? params[:direction].to_sym : :desc
   end
 
 end

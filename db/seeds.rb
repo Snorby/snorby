@@ -26,6 +26,8 @@ Setting.set(:packet_capture_auto_auth, 1) unless Setting.packet_capture_auto_aut
 Setting.set(:packet_capture_user, nil) unless Setting.packet_capture_user?
 Setting.set(:packet_capture_password, nil) unless Setting.packet_capture_password?
 
+Setting.set(:geoip, nil) unless Setting.geoip?
+
 # Load Default Classifications
 
 Classification.first_or_create({ :name => "Unauthorized Root Access" }, {

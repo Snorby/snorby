@@ -54,6 +54,7 @@ gem 'dm-paperclip',           '~> 2.3', :git => 'http://github.com/solnic/dm-pap
 gem 'net-dns',                '~> 0.6.1'
 gem 'whois',                  '~> 1.6.6'
 gem 'simple_form',            '~> 1.2.2'
+gem 'geoip',                  '~> 1.1.1'
 
 group(:test) do
   gem 'capybara'

@@ -6,7 +6,10 @@
 <% content_for :footer do %>
 
 	<script type="text/javascript">
-		$('.datepicker').daterangepicker();
+    $('.datepicker').daterangepicker({
+      dateStart: 'Today', 
+      dateEnd: 'Today'
+    });
 	</script>
 
 <% end %>

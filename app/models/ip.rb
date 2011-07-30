@@ -52,4 +52,17 @@ class Ip
   has n, :events, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], 
          :constraint => :destroy
 
+  def geoip
+    @geoip_hash ||= {}
+
+    if @geoip_hash.empty?
+      @geoip_hash = { 
+        :source => Snorby::Geoip.lookup(self.ip_src.to_s), 
+        :destination =>  Snorby::Geoip.lookup(self.ip_dst.to_s)
+      }
+    end
+
+    @geoip_hash
+  end
+
 end

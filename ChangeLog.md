@@ -1,6 +1,8 @@
 # Snorby 2.3.3
 
 * Fixed bug with dst pic graph loading.
+* Event tables can now be sorted using the table headers.
+* Checked event open hotkey to shift+return.
 
 # Snorby 2.3.2
 

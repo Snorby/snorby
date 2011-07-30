@@ -3710,3 +3710,13 @@ html.login,body.login{
 }
 
 /* @end */
+
+/* @group Geoip */
+
+div.map{
+	display: block;
+	position: relative;
+	overflow: hidden;
+}
+
+/* @end */

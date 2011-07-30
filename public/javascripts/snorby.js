@@ -207,6 +207,15 @@ var Snorby = {
 				$('div#events-graph').show();
 				return false;
 			});
+
+      $('a.show_map_graph').live('click', function(e) {
+				e.preventDefault();
+				$('#box-menu li').removeClass('active');
+				$(this).parent('li').addClass('active');
+				$('div.dashboard-graph').hide();
+				$('div#geoip-graph').show();
+				return false;
+			});
 			
 			$('a.show_severities_graph').live('click', function(e) {
 				e.preventDefault();
