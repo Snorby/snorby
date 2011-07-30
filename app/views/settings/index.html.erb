@@ -63,8 +63,11 @@
 			</p>
 
 			<p>
-				<%= check_box_tag '[settings][geoip]', 1, Setting.find(:geoip) %> <%= label_tag 'Enable GeoIP Support' %><br />
-				<i>(Allow analysts to view the source and destination coordinates)</i><br />
+      <%= check_box_tag '[settings][autodrop]', 1, Setting.find(:autodrop) %> <%= label_tag 'Prune database when event count is greater than' %>
+        <%= select_tag '[settings][autodrop_count]', "<option value='500000'>500,000</option><option value='1000000'>1,000,000</option><option value='2000000'>2,000,000</option><option value='3000000'>3,000,000</option><option value='4000000'>4,000,000</option><option value='5000000'>5,000,000</option>".html_safe, 
+				{ :class => 'require', :autodrop_count => Setting.find(:autodrop_count) } %>
+        <br />
+        <i>(Prune the database automatically when the event count exceeds your specified limit.)</i><br />
 				<br/>
 			</p>
 

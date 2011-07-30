@@ -7,7 +7,8 @@ class Setting
     :lookups,
     :notes,
     :packet_capture,
-    :packet_capture_auto_auth
+    :packet_capture_auto_auth,
+    :autodrop
   ]
 
   include DataMapper::Resource
