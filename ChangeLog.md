@@ -3,6 +3,10 @@
 * Fixed bug with dst pic graph loading.
 * Event tables can now be sorted using the table headers.
 * Checked event open hotkey to shift+return.
+* Bug fixes with weekly/monthly email reports.
+* Add CIDR to search for src/dst.
+* Minor UI changes and enhancements.
+* Fixed bug with event hotkey navigation.
 
 # Snorby 2.3.2
 
