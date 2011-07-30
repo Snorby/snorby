@@ -37,13 +37,16 @@ module ApplicationHelper
   def title(header, title=nil, &block)
     show_title(title ? title : header)
     title_header = content_tag(:div, header, :id => 'title-header', :class => 'grid_6')
+    
     if block_given?
-      menu = content_tag(:ul, "<li>&nbsp;</li>#{capture(&block)}<li>&nbsp;</li>".html_safe, :id => 'title-menu')
+      data = capture(&block)
+      menu = content_tag(:ul, "<li>&nbsp;</li>#{capture(&block)}<li>&nbsp;</li>".html_safe, :id => 'title-menu') unless data == "\n\t\t\t\n\n"
       menu_holder = content_tag(:ul, menu, :id => 'title-menu-holder', :class => '')
       html = title_header + menu_holder
     else
       html = title_header
     end
+
     return content_tag(:div, html, :id => 'title')
   end
 
@@ -90,9 +93,11 @@ module ApplicationHelper
 
   def drop_down_for(name, icon_path, id, &block)
     html = link_to "#{image_tag(icon_path, :size => '16x16')} #{name}".html_safe, '#', :class => 'has_dropdown right-more', :id => "#{id}"
+
     if block_given?
       html += content_tag(:dl, "#{capture(&block)}".html_safe, :id => "#{id}", :class => 'drop-down-menu', :style => 'display:none;')
     end
+
     "<li>#{html}</li>".html_safe
   end
 
