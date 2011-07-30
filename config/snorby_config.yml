@@ -11,6 +11,6 @@ test:
 # Change the production configuration 
 # for your environment.
 production:
-  domain: 'snorby.org'
+  domain: 'demo.snorby.org'
   wkhtmltopdf: /usr/local/bin/wkhtmltopdf
   mailer_sender: 'snorby@snorby.org'
