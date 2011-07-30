@@ -60,6 +60,44 @@ class Event
     # Note: Need to decrement Severity, Sensor and User Counts
   end
 
+   SORT = { 
+    :sig_priority => 'signature',
+    :sid => 'event',
+    :ip_src => 'ip',
+    :ip_dst => 'ip',
+    :sig_name => 'signature',
+    :timestamp => 'event',
+    :user_count => 'event'
+  }
+
+  def self.sorty(params={})
+    p params
+
+    sort = params[:sort]
+    direction = params[:direction]
+
+    page = {
+      :per_page => User.current_user.per_page_count
+    }
+
+    if SORT[sort].downcase == 'event'
+      page.merge!(:order => sort.send(direction))
+    else
+      page.merge!(
+        :order => [Event.send(SORT[sort].to_sym).send(sort).send(direction), :timestamp.send(direction)],
+        :links => [Event.relationships[SORT[sort].to_s].inverse]
+      )
+    end
+    
+    if params.has_key?(:search)
+      page.merge!(search(params[:search]))
+    else
+      page.merge!(:classification_id => nil)
+    end
+
+    page(params[:page].to_i, page)
+  end
+
   def packet_capture(params={})
     case Setting.find(:packet_capture_type).to_sym
     when :openfpc
@@ -383,7 +421,7 @@ class Event
     end
   end
 
-  def self.search(params, page, per_page, order)
+  def self.search(params)
     @search = {}
 
     @search.merge!({:sid => params[:sid].to_i}) unless params[:sid].blank?
@@ -413,10 +451,7 @@ class Event
 
     @search.merge!({:"signature.sig_priority" => params[:severity].to_i}) unless params[:severity].blank?
 
-    @search = all(@search).page(page, :per_page => per_page, 
-      :order => [order.first.send(order.last)]
-    )
-
+    @search
   end
 
 end

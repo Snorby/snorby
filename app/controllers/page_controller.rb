@@ -1,5 +1,7 @@
 class PageController < ApplicationController
 
+  helper_method :sort_column, :sort_direction, :sort_page
+
   def dashboard
 
     @range = params[:range].blank? ? 'today' : params[:range]
@@ -46,11 +48,11 @@ class PageController < ApplicationController
   end
 
   def results    
-      limit = params[:limit].to_i.zero? ? @current_user.per_page_count : params[:limit].to_i
-      @events = Event.search(params[:search], params[:page].to_i, limit, [:timestamp, :desc])
-      @classifications ||= Classification.all
-  #rescue ArgumentError
-    #redirect_to :back, :notice => 'Please double check you search parameters and make sure they are valid.'
+    params[:sort] = sort_column
+    params[:page] = sort_page
+    params[:direction] = sort_direction
+    @events = Event.sorty(params)
+    @classifications ||= Classification.all
   end
 
   private
@@ -105,5 +107,22 @@ class PageController < ApplicationController
       end
 
     end
+
+
+  private
+  
+  def sort_column
+    return :timestamp unless params.has_key?(:sort)
+    return params[:sort].to_sym if Event::SORT.has_key?(params[:sort].to_sym)
+    :timestamp
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction].to_s) ? params[:direction].to_sym : :desc
+  end
+
+  def sort_page
+    params[:page].to_i
+  end
 
 end

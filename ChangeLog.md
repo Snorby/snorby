@@ -1,3 +1,7 @@
+# Snorby 2.3.3
+
+* Fixed bug with dst pic graph loading.
+
 # Snorby 2.3.2
 
 * updated DM deps

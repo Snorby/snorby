@@ -50,8 +50,22 @@ module ApplicationHelper
   def sortable(column, title = nil)
     title ||= column.titleize
     css_class = column == sort_column ? "current #{sort_direction}" : nil
-    direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
-    link_to title, {:sort => column, :direction => direction}, {:class => css_class}
+    direction = column == sort_column && sort_direction == :desc ? :asc : :desc
+    
+    link = {
+      :sort => column,
+      :direction => direction
+    }
+
+    if params.has_key?(:search)
+      link[:search] = params[:search]
+    end
+
+    if params.has_key?(:page)
+      link[:page] = params[:page].to_i
+    end
+
+    link_to title, link, {:class => css_class}
   end
 
   #
