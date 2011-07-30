@@ -1,6 +1,5 @@
 development:
   domain: localhost:3000
-  #wkhtmltopdf: /usr/local/bin/wkhtmltopdf
   wkhtmltopdf: /Users/mephux/.rvm/gems/ruby-1.9.2-p0/bin/wkhtmltopdf
   mailer_sender: 'snorby@snorby.org'
 
@@ -9,7 +8,9 @@ test:
   wkhtmltopdf: /usr/local/bin/wkhtmltopdf
   mailer_sender: 'snorby@snorby.org'
 
+# Change the production configuration 
+# for your environment.
 production:
-  domain: localhost:3000
+  domain: 'snorby.org'
   wkhtmltopdf: /usr/local/bin/wkhtmltopdf
   mailer_sender: 'snorby@snorby.org'
