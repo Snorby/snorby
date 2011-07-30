@@ -63,9 +63,9 @@ class Cache
   
   def self.cache_time
     if (time = get_last)
-      return time.ran_at + 30.minute
+      return time.ran_at 
     else
-      Time.now - 30.minute
+      Time.now 
     end
   end
 
