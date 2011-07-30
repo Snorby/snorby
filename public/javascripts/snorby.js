@@ -934,7 +934,7 @@ var Snorby = {
 				return false;
 			});
 			
-			$(document).bind('keydown', 'ctrl+o', function() {
+			$(document).bind('keydown', 'shift+return', function() {
 				$('ul.table div.content li.event.currently-over div.row div.click').click();
 				return false;
 			});
