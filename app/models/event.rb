@@ -1,6 +1,5 @@
 require 'netaddr'
 require 'snorby/model/counter'
-require 'snorby/extensions/ip_addr'
 
 class Event
 
