@@ -139,7 +139,6 @@ class Cache
       blah = self.all(:sid => sensor.sid).group_by { |x| x.ran_at.hour }
       
       blah.each do |hour, data|
-        p "#{hour} => #{data.map(&:event_count).sum}"
         count[hour] = data.map(&:event_count).sum
       end
       
@@ -148,8 +147,7 @@ class Cache
         :range => count.keys
       }
     end
-    
-    p @metrics
+
     @metrics
   end
 
