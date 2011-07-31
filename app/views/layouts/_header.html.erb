@@ -46,11 +46,12 @@
             <li class='administration right'><%= link_to "Administration", settings_path %></li>
 
             <dl id="admin-menu" style='display:none;'>
-              <div class="admin-arrow"></div>
-
+              
               <dd>
                 <%= link_to "General Settings", settings_path %>
               </dd>
+
+                <div class="admin-arrow"></div>
 
               <dd>
                 <%= link_to "Classifications", classifications_path %>
@@ -71,7 +72,7 @@
               <dd>
                 <%= link_to "Worker & Job Queue <span class='shortcut'>ctrl+3</span>".html_safe, jobs_path %>
               </dd>
-
+            
             </dl>
 
 					<% end %>

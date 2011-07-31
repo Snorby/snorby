@@ -8,6 +8,8 @@
 * Minor UI changes and enhancements.
 * Fixed bug with event hotkey navigation.
 * Add auto prune functionality - remove events based of user specifications
+* Changed the "no-data" placeholder to fix the global color schema
+* Minor helper method refactoring
 
 # Snorby 2.3.2
 
