@@ -79,7 +79,6 @@ GEM
       ffi (~> 1.0.6)
     chronic (0.3.0)
     closure-compiler (1.1.1)
-    combinatorics (0.3.1)
     daemons (1.1.4)
     data_objects (0.10.6)
       addressable (~> 2.1)
@@ -182,6 +181,7 @@ GEM
     net-ssh (2.1.4)
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
+    netaddr (1.5.0)
     nokogiri (1.5.0)
     open4 (1.1.0)
     orm_adapter (0.0.5)
@@ -257,7 +257,6 @@ DEPENDENCIES
   capistrano
   capybara
   chronic (~> 0.3.0)
-  combinatorics (~> 0.3.1)
   daemons (~> 1.1.0)
   delayed_job (~> 2.1.4)
   delayed_job_data_mapper (~> 1.0.0.rc)!
@@ -287,6 +286,7 @@ DEPENDENCIES
   jquery-rails
   mail (~> 2.2.10)
   net-dns (~> 0.6.1)
+  netaddr (~> 1.5.0)
   pdfkit (~> 0.4.6)
   rails (= 3.0.5)
   railties (= 3.0.5)
