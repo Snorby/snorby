@@ -43,6 +43,11 @@ del {
 	text-decoration: line-through;
 }
 
+.ui-state-default{
+	padding: 0 !important;
+	text-align: center !important;
+}
+
 /* @end */
 
 /* @group FancyBox */
