@@ -1,3 +1,4 @@
+require 'netaddr'
 require 'snorby/model/counter'
 require 'snorby/extensions/ip_addr'
 
@@ -448,7 +449,7 @@ class Event
     ### IPAddr
     unless params[:ip_src].blank?
       if params[:ip_src].match(/\d+\/\d+/)
-        range = IPAddr.each("#{params[:ip_src]}").to_a
+        range = NetAddr::CIDR.create("#{params[:ip_src]}")
         @search.merge!({
           :"ip.ip_src".gte => IPAddr.new(range.first),
           :"ip.ip_src".lte => IPAddr.new(range.last),
@@ -505,8 +506,7 @@ class Event
   
     @search
 
-  rescue ArgumentError => e
-    p e
+  rescue NetAddr::ValidationError => e
     {}
   end
 
