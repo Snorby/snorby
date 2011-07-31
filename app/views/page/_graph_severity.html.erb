@@ -59,13 +59,16 @@
 						 backgroundColor: '#fff'
 		      },
 		      series: [{
-						name: 'High Severity',
+            name: 'High Severity',
+            color: sev1_bg_color,
 						data: [<%= @high.join(', ') %>]
 					},{
 						name: 'Medium Severity',
+            color: sev2_bg_color,
 						data: [<%= @medium.join(', ') %>]
 					},{
-						name: 'Low Severity',
+            name: 'Low Severity',
+            color: sev3_bg_color,
 						data: [<%= @low.join(', ') %>]
 					}]
 		   });
