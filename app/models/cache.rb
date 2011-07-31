@@ -121,8 +121,7 @@ class Cache
         count[hour] = low_count
       end
     end
-    
-    p count.values
+
     count.values
   end
 
