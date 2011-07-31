@@ -1,3 +1,8 @@
+# Snorby 2.3.4
+
+  * You can now view the last 24 hours on the dashboard.
+  * Fixed minor css issue with hidden menus still showing right border
+
 # Snorby 2.3.3
 
 * Fixed bug with dst pie graph loading.
