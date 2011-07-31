@@ -460,7 +460,7 @@ class Event
 
     unless params[:ip_dst].blank?
       if params[:ip_dst].match(/\d+\/\d+/)
-        range = IPAddr.each("#{params[:ip_dst]}").to_a
+        range = NetAddr::CIDR.create("#{params[:ip_dst]}")
         @search.merge!({
           :"ip.ip_dst".gte => IPAddr.new(range.first),
           :"ip.ip_dst".lte => IPAddr.new(range.last),
