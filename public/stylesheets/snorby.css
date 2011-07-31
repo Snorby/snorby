@@ -743,8 +743,8 @@ dl#admin-menu{
   -moz-box-shadow: 0px 1px 20px rgba(0,0,0,0.4);
   box-shadow: 0px 1px 20px rgba(0,0,0,0.4);
 	min-width: 200px;
-	margin: 0;
 	padding: 0;
+	opacity: 0.95;
 	display: block;
 	overflow: visible;
 	position: absolute;
@@ -756,6 +756,21 @@ dl#admin-menu{
 	border: 1px solid #151515;
 	top: 40px;
 	right: -32.5px;
+	margin-right: 0;
+	margin-left: 0;
+	margin-bottom: 0;
+}
+
+dl#admin-menu dd{
+	margin: 0;
+	padding: 4px 15px;
+	height: 25px;
+	display: block;
+	position: relative;
+	overflow: hidden;
+	border: 1px solid #000;
+	border-top-style: none;
+	border-bottom-style: none;
 }
 
 dl#admin-menu div.admin-arrow{
@@ -768,13 +783,20 @@ dl#admin-menu div.admin-arrow{
 	right: 42%;
 }
 
-dl#admin-menu dd{
-	margin: 0;
-	padding: 4px 15px;
-	height: 25px;
-	display: block;
-	position: relative;
-	overflow: hidden;
+dl#admin-menu dd:first-child{
+	border-top: 1px solid #000;
+   -moz-border-radius-topright: 5px;
+   -moz-border-radius-topleft: 5px;
+   -webkit-border-top-right-radius: 5px;
+  	-webkit-border-top-left-radius: 5px;
+}
+
+dl#admin-menu dd:last-child{
+	border-bottom: 1px solid #000;
+    -moz-border-radius-bottomright: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
 }
 
 dl#admin-menu dd span{
@@ -801,7 +823,7 @@ dl#admin-menu dd span{
 }
 
 dl#admin-menu dd:hover{
-	background-color: rgba(63,63,63,0.9);
+	background-color: rgba(66,66,66,0.4);
 }
 
 dl#admin-menu dd a{
@@ -811,7 +833,7 @@ dl#admin-menu dd a{
 	position: relative;
 	display: block;
 	overflow: visible;
-	color: #fff;
+	color: #ececec;
 	text-decoration: none;
 	font-variant: normal;
 	font-weight: normal;
@@ -1009,12 +1031,14 @@ dl#admin-menu dd a{
 	display: block;
 	position: relative;
 	overflow: hidden;
+	margin-right: 2px;
+	top: 1px;
 }
 
 #wrapper #content #title #title-menu-holder ul#title-menu li a img{
 	vertical-align: middle;
 	margin-top: -5px;
-	margin-right: 5px;
+	margin-right: 3px;
 }
 
 #wrapper #content #title #title-menu-holder ul#title-menu dl.drop-down-menu{
