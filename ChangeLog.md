@@ -3,6 +3,7 @@
   * You can now view the last 24 hours on the dashboard.
   * Fixed minor css issue with hidden menus still showing right border
   * Update batch_size to 10,000 events per cache processing loop
+  * Dashboard sev graphs now respect global severity colors
 
 # Snorby 2.3.3
 
