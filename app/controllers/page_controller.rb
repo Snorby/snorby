@@ -25,7 +25,10 @@ class PageController < ApplicationController
 
     @event_count = @cache.all.map(&:event_count).sum
 
-    @axis = @sensor_metrics.last[:range].join(',') if @sensor_metrics.last
+     
+    if @sensor_metrics.last
+      @axis = @sensor_metrics.last[:range].join(',')
+    end
 
     @classifications = Classification.all(:order => [:events_count.desc])
     @sensors = Sensor.all(:limit => 5, :order => [:events_count.desc])
