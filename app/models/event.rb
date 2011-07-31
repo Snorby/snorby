@@ -474,7 +474,19 @@ class Event
       @search.merge!({:"signature.sig_priority" => params[:severity].to_i})
     end
 
-    unless params[:timestamp].blank?
+    # Timestamp
+    if params[:timestamp].blank?
+
+      unless params[:time_start].blank? || params[:time_end].blank?
+        @search.merge!({
+          :conditions => ['timestamp >= ? AND timestamp <= ?',
+            Time.at(params[:time_start].to_i),
+            Time.at(params[:time_end].to_i)
+        ]})
+      end
+
+    else
+
       if params[:timestamp] =~ /\s\-\s/
         start_time, end_time = params[:timestamp].split(' - ')
         @search.merge!({:conditions => ['timestamp >= ? AND timestamp <= ?', 
@@ -484,6 +496,7 @@ class Event
         @search.merge!({:timestamp.gte => 
                        Chronic.parse(params[:timestamp]).beginning_of_day})
       end
+
     end
 
     unless params[:severity].blank?

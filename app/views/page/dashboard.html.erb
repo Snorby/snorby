@@ -21,6 +21,8 @@
 		<div class='dashboard-menu'>
 
 			<ul>
+
+        <li class='<%= "active" if @range == 'last_24' %>'><%= link_to "Last 24", dashboard_path(:range => :last_24) %></li>
 				
 				<li class='<%= "active" if @range == 'today' %>'><%= link_to "Today", dashboard_path(:range => :today) %></li>
 				
@@ -46,7 +48,7 @@
 				<% else %>
 				
 					<% unless %w(yesterday week last_week month last_month year quarter).include?(params[:range]) %>
-						<li class='right'><i>Last Updated: <%= @last_cache.strftime('%D %l:%M:%S %p') %></i></li>
+						<li class='right'><i>Updated: <%= @last_cache.strftime('%D %l:%M:%S %p') %></i></li>
 					<% end %>
 					
 				<% end %>

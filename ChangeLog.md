@@ -1,13 +1,20 @@
+# Snorby 2.3.4
+
+  * You can now view the last 24 hours on the dashboard.
+  * Fixed minor css issue with hidden menus still showing right border
+  * Update batch_size to 10,000 events per cache processing loop
+  * Dashboard sev graphs now respect global severity colors
+
 # Snorby 2.3.3
 
-* Fixed bug with dst pic graph loading.
+* Fixed bug with dst pie graph loading.
 * Event tables can now be sorted using the table headers.
-* Checked event open hotkey to shift+return.
+* Changed event open hotkey to shift+return.
 * Bug fixes with weekly/monthly email reports.
 * Add CIDR to search for src/dst.
 * Minor UI changes and enhancements.
 * Fixed bug with event hotkey navigation.
-* Add auto prune functionality - remove events based of user specifications
+* Added auto prune functionality - remove events based of user specifications
 * Changed the "no-data" placeholder to fix the global color schema
 * Minor helper method refactoring
 

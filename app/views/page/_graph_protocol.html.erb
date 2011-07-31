@@ -25,6 +25,8 @@
 									text: 'Date of Month'
 								<% elsif (@range == 'week' || @range == 'last_week') %>
 									text: 'Date Of Week'
+                <% elsif @range == 'last_24' %>
+                  text: 'Last 24 Hours'
 								<% else %>
 									text: 'Hour of Day'
 								<% end %>

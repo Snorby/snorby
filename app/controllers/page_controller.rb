@@ -4,7 +4,7 @@ class PageController < ApplicationController
 
   def dashboard
 
-    @range = params[:range].blank? ? 'today' : params[:range]
+    @range = params[:range].blank? ? 'last_24' : params[:range]
 
     set_defaults
 
@@ -14,9 +14,11 @@ class PageController < ApplicationController
     @tcp = @cache.protocol_count(:tcp, @range.to_sym)
     @udp = @cache.protocol_count(:udp, @range.to_sym)
     @icmp = @cache.protocol_count(:icmp, @range.to_sym)
+
     @high = @cache.severity_count(:high, @range.to_sym)
     @medium = @cache.severity_count(:medium, @range.to_sym)
     @low = @cache.severity_count(:low, @range.to_sym)
+    
     @sensor_metrics = @cache.sensor_metrics(@range.to_sym)
 
     @signature_metrics = @cache.signature_metrics
@@ -60,6 +62,12 @@ class PageController < ApplicationController
     def set_defaults
 
       case @range.to_sym
+      when :last_24
+        @cache = Cache.last_24
+        
+        @start_time = Time.zone.now.yesterday
+        @end_time = Time.zone.now
+
       when :today
         @cache = Cache.today
         @start_time = Time.now.beginning_of_day

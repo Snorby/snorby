@@ -60,6 +60,10 @@ class Cache
   def self.today
     all(:ran_at.gte => Time.now.beginning_of_day, :ran_at.lte => Time.now.end_of_day)
   end
+
+  def self.last_24
+    all(:ran_at.gte => Time.zone.now.yesterday, :ran_at.lte => Time.zone.now)
+  end
   
   def self.cache_time
     if (time = get_last)
@@ -70,7 +74,8 @@ class Cache
   end
 
   def self.protocol_count(protocol, type=nil)
-    count = []
+    count = count_hash(type)
+    
     @cache = cache_for_type(self, :hour)
 
     case protocol.to_sym
@@ -88,16 +93,12 @@ class Cache
       end
     end
 
-    range_for_type(:hour) do |i|
-      next if count[i]
-      count[i] = 0
-    end
-
-    count
+    count.values
   end
 
   def self.severity_count(severity, type=nil)
-    count = []
+    count = count_hash(type)   
+    
     @cache = cache_for_type(self, :hour)
 
     case severity.to_sym
@@ -121,12 +122,7 @@ class Cache
       end
     end
 
-    range_for_type(:hour) do |i|
-      next if count[i]
-      count[i] = 0
-    end
-
-    count
+    count.values
   end
 
   def self.get_last
@@ -137,14 +133,18 @@ class Cache
     @metrics = []
 
     Sensor.all(:limit => 5, :order => [:events_count.desc]).each do |sensor|
-      count = Array.new(24) { 0 }
-      blah = self.all(:sid => sensor.sid).group_by { |x| x.ran_at.hour }
+      count = count_hash(type)
 
+      blah = self.all(:sid => sensor.sid).group_by { |x| x.ran_at.hour }
+      
       blah.each do |hour, data|
         count[hour] = data.map(&:event_count).sum
       end
-
-      @metrics << { :name => sensor.name, :data => count, :range => 24.times.to_a }
+      
+      @metrics << { :name => sensor.name, 
+        :data => count.values, 
+        :range => count.keys
+      }
     end
 
     @metrics
@@ -229,6 +229,28 @@ class Cache
     end
     
     @top
+  end
+
+  def self.count_hash(type=nil)
+    count = {}
+
+    if type == :last_24
+      
+      Range.new(Time.zone.now.yesterday.to_i, Time.zone.now.to_i).step(1.hour) do |seconds_since_epoch|
+        time = Time.at(seconds_since_epoch)
+        count[time.hour] = 0
+      end
+
+    else
+    
+      count[0] = 0
+      1.upto(23).each do |i|
+        count[i] = 0
+      end
+
+    end
+
+    count
   end
 
   def self.cache_for_type(collection, type=:week, sensor=false)

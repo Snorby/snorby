@@ -39,8 +39,8 @@ module ApplicationHelper
     title_header = content_tag(:div, header, :id => 'title-header', :class => 'grid_6')
     
     if block_given?
-      data = capture(&block)
-      menu = content_tag(:ul, "<li>&nbsp;</li>#{capture(&block)}<li>&nbsp;</li>".html_safe, :id => 'title-menu') unless data == "\n\t\t\t\n\n"
+      data = capture(&block).gsub("\n|\t", '')
+      menu = content_tag(:ul, "<li>&nbsp;</li>#{capture(&block)}<li>&nbsp;</li>".html_safe, :id => 'title-menu') unless data.blank?
       menu_holder = content_tag(:ul, menu, :id => 'title-menu-holder', :class => '')
       html = title_header + menu_holder
     else

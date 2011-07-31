@@ -19,7 +19,9 @@
 module Snorby
   module Jobs
     module CacheHelper
-      
+
+      BATCH_SIZE = 10000
+
       def logit(msg, show_sensor=true)
         if show_sensor
           STDOUT.puts "Sensor #{@sensor.sid}: #{msg}" if verbose
