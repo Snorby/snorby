@@ -142,8 +142,8 @@ class Cache
       end
       
       @metrics << { :name => sensor.name, 
-        :data => count.values, 
-        :range => count.keys
+        :data => count.values,
+        :range => count.keys.collect {|x| "'#{x}'" }
       }
     end
 
