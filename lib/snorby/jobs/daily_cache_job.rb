@@ -80,7 +80,7 @@ module Snorby
 
           # Autodrop Logic
           if Setting.autodrop?
-            if Event.count > Setting.autodrop_count.to_i
+            if Event.count > Setting.autodrop_count.value.to_i
               autodrop = Event.all(:limit => Setting.autodrop_count.value.to_i, :order => :timestamp.asc)
               autodrop.destroy
             end
@@ -113,7 +113,6 @@ module Snorby
         @tcp_events = []
         @udp_events = []
         @icmp_events = []
-
 
         if day_end >= @stop_date
           logit "Current - No New Events To Cache..."
