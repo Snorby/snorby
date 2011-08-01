@@ -19,22 +19,31 @@
 	<div class='main grid_9'>
 		
 		<div class='dashboard-menu'>
-
+      
 			<ul>
 
-        <li class='<%= "active" if @range == 'last_24' %>'><%= link_to "Last 24", dashboard_path(:range => :last_24) %></li>
+        <li class='<%= "active" if @range == 'last_24' %> add_tipsy' title="<%= (@now - 24.hours).strftime('%D %H:%S %p') %> - <%= @now.strftime('%D %H:%S %p') %>"><%= link_to "Last 24", dashboard_path(:range => :last_24) %></li>
 				
-				<li class='<%= "active" if @range == 'today' %>'><%= link_to "Today", dashboard_path(:range => :today) %></li>
+				<li class='<%= "active" if @range == 'today' %> add_tipsy' title="<%= @now.strftime('%A, %B %Y') %>"><%= link_to "Today", dashboard_path(:range => :today) %></li>
 				
-				<li class='<%= "active" if @range == 'yesterday' %>'><%= link_to "Yesterday", dashboard_path(:range => :yesterday) %></li>
+        <li class='<%= "active" if @range == 'yesterday' %> add_tipsy' title="<%= @now.yesterday.strftime('%A, %B %Y') %>"><%= link_to "Yesterday", dashboard_path(:range => :yesterday) %></li>
+
+        <% if @now.beginning_of_week.day == @now.day %>
+          <li class='<%= "active" if @range == 'last_week' %> add_tipsy' title="<%= (@now - 1.week).beginning_of_week.strftime('%D') %> - <%= (@now - 1.week).end_of_week.strftime('%D') %>"><%= link_to "Last Week", dashboard_path(:range => :last_week) %></li>
+        <% else %>
+          <li class='<%= "active" if @range == 'week' %> add_tipsy' title="<%= @now.beginning_of_week.strftime('%D') %> - <%= @now.end_of_week.strftime('%D') %>"><%= link_to "This Week", dashboard_path(:range => :week) %></li>
+        <% end %>
+			  
+        <% if @now.day == 1 %>
+           <li class='<%= "active" if @range == 'last_month' %> add_tipsy' title="<%= (@now - 1.month).beginning_of_month.strftime('%B') %>"><%= link_to "Last Month", dashboard_path(:range => :last_month) %></li>
+        <% else %>
+          <li class='<%= "active" if @range == 'month' %> add_tipsy' title="<%= @now.beginning_of_month.strftime('%B') %>"><%= link_to "This Month", dashboard_path(:range => :month) %></li>
+        <% end %>
 				
-				<li class='<%= "active" if @range == 'week' %>'><%= link_to "This Week", dashboard_path(:range => :week) %></li>
 				
-				<li class='<%= "active" if @range == 'month' %>'><%= link_to "This Month", dashboard_path(:range => :month) %></li>
+        <li class='<%= "active" if @range == 'quarter' %> add_tipsy' title="<%= @now.beginning_of_quarter.strftime('%B %Y') %> - <%= @now.end_of_quarter.strftime('%B %Y') %>"><%= link_to "This Quarter", dashboard_path(:range => :quarter) %></li>
 				
-				<li class='<%= "active" if @range == 'quarter' %>'><%= link_to "This Quarter", dashboard_path(:range => :quarter) %></li>
-				
-				<li class='<%= "active" if @range == 'year' %>'><%= link_to "This Year", dashboard_path(:range => :year) %></li>
+				<li class='<%= "active" if @range == 'year' %> add_tipsy' title="<%= @now.strftime('%Y') %>"><%= link_to "This Year", dashboard_path(:range => :year) %></li>
 				
 				<% if Snorby::Jobs.caching? %>
 					<% content_for :footer do %>
