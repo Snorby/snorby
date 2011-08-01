@@ -1,3 +1,9 @@
+# Snorby 2.3.5
+
+  * Snorby::Report bug fixes with sending weekly/monthly reports.
+  * Better error logging in all snorby cache jobs
+  * Pie chart loading indicator should be generated dynamically.
+
 # Snorby 2.3.4
 
   * You can now view the last 24 hours on the dashboard.
