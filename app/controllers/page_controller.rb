@@ -68,8 +68,8 @@ class PageController < ApplicationController
     when :last_24
       @cache = Cache.last_24
       
-      @start_time = Time.zone.now.yesterday
-      @end_time = Time.zone.now
+      @start_time = Time.now.yesterday
+      @end_time = Time.now
 
     when :today
       @cache = Cache.today
