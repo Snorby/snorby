@@ -172,7 +172,7 @@ module Snorby
             records = []
             batch = 0
 
-            all_events.each_chunk(BATCH_SIZE) do |chunk|
+            all_events.each_chunk(BATCH_SIZE.to_i) do |chunk|
               @events = chunk
               
               logit "\nProcessing Batch #{batch += 1} of " + 

@@ -74,7 +74,8 @@ module Snorby
              
           rescue PDFKit::NoExecutableError => e
             logit "#{e}"
-          rescue
+          rescue => e
+            logit "#{e}"
             logit "Error: Unable to send report - please make sure your mail configurations are correct."
           end
 
@@ -132,7 +133,7 @@ module Snorby
           records = []
           batch = 0
 
-          all_events.each_chunk(BATCH_SIZE) do |chunk|
+          all_events.each_chunk(BATCH_SIZE.to_i) do |chunk|
             @events = chunk
             
             logit "\nProcessing Batch #{batch += 1} of " + 
