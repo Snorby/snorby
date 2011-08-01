@@ -25,7 +25,7 @@ module Snorby
       class CacheCompleted < Exception; end;
 
       def perform
-        @stop_date = Time.now.yesterday.end_of_day
+        @stop_date = DateTime.now.yesterday.end_of_day
 
         begin
 
@@ -75,7 +75,8 @@ module Snorby
           rescue PDFKit::NoExecutableError => e
             logit "#{e}"
           rescue => e
-            logit "#{e}"
+            logit "#{e}", false
+            logit "#{e.backtrace.first}", false
             logit "Error: Unable to send report - please make sure your mail configurations are correct."
           end
 
