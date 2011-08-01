@@ -3,6 +3,7 @@ class PageController < ApplicationController
   helper_method :sort_column, :sort_direction, :sort_page
 
   def dashboard
+    @now = Time.now
 
     @range = params[:range].blank? ? 'last_24' : params[:range]
 
@@ -68,53 +69,53 @@ class PageController < ApplicationController
     when :last_24
       @cache = Cache.last_24
       
-      @start_time = Time.now.yesterday
-      @end_time = Time.now
+      @start_time = @now.yesterday
+      @end_time = @now
 
     when :today
       @cache = Cache.today
-      @start_time = Time.now.beginning_of_day
-      @end_time = Time.now.end_of_day
+      @start_time = @now.beginning_of_day
+      @end_time = @now.end_of_day
 
     when :yesterday
       @cache = Cache.yesterday
-      @start_time = (Time.now - 1.day).beginning_of_day
-      @end_time = (Time.now - 1.day).end_of_day
+      @start_time = (@now - 1.day).beginning_of_day
+      @end_time = (@now - 1.day).end_of_day
 
     when :week
       @cache = DailyCache.this_week
-      @start_time = Time.now.beginning_of_week
-      @end_time = Time.now.end_of_week
+      @start_time = @now.beginning_of_week
+      @end_time = @now.end_of_week
 
     when :last_week
       @cache = DailyCache.last_week
-      @start_time = (Time.now - 1.week).beginning_of_week
-      @end_time = (Time.now - 1.week).end_of_week
+      @start_time = (@now - 1.week).beginning_of_week
+      @end_time = (@now - 1.week).end_of_week
 
     when :month
       @cache = DailyCache.this_month
-      @start_time = Time.now.beginning_of_month
-      @end_time = Time.now.end_of_month
+      @start_time = @now.beginning_of_month
+      @end_time = @now.end_of_month
 
     when :last_month
       @cache = DailyCache.last_month
-      @start_time = (Time.now - 2.months).beginning_of_month
-      @end_time = (Time.now - 2.months).end_of_month
+      @start_time = (@now - 2.months).beginning_of_month
+      @end_time = (@now - 2.months).end_of_month
 
     when :quarter
       @cache = DailyCache.this_quarter
-      @start_time = Time.now.beginning_of_quarter
-      @end_time = Time.now.end_of_quarter
+      @start_time = @now.beginning_of_quarter
+      @end_time = @now.end_of_quarter
 
     when :year
       @cache = DailyCache.this_year
-      @start_time = Time.now.beginning_of_year
-      @end_time = Time.now.end_of_year
+      @start_time = @now.beginning_of_year
+      @end_time = @now.end_of_year
 
     else
       @cache = Cache.today
-      @start_time = Time.now.beginning_of_day
-      @end_time = Time.now.end_of_day
+      @start_time = @now.beginning_of_day
+      @end_time = @now.end_of_day
     end
 
   end
