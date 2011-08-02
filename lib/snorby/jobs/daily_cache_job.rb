@@ -25,7 +25,7 @@ module Snorby
       class CacheCompleted < Exception; end;
 
       def perform
-        @stop_date = DateTime.now.yesterday.end_of_day
+        @stop_date = Time.now.yesterday.end_of_day
 
         begin
 
