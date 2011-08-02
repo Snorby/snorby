@@ -62,7 +62,7 @@ class Cache
   end
 
   def self.last_24
-    all(:ran_at.gte => Time.zone.now.yesterday, :ran_at.lte => Time.zone.now)
+    all(:ran_at.gte => Time.now.yesterday, :ran_at.lte => Time.now)
   end
   
   def self.cache_time
@@ -135,7 +135,7 @@ class Cache
     Sensor.all(:limit => 5, :order => [:events_count.desc]).each do |sensor|
       count = count_hash(type)
 
-      blah = self.all(:sid => sensor.sid).group_by { |x| x.ran_at.hour }
+      blah = self.all(:sid => sensor.sid).group_by { |x| "#{x.ran_at.day}-#{x.ran_at.hour}" }
       
       blah.each do |hour, data|
         count[hour] = data.map(&:event_count).sum
@@ -143,7 +143,7 @@ class Cache
       
       @metrics << { :name => sensor.name, 
         :data => count.values,
-        :range => count.keys.collect {|x| "'#{x}'" }
+        :range => count.keys.collect {|x| "'#{x.split('-').last}'" }
       }
     end
 
@@ -235,17 +235,29 @@ class Cache
     count = {}
 
     if type == :last_24
-      
-      Range.new(Time.zone.now.yesterday.to_i, Time.zone.now.to_i).step(1.hour) do |seconds_since_epoch|
+      now = Time.now
+      # TODO
+      # this will need to store the key as day/hour
+      Range.new(now.yesterday.to_i, now.to_i).step(1.hour) do |seconds_since_epoch|
         time = Time.at(seconds_since_epoch)
-        count[time.hour] = 0
+        key = "#{time.day}-#{time.hour}"
+        count[key] = 0
       end
 
     else
     
-      count[0] = 0
-      1.upto(23).each do |i|
-        count[i] = 0
+      if type == :today
+        time_start = Time.now.beginning_of_day.to_i
+        time_end =  Time.now.end_of_day.to_i
+      else
+        time_start = Time.now.yesterday.beginning_of_day.to_i
+        time_end =  Time.now.yesterday.end_of_day.to_i  
+      end
+
+      Range.new(time_start, time_end).step(1.hour) do |seconds_since_epoch|
+        time = Time.at(seconds_since_epoch)
+        key = "#{time.day}-#{time.hour}"
+        count[key] = 0
       end
 
     end
@@ -253,53 +265,19 @@ class Cache
     count
   end
 
-  def self.cache_for_type(collection, type=:week, sensor=false)
-    case type.to_sym
-    when :week
-      return collection.group_by { |x| x.ran_at.day } unless sensor
-      return collection.all(:sid => sensor.sid).group_by { |x| x.ran_at.day }
-    when :month
-      return collection.group_by { |x| x.ran_at.day } unless sensor
-      return collection.all(:sid => sensor.sid).group_by { |x| x.ran_at.day }
-    when :year
-      return collection.group_by { |x| x.ran_at.month } unless sensor
-      return collection.all(:sid => sensor.sid).group_by { |x| x.ran_at.month }
-    when :hour
-      return collection.group_by { |x| x.ran_at.hour } unless sensor
-      return collection.all(:sid => sensor.sid).group_by { |x| x.ran_at.hour }
-    else
-      return collection.group_by { |x| x.ran_at.day } unless sensor
-      return collection.all(:sid => sensor.sid).group_by { |x| x.ran_at.day }
+  def self.cache_for_type(collection, type=:hour, sensor=false)
+    return collection.group_by { |x| "#{x.ran_at.day}-#{x.ran_at.hour}" } unless sensor
+    return collection.all(:sid => sensor.sid).group_by do |x| 
+      "#{x.ran_at.day}-#{x.ran_at.hour}"
     end
   end
 
-  def self.range_for_type(type=:week, &block)
-
-    case type.to_sym
-    when :hour
-      Time.now.beginning_of_day.hour.upto(Time.now.end_of_day.hour) do |i|
-        block.call(i) if block
-      end
-    when :week
-      Time.now.beginning_of_week.day.upto(Time.now.end_of_week.day) do |i|
-        block.call(i) if block
-      end
-    when :month
-      Time.now.beginning_of_month.day.upto(Time.now.end_of_month.day) do |i|
-        block.call(i) if block
-      end
-    when :year
-      start_time_method = :beginning_of_year
-      end_time_method = :end_of_year
-      Time.now.beginning_of_year.month.upto(Time.now.end_of_year.month) do |i|
-        block.call(i) if block
-      end
-    else
-      Time.now.beginning_of_week.day.upto(Time.now.end_of_week.day) do |i|
-        block.call(i) if block
-      end
+  def self.range_for_type(type=:hour, &block)
+    Range.new(Time.now.beginning_of_day.to_i, Time.now.end_of_day.to_i).step(1.hour) do |seconds_since_epoch|
+      time = Time.at(seconds_since_epoch)
+      key = "#{time.day}-#{time.hour}"
+      block.call(key) if block
     end
-
   end
 
 end
