@@ -2867,6 +2867,7 @@ div.notes div#new_note textarea#body{
 	color: #fff;
 	line-height: 17px;
 	margin-bottom: 5px;
+	word-wrap: break-word;
 }
 
 .event-note .note-body strong{

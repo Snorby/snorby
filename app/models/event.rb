@@ -299,7 +299,7 @@ class Event
   end
   
   def in_xml
-    %{<snorby>#{to_xml}#{user.to_xml if user}#{ip.to_xml}#{protocol_data.last.to_xml if protocol_data}#{classification.to_xml if classification}#{payload.to_xml if payload}#{notes.to_xml}</snorby>}
+    %{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><snorby>#{to_xml}#{user.to_xml if user}#{ip.to_xml}#{protocol_data.last.to_xml if protocol_data}#{classification.to_xml if classification}#{payload.to_xml if payload}#{notes.to_xml}</snorby>}.chomp
   end
 
   def in_json
@@ -314,7 +314,7 @@ class Event
       :dst_port => dst_port,
       :type => type,
       :proto => proto,
-      :payload => payload.to_ascii,
+      :payload => payload,
       :payload_html => payload.to_html
     }
     return json
@@ -364,8 +364,10 @@ class Event
       return 0
     elsif tcp?
       return tcp.tcp_sport
-    else
+    elsif udp?
       return udp.udp_sport
+    else
+      return nil
     end
   end
 
@@ -380,8 +382,10 @@ class Event
       return 0
     elsif tcp?
       return tcp.tcp_dport
-    else
+    elsif udp?
       return udp.udp_dport
+    else
+      return nil
     end
   end
 
