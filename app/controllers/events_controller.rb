@@ -148,13 +148,10 @@ class EventsController < ApplicationController
 
   def activity
     @user = User.get(params[:user_id])
-    if @user
-      @events = @user.events.page(params[:page].to_i, :per_page => @current_user.per_page_count, 
+    @userr = @current_user unless @user
+
+    @events = @user.events.page(params[:page].to_i, :per_page => @current_user.per_page_count, 
               :order => [:timestamp.desc])
-    else
-      @events =  @current_user.events.page(params[:page].to_i, :per_page => @current_user.per_page_count, 
-              :order => [:timestamp.desc])
-    end
 
     @classifications ||= Classification.all
   end
