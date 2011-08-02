@@ -299,7 +299,7 @@ class Event
   end
   
   def in_xml
-    %{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><snorby>#{to_xml}#{user.to_xml if user}#{ip.to_xml}#{protocol_data.last.to_xml if protocol_data}#{classification.to_xml if classification}#{payload.to_xml if payload}#{notes.to_xml}</snorby>}.chomp
+    %{<snorby>#{to_xml}#{user.to_xml if user}#{ip.to_xml}#{protocol_data.last.to_xml if protocol_data}#{classification.to_xml if classification}#{payload.to_xml if payload}</snorby>}.chomp
   end
 
   def in_json
@@ -315,7 +315,7 @@ class Event
       :type => type,
       :proto => proto,
       :payload => payload,
-      :payload_html => payload.to_html
+      :payload_html => payload ? payload.to_html : ''
     }
     return json
   end
