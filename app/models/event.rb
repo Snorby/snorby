@@ -507,6 +507,8 @@ class Event
 
   rescue NetAddr::ValidationError => e
     {}
+  rescue ArgumentError => e
+    {}
   end
 
 end
