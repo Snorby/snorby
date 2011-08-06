@@ -198,4 +198,42 @@ module ApplicationHelper
     end
   end
 
+
+  def clippy(text, bgcolor='#FFFFFF', id=0)
+    html = <<-EOF
+      <span style="display:none" id="clippy_#{id}" class="url-box-clippy">
+        #{text}
+      </span>
+      <span id="main_clippy_#{id}" class="add_tipsy clippy" 
+      original-title="copied!" title="copy to clipboard">
+        <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" 
+                width="14" 
+                height="14" 
+                class="clippy" 
+                id="clippy">
+        <param name="movie" value="/flash/clippy.swf">
+        <param name="allowScriptAccess" value="always">
+        <param name="quality" value="high">
+        <param name="scale" value="noscale">
+        <param name="FlashVars" value="id=clippy_#{id}&amp;copied=&amp;copyto=">
+        <param name="bgcolor" value="#{bgcolor}">
+        <param name="wmode" value="opaque">
+        <embed src="/flash/clippy.swf" 
+               width="14" 
+               height="14" 
+               name="clippy" 
+               quality="high" 
+               allowscriptaccess="always" 
+               type="application/x-shockwave-flash" 
+               pluginspage="http://www.macromedia.com/go/getflashplayer" 
+               flashvars="id=clippy_#{id}&amp;copied=&amp;copyto=" 
+               bgcolor="#{bgcolor}" 
+               wmode="opaque">
+        </object>
+      </span>
+    EOF
+
+    html.html_safe
+  end
+  
 end

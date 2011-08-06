@@ -61,8 +61,12 @@ class Cache
     all(:ran_at.gte => Time.now.beginning_of_day, :ran_at.lte => Time.now.end_of_day)
   end
 
-  def self.last_24
-    all(:ran_at.gte => Time.now.yesterday, :ran_at.lte => Time.now)
+  def self.last_24(first=nil,last=nil)
+    current = Time.now
+    end_time = last ? last : current
+    start_time = first ? first : current.yesterday
+
+    all(:ran_at.gte => start_time, :ran_at.lte => end_time)
   end
   
   def self.cache_time
@@ -141,7 +145,8 @@ class Cache
         count[hour] = data.map(&:event_count).sum
       end
       
-      @metrics << { :name => sensor.name, 
+      @metrics << { 
+        :name => sensor.name, 
         :data => count.values,
         :range => count.keys.collect {|x| "'#{x.split('-').last}'" }
       }
@@ -238,6 +243,7 @@ class Cache
       now = Time.now
       # TODO
       # this will need to store the key as day/hour
+      
       Range.new(now.yesterday.to_i, now.to_i).step(1.hour) do |seconds_since_epoch|
         time = Time.at(seconds_since_epoch)
         key = "#{time.day}-#{time.hour}"

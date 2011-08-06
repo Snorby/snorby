@@ -33,7 +33,9 @@
              events: {
                 click: function(event) {
                   HCloader(event.toElement.offsetParent.id);
-                  document.location = '/results?search[ip_src]=' + event.point.name;
+                  document.location = '/results?search[ip_src]=' + 
+                    event.point.name + '&search[time_start]=<%= @start_time.to_i %>' +
+                    '&search[time_end]=<%= @end_time.to_i %>';
                  },
               },
 		            allowPointSelect: true,

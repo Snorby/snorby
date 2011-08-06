@@ -67,10 +67,11 @@ class PageController < ApplicationController
 
     case @range.to_sym
     when :last_24
-      @cache = Cache.last_24
       
       @start_time = @now.yesterday
       @end_time = @now
+      
+      @cache = Cache.last_24(@start_time, @end_time)
 
     when :today
       @cache = Cache.today
@@ -99,8 +100,8 @@ class PageController < ApplicationController
 
     when :last_month
       @cache = DailyCache.last_month
-      @start_time = (@now - 2.months).beginning_of_month
-      @end_time = (@now - 2.months).end_of_month
+      @start_time = (@now - 1.months).beginning_of_month
+      @end_time = (@now - 1.months).end_of_month
 
     when :quarter
       @cache = DailyCache.this_quarter

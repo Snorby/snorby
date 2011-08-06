@@ -176,7 +176,7 @@ module Snorby
               @events = chunk
               
               logit "\nProcessing Batch #{batch += 1} of " + 
-              "#{(all_events.length / 1000) + 1}...", false
+              "#{(all_events.length / BATCH_SIZE) + 1}...", false
               
               build_sensor_event_count
               build_proto_counts

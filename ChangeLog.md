@@ -1,3 +1,8 @@
+# Snorby 2.3.6
+
+  * Fixed issue this inaccurate last_month timestamps.
+  * Graph click events are not scoped by range time.
+
 # Snorby 2.3.5
 
   * Snorby::Report bug fixes with sending weekly/monthly reports.
