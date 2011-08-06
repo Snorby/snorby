@@ -19,9 +19,37 @@
 		</tr>
 		<tbody>
 			<tr>
-				<td style='width:150px;' class='first'><a href='/events/lookup?address=<%= @event.ip.ip_src %>' data-address='<%= @event.ip.ip_src %>' class='ip-button snorbybox'><%= @event.ip.ip_src %></a></td>
-				<td style='width:150px;'><a href='/events/lookup?address=<%= @event.ip.ip_dst %>' data-address='<%= @event.ip.ip_dst %>' class='ip-button snorbybox'><%= @event.ip.ip_dst %></a></td>
-				<td><%= @event.ip.ip_ver %></td>
+        
+        <td style='width:150px;' class='first'>
+          <a href='/events/lookup?address=<%= @event.ip.ip_src %>' 
+            data-address='<%= @event.ip.ip_src %>' class='ip-button has-event-menu' onclick="return false;">
+            
+            <%= @event.ip.ip_src %>
+            <%= clippy(@event.ip.ip_src, '#FFFFFF', "src-#{@event.id}") %>
+          </a>
+          
+          <dl class='event-sub-menu round shadow push-down' style='display:none;'>
+            <dd><%= link_to 'Source Lookup', "/events/lookup?address=#{@event.ip.ip_src}", :class => 'snorbybox' %></dd>
+            <dd><%= link_to "Search By Source", results_path(:search => {:ip_src => @event.ip.ip_src}) %></dd>
+          </dl>
+
+        </td>
+
+        <td style='width:150px;'>
+          <a href='/events/lookup?address=<%= @event.ip.ip_dst %>' 
+            data-address='<%= @event.ip.ip_dst %>' class='ip-button has-event-menu'>
+            
+            <%= @event.ip.ip_dst %>
+            <%= clippy(@event.ip.ip_dst, '#FFFFFF', "dst-#{@event.id}") %>
+          </a>
+
+          <dl class='event-sub-menu round shadow push-down' style='display:none;'>
+            <dd><%= link_to 'Destination Lookup', "/events/lookup?address=#{@event.ip.ip_dst}", :class => 'snorbybox' %></dd>
+            <dd><%= link_to "Search By Destination", results_path(:search => {:ip_dst => @event.ip.ip_dst}) %></dd>
+          </dl
+        </td>
+        
+        <td><%= @event.ip.ip_ver %></td>
 				<td><%= @event.ip.ip_hlen %></td>
 				<td><%= @event.ip.ip_tos %></td>
 				<td><%= @event.ip.ip_len %></td>

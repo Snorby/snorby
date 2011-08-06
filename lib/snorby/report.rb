@@ -50,8 +50,13 @@ module Snorby
 
       @last_cache = @cache.get_last ? @cache.get_last.ran_at : Time.now
 
-      sigs = Event.all(:limit => 5, :order => [:timestamp.desc], :fields => [:sig_id], :unique => true).map(&:signature).map(&:sig_id)
-      @recent_events = Event.all(:sig_id => sigs).group_by { |x| x.sig_id }.map(&:last).map(&:first)
+      sigs = Event.all(:limit => 5, :order => [:timestamp.desc], 
+                       :fields => [:sig_id], 
+                       :unique => true).map(&:signature).map(&:sig_id)
+
+      @recent_events = Event.all(:sig_id => sigs).group_by do |x| 
+        x.sig_id 
+      end.map(&:last).map(&:first)
       
 
       av = ActionView::Base.new(Rails.root.join('app', 'views'))
@@ -74,7 +79,9 @@ module Snorby
         :last_cache => @last_cache
       })
 
-      pdf = PDFKit.new(av.render(:template => "page/dashboard.pdf.erb", :layout => 'layouts/pdf.html.erb'))
+      pdf = PDFKit.new(av.render(:template => "page/dashboard.pdf.erb", 
+                                 :layout => 'layouts/pdf.html.erb'))
+
       pdf.stylesheets << Rails.root.join("public/stylesheets/pdf.css")
       
       data = {
@@ -122,8 +129,8 @@ module Snorby
 
       when :last_month
         @cache = DailyCache.last_month
-        @start_time = (Time.now - 2.months).beginning_of_month
-        @end_time = (Time.now - 2.months).end_of_month
+        @start_time = (Time.now - 1.months).beginning_of_month
+        @end_time = (Time.now - 1.months).end_of_month
 
       when :quarter
         @cache = DailyCache.this_quarter

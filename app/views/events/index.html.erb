@@ -6,9 +6,7 @@
 			$('div#wrapper').attr({last_event: last_event.time});
 		
       setInterval (function () {
-          console.log('checking');
         $.get('/events/last', function(data) {
-          console.log(data)
 					var old_id = $('div#wrapper').attr('last_event');
 					var page = parseInt($('.pager li.active a').html());
 					if (old_id != data.time) {
