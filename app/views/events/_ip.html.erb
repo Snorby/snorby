@@ -22,22 +22,31 @@
         
         <td style='width:150px;' class='first'>
           <a href='/events/lookup?address=<%= @event.ip.ip_src %>' 
-            data-address='<%= @event.ip.ip_src %>' class='ip-button snorbybox'>
+            data-address='<%= @event.ip.ip_src %>' class='ip-button has-event-menu' onclick="return false;">
             
             <%= @event.ip.ip_src %>
+            <%= clippy(@event.ip.ip_src, '#FFFFFF', "src-#{@event.id}") %>
           </a>
+          
+          <dl class='event-sub-menu round shadow push-down' style='display:none;'>
+            <dd><%= link_to 'Source Lookup', "/events/lookup?address=#{@event.ip.ip_src}", :class => 'snorbybox' %></dd>
+            <dd><%= link_to "Search By Source", results_path(:search => {:ip_src => @event.ip.ip_src}) %></dd>
+          </dl>
 
-          <%= clippy(@event.ip.ip_src, '#FFFFFF', "src-#{@event.id}") %>
         </td>
 
         <td style='width:150px;'>
           <a href='/events/lookup?address=<%= @event.ip.ip_dst %>' 
-            data-address='<%= @event.ip.ip_dst %>' class='ip-button snorbybox'>
+            data-address='<%= @event.ip.ip_dst %>' class='ip-button has-event-menu'>
             
             <%= @event.ip.ip_dst %>
+            <%= clippy(@event.ip.ip_dst, '#FFFFFF', "dst-#{@event.id}") %>
           </a>
 
-          <%= clippy(@event.ip.ip_dst, '#FFFFFF', "dst-#{@event.id}") %>
+          <dl class='event-sub-menu round shadow push-down' style='display:none;'>
+            <dd><%= link_to 'Destination Lookup', "/events/lookup?address=#{@event.ip.ip_dst}", :class => 'snorbybox' %></dd>
+            <dd><%= link_to "Search By Destination", results_path(:search => {:ip_dst => @event.ip.ip_dst}) %></dd>
+          </dl
         </td>
         
         <td><%= @event.ip.ip_ver %></td>

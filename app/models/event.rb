@@ -497,8 +497,9 @@ class Event
                        Chronic.parse(start_time).beginning_of_day, 
                        Chronic.parse(end_time).end_of_day]})
       else
-        @search.merge!({:timestamp.gte => 
-                       Chronic.parse(params[:timestamp]).beginning_of_day})
+        @search.merge!({:conditions => ['timestamp >= ? AND timestamp <= ?', 
+                       Chronic.parse(params[:timestamp]).beginning_of_day, 
+                       Chronic.parse(params[:timestamp]).end_of_day]})
       end
 
     end

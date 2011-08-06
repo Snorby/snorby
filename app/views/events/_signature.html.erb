@@ -15,7 +15,7 @@
 				<td class='first'><%= @event.signature.sig_gid %></td>
 				<td><%= @event.signature.sig_sid %></td>
 				<td><%= @event.signature.sig_rev %></td>
-				<td><%= css_chart(@event.signature.event_percentage) %></td>
+        <td class='search-by-signature' data-url="/results?search[signature_name]=<%= @event.signature.name %>"><%= css_chart(@event.signature.event_percentage) %></td>
 				<td style='width:200px;' class='last'><%= link_to "Query Signature Database", @event.signature_url, :target => '_blank' %></td>
 			</tr>
 		</tbody>

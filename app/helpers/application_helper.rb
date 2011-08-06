@@ -201,9 +201,7 @@ module ApplicationHelper
 
   def clippy(text, bgcolor='#FFFFFF', id=0)
     html = <<-EOF
-      <span style="display:none" id="clippy_#{id}" class="url-box-clippy">
-        #{text}
-      </span>
+      <span style="display:none" id="clippy_#{id}" class="ip-copy">#{text}</span>
       <span id="main_clippy_#{id}" class="add_tipsy clippy" 
       original-title="copied!" title="copy to clipboard">
         <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" 

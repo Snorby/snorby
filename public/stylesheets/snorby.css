@@ -1395,6 +1395,10 @@ span.status.fail{
 	background: #fd2516;
 }
 
+td.search-by-signature{
+	cursor: pointer;
+}
+
 table td a{
 	padding: 3px 5px;
 	background-color: #e0e0e0;
@@ -1415,12 +1419,29 @@ table td a{
 table td a.ip-button{
 	height: 15px;
 	line-height: 17px;
-	width: 100px;
+	/*width: 100px;*/
 	position: relative;
 	overflow: hidden;
 	display: block;
-	text-align: center;
-	top: 2px;
+	text-align: left;
+	top: 5px;
+	float: left;
+	padding-right: 25px;
+	text-shadow: #fff 0 1px 0;
+}
+
+span.ip-copy{
+	float: right;
+}
+
+span.clippy{
+	display: inline-block;
+	position: absolute;
+	right: 5px;
+	overflow: visible;
+	width: 14px;
+	height: 14px;
+	top: 4px;
 }
 
 table td a:hover{
@@ -1873,9 +1894,10 @@ ul.table div.content #event-menu{
 	float: right;
 	display: block;
 	position: relative;
+	overflow: visible;
 }
 
-ul.table div.content #event-menu dl#event-sub-menu{
+dl.event-sub-menu{
 	display: block;
 	position: absolute;
 	z-index: 99999;
@@ -1885,17 +1907,26 @@ ul.table div.content #event-menu dl#event-sub-menu{
 	background: -webkit-gradient(linear,0% 100%,0% 0,from(#000000),to(#363636));
 	background: -moz-linear-gradient(90deg,#000000,#363636);
 	
+	-webkit-box-shadow: 0px 1px 10px rgba(0,0,0,0.5);
+	-moz-box-shadow: 0px 1px 10px rgba(0,0,0,0.5);
+	box-shadow: 0px 1px 10px rgba(0,0,0,0.5);
+	
 	color: #fffeff;
 	width: 200px;
 	border: 1px solid #222;
 	padding: 5px;
+	overflow: visible;
 }
 
-ul.table div.content #event-menu dl#event-sub-menu dd{
+dl.event-sub-menu.push-down{
+	top: 61px;
+}
+
+dl.event-sub-menu dd{
 	padding: 0 5px;
 }
 
-ul.table div.content #event-menu dl#event-sub-menu dd a{
+dl.event-sub-menu dd a{
 	color: #fff;
 	text-shadow: #000 0 1px 0;
 	font-weight: normal;
@@ -1904,9 +1935,13 @@ ul.table div.content #event-menu dl#event-sub-menu dd a{
 	font-variant: normal;
 	display: block;
 	position: relative;
+	background: transparent !important;
+	border: none !important;
+	margin: 0 !important;
+	padding: 0 !important;
 }
 
-ul.table div.content #event-menu dl#event-sub-menu dd:hover{
+dl.event-sub-menu dd:hover{
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;

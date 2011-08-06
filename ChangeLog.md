@@ -2,6 +2,10 @@
 
   * Fixed issue this inaccurate last_month timestamps.
   * Graph click events are not scoped by range time.
+  * Added c/p support for src/dst ips addrs.
+  * Both src/dst ip addrs now have there own menu.
+  * Fixed issue with single date in search form.
+  * earliestDate now set to current day.
 
 # Snorby 2.3.5
 
