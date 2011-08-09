@@ -53,14 +53,14 @@ class User
   # Define created_at and updated_at timestamps
   timestamps :at
 
+  validates_attachment_content_type :avatar, :content_type => ["image/png", "image/gif", "image/jpeg"]
+
   has_attached_file :avatar,
   :styles => {
     :large => "500x500>",
     :medium => "300x300>",
     :small => "100x100#"
   }, :default_url => '/images/default_avatar.png', :processors => [:cropper]
-
-  validates_attachment_content_type :avatar, :content_type => ["image/png", "image/gif", "image/jpeg"]
 
   has n, :notifications, :constraint => :destroy
 
