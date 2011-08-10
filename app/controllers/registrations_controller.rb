@@ -45,7 +45,7 @@ class RegistrationsController < Devise::RegistrationsController
       end
     else
       clean_up_passwords(resource)
-      render_with_scope :edit
+      redirect_to edit_user_registration_path
     end
   end
 

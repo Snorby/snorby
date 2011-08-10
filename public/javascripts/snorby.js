@@ -720,7 +720,7 @@ var Snorby = {
 			
 			$('.add_tipsy').tipsy({
 				fade: true,
-				html: true,
+				html: false,
 				gravity: 's',
 				live: true
 			});

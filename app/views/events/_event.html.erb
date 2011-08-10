@@ -15,12 +15,12 @@
 		</div>
 		
 		<div class='severity small'><span class='severity sev<%= event.signature.severity_id %>'><%= event.signature.severity_id %></span></div>
-		<div class='click sensor address' title='<%= event.sensor.sensor_name %>'><%= truncate(event.sensor.sensor_name, :length => 17, :omission => '...') %></div>
+		<div class='click sensor address' title='<%=h event.sensor.sensor_name %>'><%= truncate(event.sensor.sensor_name, :length => 17, :omission => '...') %></div>
 		<div class='click src_ip address'><%= event.ip.present? ? event.ip.ip_src : 'N/A' %></div>
 		<div class='click dst_ip address'><%= event.ip.present? ? event.ip.ip_dst : 'N/A' %></div>
 		
 		<% if classification_css %>
-			<div class='click signature'><span class='add_tipsy' title='<%= event.user.nil? ? '???' : event.user.name %> classified event as <%= event.classification.name %>'><%= truncate(event.signature.name, :length => 65, :omission => '...') %></span></div>
+			<div class='click signature'><span class='add_tipsy' title="<%= event.user.nil? ? '???' : event.user.name %> classified event as <%= event.classification.name %>"><%= truncate(event.signature.name, :length => 65, :omission => '...') %></span></div>
 		<% else %>
 			<div class='click signature'><span title='<%= event.signature.name %>'><%= truncate(event.signature.name, :length => 65, :omission => '...') %></span></div>
 		<% end %>

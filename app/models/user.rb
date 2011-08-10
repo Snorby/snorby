@@ -58,9 +58,16 @@ class User
     :large => "500x500>",
     :medium => "300x300>",
     :small => "100x100#"
-  }, :default_url => '/images/default_avatar.png', :processors => [:cropper]
+  }, :default_url => '/images/default_avatar.png', :processors => [:cropper],
+    :whiny => false
 
-  validates_attachment_content_type :avatar, :content_type => ["image/png", "image/gif", "image/jpeg"]
+  #validates_attachment_content_type :avatar, :content_type => ["image/png", "image/gif", "image/jpeg"]
+
+  validates_attachment_content_type :avatar, :content_type => ['image/jpeg', 'image/gif', 'image/png', 'image/pjpeg', 'image/x-png'], 
+  :message => 'Uploaded file is not an image', 
+  :if => Proc.new { |profile| profile.avatar.file? }
+
+
 
   has n, :notifications, :constraint => :destroy
 
