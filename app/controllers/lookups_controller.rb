@@ -1,4 +1,8 @@
 class LookupsController < ApplicationController
+
+  before_filter :require_administrative_privileges  
+  before_filter :check_for_demo_user, :expect => [:index]
+    
   # GET /lookups
   # GET /lookups.xml
   def index
