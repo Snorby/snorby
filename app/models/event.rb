@@ -72,8 +72,6 @@ class Event
   }
 
   def self.sorty(params={})
-    p params
-
     sort = params[:sort]
     direction = params[:direction]
 
@@ -92,8 +90,18 @@ class Event
     
     if params.has_key?(:search)
       page.merge!(search(params[:search]))
-    else
+    elsif !params.has_key?(:classification_all)
       page.merge!(:classification_id => nil)
+    end
+
+    if params.has_key?(:user_events)
+      relationship = Event.relationships['user'].inverse
+
+      if page.has_key?(:links)
+        page[:links].push(relationship)
+      else
+        page[:links] = [relationship]
+      end
     end
 
     page(params[:page].to_i, page)

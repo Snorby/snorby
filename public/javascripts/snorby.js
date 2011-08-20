@@ -22,7 +22,6 @@ var csrf = $('meta[name="csrf-token"]').attr('content');
 
 function HCloader(element) {
   var $holder = $('div#' + element);
-  
   $holder.fadeTo('slow', 0.2);
   
   var $el = $('<div class="cover-loader" />');
@@ -828,7 +827,7 @@ var Snorby = {
 						});
 					});
 				};
-				
+			
 				$('input#selected_events[type="hidden"]').val(selected_events);
 				
 			});
