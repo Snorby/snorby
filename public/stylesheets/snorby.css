@@ -407,6 +407,23 @@ del {
 
 /* @end */
 
+div.rule-data pre{
+    white-space: pre-wrap; /* css-3 */
+    white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+    white-space: -pre-wrap; /* Opera 4-6 */
+    white-space: -o-pre-wrap; /* Opera 7 */
+    word-wrap: break-word;
+	background-color: #000;
+	color: #fff;
+	text-decoration: none;
+	padding: 10px;
+	margin: 5px 0;
+	height: auto;
+	width: auto;
+	border: 3px solid #666;
+	font: normal normal normal 1.1em "Courier New", Courier, mono;
+}
+
 /* @group Main */
 
 .boxit{
@@ -926,7 +943,9 @@ dl#admin-menu dd a{
 }
 
 #wrapper #content div.note.lookups{
-	margin-bottom: 10px;
+	display: block;
+	position: relative;
+	overflow: hidden;
 }
 
 .page{
@@ -2050,23 +2069,6 @@ ul.table div.content div.event-data div.event-data-holder div.event-data-holder-
 	padding: 10px 10px 0;
 }
 
-div.rule-data pre{
-    white-space: pre-wrap; /* css-3 */
-    white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
-    white-space: -pre-wrap; /* Opera 4-6 */
-    white-space: -o-pre-wrap; /* Opera 7 */
-    word-wrap: break-word;
-	background-color: #000;
-	color: #fff;
-	text-decoration: none;
-	padding: 10px;
-	margin: 5px 0;
-	height: auto;
-	width: auto;
-	border: 3px solid #666;
-	font: normal normal normal 1.2em "Courier New", Courier, mono;
-}
-
 ul.table div.content div.event-data div.event-data-holder div.event-data-holder-inside div.notes{
 	
 }
@@ -2717,6 +2719,7 @@ input.error{
 	position: relative;
 	display: block;
 	overflow: visible;
+	padding-top: 5px;
 }
 
 p.form-order{
@@ -2724,12 +2727,13 @@ p.form-order{
 	display: inline-block;
 	overflow: hidden;
 	width: 500px;
-	height: 70px;
 	float: left;
+	height: 50px;
 }
 
 input.large{
-	width: 460px;
+	width: 430px;
+	margin-bottom: 10px;
 }
 
 input[disabled]{
