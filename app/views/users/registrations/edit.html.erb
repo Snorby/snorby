@@ -10,19 +10,19 @@
 			<div class='grid_5'>
 				
 				<p><%= f.label :name %> <i>(please use first and last name)</i><br />
-			  <%= f.text_field :name, :placeholder => 'Full Name...', :class => 'required' %></p>
+			  <%= f.text_field :name, :placeholder => 'Full Name', :class => 'required' %></p>
 
 			  <p><%= f.label :email %> <i>(example: snorby@snorby.org)</i><br />
-			  <%= f.text_field :email, :placeholder => 'E-mail Address...', :class => 'required email' %></p>
+			  <%= f.text_field :email, :placeholder => 'E-mail Address', :class => 'required email' %></p>
 				
 				<p><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-			  <%= f.password_field :password, :placeholder => 'Password...' %></p>
+			  <%= f.password_field :password, :placeholder => 'Password' %></p>
 
 			  <p><%= f.label :password_confirmation %><br />
-			  <%= f.password_field :password_confirmation, :placeholder => 'Password Confirmation...' %></p>
+			  <%= f.password_field :password_confirmation, :placeholder => 'Password Confirmation' %></p>
 
 				<p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-			  <%= f.password_field :current_password, :placeholder => 'Current Password...', :class => 'required password' %></p>
+			  <%= f.password_field :current_password, :placeholder => 'Current Password', :class => 'required password' %></p>
 
 				<p>
 					<%= f.label 'Note Notifications:' %>

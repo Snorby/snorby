@@ -9,6 +9,8 @@ class Event
   # Included for the truncate helper method.
   extend ActionView::Helpers::TextHelper
 
+  SIGNATURE_URL = "http://rootedyour.com/snortsid?sid=$$gid$$-$$sid$$"
+
   storage_names[:default] = "event"
 
   property :sid, Integer, :key => true, :index => true
@@ -29,27 +31,35 @@ class Event
 
   property :timestamp, DateTime
 
-  has n, :favorites, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :constraint => :destroy
+  has n, :favorites, :parent_key => [ :sid, :cid ], 
+    :child_key => [ :sid, :cid ], :constraint => :destroy
 
   has n, :users, :through => :favorites
 
   has 1, :severity, :through => :signature, :via => :sig_priority
 
-  has 1, :payload, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :constraint => :destroy
+  has 1, :payload, :parent_key => [ :sid, :cid ], 
+    :child_key => [ :sid, :cid ], :constraint => :destroy
 
-  has 1, :icmp, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :constraint => :destroy
+  has 1, :icmp, :parent_key => [ :sid, :cid ], 
+    :child_key => [ :sid, :cid ], :constraint => :destroy
 
-  has 1, :tcp, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :constraint => :destroy
+  has 1, :tcp, :parent_key => [ :sid, :cid ], 
+    :child_key => [ :sid, :cid ], :constraint => :destroy
 
-  has 1, :udp, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :constraint => :destroy
+  has 1, :udp, :parent_key => [ :sid, :cid ], 
+    :child_key => [ :sid, :cid ], :constraint => :destroy
 
-  has 1, :opt, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :constraint => :destroy
+  has 1, :opt, :parent_key => [ :sid, :cid ], 
+    :child_key => [ :sid, :cid ], :constraint => :destroy
 
-  has n, :notes, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :constraint => :destroy
+  has n, :notes, :parent_key => [ :sid, :cid ], 
+    :child_key => [ :sid, :cid ], :constraint => :destroy
 
   belongs_to :user
 
-  belongs_to :sensor, :parent_key => :sid, :child_key => :sid, :required => true
+  belongs_to :sensor, :parent_key => :sid, 
+    :child_key => :sid, :required => true
 
   belongs_to :signature, :child_key => :sig_id, :parent_key => :sig_id
 
@@ -72,8 +82,6 @@ class Event
   }
 
   def self.sorty(params={})
-    p params
-
     sort = params[:sort]
     direction = params[:direction]
 
@@ -85,15 +93,26 @@ class Event
       page.merge!(:order => sort.send(direction))
     else
       page.merge!(
-        :order => [Event.send(SORT[sort].to_sym).send(sort).send(direction), :timestamp.send(direction)],
+        :order => [Event.send(SORT[sort].to_sym).send(sort).send(direction), 
+                   :timestamp.send(direction)],
         :links => [Event.relationships[SORT[sort].to_s].inverse]
       )
     end
     
     if params.has_key?(:search)
       page.merge!(search(params[:search]))
-    else
+    elsif !params.has_key?(:classification_all)
       page.merge!(:classification_id => nil)
+    end
+
+    if params.has_key?(:user_events)
+      relationship = Event.relationships['user'].inverse
+
+      if page.has_key?(:links)
+        page[:links].push(relationship)
+      else
+        page[:links] = [relationship]
+      end
     end
 
     page(params[:page].to_i, page)
@@ -111,13 +130,15 @@ class Event
   end
 
   def signature_url
-    if Setting.signature_lookup?
-      url = Setting.find(:signature_lookup)
-      return url.sub(/\$\$sid\$\$/, signature.sig_sid.to_s).sub(/\$\$gid\$\$/, signature.sig_gid.to_s)
+    sid, gid = [/\$\$sid\$\$/, /\$\$gid\$\$/]
+
+    @signature_url = if Setting.signature_lookup?
+      Setting.find(:signature_lookup) 
     else
-      url = "http://rootedyour.com/snortsid?sid=$$gid$$-$$sid$$"
-      return url.sub(/\$\$sid\$\$/, signature.sig_sid.to_s).sub(/\$\$gid\$\$/, signature.sig_gid.to_s)
+      SIGNATURE_URL
     end
+
+    @signature_url.sub(sid, signature.sig_sid.to_s).sub(gid, signature.sig_gid.to_s)
   end
 
   def matches_notification?
@@ -145,19 +166,23 @@ class Event
   end
 
   def self.last_month
-    all(:timestamp.gte => 2.month.ago.beginning_of_month, :timestamp.lte => 1.month.ago.end_of_month)
+    all(:timestamp.gte => 2.month.ago.beginning_of_month, 
+        :timestamp.lte => 1.month.ago.end_of_month)
   end
 
   def self.last_week
-    all(:timestamp.gte => 2.week.ago.beginning_of_week, :timestamp.lte => 1.week.ago.end_of_week)
+    all(:timestamp.gte => 2.week.ago.beginning_of_week, 
+        :timestamp.lte => 1.week.ago.end_of_week)
   end
 
   def self.yesterday
-    all(:timestamp.gte => 1.day.ago.beginning_of_day, :timestamp.lte => 1.day.ago.end_of_day)
+    all(:timestamp.gte => 1.day.ago.beginning_of_day, 
+        :timestamp.lte => 1.day.ago.end_of_day)
   end
 
   def self.today
-    all(:timestamp.gte => Time.now.beginning_of_day, :timestamp.lte => Time.now.end_of_day)
+    all(:timestamp.gte => Time.now.beginning_of_day, 
+        :timestamp.lte => Time.now.end_of_day)
   end
 
   def self.find_classification(classification_id)
@@ -173,11 +198,13 @@ class Event
   end
 
   def self.between(start_time, end_time)
-    all(:timestamp.gte => start_time, :timestamp.lte => end_time, :order => [:timestamp.desc])
+    all(:timestamp.gte => start_time, :timestamp.lte => end_time, 
+        :order => [:timestamp.desc])
   end
 
   def self.between_time(start_time, end_time)
-    all(:timestamp.gte => start_time, :timestamp.lt => end_time, :order => [:timestamp.desc])
+    all(:timestamp.gte => start_time, :timestamp.lt => end_time, 
+        :order => [:timestamp.desc])
   end
 
   def self.find_by_ids(ids)
@@ -283,14 +310,28 @@ class Event
   end
   
   def source_port
+    return nil unless protocol_data
+
     if protocol_data.first == :icmp
       nil
     else
       protocol_data.last.send(:"#{protocol_data.first}_sport")
     end
   end
-  
+ 
+  def rule
+    @rule = Snorby::Rule.get({
+      :rule_id => signature.sig_sid,
+      :generator_id => signature.sig_gid,
+      :revision_id => signature.sig_rev
+    })
+
+    @rule if @rule.found?
+  end
+
   def destination_port
+    return nil unless protocol_data
+
     if protocol_data.first == :icmp
       nil
     else

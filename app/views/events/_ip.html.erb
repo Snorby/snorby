@@ -29,8 +29,17 @@
           </a>
           
           <dl class='event-sub-menu round shadow push-down' style='display:none;'>
-            <dd><%= link_to 'Source Lookup', "/events/lookup?address=#{@event.ip.ip_src}", :class => 'snorbybox' %></dd>
-            <dd><%= link_to "Search By Source", results_path(:search => {:ip_src => @event.ip.ip_src}) %></dd>
+            <dd><%= link_to 'Basic Source Lookup', "/events/lookup?address=#{@event.ip.ip_src}", :class => 'snorbybox' %></dd>
+
+            <% @lookups.each do |lookup| %>
+              <dd>
+              <%= link_to lookup.title, 
+                lookup.build(:ip => @event.ip.ip_src, :port => @event.source_port),
+                :target => '_blank' %>
+              </dd>
+            <% end %>
+
+            <dd><%= link_to "Snorby Search By Source", results_path(:search => {:ip_src => @event.ip.ip_src}) %></dd>
           </dl>
 
         </td>
@@ -44,8 +53,17 @@
           </a>
 
           <dl class='event-sub-menu round shadow push-down' style='display:none;'>
-            <dd><%= link_to 'Destination Lookup', "/events/lookup?address=#{@event.ip.ip_dst}", :class => 'snorbybox' %></dd>
-            <dd><%= link_to "Search By Destination", results_path(:search => {:ip_dst => @event.ip.ip_dst}) %></dd>
+            <dd><%= link_to 'Basic Destination Lookup', "/events/lookup?address=#{@event.ip.ip_dst}", :class => 'snorbybox' %></dd>
+            
+            <% @lookups.each do |lookup| %>
+              <dd>
+              <%= link_to lookup.title, 
+                lookup.build(:ip => @event.ip.ip_dst, :port => @event.destination_port),
+                :target => '_blank' %>
+              </dd>
+            <% end %>
+
+            <dd><%= link_to "Snorby Search By Destination", results_path(:search => {:ip_dst => @event.ip.ip_dst}) %></dd>
           </dl
         </td>
         

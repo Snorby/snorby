@@ -7,26 +7,33 @@
 			<th class='first'>Generator ID</th>
 			<th>Signature ID</th>
 			<th>Signature Revision</th>
-			<th>Activity (<%= @event.signature.event_percentage(true) %>)</th>
+      <th>Activity (<%= @event.signature.event_percentage(true) %>)</th>
+      <th>&nbsp;</th>
 			<th class='last'></th>
 		</tr>
 		<tbody>
 			<tr>
 				<td class='first'><%= @event.signature.sig_gid %></td>
 				<td><%= @event.signature.sig_sid %></td>
-				<td><%= @event.signature.sig_rev %></td>
+				<td><%= @event.signature.sig_rev || 'N/A' %></td>
         
-        <td class='search-by-signature'
+        <td class='search-by-signature add_tipsy'
+          title="View all '<%= @event.signature.name%>' events."
           data-url="/results?search[signature_name]=<%= @event.signature.name %>">
           <%= css_chart(@event.signature.event_percentage) %>
         </td>
 
-        <td style='width:200px;' class='last'>
+        <td style='width:190px;' class=''>
           <%= link_to "Query Signature Database", 
             @event.signature_url, :target => '_blank' %>
         </td>
+
+        <td style='width:90px;' class='last'>
+          <%= link_to "View Rule", rule_events_path(:sid => @event.sid, :cid => @event.cid), :class => 'snorbybox', :target => '_blank' %>  
+        </td>
+
 			</tr>
 		</tbody>
 	</table>
-	
+
 </div>

@@ -22,7 +22,6 @@ var csrf = $('meta[name="csrf-token"]').attr('content');
 
 function HCloader(element) {
   var $holder = $('div#' + element);
-  
   $holder.fadeTo('slow', 0.2);
   
   var $el = $('<div class="cover-loader" />');
@@ -469,7 +468,33 @@ var Snorby = {
 				$('pre#' + $(this).attr('data-content-name')).show();
 				return false;
 			});
-			
+		
+      $('a.snorbybox-content').live('click', function(event) {
+        event.preventDefault();
+        $('dl.drop-down-menu').fadeOut('slow');
+				var content = $(this).attr('data-content');
+
+        $.fancybox({
+					padding: 0,
+          content: content,
+					centerOnScroll: true,
+	        zoomSpeedIn: 300, 
+	        zoomSpeedOut: 300,
+					overlayShow: true,
+					overlayOpacity: 0.5,
+					overlayColor: '#000',
+					onStart: function() {
+						$(document).unbind('keydown', 'right');
+						$(document).unbind('keydown', 'esc');
+						$(document).unbind('keydown', 'shift+left');
+						$('dl#event-sub-menu').hide();
+					},
+					onClosed: function() {
+						Snorby.hotkeys();
+					}
+				});
+      });
+
 			$('a.snorbybox').live('click', function() {
 				$('dl.drop-down-menu').fadeOut('slow');
 				$.fancybox({
@@ -828,7 +853,7 @@ var Snorby = {
 						});
 					});
 				};
-				
+			
 				$('input#selected_events[type="hidden"]').val(selected_events);
 				
 			});

@@ -11,16 +11,16 @@
 			<div class='grid_5'>
 				
 				<p><%= f.label :name %> <i>(please use first and last name)</i><br />
-			  <%= f.text_field :name, :placeholder => 'Full Name...', :class => 'required' %></p>
+			  <%= f.text_field :name, :placeholder => 'Full Name', :class => 'required' %></p>
 
 			  <p><%= f.label :email %> <i>(example: snorby@snorby.org)</i><br />
-			  <%= f.text_field :email, :placeholder => 'E-mail Address...', :class => 'required email' %></p>
+			  <%= f.text_field :email, :placeholder => 'E-mail Address', :class => 'required email' %></p>
 				
 				<p><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-			  <%= f.password_field :password, :placeholder => 'Password...' %></p>
+			  <%= f.password_field :password, :placeholder => 'Password' %></p>
 
 			  <p><%= f.label :password_confirmation %><br />
-			  <%= f.password_field :password_confirmation, :placeholder => 'Password Confirmation...' %></p>
+			  <%= f.password_field :password_confirmation, :placeholder => 'Password Confirmation' %></p>
 
 				<p>
 					I would like to list <%= f.select :per_page_count, %w[25 45 65 100], { :include_blank => false } %>  <%= f.label "items per page." %><br />
