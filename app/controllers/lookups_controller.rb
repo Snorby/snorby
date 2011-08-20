@@ -1,4 +1,7 @@
 class LookupsController < ApplicationController
+
+  before_filter :require_administrative_privileges
+
   # GET /lookups
   # GET /lookups.xml
   def index
