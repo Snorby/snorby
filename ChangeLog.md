@@ -4,7 +4,8 @@
   * Add sort support for the queue event listing.
   * Fixed XSS issue with classification tooltips - escape user name.
   * Remove verbose paperclip error messages - improve image type validations.
-
+  * Make hotkey menu standardized across event views.
+  * Remove unneeded /\./ from all form inputs.
 
 # Snorby 2.3.6
 

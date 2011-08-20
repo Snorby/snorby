@@ -7,6 +7,7 @@
 <% else %>
 	
 	<%= title "Search Results <i>#{pluralize(@events.pager.total, 'event')} found</i>".html_safe, 'Search Results' do %>
+    <%= menu_item "Hotkeys", hotkey_events_path, 'events/keyboard.png', :class => 'snorbybox' %>
 		<%= render :partial => 'events/menu' %>
 	<% end %>
 	
