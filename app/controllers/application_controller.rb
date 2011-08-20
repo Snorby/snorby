@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   use Rails::DataMapper::Middleware::IdentityMap
   protect_from_forgery
 
+  helper_method :check_for_demo_user
+
   before_filter :authenticate_user!
   before_filter :user_setup
   
@@ -12,6 +14,10 @@ class ApplicationController < ActionController::Base
     def require_administrative_privileges
       return true if user_signed_in? && current_user.admin
       redirect_to root_path
+    end
+
+    def check_for_demo_user
+      redirect_to :back, :notice => 'The Demo Account cannot modify system settings.' if @current_user.demo?
     end
 
     def user_setup
@@ -23,11 +29,6 @@ class ApplicationController < ActionController::Base
           redirect_to login_path, :notice => 'Your account has be disabled. Please contact the administrator.'
         end
       end
-      # if Time.respond_to?(:zone)
-      #   Time.zone = current_user.timezone
-      # else
-      #   Time.timezone = current_user.timezone
-      # end
     end
 
 end
