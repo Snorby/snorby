@@ -1,5 +1,7 @@
 Snorby::Application.routes.draw do
 
+  resources :lookups
+
   # This feature is not ready yet
   # resources :notifications
 
@@ -64,6 +66,7 @@ Snorby::Application.routes.draw do
       get :hotkey
       post :export
       get :lookup
+      get :rule
       get :packet_capture
       get :history
       post :classify

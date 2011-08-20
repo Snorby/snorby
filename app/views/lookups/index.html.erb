@@ -1,0 +1,25 @@
+<%= title "Lookup Sources" do -%>
+
+	<%= menu_item "Add Lookup Source", new_lookup_path, 'icons/add.png' %>
+	<%= render :partial => 'settings/menu' %>
+	
+<%- end -%>
+
+<div id="lookups" class='grid_12 page boxit'>
+	
+	<table border="0" cellspacing="0" cellpadding="0">
+		<tr>		
+			<th>Menu Title</th>
+			<th>URL</th>
+			<th>Edit</th>
+			<th>Destroy</th>
+		</tr>
+		<tbody class='lookups'>
+			<%= render @lookups %>
+		</tbody>
+	</table>
+
+	<%= pager(@lookups, '/lookups') %>
+	
+</div>
+

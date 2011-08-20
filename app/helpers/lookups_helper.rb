@@ -1,0 +1,2 @@
+module LookupsHelper
+end

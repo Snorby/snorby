@@ -6,6 +6,7 @@
   * Remove verbose paperclip error messages - improve image type validations.
   * Make hotkey menu standardized across event views.
   * Remove unneeded /\./ from all form inputs.
+  * Add event rule lookup - rule dirs set in snorby_config.yml
 
 # Snorby 2.3.6
 

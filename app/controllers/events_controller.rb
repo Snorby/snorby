@@ -30,8 +30,18 @@ class EventsController < ApplicationController
     end
   end
 
+  def rule
+    @event = Event.get(params['sid'], params['cid'])
+    @event.rule ? @rule = @event.rule : @rule = 'No rule found for this event.'
+
+    respond_to do |format|
+      format.html { render :layout => false }
+    end
+  end
+
   def show
     @event = Event.get(params['sid'], params['cid'])
+    @lookups ||= Lookup.all
     @notes = @event.notes.all.page(params[:page].to_i, 
                                    :per_page => 5, :order => [:id.desc])
     respond_to do |format|

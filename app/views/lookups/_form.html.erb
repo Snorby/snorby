@@ -1,0 +1,37 @@
+<div class="note lookups" style='margin:10px;'>
+  Lookup sources are available within the event show view via the source &
+  destination address menus. A following are allowed URL variables: ${ip} and ${port}. 
+  <strong>Example: http://www.example.com/lookup?address=${ip}</strong>
+</div>
+
+<div id='lookup-form' class='grid_12 boxit page'>
+	<%= form_for @lookup, :html => { :class => 'validate' } do |f| %>
+	  
+		<%= error_messages_for(@lookup) %>
+	
+		<p class='form-order'>
+			<%= f.label 'Lookup Title' %><br />
+	  	<%= f.text_field :title, :class => 'required large', :placeholder => 'Example.com Address Lookup', :autocomplete => :off %>
+		</p>
+		
+		<p class='form-order'>
+			<%= f.label 'Lookup Source URL' %><br />
+	  	<%= f.text_field :value, :class => 'required large', :placeholder => 'Source URL', :autocomplete => :off %>
+		</p>
+
+    <br />
+    <br />
+    <br />
+    <br />
+		<%= form_actions do %>
+
+			<%= button "Save lookup Source", :class => 'success' %>
+
+			<%= button "Cancel", :class => 'warning cancel' %>
+
+		<% end %>
+	
+	<% end %>
+	
+</div>
+

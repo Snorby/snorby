@@ -2,6 +2,9 @@ development:
   domain: localhost:3000
   wkhtmltopdf: /Users/mephux/.rvm/gems/ruby-1.9.2-p0/bin/wkhtmltopdf
   mailer_sender: 'snorby@snorby.org'
+  rules: 
+    - "/Users/mephux/.snort/rules"
+    - "/Users/mephux/.snort/so_rules"
 
 test:
   domain: localhost:3000
@@ -14,3 +17,5 @@ production:
   domain: 'demo.snorby.org'
   wkhtmltopdf: /usr/local/bin/wkhtmltopdf
   mailer_sender: 'snorby@snorby.org'
+  rules:
+    - ""

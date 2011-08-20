@@ -1,0 +1,7 @@
+<tr>
+	<td class='first'><%= lookup.title %></td>
+	<td><%= lookup.value %></td>	
+  <td><%= link_to "Edit", edit_lookup_path(lookup) %></td>
+  <td class='last'><%= link_to image_tag("icons/destroy.png", :size => '16x16', :class => 'trash'), lookup_path(lookup), :method => :delete, :confirm => 'Are you sure you want to remove this lookup?' %></td>
+</tr>
+
