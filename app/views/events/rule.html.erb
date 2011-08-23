@@ -1,8 +1,19 @@
 <%= snorby_box("Rule Information", false) do %>
 
+  <strong>Signature:</strong> <%= @event.signature.name %>
+  <br />
+
   <div class="rule-data" style=''>
     <pre><%= @rule.to_s %></pre>
   </div>
+
+  <br />
+
+  <%= snorby_box_footer do %>
+    <%= form_actions do %>
+      <%= button "Cancel", :class => 'warning cancel-snorbybox' %>
+    <% end %>
+  <% end %>
 
 <% end %>
 

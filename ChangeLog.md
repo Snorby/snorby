@@ -1,3 +1,8 @@
+# Snorby 2.3.8
+
+  * Fixed issues with classified events not showing in search results.
+  * Fixed issue with mass classification user table joins.
+
 # Snorby 2.3.7
 
   * Fix bug with week/month email reports having incorrect ranges.

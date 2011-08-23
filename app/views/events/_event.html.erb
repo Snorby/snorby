@@ -30,7 +30,7 @@
 				<span title="This event has <%= pluralize(event.notes_count, 'note') %>" class='add_tipsy round notes-count'><%= image_tag("icons/notes.png", :size => '16x16') %></span>
 			<% end %>
 			
-			<b title='Event ID: <%= event.sid %>.<%= event.cid %><br /><%= event.timestamp.strftime('%A, %b %d, %Y at %I:%M:%S %p') %>' class='add_tipsy'><%= event.pretty_time %></b>
+      <b title='Event ID: <%= event.sid %>.<%= event.cid %> &nbsp; <%= event.timestamp.strftime('%A, %b %d, %Y at %I:%M:%S %p') %>' class='add_tipsy'><%= event.pretty_time %></b>
 			
 		</div>
 		

@@ -101,7 +101,9 @@ class Event
     
     if params.has_key?(:search)
       page.merge!(search(params[:search]))
-    elsif !params.has_key?(:classification_all)
+    end
+
+    unless params.has_key?(:classification_all)
       page.merge!(:classification_id => nil)
     end
 
@@ -430,32 +432,23 @@ class Event
     end
   end
 
-  def self.reset_classifications
-    all.update(:classification_id => 0)
-    Classification.all.each do |classification|
-      classification.update(:events_count => 0)
-    end
-  end
-  
-  def self.classify_from_collection(collection, classification, user, reclassify=false)
+  def self.classify_from_collection(events, classification, user, reclassify=false)
     @classification = Classification.get(classification)
-    @user ||= User.get(user)
+    @user = User.get(user)
 
-    collection.each do |event|
-      next unless event
-      old_classification = event.classification || false
-      
-      next if old_classification == @classification
-      
-      next if (old_classification && reclassify == false)
-      
-      event.user = @user
+    events.each do |event|
 
-      if @classification.blank?
-        event.classification = nil
+      old_classification = if event.classification.present?
+        event.classification
       else
-        event.classification = @classification
+        nil
       end
+
+      next if old_classification == @classification
+      next if old_classification && reclassify == false
+
+      event.classification = @classification
+      event.user_id = @user.id
 
       if event.save
         @classification.up(:events_count) if @classification
@@ -463,8 +456,10 @@ class Event
       else
         Rails.logger.info "ERROR: #{event.errors.inspect}"
       end
-      
+
     end
+  rescue => e
+    Rails.logger.info(e.backtrace)        
   end
 
   def self.search(params)
