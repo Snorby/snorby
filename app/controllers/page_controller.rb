@@ -55,8 +55,9 @@ class PageController < ApplicationController
 
   def results    
     params[:sort] = sort_column
-    params[:page] = sort_page
     params[:direction] = sort_direction
+    params[:classification_all] = true
+
     @events = Event.sorty(params)
     @classifications ||= Classification.all
   end
