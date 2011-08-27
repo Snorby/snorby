@@ -19,6 +19,7 @@ javascripts:
     - public/javascripts/scrollto.js
     - public/javascripts/validate.js
     - public/javascripts/tipsy.js
+    - public/javascripts/chosen.js
     - public/javascripts/snorby.js
 
 stylesheets:

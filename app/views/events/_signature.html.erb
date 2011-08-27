@@ -13,8 +13,8 @@
 		</tr>
 		<tbody>
 			<tr>
-				<td class='first'><%= @event.signature.sig_gid %></td>
-				<td><%= @event.signature.sig_sid %></td>
+				<td class='first'><%= @event.signature.sig_gid || 'N/A' %></td>
+				<td><%= @event.signature.sig_sid || 'N/A' %></td>
 				<td><%= @event.signature.sig_rev || 'N/A' %></td>
         
         <td class='search-by-signature add_tipsy'

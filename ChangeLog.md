@@ -1,3 +1,8 @@
+# Snorby 2.3.9
+
+  * Fixed minor bugs with new counts using cache counters before count queries.
+  * Updated input for fonts and added chosen.js for select tags.
+
 # Snorby 2.3.8
 
   * Fixed issues with classified events not showing in search results.

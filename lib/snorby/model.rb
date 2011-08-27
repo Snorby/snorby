@@ -23,7 +23,8 @@ module Snorby
   module Model
 
     def self.included(base)
-      base.send :include, DataMapper::Resource, DataMapper::Migrations, Model::Types
+      base.send :include, DataMapper::Resource, 
+                DataMapper::Migrations, Model::Types
     end
 
   end
