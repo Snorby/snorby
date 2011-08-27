@@ -5,7 +5,7 @@
 
 <% content_for :footer do %>
 
-	<script type="text/javascript">
+  <script type="text/javascript">
     $('.datepicker').daterangepicker({
       dateStart: 'Today', 
       dateEnd: 'Today',
@@ -53,17 +53,17 @@
 			
 			<div class='grid_4 alpha'>
 				<%= label_tag 'Select Sensor' %><br />
-				<%= select_tag '[search][sid]', dropdown_select_tag(Sensor.all, :sid, true) %>
+        <%= select_tag '[search][sid]', dropdown_select_tag(Sensor.all, :sid, true), :class => 'add_chosen' %>
 			</div>
 			
 			<div class='grid_4 alpha'>
 				<%= label_tag 'Select Classification' %><br />
-				<%= select_tag '[search][classification_id]', dropdown_select_tag(Classification.all, :id, true, ["<option value='null'>Unclassified</option>"]) %>
+				<%= select_tag '[search][classification_id]', dropdown_select_tag(Classification.all, :id, true, ["<option value='null'>Unclassified</option>"]), :class => 'add_chosen' %>
 			</div>
 			
 			<div class='grid_4 alpha'>
 				<%= label_tag 'Select Severity' %><br />
-				<%= select_tag '[search][severity]', dropdown_select_tag(Severity.all, :sig_id, true) %>
+				<%= select_tag '[search][severity]', dropdown_select_tag(Severity.all, :sig_id, true), :class => 'add_chosen' %>
 			</div>
 			
 		</div>

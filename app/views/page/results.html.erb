@@ -1,6 +1,7 @@
 <% if params[:title] %>
 	
 	<%= title "#{truncate(h(params[:title]))} <i>#{pluralize(@events.pager.total, 'event')} found</i>".html_safe, "#{h(params[:title])}" do %>
+    <%= menu_item "Hotkeys", hotkey_events_path, 'events/keyboard.png', :class => 'snorbybox' %>
 		<%= render :partial => 'events/menu' %>
 	<% end %>
 	
@@ -14,5 +15,4 @@
 <% end %>
 
 <%= render :partial => 'page/events' %>
-
 <%= render :partial => 'events/hotkeys' %>

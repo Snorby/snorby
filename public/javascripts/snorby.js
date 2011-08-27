@@ -1262,5 +1262,7 @@ jQuery(document).ready(function($) {
 	Snorby.pages.classifications();
 	Snorby.pages.dashboard();
 	Snorby.pages.events();
-	
+
+  $('.add_chosen').chosen();
+
 });

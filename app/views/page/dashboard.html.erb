@@ -97,7 +97,12 @@
 		<ul class='box-list'>
 			<% @sensors.each do |sensor| %>
 			<li><%= link_to truncate(sensor.sensor_name, :length => 30), results_path(:title => "#{sensor.sensor_name}", 
-			:search => { :sid => sensor.sid }), :title => sensor.sensor_name %> <span><%= sensor.events_count %></span></li>
+              :search => { :sid => sensor.sid }), :title => sensor.sensor_name %> 
+
+        <span>
+          <%= sensor.events_count.zero? ? sensor.events.count : sensor.events_count %>
+        </span>
+      </li>
 			<% end %>
 		</ul>
 	
@@ -121,8 +126,13 @@
 		
 		<ul class='box-list'>
 			<% @recent_events.each do |event| %>
-				<li><%= link_to truncate(event.signature.name, :length => 25), results_path(:title => "#{truncate(event.signature.name, :length => 40)}", 
-				:search => {:signature_name => "#{event.signature.name}"}), :title => event.signature.name %> <span><%= event.signature.events_count %></span></li>
+        <li>
+          <%= link_to truncate(event.signature.name, :length => 25), results_path(:title => "#{truncate(event.signature.name, :length => 40)}", 
+                :search => {:signature_name => "#{event.signature.name}"}), :title => event.signature.name %> 
+          <span>
+            <%= event.signature.events_count.zero? ? event.signature.events.count : event.signature.events_count %>
+          </span>
+        </li>
 			<% end %>
 		</ul>
 	
