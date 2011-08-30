@@ -5,7 +5,7 @@ development:
   rules: 
     - "/Users/mephux/.snort/rules"
     - "/Users/mephux/.snort/so_rules"
-  authentication_mode: database
+  authentication_mode: cas
   cas_config:
     base_url: https://auth.server.com.br/
     login_url: https://auth.server.com.br/login?domain=server

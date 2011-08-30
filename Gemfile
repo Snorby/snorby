@@ -40,7 +40,7 @@ gem 'capistrano'
 # Rails Plugins
 gem 'jammit',                      '~> 0.5.4'
 gem 'devise',                      '~> 1.4'
-gem  'devise_cas_authenticatable', :git => 'git://github.com/acmarques/snorby_cas_authenticatable.git'
+gem 'devise_cas_authenticatable'   ,:git => 'git://github.com/acmarques/snorby_cas_authenticatable.git'
 gem 'dm-devise',                   '~> 1.4'
 gem "mail",                        '~> 2.2.10'
 gem "RedCloth",                    "~> 4.0", :require => 'redcloth'
