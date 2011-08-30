@@ -12,4 +12,37 @@ class SensorsController < ApplicationController
     render :text => @sensor.name
   end
 
+  def options
+    @sensor = Sensor.get(params[:id])
+
+    respond_to do |format|
+      format.html {render :layout => false}
+      format.js
+    end
+  end
+
+  def update
+    @sensor = Sensor.get(params[:id])
+
+    respond_to do |format|
+      if @sensor.update(params[:sensor])
+        format.html { redirect_to(sensors_url, :notice => 'Sensor options successfully updated.') }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @sensor.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy
+    @sensor = Sensor.get(params[:id])
+    @sensor.destroy!
+
+    respond_to do |format|
+      format.html { redirect_to(sensors_url) }
+      format.xml  { head :ok }
+    end
+  end
+
 end

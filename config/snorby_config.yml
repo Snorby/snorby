@@ -2,7 +2,7 @@ development:
   domain: localhost:3000
   wkhtmltopdf: /Users/mephux/.rvm/gems/ruby-1.9.2-p0/bin/wkhtmltopdf
   mailer_sender: 'snorby@snorby.org'
-  rules: 
+  rules:
     - "/usr/local/etc/sagan-rules"
     - "/Users/mephux/.snort/rules"
     - "/Users/mephux/.snort/so_rules"
@@ -12,7 +12,7 @@ test:
   wkhtmltopdf: /usr/local/bin/wkhtmltopdf
   mailer_sender: 'snorby@snorby.org'
 
-# Change the production configuration 
+# Change the production configuration
 # for your environment.
 production:
   domain: 'demo.snorby.org'

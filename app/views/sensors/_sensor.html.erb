@@ -12,12 +12,31 @@
 		<td class='last_event_time'>N/A</td>
 	<% end %>
 	
-	<td class='event_count'><%= sensor.events_count %></td>
+  <td class='event_count'>
+    <%= sensor.events_count_or_find %>
+  </td>
+
+
+  <% if current_user.admin? %>
+
+    <td class='chart add_tipsy search-by-click'
+      data-url='<%= results_path(:title => "#{sensor.sensor_name}", :search => { :sid => sensor.sid }) %>'
+      title='View all <%= sensor.sensor_name %> events.'>
+      <%= css_chart(sensor.event_percentage) %>
+    </td>
 	
-	<td class='chart'>
-		<%= css_chart(sensor.event_percentage) %>
-	</td>
+    <td class='last'>
+      <%= link_to 'Options', options_sensors_path(:id => sensor.sid), :class => 'snorbybox' %>
+    </td>
+
+  <%- else -%>
+
+    <td class='chart add_tipsy search-by-click last'
+      data-url='<%= results_path(:title => "#{sensor.sensor_name}", :search => { :sid => sensor.sid }) %>'
+      title='View all <%= sensor.sensor_name %> events.'>
+      <%= css_chart(sensor.event_percentage) %>
+    </td>
 	
-	<td class='last'><%= link_to 'View', results_path(:title => "#{sensor.sensor_name}", :search => { :sid => sensor.sid }) %></td>
-	
+  <%- end -%>
+
 </tr>

@@ -1,5 +1,11 @@
 require "pathname"
 
+# Example Rule:
+# alert tcp $EXTERNAL_NET any -> $HOME_NET 22 (msg:"[OPENSSH] Session closed"; 
+# content: "session closed for" ; classtype: not-suspicious; program: sshd; 
+# reference: url,wiki.quadrantsec.com/bin/view/Main/5000407; 
+# sid:5000407; rev:1;)
+
 # Snorby
 module Snorby
   # Rule
@@ -66,6 +72,8 @@ module Snorby
           return @rule if @rule
           path = Pathname.new(file)
          
+          p path
+
           if File.extname(path) == ".rules"
             file = File.open(path)
             
@@ -74,7 +82,6 @@ module Snorby
 
               next if line.match(/^\#/)
               next unless line.match(/sid\:#{@rule_id}\;/)
-              
 
               if @revision_id
                 next unless line.match(/rev\:#{@revision_id}\;/)

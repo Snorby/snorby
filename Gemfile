@@ -42,20 +42,29 @@ gem 'jammit',                 '~> 0.5.4'
 gem 'devise',                 '~> 1.4'
 gem 'dm-devise',              '~> 1.4'
 gem "mail",                   '~> 2.2.10'
-gem "RedCloth",               "~> 4.0", :require => 'redcloth'
 gem 'chronic',                '~> 0.3.0'
 gem 'pdfkit',                 '~> 0.4.6'
-gem 'ezprint',                :git => 'http://github.com/mephux/ezprint.git', :branch => 'rails3', :require => 'ezprint'
 gem 'daemons',                '~> 1.1.0'
 gem 'delayed_job',            '~> 2.1.4'
-gem 'delayed_job_data_mapper','~> 1.0.0.rc', :git => 'http://github.com/Snorby/delayed_job_data_mapper.git'
 gem 'rmagick',                '~> 2.13.1'
-gem 'dm-paperclip',           '~> 2.3', :git => 'http://github.com/solnic/dm-paperclip.git', :branch => 'master'
 gem 'net-dns',                '~> 0.6.1'
 gem 'whois',                  '~> 1.6.6'
 gem 'simple_form',            '~> 1.2.2'
 gem 'geoip',                  '~> 1.1.1'
 gem 'netaddr',                '~> 1.5.0'
+gem "RedCloth",               "~> 4.0", 
+  :require => 'redcloth'
+
+gem 'delayed_job_data_mapper','~> 1.0.0.rc', 
+  :git => 'http://github.com/Snorby/delayed_job_data_mapper.git'
+
+gem 'dm-paperclip',           '~> 2.3', 
+  :git => 'http://github.com/solnic/dm-paperclip.git', :branch => 'master'
+
+gem 'ezprint',                
+  :git => 'http://github.com/mephux/ezprint.git', 
+  :branch => 'rails3', :require => 'ezprint'
+
 
 group(:test) do
   gem 'capybara'

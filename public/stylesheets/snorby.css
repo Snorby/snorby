@@ -926,7 +926,7 @@ dl#admin-menu dd a{
   box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
 }
 
-#wrapper #content div.note{
+div.note{
 	cursor: pointer;
 	border: 1px solid #fdf5a2;
 	padding: 10px 10px 10px 35px;
@@ -940,6 +940,10 @@ dl#admin-menu dd a{
 	background: #fefae8 url(../images/icons/note.png) no-repeat 10px center;
 	font-style: normal;
 	font-size: 1.1em;
+}
+
+div.note.no-cursor{
+	cursor: default;
 }
 
 #wrapper #content div.note.lookups{
@@ -1435,7 +1439,7 @@ span.status.fail{
 	background: #fd2516;
 }
 
-td.search-by-signature{
+td.search-by-click{
 	cursor: pointer;
 }
 

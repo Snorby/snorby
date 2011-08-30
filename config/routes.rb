@@ -29,6 +29,9 @@ Snorby::Application.routes.draw do
   root :to => "page#dashboard"
 
   resources :sensors do
+    collection do
+      get :options
+    end
   end
 
   resources :settings do

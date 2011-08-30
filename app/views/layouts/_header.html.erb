@@ -1,33 +1,33 @@
 <div id="header">
 	<div id="header-inside">
-		<div id="header-content">
-			<div id="header-top" class='container_12'>
-				
-				<div id="logo" class='grid_6'>
-					<%= link_to "Snorby", root_path %>
-				</div>
-				
-				<div id="user-menu" class=''>
-					
-					<ul>
-						<% if user_signed_in? %>
-							
-							<li class='first'>Welcome <%= current_user.name %></li>
-							<li><%= link_to 'Settings', edit_user_registration_path %></li>
-							<li class='last'><%= link_to 'Log out', logout_path %></li>
-							
-						<% else %>
-						
-							<li class='first'><%= link_to 'Log In', login_path %></li>
-							<li class='last'><%= link_to 'Forgot Password?', new_password_path(resource_name) %></li>
-							
-						<% end %>				
-					</ul>
-					
-				</div>
-				
-			</div>
-		</div>
+
+    <div id="header-top" class='container_12'>
+
+      <div id="logo" class='grid_6'>
+        <%= link_to "Snorby", root_path %>
+      </div>
+
+      <div id="user-menu" class=''>
+
+        <ul>
+          <% if user_signed_in? %>
+
+            <li class='first'>Welcome <%= current_user.name %></li>
+            <li><%= link_to 'Settings', edit_user_registration_path %></li>
+            <li class='last'><%= link_to 'Log out', logout_path %></li>
+
+          <% else %>
+
+            <li class='first'><%= link_to 'Log In', login_path %></li>
+            <li class='last'><%= link_to 'Forgot Password?', new_password_path(resource_name) %></li>
+
+          <% end %>				
+        </ul>
+
+      </div>
+
+    </div>
+
 		
 		<div id="menu">
 

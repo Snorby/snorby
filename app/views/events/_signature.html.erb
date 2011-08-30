@@ -17,7 +17,7 @@
 				<td><%= @event.signature.sig_sid || 'N/A' %></td>
 				<td><%= @event.signature.sig_rev || 'N/A' %></td>
         
-        <td class='search-by-signature add_tipsy'
+        <td class='search-by-click add_tipsy'
           title="View all '<%= @event.signature.name%>' events."
           data-url="/results?search[signature_name]=<%= @event.signature.name %>">
           <%= css_chart(@event.signature.event_percentage) %>

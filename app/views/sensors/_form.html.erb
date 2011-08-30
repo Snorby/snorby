@@ -1,0 +1,75 @@
+<%= form_for(@sensor) do |f| %>
+
+
+  <div class="note no-cursor">
+    Custom packet capture configurations will override the global
+    packet capture configurations in `General Settings`.
+  </div>
+
+  <div style='height:160px;'>
+
+    <div class="sensor-packet-capture">
+
+      <div class="packet-capture-options">
+        <div class="form-block left" style='width:375px;'>
+      
+          <%= f.label :packet_capture_url, 'Packet Capture URL' %><br />
+          <%= f.text_field :packet_capture_url, 
+            :style => 'width:375px;',
+           :class => 'required url',
+           :placeholder => 'Packet Capture URL' %>
+
+        </div>
+
+        <div class="form-block left" style='width:375px;'>
+      
+          <%= f.label :packet_capture_auth, 'Packet Capture Auto Authentication' %>
+          <%= f.check_box :packet_capture_auth %>
+
+        </div>      
+      </div>
+      
+      <div class="packet-capture-auth">
+
+        <div class="form-block left" style='width:375px;'>
+
+          <%= f.label :packet_capture_user, 'Packet Capture Username' %><br />
+          <%= f.text_field :packet_capture_user %><br />
+
+        </div>
+
+        <div class="form-block left" style='width:375px;'>
+
+          <%= f.label :packet_capture_password, 'Packet Capture Password' %><br />
+          <%= f.text_field :packet_capture_password %><br />
+
+        </div>
+      
+      </div>
+
+    </div>
+
+  </div>
+
+<% end %>
+
+<%= snorby_box_footer do %>
+
+  <%= form_actions do %>
+    <%= button "Update Sensor", :class => 'success' %>
+    <%= button "Cancel", :class => 'warning cancel-snorbybox' %>
+  <% end %>
+
+<% end %>
+
+
+<script type="text/javascript">
+
+  $(function() {
+
+    console.log('HELLO')
+    $('form#edit_sensor_2').validate();
+
+  });
+
+</script>

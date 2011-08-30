@@ -25,11 +25,15 @@
 			<th>Last Event</th>
 			<th>Event Count</th>
 			<th>Event %</th>
-			<th>Events</th>
+      <% if current_user.admin? %>
+			  <th>&nbsp;</th>
+      <%- end -%>
 		</tr>
+
 		<tbody class='sensors'>
 			<%= render @sensors %>
 		</tbody>
+
 	</table>
 
 

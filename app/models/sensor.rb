@@ -22,6 +22,12 @@ class Sensor
 
   property :events_count, Integer, :index => true, :default => 0
 
+  # Packet Capture Options
+  property :packet_capture_url, Text
+  property :packet_capture_auth, Boolean, :index => true, :default => false
+  property :packet_capture_user, String
+  property :packet_capture_password, String
+
   has n, :events, :child_key => :sid, :constraint => :destroy
 
   has n, :ips, :child_key => :sid, :constraint => :destroy
@@ -36,7 +42,11 @@ class Sensor
     return name unless name == 'Click To Change Me'
     hostname
   end
-  
+
+  def events_count_or_find
+   events_count.zero? ? events.count : events_count 
+  end
+
   def daily_cache
     DailyCache.all(:sid => sid)
   end
@@ -47,12 +57,12 @@ class Sensor
   end
   
   #
-  #  
+  #  Sensor Percentage
   # 
   def event_percentage
     begin
       total_event_count = Sensor.all.map(&:events_count).sum
-      ((self.events_count.to_f / total_event_count.to_f) * 100).round
+      ((self.events_count_or_find.to_f / total_event_count.to_f) * 100).round(2)
     rescue FloatDomainError
       0
     end

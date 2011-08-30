@@ -1239,7 +1239,7 @@ jQuery(document).ready(function($) {
     };
   });
 
-  $('td.search-by-signature').live('click', function(event) {
+  $('td.search-by-click').live('click', function(event) {
     event.preventDefault();
     var url = $(this).attr('data-url');
     window.location = url;
