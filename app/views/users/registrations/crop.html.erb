@@ -61,8 +61,10 @@ function update_crop(coords) {
 	    <%= f.hidden_field attribute, :id => attribute %>
 	  <% end %>
 
-	  <p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, :placeholder => 'Current Password', :class => 'required password' %></p>
+    <% if Snorby::CONFIG[:authentication_mode] == "database" %>
+  	  <p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+      <%= f.password_field :current_password, :placeholder => 'Current Password', :class => 'required password' %></p>
+    <% end %>
 
 		<%= form_actions do %>
 
