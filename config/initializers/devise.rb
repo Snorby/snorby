@@ -141,12 +141,12 @@ Devise.setup do |config|
   # end
   
   
-  if Snorby::CONFIG[:use_cas_authentication]  
-    config.cas_base_url = Snorby::CONFIG[:cas]["base_url"]
+  if Snorby::CONFIG[:authentication_mode] == "cas"  
+    config.cas_base_url = Snorby::CONFIG[:cas_config]["base_url"]
 
     # you can override these if you need to, but cas_base_url is usually enough
-    config.cas_login_url = Snorby::CONFIG[:cas]["login_url"]
-    config.cas_logout_url = Snorby::CONFIG[:cas]["logout_url"]
+    config.cas_login_url = Snorby::CONFIG[:cas_config]["login_url"]
+    config.cas_logout_url = Snorby::CONFIG[:cas_config]["logout_url"]
     # config.cas_validate_url = "https://cas.myorganization.com/serviceValidate"
   end
   

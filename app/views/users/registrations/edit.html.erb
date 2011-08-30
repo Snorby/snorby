@@ -15,7 +15,7 @@
 			  <p><%= f.label :email %> <i>(example: snorby@snorby.org)</i><br />
 			  <%= f.text_field :email, :placeholder => 'E-mail Address', :class => 'required email' %></p>
         
-        <% unless Snorby::CONFIG[:use_cas_authentication] %>
+        <% if Snorby::CONFIG[:authentication_mode] == "database"  %>
   				<p><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
   			  <%= f.password_field :password, :placeholder => 'Password' %></p>        
         

@@ -11,7 +11,7 @@ class User
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
-  if Snorby::CONFIG[:use_cas_authentication] 
+  if Snorby::CONFIG[:authentication_mode] == "cas"
     devise :cas_authenticatable, :registerable, :trackable
     property :email, String, :required => true, :unique => true 
   else

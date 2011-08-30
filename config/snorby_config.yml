@@ -5,17 +5,17 @@ development:
   rules: 
     - "/Users/mephux/.snort/rules"
     - "/Users/mephux/.snort/so_rules"
-  use_cas_authentication: true
-  cas:
+  authentication_mode: database
+  cas_config:
     base_url: https://auth.server.com.br/
-    login_url: https://auth.server.com.br/login?domain=cas
-    logout_url: https://auth.server.com.br/logout?domain=cas
+    login_url: https://auth.server.com.br/login?domain=server
+    logout_url: https://auth.server.com.br/logout?domain=server
 
 test:
   domain: localhost:3000
   wkhtmltopdf: /usr/local/bin/wkhtmltopdf
   mailer_sender: 'snorby@snorby.org'
-  use_cas_authentication: false
+  authentication_mode: database
 
 # Change the production configuration 
 # for your environment.
@@ -25,4 +25,4 @@ production:
   mailer_sender: 'snorby@snorby.org'
   rules:
     - ""
-  use_cas_authentication: false  
+  authentication_mode: database
