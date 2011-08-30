@@ -14,17 +14,19 @@
 
 			  <p><%= f.label :email %> <i>(example: snorby@snorby.org)</i><br />
 			  <%= f.text_field :email, :placeholder => 'E-mail Address', :class => 'required email' %></p>
-				
-				<p><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-			  <%= f.password_field :password, :placeholder => 'Password' %></p>
+        
+        <% unless Snorby::CONFIG[:use_cas_authentication] %>
+  				<p><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+  			  <%= f.password_field :password, :placeholder => 'Password' %></p>        
+        
+  			  <p><%= f.label :password_confirmation %><br />
+  			  <%= f.password_field :password_confirmation, :placeholder => 'Password Confirmation' %></p>
 
-			  <p><%= f.label :password_confirmation %><br />
-			  <%= f.password_field :password_confirmation, :placeholder => 'Password Confirmation' %></p>
+  				<p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+  			  <%= f.password_field :current_password, :placeholder => 'Current Password', :class => 'required password' %></p>
 
-				<p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-			  <%= f.password_field :current_password, :placeholder => 'Current Password', :class => 'required password' %></p>
-
-				<p>
+  				<p>
+  			<% end %>	  
 					<%= f.label 'Note Notifications:' %>
 					<%= f.select :accept_notes, [['Yes', 1], ['No', 2], ['Only events I\'ve noted', 3]], { :include_blank => false } %><br />
 					<i>(Would you like to receive notifications when new notes are added?)</i><br />

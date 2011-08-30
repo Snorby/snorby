@@ -3,14 +3,19 @@ development:
   wkhtmltopdf: /Users/mephux/.rvm/gems/ruby-1.9.2-p0/bin/wkhtmltopdf
   mailer_sender: 'snorby@snorby.org'
   rules: 
-    - "/usr/local/etc/sagan-rules"
     - "/Users/mephux/.snort/rules"
     - "/Users/mephux/.snort/so_rules"
+  use_cas_authentication: true
+  cas:
+    base_url: https://auth.server.com.br/
+    login_url: https://auth.server.com.br/login?domain=cas
+    logout_url: https://auth.server.com.br/logout?domain=cas
 
 test:
   domain: localhost:3000
   wkhtmltopdf: /usr/local/bin/wkhtmltopdf
   mailer_sender: 'snorby@snorby.org'
+  use_cas_authentication: false
 
 # Change the production configuration 
 # for your environment.
@@ -20,3 +25,4 @@ production:
   mailer_sender: 'snorby@snorby.org'
   rules:
     - ""
+  use_cas_authentication: false  

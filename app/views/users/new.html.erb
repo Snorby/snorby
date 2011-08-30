@@ -16,13 +16,15 @@
 			  <p><%= f.label :email %> <i>(example: snorby@snorby.org)</i><br />
 			  <%= f.text_field :email, :placeholder => 'E-mail Address', :class => 'required email' %></p>
 				
-				<p><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-			  <%= f.password_field :password, :placeholder => 'Password' %></p>
+				<% unless Snorby::CONFIG[:use_cas_authentication] %>
+  				<p><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+  			  <%= f.password_field :password, :placeholder => 'Password' %></p>
 
-			  <p><%= f.label :password_confirmation %><br />
-			  <%= f.password_field :password_confirmation, :placeholder => 'Password Confirmation' %></p>
+  			  <p><%= f.label :password_confirmation %><br />
+  			  <%= f.password_field :password_confirmation, :placeholder => 'Password Confirmation' %></p>
 
-				<p>
+  				<p>
+				<% end %>  
 					I would like to list <%= f.select :per_page_count, %w[25 45 65 100], { :include_blank => false } %>  <%= f.label "items per page." %><br />
 					<i>(select the default amount of events to list per page view)</i><br />
 					<br />

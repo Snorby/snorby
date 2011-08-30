@@ -14,7 +14,7 @@
 							
 							<li class='first'>Welcome <%= current_user.name %></li>
 							<li><%= link_to 'Settings', edit_user_registration_path %></li>
-							<li class='last'><%= link_to 'Log out', logout_path %></li>
+							<li class='last'><%= link_to 'Log out', destroy_user_session_path %></li>
 							
 						<% else %>
 						

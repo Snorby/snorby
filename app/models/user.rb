@@ -11,8 +11,13 @@ class User
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
-  
+  if Snorby::CONFIG[:use_cas_authentication] 
+    devise :cas_authenticatable, :registerable, :trackable
+    property :email, String, :required => true, :unique => true 
+  else
+    devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
+  end
+
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 
   property :favorites_count, Integer, :index => true, :default => 0
