@@ -2,6 +2,7 @@
 
   * Fixed minor bugs with new counts using cache counters before count queries.
   * Updated input for fonts and added chosen.js for select tags.
+  * CAS authentication support. Thanks acmarques.
 
 # Snorby 2.3.8
 
