@@ -1,4 +1,4 @@
-<li id='event_<%= event.sid %><%= event.cid %>' class='event' data-event-id='<%= event.id %>' data-event-sid='<%= event.sid %>' data-event-cid='<%= event.cid %>'>
+  <li id='event_<%= event.sid %><%= event.cid %>' class='event' data-event-id='<%= event.id %>' data-event-sid='<%= event.sid %>' data-event-cid='<%= event.cid %>'>
 	
 	<% classification_css = event.classification.blank? ? nil : "classified" %>
 	
@@ -19,7 +19,7 @@
 		
 		<% geoip_src = event.ip.geoip[:source] %>
 		<div class='click src_ip address'>
-		  <% if event.ip.present? %>
+		  <% if Setting.geoip? && event.ip.present?  %>
         <span class='click dst_country_flag add_tipsy' original-title='<%= geoip_src[:country_name] %>'>
           <img src='/images/flags/<%= geoip_src[:country_code2].downcase %>.png'>
         </span>
@@ -29,7 +29,7 @@
 		
 		<% geoip_dest = event.ip.geoip[:destination] %>
 		<div class='click dst_ip address'>
-      <% if event.ip.present? %>
+      <% if Setting.geoip? && event.ip.present? %>
         <span class='click dst_country_flag add_tipsy' original-title='<%= geoip_dest[:country_name] %>'>
           <img src='/images/flags/<%= geoip_dest[:country_code2].downcase  %>.png'>
         </span>
