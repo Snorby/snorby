@@ -15,15 +15,27 @@
 		</div>
 		
 		<div class='severity small'><span class='severity sev<%= event.signature.severity_id %>'><%= event.signature.severity_id %></span></div>
-		<div class='click sensor address' title='<%=h event.sensor.sensor_name %>'><%= truncate(event.sensor.sensor_name, :length => 17, :omission => '...') %></div>
+		<div class='click sensor' title='<%=h event.sensor.sensor_name %>'><%= truncate(event.sensor.sensor_name, :length => 17, :omission => '...') %></div>
 		
 		<% geoip_src = event.ip.geoip[:source] %>
-		<div class='click src_ip address'><%= event.ip.present? ? event.ip.ip_src : 'N/A' %></div>
-		<div class='click add_tipsy' original-title="<%= geoip_src[:country_name] %>"><img src="/images/flags/<%= geoip_src[:country_code2].downcase  %>.png"></div>
+		<div class='click src_ip address'>
+		  <% if event.ip.present? %>
+        <span class='click dst_country_flag add_tipsy' original-title='<%= geoip_src[:country_name] %>'>
+          <img src='/images/flags/<%= geoip_src[:country_code2].downcase %>.png'>
+        </span>
+      <% end %>
+		  <%= event.ip.present? ? event.ip.ip_src : 'N/A' %>
+		</div>
 		
-		<% geoip_dest = event.ip.geoip[:destination]  %>
-		<div class='click dst_ip address'><%= event.ip.present? ? event.ip.ip_dst : 'N/A' %></div>
-		<div class='click add_tipsy' original-title="<%= geoip_dest[:country_name] %>"><img src="/images/flags/<%= geoip_dest[:country_code2].downcase  %>.png"></div>		
+		<% geoip_dest = event.ip.geoip[:destination] %>
+		<div class='click dst_ip address'>
+      <% if event.ip.present? %>
+        <span class='click dst_country_flag add_tipsy' original-title='<%= geoip_dest[:country_name] %>'>
+          <img src='/images/flags/<%= geoip_dest[:country_code2].downcase  %>.png'>
+        </span>
+      <% end %>
+		  <%= event.ip.present? ? event.ip.ip_dst : 'N/A' %>
+		</div>
 		
 		<% if classification_css %>
 			<div class='click signature'><span class='add_tipsy' title="<%= event.user.nil? ? '???' : event.user.name %> classified event as <%= event.classification.name %>"><%= truncate(event.signature.name, :length => 65, :omission => '...') %></span></div>

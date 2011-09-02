@@ -1717,9 +1717,21 @@ ul.table li .row div img{
 	margin-top: -5px;
 }
 
-ul.table li .row div.address{
+ul.table li .row div.sensor{
 	width: 105px;
 	padding-left: 12px;
+}
+
+ul.table li .row div.sensor{
+	width: 105px;
+}
+
+ul.table li .row div.address{
+	width: 150px;
+}
+
+ul.table li .row div span.dst_country_flag{
+	padding-right: 4px;
 }
 
 ul.table li .row div.large{
