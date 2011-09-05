@@ -31,8 +31,8 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def update
-
-    if resource.update_with_password(params[resource_name])
+    method = (Snorby::CONFIG[:authentication_mode] == "database") ? "update_with_password" :  "update"
+    if resource.send(method, params[resource_name])
       
       if params[:user][:avatar].blank?
         

@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/acmarques/snorby_cas_authenticatable.git
+  revision: 18cca67306d688f48e3138ce3e6c194fcb7cef18
+  specs:
+    devise_cas_authenticatable (1.0.0.alpha10)
+      devise
+      devise (>= 1.0.6)
+      rubycas-client (>= 2.2.1)
+
+GIT
   remote: http://github.com/Snorby/delayed_job_data_mapper.git
   revision: b77c0ae4c777fca19d1bc9c6c501edad7f2ec8b0
   specs:
@@ -221,6 +230,8 @@ GEM
     rspec-rails (2.0.1)
       rspec (~> 2.0.0)
     ruby-graphviz (1.0.0)
+    rubycas-client (2.2.1)
+      activesupport
     rubyzip (0.9.4)
     selenium-webdriver (0.2.2)
       childprocess (>= 0.1.9)
@@ -261,6 +272,7 @@ DEPENDENCIES
   delayed_job (~> 2.1.4)
   delayed_job_data_mapper (~> 1.0.0.rc)!
   devise (~> 1.4)
+  devise_cas_authenticatable!
   dm-active_model (~> 1.1.0)
   dm-aggregates (~> 1.1.0)
   dm-chunked_query (~> 0.3)

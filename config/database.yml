@@ -1,11 +1,16 @@
 # Snorby Database Configuration
 #
 # Please set your database password/user below
+# NOTE: Indentation is important.
 #
 snorby: &snorby
   adapter: mysql
   username: root
+<<<<<<< HEAD
   password: s3cr3tsauce
+=======
+  password: # Example: password: "s3cr3tsauce"
+>>>>>>> master
   host: localhost
 
 development:
