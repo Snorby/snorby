@@ -54,6 +54,9 @@ class User
   
   # Define if the user has been enabled/disabled
   property :enabled, Boolean, :default => true
+
+  # Define if get avatar from gravatar.com or not
+  property :gravatar, Boolean, :default => false
   
   # Define created_at and updated_at timestamps
   timestamps :at

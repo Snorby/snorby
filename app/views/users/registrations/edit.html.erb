@@ -50,7 +50,7 @@
 				
 				<div class='user-show-avatar'>
 					
-					<%= image_tag(@user.avatar.url(:small), :class => 'avatar') %>
+					<%= image_tag(@user.gravatar ? get_gravatar_uri(@user.email) : @user.avatar.url(:small), :class => 'avatar') %>
 					
 					<p><strong>Login Count:</strong> <%= @user.sign_in_count %></p>
           
@@ -71,6 +71,11 @@
 					<%= f.file_field :avatar %><br />
 				</p>
 				
+				<p>
+					<%= f.check_box :gravatar%> <%= f.label "Use Gravatar" %>
+					<i>(Get avatar from gravatar.com)</i>
+				</p>
+								
 				<% if current_user.admin? %>
 
 					<p>

@@ -63,6 +63,11 @@
 					<br />
 				</p>
 				
+				<p>
+					<%= f.check_box :gravatar%> <%= f.label "Use Gravatar" %>
+					<i>(Get avatar from gravatar.com)</i>
+				</p>
+				
 				<% if current_user.admin? %>
 
 					<p>
