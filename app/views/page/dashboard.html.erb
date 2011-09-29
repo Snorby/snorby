@@ -100,7 +100,7 @@
               :search => { :sid => sensor.sid }), :title => sensor.sensor_name %> 
 
         <span>
-          <%= sensor.events_count.zero? ? sensor.events.count : sensor.events_count %>
+          <%= sensor.events_count.zero? ? Event.count(:sid => sensor.sid) : sensor.events_count %>
         </span>
       </li>
 			<% end %>
