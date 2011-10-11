@@ -38,7 +38,8 @@ class PageController < ApplicationController
     @last_cache = @cache.cache_time
 
     sigs = Event.all(:limit => 5, :order => [:timestamp.desc], :fields => [:sig_id], :unique => true).map(&:signature).map(&:sig_id)
-    @recent_events = Event.all(:sig_id => sigs).group_by { |x| x.sig_id }.map(&:last).map(&:first)
+    @recent_events = [];
+    sigs.each{|s| @recent_events << Event.last(:sig_id => s) }
 
     respond_to do |format|
       format.html # { render :template => 'page/dashboard.pdf.erb', :layout => 'pdf.html.erb' }

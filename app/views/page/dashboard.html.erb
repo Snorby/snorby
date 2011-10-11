@@ -130,7 +130,7 @@
           <%= link_to truncate(event.signature.name, :length => 25), results_path(:title => "#{truncate(event.signature.name, :length => 40)}", 
                 :search => {:signature_name => "#{event.signature.name}"}), :title => event.signature.name %> 
           <span>
-            <%= event.signature.events_count.zero? ? event.signature.events.count : event.signature.events_count %>
+            <%= event.signature.events_count.zero? ? Event.count(:sig_id => event.signature.sig_id) : event.signature.events_count %>
           </span>
         </li>
 			<% end %>
