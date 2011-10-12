@@ -137,7 +137,7 @@ You can open the rails console at anytime and interact with the Snorby environme
 ## License
 
 * Note: The snorby source code is 100% free and open source however we use highcharts for metrics
-and reporting. Please make sure you review the [highcharts]('http://www.highcharts.com) licensing in detail [here]('http://www.highcharts.com/license'). 
+and reporting. Please make sure you review the [highcharts](http://www.highcharts.com) licensing in detail [here](http://www.highcharts.com/license). 
 The below license only applies to snorby source code which can be identified with the below license in each file.
 
 Snorby - All About Simplicity.
