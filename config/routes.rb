@@ -36,6 +36,7 @@ Snorby::Application.routes.draw do
       get :restart_worker
       get :start_sensor_cache
       get :start_daily_cache
+      get :start_geoip_update
       get :start_worker
     end
   end

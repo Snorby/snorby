@@ -8,7 +8,8 @@ class Setting
     :notes,
     :packet_capture,
     :packet_capture_auto_auth,
-    :autodrop
+    :autodrop,
+    :geoip
   ]
 
   include DataMapper::Resource
