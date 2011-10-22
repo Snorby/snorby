@@ -68,7 +68,8 @@
 				
 				<p>
 					<%= f.label 'Change Avatar' %><br />
-					<%= f.file_field :avatar %><br />
+          <%= f.file_field :avatar %><br />
+          <br />
 				</p>
 				
 				<p>
@@ -79,7 +80,6 @@
 				<% if current_user.admin? %>
 
 					<p>
-						<br />
 						<%= f.check_box :admin %> <%= f.label "Administrator" %>
 						<i>(should this user have administrative rights?)</i>
 					</p>

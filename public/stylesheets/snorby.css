@@ -943,6 +943,7 @@ dl#admin-menu dd a{
 }
 
 #wrapper #content div.note.lookups{
+	cursor: default;
 	display: block;
 	position: relative;
 	overflow: hidden;
@@ -1718,7 +1719,6 @@ ul.table li .row div img{
 }
 
 ul.table li .row div.sensor{
-	width: 105px;
 	padding-left: 12px;
 }
 
@@ -1726,12 +1726,45 @@ ul.table li .row div.sensor{
 	width: 105px;
 }
 
-ul.table li .row div.address{
-	width: 150px;
+ul.table li .row.geoip div.address{
+	width: 150px;	
 }
 
-ul.table li .row div span.dst_country_flag{
-	padding-right: 4px;
+ul.table li .row div.address{
+	width: 120px;
+}
+
+ul.table li .row div span.country_flag{ 
+	margin-right: 4px;
+	
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	
+	padding: 5px;
+	color: white;
+	font-weight: bold;
+	text-decoration: none;
+	font-variant: normal;
+	background-color: #DDD;
+	text-align: center;
+	position: relative;
+	font-size: 0.85em;
+	top: 0.5px;
+	text-shadow: #cbcbcb 0 1px 0;
+}
+
+ul.table li.highlight .row div span.country_flag{
+  -webkit-box-shadow: inset 0px 0px 10px rgba(0,0,0,0.5);
+  -moz-box-shadow: inset 0px 0px 10px rgba(0,0,0,0.5);
+  box-shadow: inset 0px 0px 10px rgba(0,0,0,0.5);
+	background: #2b2c2e;
+	text-shadow: #000 0 1px 0;
+}
+
+img.flag{
+	margin-right: 5px;
+	margin-bottom: -1px;
 }
 
 ul.table li .row div.large{
@@ -2763,15 +2796,15 @@ input.error{
 
 p.form-order{
 	position: relative;
-	display: inline-block;
+	display: block;
 	overflow: hidden;
-	width: 500px;
-	float: left;
+	width: 600px;
 	height: 50px;
+	margin-bottom: 15px;
 }
 
 input.large{
-	width: 430px;
+	width: 500px;
 	margin-bottom: 10px;
 }
 
@@ -3099,6 +3132,10 @@ img.avatar-small{
 	overflow: hidden;
 	margin-bottom: 10px;
 	border: 1px solid #d1d1d1;
+}
+
+#general-settings #form-holder input[type="text"]{
+	width:  450px;
 }
 
 #general-settings div.pc-settings p{
@@ -3562,6 +3599,7 @@ div.dashboard-graph.no-pie-data{
 	position: relative;
 	overflow: visible;
 	height: 195px;
+	margin-bottom: 10px;
 }
 
 #search-box input{
