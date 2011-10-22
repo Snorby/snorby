@@ -81,6 +81,30 @@ class Event
     :user_count => 'event'
   }
 
+
+  def self.unique_events_by_source_ip
+    data = []
+
+    ips = Ip.all(:limit => 25, :fields => [:ip_src], :unique => true).map(&:ip_src)
+    events = ips.collect do |ip| 
+      Event.all(:'ip.ip_src' => ip, :order => :timestamp.desc).group_by do |x| 
+        x.sig_id
+      end
+    end
+
+    events.each do |set|
+      next if set.blank?
+      next if set.values.blank?
+
+      set.each do |key, value|
+        
+        data << value.first
+      end
+    end
+
+    data
+  end
+
   def self.sorty(params={})
     sort = params[:sort]
     direction = params[:direction]
