@@ -1,14 +1,14 @@
 # Snorby 2.3.10
 
- * NOTE: Remember to run `rake snorby:update` for this version release.
- 
- * Improvements in the UI for CAS authentication mode (Antonio Marques)
- * Added option to display GeoIP information in the events list (Antonio Marques)
- * Added option to get user avatar from gravatar.com (Antonio Marques)
- * Created Job to automatically update GeoIP database (if geoip enabled) (Antonio Marques)
- * Some performance optimizations (Antonio Marques)
- * Updated GeoIP css/UI
- * Minor fixes with lookup/user settings display.
+  * NOTE: Remember to run `rake snorby:update` for this version release.
+  
+  * Improvements in the UI for CAS authentication mode (Antonio Marques)
+  * Added option to display GeoIP information in the events list (Antonio Marques)
+  * Added option to get user avatar from gravatar.com (Antonio Marques)
+  * Created Job to automatically update GeoIP database (if geoip enabled) (Antonio Marques)
+  * Some performance optimizations (Antonio Marques)
+  * Updated GeoIP css/UI
+  * Minor fixes with lookup/user settings display.
 
 # Snorby 2.3.9
 
