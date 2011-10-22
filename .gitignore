@@ -1,9 +1,10 @@
 # Snorby .gitignore 
 
 
-*.rbc
-*.tmproj
-*.swp
+.rbc
+.tmproj
+.swp
+.swo
 log/*
 tmp/*
 log/*
@@ -24,11 +25,8 @@ public/system/
 public/javascripts/all.js
 public/javascripts/snorby_packaged.js
 public/stylesheets/snorby_packaged.css
-<<<<<<< HEAD
 public/assets/*
-=======
 vendor/bundle/
->>>>>>> master
 
 !tmp/.gitignore
 !log/.gitignore
