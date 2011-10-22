@@ -40,8 +40,8 @@ module Snorby
     end
 
     def self.problems?
-      return true if (!Snorby::Worker.running? || !Snorby::Jobs.sensor_cache? || !Snorby::Jobs.daily_cache?)
-      false
+      worker_and_caches = (!Snorby::Worker.running? || !Snorby::Jobs.sensor_cache? || !Snorby::Jobs.daily_cache?)
+      Setting.geoip? ? ( worker_and_caches || !Snorby::Jobs.geoip_update?) : worker_and_caches
     end
 
     def self.process
