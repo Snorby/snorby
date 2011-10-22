@@ -81,7 +81,6 @@
   * Cache logic now processes in chunks to prevent blowing the stack
   * Fixed issues with daily cache not processing when events return nil
   * Epic amounts of other bug fixes
-
   * UI/UX
   * Admin menu move to sub menu bar for UX reasons.
   * Change hotkeys that conflict with macosx bindings
