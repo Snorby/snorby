@@ -158,20 +158,23 @@ module ApplicationHelper
 
   def worker_status(show_image=false)
 
-    if Snorby::Jobs.sensor_cache? && Snorby::Jobs.daily_cache?
-      return content_tag(:span, "OK", :class => 'status ok add_tipsy', :title => 'Success: Everything Looks Good!')
-      #return image_tag('icons/active.png', :class => 'add_tipsy', :title => 'Success: Everything Looks Good!')
-    elsif Snorby::Jobs.sensor_cache?
-      return content_tag(:span, "WARNING", :class => 'status warning add_tipsy', :title => 'Warning: The Daily Cache Job Is Not Running...')
-      #return image_tag('icons/job-fail.png', :class => 'add_tipsy', :title => 'Warning: The Daily Cache Job Is Not In Running...')
-    elsif Snorby::Jobs.daily_cache?
-      return content_tag(:span, "WARNING", :class => 'status warning add_tipsy', :title => 'Warning: The Sensor Cache Job Is Not Running...')
-      #return image_tag('icons/job-fail.png', :class => 'add_tipsy', :title => 'Warning: The Sensor Cache Job Is Not In Running...')
-    else
-      return content_tag(:span, "FAIL", :class => 'status fail add_tipsy', :title => 'ERROR: Both Cache Jobs Are Not Running...')
-      #return image_tag('icons/dead.png', :class => 'add_tipsy', :title => 'ERROR: Both Cache Jobs Are Not Running...')
-    end
+    validations = [{:check => Snorby::Jobs.sensor_cache?, :enabled => true, :desc => "Sensor Cache Job"},
+                   {:check=> Snorby::Jobs.daily_cache?, :enabled => true, :desc => "Daily Cache Job"},
+                   {:check=> Snorby::Jobs.geoip_update?, :enabled => Setting.geoip?, :desc => "GeoIP Update Job"}
+                  ]
 
+    # Just check for enabled jobs              
+    items_to_check = validations.select{|h| h[:enabled] == true} 
+
+    if items_to_check.select{|h| h[:check] == true}.count == items_to_check.count
+      return content_tag(:span, "OK", :class => 'status ok add_tipsy', :title => 'Success: Everything Looks Good!')
+    elsif items_to_check.select{|h| h[:check] == false}.count == items_to_check.count
+      return content_tag(:span, "FAIL", :class => 'status fail add_tipsy', :title => 'ERROR: No Jobs Are Running...')
+    else
+      prbs = items_to_check.select{|h| h[:check] == false}.collect{|h| h[:desc]}
+      msg = "Warning: The Job(s) #{prbs.inject { |r, i| r = r + " and " + i}} #{prbs.count > 1 ? "are" : "is"} Not Running..."
+      return content_tag(:span, "WARNING", :class => 'status warning add_tipsy', :title => msg)
+    end
   end
 
   #

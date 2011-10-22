@@ -1,7 +1,5 @@
 # Snorby .gitignore 
 
-config/snorby-geoip.dat
-*.dat
 
 *.rbc
 *.tmproj

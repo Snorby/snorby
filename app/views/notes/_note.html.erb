@@ -1,9 +1,7 @@
 <div id='note_<%= note.id %>' class='event-note round'>
 	
 	<div class='note-avatar-holder'>
-		
-		<%= image_tag note.user.avatar.url(:small) %>
-		
+	  <%= image_tag(note.user.gravatar ? get_gravatar_uri(note.user.email) : note.user.avatar.url(:small), :size => '32x32') %>			
 	</div>
 	
 	<% if current_user.admin %>

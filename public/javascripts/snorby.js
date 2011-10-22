@@ -750,6 +750,13 @@ var Snorby = {
 				live: true
 			});
 			
+			$('.add_tipsy_html').tipsy({
+				fade: true,
+				html: true,
+				gravity: 's',
+				live: true
+			});
+
 		},
 		
 		input_style: function(){

@@ -1,8 +1,8 @@
-<li id='event_<%= event.sid %><%= event.cid %>' class='event' data-event-id='<%= event.id %>' data-event-sid='<%= event.sid %>' data-event-cid='<%= event.cid %>'>
+  <li id='event_<%= event.sid %><%= event.cid %>' class='event' data-event-id='<%= event.id %>' data-event-sid='<%= event.sid %>' data-event-cid='<%= event.cid %>'>
 	
 	<% classification_css = event.classification.blank? ? nil : "classified" %>
 	
-	<div class='row <%= classification_css %>'>
+  <div class='row <%= classification_css %> <%= 'geoip' if Setting.geoip? %>'>
 		
 		<div class='select small'><%= check_box_tag 'event-selector', nil, false, :class => "check_box_#{event.id}" %></div>
 		
@@ -15,9 +15,30 @@
 		</div>
 		
 		<div class='severity small'><span class='severity sev<%= event.signature.severity_id %>'><%= event.signature.severity_id %></span></div>
-		<div class='click sensor address' title='<%=h event.sensor.sensor_name %>'><%= truncate(event.sensor.sensor_name, :length => 17, :omission => '...') %></div>
-		<div class='click src_ip address'><%= event.ip.present? ? event.ip.ip_src : 'N/A' %></div>
-		<div class='click dst_ip address'><%= event.ip.present? ? event.ip.ip_dst : 'N/A' %></div>
+		<div class='click sensor' title='<%=h event.sensor.sensor_name %>'><%= truncate(event.sensor.sensor_name, :length => 17, :omission => '...') %></div>
+		
+
+		<div class='click src_ip address'>
+      <% if Setting.geoip? && event.ip.present?  %>
+
+        <% geoip_src = event.ip.geoip[:source] %>
+
+        <span class='click country_flag add_tipsy_html' original-title='<img class="flag" src="/images/flags/<%= geoip_src[:country_code2].downcase %>.png"> <%= geoip_src[:country_name] %>'><%= geoip_src[:country_code2] %></span>
+
+      <% end %>
+		  <%= event.ip.present? ? event.ip.ip_src : 'N/A' %>
+		</div>
+		
+		<div class='click dst_ip address'>
+      <% if Setting.geoip? && event.ip.present? %>
+
+        <% geoip_dest = event.ip.geoip[:destination] %>
+
+        <span class='click country_flag add_tipsy_html' original-title='<img class="flag" src="/images/flags/<%= geoip_dest[:country_code2].downcase  %>.png"> <%= geoip_dest[:country_name] %>'><%= geoip_dest[:country_code2] %></span>
+
+      <% end %>
+		  <%= event.ip.present? ? event.ip.ip_dst : 'N/A' %>
+		</div>
 		
 		<% if classification_css %>
 			<div class='click signature'><span class='add_tipsy' title="<%= event.user.nil? ? '???' : event.user.name %> classified event as <%= event.classification.name %>"><%= truncate(event.signature.name, :length => 65, :omission => '...') %></span></div>
