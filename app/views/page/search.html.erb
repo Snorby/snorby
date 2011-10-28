@@ -58,7 +58,7 @@
 			
 			<div class='grid_4 alpha'>
 				<%= label_tag 'Select Classification' %><br />
-				<%= select_tag '[search][classification_id]', dropdown_select_tag(Classification.all, :id, true, ["<option value='null'>Unclassified</option>"]), :class => 'add_chosen' %>
+				<%= select_tag '[search][classification_id]', dropdown_select_tag(Classification.all, :id, true, ["<option value=''>Unclassified</option>"]), :class => 'add_chosen' %>
 			</div>
 			
 			<div class='grid_4 alpha'>
