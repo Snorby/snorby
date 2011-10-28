@@ -7,32 +7,32 @@ DM_VERSION = '~> 1.1.0'
 
 gem 'rake', '0.9.2'
 
-gem 'rails',                  RAILS_VERSION
+gem 'rails',                       RAILS_VERSION
 gem 'jquery-rails'
-gem 'bundler',                '~> 1.0.0'
+gem 'bundler',                     '~> 1.0.0'
 
-gem 'activesupport',          RAILS_VERSION, :require => 'active_support'
-gem 'actionpack',             RAILS_VERSION, :require => 'action_pack'
-gem 'actionmailer',           RAILS_VERSION, :require => 'action_mailer'
-gem 'railties',               RAILS_VERSION, :require => 'rails'
+gem 'activesupport',               RAILS_VERSION, :require => 'active_support'
+gem 'actionpack',                  RAILS_VERSION, :require => 'action_pack'
+gem 'actionmailer',                RAILS_VERSION, :require => 'action_mailer'
+gem 'railties',                    RAILS_VERSION, :require => 'rails'
 
-gem 'dm-core',                DM_VERSION
-gem 'dm-rails',               DM_VERSION
-gem 'dm-do-adapter',          DM_VERSION
-gem 'dm-active_model',        DM_VERSION
-gem 'dm-mysql-adapter',       DM_VERSION
+gem 'dm-core',                     DM_VERSION
+gem 'dm-rails',                    DM_VERSION
+gem 'dm-do-adapter',               DM_VERSION
+gem 'dm-active_model',             DM_VERSION
+gem 'dm-mysql-adapter',            DM_VERSION
 
-gem 'dm-pager',               DM_VERSION
-gem 'dm-migrations',          DM_VERSION
-gem 'dm-types',               DM_VERSION
-gem 'dm-validations',         DM_VERSION
-gem 'dm-constraints',         DM_VERSION
-gem 'dm-transactions',        DM_VERSION
-gem 'dm-aggregates',          DM_VERSION
-gem 'dm-timestamps',          DM_VERSION
-gem 'dm-observer',            DM_VERSION
-gem 'dm-serializer',          DM_VERSION
-gem 'dm-chunked_query',       '~> 0.3'
+gem 'dm-pager',                    DM_VERSION
+gem 'dm-migrations',               DM_VERSION
+gem 'dm-types',                    DM_VERSION
+gem 'dm-validations',              DM_VERSION
+gem 'dm-constraints',              DM_VERSION
+gem 'dm-transactions',             DM_VERSION
+gem 'dm-aggregates',               DM_VERSION
+gem 'dm-timestamps',               DM_VERSION
+gem 'dm-observer',                 DM_VERSION
+gem 'dm-serializer',               DM_VERSION
+gem 'dm-chunked_query',            '~> 0.3'
 
 # Deploy with Capistrano
 gem 'capistrano'
@@ -40,7 +40,7 @@ gem 'capistrano'
 # Rails Plugins
 gem 'jammit',                      '~> 0.5.4'
 gem 'devise',                      '~> 1.4'
-gem 'devise_cas_authenticatable'   ,:git => 'git://github.com/acmarques/snorby_cas_authenticatable.git'
+gem 'devise_cas_authenticatable',  :git => 'http://github.com/acmarques/snorby_cas_authenticatable.git'
 gem 'dm-devise',                   '~> 1.4'
 gem "mail",                        '~> 2.2.10'
 gem "RedCloth",                    "~> 4.0", :require => 'redcloth'
@@ -65,6 +65,9 @@ group(:test) do
   gem 'rspec-core',		        RSPEC_VERSION, :require => 'rspec/core'
   gem 'rspec-expectations',	  RSPEC_VERSION, :require => 'rspec/expectations'
   gem 'rspec-rails',		      RSPEC_VERSION
+  gem 'ansi'
+  gem 'turn'
+  gem 'minitest'
 end
 
 group(:doc) do

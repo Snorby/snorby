@@ -1,5 +1,6 @@
 # Snorby 2.3.10
 
+<<<<<<< HEAD
  * NOTE: Remember to run `rake snorby:update` for this version release.
  
  * Improvements in the UI for CAS authentication mode (Antonio Marques)
@@ -9,6 +10,16 @@
  * Some performance optimizations (Antonio Marques)
  * Updated GeoIP css/UI
  * Minor fixes with lookup/user settings display.
+=======
+  * NOTE: Remember to run `rake snorby:update` for this version release.
+  * Improvements in the UI for CAS authentication mode (Antonio Marques)
+  * Added option to display GeoIP information in the events list (Antonio Marques)
+  * Added option to get user avatar from gravatar.com (Antonio Marques)
+  * Created Job to automatically update GeoIP database (if geoip enabled) (Antonio Marques)
+  * Some performance optimizations (Antonio Marques)
+  * Updated GeoIP css/UI
+  * Minor fixes with lookup/user settings display.
+>>>>>>> master
 
 # Snorby 2.3.9
 
@@ -82,7 +93,6 @@
   * Cache logic now processes in chunks to prevent blowing the stack
   * Fixed issues with daily cache not processing when events return nil
   * Epic amounts of other bug fixes
-
   * UI/UX
   * Admin menu move to sub menu bar for UX reasons.
   * Change hotkeys that conflict with macosx bindings
