@@ -65,6 +65,9 @@ group(:test) do
   gem 'rspec-core',		        RSPEC_VERSION, :require => 'rspec/core'
   gem 'rspec-expectations',	  RSPEC_VERSION, :require => 'rspec/expectations'
   gem 'rspec-rails',		      RSPEC_VERSION
+  gem 'ansi'
+  gem 'turn'
+  gem 'minitest'
 end
 
 group(:doc) do
