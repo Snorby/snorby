@@ -4,6 +4,7 @@
 *.rbc
 *.tmproj
 *.swp
+*.swo
 log/*
 tmp/*
 log/*

@@ -1,13 +1,4 @@
 GIT
-  remote: git://github.com/acmarques/snorby_cas_authenticatable.git
-  revision: 18cca67306d688f48e3138ce3e6c194fcb7cef18
-  specs:
-    devise_cas_authenticatable (1.0.0.alpha10)
-      devise
-      devise (>= 1.0.6)
-      rubycas-client (>= 2.2.1)
-
-GIT
   remote: http://github.com/Snorby/delayed_job_data_mapper.git
   revision: b77c0ae4c777fca19d1bc9c6c501edad7f2ec8b0
   specs:
@@ -16,6 +7,15 @@ GIT
       dm-aggregates
       dm-core
       dm-observer
+
+GIT
+  remote: http://github.com/acmarques/snorby_cas_authenticatable.git
+  revision: 18cca67306d688f48e3138ce3e6c194fcb7cef18
+  specs:
+    devise_cas_authenticatable (1.0.0.alpha10)
+      devise
+      devise (>= 1.0.6)
+      rubycas-client (>= 2.2.1)
 
 GIT
   remote: http://github.com/mephux/ezprint.git
