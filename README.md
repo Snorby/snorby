@@ -58,6 +58,10 @@ Pass: snorby
 	`$ bundle install`
 	
 	* NOTE: If you get missing gem issues in production use `bundle install --path vendor/cache`
+
+	* If your system gems are updated beyond the gemfile.lock you should use as an example `bundle exec rake snorby:setup` 
+
+	* If running `bundle exec {app}` is painful you can safely install binstubs by `bundle install --binstubs` 
 	
 * Run The Snorby Setup
 
