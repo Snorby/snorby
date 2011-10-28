@@ -40,7 +40,7 @@ module Snorby
     end
     
     def dns
-      @dns ||= Resolver(@hostname)
+      @dns ||= Resolver(hostname)
     end
     
   end
