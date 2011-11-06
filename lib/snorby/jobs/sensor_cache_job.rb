@@ -27,10 +27,10 @@ module Snorby
       def perform
         begin
 
-          current_hour = Time.now.beginning_of_day + Time.now.hour.hours
+          current_hour = DateTime.now.beginning_of_day + DateTime.now.hour.hours
           half_past_time = current_hour + 30.minutes
 
-          if half_past_time < Time.now
+          if half_past_time < DateTime.now
             @stop_time = half_past_time
           else
             @stop_time = current_hour
@@ -45,10 +45,10 @@ module Snorby
             if @since_last_cache.blank?
               if @sensor.cache.blank?
 
-                current_hour = Time.now.beginning_of_day + Time.now.hour.hours
+                current_hour = DateTime.now.beginning_of_day + DateTime.now.hour.hours
                 half_past_time = current_hour + 30.minutes
 
-                if half_past_time < Time.now
+                if half_past_time < DateTime.now
                   start_time = half_past_time
                 else
                   start_time = current_hour
