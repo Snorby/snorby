@@ -15,6 +15,7 @@ log/*
 .DS_Store
 
 doc
+bin
 pkg
 rdoc
 tmtags
