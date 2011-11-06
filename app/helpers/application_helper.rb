@@ -1,5 +1,10 @@
 module ApplicationHelper
 
+  def geoip?
+    return @geoip unless @geoip == nil
+    @geoip = Setting.geoip?
+  end
+
   def select_options(options, attributes={})
     select_options = ""
     options.each do |data|

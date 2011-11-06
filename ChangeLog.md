@@ -1,7 +1,13 @@
 # Snorby 2.3.11
 
+  * NOTE: Remember to run `rake snorby:update` for this version release.
+  * Fixed all deprecation warnings.
+  * Upgrade to newest rails/DM versions.
   * Fix timezone issues with cache jobs
   * Fix unclassified search parameters.
+  * Fix issue with dst source calculations in pdf reports.
+  * Add optimizations for geoip settings query on iterations
+  * Improve AJAX pagination - fix load race conditions.
 
 # Snorby 2.3.10
 

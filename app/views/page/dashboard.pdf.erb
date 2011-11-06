@@ -354,7 +354,7 @@
 			<th>Event Count</th>
 		</tr>
 
-		<% destination_total = @src_metrics.map(&:last).sum %>
+		<% destination_total = @dst_metrics.map(&:last).sum %>
 		<% dst_count = 0 %>
 		<% @dst_metrics.sort{|a,b| -1*(a[1]<=>b[1]) }.each do |name, count| %>
 		<% break if dst_count >= 10 %>
