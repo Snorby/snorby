@@ -21,14 +21,14 @@ module Snorby
     class GeoipUpdatedbJob < Struct.new(:verbose)
       
       def perform
-        
-        Net::HTTP.start("geolite.maxmind.com") { |http|
+        Net::HTTP.start("geolite.maxmind.com") do |http|
           resp = http.get("/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz")
-          open("tmp/GeoIP.dat", "wb") { |file|
+          open("tmp/GeoIP.dat", "wb") do |file|
             gz = Zlib::GzipReader.new(StringIO.new(resp.body.to_s)) 
             file.write(gz.read)
-           }
-        }        
+          end
+        end
+
         FileUtils.mv('tmp/GeoIP.dat', 'config/snorby-geoip.dat', :force => true)
         
         Snorby::Jobs.geoip_update.destroy! if Snorby::Jobs.geoip_update?
@@ -36,7 +36,6 @@ module Snorby
         Delayed::Job.enqueue(Snorby::Jobs::GeoipUpdatedbJob.new(false), 
                                :priority => 1, 
                                :run_at => 1.week.from_now)
-        
       end
     end
   end
