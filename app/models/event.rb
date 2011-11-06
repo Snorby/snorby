@@ -492,7 +492,11 @@ class Event
     @search.merge!({:sid => params[:sid].to_i}) unless params[:sid].blank?
 
     unless params[:classification_id].blank?
-      @search.merge!({:classification_id => params[:classification_id].to_i})
+      if params[:classification_id].to_i == 0
+        @search.merge!({:classification_id => nil})
+      else
+        @search.merge!({:classification_id => params[:classification_id].to_i})
+      end
     end
 
     unless params[:signature_name].blank?
