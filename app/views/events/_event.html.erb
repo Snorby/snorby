@@ -2,7 +2,7 @@
 	
 	<% classification_css = event.classification.blank? ? nil : "classified" %>
 	
-  <div class='row <%= classification_css %> <%= 'geoip' if Setting.geoip? %>'>
+  <div class='row <%= classification_css %> <%= 'geoip' if geoip? %>'>
 		
 		<div class='select small'><%= check_box_tag 'event-selector', nil, false, :class => "check_box_#{event.id}" %></div>
 		
@@ -19,7 +19,7 @@
 		
 
 		<div class='click src_ip address'>
-      <% if Setting.geoip? && event.ip.present?  %>
+      <% if geoip? && event.ip.present?  %>
 
         <% geoip_src = event.ip.geoip[:source] %>
 
@@ -30,7 +30,7 @@
 		</div>
 		
 		<div class='click dst_ip address'>
-      <% if Setting.geoip? && event.ip.present? %>
+      <% if geoip? && event.ip.present? %>
 
         <% geoip_dest = event.ip.geoip[:destination] %>
 

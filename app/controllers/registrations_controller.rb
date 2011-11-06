@@ -34,7 +34,7 @@ class RegistrationsController < Devise::RegistrationsController
     method = (Snorby::CONFIG[:authentication_mode] == "database") ? "update_with_password" :  "update"
     if resource.send(method, params[resource_name])
       
-      if params[:user][:avatar].blank?
+      if params[resource_name]['avatar'].blank?
         
         resource.reprocess_avatar
         
@@ -43,6 +43,7 @@ class RegistrationsController < Devise::RegistrationsController
       else
         render :template => "users/registrations/crop"
       end
+
     else
       clean_up_passwords(resource)
       redirect_to edit_user_registration_path
