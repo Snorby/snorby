@@ -1,3 +1,8 @@
+# Snorby 2.3.11
+
+  * Fix timezone issues with cache jobs
+  * Fix unclassified search parameters.
+
 # Snorby 2.3.10
 
 <<<<<<< HEAD
