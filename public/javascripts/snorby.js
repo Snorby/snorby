@@ -1243,12 +1243,12 @@ jQuery(document).ready(function($) {
   Handlebars.registerHelper('geoip', function(ip) {
     if (ip) {
       var name = ip.country_name;
-      var code = ip.country_code2.toLowerCase();
+      var code = ip.country_code2;
       if (name === "--") { name = 'N/A' };
 
       return '<span class="click ' +
       'country_flag add_tipsy_html" title="&lt;img class=&quot;flag&quot; ' +
-      'src=&quot;/images/flags/'+code+'.png&quot;&gt; ' + name + '">' + code + '</span>'; 
+      'src=&quot;/images/flags/'+code.toLowerCase()+'.png&quot;&gt; ' + name + '">' + code + '</span>'; 
     } else {
       return null;
     };
