@@ -1243,7 +1243,7 @@ jQuery(document).ready(function($) {
   Handlebars.registerHelper('geoip', function(ip) {
     if (ip) {
       var name = ip.country_name;
-      var code = ip.country_code2;
+      var code = ip.country_code2.toLowerCase();
       if (name === "--") { name = 'N/A' };
 
       return '<span class="click ' +
