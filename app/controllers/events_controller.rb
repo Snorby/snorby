@@ -162,7 +162,7 @@ class EventsController < ApplicationController
   end
 
   def last
-    render :json => {:time => Event.last.timestamp}
+    render :json => { :time => Event.last_event_timestamp }
   end
 
   def since

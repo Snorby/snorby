@@ -8,6 +8,7 @@
   * Fix issue with dst source calculations in pdf reports.
   * Add optimizations for geoip settings query on iterations
   * Improve AJAX pagination - fix load race conditions.
+  * Improve kinda-real-time event notification logic.
 
 # Snorby 2.3.10
 
