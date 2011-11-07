@@ -139,7 +139,7 @@ function update_note_count (event_id, data) {
 	var notes_count = event_row.find('span.notes-count');
 	
 	var template = '<span class="add_tipsy round notes-count" title="{{notes_count_in_words}}"><img alt="Notes" height="16" src="/images/icons/notes.png" width="16"></span>'
-	var event_html = Mustache.to_html(template, data);
+	var event_html = Snorby.templates.render(template, data);
   	
 	if (data.notes_count == 0) {
 		
@@ -731,34 +731,54 @@ var Snorby = {
 	},
 	
 	templates: {
-		
+	
+    render: function(source, data) {
+      var self = this;
+
+      var template = Handlebars.compile(source);
+      return template(data);
+    },
+
 		flash: function(data){
+      var self = this;
+
 			var template = " \
 			<div class='{{type}}' id='flash_message' style='display:none;'> \
 				<div class='message {{type}}'>{{message}}</div> \
 			</div>";
-			return Mustache.to_html(template, data);
+			return Snorby.templates.render(template, data);
 		},
 		
 		event_table: function(data){
+      var self = this;
+      
+      var klass = '';
+      if (data.events[0].geoip) { klass = ' geoip' };
+
 			var template = " \
 			{{#events}} \
 			<li id='event_{{sid}}{{cid}}' class='event' style='display:none;' data-event-id='{{sid}}-{{cid}}' data-event-sid='{{sid}}' data-event-cid='{{cid}}'> \
-				<div class='row'> \
+				<div class='row"+klass+"'> \
 					<div class='select small'><input class='event-selector' id='event-selector' name='event-selector' type='checkbox'></div> \
 					<div class='important small'><div class='create-favorite enabled'></div></div> \
 					<div class='severity small'><span class='severity sev{{severity}}'>{{severity}}</span></div> \
-					<div class='click sensor address'>{{hostname}}</div> \
-					<div class='click src_ip address'>{{ip_src}}</div> \
-					<div class='click dst_ip address'>{{ip_dst}}</div> \
+					<div class='click sensor'>{{hostname}}</div> \
+          <div class='click src_ip address'> \
+            {{{geoip this.src_geoip}}} {{ip_src}} \
+          </div> \
+					<div class='click dst_ip address'> \
+            {{{geoip this.dst_geoip}}} {{ip_dst}} \
+          </div> \
 					<div class='click signature'>{{message}}</div> \
-					<div class='click timestamp'>{{timestamp}}</div> \
+					<div class='click timestamp'> \
+            <b class='add_tipsy' title='Event ID: {{sid}}.{{cid}} &nbsp; {{datetime}}'>{{timestamp}}</b> \
+          </div> \
 				</div> \
 				<div style='display:none;' class='event-data' data='false'></div> \
 			</li> \
 			{{/events}}"
 			
-			return Mustache.to_html(template, data);
+			return Snorby.templates.render(template, data);
 		},
 	},
 	
@@ -1219,6 +1239,20 @@ var Snorby = {
 }
 
 jQuery(document).ready(function($) {
+
+  Handlebars.registerHelper('geoip', function(ip) {
+    if (ip) {
+      var name = ip.country_name;
+      var code = ip.country_code2;
+      if (name === "--") { name = 'N/A' };
+
+      return '<span class="click ' +
+      'country_flag add_tipsy_html" title="&lt;img class=&quot;flag&quot; ' +
+      'src=&quot;/images/flags/'+code+'.png&quot;&gt; ' + name + '">' + code + '</span>'; 
+    } else {
+      return null;
+    };
+  });
 
   $('#login form#user_new').submit(function(event) {
     event.preventDefault();

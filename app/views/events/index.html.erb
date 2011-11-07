@@ -2,13 +2,15 @@
 	<script type="text/javascript">
 		<% unless Event.last.blank? %>
 		
-			var last_event = <%= Event.last.json_time %>;
-			$('div#wrapper').attr({last_event: last_event.time});
+			var last_event = "<%= Event.last_event_timestamp %>";
+			$('div#wrapper').attr({last_event: last_event});
 		
       setInterval (function () {
         $.get('/events/last', function(data) {
+
 					var old_id = $('div#wrapper').attr('last_event');
 					var page = parseInt($('.pager li.active a').html());
+
 					if (old_id != data.time) {
 						$.get('events/since', {timestamp: old_id}, function (data) {
 							if (data.events && data.events.length != 0) {
@@ -24,12 +26,13 @@
 										$('#events div.new_events').html('<strong class="new_event_count">'+new_count+'</strong> New Events Are Available Click here To View Them.');
 										
 									};
-									
+
 									$('#events ul.table div.content').prepend(Snorby.templates.event_table(data));
 								};
 								Snorby.notification({title: 'New Events', text: data.events.length + ' Events Added.'});
 							};
-						});
+            });
+
 						$('div#wrapper').attr('last_event', data.time)
 					};
 				});
