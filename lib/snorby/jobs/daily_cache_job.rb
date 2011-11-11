@@ -25,7 +25,7 @@ module Snorby
       class CacheCompleted < Exception; end;
 
       def perform
-        @stop_date = Time.now.yesterday.end_of_day
+        @stop_date = DateTime.now.yesterday.end_of_day
 
         begin
 
@@ -82,9 +82,9 @@ module Snorby
 
           # Autodrop Logic
           if Setting.autodrop?
-            if Event.count > Setting.autodrop_count.value.to_i
-              autodrop = Event.all(:limit => Setting.autodrop_count.value.to_i, :order => :timestamp.asc)
-              autodrop.destroy
+            while Event.count > Setting.autodrop_count.value.to_i do
+              autodrop = Event.all(:limit => 1000, :order => :timestamp.asc)
+              autodrop.destroy!
             end
           end
 

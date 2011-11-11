@@ -139,4 +139,15 @@ Devise.setup do |config|
   #   end
   #   manager.default_strategies(:scope => :user).unshift :twitter_oauth
   # end
+  
+  
+  if Snorby::CONFIG[:authentication_mode] == "cas"  
+    config.cas_base_url = Snorby::CONFIG[:cas_config]["base_url"]
+
+    # you can override these if you need to, but cas_base_url is usually enough
+    config.cas_login_url = Snorby::CONFIG[:cas_config]["login_url"]
+    config.cas_logout_url = Snorby::CONFIG[:cas_config]["logout_url"]
+    # config.cas_validate_url = "https://cas.myorganization.com/serviceValidate"
+  end
+  
 end

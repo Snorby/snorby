@@ -10,7 +10,7 @@
 			<td class='run_at currently_running'><%= image_tag('icons/pager.gif') %>(in progress)</td>
 		<% end %>
 	<% else %>
-		<td class='run_at'><%= distance_of_time_in_words(Time.now, job.run_at) %></td>
+		<td class='run_at'><%= distance_of_time_in_words(DateTime.now, Time.parse(job.run_at.to_s)) %></td>
 	<% end %>
 	
 	<td class='failed_at'><%= job.failed_at || 'N/A' %></td>

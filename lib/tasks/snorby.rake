@@ -18,9 +18,10 @@
 
 namespace :snorby do
   
-  desc 'Setup'
+  desc 'Setup'  
   task :setup => :environment do
-    
+    require "./lib/snorby/dm/types"
+        
     Rake::Task['secret'].invoke
     
     # Create the snorby database if it does not currently exist
@@ -36,6 +37,7 @@ namespace :snorby do
   
   desc 'Update Snorby'
   task :update => :environment do
+    require "./lib/snorby/dm/types"
     
     # Setup the snorby database
     Rake::Task['db:autoupgrade'].invoke

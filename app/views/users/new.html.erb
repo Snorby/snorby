@@ -10,19 +10,26 @@
 
 			<div class='grid_5'>
 				
-				<p><%= f.label :name %> <i>(please use first and last name)</i><br />
-			  <%= f.text_field :name, :placeholder => 'Full Name', :class => 'required' %></p>
-
+				<% if Snorby::CONFIG[:authentication_mode] == "cas" %>
+  				<p><%= f.label :name %> <i>(please use your complete CAS login)</i><br />
+  			  <%= f.text_field :name, :placeholder => 'CAS login', :class => 'required' %></p>
+        <% else %>
+  				<p><%= f.label :name %> <i>(please use first and last name)</i><br />
+  			  <%= f.text_field :name, :placeholder => 'Full Name', :class => 'required' %></p>        
+        <% end %>  
+        
 			  <p><%= f.label :email %> <i>(example: snorby@snorby.org)</i><br />
 			  <%= f.text_field :email, :placeholder => 'E-mail Address', :class => 'required email' %></p>
 				
-				<p><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-			  <%= f.password_field :password, :placeholder => 'Password' %></p>
+				<% if Snorby::CONFIG[:authentication_mode] == "database" %>
+  				<p><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+  			  <%= f.password_field :password, :placeholder => 'Password' %></p>
 
-			  <p><%= f.label :password_confirmation %><br />
-			  <%= f.password_field :password_confirmation, :placeholder => 'Password Confirmation' %></p>
+  			  <p><%= f.label :password_confirmation %><br />
+  			  <%= f.password_field :password_confirmation, :placeholder => 'Password Confirmation' %></p>
 
-				<p>
+  				<p>
+				<% end %>  
 					I would like to list <%= f.select :per_page_count, %w[25 45 65 100], { :include_blank => false } %>  <%= f.label "items per page." %><br />
 					<i>(select the default amount of events to list per page view)</i><br />
 					<br />
@@ -54,6 +61,11 @@
 					<%= f.label 'Change Avatar' %><br />
 					<%= f.file_field :avatar %><br />
 					<br />
+				</p>
+				
+				<p>
+					<%= f.check_box :gravatar%> <%= f.label "Use Gravatar" %>
+					<i>(Get avatar from gravatar.com)</i>
 				</p>
 				
 				<% if current_user.admin? %>

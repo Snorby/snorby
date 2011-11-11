@@ -11,8 +11,13 @@ class User
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
-  
+  if Snorby::CONFIG[:authentication_mode] == "cas"
+    devise :cas_authenticatable, :registerable, :trackable
+    property :email, String, :required => true, :unique => true 
+  else
+    devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
+  end
+
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 
   property :favorites_count, Integer, :index => true, :default => 0
@@ -49,6 +54,9 @@ class User
   
   # Define if the user has been enabled/disabled
   property :enabled, Boolean, :default => true
+
+  # Define if get avatar from gravatar.com or not
+  property :gravatar, Boolean, :default => false
   
   # Define created_at and updated_at timestamps
   timestamps :at
@@ -61,13 +69,11 @@ class User
   }, :default_url => '/images/default_avatar.png', :processors => [:cropper],
     :whiny => false
 
-  #validates_attachment_content_type :avatar, :content_type => ["image/png", "image/gif", "image/jpeg"]
+  ##validates_attachment_content_type :avatar, :content_type => ["image/png", "image/gif", "image/jpeg"]
 
   validates_attachment_content_type :avatar, :content_type => ['image/jpeg', 'image/gif', 'image/png', 'image/pjpeg', 'image/x-png'], 
   :message => 'Uploaded file is not an image', 
   :if => Proc.new { |profile| profile.avatar.file? }
-
-
 
   has n, :notifications, :constraint => :destroy
 

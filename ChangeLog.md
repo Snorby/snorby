@@ -1,7 +1,31 @@
+# Snorby 2.3.11
+
+  * NOTE: Remember to run `rake snorby:update` for this version release.
+  * Fixed all deprecation warnings.
+  * Upgrade to newest rails/DM versions.
+  * Fix timezone issues with cache jobs
+  * Fix unclassified search parameters.
+  * Fix issue with dst source calculations in pdf reports.
+  * Add optimizations for geoip settings query on iterations
+  * Improve AJAX pagination - fix load race conditions.
+  * Improve kinda-real-time event notification logic.
+
+# Snorby 2.3.10
+
+  * NOTE: Remember to run `rake snorby:update` for this version release.
+  * Improvements in the UI for CAS authentication mode (Antonio Marques)
+  * Added option to display GeoIP information in the events list (Antonio Marques)
+  * Added option to get user avatar from gravatar.com (Antonio Marques)
+  * Created Job to automatically update GeoIP database (if geoip enabled) (Antonio Marques)
+  * Some performance optimizations (Antonio Marques)
+  * Updated GeoIP css/UI
+  * Minor fixes with lookup/user settings display.
+
 # Snorby 2.3.9
 
   * Fixed minor bugs with new counts using cache counters before count queries.
   * Updated input for fonts and added chosen.js for select tags.
+  * CAS authentication support. Thanks acmarques.
 
 # Snorby 2.3.8
 
@@ -69,7 +93,6 @@
   * Cache logic now processes in chunks to prevent blowing the stack
   * Fixed issues with daily cache not processing when events return nil
   * Epic amounts of other bug fixes
-
   * UI/UX
   * Admin menu move to sub menu bar for UX reasons.
   * Change hotkeys that conflict with macosx bindings

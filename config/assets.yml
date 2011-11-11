@@ -10,7 +10,7 @@ javascripts:
     - public/javascripts/jquery-ui.js
     - public/javascripts/rails.js
     - public/javascripts/hotkeys.js
-    - public/javascripts/mustache.js
+    - public/javascripts/handlebars.js
     - public/javascripts/easing.js
     - public/javascripts/fancybox.js
     - public/javascripts/growl.js

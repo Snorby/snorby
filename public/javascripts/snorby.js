@@ -139,7 +139,7 @@ function update_note_count (event_id, data) {
 	var notes_count = event_row.find('span.notes-count');
 	
 	var template = '<span class="add_tipsy round notes-count" title="{{notes_count_in_words}}"><img alt="Notes" height="16" src="/images/icons/notes.png" width="16"></span>'
-	var event_html = Mustache.to_html(template, data);
+	var event_html = Snorby.templates.render(template, data);
   	
 	if (data.notes_count == 0) {
 		
@@ -484,13 +484,11 @@ var Snorby = {
 					overlayOpacity: 0.5,
 					overlayColor: '#000',
 					onStart: function() {
-						$(document).unbind('keydown', 'right');
-						$(document).unbind('keydown', 'esc');
-						$(document).unbind('keydown', 'shift+left');
+            Snorby.eventCloseHotkeys(false);
 						$('dl#event-sub-menu').hide();
 					},
 					onClosed: function() {
-						Snorby.hotkeys();
+            Snorby.eventCloseHotkeys(true);
 					}
 				});
       });
@@ -507,13 +505,11 @@ var Snorby = {
 					overlayColor: '#000',
 					href: this.href,
 					onStart: function() {
-						$(document).unbind('keydown', 'right');
-						$(document).unbind('keydown', 'esc');
-						$(document).unbind('keydown', 'shift+left');
+            Snorby.eventCloseHotkeys(false);
 						$('dl#event-sub-menu').hide();
 					},
 					onClosed: function() {
-						Snorby.hotkeys();
+					  Snorby.eventCloseHotkeys(true);
 					}
 				});
 				return false;
@@ -563,6 +559,8 @@ var Snorby = {
 			});
 			
 			$('ul.table div.content li.event div.click').live('click', function() {
+        var self = $(this);
+
 				$('dl#event-sub-menu').hide();
 				
 				var sid = $(this).parents('li').attr('data-event-sid');
@@ -588,18 +586,27 @@ var Snorby = {
             
 						current_row.slideUp('fast', function () {
 							$('li.event div.event-data').slideUp('fast');
+              Snorby.eventCloseHotkeys(true);
 						});
             
-            Snorby.hotkeys();
-
 					} else {
 						$('li.event div.event-data').slideUp('fast');
-						current_row.slideDown('fast');
-            
-            $(document).unbind('keydown', 'left');
-            $(document).unbind('keydown', 'right');
-            $(document).unbind('keydown', 'shift+left');
-            $(document).unbind('keydown', 'shift+right');
+						current_row.slideDown('fast', function() {
+
+              $(document).bind('keydown', 'esc', function() {
+                $('li.event').removeClass('highlight');
+                parent_row.removeClass('highlight');
+
+                current_row.slideUp('fast', function () {
+                  $('li.event div.event-data').slideUp('fast');
+                });
+              
+                Snorby.eventCloseHotkeys(true);
+                $(this).unbind('keydown', 'esc');
+              });
+
+              Snorby.eventCloseHotkeys(false);
+						});
 					};
 
 				} else {
@@ -607,19 +614,28 @@ var Snorby = {
 					check_box.hide();
 					$('li.event div.event-data').slideUp('fast');
 					parent_row.find('div.select').append("<img alt='laoding' src='/images/icons/loading.gif' class='select-loading'>");
-					
+
 					$.get('/events/show/'+sid+'/'+cid, function () {
 
-            $(document).unbind('keydown', 'left');
-            $(document).unbind('keydown', 'right');
-            $(document).unbind('keydown', 'shift+left');
-            $(document).unbind('keydown', 'shift+right');
+            $(document).bind('keydown', 'esc', function() {
+              $('li.event').removeClass('highlight');
+              parent_row.removeClass('highlight');
 
+						  current_row.slideUp('fast', function () {
+							  $('li.event div.event-data').slideUp('fast');
+						  });
+            
+              $(this).unbind('keydown', 'esc');
+              Snorby.eventCloseHotkeys(true);
+            });
 
 						Snorby.helpers.remove_click_events(false);
+
 						$('.select-loading').remove();
 						check_box.show();
-						current_row.attr('data', true);		
+						current_row.attr('data', true);
+
+            Snorby.eventCloseHotkeys(false);
 					}, 'script');
 					
 				};
@@ -641,6 +657,20 @@ var Snorby = {
 		
 	},
 	
+  eventCloseHotkeys: function(bind) {
+    if (bind) {
+      $(document).bind('keydown', 'shift+right', Snorby.hotKeyCallback.shiftPlusRight);
+      $(document).bind('keydown', 'right', Snorby.hotKeyCallback.right);			
+      $(document).bind('keydown', 'shift+left', Snorby.hotKeyCallback.shiftPlusLeft);
+      $(document).bind('keydown', 'left', Snorby.hotKeyCallback.left);      
+    } else {
+      $(document).unbind('keydown', Snorby.hotKeyCallback.shiftPlusRight);
+      $(document).unbind('keydown', Snorby.hotKeyCallback.right);			
+      $(document).unbind('keydown', Snorby.hotKeyCallback.shiftPlusLeft);
+      $(document).unbind('keydown', Snorby.hotKeyCallback.left);
+    }
+  },
+
 	admin: function(){
 		
 		$('#users input#enabled').live('click', function(e) {
@@ -701,34 +731,54 @@ var Snorby = {
 	},
 	
 	templates: {
-		
+	
+    render: function(source, data) {
+      var self = this;
+
+      var template = Handlebars.compile(source);
+      return template(data);
+    },
+
 		flash: function(data){
+      var self = this;
+
 			var template = " \
 			<div class='{{type}}' id='flash_message' style='display:none;'> \
 				<div class='message {{type}}'>{{message}}</div> \
 			</div>";
-			return Mustache.to_html(template, data);
+			return Snorby.templates.render(template, data);
 		},
 		
 		event_table: function(data){
+      var self = this;
+      
+      var klass = '';
+      if (data.events[0].geoip) { klass = ' geoip' };
+
 			var template = " \
 			{{#events}} \
 			<li id='event_{{sid}}{{cid}}' class='event' style='display:none;' data-event-id='{{sid}}-{{cid}}' data-event-sid='{{sid}}' data-event-cid='{{cid}}'> \
-				<div class='row'> \
+				<div class='row"+klass+"'> \
 					<div class='select small'><input class='event-selector' id='event-selector' name='event-selector' type='checkbox'></div> \
 					<div class='important small'><div class='create-favorite enabled'></div></div> \
 					<div class='severity small'><span class='severity sev{{severity}}'>{{severity}}</span></div> \
-					<div class='click sensor address'>{{hostname}}</div> \
-					<div class='click src_ip address'>{{ip_src}}</div> \
-					<div class='click dst_ip address'>{{ip_dst}}</div> \
+					<div class='click sensor'>{{hostname}}</div> \
+          <div class='click src_ip address'> \
+            {{{geoip this.src_geoip}}} {{ip_src}} \
+          </div> \
+					<div class='click dst_ip address'> \
+            {{{geoip this.dst_geoip}}} {{ip_dst}} \
+          </div> \
 					<div class='click signature'>{{message}}</div> \
-					<div class='click timestamp'>{{timestamp}}</div> \
+					<div class='click timestamp'> \
+            <b class='add_tipsy' title='Event ID: {{sid}}.{{cid}} &nbsp; {{datetime}}'>{{timestamp}}</b> \
+          </div> \
 				</div> \
 				<div style='display:none;' class='event-data' data='false'></div> \
 			</li> \
 			{{/events}}"
 			
-			return Mustache.to_html(template, data);
+			return Snorby.templates.render(template, data);
 		},
 	},
 	
@@ -750,6 +800,13 @@ var Snorby = {
 				live: true
 			});
 			
+			$('.add_tipsy_html').tipsy({
+				fade: true,
+				html: true,
+				gravity: 's',
+				live: true
+			});
+
 		},
 		
 		input_style: function(){
@@ -870,21 +927,22 @@ var Snorby = {
 		pagenation: function() {
 			
 			$('ul.pager li').live('click', function() {
-				
+				var self = this;
+
 				if (history && history.pushState) {
 					$(window).bind("popstate", function() {
 						$.getScript(location.href);
 			    });
 				};
 				
-				if (!$(this).hasClass('more')) {
+				if (!$(self).hasClass('more')) {
 					
-					var current_width = $(this).width();
+					var current_width = $(self).width();
 					if (current_width < 16) { var current_width = 16 };
 					
-					$(this).addClass('loading').css('width', current_width);
+					$(self).addClass('loading').css('width', current_width);
 					
-					if ($(this).parents('div').hasClass('notes-pager')) {
+					if ($(self).parents('div').hasClass('notes-pager')) {
 						$('div.notes').fadeTo(500, 0.4);
 					} else {
 						$('div.content, tbody.content').fadeTo(500, 0.4);
@@ -893,10 +951,22 @@ var Snorby = {
 					Snorby.helpers.remove_click_events(true);
 					
 					if (history && history.pushState) {
-						$.getScript($(this).find('a').attr('href'));
-						history.pushState(null, document.title, $(this).find('a').attr('href'));
+						
+            $.getScript($(self).find('a').attr('href'), function() {
+              history.pushState(null, document.title, $(self).find('a').attr('href'));
+              $('div.content').fadeTo(500, 1);
+              Snorby.helpers.remove_click_events(false);
+              Snorby.helpers.recheck_selected_events();
+              $.scrollTo('#header', 500);
+            });
+
 					} else {
-						$.getScript($(this).find('a').attr('href'));
+						$.getScript($(self).find('a').attr('href'), function() {
+              $('div.content').fadeTo(500, 1);
+              Snorby.helpers.remove_click_events(false);
+              Snorby.helpers.recheck_selected_events();
+              $.scrollTo('#header', 500);
+            });
 					};
 					
 				};
@@ -934,9 +1004,30 @@ var Snorby = {
 		});
 		
 	},
-	
+
+  hotKeyCallback: {
+      
+    left: function() {
+      $('div.pager.main ul.pager li.previous a').click();
+    },
+
+    right: function() {
+      $('div.pager.main ul.pager li.next a').click();
+    },
+
+    shiftPlusRight: function() {
+      $('div.pager.main ul.pager li.last a').click();
+    },
+
+    shiftPlusLeft: function() {
+      $('div.pager.main ul.pager li.first a').click();
+    }
+
+  },
+
 	hotkeys: function(){
-	
+    var self = this;
+
 		$(document).bind('keydown', 'ctrl+shift+h', function() {
 			$.fancybox({
 				padding: 0,
@@ -971,108 +1062,85 @@ var Snorby = {
 			return false;
 		});
 	
-		$('ul.table div.content li.event').live('hover', function() {
-			$('ul.table div.content li.event').removeClass('currently-over');
-			$(this).addClass('currently-over');
-		}, function() {
-			$(this).removeClass('currently-over');
-		});
-	
 		if ($('div.pager').is(':visible')) {
 			
 			$(document).bind('keydown', 'shift+down', function() {
         var item = $('ul.table div.content li.event.currently-over');
+        
 				if (item.is(':visible')) {
           if (item.next().length != 0) {
-            item.removeClass('currently-over').next().addClass('currently-over');
+            item.removeClass('currently-over');
+            item.next().addClass('currently-over');
           } else {
             $('ul.table div.content li.event:first').addClass('currently-over');
           };
 				} else {
 					$('ul.table div.content li.event:first').addClass('currently-over');
 				};
-				return false;
+
 			});
 
 			$(document).bind('keydown', 'shift+up', function() {
         var item = $('ul.table div.content li.event.currently-over');
 				if (item.is(':visible')) {
           if (item.prev().length != 0) {
-            item.removeClass('currently-over').prev().addClass('currently-over');
+            item.removeClass('currently-over');
+            item.prev().addClass('currently-over');
           } else {
             $('ul.table div.content li.event:last').addClass('currently-over');
           };
 				} else {
 					$('ul.table div.content li.event:last').addClass('currently-over');
 				};
-				return false;
 			});
 			
 			$(document).bind('keydown', 'shift+return', function() {
 				$('ul.table div.content li.event.currently-over div.row div.click').click();
-				return false;
-			});
-			
-			$(document).bind('keydown', 'esc', function() {
-				$('ul.table div.content li.event.highlight div.row div.click').click();
-				return false;
 			});
 			
 			$(document).bind('keydown', 'ctrl+shift+1', function() {
-				$('span.sev1').parents('div.row').find('input#event-selector').click().trigger('change');
-				return false;
+        
+        $('span.sev1').parents('div.row').find('input#event-selector').each(function() {
+          var $checkbox = $(this);
+          $checkbox.attr('checked', !$checkbox.attr('checked'));
+          $checkbox.trigger('change');
+        });
 			});
 			
 			$(document).bind('keydown', 'ctrl+shift+2', function() {
-				$('span.sev2').parents('div.row').find('input#event-selector').click().trigger('change');
-				return false;
+        $('span.sev2').parents('div.row').find('input#event-selector').each(function() {
+          var $checkbox = $(this);
+          $checkbox.attr('checked', !$checkbox.attr('checked'));
+          $checkbox.trigger('change');
+        });
 			});
 			
 			$(document).bind('keydown', 'ctrl+shift+3', function() {
-				$('span.sev3').parents('div.row').find('input#event-selector').click().trigger('change');
-				return false;
+        $('span.sev3').parents('div.row').find('input#event-selector').each(function() {
+          var $checkbox = $(this);
+          $checkbox.attr('checked', !$checkbox.attr('checked'));
+          $checkbox.trigger('change');
+        });
 			});
 			
 			$(document).bind('keydown', 'ctrl+shift+u', function() {
 				set_classification(0);
-				return false;
 			});
-			
-			$(document).bind('keydown', 'shift+right', function() {
-				$('div.pager.main ul.pager li.last a').click();
-				return false;
-			});
-			
+
       $(document).bind('keydown', 'alt+right', function() {
         $('div.pager.notes-pager ul.pager li.next a').click();
-        return false;
       });
-			
-			$(document).bind('keydown', 'right', function() {
-				$('div.pager.main ul.pager li.next a').click();
-				return false;
-			});
-			
-			$(document).bind('keydown', 'shift+left', function() {
-				$('div.pager.main ul.pager li.first a').click();
-				return false;
-			});
-			
+
       $(document).bind('keydown', 'alt+left', function() {
         $('div.pager.notes-pager ul.pager li.previous a').click();
-        return false;
       });
-			
-			$(document).bind('keydown', 'left', function() {
-				$('div.pager.main ul.pager li.previous a').click();
-				return false;
-			});
 			
 			$(document).bind('keydown', 'ctrl+shift+a', function() {
 				$('input.event-select-all').click().trigger('change');
-				return false;
 			});
 			
+      Snorby.eventCloseHotkeys(true);
+
 		};
 		
 	},
@@ -1172,6 +1240,20 @@ var Snorby = {
 
 jQuery(document).ready(function($) {
 
+  Handlebars.registerHelper('geoip', function(ip) {
+    if (ip) {
+      var name = ip.country_name;
+      var code = ip.country_code2;
+      if (name === "--") { name = 'N/A' };
+
+      return '<span class="click ' +
+      'country_flag add_tipsy_html" title="&lt;img class=&quot;flag&quot; ' +
+      'src=&quot;/images/flags/'+code.toLowerCase()+'.png&quot;&gt; ' + name + '">' + code + '</span>'; 
+    } else {
+      return null;
+    };
+  });
+
   $('#login form#user_new').submit(function(event) {
     event.preventDefault();
     var self = $('#login');
@@ -1264,5 +1346,12 @@ jQuery(document).ready(function($) {
 	Snorby.pages.events();
 
   $('.add_chosen').chosen();
+
+  $('ul.table div.content li.event').live('hover', function() {
+    $('ul.table div.content li.event').removeClass('currently-over');
+    $(this).toggleClass('currently-over');
+  }, function() {
+    $(this).toggleClass('currently-over');
+  });
 
 });

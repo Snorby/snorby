@@ -46,6 +46,12 @@ class SettingsController < ApplicationController
     Delayed::Job.enqueue(Snorby::Jobs::DailyCacheJob.new(false), :priority => 1, :run_at => Time.now.tomorrow.beginning_of_day)
     redirect_to jobs_path
   end
+  
+  def start_geoip_update
+    Snorby::Jobs.geoip_update.destroy! if Snorby::Jobs.geoip_update?
+    Delayed::Job.enqueue(Snorby::Jobs::GeoipUpdatedbJob.new(false), :priority => 1, :run_at => 1.week.from_now.beginning_of_day)
+    redirect_to jobs_path
+  end
 
   def restart_worker
     Snorby::Worker.restart if Snorby::Worker.running?

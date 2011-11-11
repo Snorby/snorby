@@ -81,6 +81,35 @@ class Event
     :user_count => 'event'
   }
 
+
+  def self.last_event_timestamp
+    event = first(:order => [:timestamp.desc])
+    timestamp = event ? event.timestamp : DateTime.now
+  end
+
+  def self.unique_events_by_source_ip
+    data = []
+
+    ips = Ip.all(:limit => 25, :fields => [:ip_src], :unique => true).map(&:ip_src)
+    events = ips.collect do |ip| 
+      Event.all(:'ip.ip_src' => ip, :order => :timestamp.desc).group_by do |x| 
+        x.sig_id
+      end
+    end
+
+    events.each do |set|
+      next if set.blank?
+      next if set.values.blank?
+
+      set.each do |key, value|
+        
+        data << value.first
+      end
+    end
+
+    data
+  end
+
   def self.sorty(params={})
     sort = params[:sort]
     direction = params[:direction]
@@ -248,19 +277,36 @@ class Event
   # @return [Hash] hash of events between range.
   #
   def self.to_json_since(time)
+    
+    geoip = Setting.geoip?
     events = Event.all(:timestamp.gt => time, :classification_id => nil, :order => [:timestamp.desc])
     json = {:events => []}
+
     events.each do |event|
-      json[:events] << {
+      ip = event.ip
+
+      event = {
         :sid => event.sid,
         :cid => event.cid,
         :hostname => event.sensor.sensor_name,
         :severity => event.signature.sig_priority,
-        :ip_src => event.ip.ip_src.to_s,
-        :ip_dst => event.ip.ip_dst.to_s,
+        :ip_src => ip.ip_src.to_s,
+        :ip_dst => ip.ip_dst.to_s,
         :timestamp => event.pretty_time,
-        :message => truncate(event.signature.name, :length => 65, :omission => '...')
+        :datetime => event.timestamp.strftime('%A, %b %d, %Y at %I:%M:%S %p'),
+        :message => truncate(event.signature.name, :length => 65, :omission => '...'),
+        :geoip => false
       }
+
+      if geoip
+        event.merge!({
+          :geoip => true,
+          :src_geoip => ip.geoip[:source],
+          :dst_geoip => ip.geoip[:destination]
+        })
+      end
+
+      json[:events] << event
     end
     return json
   end
@@ -468,7 +514,11 @@ class Event
     @search.merge!({:sid => params[:sid].to_i}) unless params[:sid].blank?
 
     unless params[:classification_id].blank?
-      @search.merge!({:classification_id => params[:classification_id].to_i})
+      if params[:classification_id].to_i == 0
+        @search.merge!({:classification_id => nil})
+      else
+        @search.merge!({:classification_id => params[:classification_id].to_i})
+      end
     end
 
     unless params[:signature_name].blank?

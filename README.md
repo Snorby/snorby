@@ -58,6 +58,10 @@ Pass: snorby
 	`$ bundle install`
 	
 	* NOTE: If you get missing gem issues in production use `bundle install --path vendor/cache`
+
+	* If your system gems are updated beyond the gemfile.lock you should use as an example `bundle exec rake snorby:setup` 
+
+	* If running `bundle exec {app}` is painful you can safely install binstubs by `bundle install --binstubs` 
 	
 * Run The Snorby Setup
 
@@ -137,7 +141,7 @@ You can open the rails console at anytime and interact with the Snorby environme
 ## License
 
 * Note: The snorby source code is 100% free and open source however we use highcharts for metrics
-and reporting. Please make sure you review the [highcharts]('http://www.highcharts.com) licensing in detail [here]('http://www.highcharts.com/license'). 
+and reporting. Please make sure you review the [highcharts](http://www.highcharts.com) licensing in detail [here](http://www.highcharts.com/license). 
 The below license only applies to snorby source code which can be identified with the below license in each file.
 
 Snorby - All About Simplicity.
