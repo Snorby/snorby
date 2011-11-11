@@ -1,6 +1,5 @@
 # Snorby .gitignore 
 
-
 *.rbc
 *.tmproj
 *.swp
@@ -30,3 +29,6 @@ vendor/bundle/
 
 !tmp/.gitignore
 !log/.gitignore
+
+config/snorby_config.yml
+config/database.yml
