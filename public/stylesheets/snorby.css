@@ -2893,7 +2893,7 @@ input[type='text']{
 
 td.chart{
 	position: relative;
-	width: 200px;
+	width: 120px;
 	padding-left: 10px;
 	padding-bottom: 0;
 }
@@ -2901,7 +2901,7 @@ td.chart{
 div.progress-container {
 	vertical-align: middle;
   	border: 1px solid #c0c0c0;
-  	width: 180px;
+  	width: 100px;
   	float: left; 
 	background: #fff;
 	display: block;
