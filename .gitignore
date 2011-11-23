@@ -30,3 +30,5 @@ vendor/bundle/
 
 !tmp/.gitignore
 !log/.gitignore
+
+nbproject
