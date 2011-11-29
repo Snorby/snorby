@@ -9,22 +9,22 @@
 				<div id="snorbybox-form-holder">
 
 					<div id='snorbybox-form-full'>
-						<%= check_box_tag("use_sig_id", 1, 1) %> <%= label_tag "Only for this signature: <strong>#{@event.signature.sig_name}</strong>".html_safe %><br />
+						<%= check_box_tag("use_sig_id", 1, 1) %> <%= label_tag "use_sig_id", "Only for this signature: <strong>#{@event.signature.sig_name}</strong>".html_safe %><br />
 						<%= hidden_field_tag :sig_id, @event.signature.sig_id.to_i %><br />
 					</div>
 
 					<div id="snorbybox-form">
-						<%= check_box_tag("use_ip_src", 1) %> <%= label_tag "Only for source address #{@event.ip.ip_src}".html_safe %><br />
+						<%= check_box_tag("use_ip_src", 1) %> <%= label_tag "use_ip_src", "Only for source address #{@event.ip.ip_src}".html_safe %><br />
 						<%= hidden_field_tag :ip_src, @event.ip.ip_src.to_i %><br />
 					</div>
 
 					<div id="snorbybox-form">
-						<%= check_box_tag("use_ip_dst", 1) %> <%= label_tag "Only for destination address #{@event.ip.ip_dst}".html_safe %><br />
+						<%= check_box_tag("use_ip_dst", 1) %> <%= label_tag "use_ip_dst", "Only for destination address #{@event.ip.ip_dst}".html_safe %><br />
 				    <%= hidden_field_tag :ip_dst, @event.ip.ip_dst.to_i %><br />
 					</div>
 
 					<div id='snorbybox-form'>
-						<%= label_tag "Select Classification: <i>(select classification for mass action)</i>".html_safe %><br />
+						<%= label_tag "", "Select Classification: <i>(select classification for mass action)</i>".html_safe %><br />
 						<%= select_tag :classification_id, dropdown_select_tag(Classification.all, :id, false) %>
 					</div>
 
@@ -33,7 +33,7 @@
 				<br />
 				
 				<div id='snorbybox-form-full' class='clearfix'>
-			    <%= label_tag 'Select Sensors <i>(optional - Blank = All)</i>'.html_safe %><br />
+			    <%= label_tag "", "Select Sensors <i>(optional - Blank = All)</i>".html_safe %><br />
           <%= select_tag :sensor_ids, options_from_collection_for_select(Sensor.all, :sid, :name), 
             { :multiple => true, 
               :size => 10, 
@@ -45,7 +45,7 @@
 				
 				<div id='snorbybox-form-full' class='clearfix'>
 					<%= check_box_tag("reclassify", 1) %>  
-					<%= label_tag "I would like to apply this classification to already classified events matching this criteria.".html_safe %><br />
+					<%= label_tag "reclassify", "I would like to apply this classification to already classified events matching this criteria.".html_safe %><br />
 				</div>
 				
 				<br />
