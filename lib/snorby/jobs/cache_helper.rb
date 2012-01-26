@@ -143,14 +143,14 @@ module Snorby
       def fetch_src_ip_metrics
         logit '- fetching src ip metrics'
         @src_ips = {}
-        @events.group_by { |x| x.ip.ip_src.to_s }.collect { |x,y| @src_ips.merge!({x => y.size}) }
+        @events.select{|e| e.ip != nil}.group_by { |x| x.ip.ip_src.to_s }.collect { |x,y| @src_ips.merge!({x => y.size}) }
         @src_ips
       end
 
       def fetch_dst_ip_metrics
         logit '- fetching dst ip metrics'
         @dst_ips = {}
-        @events.group_by { |x| x.ip.ip_dst.to_s }.collect { |x,y| @dst_ips.merge!({x => y.size}) }
+        @events.select{|e| e.ip != nil}.group_by { |x| x.ip.ip_dst.to_s }.collect { |x,y| @dst_ips.merge!({x => y.size}) }
         @dst_ips
       end
       
