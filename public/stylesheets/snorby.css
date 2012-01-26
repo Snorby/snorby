@@ -3628,6 +3628,36 @@ div.dashboard-graph.no-pie-data{
 	position: relative;
 }
 
+#snorbybox-content #packet-capture-settings{
+	width: 750px;
+	display: block;
+	position: relative;
+	overflow: hidden;
+}
+
+#snorbybox-content #packet-capture-settings .pc-column{
+	width: 375px;
+	display: block;
+	position: relative;
+	overflow: hidden;
+	float: left;
+	height: 140px;
+}
+
+#snorbybox-content #packet-capture-settings p.pc-settings{
+	height: 60px;
+}
+
+#snorbybox-content #packet-capture-settings p.pc-settings input[type='text'],
+#snorbybox-content #packet-capture-settings p.pc-settings input[type='password']{
+	width: 320px;	
+}
+
+#snorbybox-content #packet-capture-settings p.pc-plugin-type{
+	margin-bottom: 20px;
+	margin-top: 10px;
+}
+
 #snorbybox-content form{
 	display: block;
 	overflow: hidden;

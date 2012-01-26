@@ -15,6 +15,7 @@
 		</div>
 		
 		<div class='severity small'><span class='severity sev<%= event.signature.severity_id %>'><%= event.signature.severity_id %></span></div>
+
 		<div class='click sensor' title='<%=h event.sensor.sensor_name %>'><%= truncate(event.sensor.sensor_name, :length => 17, :omission => '...') %></div>
 		
 
