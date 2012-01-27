@@ -1,17 +1,9 @@
 # Snorby .gitignore 
 
-
-<<<<<<< HEAD
-.rbc
-.tmproj
-.swp
-.swo
-=======
 *.rbc
 *.tmproj
 *.swp
 *.swo
->>>>>>> master
 log/*
 tmp/*
 log/*
@@ -38,3 +30,5 @@ vendor/bundle/
 
 !tmp/.gitignore
 !log/.gitignore
+
+nbproject
