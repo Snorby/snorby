@@ -127,22 +127,7 @@ You can open the rails console at anytime and interact with the Snorby environme
 	# If the Snorby worker is running this will start the cache jobs and set the run_at time for the current time.
 	Snorby::Jobs.run_now!
 
-## Snorby Team
-
- * Snorby
- 	* **Dustin Willis Webber** (Creator, Designer and Backend Code)
-
- * Insta-Snorby 
- 	* **Jason Meller** (Insta-Snorby Creator and Maintainer) [https://github.com/Snorby/insta-snorby](https://github.com/Snorby/insta-snorby)
-
- * Team Cool
- 	* **JJ Cummings** (Super Badass)
-
 ## License
-
-* Note: The snorby source code is 100% free and open source however we use highcharts for metrics
-and reporting. Please make sure you review the [highcharts](http://www.highcharts.com) licensing in detail [here](http://www.highcharts.com/license). 
-The below license only applies to snorby source code which can be identified with the below license in each file.
 
 Snorby - All About Simplicity.
 
@@ -161,3 +146,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+* Note: The snorby source code is 100% free and open source however we use highcharts for metrics
+and reporting. Please make sure you review the [highcharts](http://www.highcharts.com) licensing in detail [here](http://www.highcharts.com/license). 
+The below license only applies to snorby source code which can be identified with the below license in each file.
