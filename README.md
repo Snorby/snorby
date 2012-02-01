@@ -41,19 +41,15 @@ Pass: snorby
 	
 		`apt-get install imagemagick`
 
-* Install Gem Dependencies (make sure you have bundler installed: `gem install bundler`)
-
-	`bundle install`
-	
-* Install wkhtmltopdf
-
-	`pdfkit --install-wkhtmltopdf # If this fails - visit http://code.google.com/p/wkhtmltopdf/ for more information`
-	
 * Get Snorby from the download section or use the latest edge release via git.
 
 	`git clone git://github.com/Snorby/snorby.git`
 
-* Install Gem Dependencies (inside the root Snorby directory)
+* Move into de snorby Directory
+
+	`cd snorby`
+
+* Install Gem Dependencies  (make sure you have bundler installed: `gem install bundler`)
 
 	`$ bundle install`
 	
@@ -63,17 +59,21 @@ Pass: snorby
 
 	* If running `bundle exec {app}` is painful you can safely install binstubs by `bundle install --binstubs` 
 	
+* Install wkhtmltopdf
+
+	`pdfkit --install-wkhtmltopdf # If this fails - visit http://code.google.com/p/wkhtmltopdf/ for more information`
+
 * Run The Snorby Setup
 
 	`rake snorby:setup`
 	
 * Edit The Snorby Configuration File
 
-	`snorby/app/config/snorby_config.yml`
+	`config/snorby_config.yml`
 	
 * Edit The Snorby Mail Configurations
 
-	`snorby/app/initializers/mail_config.rb`
+	`config/initializers/mail_config.rb`
 	
 * Once all options have been configured and snorby is up and running
 
