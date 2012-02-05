@@ -560,7 +560,7 @@ body.login #flash_message{
 
 body.login #flash_message.success{
 	border-bottom: 1px solid #000;
-	background-color: rgba(15,113,12,0.8);
+	background-color: rgba(10,96,8,0.8);
 }
 
 #flash_message div.message{

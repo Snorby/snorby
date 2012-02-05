@@ -8,8 +8,8 @@
 			<br />
 		</strong>
 	<% else %>
-		<%= render @notes %>
-		
+    
+    <%= render @notes %>
 		<%= pager(@notes, "/events/show/#{@event.sid}/#{@event.cid}", false) %>
 		
 	<% end %>

@@ -925,13 +925,15 @@ var Snorby = {
 		},
 		
 		pagenation: function() {
-			
+
 			$('ul.pager li').live('click', function() {
 				var self = this;
+        
+        var notes = $(this).parents('.pager').hasClass('notes-pager');
 
 				if (history && history.pushState) {
 					$(window).bind("popstate", function() {
-						$.getScript(location.href);
+            $.getScript(location.href);
 			    });
 				};
 				
@@ -953,19 +955,25 @@ var Snorby = {
 					if (history && history.pushState) {
 						
             $.getScript($(self).find('a').attr('href'), function() {
-              history.pushState(null, document.title, $(self).find('a').attr('href'));
               $('div.content').fadeTo(500, 1);
               Snorby.helpers.remove_click_events(false);
               Snorby.helpers.recheck_selected_events();
-              $.scrollTo('#header', 500);
+              
+              if (!notes) {
+                history.pushState(null, document.title, $(self).find('a').attr('href'));
+                $.scrollTo('#header', 500);
+              };
+
             });
 
 					} else {
 						$.getScript($(self).find('a').attr('href'), function() {
+              
               $('div.content').fadeTo(500, 1);
               Snorby.helpers.remove_click_events(false);
               Snorby.helpers.recheck_selected_events();
-              $.scrollTo('#header', 500);
+              
+              if (!notes) { $.scrollTo('#header', 500) };
             });
 					};
 					
@@ -1159,7 +1167,7 @@ var Snorby = {
 		
 		if ($('div#general-settings').length > 0) {
 			
-			if ($('input#_settings_packet_capture:checked').length > 0) {
+			if ($('input#_settings_packet_capture').is(':checked')) {
 				$('div.pc-settings').show();
 				$('p.pc-settings input[type="text"], p.pc-settings select').addClass('required');
 			} else {
@@ -1167,18 +1175,19 @@ var Snorby = {
 				$('p.pc-settings input[type="text"], p.pc-settings select').removeClass('required');
 			};
 
-			if ($('input#_settings_packet_capture_auto_auth:checked').length == 0) {
-				$('input#_settings_packet_capture_user, input#_settings_packet_capture_password').attr('disabled', 'disabled');
-				$('input#_settings_packet_capture_user, input#_settings_packet_capture_password').removeClass('required');
+			if ($('input#_settings_packet_capture_auto_auth').is(':checked')) {
+				$('input#_settings_packet_capture_user, input#_settings_packet_capture_password').attr('disabled', null);
 			} else {
-				$('input#_settings_packet_capture_user, input#_settings_packet_capture_password').attr('disabled', '');
+        $('input#_settings_packet_capture_user, input#_settings_packet_capture_password').attr('disabled', 'disabled');
+				$('input#_settings_packet_capture_user, input#_settings_packet_capture_password').removeClass('required');
 			};
 			
 			var packet_capture_plugin = $('select#_settings_packet_capture_type').attr('packet_capture_plugin');
+
 			$('select#_settings_packet_capture_type option[value="'+packet_capture_plugin+'"]').attr('selected', 'selected');
 			
-      if ($('input#_settings_autodrop:checked').length > 0) {
-        $('select#_settings_autodrop_count').attr('disabled', '');
+      if ($('input#_settings_autodrop').is(':checked')) {
+        $('select#_settings_autodrop_count').attr('disabled', null);
       } else {
         $('select#_settings_autodrop_count').attr('disabled', 'disabled');
       };
@@ -1187,8 +1196,10 @@ var Snorby = {
 			$('select#_settings_autodrop_count option[value="'+autodrop_count+'"]').attr('selected', 'selected');
 		};
 
+    // end
+
 		$('input#_settings_packet_capture').live('click', function() {
-			if ($('input#_settings_packet_capture:checked').length > 0) {
+			if ($('input#_settings_packet_capture').is(':checked')) {
 				$('div.pc-settings').show();
 				$('p.pc-settings input[type="text"], p.pc-settings select').addClass('required');
 			} else {
@@ -1198,21 +1209,22 @@ var Snorby = {
 		});
 
     $('input#_settings_autodrop').live('click', function() {
-      console.log('w0ots!')
+
       if ($(this).is(':checked')) {
-        $('select#_settings_autodrop_count').attr('disabled', '');
+        $('select#_settings_autodrop_count').attr('disabled', null);
       } else {
         $('select#_settings_autodrop_count').attr('disabled', 'disabled');
       };
+
     });
 
 		$('input#_settings_packet_capture_auto_auth').live('click', function() {
-			if ($('input#_settings_packet_capture_auto_auth:checked').length > 0) {
+			if ($('input#_settings_packet_capture_auto_auth').is(':checked')) {
 				$('input#_settings_packet_capture_user, input#_settings_packet_capture_password').addClass('required');
-				$('input#_settings_packet_capture_user, input#_settings_packet_capture_password').attr('disabled', '');
+				$('input#_settings_packet_capture_user, input#_settings_packet_capture_password').attr('disabled', null);
 			} else {
 				$('input#_settings_packet_capture_user, input#_settings_packet_capture_password').removeClass('required');
-				$('input#_settings_packet_capture_user, input#_settings_packet_capture_password').attr('disabled', 'disabled');
+        $('input#_settings_packet_capture_user, input#_settings_packet_capture_password').attr('disabled', 'disabled');
 			};
 		});
 		
@@ -1258,9 +1270,17 @@ jQuery(document).ready(function($) {
     event.preventDefault();
     var self = $('#login');
     var that = this;
-    
-    if ($('input#user_password', that).attr('value').length > 1) {
-      if ($('input#user_email', that).attr('value').length > 5) {
+   
+    if ($('#password').length > 0) {
+      that.submit(); 
+    } else {
+      var password_value = $('input#user_password', that).attr('value');
+    };
+
+    var email_value = $('input#user_email', that).attr('value');
+
+    if (password_value && (password_value.length > 1)) {
+      if (email_value.length > 5) {
 
         $.post(that.action, $(that).serialize(), function(data) {
             if (data.success) {
@@ -1269,6 +1289,7 @@ jQuery(document).ready(function($) {
                 type: 'success', 
                 message: "Loading - Authentication Successful!"
               });
+
               flash();
               $.get(data.redirect, function(data) {
                 self.fadeOut('slow', function() {
@@ -1278,6 +1299,7 @@ jQuery(document).ready(function($) {
                   history.pushState(null, 'Snorby - Dashboard', '/');
                 });
               });
+
             } else {
               flash_message.push({
                 type: 'error', 

@@ -42,16 +42,20 @@ class EventsController < ApplicationController
   def show
     @event = Event.get(params['sid'], params['cid'])
     @lookups ||= Lookup.all
+
     @notes = @event.notes.all.page(params[:page].to_i, 
                                    :per_page => 5, :order => [:id.desc])
+
     respond_to do |format|
       format.html {render :layout => false}
       format.js
+
       format.pdf do
         render :pdf => "Event:#{@event.id}", 
                :template => "events/show.pdf.erb", 
                :layout => 'pdf.html.erb', :stylesheets => ["pdf"]
       end
+
       format.xml { render :xml => @event.in_xml }
       format.csv { render :text => @event.to_csv }
       format.json { render :json => @event.in_json }
