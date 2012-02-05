@@ -116,7 +116,7 @@ module Snorby
         @udp_events = []
         @icmp_events = []
 
-        if day_end >= @stop_date
+        if day_end > @stop_date
           logit "Current - No New Events To Cache..."
           return
         end

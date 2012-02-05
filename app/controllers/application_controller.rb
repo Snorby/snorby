@@ -5,9 +5,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   helper_method :check_for_demo_user
-
-  before_filter :authenticate_user!
   before_filter :user_setup
+  # before_filter :authenticate_user!
   
   protected
 
@@ -28,7 +27,23 @@ class ApplicationController < ActionController::Base
           sign_out current_user
           redirect_to login_path, :notice => 'Your account has be disabled. Please contact the administrator.'
         end
+      else
+
+        current_uri = request.env['PATH_INFO']
+        routes = ["", "/", "/users/login"]
+
+        if current_uri && routes.include?(current_uri)
+          redirect_to '/users/login' unless current_uri == "/users/login"
+        else
+          authenticate_user!
+        end
       end
+
+      # if Time.respond_to?(:zone)
+      #   Time.zone = current_user.timezone
+      # else
+      #   Time.timezone = current_user.timezone
+      # end
     end
 
 end

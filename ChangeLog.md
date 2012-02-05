@@ -1,3 +1,10 @@
+# Snorby 2.3.13
+
+  * Minor javascript bug fixes.
+  * Fix time logic bug in daily cache job. <3
+  * Fixed ajax/request issues with password reset form
+  * Fixed event note pagination bug.
+  
 # Snorby 2.3.12
 
   * Update jquery/highcharts
