@@ -1,3 +1,13 @@
+# Snorby 2.3.14
+
+  * Major Cache refactor <3
+  * Add force cache update button to dashboard
+  * Index updates
+  * Remove auto refresh from worker/queue page
+
+  ** NOTE: remember to run `bundle exec rake snorby:update`
+  and restart the jobs/worker process.
+
 # Snorby 2.3.13
 
   * Minor javascript bug fixes.
