@@ -75,7 +75,7 @@ module Snorby
                 start_time = if last_run > DateTime.now
                   @sensor.cache.last.ran_at - 30.minutes
                 else
-                  @sensor.cache.last.ran_at + 30.minutes
+                  @sensor.cache.last.ran_at
                 end
 
               end
@@ -195,6 +195,7 @@ module Snorby
 
             logit "\nTime: #{start_time} - #{end_time}", false
             logit "no events - building empty cache record"
+
             tmp = Cache.first_or_create(:sid => @sensor.sid, :ran_at => start_time)
             tmp.update(:updated_at => DateTime.now)
 
