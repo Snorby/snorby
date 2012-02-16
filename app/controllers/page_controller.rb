@@ -25,7 +25,6 @@ class PageController < ApplicationController
     @signature_metrics = @cache.signature_metrics
 
     @event_count = @cache.all.map(&:event_count).sum
-
      
     if @sensor_metrics.last
       @axis = @sensor_metrics.last[:range].join(',')
@@ -52,6 +51,11 @@ class PageController < ApplicationController
   end
 
   def search
+  end
+
+  def force_cache
+    Snorby::Jobs.force_sensor_cache
+    redirect_to dashboard_path
   end
 
   def results    

@@ -1,6 +1,5 @@
 # Snorby .gitignore 
 
-
 *.rbc
 *.tmproj
 *.swp
@@ -32,3 +31,8 @@ vendor/bundle/
 !log/.gitignore
 
 nbproject
+
+# Ignore Config Files
+config/snorby_config.yml
+config/database.yml
+config/initializers/mail_config.rb

@@ -10,6 +10,8 @@
 		<%= drop_down_item "Export To PDF", 
 		dashboard_path(:range => params[:range] == 'today' ? 'now' : params[:range], :format => :pdf), nil, { :class => 'dashboard' } %>
 
+    <%= drop_down_item "Force Cache Update", force_cache_path if Snorby::Worker.running? %>
+
 	<% end %>
 
 <% end %>
@@ -56,7 +58,9 @@
 				<% else %>
 				
 					<% unless %w(yesterday week last_week month last_month year quarter).include?(params[:range]) %>
-						<li class='right'><i>Updated: <%= @last_cache.strftime('%D %l:%M:%S %p') %></i></li>
+            <li class='right'>
+              <i>Updated: <%= @last_cache.strftime('%D %l:%M:%S %p') %></i>
+            </li>
 					<% end %>
 					
 				<% end %>

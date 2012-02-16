@@ -25,13 +25,28 @@ module Snorby
       attr_accessor :events, :last_cache, :cache, :last_event
 
       def perform
-        begin
+
+          Signal.trap("INT") do 
+            if defined?(@cache)
+              p @cache
+              @cache.destroy! 
+            end
+            raise("SensorCacheJob Failed")
+          end
+
+          Signal.trap("TERM") do
+            if defined?(@cache)
+              p @cache
+              @cache.destroy! 
+            end
+            raise("SensorCacheJob Failed")
+          end
 
           current_hour = DateTime.now.beginning_of_day + DateTime.now.hour.hours
           half_past_time = current_hour + 30.minutes
 
           if half_past_time < DateTime.now
-            @stop_time = half_past_time
+            @stop_time = half_past_time 
           else
             @stop_time = current_hour
           end
@@ -39,11 +54,11 @@ module Snorby
           Sensor.all.each do |sensor|
             @sensor = sensor
 
-            logit "Looking for events..."
             @since_last_cache = since_last_cache
 
-            if @since_last_cache.blank?
-              if @sensor.cache.blank?
+            if @since_last_cache.compact.empty? #|| @since_last_cache.first.nil?
+
+              if @sensor.cache.first.blank?
 
                 current_hour = DateTime.now.beginning_of_day + DateTime.now.hour.hours
                 half_past_time = current_hour + 30.minutes
@@ -55,68 +70,105 @@ module Snorby
                 end
 
               else
-                start_time = @sensor.cache.last.ran_at + 30.minutes
+                last_run = @sensor.cache.last.ran_at
+
+                start_time = if last_run > DateTime.now
+                  @sensor.cache.last.ran_at - 30.minutes
+                else
+                  @sensor.cache.last.ran_at + 30.minutes
+                end
+
               end
 
-              Cache.create(:sid => @sensor.sid, :ran_at => start_time)
-              next
+              #logit "Building Empty Cache - #{start_time} - #{@stop_time}"
+              tmp = Cache.first_or_create(:sid => @sensor.sid, :ran_at => start_time)
+              tmp.update(:updated_at => DateTime.now)
+              #next
             end
 
-            # Prevent Duplicate Cache Records
-            if @sensor.cache.blank?
+            #
+            # This will fail if the sensor has no events
+            #
 
+            # Prevent Duplicate Cache Records
+            if @sensor.cache.first.blank?
+              
               start_time = @since_last_cache.first.timestamp.beginning_of_day + 
                 @since_last_cache.first.timestamp.hour.hours
 
               end_time = start_time + 30.minute
-              next if start_time >= @stop_time
+
+              next if start_time > @stop_time
             else
-              start_time = @sensor.cache.last.ran_at + 30.minute
+              last_run = @sensor.cache.last.ran_at
+
+              start_time = if last_run > DateTime.now
+                @sensor.cache.last.ran_at - 30.minutes
+              else
+                @sensor.cache.last.ran_at
+              end
+
+
               end_time = start_time + 30.minute
-              next if start_time >= @stop_time
+
+              next if (start_time > @stop_time)
             end
 
-            split_events_and_process(start_time, end_time)
+            #
+            # Process
+            #
+            while (start_time < end_time) do
+              @stime = start_time
+              @etime = end_time
 
+              break if start_time > @stop_time
+
+              split_events_and_process(start_time, end_time)
+
+              start_time = end_time
+              end_time = end_time + 30.minutes
+            end
+
+          end # Sensor.all.each END
+
+          logit "\n[~] Building Sensor Metrics", false
+          Sensor.all.each do |x|
+            x.update(:events_count => Event.all(:sid => x.sid).count)
           end
 
-          Snorby::Jobs.sensor_cache.destroy! if Snorby::Jobs.sensor_cache?
-          
-          Delayed::Job.enqueue(Snorby::Jobs::SensorCacheJob.new(false), 
-          :priority => 1, :run_at => @stop_time + 31.minute)
+          logit "[~] Building Signature Metrics", false
+          update_signature_count
 
-        rescue => e
-          puts e
-        rescue Interrupt
-          @cache.destroy! if defined?(@cache)
-        end
+          logit "[~] Building Severity Metrics\n\n", false
+          Severity.all.each do |x|
+            x.update(:events_count => Event.all(:"signature.sig_priority" => x.sig_id).count)
+          end
+
+
+          Snorby::Jobs.sensor_cache.destroy! if Snorby::Jobs.sensor_cache?
+
+          Delayed::Job.enqueue(Snorby::Jobs::SensorCacheJob.new(false), 
+          :priority => 1, :run_at => DateTime.now + 10.minutes)
+
+      rescue => e
+        puts e
+        puts e.backtrace
+        @cache.destroy! if defined?(@cache)
       end
 
       private
 
-        def build_snorby_cache
-
-          build_sensor_event_count
-          build_proto_counts
-
-          @cache.update({
-                          :event_count => fetch_event_count,
-                          :tcp_count => fetch_tcp_count,
-                          :udp_count => fetch_udp_count,
-                          :icmp_count => fetch_icmp_count,
-                          :severity_metrics => fetch_severity_metrics,
-                          :src_ips => fetch_src_ip_metrics,
-                          :dst_ips => fetch_dst_ip_metrics,
-                          :signature_metrics => fetch_signature_metrics
-          })
-
-          @cache
-        end
-
         def since_last_cache
-          return Event.all(:sid => @sensor.sid) if @sensor.cache.blank?
+          return [Event.all(:sid => @sensor.sid).first] if @sensor.cache.first.blank?
+
           @last_cache = @sensor.cache.last
-          Event.all(:timestamp.gte => @last_cache.ran_at).all(:sid => @sensor.sid)
+          time = if @last_cache.ran_at > DateTime.now
+            @last_cache.ran_at - 30.minutes
+          else
+            @last_cache.ran_at
+          end
+
+          [Event.all(:sid => @sensor.sid, :timestamp.gte => time).first]
         end
 
         def reset_counter_cache_columns
@@ -133,80 +185,50 @@ module Snorby
         #
         def split_events_and_process(start_time, end_time)
 
-          return if start_time >= @stop_time
+          event = select(%{
+            select cid from event where timestamp >= '#{@stime}' 
+            and timestamp < '#{@etime}' and sid = #{@sensor.sid.to_i} 
+            order by timestamp desc limit 1
+          })
 
-          all_events = @since_last_cache.between_time(start_time, end_time)
+          if event.empty?
 
-          @tcp_events = []
-          @udp_events = []
-          @icmp_events = []
-
-          @last_event = all_events.last
-
-          if all_events.blank?
-
-            Cache.create(:sid => @sensor.sid, :ran_at => start_time)
+            logit "\nTime: #{start_time} - #{end_time}", false
+            logit "no events - building empty cache record"
+            tmp = Cache.first_or_create(:sid => @sensor.sid, :ran_at => start_time)
+            tmp.update(:updated_at => DateTime.now)
 
           else
 
             if defined?(@last_cache)
-              logit 'Found last cache...'
               @last_cache = @sensor.cache.last
-
-              @cache = Cache.create(:sid => @last_event.sid, 
-              :cid => @last_event.cid, :ran_at => start_time)
+              @cache = Cache.first_or_create(:sid => @sensor.sid, :ran_at => start_time)
 
             else
               logit 'No cache records found - creating first cache record...'
               reset_counter_cache_columns
               
-              @last_cache = Cache.create(:sid => @last_event.sid, 
-              :cid => @last_event.cid, :ran_at => start_time)
-
+              @last_cache = Cache.first_or_create(:sid => @sensor.sid, :ran_at => start_time)
               @cache = @last_cache
             end
 
-            logit "\nNew Day: #{start_time} - #{end_time}", false
-            logit "#{all_events.length} events found. Processing."
+            logit "\nTime: #{start_time} - #{end_time}", false
 
-            records = []
-            batch = 0
+            data = {
+              :cid => event.first.to_i,
+              :event_count => fetch_event_count,
+              :tcp_count => fetch_tcp_count,
+              :udp_count => fetch_udp_count,
+              :icmp_count => fetch_icmp_count,
+              :severity_metrics => fetch_severity_metrics,
+              :src_ips => fetch_src_ip_metrics,
+              :dst_ips => fetch_dst_ip_metrics,
+              :signature_metrics => fetch_signature_metrics
+            }
 
-            all_events.each_chunk(BATCH_SIZE.to_i) do |chunk|
-              @events = chunk
-              
-              logit "\nProcessing Batch #{batch += 1} of " + 
-              "#{(all_events.length / BATCH_SIZE) + 1}...", false
-              
-              build_sensor_event_count
-              build_proto_counts
 
-              data = {
-                :event_count => fetch_event_count,
-                :tcp_count => fetch_tcp_count,
-                :udp_count => fetch_udp_count,
-                :icmp_count => fetch_icmp_count,
-                :severity_metrics => fetch_severity_metrics,
-                :src_ips => fetch_src_ip_metrics,
-                :dst_ips => fetch_dst_ip_metrics,
-                :signature_metrics => fetch_signature_metrics
-              }
-
-              records << data
-            end
-
-            if records.length > 1
-              results = merged_records(records)
-              @cache.update(results)
-            else
-              @cache.update(records.first)
-            end
+            @cache.update(data)
           end
-
-          new_start_time = end_time
-          new_end_time = end_time + 30.minutes
-
-          split_events_and_process(new_start_time, new_end_time)
 
         end
 

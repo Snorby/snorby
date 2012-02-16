@@ -61,7 +61,6 @@ module Snorby
     
     def self.start
       `#{Rails.root}/script/delayed_job start --pid-dir #{@@pid_path} RAILS_ENV=#{Rails.env}`
-      # Snorby::Jobs::SensorCacheJob.new(false).perform unless Snorby::Jobs.sensor_cache?
     end
     
     def self.stop

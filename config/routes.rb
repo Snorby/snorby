@@ -49,6 +49,7 @@ Snorby::Application.routes.draw do
   match '/dashboard', :controller => 'Page', :action => 'dashboard'
   match '/search', :controller => 'Page', :action => 'search'
   match '/results', :controller => 'Page', :action => 'results'
+  match '/force/cache', :controller => "Page", :action => 'force_cache'
   
   match ':controller(/:action(/:sid/:cid))', :controller => 'Events'
 
