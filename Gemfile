@@ -11,11 +11,15 @@ gem 'rails',                       RAILS_VERSION
 gem 'jquery-rails'
 gem 'bundler',                     '~> 1.0.0'
 
+gem 'ruby-debug19'
+
+# DateTime Patches
+gem 'home_run',                    :require => 'date'
+
 gem 'activesupport',               RAILS_VERSION, :require => 'active_support'
 gem 'actionpack',                  RAILS_VERSION, :require => 'action_pack'
 gem 'actionmailer',                RAILS_VERSION, :require => 'action_mailer'
 gem 'railties',                    RAILS_VERSION, :require => 'rails'
-
 gem 'dm-core',                     DM_VERSION
 gem 'dm-rails',                    DM_VERSION
 gem 'dm-do-adapter',               DM_VERSION
@@ -44,7 +48,7 @@ gem 'dm-devise',                   '~> 1.5'
 gem 'rubycas-client'
 gem 'devise_cas_authenticatable',  :git => 'http://github.com/Snorby/snorby_cas_authenticatable.git'
 gem "mail",                        '~> 2.3'
-gem "RedCloth",                    "~> 4.0", :require => 'redcloth'
+gem "RedCloth",                    "~> 4.2.9", :require => 'redcloth'
 gem 'chronic',                     '~> 0.3.0'
 gem 'pdfkit',                      '~> 0.4.6'
 gem 'ezprint',                     :git => 'http://github.com/mephux/ezprint.git', :branch => 'rails3', :require => 'ezprint'
@@ -53,11 +57,10 @@ gem 'delayed_job',                 '~> 2.1.4'
 gem 'delayed_job_data_mapper',     '~> 1.0.0.rc', :git => 'http://github.com/Snorby/delayed_job_data_mapper.git'
 gem 'rmagick',                     '~> 2.13.1'
 
-
 gem 'dm-paperclip',                '~> 2.4.1', :git => 'http://github.com/Snorby/dm-paperclip.git'
 
 gem 'net-dns',                     '~> 0.6.1'
-gem 'whois',                       '~> 1.6.6'
+gem 'whois',                       '~> 2.3.0'
 gem 'simple_form',                 '~> 1.2.2'
 gem 'geoip',                       '~> 1.1.1'
 gem 'netaddr',                     '~> 1.5.0'

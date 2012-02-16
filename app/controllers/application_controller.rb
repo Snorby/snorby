@@ -20,13 +20,16 @@ class ApplicationController < ActionController::Base
     end
 
     def user_setup
+
       if user_signed_in?
+
         if current_user.enabled
           User.current_user = current_user
         else
           sign_out current_user
           redirect_to login_path, :notice => 'Your account has be disabled. Please contact the administrator.'
         end
+
       else
 
         current_uri = request.env['PATH_INFO']
@@ -37,6 +40,7 @@ class ApplicationController < ActionController::Base
         else
           authenticate_user!
         end
+
       end
 
       # if Time.respond_to?(:zone)

@@ -38,7 +38,7 @@ namespace :snorby do
   desc 'Update Snorby'
   task :update => :environment do
     require "./lib/snorby/dm/types"
-    
+
     # Setup the snorby database
     Rake::Task['db:autoupgrade'].invoke
     

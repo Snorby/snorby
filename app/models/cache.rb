@@ -71,7 +71,7 @@ class Cache
   
   def self.cache_time
     if (time = get_last)
-      return time.ran_at + 30.minutes 
+      return time.updated_at
     else
       Time.now 
     end
@@ -130,7 +130,7 @@ class Cache
   end
 
   def self.get_last
-    first(:order => [:ran_at.desc])
+    first(:order => [:updated_at.desc])
   end
 
   def self.sensor_metrics(type=nil)

@@ -95,3 +95,8 @@ if Severity.all.blank?
   Severity.create(:id => 2, :sig_id => 2, :name => 'Medium Severity', :text_color => "#ffffff", :bg_color => "#fab908")
   Severity.create(:id => 3, :sig_id => 3, :name => 'Low Severity', :text_color => "#ffffff", :bg_color => "#3a781a")
 end
+
+# Validate Snorby Indexes
+require "./lib/snorby/jobs/cache_helper"
+include Snorby::Jobs::CacheHelper
+validate_cache_indexes

@@ -52,7 +52,7 @@ module Snorby
     
     def self.geoip_update
       Snorby::Jobs.find.first(:handler.like => "%!ruby/struct:Snorby::Jobs::GeoipUpdatedbJob%")
-    end    
+    end
 
     def self.sensor_cache?
       !Snorby::Jobs.find.first(:handler.like => "%!ruby/struct:Snorby::Jobs::SensorCacheJob%").blank?
@@ -123,6 +123,16 @@ module Snorby
       Jobs.daily_cache.update(:run_at => Time.now + 10.second) if Jobs.daily_cache?
       Jobs.geoip_update.update(:run_at => Time.now + 10.second) if (Jobs.geoip_update? && Setting.geoip?)
     end
+
+    def self.force_sensor_cache
+      if Jobs.sensor_cache?
+        Jobs.sensor_cache.update(:run_at => DateTime.now + 5.second)
+      else
+        Delayed::Job.enqueue(Snorby::Jobs::SensorCacheJob.new(false), 
+        :priority => 1, :run_at => DateTime.now + 5.second)
+      end
+    end
+
 
     def self.clear_cache(are_you_sure=false)
       if are_you_sure

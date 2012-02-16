@@ -20,7 +20,7 @@ module Snorby
   module Jobs
     module CacheHelper
 
-      BATCH_SIZE = 10000
+      BATCH_SIZE = 5000
 
       def logit(msg, show_sensor=true)
         if show_sensor
@@ -65,49 +65,32 @@ module Snorby
           end
         end
 
+        logit "merge completed successfully."
         data
       end
 
-      def fetch_event_count(from_database=false)
-        logit '- fetch_event_count'
-        @events.size
-      end
-
-      def build_proto_counts
-        logit '- building proto counts'
-
-        @events.each do |event|
-
-          #event.matches_notification?
-
-          if event.tcp?
-            @tcp_events << event
-          elsif event.udp?
-            @udp_events << event
-          else
-            @icmp_events << event
-          end
-
-        end
+      def fetch_event_count
+        logit 'fetching event count'
+        sql_event_count.first.to_i
       end
 
       def fetch_tcp_count
-        logit '- fetching tcp count'
-        @tcp_events.length
+        logit 'fetching tcp count'
+        sql_tcp.first.to_i
       end
 
       def fetch_udp_count
-        logit '- fetching udp count'
-        @udp_events.length
+        logit 'fetching udp count'
+        sql_udp.first.to_i
       end
 
       def fetch_icmp_count
-        logit '- fetching icmp count'
-        @icmp_events.length
+        logit 'fetching icmp count'
+        sql_icmp.first.to_i
       end
 
       def build_sensor_event_count(update_counter=true)
-        logit '- fetching sensor metrics'
+        logit 'fetching sensor metrics'
         @sensor.reload
         count = @sensor.events_count + @events.size
         @sensor.update!(:events_count => count) if update_counter
@@ -115,45 +98,227 @@ module Snorby
       end
 
       def fetch_severity_metrics(update_counter=true)
-        logit '- fetching severity metrics'
-        severity = @events.map(&:signature).map(&:sig_priority)
+        logit 'fetching severity metrics'
         metrics = {}
-        Severity.all.each do |sev|
-          metrics[sev.id] = severity.collect { |s| s if s == sev.id }.compact.size
-          sev.update!(:events_count => sev.events_count + metrics[sev.id]) if update_counter && metrics[sev.id]
+
+        sql_severity.collect do |x| 
+          key = x['sig_priority'].to_i
+          value = x['count(*)'].to_i
+
+          metrics[key] = value
         end
+
         metrics
       end
       
       def fetch_signature_metrics(update_counter=true)
-        logit '- fetching signature metrics'
-        @signature_metrics = {}
-        Signature.all.each do |sig|
-          sig_count = @events.all(:sig_id => sig.sig_id).size
-          
-          next if sig_count.zero?
-          
-          @signature_metrics.merge!({sig.sig_name.to_sym => sig_count})
-          
-          sig.update!(:events_count => sig.events_count + sig_count) if update_counter
+        logit 'fetching signature metrics'
+        signature_metrics = {}
+
+        sql_signature.collect do |x|
+          signature_metrics[x['sig_name']] = x['count(*)'].to_i
         end
-        @signature_metrics
+
+        signature_metrics
       end
       
       def fetch_src_ip_metrics
-        logit '- fetching src ip metrics'
-        @src_ips = {}
-        @events.select{|e| e.ip != nil}.group_by { |x| x.ip.ip_src.to_s }.collect { |x,y| @src_ips.merge!({x => y.size}) }
-        @src_ips
+        logit 'fetching src ip metrics'
+        src_ips = {}
+
+        sql_source_ip.collect do |x|
+          key = x["inet_ntoa(ip_src)"].to_s
+          value = x["count(*)"].to_i
+
+          src_ips[key] = value
+        end
+
+        src_ips
       end
 
       def fetch_dst_ip_metrics
-        logit '- fetching dst ip metrics'
-        @dst_ips = {}
-        @events.select{|e| e.ip != nil}.group_by { |x| x.ip.ip_dst.to_s }.collect { |x,y| @dst_ips.merge!({x => y.size}) }
-        @dst_ips
+        logit 'fetching dst ip metrics'
+        dst_ips = {}
+
+        sql_destination_ip.collect do |x|
+          key = x["inet_ntoa(ip_dst)"].to_s
+          value = x["count(*)"].to_i
+
+          dst_ips[key] = value
+        end
+
+        dst_ips
+      end
+
+      def db_adapter
+        @adapter ||= DataMapper.repository(:default).adapter
+      end
+
+      #
+      # DM Select
+      #
+      def select(sql)
+        db_adapter.select(sql)
+      end
+
+      #
+      # DM Execute
+      #
+      def execute(sql)
+        db_adapter.execute(sql)
+      end
+
+      def options
+        @options ||= DataMapper.repository.adapter.options
+      end
+
+      def update_signature_count
+        sql = %{
+          update signature set events_count = (select count(*) 
+          from event where event.signature = signature.sig_id);
+        }
+
+        execute(sql)
+      end
+
+      def has_timestamp_index?
+        sql = %{
+          SELECT * FROM information_schema.statistics 
+          WHERE table_schema = '#{options["database"]}'
+          AND table_name = 'event' AND index_name = 'index_timestamp_cid_sid' limit 1;
+        }
+        !select(sql).empty?
+      end
+
+      def validate_cache_indexes
+        unless has_timestamp_index?
+          execute("create index index_timestamp_cid_sid on  event (  timestamp,  cid, sid );")
+        end
+      end
+
+      def sql_min_max
+        sql = %{
+          select min(cid), max(cid) from event USE INDEX (index_timestamp_cid_sid)
+          where 
+          timestamp >= '#{@stime}' and timestamp < '#{@etime}' 
+          and sid = #{@sensor.sid.to_i};
+        } 
+
+        select(sql)
+      end
+
+      def sql_event_count
+        sql = %{
+          select count(*) from event 
+          where sid = #{@sensor.sid.to_i} and timestamp >= '#{@stime}' 
+          and timestamp < '#{@etime}'
+        }
+
+        select(sql)
+      end
+
+      def sql_signature
+        sql = %{
+          select signature, sig_name, c as `count(*)` from
+          (select signature,  count(*) as c from event  
+          join signature  on event.signature = signature.sig_id  
+          where timestamp >= '#{@stime}' 
+          and timestamp < '#{@etime}' 
+          and sid = #{@sensor.sid.to_i}
+          group by signature) a 
+          inner join signature b on a.signature = b.sig_id
+        }
+
+        select(sql)
       end
       
+      def sql_source_ip
+        sql = %{
+          select INET_NTOA(ip_src), count(*) from event USE INDEX (index_timestamp_cid_sid) 
+          inner join iphdr on event.cid  = iphdr.cid 
+          and event.sid = iphdr.sid where timestamp >= '#{@stime}' 
+          and timestamp < '#{@etime}'
+          and event.sid = #{@sensor.sid.to_i}
+          group by INET_NTOA(ip_src); 
+        }
+
+        select(sql)
+      end
+
+      def sql_destination_ip
+        sql = %{
+          select INET_NTOA(ip_dst), count(*) from event USE INDEX (index_timestamp_cid_sid)
+          inner join iphdr on event.cid  = iphdr.cid 
+          and event.sid = iphdr.sid where timestamp >= '#{@stime}' 
+          and timestamp < '#{@etime}'
+          and event.sid = #{@sensor.sid.to_i}
+          group by INET_NTOA(ip_dst); 
+        }
+
+        select(sql)
+      end
+
+      def sql_severity
+        sql = %{
+          select sig_priority, count(*) from event USE INDEX (index_timestamp_cid_sid) 
+          inner join signature on event.signature = signature.sig_id 
+          where timestamp >= '#{@stime}' 
+          and timestamp < '#{@etime}'
+          and event.sid = #{@sensor.sid.to_i}
+          group by sig_priority; 
+        }
+
+        select(sql)
+      end
+
+      def sql_sensor
+        sql = %{
+          select `sid`, count(*) from event   
+          where timestamp >= '#{@stime}' 
+          and timestamp < '#{@etime}'
+          and event.sid = #{@sensor.sid.to_i}
+          group by sid; 
+        }
+
+        select(sql)
+      end
+
+      def sql_tcp
+        sql = %{
+          select   count(*) from event  USE INDEX (index_timestamp_cid_sid)
+          inner join tcphdr on event.cid  = tcphdr.cid 
+          and event.sid = tcphdr.sid
+          where timestamp >= '#{@stime}' 
+          and timestamp < '#{@etime}' and event.sid = #{@sensor.sid.to_i};
+        }
+
+        select(sql)
+      end
+
+      def sql_udp
+        sql = %{
+          select   count(*) from event USE INDEX (index_timestamp_cid_sid)
+          inner join udphdr on event.cid  = udphdr.cid 
+          and event.sid = udphdr.sid
+          where timestamp >= '#{@stime}' 
+          and timestamp < '#{@etime}' and event.sid = #{@sensor.sid.to_i};
+        }
+
+        select(sql)
+      end
+
+      def sql_icmp
+        sql = %{
+          select   count(*) from event USE INDEX (index_timestamp_cid_sid) 
+          inner join icmphdr on 
+          event.cid  = icmphdr.cid and event.sid = icmphdr.sid 
+          where timestamp >= '#{@stime}' 
+          and timestamp < '#{@etime}' and event.sid = #{@sensor.sid.to_i};
+        }
+
+        select(sql)
+      end
+
     end
   end
 end
