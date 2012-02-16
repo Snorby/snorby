@@ -11,6 +11,21 @@ require 'rails/test_unit/railtie'
 Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 module Snorby
+
+  # Check For snorby_config.yml
+  unless File.exists?("config/snorby_config.yml")
+    puts "Snorby Configuration Error"
+    puts "* Please EDIT and rename config/snorby_config.example.yml to config/snorby_config.yml"
+    exit 1
+  end
+  
+  # Check For database.yml
+  unless File.exists?("config/database.yml")
+    puts "Snorby Configuration Error"
+    puts "* Please EDIT and rename config/database.example.yml to config/database.yml"
+    exit 1
+  end
+
   # Snorby Environment Specific Configurations
   raw_config = File.read("config/snorby_config.yml")
   CONFIG = YAML.load(raw_config)[Rails.env].symbolize_keys
