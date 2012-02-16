@@ -75,7 +75,7 @@ module Snorby
                 start_time = if last_run > DateTime.now
                   @sensor.cache.last.ran_at - 30.minutes
                 else
-                  @sensor.cache.last.ran_at + 30.minutes
+                  @sensor.cache.last.ran_at
                 end
 
               end
