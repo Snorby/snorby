@@ -62,7 +62,7 @@
 			</p>
 
 			<p>
-				<%= check_box_tag '[settings][event_notifications]', 0, (Setting.event_notifications ? Setting.find(:event_notifications) : nil) %> <%= label_tag 'Enable Global Event Notifications' %><br />
+				<%= check_box_tag '[settings][event_notifications]', 0, (Setting.event_notifications ? Setting.find(:event_notifications) : false) %> <%= label_tag 'Enable Global Event Notifications' %><br />
         <i>(Show new event notifications globally. Event count since last check time.)</i>
 			</p>
 
