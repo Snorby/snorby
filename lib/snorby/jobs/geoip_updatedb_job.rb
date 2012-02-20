@@ -29,10 +29,23 @@ module Snorby
 
         resp = Net::HTTP.get_response(uri)
 
+        gzip = lambda do |resp, file|
+          gz = Zlib::GzipReader.new(StringIO.new(resp.body.to_s)) 
+          file.write(gz.read)
+        end
+
+        normal = lambda do |resp, file|
+          data = StringIO.new(resp.body.to_s)
+          file.write(data.read)
+        end
+
         if resp.is_a?(Net::HTTPOK)
           open("tmp/tmp-snorby-geoip.dat", "wb") do |file|
-            gz = Zlib::GzipReader.new(StringIO.new(resp.body.to_s)) 
-            file.write(gz.read)
+            if uri.to_s.match(/.gz/)
+              gzip.call(resp, file)
+            else
+              normal.call(resp, file)
+            end
           end
         end
 
