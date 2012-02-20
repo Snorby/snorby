@@ -2,6 +2,7 @@ development:
   domain: localhost:3000
   wkhtmltopdf: /Users/mephux/.rvm/gems/ruby-1.9.2-p0/bin/wkhtmltopdf
   mailer_sender: 'snorby@snorby.org'
+  geoip_uri: "http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz"
   rules: 
     - "/Users/mephux/.snort/rules"
     - "/Users/mephux/.snort/so_rules"
@@ -16,14 +17,19 @@ test:
   domain: localhost:3000
   wkhtmltopdf: /usr/local/bin/wkhtmltopdf
   mailer_sender: 'snorby@snorby.org'
+  geoip_uri: "http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz"
   authentication_mode: database
 
-# Change the production configuration 
-# for your environment.
+# 
+# Production
+#
+# Change the production configuration for your environment.
+#
 production:
   domain: 'demo.snorby.org'
   wkhtmltopdf: /usr/local/bin/wkhtmltopdf
   mailer_sender: 'snorby@snorby.org'
+  geoip_uri: "http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz"
   rules:
     - ""
   authentication_mode: database
