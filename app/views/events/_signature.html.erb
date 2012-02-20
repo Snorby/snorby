@@ -6,8 +6,11 @@
 		<tr>
 			<th class='first'>Generator ID</th>
 			<th>Signature ID</th>
-			<th>Signature Revision</th>
-      <th>Activity (<%= @event.signature.event_percentage(true) %>)</th>
+      <th>Signature Revision</th>
+
+      <% total_event_count ||= Event.count %>
+
+      <th>Activity (<%= @event.signature.event_percentage(true, total_event_count) %>)</th>
       <th>&nbsp;</th>
 			<th class='last'></th>
 		</tr>
@@ -20,7 +23,7 @@
         <td class='search-by-signature add_tipsy'
           title="View all '<%= @event.signature.name%>' events."
           data-url="/results?search[signature_name]=<%= @event.signature.name %>">
-          <%= css_chart(@event.signature.event_percentage) %>
+          <%= css_chart(@event.signature.event_percentage(false, total_event_count)) %>
         </td>
 
         <td style='width:190px;' class=''>

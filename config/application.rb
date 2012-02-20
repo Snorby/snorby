@@ -30,6 +30,11 @@ module Snorby
   raw_config = File.read("config/snorby_config.yml")
   CONFIG = YAML.load(raw_config)[Rails.env].symbolize_keys
 
+  # Default authentication to database
+  unless CONFIG.has_key?(:authentication_mode)
+    CONFIG[:authentication_mode] = "database"
+  end
+
   class Application < Rails::Application
         
     PDFKit.configure do |config|

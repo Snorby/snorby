@@ -52,7 +52,7 @@ class Sensor
   def event_percentage
     begin
       total_event_count = Sensor.all.map(&:events_count).sum
-      ((self.events_count.to_f / total_event_count.to_f) * 100).round
+      "%.2f" % ((self.events_count.to_f / total_event_count.to_f) * 100).round(1)
     rescue FloatDomainError
       0
     end

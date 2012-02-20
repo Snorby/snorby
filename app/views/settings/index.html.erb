@@ -26,7 +26,13 @@
 				<%= label_tag 'Signature Lookup URL' %> <i>(user $$sid$$ and $$gid$$ for the get request parameters)</i><br />
 				<%= text_field_tag '[settings][signature_lookup]', (Setting.signature_lookup ? Setting.find(:signature_lookup) : nil), :placeholder => 'Signature Lookup URL', :autocomplete => :off, :class => 'required url' %>
 			</p>
-			
+
+
+			<p>
+				<%= check_box_tag '[settings][update_notifications]', 0, (Setting.update_notifications ? Setting.find(:update_notifications) : nil) %> <%= label_tag 'Enable Snorby Update Notifications' %><br />
+        <i>(Notification reminder when a new Snorby build is release using http://snorby.org/version)</i>
+			</p>
+
 			<p>
 				<%= check_box_tag '[settings][packet_capture]', 0, (Setting.packet_capture ? Setting.find(:packet_capture) : nil) %> <%= label_tag 'Enable Packet Capture Support' %><br />
 				<i>(Enable the Snorby Packet Capture Plugin)</i>

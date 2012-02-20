@@ -19,6 +19,6 @@
 module Snorby
 
   # Snorby Version
-  VERSION = '2.3.14'
+  VERSION = '2.4.0'
 
 end

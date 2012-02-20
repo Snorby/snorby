@@ -35,4 +35,5 @@ nbproject
 # Ignore Config Files
 config/snorby_config.yml
 config/database.yml
-config/initializers/mail_config.rb
+
+config/snorby-geoip.dat

@@ -12,7 +12,7 @@
 		<td class='last_event_time'>N/A</td>
 	<% end %>
 	
-	<td class='event_count'><%= sensor.events_count %></td>
+	<td class='event_count'><%= number_with_delimiter sensor.events_count %></td>
 	
 	<td class='chart'>
 		<%= css_chart(sensor.event_percentage) %>

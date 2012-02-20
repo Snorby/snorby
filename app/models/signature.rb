@@ -4,7 +4,7 @@ class Signature
 
   include DataMapper::Resource
   include Snorby::Model::Counter
-  
+
   storage_names[:default] = "signature"
 
   #belongs_to :category, :parent_key => :sig_class_id, :child_key => :sig_class_id, :required => true
@@ -40,21 +40,34 @@ class Signature
   def name
     sig_name
   end
-  
+
   #
   #  
   # 
-  def event_percentage(in_wrods=false)
+  def event_percentage(in_words=false, count=Event.count)
     begin
-      total_event_count = Signature.all.map(&:events_count).sum
-      if in_wrods
-        "#{self.events_count}/#{total_event_count}"
+      if in_words
+        "#{self.events_count}/#{count}"
       else
-        ((self.events_count.to_f / total_event_count.to_f) * 100).round
+        "%.2f" % ((self.events_count.to_f / count.to_f) * 100).round(2)
       end
+
     rescue FloatDomainError
       0
     end
+  end
+
+  def self.sorty(params={})
+    sort = params[:sort]
+    direction = params[:direction]
+
+    page = {
+      :per_page => User.current_user.per_page_count
+    }
+
+    page.merge!(:order => sort.send(direction))
+
+    page(params[:page].to_i, page)
   end
 
 end

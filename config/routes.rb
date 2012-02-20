@@ -40,9 +40,16 @@ Snorby::Application.routes.draw do
       get :start_worker
     end
   end
-  
-  resources :severities do
+
+  resources :signatures do
+
+    collection do
+      get :search
+    end
     
+  end
+
+  resources :severities do
   end
 
 
@@ -50,6 +57,7 @@ Snorby::Application.routes.draw do
   match '/search', :controller => 'Page', :action => 'search'
   match '/results', :controller => 'Page', :action => 'results'
   match '/force/cache', :controller => "Page", :action => 'force_cache'
+  match '/cache/status', :controller => "Page", :action => 'cache_status'
   
   match ':controller(/:action(/:sid/:cid))', :controller => 'Events'
 

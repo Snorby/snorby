@@ -1,0 +1,6 @@
+$('div#signatures').replaceWith("<%= escape_javascript(render(:partial => 'signatures/signatures', :locals => { :signatures => @signatures })) %>");
+$('div.content, tbody.content').fadeTo(500, 1);
+Snorby.helpers.remove_click_events(false);
+$.scrollTo('#header', 500);
+flash();
+

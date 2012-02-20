@@ -20,37 +20,37 @@
 	<%= form_tag results_path, :method => :get do %>
 
 		<div id='search-box'>
-			
+
 			<div class='grid_4 alpha'>
-				<%= label_tag "Signature" %><br />
+				<%= label_tag "Signature Name" %><br />
 				<%= text_field_tag '[search][signature_name]', params[:signature_name], :placeholder => 'Signature Name' %>
 			</div>
-			
+
 			<div class='grid_4 alpha'>
 				<%= label_tag "Source Address" %><br />
-				<%= text_field_tag '[search][ip_src]', params[:ip_src], :placeholder => 'Source or CIDR notation' %>
+        <%= text_field_tag '[search][ip_src]', params[:ip_src], :placeholder => 'Source or CIDR notation' %>
 			</div>
-			
-			<div class='grid_4 alpha'>
+
+      <div class='grid_4 alpha'>
 				<%= label_tag "Destination Address" %><br />
-				<%= text_field_tag '[search][ip_dst]', params[:ip_dst], :placeholder => 'Destination or CIDR notation' %>
-			</div>
-			
-			<div class='grid_4 alpha'>
-				<%= label_tag "Timestamp" %><br />
-				<%= text_field_tag '[search][timestamp]', params[:timestamp], :placeholder => 'Timestamp', :class => 'datepicker' %>
-			</div>
-			
+        <%= text_field_tag '[search][ip_dst]', params[:ip_dst], :placeholder => 'Destination or CIDR notation' %> 
+      </div>
+
+      <div class='grid_4 alpha'>
+				<%= label_tag "Date Range" %><br />
+        <%= text_field_tag '[search][timestamp]', params[:timestamp], :autocomplete=>:off, :placeholder => 'Date Range', :class => 'datepicker' %>
+      </div>
+
 			<div class='grid_4 alpha'>
 				<%= label_tag "Source Port" %><br />
-				<%= text_field_tag '[search][src_port]', params[:src_port], :placeholder => 'Source Port' %>
-			</div>
-			
+        <%= text_field_tag '[search][src_port]', params[:src_port], :placeholder => 'Port Number' %>
+      </div>
+
 			<div class='grid_4 alpha'>
 				<%= label_tag "Destination Port" %><br />
-				<%= text_field_tag '[search][dst_port]', params[:dst_port], :placeholder => 'Destination Port' %>
-			</div>
-			
+        <%= text_field_tag '[search][dst_port]', params[:dst_port], :placeholder => 'Port Number' %>
+      </div>
+
 			<div class='grid_4 alpha'>
 				<%= label_tag 'Select Sensor' %><br />
         <%= select_tag '[search][sid]', dropdown_select_tag(Sensor.all, :sid, true), :class => 'add_chosen' %>
@@ -65,7 +65,7 @@
 				<%= label_tag 'Select Severity' %><br />
 				<%= select_tag '[search][severity]', dropdown_select_tag(Severity.all, :sig_id, true), :class => 'add_chosen' %>
 			</div>
-			
+
 		</div>
 
 		<%= form_actions do %>

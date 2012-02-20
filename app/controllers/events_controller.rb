@@ -9,6 +9,11 @@ class EventsController < ApplicationController
 
     @events = Event.sorty(params)
     @classifications ||= Classification.all
+
+    respond_to do |format|
+      format.html {render :layout => true}
+      format.js
+    end
   end
 
   def queue
