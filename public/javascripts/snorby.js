@@ -808,7 +808,6 @@ var Snorby = {
         '</span>' +
         '</div>';
 
-
       $('div.close-update-notification').live('click', function(e) {
         e.preventDefault();
         $.cookie('snorby-ignore-update', 1, { expires: 20 });

@@ -2,6 +2,8 @@
 
   * New Signature Listing View
   * New Snorby Update Notification Options
+    - NOTICE: This will make a request to http://snorby.org/version for
+      current release metrics.
   
   * Minor UI/Design Improvements
   * Minor bug fixes and performance enhancements
