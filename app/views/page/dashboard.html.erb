@@ -10,7 +10,9 @@
 		<%= drop_down_item "Export To PDF", 
 		dashboard_path(:range => params[:range] == 'today' ? 'now' : params[:range], :format => :pdf), nil, { :class => 'dashboard' } %>
 
-    <%= drop_down_item "Force Cache Update", force_cache_path if Snorby::Worker.running? %>
+  <%= drop_down_item "Force Cache Update", force_cache_path, nil, {
+    :class => 'force-cache-update'
+  } if Snorby::Worker.running? %>
 
 	<% end %>
 
@@ -51,14 +53,16 @@
 						<script type="text/javascript">
 							setTimeout(function(){
 								location.reload();
-							},50000);
+							},5000);
 						</script>
 					<% end %>
-					<li class='right'><i>Currently Caching <%= image_tag('icons/pager.gif', :size => '16x11') %></i></li>
+          <li class='right last-cache-time'>
+            <i>Currently Caching <%= image_tag('icons/pager.gif', :size => '16x11') %></i>
+          </li>
 				<% else %>
 				
 					<% unless %w(yesterday week last_week month last_month year quarter).include?(params[:range]) %>
-            <li class='right'>
+            <li class='right last-cache-time'>
               <i>Updated: <%= @last_cache.strftime('%D %l:%M:%S %p') %></i>
             </li>
 					<% end %>
@@ -104,7 +108,7 @@
               :search => { :sid => sensor.sid }), :title => sensor.sensor_name %> 
 
         <span>
-          <%= sensor.events_count.zero? ? Event.count(:sid => sensor.sid) : sensor.events_count %>
+          <%= number_with_delimiter (sensor.events_count.zero? ? Event.count(:sid => sensor.sid) : sensor.events_count) %>
         </span>
       </li>
 			<% end %>
@@ -119,7 +123,7 @@
 			<li class='has-image'>
 				<%= image_tag(user.gravatar ? get_gravatar_uri(user.email) : user.avatar.url(:small), :size => '16x16', :class => 'avatar-small') %> 
 				<%= link_to truncate(user.name, :length => 30), activity_events_path(:user_id => user.id), :title => user.name %> 
-				<span><%= user.favorites_count %></span>
+				<span><%= number_with_delimiter user.favorites_count %></span>
 			</li>
 			<% end %>
 		</ul>
@@ -134,7 +138,7 @@
           <%= link_to truncate(event.signature.name, :length => 25), results_path(:title => "#{truncate(event.signature.name, :length => 40)}", 
                 :search => {:signature_name => "#{event.signature.name}"}), :title => event.signature.name %> 
           <span>
-            <%= event.signature.events_count.zero? ? Event.count(:sig_id => event.signature.sig_id) : event.signature.events_count %>
+            <%= number_with_delimiter (event.signature.events_count.zero? ? Event.count(:sig_id => event.signature.sig_id) : event.signature.events_count) %>
           </span>
         </li>
 			<% end %>
@@ -148,7 +152,7 @@
 			<% @classifications.each do |classification| %>
 			
 			<li><%= link_to truncate(classification.name, :length => 25), results_path(:title => "#{classification.name}", 
-			:search => {:classification_id => "#{classification.id}"}), :title => classification.name %> <span><%= classification.events_count %></span></li>
+			:search => {:classification_id => "#{classification.id}"}), :title => classification.name %> <span><%= number_with_delimiter classification.events_count %></span></li>
 			<% end %>
 		</ul>
 	

@@ -1,7 +1,7 @@
 <tr>
 	<td class='first'><%= classification.id %></td>
 	<td><%= classification.name %></td>
-	<td><%= classification.events_count %></td>
+	<td><%= number_with_delimiter classification.events_count %></td>
 	
 	<td class='chart'><%= css_chart(classification.event_percentage) %></td>
 	

@@ -119,9 +119,9 @@ module Snorby
     end
 
     def self.run_now!
-      Jobs.sensor_cache.update(:run_at => Time.now + 10.second) if Jobs.sensor_cache?
-      Jobs.daily_cache.update(:run_at => Time.now + 10.second) if Jobs.daily_cache?
-      Jobs.geoip_update.update(:run_at => Time.now + 10.second) if (Jobs.geoip_update? && Setting.geoip?)
+      Jobs.sensor_cache.update(:run_at => DateTime.now + 10.second) if Jobs.sensor_cache?
+      Jobs.daily_cache.update(:run_at => DateTime.now + 10.second) if Jobs.daily_cache?
+      Jobs.geoip_update.update(:run_at => DateTime.now + 10.second) if (Jobs.geoip_update? && Setting.geoip?)
     end
 
     def self.force_sensor_cache

@@ -55,7 +55,23 @@ class PageController < ApplicationController
 
   def force_cache
     Snorby::Jobs.force_sensor_cache
-    redirect_to dashboard_path
+    render :json => {
+      :caching => Snorby::Jobs.caching?,
+      :problems => Snorby::Worker.problems?,
+      :running => Snorby::Worker.running?,
+      :daily_cache => Snorby::Jobs.daily_cache?,
+      :sensor_cache => Snorby::Jobs.sensor_cache?
+    }
+  end
+
+  def cache_status
+    render :json => {
+      :caching => Snorby::Jobs.caching?,
+      :problems => Snorby::Worker.problems?,
+      :running => Snorby::Worker.running?,
+      :daily_cache => Snorby::Jobs.daily_cache?,
+      :sensor_cache => Snorby::Jobs.sensor_cache?
+    }
   end
 
   def results    

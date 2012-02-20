@@ -39,15 +39,20 @@ module ApplicationHelper
   #
   # @return [String] title html
   #
-  def title(header, title=nil, &block)
+  def title(header, title=nil, menu_content=true, &block)
     show_title(title ? title : header)
     title_header = content_tag(:div, header, :id => 'title-header', :class => 'grid_6')
     
     if block_given?
       data = capture(&block).gsub("\n|\t", '')
-      menu = content_tag(:ul, "<li>&nbsp;</li>#{capture(&block)}<li>&nbsp;</li>".html_safe, :id => 'title-menu') unless data.blank?
-      menu_holder = content_tag(:ul, menu, :id => 'title-menu-holder', :class => '')
-      html = title_header + menu_holder
+
+      if menu_content
+        menu = content_tag(:ul, "<li>&nbsp;</li>#{capture(&block)}<li>&nbsp;</li>".html_safe, :id => 'title-menu') unless data.blank?
+        menu_holder = content_tag(:ul, menu, :id => 'title-menu-holder', :class => '')
+        html = title_header + menu_holder
+      else
+        html = title_header + data.html_safe
+      end
     else
       html = title_header
     end
@@ -156,9 +161,10 @@ module ApplicationHelper
     content_tag(:button, "<span>#{name}</span>".html_safe, options)
   end
 
-  def css_chart(percentage)
+  def css_chart(percentage, large=false)
     html = content_tag(:div, "<span>#{percentage}%</span>".html_safe, :style => "width: #{percentage}%")
-    content_tag(:div, html, :class => 'progress-container')
+    klass = large ? 'progress-container-large' : 'progress-container'
+    content_tag(:div, html, :class => klass)
   end
 
   def worker_status(show_image=false)

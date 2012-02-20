@@ -16,40 +16,65 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+require "./lib/snorby/dm/types"
+require "./lib/snorby/jobs"
+require "./lib/snorby/worker"
+
 namespace :snorby do
   
   desc 'Setup'  
   task :setup => :environment do
-    require "./lib/snorby/dm/types"
         
     Rake::Task['secret'].invoke
     
     # Create the snorby database if it does not currently exist
     Rake::Task['db:create'].invoke
     
-    # Setup the snorby database
-    Rake::Task['db:autoupgrade'].invoke
-    
-    # Load Default Records
-    Rake::Task['db:seed'].invoke
-    
+    # Snorby update logic 
+    Rake::Task['snorby:update'].invoke
   end
   
   desc 'Update Snorby'
   task :update => :environment do
-    require "./lib/snorby/dm/types"
 
     # Setup the snorby database
     Rake::Task['db:autoupgrade'].invoke
     
     # Load Default Records
     Rake::Task['db:seed'].invoke
-    
+
+    # Restart Worker
+    Rake::Task['snorby:restart_worker'].invoke
   end
   
   desc 'Remove Old CSS/JS packages and re-bundle'
   task :refresh => :environment do
     `jammit`
+  end
+
+  desc 'Restart Worker/Jobs'
+  task :restart_worker => :environment do
+
+    if Snorby::Worker.running?
+      puts '* Stopping the Snorby worker process.'
+      Snorby::Worker.stop
+    end
+
+    unless Snorby::Worker.running?
+      puts "* Removing old jobs"
+      Snorby::Jobs.find.all.destroy
+
+      puts "* Starting the Snorby worker process."
+      Snorby::Worker.start
+
+      if Snorby::Worker.running?
+        puts "* Adding jobs to the queue"
+        Snorby::Jobs.run_now!
+      else
+        puts "[X] Error: Unable to start the Snorby worker process."
+      end
+    end
+
   end
   
   desc 'Soft Reset - Reset Snorby metrics'

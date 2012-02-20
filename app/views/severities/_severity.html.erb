@@ -3,8 +3,8 @@
 	<td><%= severity.name %></td>
 	<td><%= severity.bg_color %></td>
 	<td><%= severity.text_color %></td>
-	<td><%= severity.signatures.count %></td>
-	<td><%= severity.events_count %></td>
+	<td><%= number_with_delimiter severity.signatures.count %></td>
+	<td><%= number_with_delimiter severity.events_count %></td>
 	<td><span class='severity-example' style='background-color:<%= severity.bg_color %>;color:<%= severity.text_color %>'><%= severity.sig_id %></span></td>
 	<td><%= link_to "Edit", edit_severity_path(severity) %></td>
 	

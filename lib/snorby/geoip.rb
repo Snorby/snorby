@@ -23,6 +23,10 @@ module Snorby
    
     PATH = File.join(Rails.root.to_s, 'config', 'snorby-geoip.dat')
 
+    FAKE_DATA = {
+      :country_code2 => "N/A" 
+    }
+
     def self.database?
       return false unless File.exists?(PATH)
       File.open(PATH)
@@ -30,7 +34,7 @@ module Snorby
 
     def self.lookup(ip)
       database = self.database?
-      return {} unless database
+      return FAKE_DATA unless database
       lookup = GeoIP.new(database).country(ip)
       lookup.to_hash
     rescue ArgumentError => e

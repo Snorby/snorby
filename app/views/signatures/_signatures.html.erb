@@ -1,0 +1,30 @@
+<div id="signatures" class='grid_12 page boxit'>
+
+  <% @total_event_count ||= Event.count %>
+
+	<table class='default' border="0" cellspacing="0" cellpadding="0">
+		
+		<tr>		
+      <th>
+        <%= sortable(:sig_priority, 'Sev.')%>
+      </th>
+      <th>
+        <%= sortable(:sig_name, 'Signature Name')%>
+      </th>
+      <th>
+        <%= sortable(:events_count, 'Event Count')%>
+      </th>
+      <th></th>
+		</tr>
+		
+		<tbody class='signatures content'>
+			<%= render @signatures %>
+		</tbody>
+		
+	</table>
+
+
+	<%= pager(@signatures, '/signatures') %>
+	
+</div>
+

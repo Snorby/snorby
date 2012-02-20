@@ -131,7 +131,7 @@ function set_classification (class_id) {
 		};
 		
 	};
-}
+};
 
 function update_note_count (event_id, data) {
 	
@@ -550,12 +550,14 @@ var Snorby = {
 			});
 
 			$('input.event-select-all').live('change', function() {
-				if ($(this).attr('checked')) {
-					$('ul.table div.content li.event input.event-selector').attr('checked', true);
+        var $item = $('ul.table div.content li.event input#event-selector');
+				
+        if ($(this).is(':checked')) {
+					$item.attr('checked', true);
 				} else {
-					$('ul.table div.content li.event input.event-selector').attr('checked', false);
+					$item.removeAttr('checked');
 				};
-				return true;
+
 			});
 			
 			$('ul.table div.content li.event div.click').live('click', function() {
@@ -659,11 +661,20 @@ var Snorby = {
 	
   eventCloseHotkeys: function(bind) {
     if (bind) {
+			$(document).bind('keydown', '1', Snorby.hotKeyCallback.Sev1);
+      $(document).bind('keydown', '2', Snorby.hotKeyCallback.Sev2);
+      $(document).bind('keydown', '3', Snorby.hotKeyCallback.Sev3);
+
       $(document).bind('keydown', 'shift+right', Snorby.hotKeyCallback.shiftPlusRight);
       $(document).bind('keydown', 'right', Snorby.hotKeyCallback.right);			
       $(document).bind('keydown', 'shift+left', Snorby.hotKeyCallback.shiftPlusLeft);
       $(document).bind('keydown', 'left', Snorby.hotKeyCallback.left);      
     } else {
+
+			$(document).unbind('keydown', Snorby.hotKeyCallback.Sev1);
+      $(document).unbind('keydown', Snorby.hotKeyCallback.Sev2);
+      $(document).unbind('keydown', Snorby.hotKeyCallback.Sev3);
+
       $(document).unbind('keydown', Snorby.hotKeyCallback.shiftPlusRight);
       $(document).unbind('keydown', Snorby.hotKeyCallback.right);			
       $(document).unbind('keydown', Snorby.hotKeyCallback.shiftPlusLeft);
@@ -780,6 +791,81 @@ var Snorby = {
 			
 			return Snorby.templates.render(template, data);
 		},
+
+    update_notifications: function(data) {
+      var self = this;
+      var template = '<div id="update-notification">' +
+        '<span>' + 
+        '<div class="message-update-notification">' +
+        'A new version of Snorby is now avaliable. ' +
+        '</div>' +
+        'Version {{version}} - ' +
+        '' +
+        '<a href="{{download}}" target="_blank">Download</a>  - ' +
+        '<a href="{{changeLog}}" target="_blank">Change Log</a>' +
+        '' +
+        '<div class="close-update-notification">x</div>' +
+        '</span>' +
+        '</div>';
+
+      $('div.close-update-notification').live('click', function(e) {
+        e.preventDefault();
+        $.cookie('snorby-ignore-update', 1, { expires: 20 });
+        $('div#update-notification').remove();
+      });
+
+      return Snorby.templates.render(template, data);
+    },
+
+    searchLoading: function() {
+      var self = this;
+      var template = '<div class="search-loading" />';
+      return template;
+    },
+
+    signatureTable: function() {
+      var self = this;
+      var template = '<div id="signatures-input-search" class="grid_12 page boxit" style="display: block;">' +
+        '<table class="default" border="0" cellspacing="0" cellpadding="0">' +
+        '<tbody><tr><th style="width:30px">Sev.</th><th>Signature Name</th><th>Event Count</th><th></th></tr></tbody>' +
+        '<tbody class="signatures content">' +
+        '</tbody>' +
+        '</table>' +
+        '</div>';
+
+      return template;
+    },
+
+    signatures: function(data) {
+      var self = this;
+      var event_count = data.total;
+
+      var template = '{{#each signatures}}' +
+        '<tr>' +
+        '<td class="first">' +
+        '<div class="severity small">' +
+        '<span class="severity sev{{sig_priority}}">' +
+        '{{sig_priority}}' +
+        '</span>' +
+        '</div>' +
+        '</td>' +
+        '<td class="" title="{{sig_name}}">' +
+        '{{{truncate this.sig_name 60}}}' +
+        '</td>' +
+        '<td class="chart-large add_tipsy" original-title="{{events_count}} of {{../total}} events">' +
+        '<div class="progress-container-large">' +
+        '<div style="width: {{{percentage ../total}}}%">' +
+        '<span>{{{percentage ../total}}}%</span>' +
+        '</div>' +
+        '</div>' +
+        '</td>' +
+        '<td class="last" style="width:45px;padding-right:6px;padding-left:0px;">' +
+        '<a href="/results?search%5Bsignature_name%5D={{sig_name}}&title={{sig_name}}">View</a>' +
+        '</td>' +
+        '</tr>{{/each}}'; 
+      return Snorby.templates.render(template, data);
+    }
+
 	},
 	
 	notification: function(message){
@@ -1029,6 +1115,30 @@ var Snorby = {
 
     shiftPlusLeft: function() {
       $('div.pager.main ul.pager li.first a').click();
+    },
+
+    Sev1: function() {
+      $('span.sev1').parents('div.row').find('input#event-selector').each(function() {
+        var $checkbox = $(this);
+        $checkbox.attr('checked', !$checkbox.attr('checked'));
+        $checkbox.trigger('change');
+      }); 
+    },
+
+    Sev2: function() {
+      $('span.sev2').parents('div.row').find('input#event-selector').each(function() {
+        var $checkbox = $(this);
+        $checkbox.attr('checked', !$checkbox.attr('checked'));
+        $checkbox.trigger('change');
+      }); 
+    },
+
+    Sev3: function() {
+      $('span.sev3').parents('div.row').find('input#event-selector').each(function() {
+        var $checkbox = $(this);
+        $checkbox.attr('checked', !$checkbox.attr('checked'));
+        $checkbox.trigger('change');
+      }); 
     }
 
   },
@@ -1105,31 +1215,10 @@ var Snorby = {
 			$(document).bind('keydown', 'shift+return', function() {
 				$('ul.table div.content li.event.currently-over div.row div.click').click();
 			});
-			
-			$(document).bind('keydown', 'ctrl+shift+1', function() {
-        
-        $('span.sev1').parents('div.row').find('input#event-selector').each(function() {
-          var $checkbox = $(this);
-          $checkbox.attr('checked', !$checkbox.attr('checked'));
-          $checkbox.trigger('change');
-        });
-			});
-			
-			$(document).bind('keydown', 'ctrl+shift+2', function() {
-        $('span.sev2').parents('div.row').find('input#event-selector').each(function() {
-          var $checkbox = $(this);
-          $checkbox.attr('checked', !$checkbox.attr('checked'));
-          $checkbox.trigger('change');
-        });
-			});
-			
-			$(document).bind('keydown', 'ctrl+shift+3', function() {
-        $('span.sev3').parents('div.row').find('input#event-selector').each(function() {
-          var $checkbox = $(this);
-          $checkbox.attr('checked', !$checkbox.attr('checked'));
-          $checkbox.trigger('change');
-        });
-			});
+
+			$(document).bind('keydown', 'ctrl+shift+1', Snorby.hotKeyCallback.Sev1);
+      $(document).bind('keydown', 'ctrl+shift+2', Snorby.hotKeyCallback.Sev2);
+      $(document).bind('keydown', 'ctrl+shift+3', Snorby.hotKeyCallback.Sev3);
 			
 			$(document).bind('keydown', 'ctrl+shift+u', function() {
 				set_classification(0);
@@ -1247,8 +1336,8 @@ var Snorby = {
 		});
 		
 	}
-	
-}
+
+};
 
 jQuery(document).ready(function($) {
 
@@ -1264,6 +1353,19 @@ jQuery(document).ready(function($) {
     } else {
       return null;
     };
+  });
+
+  Handlebars.registerHelper('truncate', function(data, length) {
+     if (data.length > length) {
+       return data.substring(0,length) + "...";
+     } else {
+      return data;
+     };
+  });
+
+  Handlebars.registerHelper('percentage', function(total) {
+    var calc = ((parseFloat(this.events_count) / parseFloat(total)) * 100);
+    return calc.toFixed(2);
   });
 
   $('#login form#user_new').submit(function(event) {
@@ -1282,15 +1384,23 @@ jQuery(document).ready(function($) {
     if (password_value && (password_value.length > 1)) {
       if (email_value.length > 5) {
 
+        $('#content').append('<div class="auth-loading">Submitting Credentials, Please Wait...</div>');
+        $('#content #title, #content #signin').animate({
+          opacity: 0.2
+        }, 500);
+
         $.post(that.action, $(that).serialize(), function(data) {
             if (data.success) {
 
-              flash_message.push({
-                type: 'success', 
-                message: "Loading - Authentication Successful!"
+              $('div.auth-loading').animate({
+                opacity: 0
+              }, 500, function() {
+                $('div.auth-loading').html('Authentication Successful, Please Wait...');
+                $('div.auth-loading').animate({
+                  opacity: 1
+                }, 500);
               });
 
-              flash();
               $.get(data.redirect, function(data) {
                 self.fadeOut('slow', function() {
                   document.open();
@@ -1303,9 +1413,13 @@ jQuery(document).ready(function($) {
             } else {
               flash_message.push({
                 type: 'error', 
-                message: "Fail - Authentication Failure!"
+                message: "Error, Authentication Failed!"
               });
               flash();
+              $('div.auth-loading').remove();
+              $('#content #title, #content #signin').animate({
+                opacity: 1
+              }, 1000);
             };
         });
 
@@ -1374,6 +1488,93 @@ jQuery(document).ready(function($) {
     $(this).toggleClass('currently-over');
   }, function() {
     $(this).toggleClass('currently-over');
+  });
+
+  var signature_input_search = null;
+  var signature_input_search_last = null;
+  var signature_input_search_timeout = null;
+
+  $('input#signature-search').live('keyup', function() {
+    var value = $(this).val().replace(/^\s+|\s+$/g, '');
+
+    if (value.length >= 3) {
+
+      if (value !== signature_input_search_last) {
+        if (signature_input_search) { signature_input_search.abort() };
+
+        signature_input_search_last = value;
+
+        if ($('div.search-loading').length == 0) {
+          $('div#title').append(Snorby.templates.searchLoading());
+        };
+        
+        signature_input_search = $.ajax({
+          url: '/signatures/search',
+          global: false,
+          data: { q: value, authenticity_token: csrf },
+          type: "POST",
+          dataType: "json",
+          cache: false,
+          success: function(data) {
+            signature_input_search = null;
+            signature_input_search_last = value;
+
+            $('div#signatures').hide();
+            $('div.search-loading').remove();
+
+            if ($('div#signatures-input-search').length == 0) {
+              $('div#content').append(Snorby.templates.signatureTable());
+            };
+
+            $("div#signatures-input-search tbody.signatures").html(Snorby.templates.signatures(data));
+          }
+        });
+      };
+
+    } else {
+      $('div#signatures').show(); 
+      $("div#signatures-input-search").remove();
+      $('div.search-loading').remove();
+      signature_input_search_last = null;
+      if (signature_input_search) { signature_input_search.abort() };
+    };
+  });
+
+  var cache_reload_count = 0;
+  function currently_caching() {
+    $.ajax({
+      url: '/cache/status',
+      global: false,
+      dataType: 'json',
+      cache: false,
+      type: 'GET',
+      success: function(data) {
+        if (data.caching) {
+          setTimeout(function() {
+            cache_reload_count = 0;
+            currently_caching();
+          }, 2000);
+        } else {
+          if (cache_reload_count == 3) {
+            cache_reload_count = 0;
+            location.reload();
+          } else {
+            cache_reload_count++;
+            currently_caching();
+          };
+        };
+      }
+    });
+  };
+
+  $('dd a.force-cache-update').live('click', function(e) {
+    e.preventDefault();
+    $('li.last-cache-time')
+    .html("<i>Currently Caching <img src='../images/icons/pager.gif' width='16' height='11' /></i>");
+
+    $.getJSON(this.href, function(data) {
+      setTimeout(currently_caching, 6000);
+    });
   });
 
 });
