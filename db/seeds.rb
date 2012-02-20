@@ -12,8 +12,8 @@ Setting.set(:daily, 1) unless Setting.daily?
 Setting.set(:weekly, 1) unless Setting.weekly?
 Setting.set(:monthly, 1) unless Setting.monthly?
 Setting.set(:lookups, 1) unless Setting.lookups?
-Setting.set(:notes, 1) unless Setting.notes?
 
+Setting.set(:notes, 1) # unless Setting.notes?
 Setting.set(:geoip, 0) unless Setting.geoip?
 
 Setting.set(:event_notifications, 0) unless Setting.event_notifications?

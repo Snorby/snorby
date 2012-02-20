@@ -34,12 +34,14 @@ class Setting
   def self.find(name)
     record = first(:name => name)
     return false if record.nil?
+    return false if record.value.is_a?(Integer) && record.value.zero?
     record.value
   end
 
   def self.has_setting(name)
     record = first(:name => name)
     return false if record.nil?
+    return false if record.value.is_a?(Integer) && record.value.zero?
     return true unless record.value.blank?
     false
   end

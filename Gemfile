@@ -11,8 +11,6 @@ gem 'rails',                       RAILS_VERSION
 gem 'jquery-rails'
 gem 'bundler',                     '~> 1.0.0'
 
-gem 'ruby-debug19'
-
 # DateTime Patches
 gem 'home_run',                    :require => 'date'
 
