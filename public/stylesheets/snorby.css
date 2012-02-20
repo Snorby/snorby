@@ -3033,6 +3033,9 @@ form.basic-form p{
 	margin-bottom: 10px;
 }
 
+form.basic-form p._settings_packet_capture{
+}
+
 label.error{
 	visibility: hidden;
 	display: none;
@@ -3056,7 +3059,7 @@ i{
 	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#fff',endColorstr='#ededed');
 	background: -webkit-gradient(linear,0% 0,0% 100%,from(#fff),to(#ededed));
 	background: -moz-linear-gradient(-90deg,#fff,#ededed);
-	margin: 10px -10px -15px;
+	margin: 10px -10px -17px;
 	border-top: 1px solid #e7e7e7;
 	padding: 7px 10px 9px;
 }
@@ -3352,7 +3355,7 @@ img.avatar-small{
 	display: block;
 	position: relative;
 	overflow: hidden;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 	border: 1px solid #d1d1d1;
 }
 
@@ -3821,7 +3824,6 @@ div.dashboard-graph.no-pie-data{
 	position: relative;
 	overflow: visible;
 	padding-top: 10px;
-	margin-bottom: 8px;
 }
 
 #search-box{

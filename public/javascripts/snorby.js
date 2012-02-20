@@ -133,6 +133,89 @@ function set_classification (class_id) {
 	};
 };
 
+function fetch_last_event(callback) {
+  $.ajax({
+    url: '/events/last',
+    dataType: 'json',
+    type: 'GET',
+    global: false,
+    cache: false,
+    success: function(data) {
+      if (data && (data.time)) {
+        $('div#wrapper').attr({last_event: data.time});
+        callback(data.time);
+      };
+    }
+  });
+};
+
+function monitor_events(prepend_events) {
+ 
+  $("#growl").notify({
+      speed: 500,
+      expires: 5000
+  });
+
+  fetch_last_event(function(time) {
+    setInterval (function () {
+      new_event_check(prepend_events);
+    }, 50000);
+  });
+
+};
+
+function new_event_check(prepend_events) {
+  $.ajax({
+    url: '/events/last',
+    dataType: 'json',
+    type: 'GET',
+    global: false,
+    cache: false,
+    success: function(data) {
+      var old_id = $('div#wrapper').attr('last_event');
+      
+      var page = parseInt($('.pager li.active a').html());
+
+      if (old_id != data.time) {
+        $.ajax({
+          url: 'events/since',
+          data: { timestamp: old_id },
+          dataType: 'json',
+          type: 'GET',
+          global: false,
+          cache: false,
+          success: function(newEvents) {
+            if (newEvents.events && newEvents.events.length != 0) {
+
+              if (prepend_events) {
+                if (page <= '1') { 
+                  
+                  if ($('div.new_events').length == 0) {
+                    
+                    $('#events').prepend('<div class="note new_events"><strong class="new_event_count">'+newEvents.events.length+'</strong> New Events Are Available Click here To View Them.</div>');
+                    
+                  } else {
+                    
+                    var new_count = parseInt($('#events div.new_events strong.new_event_count').html()) + newEvents.events.length;
+                    $('#events div.new_events').html('<strong class="new_event_count">'+new_count+'</strong> New Events Are Available Click here To View Them.');
+                    
+                  };
+
+                  $('#events ul.table div.content').prepend(Snorby.templates.event_table(newEvents));
+                };
+              };
+
+              Snorby.notification({title: 'New Events', text: newEvents.events.length + ' Events Added.'});
+            };
+          }
+        });
+
+        $('div#wrapper').attr('last_event', data.time);
+      };
+    }
+  });
+};
+
 function update_note_count (event_id, data) {
 	
 	var event_row = $('li#'+event_id+' div.row div.timestamp');

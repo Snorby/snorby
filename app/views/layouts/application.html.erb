@@ -56,27 +56,37 @@
 
     <%- end -%>
 		
-		<%= yield(:footer) %>
+    <%= yield(:footer) %>
 
-  <script type="text/javascript" charset="utf-8">
-    <% if Setting.update_notifications? %>
-      if (!$.cookie('snorby-ignore-update')) {
-        $.ajax({
-          url: 'http://www.snorby.org/version',
-          dataType: "jsonp",
-          global: false,
-          crossDomain: true,
-          success: function(data) {
-            if (data && (typeof data === "object")) {
-              if (data.version !== "<%= Snorby::VERSION %>") {
-                $('#header-top').append(Snorby.templates.update_notifications(data));
+    <%= render :partial => 'layouts/notify' %>
+
+    <script type="text/javascript" charset="utf-8">
+      <% if Setting.update_notifications? %>
+        if (!$.cookie('snorby-ignore-update')) {
+          $.ajax({
+            url: 'http://www.snorby.org/version',
+            dataType: "jsonp",
+            global: false,
+            crossDomain: true,
+            success: function(data) {
+              if (data && (typeof data === "object")) {
+                if (data.version !== "<%= Snorby::VERSION %>") {
+                  $('#header-top').append(Snorby.templates.update_notifications(data));
+                };
               };
-            };
-          }
-        });
-      };
-    <% end %>
-  </script>
+            }
+          });
+        };
+      <% end %>
+
+      <% if Setting.event_notifications? %>
+        monitor_events(false);
+      <% else %>
+        if (window.location.pathname === "/events") {
+          monitor_events(true);
+        };
+      <% end %>
+    </script>
 
   </body> 
 </html> 

@@ -1,7 +1,8 @@
 # Snorby 2.4.0
 
   * New Signature Listing View
-  * New Snorby Update Notification Options
+  * New Global Event Notification Option
+  * New Snorby Update Notification Option
     - NOTICE: This will make a request to http://snorby.org/version for
       current release metrics.
   
