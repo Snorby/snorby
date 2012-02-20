@@ -15,6 +15,8 @@ Setting.set(:lookups, 1) unless Setting.lookups?
 Setting.set(:notes, 1) unless Setting.notes?
 
 Setting.set(:geoip, 0) unless Setting.geoip?
+
+Setting.set(:event_notifications, 0) unless Setting.event_notifications?
 Setting.set(:update_notifications, 0) unless Setting.update_notifications?
 
 # Remove Legacy Settings

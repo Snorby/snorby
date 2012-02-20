@@ -81,7 +81,6 @@ class Event
     :user_count => 'event'
   }
 
-
   def self.last_event_timestamp
     event = first(:order => [:timestamp.desc])
     timestamp = event ? event.timestamp : DateTime.now
