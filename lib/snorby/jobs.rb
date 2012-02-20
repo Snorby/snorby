@@ -125,10 +125,8 @@ module Snorby
       Delayed::Job.enqueue(Snorby::Jobs::DailyCacheJob.new(false), 
       :priority => 1, :run_at => DateTime.now + 5.second)
 
-      if Setting.geoip?
-        Delayed::Job.enqueue(Snorby::Jobs::GeoipUpdatedbJob.new, 
-        :priority => 1, :run_at => DateTime.now + 5.second)
-      end
+      Delayed::Job.enqueue(Snorby::Jobs::GeoipUpdatedbJob.new, 
+      :priority => 1, :run_at => DateTime.now + 5.second)
     end
 
     def self.force_sensor_cache
