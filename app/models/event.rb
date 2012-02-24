@@ -259,8 +259,13 @@ class Event
   end
 
   def pretty_time
-    return "#{timestamp.strftime('%l:%M %p')}" if Date.today.to_date == timestamp.to_date
-    "#{timestamp.strftime('%m/%d/%Y')}"
+    if Setting.utc?
+      return "#{timestamp.utc.strftime('%H:%M')}" if Date.today.to_date == timestamp.to_date
+      "#{timestamp.strftime('%m/%d/%Y')}"
+    else
+      return "#{timestamp.strftime('%l:%M %p')}" if Date.today.to_date == timestamp.to_date
+      "#{timestamp.strftime('%m/%d/%Y')}"
+    end
   end
 
   #

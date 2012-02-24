@@ -13,6 +13,7 @@ Setting.set(:weekly, 1) unless Setting.weekly?
 Setting.set(:monthly, 1) unless Setting.monthly?
 Setting.set(:lookups, 1) unless Setting.lookups?
 
+Setting.set(:utc, 0) #unless Setting.utc?
 Setting.set(:notes, 1) # unless Setting.notes?
 Setting.set(:geoip, 0) unless Setting.geoip?
 

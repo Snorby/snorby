@@ -694,6 +694,12 @@ body.login #flash_message.success{
 	text-indent: 99999em;
 }
 
+
+strong.current-snorby-env{
+	color: #fefad4;
+	text-shadow: #000 0 1px 0;
+}
+
 #header #header-inside #header-content #header-top #user-menu{
 	display: block;
 	position: relative;

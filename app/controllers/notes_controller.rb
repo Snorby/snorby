@@ -15,11 +15,9 @@ class NotesController < ApplicationController
   end
   
   def create
-    if Setting.notes?
-      @note = @event.notes.create({ :user => @user, :body => params[:body] })
-      if @note.save
-        Delayed::Job.enqueue(Snorby::Jobs::NoteNotification.new(@note.id))
-      end
+    @note = @event.notes.create({ :user => @user, :body => params[:body] })
+    if @note.save
+      Delayed::Job.enqueue(Snorby::Jobs::NoteNotification.new(@note.id))
     end
   end
   

@@ -61,11 +61,11 @@
           </li>
 				<% else %>
 				
-					<% unless %w(yesterday week last_week month last_month year quarter).include?(params[:range]) %>
-            <li class='right last-cache-time'>
-              <i>Updated: <%= @last_cache.strftime('%D %l:%M:%S %p') %></i>
-            </li>
-					<% end %>
+
+          <li class='right last-cache-time'>
+            <i>Updated: <%= @last_cache.strftime('%D %l:%M:%S %p') %></i>
+          </li>
+
 					
 				<% end %>
 

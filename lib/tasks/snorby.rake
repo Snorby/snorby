@@ -21,7 +21,7 @@ require "./lib/snorby/jobs"
 require "./lib/snorby/worker"
 
 namespace :snorby do
-  
+
   desc 'Setup'  
   task :setup => :environment do
         
