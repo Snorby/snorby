@@ -1,6 +1,7 @@
 class Setting
 
   CHECKBOXES = [
+    :utc,
     :event_notifications,
     :update_notifications,
     :daily,

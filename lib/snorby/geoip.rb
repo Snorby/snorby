@@ -29,6 +29,7 @@ module Snorby
 
     def self.database?
       return false unless File.exists?(PATH)
+      return false if File.zero?(PATH)
       File.open(PATH)
     end
 

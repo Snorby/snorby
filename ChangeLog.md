@@ -1,5 +1,12 @@
 # Snorby 2.4.0
 
+  * Fix new event note controller bug.
+  * Minor view fixes / improvements.
+  * Add EU GeoIP Flag.
+  * Add support for custom Geoip Databases
+
+# Snorby 2.4.0
+
   * New Signature Listing View
   * New Global Event Notification Option
   * New Snorby Update Notification Option

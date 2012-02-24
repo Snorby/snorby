@@ -11,17 +11,22 @@
 					
 					<ul>
 						<% if user_signed_in? %>
-							
+
 							<li class='first'>Welcome <%= current_user.name %></li>
 							<li><%= link_to 'Settings', edit_user_registration_path %></li>
 							<li class='last'><%= link_to 'Log out', destroy_user_session_path %></li>
 							
-						<% else %>
-						
+            <% else %>
+
 							<li class='first'><%= link_to 'Log In', login_path %></li>
-							<li class='last'><%= link_to 'Forgot Password?', new_password_path(resource_name) %></li>
-							
-						<% end %>				
+              <li class='last'><%= link_to 'Forgot Password?', new_password_path(resource_name) %></li>	
+
+            <% end %>
+
+            <% unless Rails.env.production? %>
+              <strong class='current-snorby-env'>(<%= Rails.env.upcase %> MODE)</strong>
+            <% end %>
+
 					</ul>
 					
 				</div>
@@ -87,9 +92,9 @@
 					
 					<% unless Snorby::Worker.running? %>
             <li class='menu-error right <%= current_user.admin ? 'admin' : '' %>'>
-            <%= image_tag('icons/note-icon-white.png') %>
-            The Snorby worker is not currently running.
-          </li>
+              <%= image_tag('icons/note-icon-white.png') %>
+              The Snorby worker is not currently running.
+            </li>
 					<% end %>
 					
 				<% end %>

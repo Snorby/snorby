@@ -1,5 +1,13 @@
 module ApplicationHelper
 
+  def display_time(time)
+    if Setting.utc?
+      time.utc.strftime('%A, %b %d, %Y at %H:%M:%S %::z')
+    else
+      time.strftime('%A, %b %d, %Y at %l:%M:%S %p')
+    end
+  end
+
   def geoip?
     return @geoip unless @geoip == nil
     @geoip = Setting.geoip?

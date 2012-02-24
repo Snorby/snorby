@@ -16,7 +16,7 @@
 		
 		<span><%= note.user %></span> 
 		
-		<i><%= note.created_at.strftime('%A, %B %d, %Y at %I:%M %p') %></i>
+		<i><%= display_time(note.created_at) %></i>
 		
 	</div>
 	
