@@ -1,5 +1,3 @@
-<%= title "Search Events" %>
-
 <%= stylesheet 'jquery' %>
 <%= javascript :footer, 'daterangepicker' %>
 
@@ -15,65 +13,138 @@
 
 <% end %>
 
-<div id='search' class='boxit page grid_12'>
-	
-	<%= form_tag results_path, :method => :get do %>
+<%= title "Snorby Advanced Search" do %>
 
-		<div id='search-box'>
+	<%= drop_down_for('More Options', 'icons/filter.png', 'options') do %>
 
-			<div class='grid_4 alpha'>
-				<%= label_tag "Signature Name" %><br />
-				<%= text_field_tag '[search][signature_name]', params[:signature_name], :placeholder => 'Signature Name' %>
-			</div>
+    <%= drop_down_item "View Saved Searches", '#', nil, {} %>
 
-			<div class='grid_4 alpha'>
-				<%= label_tag "Source Address" %><br />
-        <%= text_field_tag '[search][ip_src]', params[:ip_src], :placeholder => 'Source or CIDR notation' %>
-			</div>
-
-      <div class='grid_4 alpha'>
-				<%= label_tag "Destination Address" %><br />
-        <%= text_field_tag '[search][ip_dst]', params[:ip_dst], :placeholder => 'Destination or CIDR notation' %> 
-      </div>
-
-      <div class='grid_4 alpha'>
-				<%= label_tag "Date Range" %><br />
-        <%= text_field_tag '[search][timestamp]', params[:timestamp], :autocomplete=>:off, :placeholder => 'Date Range', :class => 'datepicker' %>
-      </div>
-
-			<div class='grid_4 alpha'>
-				<%= label_tag "Source Port" %><br />
-        <%= text_field_tag '[search][src_port]', params[:src_port], :placeholder => 'Port Number' %>
-      </div>
-
-			<div class='grid_4 alpha'>
-				<%= label_tag "Destination Port" %><br />
-        <%= text_field_tag '[search][dst_port]', params[:dst_port], :placeholder => 'Port Number' %>
-      </div>
-
-			<div class='grid_4 alpha'>
-				<%= label_tag 'Select Sensor' %><br />
-        <%= select_tag '[search][sid]', dropdown_select_tag(Sensor.all, :sid, true), :class => 'add_chosen' %>
-			</div>
-			
-			<div class='grid_4 alpha'>
-				<%= label_tag 'Select Classification' %><br />
-				<%= select_tag '[search][classification_id]', dropdown_select_tag(Classification.all, :id, true, ["<option value='0'>Unclassified</option>"]), :class => 'add_chosen' %>
-			</div>
-			
-			<div class='grid_4 alpha'>
-				<%= label_tag 'Select Severity' %><br />
-				<%= select_tag '[search][severity]', dropdown_select_tag(Severity.all, :sig_id, true), :class => 'add_chosen' %>
-			</div>
-
-		</div>
-
-		<%= form_actions do %>
-
-			<%= button "Submit Search", :class => 'success' %>
-
-		<% end %>
+    <%= drop_down_item "Save Current Search", '#', nil, {} %>
 
 	<% end %>
+
+<% end %>
+
+<div id='search' class='boxit page grid_12'>
+
+  <div class="search-match-box">
+    <input name="enable-all-search-rules" type="checkbox" checked='checked'/> Match 
+    <select><option value='any'>Any</option><option value='all'>All</option></select> 
+    of the following rules: 
+  </div>
+
+  <div class="search-content-box">
+    <div class="inside">
+      
+      <div class="column-select search-content-box-item">
+        <select class='add_chosen'>
+          <option value='any'>Any</option>
+          <option value='all'>All</option>
+        </select> 
+      </div>
+
+      <div class="operator-select search-content-box-item">
+        <select class='add_chosen'>
+          <option value='any'>is</option>
+          <option value='all'>is not</option>
+        </select>      
+      </div>
+
+      <div class="value search-content-box-item">
+        <input class='search-content-value' name="" type="text" /> 
+      </div>
+
+      <div title='Remove search rule' class="add_tipsy search-content-remove search-content-box-item">
+        <img src="../images/icons/minus.png" alt="" />
+      </div>
+
+      <div title='Add new search rule' class="add_tipsy search-content-add search-content-box-item">
+        <img src="../images/icons/add.png" alt="" />
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="search-content-box">
+    <div class="inside">
+      
+      <div class="column-select search-content-box-item">
+        <select class='add_chosen'>
+          <option value='any'>Any</option>
+          <option value='all'>All</option>
+        </select> 
+      </div>
+
+      <div class="operator-select search-content-box-item">
+        <select class='add_chosen'>
+          <option value='any'>is</option>
+          <option value='all'>is not</option>
+        </select>      
+      </div>
+
+      <div class="value search-content-box-item">
+        <input class='search-content-value' name="" type="text" /> 
+      </div>
+
+      <div title='Remove search rule' class="add_tipsy search-content-remove search-content-box-item">
+        <img src="../images/icons/minus.png" alt="" />
+      </div>
+
+      <div title='Add new search rule' class="add_tipsy search-content-add search-content-box-item">
+        <img src="../images/icons/add.png" alt="" />
+      </div>
+    </div>
+  </div>
+
+
+  <div class="search-content-box">
+    <div class="inside">
+      
+      <div class="column-select search-content-box-item">
+        <select class='add_chosen'>
+          <option value='any'>Any</option>
+          <option value='all'>All</option>
+        </select> 
+      </div>
+
+      <div class="operator-select search-content-box-item">
+        <select class='add_chosen'>
+          <option value='any'>is</option>
+          <option value='all'>is not</option>
+        </select>      
+      </div>
+
+      <div class="value search-content-box-item">
+        <input class='search-content-value' name="" type="text" /> 
+      </div>
+
+      <div title='Remove search rule' class="add_tipsy search-content-remove search-content-box-item">
+        <img src="../images/icons/minus.png" alt="" />
+      </div>
+
+      <div title='Add new search rule' class="add_tipsy search-content-add search-content-box-item">
+        <img src="../images/icons/add.png" alt="" />
+      </div>
+    </div>
+  </div>
+
+  <div class="other-search-options">
+    <input name="limit-all-search-rules" type="checkbox"/> 
+    Limit to
+    <input class="limit-search-results-count" name="limit-search-results-to" type="text" value='10000'/> 
+    ordered by
+    <select><option value='any'>Event Timestamp</option><option value='all'>All</option></select>
+    <br />
+    <input name="ignore-classified-events" type="checkbox"/> Ignore all classified events.
+  </div>
+
+  <%= form_actions do %>
+
+    <%= button "Submit Search", :class => 'success' %>
+
+    <%= button "Clear Search", :class => 'warning' %>
+
+  <% end %>
 
 </div>

@@ -1564,7 +1564,9 @@ jQuery(document).ready(function($) {
 	Snorby.pages.dashboard();
 	Snorby.pages.events();
 
-  $('.add_chosen').chosen();
+  $('.add_chosen').chosen({
+    allow_single_deselect: true
+  });
 
   $('ul.table div.content li.event').live('hover', function() {
     $('ul.table div.content li.event').removeClass('currently-over');
