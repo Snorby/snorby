@@ -20,6 +20,270 @@ var selected_events = [];
 var flash_message = [];
 var csrf = $('meta[name="csrf-token"]').attr('content');
 
+var SearchRule;
+
+SearchRule = function() {
+  
+  function SearchRule(selectData, callback) {
+    var self = this;
+    self.html = Handlebars.templates['search-rule']({});
+    self.columns = selectData.columns;
+    self.operators = selectData.operators;
+
+    self.selectData = selectData;
+    
+    self.classifications = selectData.classifications;
+    self.sensors = selectData.sensors;
+    self.users = selectData.users;
+    self.signatures = selectData.signatures;
+    self.protocol = selectData.protocol;
+
+    self.init();
+    return self;
+  };
+
+  SearchRule.prototype = {
+  
+    //
+    // Init - Load Data
+    //
+    init: function(callback) {
+      var self = this;
+      var width = "368px";
+
+      self.sensors_html = Handlebars.templates['select']({
+        name: "sensors-select",
+        width: width,
+        data: self.sensors
+      });
+
+      self.classifications_html = Handlebars.templates['select']({
+        name: "classifications-select",
+        width: width,
+        data: self.classifications
+      });
+
+      self.signatures_html = Handlebars.templates['select']({
+        name: "signatures-select",
+        width: width,
+        data: self.signatures
+      });
+
+      self.users_html = Handlebars.templates['select']({
+        name: "users-select",
+        width: width,
+        data: self.users
+      });
+
+      self.protocol_html = Handlebars.templates['select']({
+        name: "protocol-select",
+        width: width,
+        data: self.protocol
+      });
+
+      self.columns_html = Handlebars.templates['select']({
+        name: "column-select",
+        placeholder: "Choose a query term...",
+        data: {
+          value: self.columns
+        }
+      });
+
+      self.operators_html = function($html, data) {
+        var select = Handlebars.templates['select']({
+          name: "operators-select",
+          data: {
+            value: data
+          }
+        });
+
+        $html.find('div.operator-select').html(select);
+      };
+
+      self.datetime_picker = function(that) {
+        console.log(that)
+        that.AnyTime_picker({ 
+          format: "%Y/%m/%d %H:%i:%s",
+          formatUtcOffset: "%: (%@)",
+          placement: "popup"
+        });
+      };
+
+    },
+
+    //
+    // Add
+    //
+    add: function(that, newOptions) {
+      var self = this;
+      var options = {};
+      
+      if (options && (typeof options === "object")) {
+        options = newOptions;
+      };
+
+      var $html = $(self.html);
+      $html.find('div.column-select').html(self.columns_html);
+
+      if (that && (typeof that === "object")) {
+        $(that).parents('.search-content-box').after($html);        
+      } else {
+        $('.rules').append($html);
+      };
+
+      $html.find('.add_chosen')
+      .chosen({allow_single_deselect: true})
+      .change(function(event) {
+        var value = $(this).val();
+        var that = $(this).parents('.search-content-box');
+
+        AnyTime.noPicker(that.find('.value input'));
+
+        if (value === "signature") {
+          that.find('.value').html(self.signatures_html);
+          self.operators_html($html, self.operators.text_input);
+        } else if (value === "sensor") {
+          that.find('.value').html(self.sensors_html);
+          self.operators_html($html, self.operators.text_input);
+        } else if (value === "classification") {
+          that.find('.value').html(self.classifications_html);
+          self.operators_html($html, self.operators.text_input);
+        } else if (value === "user") {
+          that.find('.value').html(self.users_html);
+          self.operators_html($html, self.operators.text_input);
+        } else if (value === "protocol") {
+          that.find('.value').html(self.protocol_html);
+          self.operators_html($html, self.operators.text_input);
+        } else if (value === "start_time") {
+          that.find('.value').html('<input id="time-'+ new Date().getTime() +'" class="search-content-value" placeholder="Enter search value" name="" type="text">');
+          self.datetime_picker(that.find('.value input:first'))
+          self.operators_html($html, self.operators.datetime);
+        } else if (value === "end_time") {
+          that.find('.value').html('<input id="time-'+ new Date().getTime() +'" class="search-content-value" placeholder="Enter search value" name="" type="text">');
+          self.datetime_picker(that.find('.value input:first'))
+          self.operators_html($html, self.operators.datetime);
+        } else if (value === "") {
+          that.find('.value').html('<input class="search-content-value" placeholder="Enter search value" name="" type="text">');
+          self.operators_html($html, self.operators.text_input);
+        } else {
+          that.find('.value').html('<input class="search-content-value" placeholder="Enter search value" name="" type="text">');
+          self.operators_html($html, self.operators.text_input);
+        };
+
+        that.find('.add_chosen').chosen({
+          allow_single_deselect: true
+        });
+      });
+
+      $('.search-content-box:first')
+      .find('.search-content-remove')
+      .css('opacity', 1)
+      .unbind('hover')
+      .unbind('mouseover');
+    },
+
+    //
+    // Remove Rule
+    //
+    remove: function(that) {
+      var self = this;
+      if ($('.search-content-box').length > 2) {
+        $(that).parents('.search-content-box').remove();
+      } else if ($('.search-content-box').length == 2) {
+        $(that).parents('.search-content-box').remove();
+        
+        $('.search-content-box:first')
+        .find('.search-content-remove')
+        .css('opacity', 0.4)
+        .attr('title', 'NNOOO!!!')
+        .tipsy({
+				  gravity: 's'
+			  });
+      };
+    },
+
+    pack: function() {
+      var self = this;
+      var matchAll = false;
+      
+      if ($('#search select.global-match-setting').val() === "all") {
+        matchAll = true;
+      };
+
+      var json = {
+        match_all: matchAll,
+        items: {}
+      };
+
+      $('.search-content-box').each(function(index, item) {
+        var enabled = $(item).find('.search-content-enable input').is(':checked');
+        var column = $(item).find('.column-select select').val();
+        var operator = $(item).find('.operator-select select').val();
+        var value = $(item).find('.value input, .value select').val();
+
+        if (enabled) {
+          if ((column !== "") || (value !== "")) {
+            if (matchAll) {
+              json.items[column] = {
+                column: column,
+                operator: operator,
+                value: value
+              };
+            } else {
+              json.items[index] = {
+                column: column,
+                operator: operator,
+                value: value
+              };          
+            };
+          };
+        };
+      });
+
+      return json;
+    },
+
+    //
+    // Submit
+    //
+    submit: function() {
+      var self = this;
+      var search = self.pack();
+
+      if (search && !$.isEmptyObject(search.items)) {
+        $.ajax({
+          url: '/results',
+          global: false,
+          dataType: 'html',
+          cache: false,
+          type: 'GET',
+          data: { match_all: search.matchAll, search: search.items },
+          success: function(data){
+            console.log(data);
+            var content = $(data).find('#content');
+            $('#content').replaceWith(content);
+          }
+        });
+      } else {
+        $.ajax({
+          url: '/results',
+          global: false,
+          dataType: 'html',
+          cache: false,
+          type: 'GET',
+          data: {},
+          success: function(data){
+             console.log(data);
+          }
+        });
+      };
+    },
+
+  };
+
+  return SearchRule;
+}();
+
 function HCloader(element) {
   var $holder = $('div#' + element);
   $holder.fadeTo('slow', 0.2);

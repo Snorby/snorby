@@ -1,14 +1,41 @@
-<%= stylesheet 'jquery' %>
-<%= javascript :footer, 'daterangepicker' %>
+<%= javascript :header, 'daterangepicker' %>
 
 <% content_for :footer do %>
 
   <script type="text/javascript">
-    $('.datepicker').daterangepicker({
-      dateStart: 'Today', 
-      dateEnd: 'Today',
-      earliestDate: 'Today'
-    });
+    var rule = new SearchRule(<%= Snorby::Search.json %>);
+    rule.add();
+    rule.add();
+    rule.add();
+
+$('.search-content-add').live('click', function(e) {
+    e.preventDefault();
+    rule.add(this);
+});
+$('.search-content-remove').live('click', function(e) {
+    e.preventDefault();
+    rule.remove(this);
+});
+
+$('div.search-content-enable input').live('click', function() {
+    if ($(this).is(':checked')) {
+      $(this)
+      .parents('.search-content-box')
+      .find('.value *, .operator-select *, .column-select *')
+      .attr('disabled', false).css('opacity', 1);
+    } else {
+      $(this)
+      .parents('.search-content-box')
+      .find('.value *, .operator-select *, .column-select *')
+      .attr('disabled', true).css('opacity', 0.8);
+    };
+});
+
+$('button.submit-search').live('click', function(e) {
+  e.preventDefault();
+  rule.submit();
+});
+
 	</script>
 
 <% end %>
@@ -27,109 +54,19 @@
 
 <div id='search' class='boxit page grid_12'>
 
-  <div class="search-match-box">
-    <input name="enable-all-search-rules" type="checkbox" checked='checked'/> Match 
-    <select><option value='any'>Any</option><option value='all'>All</option></select> 
+  <div class="search-match-box" style='display:;'>
+    Match 
+    <select class='global-match-setting'>
+      <option value='any'>Any</option>
+      <option value='all'>All</option>
+    </select> 
     of the following rules: 
   </div>
 
-  <div class="search-content-box">
-    <div class="inside">
-      
-      <div class="column-select search-content-box-item">
-        <select class='add_chosen'>
-          <option value='any'>Any</option>
-          <option value='all'>All</option>
-        </select> 
-      </div>
-
-      <div class="operator-select search-content-box-item">
-        <select class='add_chosen'>
-          <option value='any'>is</option>
-          <option value='all'>is not</option>
-        </select>      
-      </div>
-
-      <div class="value search-content-box-item">
-        <input class='search-content-value' name="" type="text" /> 
-      </div>
-
-      <div title='Remove search rule' class="add_tipsy search-content-remove search-content-box-item">
-        <img src="../images/icons/minus.png" alt="" />
-      </div>
-
-      <div title='Add new search rule' class="add_tipsy search-content-add search-content-box-item">
-        <img src="../images/icons/add.png" alt="" />
-      </div>
-    </div>
-  </div>
+  <div class="rules"></div>
 
 
-
-  <div class="search-content-box">
-    <div class="inside">
-      
-      <div class="column-select search-content-box-item">
-        <select class='add_chosen'>
-          <option value='any'>Any</option>
-          <option value='all'>All</option>
-        </select> 
-      </div>
-
-      <div class="operator-select search-content-box-item">
-        <select class='add_chosen'>
-          <option value='any'>is</option>
-          <option value='all'>is not</option>
-        </select>      
-      </div>
-
-      <div class="value search-content-box-item">
-        <input class='search-content-value' name="" type="text" /> 
-      </div>
-
-      <div title='Remove search rule' class="add_tipsy search-content-remove search-content-box-item">
-        <img src="../images/icons/minus.png" alt="" />
-      </div>
-
-      <div title='Add new search rule' class="add_tipsy search-content-add search-content-box-item">
-        <img src="../images/icons/add.png" alt="" />
-      </div>
-    </div>
-  </div>
-
-
-  <div class="search-content-box">
-    <div class="inside">
-      
-      <div class="column-select search-content-box-item">
-        <select class='add_chosen'>
-          <option value='any'>Any</option>
-          <option value='all'>All</option>
-        </select> 
-      </div>
-
-      <div class="operator-select search-content-box-item">
-        <select class='add_chosen'>
-          <option value='any'>is</option>
-          <option value='all'>is not</option>
-        </select>      
-      </div>
-
-      <div class="value search-content-box-item">
-        <input class='search-content-value' name="" type="text" /> 
-      </div>
-
-      <div title='Remove search rule' class="add_tipsy search-content-remove search-content-box-item">
-        <img src="../images/icons/minus.png" alt="" />
-      </div>
-
-      <div title='Add new search rule' class="add_tipsy search-content-add search-content-box-item">
-        <img src="../images/icons/add.png" alt="" />
-      </div>
-    </div>
-  </div>
-
-  <div class="other-search-options">
+  <div class="other-search-options" style='display:none;'>
     <input name="limit-all-search-rules" type="checkbox"/> 
     Limit to
     <input class="limit-search-results-count" name="limit-search-results-to" type="text" value='10000'/> 
@@ -141,9 +78,7 @@
 
   <%= form_actions do %>
 
-    <%= button "Submit Search", :class => 'success' %>
-
-    <%= button "Clear Search", :class => 'warning' %>
+    <%= button "Submit Search", :class => 'submit-search success' %>
 
   <% end %>
 

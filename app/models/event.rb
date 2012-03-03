@@ -1,5 +1,6 @@
 require 'netaddr'
 require 'snorby/model/counter'
+require 'snorby/pager'
 
 class Event
 
@@ -81,6 +82,34 @@ class Event
     :user_count => 'event'
   }
 
+  SEARCH = {
+    :signature => :"signature.sig_id",
+    :signature_name => :"signature.sig_name",
+    :source_ip => :"iphdr.ip_src",
+    :destination_ip => :"iphdr.ip_dst",
+    :source_port => :"tcphdr.tcp_sport",
+    :destination_port => :"tcphdr.tcp_dport",
+    :classification => :"event.classification_id",
+    :sensor => :"event.sid",
+    :user => :"event.user_id",
+    :payload => :"payload.data_payload",
+    :start_time => :"event.timestamp",
+    :end_time => :"event.timestamp"
+  }
+
+  OPERATOR = {
+    :is => "= ?",
+    :is_not => "!= ?",
+    :contains => "LIKE ?",
+    :contains_not => 'NOT LIKE ?',
+    :gte => ">= ?",
+    :lte => "<= ?",
+    :lt => "< ?",
+    :gt => "> ?",
+    :in => "IN (?)",
+    :notnull => "NOT NULL ?"
+  }
+
   def self.last_event_timestamp
     event = first(:order => [:timestamp.desc])
     timestamp = event ? event.timestamp : DateTime.now
@@ -126,10 +155,6 @@ class Event
         :links => [Event.relationships[SORT[sort].to_s].inverse]
       )
     end
-    
-    if params.has_key?(:search)
-      page.merge!(search(params[:search]))
-    end
 
     unless params.has_key?(:classification_all)
       page.merge!(:classification_id => nil)
@@ -145,7 +170,18 @@ class Event
       end
     end
 
-    page(params[:page].to_i, page)
+    if params.has_key?(:search)
+      #sql = search(params[:search], {})
+      sql = "select * from event"
+
+      page(params[:page], { 
+        :per_page => User.current_user.per_page_count.to_i,
+        :order => :timestamp.desc,
+        :total => Event.count
+      }, sql)
+    else
+      page(params[:page].to_i, page)
+    end
   end
 
   def packet_capture(params={})
@@ -259,13 +295,15 @@ class Event
   end
 
   def pretty_time
-    if Setting.utc?
-      return "#{timestamp.utc.strftime('%H:%M')}" if Date.today.to_date == timestamp.to_date
-      "#{timestamp.strftime('%m/%d/%Y')}"
-    else
-      return "#{timestamp.strftime('%l:%M %p')}" if Date.today.to_date == timestamp.to_date
-      "#{timestamp.strftime('%m/%d/%Y')}"
-    end
+    # if Setting.utc?
+      # return "#{timestamp.utc.strftime('%H:%M')}" if Date.today.to_date == timestamp.to_date
+      # "#{timestamp.strftime('%m/%d/%Y')}"
+    # else
+      # return "#{timestamp.strftime('%l:%M %p')}" if Date.today.to_date == timestamp.to_date
+      # "#{timestamp.strftime('%m/%d/%Y')}"
+    # end
+    return "#{timestamp.strftime('%l:%M %p')}" if Date.today.to_date == timestamp.to_date
+    "#{timestamp.strftime('%m/%d/%Y')}"
   end
 
   #
@@ -512,8 +550,31 @@ class Event
     Rails.logger.info(e.backtrace)        
   end
 
-  def self.search(params)
+  def self.build_search_hash(column, operator, value)
+   ["#{column} #{operator}", value] 
+  end
+
+  def self.search(params, pager={})
     @search = {}
+    search = []
+    sql = []
+    params.each do |key, v|
+      column = v['column'].to_sym
+      operator = v['operator'].to_sym
+      value = v['value']
+
+      if column == :protocol
+      else
+        sql.push(build_search_hash(SEARCH[column], OPERATOR[operator], value.to_i))
+      end
+    end
+
+    search.push sql.collect { |x| x.first }.join(" AND ")
+    search.push(sql.collect { |x| x.last }.flatten).flatten!
+
+    p search
+
+
 
     @search.merge!({:sid => params[:sid].to_i}) unless params[:sid].blank?
 
@@ -598,7 +659,7 @@ class Event
       @search.merge!({:"signature.sig_priority" => params[:severity].to_i})
     end
   
-    @search
+    search
 
   rescue NetAddr::ValidationError => e
     {}

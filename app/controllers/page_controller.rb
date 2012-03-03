@@ -53,6 +53,10 @@ class PageController < ApplicationController
   def search
   end
 
+  def search_json
+    render :json => Snorby::Search.json
+  end
+
   def force_cache
     Snorby::Jobs.force_sensor_cache
     render :json => {
