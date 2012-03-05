@@ -1817,6 +1817,10 @@ ul.table div.content li .row .signature{
 	overflow: hidden;
 }
 
+ul.table div.content li .row.sessions .signature{
+	width: 390px;	
+}
+
 ul.table div.content li .row.classified .signature{
 	text-decoration: line-through;
 	color: #aaa;
@@ -1837,6 +1841,15 @@ ul.table div.content li.event.highlight .row div.timestamp{
 	position: absolute;
 	top: 0;
 	right: 0;
+}
+
+ul.table div.content li.event.highlight .row div.session-count{
+	color: #fffeff;
+	text-shadow: #000 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	text-align: center;
 }
 
 ul.table div.content li.event .row div .create-favorite{
@@ -1872,10 +1885,6 @@ ul.table div.content li.currently-over .row{
 	background-color: #fcfed7;	
 }
 
-/*ul.table div.content li .row:hover{
-	background-color: #fcfed7;
-}*/
-
 ul.table li .row div img{
 	vertical-align: middle;
 	margin-top: -5px;
@@ -1896,11 +1905,6 @@ ul.table li .row.geoip div.address{
 ul.table li .row div.address{
 	width: 120px;
 }
-
-
-/*ul.table li .row div div.country_flag{
-	width: 30px !important;	
-}*/
 
 ul.table li .row div div.country_flag{
 	-webkit-border-radius: 5px;
@@ -1957,6 +1961,54 @@ ul.table li .row div.timestamp{
 	text-shadow: #fff 0 1px 0;
 	text-align: right;
 	right: 0;
+	padding-right: 15px;
+}
+
+ul.table li .row.sessions div.session-count{
+	width: 80px;
+	display: block;
+	position: absolute;
+	overflow: hidden;
+	color: #b1b1b1;
+	font-weight: bold;
+	text-decoration: none;
+	font-variant: normal;
+	font-size: 0.9em;
+	text-shadow: #fff 0 1px 0;
+	text-align: center;
+	right: 0;
+}
+
+ul.table li .row.sessions div.session-count span{
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    
+	line-height: 1.4em; !important
+	display: block;
+	background-color: #469dfc;
+	color: #fff;
+	text-shadow: #3172b9 0 1px 0;
+	padding: 3px 5px;
+	position: relative;
+	font-size: 0.9em;
+	text-align: left;
+	overflow: hidden;
+}
+
+ul.table li .row.sessions div.timestamp{
+	width: 100px;
+	display: block;
+	position: absolute;
+	overflow: hidden;
+	color: #b1b1b1;
+	font-weight: bold;
+	text-decoration: none;
+	font-variant: normal;
+	font-size: 0.9em;
+	text-shadow: #fff 0 1px 0;
+	text-align: right;
+	right: 70px;
 	padding-right: 15px;
 }
 

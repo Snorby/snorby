@@ -18,9 +18,13 @@ module DataMapper
       }
 
       if sql
-        puts "SQL"
-        sql += " LIMIT #{options[:limit]} OFFSET #{options[:offset]}"
-        p sql
+        
+        if sql.kind_of?(Array)
+          sql.push([options[:limit], options[:offset]]).flatten!
+        else
+          sql += " LIMIT #{options[:limit]} OFFSET #{options[:offset]}"
+        end
+
         collection = find_by_sql(sql)
       else
         collection = new_collection scoped_query(options.merge(query))

@@ -2,17 +2,19 @@
 	
 	<% classification_css = event.classification.blank? ? nil : "classified" %>
 	
-  <div class='row <%= classification_css %> <%= 'geoip' if geoip? %>'>
-		
+  <div class='row <%= classification_css %> <%= 'geoip' if geoip? %> <%= 'sessions' if @session_view %>'>		
+
 		<div class='select small'><%= check_box_tag 'event-selector', nil, false, :class => "check_box_#{event.id}" %></div>
-		
-		<div class='important small'>
-			<% if event.favorite? %>
-				<div class='destroy-favorite enabled'></div>
-			<% else %>
-				<div class='create-favorite enabled'></div>
-			<% end %>
-		</div>
+
+    <% unless @session_view %>
+      <div class='important small'>
+        <% if event.favorite? %>
+          <div class='destroy-favorite enabled'></div>
+        <% else %>
+          <div class='create-favorite enabled'></div>
+        <% end %>
+      </div>
+    <% end %>
 		
 		<div class='severity small'><span class='severity sev<%= event.signature.severity_id || 0 %>'><%= event.signature.severity_id || 0 %></span></div>
 		<div class='click sensor' title='<%=h event.sensor.sensor_name %>'><%= truncate(event.sensor.sensor_name, :length => 17, :omission => '...') %></div>
@@ -62,6 +64,13 @@
       <b title='Event ID: <%= event.sid %>.<%= event.cid %> &nbsp; <%= display_time(event.timestamp) %>' class='add_tipsy'><%= event.pretty_time %></b>
 			
 		</div>
+
+
+    <% if @session_view %>
+      <div class="click session-count">
+        <span><%= event.number_of_events %></span>
+      </div>
+    <% end %>
 		
 	</div>
 	

@@ -28,6 +28,12 @@ class Event
   
   property :notes_count, Integer, :index => true, :default => 0
 
+  # Fake Column
+  property :number_of_events, Integer, :default => 0
+  #
+  # property :event_id, Integer
+  ###
+
   belongs_to :classification
 
   property :timestamp, DateTime
@@ -82,34 +88,6 @@ class Event
     :user_count => 'event'
   }
 
-  SEARCH = {
-    :signature => :"signature.sig_id",
-    :signature_name => :"signature.sig_name",
-    :source_ip => :"iphdr.ip_src",
-    :destination_ip => :"iphdr.ip_dst",
-    :source_port => :"tcphdr.tcp_sport",
-    :destination_port => :"tcphdr.tcp_dport",
-    :classification => :"event.classification_id",
-    :sensor => :"event.sid",
-    :user => :"event.user_id",
-    :payload => :"payload.data_payload",
-    :start_time => :"event.timestamp",
-    :end_time => :"event.timestamp"
-  }
-
-  OPERATOR = {
-    :is => "= ?",
-    :is_not => "!= ?",
-    :contains => "LIKE ?",
-    :contains_not => 'NOT LIKE ?',
-    :gte => ">= ?",
-    :lte => "<= ?",
-    :lt => "< ?",
-    :gt => "> ?",
-    :in => "IN (?)",
-    :notnull => "NOT NULL ?"
-  }
-
   def self.last_event_timestamp
     event = first(:order => [:timestamp.desc])
     timestamp = event ? event.timestamp : DateTime.now
@@ -138,7 +116,7 @@ class Event
     data
   end
 
-  def self.sorty(params={})
+  def self.sorty(params={}, sql=false)
     sort = params[:sort]
     direction = params[:direction]
 
@@ -171,8 +149,7 @@ class Event
     end
 
     if params.has_key?(:search)
-      #sql = search(params[:search], {})
-      sql = "select * from event"
+      sql = Snorby::Search.build(params[:match_all], params[:search])
 
       page(params[:page], { 
         :per_page => User.current_user.per_page_count.to_i,
@@ -180,7 +157,14 @@ class Event
         :total => Event.count
       }, sql)
     else
-      page(params[:page].to_i, page)
+      
+      if sql
+        page[:total] = 500000
+        page(params[:page].to_i, page, sql)
+      else
+        page(params[:page].to_i, page)
+      end
+
     end
   end
 

@@ -7,12 +7,14 @@
 	<ul class='table'>
 		
 		<li class='header'>
-			<div class='row <%= 'geoip' if geoip? %>'>
+			<div class='row <%= 'geoip' if geoip? %> <%= 'sessions' if @session_view %>'>
         <div class='small'>
           <%= check_box_tag 'event-select-all', nil, false, :class => 'event-select-all' %>
         </div>
-        
-        <div class='small'>&nbsp;</div>
+
+        <% unless @session_view %>
+          <div class='small'>&nbsp;</div>
+        <% end %>
         
         <div class='small'>
           <%= sortable(:sig_priority, 'Sev.')%>
@@ -33,10 +35,16 @@
         <div class='signature'>
           <%= sortable(:sig_name, 'Event Signature')%>
         </div>
-        
+
         <div class='timestamp'>
           <%= sortable(:timestamp, 'Timestamp')%>
         </div>
+
+        <% if @session_view %>
+          <div class='session-count'>
+            <%= sortable(:number_of_events, 'Sessions')%>
+          </div>
+        <% end %>
 
 			</div>
 		</li>

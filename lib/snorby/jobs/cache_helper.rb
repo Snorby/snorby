@@ -190,9 +190,37 @@ module Snorby
         !select(sql).empty?
       end
 
+      def has_aggregated_events_view?
+        sql = %{
+          SELECT *
+          FROM information_schema.views
+          WHERE table_schema = '#{options["database"]}'
+          AND table_name = 'aggregated_events';
+        }
+        !select(sql).empty?
+      end
+
+      def has_event_id_view?
+        sql = %{
+          SELECT *
+          FROM information_schema.views
+          WHERE table_schema = '#{options["database"]}'
+          AND table_name = 'events_with_id';
+        }
+        !select(sql).empty?
+      end
+
       def validate_cache_indexes
         unless has_timestamp_index?
           execute("create index index_timestamp_cid_sid on  event (  timestamp,  cid, sid );")
+        end
+
+        unless has_aggregated_events_view?
+          execute("create view aggregated_events as select ip_src, ip_dst, event.signature, count(*) as number_of_events, max(timestamp) as latest_timestamp, max(cast(unix_timestamp(event.timestamp) << 32 as unsigned) + event.cid) as max_id from event inner join iphdr on event.sid = iphdr.sid and event.cid = iphdr.cid where classification_id is null group by iphdr.ip_src, iphdr.ip_dst, event.signature;")
+        end
+
+        unless has_event_id_view?
+          execute("create view events_with_id as select event.*, cast(unix_timestamp(event.timestamp) << 32 as unsigned) + event.cid as aggregated_event_id from event;")
         end
       end
 

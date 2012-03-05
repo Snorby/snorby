@@ -70,6 +70,7 @@ Snorby::Application.routes.draw do
     end
     
     collection do
+      get :sessions
       get :view
       get :create_mass_action
       post :mass_action

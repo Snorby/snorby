@@ -105,3 +105,4 @@ end
 require "./lib/snorby/jobs/cache_helper"
 include Snorby::Jobs::CacheHelper
 validate_cache_indexes
+

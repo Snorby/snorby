@@ -54,6 +54,7 @@ SearchRule = function() {
       self.sensors_html = Handlebars.templates['select']({
         name: "sensors-select",
         width: width,
+        multiple: false,
         data: self.sensors
       });
 
@@ -162,6 +163,9 @@ SearchRule = function() {
           that.find('.value').html('<input id="time-'+ new Date().getTime() +'" class="search-content-value" placeholder="Enter search value" name="" type="text">');
           self.datetime_picker(that.find('.value input:first'))
           self.operators_html($html, self.operators.datetime);
+        } else if (value === "payload") {
+          that.find('.value').html('<input class="search-content-value" placeholder="Enter search value" name="" type="text">');
+          self.operators_html($html, self.operators.more_text_input);
         } else if (value === "") {
           that.find('.value').html('<input class="search-content-value" placeholder="Enter search value" name="" type="text">');
           self.operators_html($html, self.operators.text_input);
@@ -257,7 +261,7 @@ SearchRule = function() {
           dataType: 'html',
           cache: false,
           type: 'GET',
-          data: { match_all: search.matchAll, search: search.items },
+          data: { match_all: search.match_all, search: search.items },
           success: function(data){
             console.log(data);
             var content = $(data).find('#content');
@@ -271,7 +275,7 @@ SearchRule = function() {
           dataType: 'html',
           cache: false,
           type: 'GET',
-          data: {},
+          data: { search: {}, match_all: false },
           success: function(data){
              console.log(data);
           }

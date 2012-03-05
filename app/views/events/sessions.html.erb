@@ -1,0 +1,9 @@
+<%= title "Listing Event Sessions".html_safe, 'Listing Events' do -%>
+	<%= menu_item "Hotkeys", hotkey_events_path, 'events/keyboard.png', :class => 'snorbybox' %>
+	<%= render :partial => 'events/menu' %>
+<%- end -%>
+
+<%= render :partial => 'events/events' %>
+
+<%= render :partial => 'events/hotkeys' %>
+

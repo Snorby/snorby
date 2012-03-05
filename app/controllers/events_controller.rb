@@ -16,6 +16,25 @@ class EventsController < ApplicationController
     end
   end
 
+  def sessions
+    @session_view = true
+    params[:sort] = sort_column
+    params[:direction] = sort_direction
+
+    @events = Event.sorty(params, %{
+      select e.*, a.number_of_events from aggregated_events a 
+      inner join events_with_id e on a.latest_timestamp = e.timestamp 
+      and a.max_id = e.event_id order by a.latest_timestamp desc
+    })
+
+    @classifications ||= Classification.all
+
+    respond_to do |format|
+      format.html {render :layout => true}
+      format.js
+    end  
+  end
+
   def queue
     params[:sort] = sort_column
     params[:direction] = sort_direction
