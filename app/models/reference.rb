@@ -10,4 +10,16 @@ class Reference
 
   property :ref_tag, Text
 
+  belongs_to :sig_reference, :parent_key => :ref_id, :child_key => [ :ref_id ]
+
+  belongs_to :reference_system, :parent_key => :ref_system_id, :child_key => [ :ref_system_id ]
+
+  def value
+   ref_tag
+  end
+
+  def type
+   reference_system.ref_system_name
+  end
+
 end

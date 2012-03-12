@@ -2,16 +2,18 @@
 
 <div class='signature-table plus'>
 	
-	<table class='ip-header' border='0' cellspacing='0' cellpadding='0'>
+	<table class='default' border='0' cellspacing='0' cellpadding='0'>
 		<tr>
 			<th class='first'>Generator ID</th>
-			<th>Signature ID</th>
-      <th>Signature Revision</th>
+			<th>Sig. ID</th>
+      <th>Sig. Revision</th>
 
       <% total_event_count ||= Event.count %>
-
       <th>Activity (<%= @event.signature.event_percentage(true, total_event_count) %>)</th>
-      <th>&nbsp;</th>
+
+      <th>Category</th>
+
+      <th>Sig Info</th>
 			<th class='last'></th>
 		</tr>
 		<tbody>
@@ -24,6 +26,10 @@
           title="View all '<%= @event.signature.name%>' events."
           data-url="/results?search[signature_name]=<%= @event.signature.name %>">
           <%= css_chart(@event.signature.event_percentage(false, total_event_count)) %>
+        </td>
+
+        <td>
+          <%= @event.signature.category.present? ? @event.signature.category.sig_class_name : 'N/A' %>
         </td>
 
         <td style='width:190px;' class=''>

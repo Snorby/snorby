@@ -67,7 +67,9 @@
 		<% else %>
 			
 		<% end %>
-		
+
+    <%= render :partial => 'events/refs' if @event.signature.sig_references.present? %>
+
 		<% if @event.payload %>
 		
 			<ul class='payload-tabs plus-side'>

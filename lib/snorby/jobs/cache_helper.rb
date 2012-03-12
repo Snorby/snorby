@@ -157,15 +157,15 @@ module Snorby
       #
       # DM Select
       #
-      def select(sql)
-        db_adapter.select(sql)
+      def select(sql, *args)
+        db_adapter.select(sql, *args)
       end
 
       #
       # DM Execute
       #
-      def execute(sql)
-        db_adapter.execute(sql)
+      def execute(sql, *args)
+        db_adapter.execute(sql, *args)
       end
 
       def options

@@ -1,7 +1,9 @@
 module DataMapper
   module Pagination
 
-    def page(page = nil, options = {}, sql=false, count=0)
+    include Snorby::Jobs::CacheHelper
+
+    def page(page = nil, options = {}, sql=false, count=false)
       options, page = page, nil if page.is_a? Hash
       page_param  = pager_option(:page_param, options)
       page ||= pager_option page_param, options
@@ -23,6 +25,14 @@ module DataMapper
           sql.push([options[:limit], options[:offset]]).flatten!
         else
           sql += " LIMIT #{options[:limit]} OFFSET #{options[:offset]}"
+        end
+
+        if count
+          total = if count.kind_of?(Array)
+            select(count.first, *(count.shift; count))
+          else
+            select(count)
+          end.first.to_i
         end
 
         collection = find_by_sql(sql)

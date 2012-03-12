@@ -103,10 +103,12 @@ SearchRule = function() {
 
       self.datetime_picker = function(that) {
         console.log(that)
-        that.AnyTime_picker({ 
-          format: "%Y/%m/%d %H:%i:%s",
-          formatUtcOffset: "%: (%@)",
-          placement: "popup"
+        that.datetimepicker({
+        	timeFormat: 'hh:mm:ss',
+          dateFormat: 'yy-mm-dd',
+          numberOfMonths: 1,
+          showSecond: true,
+	        separator: ' '
         });
       };
 
@@ -137,8 +139,6 @@ SearchRule = function() {
       .change(function(event) {
         var value = $(this).val();
         var that = $(this).parents('.search-content-box');
-
-        AnyTime.noPicker(that.find('.value input'));
 
         if (value === "signature") {
           that.find('.value').html(self.signatures_html);

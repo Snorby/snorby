@@ -85,7 +85,8 @@ class Event
     :ip_dst => 'ip',
     :sig_name => 'signature',
     :timestamp => 'event',
-    :user_count => 'event'
+    :user_count => 'event',
+    :number_of_events => 'event'
   }
 
   def self.last_event_timestamp
@@ -116,7 +117,7 @@ class Event
     data
   end
 
-  def self.sorty(params={}, sql=false)
+  def self.sorty(params={}, sql=false, count=false)
     sort = params[:sort]
     direction = params[:direction]
 
@@ -124,44 +125,46 @@ class Event
       :per_page => User.current_user.per_page_count
     }
 
-    if SORT[sort].downcase == 'event'
-      page.merge!(:order => sort.send(direction))
-    else
-      page.merge!(
-        :order => [Event.send(SORT[sort].to_sym).send(sort).send(direction), 
-                   :timestamp.send(direction)],
-        :links => [Event.relationships[SORT[sort].to_s].inverse]
-      )
-    end
-
-    unless params.has_key?(:classification_all)
-      page.merge!(:classification_id => nil)
-    end
-
-    if params.has_key?(:user_events)
-      relationship = Event.relationships['user'].inverse
-
-      if page.has_key?(:links)
-        page[:links].push(relationship)
-      else
-        page[:links] = [relationship]
-      end
-    end
-
     if params.has_key?(:search)
-      sql = Snorby::Search.build(params[:match_all], params[:search])
+      sql, count = Snorby::Search.build(params[:match_all], true, params[:search])
 
       page(params[:page], { 
         :per_page => User.current_user.per_page_count.to_i,
         :order => :timestamp.desc,
         :total => Event.count
-      }, sql)
+      }, sql, count)
     else
-      
+
       if sql
-        page[:total] = 500000
-        page(params[:page].to_i, page, sql)
+        
+        page(params[:page].to_i, page, sql, count)
+
       else
+
+        if SORT[sort].downcase == 'event'
+          page.merge!(:order => sort.send(direction))
+        else
+          page.merge!(
+            :order => [Event.send(SORT[sort].to_sym).send(sort).send(direction), 
+                       :timestamp.send(direction)],
+            :links => [Event.relationships[SORT[sort].to_s].inverse]
+          )
+        end
+
+        unless params.has_key?(:classification_all)
+          page.merge!(:classification_id => nil)
+        end
+
+        if params.has_key?(:user_events)
+          relationship = Event.relationships['user'].inverse
+
+          if page.has_key?(:links)
+            page[:links].push(relationship)
+          else
+            page[:links] = [relationship]
+          end
+        end
+
         page(params[:page].to_i, page)
       end
 

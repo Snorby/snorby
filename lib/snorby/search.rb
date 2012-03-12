@@ -229,7 +229,7 @@ module Snorby
       all
     end
 
-    def self.build(matchall, params=EXAMPLE)
+    def self.build(matchall, page=true, params=EXAMPLE)
       self.joins.each do |x|
         instance_variable_set("@" + x.to_s, [])
         instance_variable_set("@" + x.to_s + "_value", [])
@@ -244,10 +244,10 @@ module Snorby
       @params = params
       
       self.build_logic
-      self.perform
+      self.perform(page)
     end
 
-    def self.perform
+    def self.perform(page)
       sql = []
       values = []
 
@@ -298,10 +298,20 @@ module Snorby
       end
 
       total_sql = []
-      total_sql.push(pack.call(sql.join(sql_join_string)) + " LIMIT ? OFFSET ?")
-      total_sql.push(values.flatten).flatten!
 
-      total_sql
+      count = ["select count(*) from (#{pack.call(sql.join(sql_join_string))}) a"]
+
+      dd = if page
+             pack.call(sql.join(sql_join_string)) + " LIMIT ? OFFSET ?"
+           else
+             pack.call(sql.join(sql_join_string))
+           end
+
+      total_sql.push(dd)
+      total_sql.push(values.flatten).flatten!
+      count.push(values.flatten).flatten!
+
+      [total_sql, count]
     end
 
     def self.build_logic
@@ -457,12 +467,12 @@ module Snorby
             :value => "Payload",
             :id => :payload,
             :type => :text_input
-          },
-          {
-            :value => "Protocol",
-            :id => :protocol,
-            :type => :select
           }
+          # {
+            # :value => "Protocol",
+            # :id => :protocol,
+            # :type => :select
+          # }
         ],
         :protocol => {
           :value => [

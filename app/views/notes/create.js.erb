@@ -1,4 +1,4 @@
-$('div#notes_<%= @event.id %>').prepend("<%= escape_javascript(render(:partial => @note)) %>");
+$('div#notes_<%= @event.id %>').find('#new_note').before("<%= escape_javascript(render(:partial => @note)) %>");
 
 update_note_count('<%= @event.html_id %>', {notes_count_in_words: "This event has <%= pluralize(@event.notes_count, 'note') %>", notes_count: <%= @event.notes_count %>});
 

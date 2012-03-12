@@ -21,11 +21,26 @@ class EventsController < ApplicationController
     params[:sort] = sort_column
     params[:direction] = sort_direction
 
-    @events = Event.sorty(params, %{
-      select e.*, a.number_of_events from aggregated_events a 
-      inner join events_with_id e on a.latest_timestamp = e.timestamp 
-      and a.max_id = e.event_id order by a.latest_timestamp desc
-    })
+    sql = %{
+      select e.sid, e.cid, e.signature, 
+      e.classification_id, e.users_count, 
+      e.notes_count, e.timestamp, e.user_id, 
+      a.number_of_events from aggregated_events a
+      inner join event e on a.event_id = e.id
+    }
+    
+    sort = if [:sid,:signature,:timestamp].include?(params[:sort])
+      "e.#{params[:sort]}"
+    elsif params[:sort] == :sig_priority
+      sql += "inner join signature s on e.signature = s.sig_sid "
+      "s.#{params[:sort]}"
+    else
+      "a.#{params[:sort]}"
+    end
+
+    sql += "order by #{sort} #{params[:direction]} limit ? offset ?"
+
+    @events = Event.sorty(params, [sql], "select count(*) from aggregated_events;")
 
     @classifications ||= Classification.all
 
@@ -233,13 +248,17 @@ class EventsController < ApplicationController
   private
 
   def sort_column
-    return :timestamp unless params.has_key?(:sort)
-    return params[:sort].to_sym if Event::SORT.has_key?(params[:sort].to_sym)
+
+    if params.has_key?(:sort)
+      return params[:sort].to_sym if Event::SORT.has_key?(params[:sort].to_sym) or [:signature].include?(params[:sort].to_sym)
+    end
+
     :timestamp
   end
   
   def sort_direction
-    %w[asc desc].include?(params[:direction].to_s) ? params[:direction].to_sym : :desc
+    return :desc if params[:direction] == "asc"
+    :asc
   end
 
 end

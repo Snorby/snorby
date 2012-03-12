@@ -1,4 +1,4 @@
-$('div#notes_<%= @event.id %>').prepend("<%= escape_javascript(render(:partial => 'notes/add_note')) %>");
+$('div#notes_<%= @event.id %>').find('#new_note').before("<%= escape_javascript(render(:partial => 'notes/add_note')) %>");
 
 $('button.add_new_note-working').removeClass('add_new_note-working').addClass('add_new_note');
 

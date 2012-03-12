@@ -33,7 +33,7 @@
         </div>
         
         <div class='signature'>
-          <%= sortable(:sig_name, 'Event Signature')%>
+          <%= sortable((@session_view ? :signature : :sig_name), 'Event Signature')%>
         </div>
 
         <div class='timestamp'>

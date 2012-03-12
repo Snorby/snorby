@@ -10,4 +10,6 @@ class SigReference
   
   property :ref_id, Integer
 
+  has 1, :reference, :parent_key => :ref_id, :child_key => [ :ref_id ]
+
 end
