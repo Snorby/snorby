@@ -68,7 +68,7 @@
 
     <% if @session_view %>
       <div class="click session-count">
-        <span><%= event.number_of_events %></span>
+        <span><%= number_with_delimiter event.number_of_events %></span>
       </div>
     <% end %>
 		

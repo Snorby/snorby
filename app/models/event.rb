@@ -7,6 +7,11 @@ class Event
   include DataMapper::Resource
   include Snorby::Model::Counter
 
+  #
+  # Cache Helpers
+  #
+  include Snorby::Jobs::CacheHelper
+
   # Included for the truncate helper method.
   extend ActionView::Helpers::TextHelper
 
@@ -258,6 +263,64 @@ class Event
   def self.between_time(start_time, end_time)
     all(:timestamp.gte => start_time, :timestamp.lt => end_time, 
         :order => [:timestamp.desc])
+  end
+
+  def self.get_collection_id_string(q)
+    sql = q.first
+    count = q.last
+
+    sql.push(999999999, 0)
+    [db_select(sql.first, *(sql.shift; sql)).map {|x| "#{x.sid}-#{x.cid}" }.join(','), db_select(count.first, *(count.shift; count)).first.to_i]
+  end
+
+  def self.update_classification(ids, classification, user_id=nil)
+
+    @classification = Classification.find(classification.to_i)
+
+    uid = if user_id
+      user_id
+    else
+      User.current_user.id
+    end
+
+    if @classification
+      update = "UPDATE `event` SET `classification_id` = #{@classification.id}, `user_id` = #{uid} WHERE "
+      events = []
+
+      process = lambda do |e|
+        event_data = e.split(',');
+
+        event_data.each_with_index do |e, index|
+          event = e.split('-')
+          events.push("(`sid` = #{event.first.to_i} and `cid` = #{event.last.to_i})")
+
+          if ((index + 1) % 10000) == 0
+            tmp = update
+            tmp += events.join(" OR ")
+            tmp += ";"
+            db_execute(tmp)
+            events = []
+          end
+        end
+
+        unless events.empty?
+          tmp = update
+          tmp += events.join(" OR ")
+          tmp += ";"
+          db_execute(tmp)
+          events = []
+        end
+
+        db_execute("update classifications set events_count = (select count(*) from event where event.`classification_id` = classifications.id);")
+      end
+
+      if ids.is_a?(Array)
+        process.call(ids.first)
+      else
+        process.call(ids)
+      end
+    end
+    
   end
 
   def self.find_by_ids(ids)

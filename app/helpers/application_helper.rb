@@ -1,12 +1,16 @@
 module ApplicationHelper
 
-  def display_time(time)
+  def display_time(time, short=false)
     # if Setting.utc?
       # time.utc.strftime('%A, %b %d, %Y at %H:%M:%S %::z')
     # else
       # time.strftime('%A, %b %d, %Y at %l:%M:%S %p')
     # end
-    time.strftime('%A, %b %d, %Y at %l:%M:%S %p')
+
+    time_string = '%A, %b %d, %Y at %l:%M:%S %p'
+    time_string = '%a, %b %d, %y at %I:%M:%S %p' if short
+
+    time.strftime(time_string)
   end
 
   def geoip?
@@ -257,5 +261,24 @@ module ApplicationHelper
 
     html.html_safe
   end
-  
+ 
+  #
+  # Ref Render
+  #
+  def pretty_reference(ref)
+    value = ref.value
+
+    result = case ref.type.to_sym
+    when :"N/A"
+      value
+    when :url
+      #link_to value, value
+      value
+    else
+      value
+    end
+
+    result
+  end
+
 end

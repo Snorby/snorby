@@ -46,7 +46,17 @@ namespace :snorby do
     # Restart Worker
     Rake::Task['snorby:restart_worker'].invoke
   end
-  
+
+  desc 'Update Snorby DB'
+  task :dbupdate => :environment do
+
+    # Setup the snorby database
+    Rake::Task['db:autoupgrade'].invoke
+    
+    # Load Default Records
+    Rake::Task['db:seed'].invoke
+  end
+
   desc 'Remove Old CSS/JS packages and re-bundle'
   task :refresh => :environment do
     `jammit`

@@ -1,0 +1,144 @@
+<%= stylesheet 'jquery' %>
+<%= javascript :header, 'daterangepicker' %>
+
+<%= title "Saved Searches" -%>
+
+<div id="searches" class='grid_12 page boxit'>
+
+<% if @searches.blank? %>
+
+  <div class="note no-click">
+    You don't currently have any saved searches. You can add them from the <%= link_to "advanced search", search_path %> builder.
+  </div>
+
+<% else %>
+	<table class='default' border="0" cellspacing="0" cellpadding="0">
+		<tr>		
+      <th>Public</th>
+			<th>Title</th>
+      <th>Author</th>
+      <th>Created At</th>
+			<th>Edit</th>
+			<th>Destroy</th>
+		</tr>
+		<tbody class='searches'>
+			<%= render @searches %>
+		</tbody>
+	</table>
+
+	<%= pager(@searches, '/saved/searches') %>
+<% end %>
+	
+</div>
+
+
+<script type="text/javascript" charset="utf-8">
+
+  $(function() {
+
+   var rule = new SearchRule(<%= Snorby::Search.json %>);
+
+$('.search-content-add').live('click', function(e) {
+    e.preventDefault();
+    rule.add(this);
+});
+$('.search-content-remove').live('click', function(e) {
+    e.preventDefault();
+    rule.remove(this);
+});
+
+$('div.search-content-enable input').live('click', function() {
+    if ($(this).is(':checked')) {
+      $(this)
+      .parents('.search-content-box')
+      .find('.value *, .operator-select *, .column-select *')
+      .attr('disabled', false).css('opacity', 1);
+    } else {
+      $(this)
+      .parents('.search-content-box')
+      .find('.value *, .operator-select *, .column-select *')
+      .attr('disabled', true).css('opacity', 0.8);
+    };
+});
+
+$('button.submit-search').live('click', function(e) {
+  e.preventDefault();
+  rule.submit();
+});
+
+  $('#content #title').on('click', 'a.reset-search-form', function(e) {
+    e.preventDefault();
+
+    $('.rules').empty();
+
+    rule.add();
+    rule.add();
+    rule.add();
+  });
+
+
+    $('.saved-search-edit').live('click', function(e) {
+      e.preventDefault();
+      
+      $(this).buttonLoading();
+
+      $.getJSON(this.href, function(data) {
+        console.log(data)
+        if (data) {
+          $('#searches').hide();
+          rule.searchUI({
+            cssClass: "update-saved-search",
+            buttonTitle: "Update & Run"
+          }, function() {
+            rule.build(data.search);
+
+            $('#title-header').replaceWith('<div class="edit edit-search-title" id="title-header">'+data.title+'</div><span>(click to edit)</span>')
+
+            $('.edit-search-title').editable("/saved/searches/title", {
+              height: '20px', 
+              method: 'POST',
+              width: '180px',
+              name: "title",
+              indicator: '<img src="/images/icons/pager.gif">',
+              data: function(value) {
+                var retval = value.replace(/<br[\s\/]?>/gi, '\n');
+                return retval;
+              },
+              submitdata : function() {
+                return { id: data.id, authenticity_token: csrf };
+              }
+            });
+
+            $('#form-actions').append('<button class="warning cancel default"><span class="sub-title">Cancel</span></button>');
+
+            $('button.update-saved-search').click(function(e) {
+              e.preventDefault();
+
+              rule.submit(function(ss) {
+                $.ajax({
+                  url: '/saved/searches/update',
+                  data: {
+                  id: data.id, 
+                  authenticity_token: csrf,
+                  search: {
+                    match_all: ss.match_all,
+                    search: ss.items
+                  }},
+                  dataType: "POST",
+                  global: false,
+                  cache: false,
+                  success: function(d) {
+                    console.log(d)
+                }});  
+              });
+            });
+          });
+
+          $(this).removeClass('loading').text('Edit');
+        };
+      });
+    });
+
+  });
+
+</script>

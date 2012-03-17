@@ -29,9 +29,9 @@ module DataMapper
 
         if count
           total = if count.kind_of?(Array)
-            select(count.first, *(count.shift; count))
+            db_select(count.first, *(count.shift; count))
           else
-            select(count)
+            db_select(count)
           end.first.to_i
         end
 

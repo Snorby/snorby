@@ -1,4 +1,4 @@
-<div class='section-title plus'>Event References</div>
+<div class='section-title plus'>References</div>
 
 <div class='references-table plus'>
 	
@@ -10,10 +10,13 @@
     <tbody>
       <% @event.signature.sig_references.each do |ref| %>
         <tr>
-          <td class='first'><%= ref.reference.type %></td>
+          
+          <td>
+            <%= ref.reference.type %>
+          </td>
 
-          <td style='' class='last'>
-            <%= ref.reference.value %> 
+          <td>
+            <%= pretty_reference(ref.reference) %> 
           </td>
 
         </tr>

@@ -79,12 +79,28 @@ class PageController < ApplicationController
   end
 
   def results    
-    params[:sort] = sort_column
-    params[:direction] = sort_direction
-    params[:classification_all] = true
+    if params.has_key?(:search)
 
-    @events = Event.sorty(params)
-    @classifications ||= Classification.all
+      if params[:search].is_a?(String)
+        value = JSON.parse(params[:search])
+        params[:search] = value
+      end
+
+      params[:sort] = sort_column
+      params[:direction] = sort_direction
+      
+      params[:classification_all] = true
+    
+      @search = (params.has_key?(:authenticity_token) ? true : false)
+
+      @params = params.to_json
+
+      @events = Event.sorty(params)
+
+      @classifications ||= Classification.all
+    else
+      redirect_to search_path
+    end
   end
 
   private

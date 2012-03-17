@@ -457,7 +457,6 @@ a {
 /* @group Snorby-Box */
 
 #snorby-box{
-	border: 10px solid rgba(36,36,36,0.9);
 	display: block;
 	position: relative;
 	overflow: visible;
@@ -469,7 +468,6 @@ a {
 	position: relative;
 	padding: 10px;
 	height: 500px;
-	width: 750px;
 	background-color: #fff;
 }
 
@@ -479,12 +477,15 @@ a {
 	position: relative;
 	padding: 10px;
 	height: auto;
-	width: 750px;
 	background-color: #fff;
 }
 
+#snorby-box #box-content,
+#snorby-box #box-content-small{
+	border-top: 1px solid #000;
+}
+
 #snorby-box #box-title{
-	cursor: move;
 	padding: 17px 10px;
 	color: #fff;
 	font-weight: normal;
@@ -1003,6 +1004,19 @@ dl#admin-menu dd a{
 	font-size: 1.1em;
 }
 
+#wrapper #content div.note a{
+	cursor: pointer;
+	color: #c04e4a;
+	font-variant: normal;
+	text-decoration: none;
+}
+
+#wrapper #content div.note.no-click{
+	cursor: default;
+	margin-bottom: 0;
+	margin-top: 15px;
+}
+
 #wrapper #content div.note.lookups{
 	cursor: default;
 	display: block;
@@ -1028,6 +1042,23 @@ dl#admin-menu dd a{
 	background: -webkit-gradient(linear,0% 0,0% 100%,from(#fff),to(#ededed));
 	background: -moz-linear-gradient(-90deg,#fff,#ededed);
 	border-bottom: 1px solid #d5d5d5;
+}
+
+#wrapper #content #title #title-header.edit{
+	float: left;
+	position: relative;
+	display: block;
+	overflow: visible;
+	padding-left: 10px;
+}
+
+#wrapper #content #title span.sub-title{
+	height: 35px;
+	line-height: 35px;
+	float: left;
+	margin-left: 5px;
+	color: #a5a5a5;
+	font-style: italic;
 }
 
 #wrapper #content #title .title-search-box {
@@ -1581,6 +1612,19 @@ table.default td a{
 	border: 1px solid #9a9a9b;
 }
 
+table.default td a.loading{
+	background: url(../images/icons/pager.gif) no-repeat center center;
+	text-indent: -9999px;
+	position: relative;
+	display: block;
+	margin: 0;
+	padding: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	top: 4px;
+}
+
 table.default td a.ip-button{
 	height: 15px;
 	line-height: 17px;
@@ -1707,6 +1751,11 @@ table.default td{
 	border-bottom: 1px solid #cdcdcd;
 	color: #474747;
 	background: #fff url(../images/page/table-bg.png) repeat-x 0 bottom;
+	overflow: visible;
+}
+
+table.default td img.locked{
+	padding-left: 8px;
 }
 
 table.default td.severity{
@@ -1715,6 +1764,18 @@ table.default td.severity{
 
 table.default td.first{
 	border-left: 1px solid #cdcdcd;
+}
+
+table.default td.first input{
+	position: relative;
+	display: block;
+	overflow: visible;
+	top: 6px;
+	left: 2px;
+}
+
+table.default td.click{
+	cursor: pointer;
 }
 
 table.default tbody.top tr:first-child td{
@@ -2111,11 +2172,13 @@ ul.table div.content div.event-data table th.last{
     -webkit-border-top-right-radius: 4px;
 }
 
+div.references-table table tbody tr:last-child td:first-child,
 ul.table div.content div.event-data table td.first{
     -moz-border-radius-bottomleft: 4px;
     -webkit-border-bottom-left-radius: 4px;
 }
 
+div.references-table table tbody tr:last-child td:last-child,
 ul.table div.content div.event-data table td.last{
     -moz-border-radius-bottomright: 4px;
     -webkit-border-bottom-right-radius: 4px;
@@ -4281,14 +4344,14 @@ div.search-port-break{
 
 #snorbybox-content form{
 	display: block;
-	overflow: hidden;
+	overflow: visible;
 	position: relative;	
 }
 
 #snorbybox-content #snorbybox-form-holder{
 	display: block;
 	position: relative;
-	overflow: hidden;
+	overflow: visible;
 }
 
 #snorbybox-content #snorbybox-form-holder #snorbybox-form{
@@ -4296,7 +4359,7 @@ div.search-port-break{
 	float: left;
 	display: block;
 	position: relative;
-	overflow: hidden;
+	overflow: visible;
 	margin-bottom: 10px;
 }
 

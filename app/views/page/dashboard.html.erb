@@ -104,8 +104,9 @@
 		
 		<ul class='box-list'>
 			<% @sensors.each do |sensor| %>
+
 			<li><%= link_to truncate(sensor.sensor_name, :length => 30), results_path(:title => "#{sensor.sensor_name}", 
-              :search => { :sid => sensor.sid }), :title => sensor.sensor_name %> 
+        "match_all"=>"true", "search"=>{"sensor"=>{"column"=>"sensor", "operator"=>"is", "value"=> sensor.sid } }), :title => sensor.sensor_name %> 
 
         <span>
           <%= number_with_delimiter (sensor.events_count.zero? ? Event.count(:sid => sensor.sid) : sensor.events_count) %>
@@ -136,7 +137,7 @@
 			<% @recent_events.each do |event| %>
         <li>
           <%= link_to truncate(event.signature.name, :length => 25), results_path(:title => "#{truncate(event.signature.name, :length => 40)}", 
-                :search => {:signature_name => "#{event.signature.name}"}), :title => event.signature.name %> 
+                "match_all"=>"true", "search"=>{"sensor"=>{"column"=>"signature", "operator"=>"is", "value"=> event.signature.sig_id } }), :title => event.signature.name %> 
           <span>
             <%= number_with_delimiter (event.signature.events_count.zero? ? Event.count(:sig_id => event.signature.sig_id) : event.signature.events_count) %>
           </span>
@@ -151,8 +152,11 @@
 		<ul class='box-list'>
 			<% @classifications.each do |classification| %>
 			
-			<li><%= link_to truncate(classification.name, :length => 25), results_path(:title => "#{classification.name}", 
-			:search => {:classification_id => "#{classification.id}"}), :title => classification.name %> <span><%= number_with_delimiter classification.events_count %></span></li>
+        <li>
+          <%= link_to truncate(classification.name, :length => 25), results_path(:title => "#{classification.name}", 
+          "match_all"=>"true", "search"=>{"sensor"=>{"column"=>"classification", "operator"=>"is", "value"=> classification.id } }), :title => classification.name %> 
+          <span><%= number_with_delimiter classification.events_count %></span>
+      </li>
 			<% end %>
 		</ul>
 	

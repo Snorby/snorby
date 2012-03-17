@@ -4,10 +4,13 @@
 <% content_for :footer do %>
 
   <script type="text/javascript">
+
     var rule = new SearchRule(<%= Snorby::Search.json %>);
-    rule.add();
-    rule.add();
-    rule.add();
+    rule.searchUI({
+      cssClass: "submit-search",
+      buttonTitle: "Submit Search"
+    });
+    rule.add();rule.add();rule.add();
 
 $('.search-content-add').live('click', function(e) {
     e.preventDefault();
@@ -37,6 +40,16 @@ $('button.submit-search').live('click', function(e) {
   rule.submit();
 });
 
+  $('#content #title').on('click', 'a.reset-search-form', function(e) {
+    e.preventDefault();
+
+    $('.rules').empty();
+
+    rule.add();
+    rule.add();
+    rule.add();
+  });
+
 	</script>
 
 <% end %>
@@ -45,42 +58,13 @@ $('button.submit-search').live('click', function(e) {
 
 	<%= drop_down_for('More Options', 'icons/filter.png', 'options') do %>
 
-    <%= drop_down_item "View Saved Searches", '#', nil, {} %>
+    <%= drop_down_item "Save Current Search", new_saved_search_path, nil, { :class => "snorbybox" } %>
 
-    <%= drop_down_item "Save Current Search", '#', nil, {} %>
+    <%= drop_down_item "View Saved Searches", saved_searches_path, nil %>
+
+    <%= drop_down_item "Reset Search Form", '#', nil, {:class => 'reset-search-form'} %>
 
 	<% end %>
 
 <% end %>
 
-<div id='search' class='boxit page grid_12'>
-
-  <div class="search-match-box" style='display:;'>
-    Match 
-    <select class='global-match-setting'>
-      <option value='any'>Any</option>
-      <option value='all'>All</option>
-    </select> 
-    of the following rules: 
-  </div>
-
-  <div class="rules"></div>
-
-
-  <div class="other-search-options" style='display:none;'>
-    <input name="limit-all-search-rules" type="checkbox"/> 
-    Limit to
-    <input class="limit-search-results-count" name="limit-search-results-to" type="text" value='10000'/> 
-    ordered by
-    <select><option value='any'>Event Timestamp</option><option value='all'>All</option></select>
-    <br />
-    <input name="ignore-classified-events" type="checkbox"/> Ignore all classified events.
-  </div>
-
-  <%= form_actions do %>
-
-    <%= button "Submit Search", :class => 'submit-search success' %>
-
-  <% end %>
-
-</div>

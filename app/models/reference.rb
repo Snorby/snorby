@@ -15,11 +15,11 @@ class Reference
   belongs_to :reference_system, :parent_key => :ref_system_id, :child_key => [ :ref_system_id ]
 
   def value
-   ref_tag
+    ref_tag
   end
 
   def type
-   reference_system.ref_system_name
+   reference_system.present? ? reference_system.ref_system_name : 'N/A'
   end
 
 end

@@ -18,6 +18,7 @@ class EventsController < ApplicationController
 
   def sessions
     @session_view = true
+
     params[:sort] = sort_column
     params[:direction] = sort_direction
 
@@ -32,7 +33,7 @@ class EventsController < ApplicationController
     sort = if [:sid,:signature,:timestamp].include?(params[:sort])
       "e.#{params[:sort]}"
     elsif params[:sort] == :sig_priority
-      sql += "inner join signature s on e.signature = s.sig_sid "
+      sql += "inner join signature s on e.signature = s.sig_id "
       "s.#{params[:sort]}"
     else
       "a.#{params[:sort]}"
@@ -136,25 +137,64 @@ class EventsController < ApplicationController
 
     if params.has_key?(:sensor_ids)
       if params[:sensor_ids].is_a?(Array)
-        options.merge!({:sid => params[:sensor_ids].map(&:to_i)})
+
+        params[:sensor_ids].each do |id|
+          options.merge!({
+            :"#{id}" => {
+              :column => :sid,
+              :operator => :is,
+              :value => id.to_i,
+              :enabled => true
+            }
+          })
+        end
       end
     end
 
-    options.merge!({:sig_id => params[:sig_id].to_i}) if params[:use_sig_id]
+    if params[:use_sig_id]
+      options.merge!({
+        :"sigid" => {
+          :column => :signature,
+          :operator => :is,
+          :value => params[:sig_id].to_i,
+          :enabled => true
+        }
+      })
+    end
     
-    options.merge!({
-      :"ip.ip_src" => IPAddr.new(params[:ip_src].to_i,Socket::AF_INET)
-    }) if params[:use_ip_src]
-    
-    options.merge!({
-      :"ip.ip_dst" => IPAddr.new(params[:ip_dst].to_i,Socket::AF_INET)
-    }) if params[:use_ip_dst]
+    if params[:use_ip_src]
+      options.merge!({
+        :"use_ip_src" => {
+          :column => :source_ip,
+          :operator => :is,
+          :value => IPAddr.new(params[:ip_src].to_i,Socket::AF_INET),
+          :enabled => true
+        }
+      })
+    end
+
+    if params[:use_ip_dst]
+      options.merge!({
+        :"use_ip_dst" => {
+          :column => :destination_ip,
+          :operator => :is,
+          :value => IPAddr.new(params[:ip_dst].to_i,Socket::AF_INET),
+          :enabled => true
+        }
+      })
+    end
 
     if options.empty?
       render :js => "flash_message.push({type: 'error', message: 'Sorry," +
         " Insufficient classification parameters submitted...'});flash();"
     else
-      Delayed::Job.enqueue(Snorby::Jobs::MassClassification.new(params[:classification_id], options, User.current_user.id, reclassify))
+
+      sql = Snorby::Search.build("true", true, options)
+      ids = Event.get_collection_id_string(sql)
+
+      Event.update_classification(ids, params[:classification_id], User.current_user.id) #unless ids.blank?
+
+      #Delayed::Job.enqueue(Snorby::Jobs::MassClassification.new(params[:classification_id], options, User.current_user.id, reclassify))
       respond_to do |format|
         format.html { render :layout => false }
         format.js
@@ -179,9 +219,9 @@ class EventsController < ApplicationController
   end
 
   def classify
-    @events = Event.find_by_ids(params[:events])
-    Event.classify_from_collection(@events, 
-    params[:classification].to_i, User.current_user.id, true)
+    if params[:events]
+      Event.update_classification(params[:events], params[:classification].to_i, User.current_user.id)
+    end
 
     render :layout => false, :status => 200
   end
@@ -253,12 +293,16 @@ class EventsController < ApplicationController
       return params[:sort].to_sym if Event::SORT.has_key?(params[:sort].to_sym) or [:signature].include?(params[:sort].to_sym)
     end
 
-    :timestamp
+    if @session_view
+      :number_of_events
+    else
+      :timestamp
+    end
   end
   
   def sort_direction
-    return :desc if params[:direction] == "asc"
-    :asc
+    return :asc if params[:direction] == "asc"
+    :desc
   end
 
 end

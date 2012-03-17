@@ -20,8 +20,112 @@ var selected_events = [];
 var flash_message = [];
 var csrf = $('meta[name="csrf-token"]').attr('content');
 
-var SearchRule;
 
+$.fn.buttonLoading = function() {
+  var width = $(this).outerWidth(true) - 2;
+  var height = $(this).outerHeight(false) - 2;
+
+  $(this).addClass('loading').css({
+    width: width,
+    height: height
+  });
+};
+
+$.deparam = jq_deparam = function( params, coerce ) {
+  var obj = {};
+  var coerce_types = { 'true': !0, 'false': !1, 'null': null };
+  
+  $.each( params.replace( /\+/g, ' ' ).split( '&' ), function(j,v){
+    var param = v.split( '=' ),
+      key = decodeURIComponent( param[0] ),
+      val,
+      cur = obj,
+      i = 0,
+      
+      keys = key.split( '][' ),
+      keys_last = keys.length - 1;
+    
+    if ( /\[/.test( keys[0] ) && /\]$/.test( keys[ keys_last ] ) ) {
+      keys[ keys_last ] = keys[ keys_last ].replace( /\]$/, '' );
+      
+      keys = keys.shift().split('[').concat( keys );
+      
+      keys_last = keys.length - 1;
+    } else {
+      keys_last = 0;
+    }
+    
+    if ( param.length === 2 ) {
+      val = decodeURIComponent( param[1] );
+      
+      if ( coerce ) {
+        val = val && !isNaN(val)            ? +val              // number
+          : val === 'undefined'             ? undefined         // undefined
+          : coerce_types[val] !== undefined ? coerce_types[val] // true, false, null
+          : val;                                                // string
+      }
+      
+      if ( keys_last ) {
+        for ( ; i <= keys_last; i++ ) {
+          key = keys[i] === '' ? cur.length : keys[i];
+          cur = cur[key] = i < keys_last
+            ? cur[key] || ( keys[i+1] && isNaN( keys[i+1] ) ? {} : [] )
+            : val;
+        }
+        
+      } else {
+        
+        if ( $.isArray( obj[key] ) ) {
+          obj[key].push( val );
+          
+        } else if ( obj[key] !== undefined ) {
+          obj[key] = [ obj[key], val ];
+          
+        } else {
+          obj[key] = val;
+        }
+      }
+      
+    } else if ( key ) {
+      obj[key] = coerce
+        ? undefined
+        : '';
+    }
+  });
+  
+  return obj;
+};
+
+function post_to_url(path, params, method) {
+  method = method || "post";
+
+  var form = document.createElement("form");
+  form.setAttribute("method", method);
+  form.setAttribute("action", path);
+
+  for(var key in params) {
+    if (params.hasOwnProperty(key)) {
+      var hiddenField = document.createElement("input");
+      hiddenField.setAttribute("type", "hidden");
+      hiddenField.setAttribute("name", key);
+
+      var value = params[key];
+      if (typeof value === "object") {
+        hiddenField.setAttribute("value", JSON.stringify(value));
+      } else if (typeof value === "string") {
+        hiddenField.setAttribute("value", value);
+      } else if (typeof value === "boolean") {
+        hiddenField.setAttribute("value", value);
+      };
+
+      form.appendChild(hiddenField);
+    };
+  };
+
+  form.submit();
+};
+
+var SearchRule;
 SearchRule = function() {
   
   function SearchRule(selectData, callback) {
@@ -31,11 +135,12 @@ SearchRule = function() {
     self.operators = selectData.operators;
 
     self.selectData = selectData;
-    
+
     self.classifications = selectData.classifications;
     self.sensors = selectData.sensors;
     self.users = selectData.users;
     self.signatures = selectData.signatures;
+    self.severities = selectData.severities;
     self.protocol = selectData.protocol;
 
     self.init();
@@ -43,10 +148,7 @@ SearchRule = function() {
   };
 
   SearchRule.prototype = {
-  
-    //
-    // Init - Load Data
-    //
+
     init: function(callback) {
       var self = this;
       var width = "368px";
@@ -62,6 +164,12 @@ SearchRule = function() {
         name: "classifications-select",
         width: width,
         data: self.classifications
+      });
+
+      self.severity_html = Handlebars.templates['select']({
+        name: "severities-select",
+        width: width,
+        data: self.severities
       });
 
       self.signatures_html = Handlebars.templates['select']({
@@ -102,7 +210,6 @@ SearchRule = function() {
       };
 
       self.datetime_picker = function(that) {
-        console.log(that)
         that.datetimepicker({
         	timeFormat: 'hh:mm:ss',
           dateFormat: 'yy-mm-dd',
@@ -114,10 +221,15 @@ SearchRule = function() {
 
     },
 
-    //
-    // Add
-    //
-    add: function(that, newOptions) {
+    searchUI: function(data, callback) {
+      var self = this;
+      $('#content #title').after(Handlebars.templates['search'](data));
+      if (callback && (typeof callback === "function")) {
+        callback();
+      };
+    },
+
+    add: function(that, newOptions, callback) {
       var self = this;
       var options = {};
       
@@ -136,13 +248,16 @@ SearchRule = function() {
 
       $html.find('.add_chosen')
       .chosen({allow_single_deselect: true})
-      .change(function(event) {
+      .change(function(event, data) {
         var value = $(this).val();
         var that = $(this).parents('.search-content-box');
 
         if (value === "signature") {
           that.find('.value').html(self.signatures_html);
           self.operators_html($html, self.operators.text_input);
+        } else if (value === "signature_name") {
+          that.find('.value').html('<input class="search-content-value" placeholder="Enter search value" name="" type="text">');
+          self.operators_html($html, self.operators.more_text_input);
         } else if (value === "sensor") {
           that.find('.value').html(self.sensors_html);
           self.operators_html($html, self.operators.text_input);
@@ -151,6 +266,9 @@ SearchRule = function() {
           self.operators_html($html, self.operators.text_input);
         } else if (value === "user") {
           that.find('.value').html(self.users_html);
+          self.operators_html($html, self.operators.text_input);
+        } else if (value === "severity") {
+          that.find('.value').html(self.severity_html);
           self.operators_html($html, self.operators.text_input);
         } else if (value === "protocol") {
           that.find('.value').html(self.protocol_html);
@@ -177,6 +295,12 @@ SearchRule = function() {
         that.find('.add_chosen').chosen({
           allow_single_deselect: true
         });
+
+        if (callback && (typeof callback === "function")) {
+          callback(that);
+        };
+
+        that.trigger('snorby:search:change');
       });
 
       $('.search-content-box:first')
@@ -184,11 +308,10 @@ SearchRule = function() {
       .css('opacity', 1)
       .unbind('hover')
       .unbind('mouseover');
+
+      return $html;
     },
 
-    //
-    // Remove Rule
-    //
     remove: function(that) {
       var self = this;
       if ($('.search-content-box').length > 2) {
@@ -199,7 +322,7 @@ SearchRule = function() {
         $('.search-content-box:first')
         .find('.search-content-remove')
         .css('opacity', 0.4)
-        .attr('title', 'NNOOO!!!')
+        .attr('title', 'You must have at least one search rule.')
         .tipsy({
 				  gravity: 's'
 			  });
@@ -225,21 +348,12 @@ SearchRule = function() {
         var operator = $(item).find('.operator-select select').val();
         var value = $(item).find('.value input, .value select').val();
 
-        if (enabled) {
-          if ((column !== "") || (value !== "")) {
-            if (matchAll) {
-              json.items[column] = {
-                column: column,
-                operator: operator,
-                value: value
-              };
-            } else {
-              json.items[index] = {
-                column: column,
-                operator: operator,
-                value: value
-              };          
-            };
+        if ((column !== "") || (value !== "")) {
+          json.items[index] = {
+            column: column,
+            operator: operator,
+            value: value,
+            enabled: enabled
           };
         };
       });
@@ -247,40 +361,86 @@ SearchRule = function() {
       return json;
     },
 
-    //
-    // Submit
-    //
-    submit: function() {
+    submit: function(callback) {
       var self = this;
       var search = self.pack();
 
+      var update_url = function() {
+        if (history && history.pushState) {
+          history.pushState(null, document.title, '/results');
+        };
+      };
+
+      if (callback && (typeof callback === "function")) {
+        callback(search, self);
+      };
+
       if (search && !$.isEmptyObject(search.items)) {
-        $.ajax({
-          url: '/results',
-          global: false,
-          dataType: 'html',
-          cache: false,
-          type: 'GET',
-          data: { match_all: search.match_all, search: search.items },
-          success: function(data){
-            console.log(data);
-            var content = $(data).find('#content');
-            $('#content').replaceWith(content);
-          }
+        post_to_url('/results', {
+          match_all: search.match_all, 
+          search: search.items, 
+          authenticity_token: csrf
         });
       } else {
-        $.ajax({
-          url: '/results',
-          global: false,
-          dataType: 'html',
-          cache: false,
-          type: 'GET',
-          data: { search: {}, match_all: false },
-          success: function(data){
-             console.log(data);
-          }
-        });
+        flash_message.push({type: 'error', message: "You cannot submit all empty search rules."});flash();
       };
+    },
+
+    build: function(search) {
+      var self = this;
+
+      if (typeof search === "string") {
+        var data = JSON.parse(search);
+      } else if (typeof search === "object") {
+        var data = search;
+      } else {
+        var data = {};
+      };
+
+      if (data.items) {
+       var rules = data.items; 
+      } else if (data.search) {
+        var rules = data.search;
+      } else {
+        var rules = {};
+      };
+      
+      if (data.match_all && data.match_all === "false") {
+       $('select.global-match-setting option[value="any"]').attr('selected', 'selected');
+      } else {
+        $('select.global-match-setting option[value="all"]').attr('selected', 'selected');
+      };
+
+      for (id in rules) {
+        var item = rules[id];
+
+        var rule = self.add(false, {});
+
+        var column = rule.find('div.column-select select');
+
+        rule.bind('snorby:search:change', function() {
+          var operator = $(this).find('div.operator-select select');
+          var value = $(this).find('div.value select, div.value input');
+
+          operator.find("option[value='"+item.operator+"']").attr('selected', 'selected');
+          operator.trigger("liszt:updated");
+          value.attr('value', item.value);
+
+          rule.unbind('snorby:search:change');
+        });
+
+        rule.attr('data-rule-id', id);
+
+        column.find("option[value='"+item.column+"']").attr('selected','selected');
+        column.trigger("liszt:updated").trigger('change');
+
+        if (item.enabled) {
+          console.log(item.enabled)
+          rule.find('div.search-content-enable input').attr('checked', item.enabled);
+        };
+      };
+
+      $('.rules .add_chosen').trigger("liszt:updated");
     },
 
   };
@@ -303,7 +463,6 @@ function HCloader(element) {
   }).html('Loading...');
   
   $el.appendTo('body');
-
 };
 
 function clippyCopiedCallback(a) {
@@ -349,7 +508,7 @@ function clear_selected_events () {
 	selected_events = [];
 	$('input#selected_events').val('');
 	return false;
-}
+};
 
 function set_classification (class_id) {
 	var selected_events = $('input#selected_events').attr('value');
@@ -373,7 +532,38 @@ function set_classification (class_id) {
 				$.getScript('/events/history?page=' + current_page_number);
 			} else if (current_page == "results") {
 				clear_selected_events();
-				$.getScript($('input#current_url').val());
+
+        if ($('div#search-params').length > 0) {
+
+          var search_data = JSON.parse($('div#search-params').text());
+
+          if (search_data) {
+            $.ajax({
+              url: $('input#current_url').val(),
+              global: false,
+              dataType: 'script',
+              data: {
+                match_all: search_data.match_all,
+                search: search_data.search,
+                authenticity_token: csrf
+              },
+              cache: false,
+              type: 'POST',
+              success: function(data) {
+                $('div.content').fadeTo(500, 1);
+                Snorby.helpers.remove_click_events(false);
+                Snorby.helpers.recheck_selected_events();
+                
+                if (history && history.pushState) {
+                  history.pushState(null, document.title, $('input#current_url').val());
+                };
+                $.scrollTo('#header', 500);
+              }
+            });
+          };
+
+        };
+
 			} else {
 				// clear_selected_events();
 				// $.getScript('/events');
@@ -511,10 +701,6 @@ function update_note_count (event_id, data) {
 var Snorby = {
 	
 	setup: function(){
-		
-		$(window).resize(function() {
-			$.fancybox.center;
-		});
 		
 		$('div#flash_message, div#flash_message > *').live('click', function() {
 			$('div#flash_message').stop().fadeOut('fast');
@@ -655,7 +841,7 @@ var Snorby = {
 						flash_message.push({type: 'error', message: "The email subject cannot be blank."});flash();
 						$.scrollTo('#header', 500);
 					} else {
-						$('a#fancybox-close').click();
+						$(document).trigger('limp.close');
 						$.post('/events/email', $('form.email-event-information').serialize(), null, "script");
 					};
 				};
@@ -687,7 +873,7 @@ var Snorby = {
 			$('button.mass-action').live('click', function(e) {
 				e.preventDefault();
 				var nform = $('form#mass-action-form');
-				$('a#fancybox-close').click();
+				$(document).trigger('limp.close');
 				$.post('/events/mass_action', nform.serialize(), null, "script");
 				return false;
 			});
@@ -696,13 +882,13 @@ var Snorby = {
 				e.preventDefault();
 				var nform = $('form#new_notification');
 				$.post('/notifications', nform.serialize(), null, "script");
-				$('a#fancybox-close').click();
+				$(document).trigger('limp.close');
 				return false;
 			});
 			
 			$('button.cancel-snorbybox').live('click', function(e) {
 				e.preventDefault();
-				$('a#fancybox-close').click();
+				$(document).trigger('limp.close');
 				return false;
 			});
 			
@@ -844,27 +1030,41 @@ var Snorby = {
 				});
       });
 
-			$('a.snorbybox').live('click', function() {
-				$('dl.drop-down-menu').fadeOut('slow');
-				$.fancybox({
-					padding: 0,
-					centerOnScroll: true,
-	        zoomSpeedIn: 300, 
-	        zoomSpeedOut: 300,
-					overlayShow: true,
-					overlayOpacity: 0.5,
-					overlayColor: '#000',
-					href: this.href,
-					onStart: function() {
-            Snorby.eventCloseHotkeys(false);
-						$('dl#event-sub-menu').hide();
-					},
-					onClosed: function() {
-					  Snorby.eventCloseHotkeys(true);
-					}
-				});
-				return false;
-			});
+      $('.snorbybox').limp({
+        cache: true,
+        round: 0,
+        loading: true,
+        animation: 'pop',
+        enableEscapeButton: true,
+        shadow: '0 1px 30px rgba(0,0,0,0.6)',
+        style: {
+          background: 'rgba(36,36,36,0.9)',
+          border: '1px solid rgba(0,0,0,0.9)',
+          padding: '5px',
+          width: '700px'
+        },
+        inside: {
+          border: '1px solid rgba(0,0,0,0.9)',
+          padding: 0
+        },
+        overlay: {
+          background: '#000',
+          opacity: 0.6
+        },
+        onOpen: function() {
+          Snorby.eventCloseHotkeys(false);
+          $('dl#event-sub-menu').hide();
+        },
+        afterOpen: function(limp, html) {
+          
+          html.find('#snorbybox-content .add_chosen').chosen({
+            allow_single_deselect: true
+          });
+        },
+        onClose: function() {
+          Snorby.eventCloseHotkeys(true);
+        }
+      });
 			
 			$('div.create-favorite.enabled').live('click', function() {
 				var sid = $(this).parents('li.event').attr('data-event-sid');
@@ -1389,30 +1589,52 @@ var Snorby = {
 					
 					Snorby.helpers.remove_click_events(true);
 					
-					if (history && history.pushState) {
-						
+          if ($('div#search-params').length > 0) {
+
+            var search_data = JSON.parse($('div#search-params').text());
+
+            if (search_data) {
+              $.ajax({
+                url: $(self).find('a').attr('href'),
+                global: false,
+                dataType: 'script',
+                data: {
+                  match_all: search_data.match_all,
+                  search: search_data.search,
+                  authenticity_token: csrf
+                },
+                cache: false,
+                type: 'POST',
+                success: function(data) {
+                  $('div.content').fadeTo(500, 1);
+                  Snorby.helpers.remove_click_events(false);
+                  Snorby.helpers.recheck_selected_events();
+                  
+                  if (!notes) {
+                    if (history && history.pushState) {
+                      history.pushState(null, document.title, $(self).find('a').attr('href'));
+                    };
+                    $.scrollTo('#header', 500);
+                  };
+                }
+              });
+            };
+
+          } else {
             $.getScript($(self).find('a').attr('href'), function() {
               $('div.content').fadeTo(500, 1);
               Snorby.helpers.remove_click_events(false);
               Snorby.helpers.recheck_selected_events();
               
               if (!notes) {
-                history.pushState(null, document.title, $(self).find('a').attr('href'));
+                if (history && history.pushState) {
+                  history.pushState(null, document.title, $(self).find('a').attr('href'));
+                };
                 $.scrollTo('#header', 500);
               };
 
-            });
-
-					} else {
-						$.getScript($(self).find('a').attr('href'), function() {
-              
-              $('div.content').fadeTo(500, 1);
-              Snorby.helpers.remove_click_events(false);
-              Snorby.helpers.recheck_selected_events();
-              
-              if (!notes) { $.scrollTo('#header', 500) };
-            });
-					};
+            });          
+          };
 					
 				};
 				
@@ -1635,8 +1857,6 @@ var Snorby = {
       var autodrop_count = $('select#_settings_autodrop_count').attr('autodrop_count');
 			$('select#_settings_autodrop_count option[value="'+autodrop_count+'"]').attr('selected', 'selected');
 		};
-
-    // end
 
 		$('input#_settings_packet_capture').live('click', function() {
 			if ($('input#_settings_packet_capture').is(':checked')) {
@@ -1928,6 +2148,149 @@ jQuery(document).ready(function($) {
     $.getJSON(this.href, function(data) {
       setTimeout(currently_caching, 6000);
     });
+  });
+
+  $('.snorby-content-restore').live('click', function(e) {
+    e.preventDefault();
+
+    if ($('.tmp-content-data').length > 0) {
+
+      $('.tmp-content-data, #footer').stop().delay(100).animate({
+        opacity: 0
+      }, 600, function() {
+        $('.tmp-content-data').hide();
+
+        $('.original-content-data, #footer').stop().delay(100).show().animate({
+          opacity: 1
+        }, 600);
+      });
+    };
+
+  });
+
+  $('.snorby-content-replace').live('click', function(e) {
+    e.preventDefault();
+
+    if ($('.tmp-content-data').length > 0) {
+
+      $('.original-content-data, #footer').stop().delay(100).animate({
+        opacity: 0
+      }, 600, function() {
+        $('.original-content-data').hide();
+        $('.tmp-content-data, #footer').stop().delay(100).show().animate({
+          opacity: 1
+        }, 600);
+      });
+
+    } else {
+
+      $('#content').addClass('original-content-data');
+
+      var item = '<li><a href="#" class="snorby-content-restore"><img' +
+        ' alt="Restart" src="/images/icons/restart.png">Go Back</a></li>';
+      var menu = '<ul class="" id="title-menu-holder"><ul id="title-menu">' +
+        '<li>&nbsp;</li>'+item+'<li>&nbsp;</li></ul></ul>';
+
+      $.ajax({
+        url: 'saved/searches',
+        global: false,
+        dataType: 'html',
+        cache: false,
+        type: 'GET',
+        success: function(data) {
+
+          var $content = $(data).find('#content')
+          .addClass('tmp-content-data').hide().css({
+            opacity: 0
+          });
+
+          var titleMenu = $content.find('#title-menu');
+
+          console.log(titleMenu);
+          if (titleMenu.length > 0) {
+            titleMenu.find('li:last-child').before(item);
+          } else {
+           $content.find('#title').append(menu);
+          };
+
+          $('.original-content-data, #footer').stop().delay(100).animate({
+            opacity: 0
+          }, 600, function() {
+            $('.original-content-data').before($content);
+            $('.original-content-data').hide();
+            $('.tmp-content-data, #footer').stop().delay(100).show().animate({
+              opacity: 1
+            }, 600);          
+          });
+        }
+      });    
+    };
+
+  });
+
+  $('body').on('click', 'button.new-saved-search-record', function(e) {
+    e.preventDefault();
+    var dd = false;
+
+    if (typeof rule !== "undefined") {
+      var dd = rule.pack();
+    } else {
+      var json = $('div#search-params').text();
+
+      if (json) {
+        try {
+          var tmp = JSON.parse(json)
+          var dd = {
+            match_all: tmp.match_all,
+            search: tmp.search
+          };
+        } catch(e) {
+          var dd = false;
+        }
+      };
+    };
+
+    if (dd) {
+      $('#snorby-box #form-actions button.success').attr('disabled', true);
+      $('#snorby-box #form-actions button.success span').text('Please Wait...');
+
+      var title = $('input#saved_search_title').val();
+      var public = $('input#saved_search_public').is(":checked");
+
+      $.ajax({
+        url: '/saved_searches/create',
+        global: false,
+        dataType: 'json',
+        cache: false,
+        type: 'POST',
+        data: { 
+          "authenticity_token": csrf, 
+          "search": { 
+            "title": title, 
+            "public": public, 
+            "search": dd
+          }
+        },
+        success: function(data){
+          
+          if (data.error) {
+            flash_message.push({type: 'error', message: "Error: This search may already exists."});flash();
+          } else {
+            flash_message.push({type: 'success', message: "Your search was saved successfully"});flash();
+          };
+
+          $(document).trigger('limp.close');
+        },
+        error: function(data) {
+         flash_message.push({type: 'error', message: "Error: This search may already exists."});flash();
+         $(document).trigger('limp.close');
+        }
+      });
+
+    } else {
+      flash_message.push({type: 'error', message: "An Unknown Error Has Occurred"});flash();
+      $(document).trigger('limp.close');
+    };
   });
 
 });

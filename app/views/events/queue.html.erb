@@ -1,5 +1,6 @@
 <%= title "My Event Queue <i>(#{pluralize(@events.count, 'event')} in queue)</i>".html_safe, 'My Event Queue' do %>
-  <%= menu_item "Hotkeys", hotkey_events_path, 'events/keyboard.png', :class => 'snorbybox' %>
+  <%= menu_item "Hotkeys", hotkey_events_path, 'events/keyboard.png', :class => 'snorbybox', :"data-width" => '753px' %>
+
 	<%= render :partial => 'events/menu' %>
 <% end %>
 

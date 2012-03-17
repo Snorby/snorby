@@ -19,26 +19,6 @@
 # Snorby
 module Snorby
 
-# select a.* 
-# from (select event.* from event
- # inner join tcphdr on event.sid = tcphdr.sid and event.cid = tcphdr.cid 
-# where 1 = 0 or (tcphdr.tcp_dport = 80)
-
-# union
-
-# select  event.* from event
- # inner join udphdr on event.sid = udphdr.sid and event.cid = udphdr.cid 
-# where 1 = 0 or (udphdr.udp_dport > 1)
-
-# union
-
-# select  event.* from event
- # inner join signature on event.signature = signature.sig_sid 
-# where 1 = 0 or (signature.sig_name is not null)) a
-# order by a.timestamp desc
-# limit 100 
-# offset 10
-
   #
   # Search
   #
@@ -47,8 +27,13 @@ module Snorby
     COLUMN = {
       :signature => "event.signature",
       :signature_name => "signature.sig_name",
+      :severity => "signature.sig_priority",
       :source_ip => "iphdr.ip_src",
       :destination_ip => "iphdr.ip_dst",
+      :tcp_source_port => "tcphdr.tcp_sport",
+      :udp_source_port => "udphdr.udp_sport",
+      :tcp_destination_port => "tcphdr.tcp_dport",
+      :udp_destination_port => "udphdr.udp_dport",
       :source_port => {
         :tcp => "tcphdr.tcp_sport",
         :udp => "udphdr.udp_sport"
@@ -85,19 +70,19 @@ module Snorby
     end
 
     AND = lambda do |data|
-      "select event.* from event #{data}"
+      "select event.* from events_with_join as event #{data}"
     end
 
     DO_OR = lambda do |data|
-      return "select event.* from event #{data} where 1 = 0 or " if data
-      "select event.* from event where 1 = 0 or "
+      return "select event.* from events_with_join as event #{data} where 1 = 0 or " if data
+      "select event.* from events_with_join as event where 1 = 0 or "
     end
 
     TCP = "inner join tcphdr on event.sid = tcphdr.sid and event.cid = tcphdr.cid "
 
     UDP = "inner join udphdr on event.sid = udphdr.sid and event.cid = udphdr.cid "
 
-    SIGNATURE = "inner join signature on event.signature = signature.sig_sid "
+    SIGNATURE = "inner join signature on event.signature = signature.sig_id "
 
     SENSOR = "inner join sensor on event.sid = sensor.sid "
 
@@ -177,7 +162,15 @@ module Snorby
         },
         :payload => {
           :sql => PAYLOAD,
-          :process => DEFAULT_PROCESS
+          :process => lambda do |data|
+            convert_values = []
+            data.each do |x|
+              hex = ""
+              x.to_s.each_char { |x| hex += x.unpack('H*')[0] }
+              convert_values.push("%#{hex}%")
+            end
+            convert_values
+          end
         },
         :ip => {
           :sql => IP,
@@ -194,10 +187,15 @@ module Snorby
 
     MAP = {
       :source_port => [:tcp, :udp],
+      :tcp_source_port => :tcp,
+      :udp_source_port => :udp,
+      :udp_destination_port => :udp,
+      :tcp_destination_port => :tcp,
       :source_ip => :ip,
       :destination_port => [:tcp, :udp],
       :destination_ip => :ip,
-      :signature_name => [:signature],
+      :signature_name => :signature,
+      :severity => :signature,
       :signature => :event,
       :payload => :payload,
       :start_time => :event,
@@ -316,9 +314,26 @@ module Snorby
 
     def self.build_logic
       @params.each do |k,v|
-        column = v['column'].to_sym
-        operator = v['operator'].to_sym
-        value = v['value']
+        column = (v['column'] or v[:column]).to_sym
+        operator = (v['operator'] or v[:operator]).to_sym
+        value = (v['value'] or v[:value])
+
+        enabled = if (v.has_key?('enabled') or v.has_key?(:enabled))
+          case (v['enabled'] or v[:enabled]).class.to_s
+          when "TrueClass"
+            true
+          when "FalseClass"
+            false
+          when "String"
+            (v['enabled'] or v[:enabled]) === "false" ? false : true
+          else
+            false
+          end
+        else
+          (column && operator && value) ? true : false
+        end
+
+        next unless enabled
 
         if MAP.has_key?(column.to_sym)
           map_value = MAP[column.to_sym]
@@ -346,6 +361,7 @@ module Snorby
       @classifications ||= Classification.all(:fields => [:name, :id])
       @users ||= User.all(:fields => [:name, :id])
       @sensors ||= Sensor.all(:fields => [:name, :sid])
+      @severities ||= Severity.all(:fields => [:name, :sig_id])
 
       @json ||= {
         :operators => {
@@ -419,8 +435,13 @@ module Snorby
             :type => :text_input
           },
           {
-            :value => "Source Port",
-            :id => :source_port,
+            :value => "TCP Source Port",
+            :id => :tcp_source_port,
+            :type => :text_input
+          },
+          {
+            :value => "UDP Source Port",
+            :id => :udp_source_port,
             :type => :text_input
           },
           {
@@ -429,8 +450,13 @@ module Snorby
             :type => :text_input
           },
           {
-            :value => "Destination Port",
-            :id => :destination_port,
+            :value => "TCP Destination Port",
+            :id => :tcp_destination_port,
+            :type => :text_input
+          },
+          {
+            :value => "UDP Destination Port",
+            :id => :udp_destination_port,
             :type => :text_input
           },
           {
@@ -442,6 +468,11 @@ module Snorby
             :value => "Signature",
             :id => :signature,
             :type => :select
+          },
+          {
+            :value => "Signature Name",
+            :id => :signature_name,
+            :type => :text_input
           },
           {
             :value => "Classified By",
@@ -467,6 +498,11 @@ module Snorby
             :value => "Payload",
             :id => :payload,
             :type => :text_input
+          },
+          {
+            :value => "Severity",
+            :id => :severity,
+            :type => :select
           }
           # {
             # :value => "Protocol",
@@ -495,6 +531,15 @@ module Snorby
           :value => @classifications.collect do |x|
             {
               :id => x.id,
+              :value => x.name
+            }
+          end
+        },
+        :severities => {
+          :type => :dropdown,
+          :value => @severities.collect do |x|
+            {
+              :id => x.sig_id,
               :value => x.name
             }
           end

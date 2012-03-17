@@ -155,100 +155,122 @@ module Snorby
       end
 
       #
-      # DM Select
+      # DM db_select
       #
-      def select(sql, *args)
+      def db_select(sql, *args)
         db_adapter.select(sql, *args)
       end
 
       #
-      # DM Execute
+      # DM db_execute
       #
-      def execute(sql, *args)
+      def db_execute(sql, *args)
         db_adapter.execute(sql, *args)
       end
 
-      def options
-        @options ||= DataMapper.repository.adapter.options
+      def db_options
+        @db_options ||= DataMapper.repository.adapter.options
+      end
+
+      def update_classification_count
+        sql = %{
+          update classifications set events_count = (db_select count(*) 
+          from event where event.`classification_id` = classifications.id); 
+        }
+
+        db_execute(sql)
       end
 
       def update_signature_count
         sql = %{
-          update signature set events_count = (select count(*) 
+          update signature set events_count = (db_select count(*) 
           from event where event.signature = signature.sig_id);
         }
 
-        execute(sql)
+        db_execute(sql)
       end
 
       def has_timestamp_index?
         sql = %{
-          SELECT * FROM information_schema.statistics 
-          WHERE table_schema = '#{options["database"]}'
+          db_select * FROM information_schema.statistics 
+          WHERE table_schema = '#{db_options["database"]}'
           AND table_name = 'event' AND index_name = 'index_timestamp_cid_sid' limit 1;
         }
-        !select(sql).empty?
+        !db_select(sql).empty?
       end
 
       def has_aggregated_events_view?
         sql = %{
-          SELECT *
+          db_select *
           FROM information_schema.views
-          WHERE table_schema = '#{options["database"]}'
+          WHERE table_schema = '#{db_options["database"]}'
           AND table_name = 'aggregated_events';
         }
-        !select(sql).empty?
+        !db_select(sql).empty?
       end
 
       def has_event_id_view?
         sql = %{
-          SELECT *
+          db_select *
           FROM information_schema.views
-          WHERE table_schema = '#{options["database"]}'
+          WHERE table_schema = '#{db_options["database"]}'
           AND table_name = 'events_with_id';
         }
-        !select(sql).empty?
+        !db_select(sql).empty?
+      end
+
+      def has_event_with_join_view?
+        sql = %{
+          db_select *
+          FROM information_schema.views
+          WHERE table_schema = '#{db_options["database"]}'
+          AND table_name = 'events_with_join';
+        }
       end
 
       def validate_cache_indexes
         unless has_timestamp_index?
-          execute("create index index_timestamp_cid_sid on  event (  timestamp,  cid, sid );")
+          db_execute("create index index_timestamp_cid_sid on  event (  timestamp,  cid, sid );")
         end
 
         unless has_aggregated_events_view?
-          execute("create view aggregated_events as select ip_src, ip_dst, event.signature, count(*) as number_of_events, max(timestamp) as latest_timestamp, max(cast(unix_timestamp(event.timestamp) << 32 as unsigned) + event.cid) as max_id from event inner join iphdr on event.sid = iphdr.sid and event.cid = iphdr.cid where classification_id is null group by iphdr.ip_src, iphdr.ip_dst, event.signature;")
+          db_execute("create view aggregated_events as db_select ip_src, ip_dst, event.signature, count(*) as number_of_events, max(timestamp) as latest_timestamp, max(cast(unix_timestamp(event.timestamp) << 32 as unsigned) + event.cid) as max_id from event inner join iphdr on event.sid = iphdr.sid and event.cid = iphdr.cid where classification_id is null group by iphdr.ip_src, iphdr.ip_dst, event.signature;")
         end
 
         unless has_event_id_view?
-          execute("create view events_with_id as select event.*, cast(unix_timestamp(event.timestamp) << 32 as unsigned) + event.cid as aggregated_event_id from event;")
+          db_execute("create view events_with_id as db_select event.*, cast(unix_timestamp(event.timestamp) << 32 as unsigned) + event.cid as aggregated_event_id from event;")
+        end
+
+        unless has_event_with_join_view?
+          db_execute("create view events_with_join as select event.*, iphdr.ip_src, iphdr.ip_dst, signature.sig_priority, signature.sig_name from event inner join iphdr on event.sid = iphdr.sid and event.cid = iphdr.cid inner join signature on event.signature = signature.sig_id;")
         end
       end
 
       def sql_min_max
         sql = %{
-          select min(cid), max(cid) from event USE INDEX (index_timestamp_cid_sid)
+          db_select min(cid), max(cid) from event USE INDEX (index_timestamp_cid_sid)
           where 
           timestamp >= '#{@stime}' and timestamp < '#{@etime}' 
           and sid = #{@sensor.sid.to_i};
         } 
 
-        select(sql)
+        db_select(sql)
       end
 
       def sql_event_count
         sql = %{
-          select count(*) from event 
+          db_select count(*) from event 
           where sid = #{@sensor.sid.to_i} and timestamp >= '#{@stime}' 
           and timestamp < '#{@etime}'
         }
 
-        select(sql)
+        db_select(sql)
       end
 
       def sql_signature
         sql = %{
-          select signature, sig_name, c as `count(*)` from
-          (select signature,  count(*) as c from event  
+          db_select signature, sig_name, c as `count(*)` from
+          (db_select signature,  count(*) as c from event  
           join signature  on event.signature = signature.sig_id  
           where timestamp >= '#{@stime}' 
           and timestamp < '#{@etime}' 
@@ -257,12 +279,12 @@ module Snorby
           inner join signature b on a.signature = b.sig_id
         }
 
-        select(sql)
+        db_select(sql)
       end
       
       def sql_source_ip
         sql = %{
-          select INET_NTOA(ip_src), count(*) from event USE INDEX (index_timestamp_cid_sid) 
+          db_select INET_NTOA(ip_src), count(*) from event USE INDEX (index_timestamp_cid_sid) 
           inner join iphdr on event.cid  = iphdr.cid 
           and event.sid = iphdr.sid where timestamp >= '#{@stime}' 
           and timestamp < '#{@etime}'
@@ -270,12 +292,12 @@ module Snorby
           group by INET_NTOA(ip_src); 
         }
 
-        select(sql)
+        db_select(sql)
       end
 
       def sql_destination_ip
         sql = %{
-          select INET_NTOA(ip_dst), count(*) from event USE INDEX (index_timestamp_cid_sid)
+          db_select INET_NTOA(ip_dst), count(*) from event USE INDEX (index_timestamp_cid_sid)
           inner join iphdr on event.cid  = iphdr.cid 
           and event.sid = iphdr.sid where timestamp >= '#{@stime}' 
           and timestamp < '#{@etime}'
@@ -283,12 +305,12 @@ module Snorby
           group by INET_NTOA(ip_dst); 
         }
 
-        select(sql)
+        db_select(sql)
       end
 
       def sql_severity
         sql = %{
-          select sig_priority, count(*) from event USE INDEX (index_timestamp_cid_sid) 
+          db_select sig_priority, count(*) from event USE INDEX (index_timestamp_cid_sid) 
           inner join signature on event.signature = signature.sig_id 
           where timestamp >= '#{@stime}' 
           and timestamp < '#{@etime}'
@@ -296,55 +318,55 @@ module Snorby
           group by sig_priority; 
         }
 
-        select(sql)
+        db_select(sql)
       end
 
       def sql_sensor
         sql = %{
-          select `sid`, count(*) from event   
+          db_select `sid`, count(*) from event   
           where timestamp >= '#{@stime}' 
           and timestamp < '#{@etime}'
           and event.sid = #{@sensor.sid.to_i}
           group by sid; 
         }
 
-        select(sql)
+        db_select(sql)
       end
 
       def sql_tcp
         sql = %{
-          select   count(*) from event  USE INDEX (index_timestamp_cid_sid)
+          db_select   count(*) from event  USE INDEX (index_timestamp_cid_sid)
           inner join tcphdr on event.cid  = tcphdr.cid 
           and event.sid = tcphdr.sid
           where timestamp >= '#{@stime}' 
           and timestamp < '#{@etime}' and event.sid = #{@sensor.sid.to_i};
         }
 
-        select(sql)
+        db_select(sql)
       end
 
       def sql_udp
         sql = %{
-          select   count(*) from event USE INDEX (index_timestamp_cid_sid)
+          db_select   count(*) from event USE INDEX (index_timestamp_cid_sid)
           inner join udphdr on event.cid  = udphdr.cid 
           and event.sid = udphdr.sid
           where timestamp >= '#{@stime}' 
           and timestamp < '#{@etime}' and event.sid = #{@sensor.sid.to_i};
         }
 
-        select(sql)
+        db_select(sql)
       end
 
       def sql_icmp
         sql = %{
-          select   count(*) from event USE INDEX (index_timestamp_cid_sid) 
+          db_select   count(*) from event USE INDEX (index_timestamp_cid_sid) 
           inner join icmphdr on 
           event.cid  = icmphdr.cid and event.sid = icmphdr.sid 
           where timestamp >= '#{@stime}' 
           and timestamp < '#{@etime}' and event.sid = #{@sensor.sid.to_i};
         }
 
-        select(sql)
+        db_select(sql)
       end
 
     end
