@@ -76,8 +76,9 @@ module ApplicationHelper
   def sortable(column, title = nil)
     title ||= column.titleize
 
-    css_class = column == sort_column ? "current #{sort_direction} add_tipsy" : 'add_tipsy'
-    direction = column == sort_column && sort_direction == :asc ? :desc : :asc
+    css_class = column == sort_column ? "current #{sort_direction} add_tipsy table-sort-link" : 'add_tipsy table-sort-link'
+    
+    direction = column == sort_column && sort_direction == :desc ? :asc : :desc
     
     link = {
       :sort => column,
@@ -93,7 +94,12 @@ module ApplicationHelper
     end
 
     link_to title, link, {
-      :class => css_class, 
+      :class => css_class,
+      :"data-direction" => direction,
+      :"data-sort" => column,
+      :"data-page" => params[:page].to_i.zero? ? 1 : params[:page].to_i,
+      :"data-title" => params[:title],
+      :"data-search-id" => params[:search_id],
       :title => "Sort `#{title}` #{direction}"}
   end
 

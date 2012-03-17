@@ -131,7 +131,10 @@ class Event
     }
 
     if params.has_key?(:search)
-      sql, count = Snorby::Search.build(params[:match_all], true, params[:search])
+      sql, count = Snorby::Search.build(params[:match_all], false, params[:search])
+
+      sql[0] += " order by #{sort} #{direction}"
+      sql[0] += " LIMIT ? OFFSET ?"
 
       page(params[:page], { 
         :per_page => User.current_user.per_page_count.to_i,

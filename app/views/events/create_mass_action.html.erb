@@ -29,18 +29,18 @@
       </div>
       
       <div class="clear"></div>
-
       <br />
 
-      <div id='snorbybox-form-full' class='clearfix'>
+      <div id='snorbybox-form-full'>
         <%= label_tag "", "Select Sensors <i>(optional - Blank = All)</i>".html_safe %><br />
         <%= select_tag :sensor_ids, options_from_collection_for_select(Sensor.all, :sid, :name), 
           { :multiple => true, 
             :size => 10,
             :id => "sensor_select",
             :class => "add_chosen", 
-            :placeholder => 'Select Sensors'
-        } %>
+            :style => "margin-top:10px;",
+            :"data-placeholder" => 'Choose a Sensor'
+        } %><br />
       </div>
 
       <br />

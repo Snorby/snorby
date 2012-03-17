@@ -1,7 +1,5 @@
 class SavedSearchesController < ApplicationController
   
-  #before_filter :require_administrative_privileges, :only => [:destroy, :edit, :update]
-  
   def index
     @searches = (SavedSearch.all(:user_id => @current_user.id) | SavedSearch.all(:public => true)).page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:created_at])
   end
@@ -41,6 +39,16 @@ class SavedSearchesController < ApplicationController
       render :json => {}
     end
   end
+
+  def view
+    @search = SavedSearch.get(params[:id].to_i)
+
+    if @search 
+      redirect_to saved_searches_path unless @current_user.id == @search.user.id
+    else
+      redirect_to saved_searches_path
+    end
+  end
   
   def edit
     @search = SavedSearch.get(params[:id])
@@ -69,7 +77,7 @@ class SavedSearchesController < ApplicationController
     end
   end
 
-  def update_search_title
+  def title
     @search = SavedSearch.get(params[:id])
 
     if @search && @current_user.id == @search.user.id

@@ -60,12 +60,13 @@ Snorby::Application.routes.draw do
   match '/cache/status', :controller => "Page", :action => 'cache_status'
   match '/search/json', :controller => "Page", :action => 'search_json'
 
-  match '/saved/searches', :controller => "SavedSearches", :action => 'index'
-  match '/saved/searches/update', :controller => "SavedSearches", :action => 'update'
-  match '/saved/searches/title', :controller => "SavedSearches", :action => 'update_search_title'
-
-  resources :saved_searches do
-
+  resources :saved_searches, :path => "/saved/searches" do
+    collection do
+      post :title
+    end
+    member do
+      get :view
+    end
   end
 
   match ':controller(/:action(/:sid/:cid))', :controller => 'Events'

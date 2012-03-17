@@ -1,5 +1,5 @@
 <% can_edit = (current_user.id == saved_search.user.id) %>
-<tr>
+<tr data-id="<%= saved_search.id %>">
 
 	<% if can_edit %>
 		
@@ -28,7 +28,7 @@
   </td>
 
   <% if can_edit %>
-    <td><%= link_to "Edit", saved_search_path(saved_search), :class => "saved-search-edit" %></td>
+    <td><%= link_to "Edit", view_saved_search_path(saved_search), :class => "saved-search-edit" %></td>
 
     <td class='last'>
       <%= link_to image_tag("icons/destroy.png", :size => '16x16', :class => 'trash'), saved_search_path(saved_search), :method => :delete, :confirm => 'Are you sure you want to remove this search?' %>

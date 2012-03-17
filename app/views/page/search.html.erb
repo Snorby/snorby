@@ -12,44 +12,6 @@
     });
     rule.add();rule.add();rule.add();
 
-$('.search-content-add').live('click', function(e) {
-    e.preventDefault();
-    rule.add(this);
-});
-$('.search-content-remove').live('click', function(e) {
-    e.preventDefault();
-    rule.remove(this);
-});
-
-$('div.search-content-enable input').live('click', function() {
-    if ($(this).is(':checked')) {
-      $(this)
-      .parents('.search-content-box')
-      .find('.value *, .operator-select *, .column-select *')
-      .attr('disabled', false).css('opacity', 1);
-    } else {
-      $(this)
-      .parents('.search-content-box')
-      .find('.value *, .operator-select *, .column-select *')
-      .attr('disabled', true).css('opacity', 0.8);
-    };
-});
-
-$('button.submit-search').live('click', function(e) {
-  e.preventDefault();
-  rule.submit();
-});
-
-  $('#content #title').on('click', 'a.reset-search-form', function(e) {
-    e.preventDefault();
-
-    $('.rules').empty();
-
-    rule.add();
-    rule.add();
-    rule.add();
-  });
-
 	</script>
 
 <% end %>

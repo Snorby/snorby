@@ -1,6 +1,3 @@
-<%= stylesheet 'jquery' %>
-<%= javascript :header, 'daterangepicker' %>
-
 <%= title "Saved Searches" -%>
 
 <div id="searches" class='grid_12 page boxit'>
@@ -33,112 +30,37 @@
 
 
 <script type="text/javascript" charset="utf-8">
-
   $(function() {
-
-   var rule = new SearchRule(<%= Snorby::Search.json %>);
-
-$('.search-content-add').live('click', function(e) {
-    e.preventDefault();
-    rule.add(this);
-});
-$('.search-content-remove').live('click', function(e) {
-    e.preventDefault();
-    rule.remove(this);
-});
-
-$('div.search-content-enable input').live('click', function() {
-    if ($(this).is(':checked')) {
-      $(this)
-      .parents('.search-content-box')
-      .find('.value *, .operator-select *, .column-select *')
-      .attr('disabled', false).css('opacity', 1);
-    } else {
-      $(this)
-      .parents('.search-content-box')
-      .find('.value *, .operator-select *, .column-select *')
-      .attr('disabled', true).css('opacity', 0.8);
-    };
-});
-
-$('button.submit-search').live('click', function(e) {
-  e.preventDefault();
-  rule.submit();
-});
-
-  $('#content #title').on('click', 'a.reset-search-form', function(e) {
-    e.preventDefault();
-
-    $('.rules').empty();
-
-    rule.add();
-    rule.add();
-    rule.add();
-  });
-
-
-    $('.saved-search-edit').live('click', function(e) {
+    $('#searches').on('click', 'td.click', function(e) {
       e.preventDefault();
+      var id = $(this).parents('tr').data('id');
       
-      $(this).buttonLoading();
+      $('#searches table tr').animate({
+        opacity: 0.5
+      }, 1000);
 
-      $.getJSON(this.href, function(data) {
-        console.log(data)
-        if (data) {
-          $('#searches').hide();
-          rule.searchUI({
-            cssClass: "update-saved-search",
-            buttonTitle: "Update & Run"
-          }, function() {
-            rule.build(data.search);
+      flash_message.push({type: 'success', message: "Loading Search - Please Wait..."});flash();
 
-            $('#title-header').replaceWith('<div class="edit edit-search-title" id="title-header">'+data.title+'</div><span>(click to edit)</span>')
+      $.getJSON('/saved/searches/' + id, function(data) {
+        var search = data.search.search;
 
-            $('.edit-search-title').editable("/saved/searches/title", {
-              height: '20px', 
-              method: 'POST',
-              width: '180px',
-              name: "title",
-              indicator: '<img src="/images/icons/pager.gif">',
-              data: function(value) {
-                var retval = value.replace(/<br[\s\/]?>/gi, '\n');
-                return retval;
-              },
-              submitdata : function() {
-                return { id: data.id, authenticity_token: csrf };
-              }
-            });
+        var search_id = null;
 
-            $('#form-actions').append('<button class="warning cancel default"><span class="sub-title">Cancel</span></button>');
-
-            $('button.update-saved-search').click(function(e) {
-              e.preventDefault();
-
-              rule.submit(function(ss) {
-                $.ajax({
-                  url: '/saved/searches/update',
-                  data: {
-                  id: data.id, 
-                  authenticity_token: csrf,
-                  search: {
-                    match_all: ss.match_all,
-                    search: ss.items
-                  }},
-                  dataType: "POST",
-                  global: false,
-                  cache: false,
-                  success: function(d) {
-                    console.log(d)
-                }});  
-              });
-            });
-          });
-
-          $(this).removeClass('loading').text('Edit');
+        if (current_user.id == data.user_id) {
+          search_id = "" + data.id + "";
         };
+          
+        var params = {
+          search_id: search_id,
+          match_all: data.search.match_all,
+          search: search,
+          title: data.title,
+          authenticity_token: csrf
+        };
+        post_to_url('/results', params);
       });
+
+      return false;
     });
-
   });
-
 </script>

@@ -224,6 +224,46 @@ SearchRule = function() {
     searchUI: function(data, callback) {
       var self = this;
       $('#content #title').after(Handlebars.templates['search'](data));
+
+      $('.search-content-add').live('click', function(e) {
+        e.preventDefault();
+        self.add(this);
+      });
+
+      $('.search-content-remove').live('click', function(e) {
+        e.preventDefault();
+        self.remove(this);
+      });
+
+      $('div.search-content-enable input').live('click', function() {
+        if ($(this).is(':checked')) {
+          $(this)
+          .parents('.search-content-box')
+          .find('.value *, .operator-select *, .column-select *')
+          .attr('disabled', false).css('opacity', 1);
+        } else {
+          $(this)
+          .parents('.search-content-box')
+          .find('.value *, .operator-select *, .column-select *')
+          .attr('disabled', true).css('opacity', 0.8);
+        };
+      });
+
+      $('button.submit-search').live('click', function(e) {
+        e.preventDefault();
+        self.submit();
+      });
+
+      $('#content #title').on('click', 'a.reset-search-form', function(e) {
+        e.preventDefault();
+
+        $('.rules').empty();
+
+        self.add();
+        self.add();
+        self.add();
+      });
+
       if (callback && (typeof callback === "function")) {
         callback();
       };
@@ -2291,6 +2331,38 @@ jQuery(document).ready(function($) {
       flash_message.push({type: 'error', message: "An Unknown Error Has Occurred"});flash();
       $(document).trigger('limp.close');
     };
+  });
+
+  $('div.results a.table-sort-link').live('click', function(e) {
+    e.preventDefault();
+
+    if ($('div#search-params').length > 0) {
+
+      var search_data = JSON.parse($('div#search-params').text());
+
+      var direction = $(this).data('direction');
+      var sort = $(this).data('sort');
+      var page = $(this).data('page');
+
+      var title = $(this).data('title');
+      var search_id = $(this).data('search-id');
+
+      var url = "/results?sort=" + sort + 
+        "&direction="+direction+"&page=" + page;
+
+      if (search_data) {
+        post_to_url(url, {
+          title: title,
+          search_id: ""+search_id+"",
+          match_all: search_data.match_all,
+          search: search_data.search,
+          authenticity_token: csrf
+        });
+      };
+
+    };
+
+    return false;
   });
 
 });

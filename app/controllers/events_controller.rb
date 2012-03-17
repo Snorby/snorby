@@ -301,8 +301,7 @@ class EventsController < ApplicationController
   end
   
   def sort_direction
-    return :asc if params[:direction] == "asc"
-    :desc
+    %w[asc desc].include?(params[:direction].to_s) ? params[:direction].to_sym : :desc
   end
 
 end

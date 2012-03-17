@@ -79,11 +79,15 @@ class PageController < ApplicationController
   end
 
   def results    
-    if params.has_key?(:search)
+    if params.has_key?(:search) && !params[:search].blank?
 
       if params[:search].is_a?(String)
-        value = JSON.parse(params[:search])
-        params[:search] = value
+        @value ||= JSON.parse(params[:search])
+        params[:search] = @value
+      end
+
+      if params[:search_id]
+        @search_object ||= params[:search_id]
       end
 
       params[:sort] = sort_column
@@ -99,7 +103,9 @@ class PageController < ApplicationController
 
       @classifications ||= Classification.all
     else
-      redirect_to search_path
+      redirect_to :back, :flash => {
+        :error => "There was a problem parsing the search rules."
+      }
     end
   end
 

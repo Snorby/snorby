@@ -7,7 +7,11 @@
 
   <%= drop_down_for('More Options', 'icons/filter.png', 'options') do %>
 
-    <%= drop_down_item "Save Current Search", new_saved_search_path, nil, { :class => "snorbybox" } %>
+    <% if @search_object %>
+      <%= drop_down_item "Edit Current Search", view_saved_search_path(@search_object), nil %>
+    <% else %>
+      <%= drop_down_item "Save Current Search", new_saved_search_path, nil, { :class => "snorbybox" } %>
+    <% end %>
 
     <%= drop_down_item "View Saved Searches", saved_searches_path, nil %>
 
@@ -20,5 +24,8 @@
   </div>
 <% end %>
 
-<%= render :partial => 'page/events' %>
+<div class="results" data-direction="<%= params[:direction] %>" data-sort="<%= params[:sort] %>">
+  <%= render :partial => 'page/events' %>
+</div>
+
 <%= render :partial => 'events/hotkeys' %>
