@@ -1,7 +1,7 @@
 package_assets: on
 compress_assets: on
 gzip_assets: on
-javascript_compressor: yui
+javascript_compressor: yui #closure #yui
 embed_assets: off
 
 javascripts:
