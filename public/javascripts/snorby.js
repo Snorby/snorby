@@ -2424,14 +2424,22 @@ jQuery(document).ready(function($) {
       var url = "/results?sort=" + sort + 
         "&direction="+direction+"&page=" + page;
 
+      var params = {
+        match_all: search_data.match_all,
+        search: search_data.search,
+        authenticity_token: csrf
+      };
+
+      if (title) {
+        params.title = title;
+      };
+
+      if (search_id) {
+        params.search_id = "" + search_id + "";
+      };
+
       if (search_data) {
-        post_to_url(url, {
-          title: title,
-          search_id: ""+search_id+"",
-          match_all: search_data.match_all,
-          search: search_data.search,
-          authenticity_token: csrf
-        });
+        post_to_url(url, params);
       };
 
     };
