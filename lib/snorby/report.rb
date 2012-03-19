@@ -98,9 +98,13 @@ module Snorby
       case @range.to_sym
       when :last_24
         @cache = Cache.last_24
+
+        @start_time = Time.now.yesterday
+        @end_time = Time.now
         
-        @start_time = Time.now.yesterday.beginning_of_day
-        @end_time = Time.now.end_of_day
+        # Fix This
+        # @start_time = Time.now.yesterday.beginning_of_day
+        # @end_time = Time.now.end_of_day
 
       when :today
         @cache = Cache.today
