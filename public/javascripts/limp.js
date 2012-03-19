@@ -465,12 +465,12 @@
       return obj;
     };
 
-    $('body').on('click', '.limp-box-close', function(e) {
+    $('body').on('click', '.limp-box-close', function(event) {
       event.preventDefault();
       $(document).trigger('limp.close');
     });
 
-    function toggle(e) {
+    function toggle(event) {
       event.preventDefault();
       var limp = fetch(this);
 
