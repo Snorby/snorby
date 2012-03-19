@@ -67,6 +67,10 @@ class SavedSearchesController < ApplicationController
         @search.search = params[:search]
       end
 
+      if params.has_key?(:public)
+        @search.public = params[:public]
+      end
+
       if @search.save
         render :json => @search
       else

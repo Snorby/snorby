@@ -78,7 +78,8 @@ class PageController < ApplicationController
     }
   end
 
-  def results    
+  def results
+
     if params.has_key?(:search) && !params[:search].blank?
 
       if params[:search].is_a?(String)
@@ -86,22 +87,37 @@ class PageController < ApplicationController
         params[:search] = @value
       end
 
-      if params[:search_id]
-        @search_object ||= params[:search_id]
+      enabled_count = 0
+      for item in params[:search] do
+        x = item.last
+        enabled = x['enabled'] or x[:enabled]
+        if (enabled && enabled.to_s === "true")
+          enabled_count += 1 
+        end
       end
 
-      params[:sort] = sort_column
-      params[:direction] = sort_direction
+      if enabled_count < params[:search].length
+        redirect_to :back, :flash => {:error => "There was a problem parsing the search rules."}
+
+      else
+        if params[:search_id]
+          @search_object ||= params[:search_id]
+        end
+
+        params[:sort] = sort_column
+        params[:direction] = sort_direction
+        
+        params[:classification_all] = true
       
-      params[:classification_all] = true
-    
-      @search = (params.has_key?(:authenticity_token) ? true : false)
+        @search = (params.has_key?(:authenticity_token) ? true : false)
 
-      @params = params.to_json
+        @params = params.to_json
 
-      @events = Event.sorty(params)
+        @events = Event.sorty(params)
 
-      @classifications ||= Classification.all
+        @classifications ||= Classification.all
+      end
+
     else
       redirect_to :back, :flash => {
         :error => "There was a problem parsing the search rules."
@@ -116,8 +132,8 @@ class PageController < ApplicationController
     case @range.to_sym
     when :last_24
       
-      @start_time = @now.yesterday
-      @end_time = @now
+      @start_time = @now.yesterday.beginning_of_day
+      @end_time = @now.end_of_day
       
       @cache = Cache.last_24(@start_time, @end_time)
 

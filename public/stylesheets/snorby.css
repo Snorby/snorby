@@ -1506,9 +1506,7 @@ h3{
 
 /* @group Growl */
 
-.ui-notify { width:350px; position:fixed; top:10px; right:10px;
-	z-index: 999999;
-}
+.ui-notify { width:350px; position:fixed; top:10px; right:10px;z-index: 999999; }
 .ui-notify-message { padding:10px; margin-bottom:15px; -moz-border-radius:8px; -webkit-border-radius:8px; border-radius:8px }
 .ui-notify-message h1 { font-size:14px; margin:0; padding:0 }
 .ui-notify-message p { margin:3px 0; padding:0; line-height:18px }
@@ -1521,7 +1519,6 @@ h3{
 .ui-notify-cross { margin-top:-4px; float:right; cursor:pointer; text-decoration:none; font-size:12px; font-weight:bold; text-shadow:0 1px 1px #fff; padding:2px }
 .ui-notify-cross:hover { color:#ffffab }
 .ui-notify-cross:active { position:relative; top:1px }
-
 /* @end */
 
 /* @group Sensors */
@@ -2231,7 +2228,7 @@ ul.table div.content div.event-data div.event-data-holder .section-title{
 	text-decoration: none;
 	font-variant: normal;
 	text-shadow: #000 0 1px 0;
-	width: 500px;
+	width: 370px;
 }
 
 ul.table div.content div.event-data div.event-data-holder ul div#tab-title{
@@ -3245,13 +3242,26 @@ div.notes #form-actions{
 }
 
 input[type='password'],
-input[type='text']{
+input[type='text'],
+textarea{
 	-webkit-font-smoothing: antialiased;
 	margin-bottom: 10px;
 	padding: 5px;
-	font: bold 1.3em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
-	letter-spacing: -1px;
+	font: 15px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	letter-spacing: 0;
 	color: #383838;
+}
+
+input[type="text"], input[type="password"], .ui-autocomplete-input, textarea, .uneditable-input {
+	display: inline-block;
+	padding: 5px;
+	font-size: 15px;
+	line-height: 18px;
+	color: #2e2e2e;
+	border: 1px solid #CCC;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
 }
 
 /* @end */
@@ -3520,6 +3530,18 @@ img.avatar-small{
 	overflow: hidden;
 	margin-bottom: 20px;
 	border: 1px solid #d1d1d1;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+#general-settings div.pc-settings input[type="password"], 
+#general-settings div.pc-settings input[type="text"]{
+	width: 400px;
+}
+
+#general-settings div.pc-settings .grid_5{
+	margin-top: 10px;
 }
 
 #general-settings #form-holder input[type="text"]{

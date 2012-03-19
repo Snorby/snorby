@@ -60,7 +60,8 @@ module Snorby
       :lt => "< ?",
       :gt => "> ?",
       :in => "IN (?)",
-      :notnull => "NOT NULL ?"
+      :notnull => "NOT NULL ?",
+      :isnull => "IS NULL"
     }
 
     EXAMPLE = {"0"=>{"column"=>"source_port", "operator"=>"is", "value"=>"80"}, "1"=>{"column"=>"destination_ip", "operator"=>"is", "value"=>"10.0.1.1"}, "2"=>{"column"=>"signature", "operator"=>"is", "value"=>"1"}, "3"=>{"column"=>"classification", "operator"=>"is", "value"=>"1"}, "4"=>{"column"=>"sensor", "operator"=>"is", "value"=>"1"}, "5"=>{"column"=>"start_time", "operator"=>"gte", "value"=>"2012/02/21 12:05:17"}}
@@ -309,6 +310,8 @@ module Snorby
       total_sql.push(values.flatten).flatten!
       count.push(values.flatten).flatten!
 
+      p [total_sql, count]
+
       [total_sql, count]
     end
 
@@ -342,14 +345,19 @@ module Snorby
 
             map_value.each do |x|
               tmp_sql = "#{COLUMN[column][x]} #{OPERATOR[operator]}"
+
               instance_variable_get("@" + x.to_s).push(tmp_sql)
-              instance_variable_get("@" + x.to_s + "_value").push(value)
+              unless [:isnull].include?(operator)
+                instance_variable_get("@" + x.to_s + "_value").push(value)
+              end
             end
 
           else
             tmp_sql = "#{COLUMN[column]} #{OPERATOR[operator]}"
             instance_variable_get("@" + map_value.to_s).push(tmp_sql)
-            instance_variable_get("@" + map_value.to_s + "_value").push(value)
+            unless [:isnull].include?(operator)
+              instance_variable_get("@" + map_value.to_s + "_value").push(value)
+            end
           end
 
         end

@@ -31,6 +31,14 @@
 
 <script type="text/javascript" charset="utf-8">
   $(function() {
+
+    $('#searches').on('click', 'td input[type="checkbox"]', function(e) {
+      var set_public = $(this).is(':checked');
+      var id = $(this).parents('tr').data('id');
+
+      $.post('/saved/searches/' + id, { id: id, public: set_public });
+    });
+
     $('#searches').on('click', 'td.click', function(e) {
       e.preventDefault();
       var id = $(this).parents('tr').data('id');

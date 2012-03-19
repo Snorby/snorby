@@ -56,18 +56,13 @@
         self.close();
       });
 
-      self.$overlay.prependTo('body');
-
       if (self.options.enableEscapeButton) {
-
-        $(document).bind('limp.keydown', function(event) {
-          if (event.keyCode == 27 && self.options.enableEscapeButton) {
-            event.preventDefault();
-            self.close();
-          };
+        $(document).keypress(function(event) {
+          if (event.keyCode == 27) { self.close() };
         });
+      };
 
-      };    
+      self.$overlay.prependTo('body');
     
       self.fetch(function(content) {
         self.visible = true;
@@ -164,7 +159,7 @@
       var offsetHeight = 0;
 
      
-      var screenh = (($(window).height() - 150) / 2);
+      var screenh = ($(window).height() / 2);
       var screenw = ($(window).width() / 2);
 
       if (self.options.adjustmentSize) {

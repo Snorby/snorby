@@ -61,11 +61,15 @@ Snorby::Application.routes.draw do
   match '/search/json', :controller => "Page", :action => 'search_json'
 
   resources :saved_searches, :path => "/saved/searches" do
+    
     collection do
       post :title
+      post :update
     end
+
     member do
       get :view
+      post :update
     end
   end
 
@@ -91,6 +95,7 @@ Snorby::Application.routes.draw do
       get :packet_capture
       get :history
       post :classify
+      post :classify_sessions
       post :mass_update
       get :queue
       post :favorite

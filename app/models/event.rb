@@ -138,8 +138,7 @@ class Event
 
       page(params[:page], { 
         :per_page => User.current_user.per_page_count.to_i,
-        :order => :timestamp.desc,
-        :total => Event.count
+        :order => :timestamp.desc
       }, sql, count)
     else
 
@@ -276,9 +275,43 @@ class Event
     [db_select(sql.first, *(sql.shift; sql)).map {|x| "#{x.sid}-#{x.cid}" }.join(','), db_select(count.first, *(count.shift; count)).first.to_i]
   end
 
+  def self.update_classification_by_session(ids, classification, user_id=nil)
+    @classification = Classification.get(classification.to_i)
+
+    uid = if user_id
+      user_id
+    else
+      User.current_user.id
+    end
+
+    if @classification
+      update = "UPDATE `events_with_join` as event SET `classification_id` = #{@classification.id}, `user_id` = #{uid} WHERE "
+      event_data = ids.split(',');
+      sql = "select * from events_with_join as event where "
+      events = []
+
+      event_data.each_with_index do |e, index|
+        event = e.split('-')
+        events.push("(`sid` = #{event.first.to_i} and `cid` = #{event.last.to_i})") 
+      end
+
+      sql += events.join(' OR ')
+      @events = db_select(sql)
+
+      classification_sql = []
+      @events.each do |event|
+        classification_sql.push "(classification_id is NULL AND signature = #{event.signature} AND ip_src = #{event.ip_src} AND ip_dst = #{event.ip_dst} AND sid = #{event.sid})"
+      end
+
+      tmp = update += classification_sql.join(" OR ")
+      db_execute(tmp)
+      db_execute("update classifications set events_count = (select count(*) from event where event.`classification_id` = classifications.id);")
+    end
+  end
+
   def self.update_classification(ids, classification, user_id=nil)
 
-    @classification = Classification.find(classification.to_i)
+    @classification = Classification.get(classification.to_i)
 
     uid = if user_id
       user_id
@@ -291,7 +324,7 @@ class Event
       events = []
 
       process = lambda do |e|
-        event_data = e.split(',');
+        event_data = e.split(',')
 
         event_data.each_with_index do |e, index|
           event = e.split('-')

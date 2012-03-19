@@ -80,6 +80,10 @@ class EventsController < ApplicationController
   end
 
   def show
+    if params.has_key?(:sessions)
+      @session_view = true
+    end
+
     @event = Event.get(params['sid'], params['cid'])
     @lookups ||= Lookup.all
 
@@ -151,6 +155,16 @@ class EventsController < ApplicationController
       end
     end
 
+    unless params[:reclassify]
+      options.merge!({
+        :classification => {
+          :column => :classification,
+          :operator => :isnull,
+          :value => ''
+        }
+      })
+    end
+
     if params[:use_sig_id]
       options.merge!({
         :"sigid" => {
@@ -192,9 +206,12 @@ class EventsController < ApplicationController
       sql = Snorby::Search.build("true", true, options)
       ids = Event.get_collection_id_string(sql)
 
-      Event.update_classification(ids, params[:classification_id], User.current_user.id) #unless ids.blank?
+      if params[:jobqueue]
+        Delayed::Job.enqueue(Snorby::Jobs::MassClassification.new(params[:classification_id], options, User.current_user.id, reclassify))
+      else
+        Event.update_classification(ids, params[:classification_id], User.current_user.id)
+      end
 
-      #Delayed::Job.enqueue(Snorby::Jobs::MassClassification.new(params[:classification_id], options, User.current_user.id, reclassify))
       respond_to do |format|
         format.html { render :layout => false }
         format.js
@@ -221,6 +238,14 @@ class EventsController < ApplicationController
   def classify
     if params[:events]
       Event.update_classification(params[:events], params[:classification].to_i, User.current_user.id)
+    end
+
+    render :layout => false, :status => 200
+  end
+
+  def classify_sessions
+    if params[:events]
+      Event.update_classification_by_session(params[:events], params[:classification].to_i, User.current_user.id)
     end
 
     render :layout => false, :status => 200

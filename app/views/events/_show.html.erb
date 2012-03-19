@@ -4,9 +4,25 @@
 		<div id='event-menu'>
 			
 			<ul>
-				
+
+        <% if @session_view %>
+          <li>
+            <%= link_to "View All Sessions", results_path({
+              :title => "Event Sessions",
+              :match_all => true,
+              :search => {
+                :source_address => { :column => :source_ip, :operator => :is, :value => @event.ip.ip_src.to_s },
+                :destination_address => { :column => :destination_ip, :operator => :is, :value => @event.ip.ip_dst.to_s },
+                :signature => { :column => :signature, :operator => :is, :value => @event.signature.sig_id },
+                :sensor => { :column => :sensor, :operator => :is, :value => @event.sid },
+                :classification => { :column => :classification, :operator => :isnull, :value => '' }
+              }
+            }), :class => 'dark-button' %>
+          </li>
+        <% end %>
+
 				<li><%= link_to "Perform Mass Classification", create_mass_action_events_path(:sid => @event.sid, :cid => @event.cid), :class => 'snorbybox dark-button' %></li>
-				
+
 				<% if Setting.packet_capture? %>
 				
 					<li>

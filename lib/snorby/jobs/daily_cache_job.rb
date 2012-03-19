@@ -84,6 +84,22 @@ module Snorby
 
         begin
 
+          logit "\n[~] Building Sensor Metrics", false
+          Sensor.all.each do |x|
+            x.update(:events_count => Event.all(:sid => x.sid).count)
+          end
+
+          logit "[~] Building Signature Metrics", false
+          update_signature_count
+
+          logit "[~] Building Classification Metrics", false
+          update_classification_count
+
+          logit "[~] Building Severity Metrics\n\n", false
+          Severity.all.each do |x|
+            x.update(:events_count => Event.all(:"signature.sig_priority" => x.sig_id).count)
+          end
+
           send_weekly_report if Setting.weekly?
           send_monthly_report if Setting.monthly?
           ReportMailer.daily_report.deliver if Setting.daily?
@@ -129,7 +145,7 @@ module Snorby
 
       def build_cache(day_start, day_end)
 
-        event = select(%{
+        event = db_select(%{
           select cid from event where timestamp >= '#{@stime}' 
           and timestamp < '#{@etime}' and sid = #{@sensor.sid.to_i} 
           order by timestamp desc limit 1

@@ -16,7 +16,10 @@
 
 <% end %>
 
-<div class='box grid_3 alpha shadow round' data-url='<%= results_path(:title => "High Severity Events", :search => { :severity => 1, :time_end => "#{@end_time.to_i}", :time_start => "#{@start_time.to_i}" }) %>'>
+<div class='box grid_3 alpha shadow round' data-url='<%= results_path(:title => "High Severity Events", :match_all => true, :search => { :sev => { :column => :severity, :operator => :is, :value => 1 },
+                                                                                                                                             :stime => {:column => :start_time, :operator => :gte, :value => "#{@start_time.strftime("%Y-%m-%d %H:%M:%S")}"},
+                                                                                                                                             :etime => {:column => :end_time, :operator => :lte, :value => "#{@end_time.strftime("%Y-%m-%d %H:%M:%S")}"}
+}) %>'>
 	
 	<div class='content shadow-in'>
 		<div class='data'>
@@ -41,8 +44,8 @@
 </div>
 
 <div class='box grid_3 alpha shadow round' data-url='<%= results_path(:title => "Medium Severity Events", :match_all => true, :search => { :sev => { :column => :severity, :operator => :is, :value => 2 },
-                                                                                                                                             :stime => {:column => :start_time, :operator => :gte, :value => "#{@start_time.to_i}"},
-                                                                                                                                             :etime => {:column => :end_time, :operator => :lte, :value => "#{@end_time.to_i}"}
+                                                                                                                                             :stime => {:column => :start_time, :operator => :gte, :value => "#{@start_time.strftime("%Y-%m-%d %H:%M:%S")}"},
+                                                                                                                                             :etime => {:column => :end_time, :operator => :lte, :value => "#{@end_time.strftime("%Y-%m-%d %H:%M:%S")}"}
 }) %>'>
 	
 	<div class='content shadow-in'>
@@ -67,7 +70,10 @@
 	
 </div>
 
-<div class='box grid_3 alpha shadow round' data-url='<%= results_path(:title => "Low Severity Events", :search => { :severity => 3, :time_end => "#{@end_time.to_i}", :time_start => "#{@start_time.to_i}" }) %>'>
+<div class='box grid_3 alpha shadow round' data-url='<%= results_path(:title => "Low Severity Events", :match_all => true, :search => { :sev => { :column => :severity, :operator => :is, :value => 3 },
+                                                                                                                                             :stime => {:column => :start_time, :operator => :gte, :value => "#{@start_time.strftime("%Y-%m-%d %H:%M:%S")}"},
+                                                                                                                                             :etime => {:column => :end_time, :operator => :lte, :value => "#{@end_time.strftime("%Y-%m-%d %H:%M:%S")}"}
+}) %>'>
 	
 	<div class='content shadow-in'>
 		<div class='data'>

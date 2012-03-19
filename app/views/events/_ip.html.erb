@@ -39,7 +39,7 @@
               </dd>
             <% end %>
 
-            <dd><%= link_to "Snorby Search By Source", results_path(:search => {:ip_src => @event.ip.ip_src}) %></dd>
+            <dd><%= link_to "Snorby Search By Source", results_path(:title => "Source Address #{@event.ip.ip_src}", :match_all => true, :search => { :sip => { :column => :source_ip, :operator => :is, :value => @event.ip.ip_src}}) %></dd>
           </dl>
 
         </td>
@@ -63,7 +63,7 @@
               </dd>
             <% end %>
 
-            <dd><%= link_to "Snorby Search By Destination", results_path(:search => {:ip_dst => @event.ip.ip_dst}) %></dd>
+            <dd><%= link_to "Snorby Search By Destination", results_path(:title => "Destination Address #{@event.ip.ip_dst}", :match_all => true, :search => {:sip => { :column => :destination_ip, :operator => :is, :value => @event.ip.ip_dst}}) %></dd>
           </dl
         </td>
         
