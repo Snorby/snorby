@@ -131,9 +131,13 @@ class PageController < ApplicationController
 
     case @range.to_sym
     when :last_24
+
+      @start_time = @now.yesterday
+      @end_time = @now
       
-      @start_time = @now.yesterday.beginning_of_day
-      @end_time = @now.end_of_day
+      # Fix This
+      # @start_time = @now.yesterday.beginning_of_day
+      # @end_time = @now.end_of_day
       
       @cache = Cache.last_24(@start_time, @end_time)
 
