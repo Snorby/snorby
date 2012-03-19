@@ -58,7 +58,21 @@ Snorby::Application.routes.draw do
   match '/results', :controller => 'Page', :action => 'results'
   match '/force/cache', :controller => "Page", :action => 'force_cache'
   match '/cache/status', :controller => "Page", :action => 'cache_status'
-  
+  match '/search/json', :controller => "Page", :action => 'search_json'
+
+  resources :saved_searches, :path => "/saved/searches" do
+    
+    collection do
+      post :title
+      post :update
+    end
+
+    member do
+      get :view
+      post :update
+    end
+  end
+
   match ':controller(/:action(/:sid/:cid))', :controller => 'Events'
 
   resources :events do
@@ -68,6 +82,7 @@ Snorby::Application.routes.draw do
     end
     
     collection do
+      get :sessions
       get :view
       get :create_mass_action
       post :mass_action
@@ -80,6 +95,7 @@ Snorby::Application.routes.draw do
       get :packet_capture
       get :history
       post :classify
+      post :classify_sessions
       post :mass_update
       get :queue
       post :favorite

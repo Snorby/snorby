@@ -1,92 +1,87 @@
-<% if Snorby::Worker.running? %>
+<%= snorby_box("Mass Action Events", false) do %>
 
-	<%= snorby_box("Mass Action Events", false) do %>
+  <div id='snorbybox-content' class=''>
+  
+  <%= form_tag '/events/mass_action', :id => 'mass-action-form' do %>
 
-		<div id='snorbybox-content' class=''>
-		
-		<%= form_tag '/events/mass_action', :id => 'mass-action-form' do %>
+      <div id="snorbybox-form-holder">
 
-				<div id="snorbybox-form-holder">
+        <div id='snorbybox-form-full'>
+          <%= check_box_tag("use_sig_id", 1, 1) %> <%= label_tag "use_sig_id", "Only for this signature: <strong>#{@event.signature.sig_name}</strong>".html_safe %><br />
+          <%= hidden_field_tag :sig_id, @event.signature.sig_id.to_i %><br />
+        </div>
 
-					<div id='snorbybox-form-full'>
-						<%= check_box_tag("use_sig_id", 1, 1) %> <%= label_tag "use_sig_id", "Only for this signature: <strong>#{@event.signature.sig_name}</strong>".html_safe %><br />
-						<%= hidden_field_tag :sig_id, @event.signature.sig_id.to_i %><br />
-					</div>
+        <div id="snorbybox-form">
+          <%= check_box_tag("use_ip_src", 1) %> <%= label_tag "use_ip_src", "Only for source address #{@event.ip.ip_src}".html_safe %><br />
+          <%= hidden_field_tag :ip_src, @event.ip.ip_src.to_i %><br />
+        </div>
 
-					<div id="snorbybox-form">
-						<%= check_box_tag("use_ip_src", 1) %> <%= label_tag "use_ip_src", "Only for source address #{@event.ip.ip_src}".html_safe %><br />
-						<%= hidden_field_tag :ip_src, @event.ip.ip_src.to_i %><br />
-					</div>
+        <div id="snorbybox-form">
+          <%= check_box_tag("use_ip_dst", 1) %> <%= label_tag "use_ip_dst", "Only for destination address #{@event.ip.ip_dst}".html_safe %><br />
+          <%= hidden_field_tag :ip_dst, @event.ip.ip_dst.to_i %><br />
+        </div>
 
-					<div id="snorbybox-form">
-						<%= check_box_tag("use_ip_dst", 1) %> <%= label_tag "use_ip_dst", "Only for destination address #{@event.ip.ip_dst}".html_safe %><br />
-				    <%= hidden_field_tag :ip_dst, @event.ip.ip_dst.to_i %><br />
-					</div>
+        <div id='snorbybox-form'>
+          <%= label_tag "", "Select Classification: <i>(select classification for mass action)</i>".html_safe %><br />
+          <%= select_tag :classification_id, dropdown_select_tag(Classification.all, :id, false), {:class => ''} %>
+        </div>
 
-					<div id='snorbybox-form'>
-						<%= label_tag "", "Select Classification: <i>(select classification for mass action)</i>".html_safe %><br />
-						<%= select_tag :classification_id, dropdown_select_tag(Classification.all, :id, false) %>
-					</div>
+      </div>
+      
+      <div class="clear"></div>
+      <br />
 
-				</div>
-				
-				<br />
-				
-				<div id='snorbybox-form-full' class='clearfix'>
-			    <%= label_tag "", "Select Sensors <i>(optional - Blank = All)</i>".html_safe %><br />
-          <%= select_tag :sensor_ids, options_from_collection_for_select(Sensor.all, :sid, :name), 
-            { :multiple => true, 
-              :size => 10, 
-              :id => "sensor_select"
-          } %>
-				</div>
+      <div id='snorbybox-form-full'>
+        <%= label_tag "", "Select Sensors <i>(optional - Blank = All)</i>".html_safe %><br />
+        <%= select_tag :sensor_ids, options_from_collection_for_select(Sensor.all, :sid, :name), 
+          { :multiple => true, 
+            :size => 10,
+            :id => "sensor_select",
+            :"data-placeholder" => 'Choose a Sensor'
+        } %><br />
+      </div>
 
-				<br />
-				
-				<div id='snorbybox-form-full' class='clearfix'>
-					<%= check_box_tag("reclassify", 1) %>  
-					<%= label_tag "reclassify", "I would like to apply this classification to already classified events matching this criteria.".html_safe %><br />
-				</div>
-				
-				<br />
+      <br />
 
-				<div id="snorbybox-form-full">
-					Note:
-					<i>
-						Selecting a source or destination address will scope the mass action by your selection. 
-						If both source and destination addresses are left unchecked the mass action  will be applied at all addresses matching this signature. 
-					</i>
-				</div>
-
-				<br />
-        
-			</div>
-		
-		<% end %>
-
-
-    <%= snorby_box_footer do %>
-
-      <%= form_actions do %>
-        <%= button "Perform Mass Action", :class => 'success mass-action' %>
-        <%= button "Cancel", :class => 'warning cancel-snorbybox' %>
+      <% if Snorby::Worker.running? %>
+        <div id='snorbybox-form-full' class='clearfix'>
+          <%= check_box_tag("jobqueue", 1) %>  
+          <%= label_tag "jobqueue", "I Would like to run this classification in the brackground.".html_safe %><br />
+        </div>
       <% end %>
 
+      <br />
+
+      <div id='snorbybox-form-full' class='clearfix'>
+        <%= check_box_tag("reclassify", 1) %>  
+        <%= label_tag "reclassify", "I would like to apply this classification to already classified events matching this criteria.".html_safe %><br />
+      </div>
+      
+      <br />
+
+      <div id="snorbybox-form-full">
+        Note:
+        <i>
+          Selecting a source or destination address will scope the mass action by your selection. 
+          If both source and destination addresses are left unchecked the mass action  will be applied at all addresses matching this signature. 
+        </i>
+      </div>
+
+      <br />
+      
+    </div>
+  
+  <% end %>
+
+
+  <%= snorby_box_footer do %>
+
+    <%= form_actions do %>
+      <%= button "Perform Mass Action", :class => 'success mass-action' %>
+      <%= button "Cancel", :class => 'warning cancel-snorbybox' %>
     <% end %>
 
+  <% end %>
 
-	<% end %>
-	
-<% else %>
-	
-	<%= snorby_box("The Snorby Worker Is Not Running!") do %>
-		
-		<div id='note-box' class='error'>
-			<%= image_tag('icons/note-icon-white.png') %>
-			The Snorby worker is not currently running. It's imperative you start the worker immediately!
-			All backend calculations are performed asynchronously using the Snorby Worker.
-		</div>
-		
-	<% end %>
-	
+
 <% end %>

@@ -1,10 +1,16 @@
 require 'netaddr'
 require 'snorby/model/counter'
+require 'snorby/pager'
 
 class Event
 
   include DataMapper::Resource
   include Snorby::Model::Counter
+
+  #
+  # Cache Helpers
+  #
+  include Snorby::Jobs::CacheHelper
 
   # Included for the truncate helper method.
   extend ActionView::Helpers::TextHelper
@@ -26,6 +32,12 @@ class Event
   property :user_id, Integer, :index => true, :required => false
   
   property :notes_count, Integer, :index => true, :default => 0
+
+  # Fake Column
+  property :number_of_events, Integer, :default => 0
+  #
+  # property :event_id, Integer
+  ###
 
   belongs_to :classification
 
@@ -78,7 +90,8 @@ class Event
     :ip_dst => 'ip',
     :sig_name => 'signature',
     :timestamp => 'event',
-    :user_count => 'event'
+    :user_count => 'event',
+    :number_of_events => 'event'
   }
 
   def self.last_event_timestamp
@@ -109,7 +122,7 @@ class Event
     data
   end
 
-  def self.sorty(params={})
+  def self.sorty(params={}, sql=false, count=false)
     sort = params[:sort]
     direction = params[:direction]
 
@@ -117,35 +130,52 @@ class Event
       :per_page => User.current_user.per_page_count
     }
 
-    if SORT[sort].downcase == 'event'
-      page.merge!(:order => sort.send(direction))
-    else
-      page.merge!(
-        :order => [Event.send(SORT[sort].to_sym).send(sort).send(direction), 
-                   :timestamp.send(direction)],
-        :links => [Event.relationships[SORT[sort].to_s].inverse]
-      )
-    end
-    
     if params.has_key?(:search)
-      page.merge!(search(params[:search]))
-    end
+      sql, count = Snorby::Search.build(params[:match_all], false, params[:search])
 
-    unless params.has_key?(:classification_all)
-      page.merge!(:classification_id => nil)
-    end
+      sql[0] += " order by #{sort} #{direction}"
+      sql[0] += " LIMIT ? OFFSET ?"
 
-    if params.has_key?(:user_events)
-      relationship = Event.relationships['user'].inverse
+      page(params[:page], { 
+        :per_page => User.current_user.per_page_count.to_i,
+        :order => :timestamp.desc
+      }, sql, count)
+    else
 
-      if page.has_key?(:links)
-        page[:links].push(relationship)
+      if sql
+        
+        page(params[:page].to_i, page, sql, count)
+
       else
-        page[:links] = [relationship]
-      end
-    end
 
-    page(params[:page].to_i, page)
+        if SORT[sort].downcase == 'event'
+          page.merge!(:order => sort.send(direction))
+        else
+          page.merge!(
+            :order => [Event.send(SORT[sort].to_sym).send(sort).send(direction), 
+                       :timestamp.send(direction)],
+            :links => [Event.relationships[SORT[sort].to_s].inverse]
+          )
+        end
+
+        unless params.has_key?(:classification_all)
+          page.merge!(:classification_id => nil)
+        end
+
+        if params.has_key?(:user_events)
+          relationship = Event.relationships['user'].inverse
+
+          if page.has_key?(:links)
+            page[:links].push(relationship)
+          else
+            page[:links] = [relationship]
+          end
+        end
+
+        page(params[:page].to_i, page)
+      end
+
+    end
   end
 
   def packet_capture(params={})
@@ -237,6 +267,98 @@ class Event
         :order => [:timestamp.desc])
   end
 
+  def self.get_collection_id_string(q)
+    sql = q.first
+    count = q.last
+
+    sql.push(999999999, 0)
+    [db_select(sql.first, *(sql.shift; sql)).map {|x| "#{x.sid}-#{x.cid}" }.join(','), db_select(count.first, *(count.shift; count)).first.to_i]
+  end
+
+  def self.update_classification_by_session(ids, classification, user_id=nil)
+    @classification = Classification.get(classification.to_i)
+
+    uid = if user_id
+      user_id
+    else
+      User.current_user.id
+    end
+
+    if @classification
+      update = "UPDATE `events_with_join` as event SET `classification_id` = #{@classification.id}, `user_id` = #{uid} WHERE "
+      event_data = ids.split(',');
+      sql = "select * from events_with_join as event where "
+      events = []
+
+      event_data.each_with_index do |e, index|
+        event = e.split('-')
+        events.push("(`sid` = #{event.first.to_i} and `cid` = #{event.last.to_i})") 
+      end
+
+      sql += events.join(' OR ')
+      @events = db_select(sql)
+
+      classification_sql = []
+      @events.each do |event|
+        classification_sql.push "(classification_id is NULL AND signature = #{event.signature} AND ip_src = #{event.ip_src} AND ip_dst = #{event.ip_dst} AND sid = #{event.sid})"
+      end
+
+      tmp = update += classification_sql.join(" OR ")
+      db_execute(tmp)
+      db_execute("update classifications set events_count = (select count(*) from event where event.`classification_id` = classifications.id);")
+    end
+  end
+
+  def self.update_classification(ids, classification, user_id=nil)
+
+    @classification = Classification.get(classification.to_i)
+
+    uid = if user_id
+      user_id
+    else
+      User.current_user.id
+    end
+
+    if @classification
+      update = "UPDATE `event` SET `classification_id` = #{@classification.id}, `user_id` = #{uid} WHERE "
+      events = []
+
+      process = lambda do |e|
+        event_data = e.split(',')
+
+        event_data.each_with_index do |e, index|
+          event = e.split('-')
+          events.push("(`sid` = #{event.first.to_i} and `cid` = #{event.last.to_i})")
+
+          if ((index + 1) % 10000) == 0
+            tmp = update
+            tmp += events.join(" OR ")
+            tmp += ";"
+            db_execute(tmp)
+            events = []
+          end
+        end
+
+        unless events.empty?
+          tmp = update
+          tmp += events.join(" OR ")
+          tmp += ";"
+          db_execute(tmp)
+          events = []
+        end
+
+        db_execute("update classifications set events_count = (select count(*) from event where event.`classification_id` = classifications.id);")
+      end
+
+      if ids.is_a?(Array)
+        process.call(ids.first)
+      else
+        process.call(ids)
+      end
+    end
+    
+  end
+
   def self.find_by_ids(ids)
     events = []
     ids.split(',').collect do |e|
@@ -259,13 +381,15 @@ class Event
   end
 
   def pretty_time
-    if Setting.utc?
-      return "#{timestamp.utc.strftime('%H:%M')}" if Date.today.to_date == timestamp.to_date
-      "#{timestamp.strftime('%m/%d/%Y')}"
-    else
-      return "#{timestamp.strftime('%l:%M %p')}" if Date.today.to_date == timestamp.to_date
-      "#{timestamp.strftime('%m/%d/%Y')}"
-    end
+    # if Setting.utc?
+      # return "#{timestamp.utc.strftime('%H:%M')}" if Date.today.to_date == timestamp.to_date
+      # "#{timestamp.strftime('%m/%d/%Y')}"
+    # else
+      # return "#{timestamp.strftime('%l:%M %p')}" if Date.today.to_date == timestamp.to_date
+      # "#{timestamp.strftime('%m/%d/%Y')}"
+    # end
+    return "#{timestamp.strftime('%l:%M %p')}" if Date.today.to_date == timestamp.to_date
+    "#{timestamp.strftime('%m/%d/%Y')}"
   end
 
   #
@@ -512,8 +636,31 @@ class Event
     Rails.logger.info(e.backtrace)        
   end
 
-  def self.search(params)
+  def self.build_search_hash(column, operator, value)
+   ["#{column} #{operator}", value] 
+  end
+
+  def self.search(params, pager={})
     @search = {}
+    search = []
+    sql = []
+    params.each do |key, v|
+      column = v['column'].to_sym
+      operator = v['operator'].to_sym
+      value = v['value']
+
+      if column == :protocol
+      else
+        sql.push(build_search_hash(SEARCH[column], OPERATOR[operator], value.to_i))
+      end
+    end
+
+    search.push sql.collect { |x| x.first }.join(" AND ")
+    search.push(sql.collect { |x| x.last }.flatten).flatten!
+
+    p search
+
+
 
     @search.merge!({:sid => params[:sid].to_i}) unless params[:sid].blank?
 
@@ -598,7 +745,7 @@ class Event
       @search.merge!({:"signature.sig_priority" => params[:severity].to_i})
     end
   
-    @search
+    search
 
   rescue NetAddr::ValidationError => e
     {}

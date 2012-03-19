@@ -1,18 +1,31 @@
-<% if params[:title] %>
+<% page_title = (params[:title] ? params[:title] : "Search Results") %>
 	
-	<%= title "#{truncate(h(params[:title]))} <i>#{pluralize(@events.pager.total, 'event')} found</i>".html_safe, "#{h(params[:title])}" do %>
-    <%= menu_item "Hotkeys", hotkey_events_path, 'events/keyboard.png', :class => 'snorbybox' %>
-		<%= render :partial => 'events/menu' %>
-	<% end %>
-	
-<% else %>
-	
-	<%= title "Search Results <i>#{pluralize(@events.pager.total, 'event')} found</i>".html_safe, 'Search Results' do %>
-    <%= menu_item "Hotkeys", hotkey_events_path, 'events/keyboard.png', :class => 'snorbybox' %>
-		<%= render :partial => 'events/menu' %>
-	<% end %>
-	
+<%= title "#{truncate(h(page_title))} <i>#{pluralize(@events.pager.total, 'event')} found</i>".html_safe, "#{truncate(h(page_title))}" do %>
+  <%= menu_item "Hotkeys", hotkey_events_path, 'events/keyboard.png', :class => 'snorbybox', :"data-width" => '753px' %>
+
+  <%= render :partial => 'events/menu' %>
+
+  <%= drop_down_for('More Options', 'icons/filter.png', 'options') do %>
+
+    <% if @search_object %>
+      <%= drop_down_item "Edit Current Search", view_saved_search_path(@search_object), nil %>
+    <% else %>
+      <%= drop_down_item "Save Current Search", new_saved_search_path, nil, { :class => "snorbybox" } %>
+    <% end %>
+
+    <%= drop_down_item "View Saved Searches", saved_searches_path, nil %>
+
+  <% end %>
 <% end %>
 
-<%= render :partial => 'page/events' %>
+<% if @search %>
+  <div id="search-params" style="display:none;">
+    <%= @params %>
+  </div>
+<% end %>
+
+<div class="results" data-direction="<%= params[:direction] %>" data-sort="<%= params[:sort] %>">
+  <%= render :partial => 'page/events' %>
+</div>
+
 <%= render :partial => 'events/hotkeys' %>

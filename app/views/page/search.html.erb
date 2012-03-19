@@ -1,79 +1,32 @@
-<%= title "Search Events" %>
-
 <%= stylesheet 'jquery' %>
-<%= javascript :footer, 'daterangepicker' %>
+<%= javascript :header, 'daterangepicker' %>
 
 <% content_for :footer do %>
 
   <script type="text/javascript">
-    $('.datepicker').daterangepicker({
-      dateStart: 'Today', 
-      dateEnd: 'Today',
-      earliestDate: 'Today'
+
+    var rule = new SearchRule(<%= Snorby::Search.json %>);
+    rule.searchUI({
+      cssClass: "submit-search",
+      buttonTitle: "Submit Search"
     });
+    rule.add();rule.add();rule.add();
+
 	</script>
 
 <% end %>
 
-<div id='search' class='boxit page grid_12'>
-	
-	<%= form_tag results_path, :method => :get do %>
+<%= title "Snorby Advanced Search" do %>
 
-		<div id='search-box'>
+	<%= drop_down_for('More Options', 'icons/filter.png', 'options') do %>
 
-			<div class='grid_4 alpha'>
-				<%= label_tag "Signature Name" %><br />
-				<%= text_field_tag '[search][signature_name]', params[:signature_name], :placeholder => 'Signature Name' %>
-			</div>
+    <%= drop_down_item "Save Current Search", new_saved_search_path, nil, { :class => "snorbybox" } %>
 
-			<div class='grid_4 alpha'>
-				<%= label_tag "Source Address" %><br />
-        <%= text_field_tag '[search][ip_src]', params[:ip_src], :placeholder => 'Source or CIDR notation' %>
-			</div>
+    <%= drop_down_item "View Saved Searches", saved_searches_path, nil %>
 
-      <div class='grid_4 alpha'>
-				<%= label_tag "Destination Address" %><br />
-        <%= text_field_tag '[search][ip_dst]', params[:ip_dst], :placeholder => 'Destination or CIDR notation' %> 
-      </div>
-
-      <div class='grid_4 alpha'>
-				<%= label_tag "Date Range" %><br />
-        <%= text_field_tag '[search][timestamp]', params[:timestamp], :autocomplete=>:off, :placeholder => 'Date Range', :class => 'datepicker' %>
-      </div>
-
-			<div class='grid_4 alpha'>
-				<%= label_tag "Source Port" %><br />
-        <%= text_field_tag '[search][src_port]', params[:src_port], :placeholder => 'Port Number' %>
-      </div>
-
-			<div class='grid_4 alpha'>
-				<%= label_tag "Destination Port" %><br />
-        <%= text_field_tag '[search][dst_port]', params[:dst_port], :placeholder => 'Port Number' %>
-      </div>
-
-			<div class='grid_4 alpha'>
-				<%= label_tag 'Select Sensor' %><br />
-        <%= select_tag '[search][sid]', dropdown_select_tag(Sensor.all, :sid, true), :class => 'add_chosen' %>
-			</div>
-			
-			<div class='grid_4 alpha'>
-				<%= label_tag 'Select Classification' %><br />
-				<%= select_tag '[search][classification_id]', dropdown_select_tag(Classification.all, :id, true, ["<option value='0'>Unclassified</option>"]), :class => 'add_chosen' %>
-			</div>
-			
-			<div class='grid_4 alpha'>
-				<%= label_tag 'Select Severity' %><br />
-				<%= select_tag '[search][severity]', dropdown_select_tag(Severity.all, :sig_id, true), :class => 'add_chosen' %>
-			</div>
-
-		</div>
-
-		<%= form_actions do %>
-
-			<%= button "Submit Search", :class => 'success' %>
-
-		<% end %>
+    <%= drop_down_item "Reset Search Form", '#', nil, {:class => 'reset-search-form'} %>
 
 	<% end %>
 
-</div>
+<% end %>
+

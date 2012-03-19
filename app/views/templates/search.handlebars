@@ -1,0 +1,27 @@
+<div id="search" class="boxit page grid_12">
+
+  <div class="search-match-box" style="display:;">
+    Match 
+    <select class="global-match-setting">
+      <option value="any">Any</option>
+      <option value="all" selected="selected">All</option>
+    </select> 
+    of the following rules: 
+  </div>
+
+  <div class="other-search-options" style="display:none;">
+    <input name="limit-all-search-rules" type="checkbox"> 
+    Limit to
+    <input class="limit-search-results-count" name="limit-search-results-to" type="text" value="10000"> 
+    ordered by
+    <select><option value="any">Event Timestamp</option><option value="all">All</option></select>
+    <br>
+    <input name="ignore-classified-events" type="checkbox"> Ignore all classified events.
+  </div>
+
+  <div class="rules"></div>
+
+  <div id="form-actions">
+    <button class="{{cssClass}} success default"><span>{{buttonTitle}}</span></button>
+  </div>
+</div>

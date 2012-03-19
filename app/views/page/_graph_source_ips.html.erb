@@ -33,9 +33,15 @@
              events: {
                 click: function(event) {
                   HCloader(event.toElement.offsetParent.id);
-                  document.location = '/results?search[ip_src]=' + 
-                    event.point.name + '&search[time_start]=<%= @start_time.to_i %>' +
-                    '&search[time_end]=<%= @end_time.to_i %>';
+                  document.location = '/results?title=Source Address '+event.point.name+'&match_all=true&search%5B0%5D%5Bcolumn%5D=source_ip&search'+
+                    '%5B0%5D%5Benabled%5D=true&search%5B0%5D%5Boperator%'+
+                    '5D=is&search%5B0%5D%5Bvalue%5D='+event.point.name+'&search%'+
+                    '5B1%5D%5Bcolumn%5D=start_time&search%5B1%5D%5Benabl'+
+                    'ed%5D=true&search%5B1%5D%5Boperator%5D=gte&search%5B'+
+                    '1%5D%5Bvalue%5D=<%= @start_time.strftime("%Y-%m-%d %H:%M:%S") %>&search%5B2%5D%5B'+
+                    'column%5D=end_time&search%5B2%5D%5Benabled%5D=true&'+
+                    'search%5B2%5D%5Boperator%5D=lte&search%5B2%5D%5Bvalu'+
+                    'e%5D=<%= @end_time.strftime("%Y-%m-%d %H:%M:%S") %>';
                  },
               },
 		            allowPointSelect: true,

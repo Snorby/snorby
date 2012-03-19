@@ -17,10 +17,22 @@
 			<% @severities.each do |sev| %>
 				var sev<%= sev.sig_id %>_bg_color = '<%= sev.bg_color %>';
       <% end %>
+
+      var current_user = <%= @current_user.to_json(
+        :only => [
+          :email,
+          :name,
+          :sign_in_count,
+          :current_sign_in_ip,
+          :last_sign_in_ip,
+          :id,
+          :admin
+        ]
+      ).html_safe %>;
 		</script>
 
 		<%= csrf_meta_tag %>
-		
+
 		<%= include_stylesheets :snorby, :media => 'all' %>
 		<%= include_javascripts :snorby %>
 
@@ -61,7 +73,7 @@
     <%= render :partial => 'layouts/notify' %>
 
     <script type="text/javascript" charset="utf-8">
-      <% if Setting.update_notifications? %>
+      <% if !Setting.update_notifications? %>
         if (!$.cookie('snorby-ignore-update')) {
           $.ajax({
             url: 'http://www.snorby.org/version',
@@ -80,10 +92,10 @@
       <% end %>
 
       <% if Setting.event_notifications? %>
-        monitor_events(false);
+        //monitor_events(false);
       <% else %>
         if (window.location.pathname === "/events") {
-          monitor_events(true);
+          //monitor_events(true);
         };
       <% end %>
     </script>

@@ -1,7 +1,9 @@
 // lib/handlebars/base.js
+
+/*jshint eqnull:true*/
 var Handlebars = {};
 
-Handlebars.VERSION = "1.0.beta.2";
+Handlebars.VERSION = "1.0.beta.5";
 
 Handlebars.helpers  = {};
 Handlebars.partials = {};
@@ -23,16 +25,16 @@ Handlebars.registerHelper('helperMissing', function(arg) {
   }
 });
 
+var toString = Object.prototype.toString, functionType = "[object Function]";
+
 Handlebars.registerHelper('blockHelperMissing', function(context, options) {
   var inverse = options.inverse || function() {}, fn = options.fn;
 
 
   var ret = "";
-  var type = Object.prototype.toString.call(context);
+  var type = toString.call(context);
 
-  if(type === "[object Function]") {
-    context = context();
-  }
+  if(type === functionType) { context = context.call(this); }
 
   if(context === true) {
     return fn(this);
@@ -67,6 +69,9 @@ Handlebars.registerHelper('each', function(context, options) {
 });
 
 Handlebars.registerHelper('if', function(context, options) {
+  var type = toString.call(context);
+  if(type === functionType) { context = context.call(this); }
+
   if(!context || Handlebars.Utils.isEmpty(context)) {
     return options.inverse(this);
   } else {
@@ -103,85 +108,85 @@ performAction: function anonymous(yytext,yyleng,yylineno,yy,yystate,$$,_$) {
 
 var $0 = $$.length - 1;
 switch (yystate) {
-case 1: return $$[$0-1] 
+case 1: return $$[$0-1]; 
 break;
-case 2: this.$ = new yy.ProgramNode($$[$0-2], $$[$0]) 
+case 2: this.$ = new yy.ProgramNode($$[$0-2], $$[$0]); 
 break;
-case 3: this.$ = new yy.ProgramNode($$[$0]) 
+case 3: this.$ = new yy.ProgramNode($$[$0]); 
 break;
-case 4: this.$ = new yy.ProgramNode([]) 
+case 4: this.$ = new yy.ProgramNode([]); 
 break;
-case 5: this.$ = [$$[$0]] 
+case 5: this.$ = [$$[$0]]; 
 break;
-case 6: $$[$0-1].push($$[$0]); this.$ = $$[$0-1] 
+case 6: $$[$0-1].push($$[$0]); this.$ = $$[$0-1]; 
 break;
-case 7: this.$ = new yy.InverseNode($$[$0-2], $$[$0-1], $$[$0]) 
+case 7: this.$ = new yy.InverseNode($$[$0-2], $$[$0-1], $$[$0]); 
 break;
-case 8: this.$ = new yy.BlockNode($$[$0-2], $$[$0-1], $$[$0]) 
+case 8: this.$ = new yy.BlockNode($$[$0-2], $$[$0-1], $$[$0]); 
 break;
-case 9: this.$ = $$[$0] 
+case 9: this.$ = $$[$0]; 
 break;
-case 10: this.$ = $$[$0] 
+case 10: this.$ = $$[$0]; 
 break;
-case 11: this.$ = new yy.ContentNode($$[$0]) 
+case 11: this.$ = new yy.ContentNode($$[$0]); 
 break;
-case 12: this.$ = new yy.CommentNode($$[$0]) 
+case 12: this.$ = new yy.CommentNode($$[$0]); 
 break;
-case 13: this.$ = new yy.MustacheNode($$[$0-1][0], $$[$0-1][1]) 
+case 13: this.$ = new yy.MustacheNode($$[$0-1][0], $$[$0-1][1]); 
 break;
-case 14: this.$ = new yy.MustacheNode($$[$0-1][0], $$[$0-1][1]) 
+case 14: this.$ = new yy.MustacheNode($$[$0-1][0], $$[$0-1][1]); 
 break;
-case 15: this.$ = $$[$0-1] 
+case 15: this.$ = $$[$0-1]; 
 break;
-case 16: this.$ = new yy.MustacheNode($$[$0-1][0], $$[$0-1][1]) 
+case 16: this.$ = new yy.MustacheNode($$[$0-1][0], $$[$0-1][1]); 
 break;
-case 17: this.$ = new yy.MustacheNode($$[$0-1][0], $$[$0-1][1], true) 
+case 17: this.$ = new yy.MustacheNode($$[$0-1][0], $$[$0-1][1], true); 
 break;
-case 18: this.$ = new yy.PartialNode($$[$0-1]) 
+case 18: this.$ = new yy.PartialNode($$[$0-1]); 
 break;
-case 19: this.$ = new yy.PartialNode($$[$0-2], $$[$0-1]) 
+case 19: this.$ = new yy.PartialNode($$[$0-2], $$[$0-1]); 
 break;
 case 20: 
 break;
-case 21: this.$ = [[$$[$0-2]].concat($$[$0-1]), $$[$0]] 
+case 21: this.$ = [[$$[$0-2]].concat($$[$0-1]), $$[$0]]; 
 break;
-case 22: this.$ = [[$$[$0-1]].concat($$[$0]), null] 
+case 22: this.$ = [[$$[$0-1]].concat($$[$0]), null]; 
 break;
-case 23: this.$ = [[$$[$0-1]], $$[$0]] 
+case 23: this.$ = [[$$[$0-1]], $$[$0]]; 
 break;
-case 24: this.$ = [[$$[$0]], null] 
+case 24: this.$ = [[$$[$0]], null]; 
 break;
 case 25: $$[$0-1].push($$[$0]); this.$ = $$[$0-1]; 
 break;
-case 26: this.$ = [$$[$0]] 
+case 26: this.$ = [$$[$0]]; 
 break;
-case 27: this.$ = $$[$0] 
+case 27: this.$ = $$[$0]; 
 break;
-case 28: this.$ = new yy.StringNode($$[$0]) 
+case 28: this.$ = new yy.StringNode($$[$0]); 
 break;
-case 29: this.$ = new yy.IntegerNode($$[$0]) 
+case 29: this.$ = new yy.IntegerNode($$[$0]); 
 break;
-case 30: this.$ = new yy.BooleanNode($$[$0]) 
+case 30: this.$ = new yy.BooleanNode($$[$0]); 
 break;
-case 31: this.$ = new yy.HashNode($$[$0]) 
+case 31: this.$ = new yy.HashNode($$[$0]); 
 break;
-case 32: $$[$0-1].push($$[$0]); this.$ = $$[$0-1] 
+case 32: $$[$0-1].push($$[$0]); this.$ = $$[$0-1]; 
 break;
-case 33: this.$ = [$$[$0]] 
+case 33: this.$ = [$$[$0]]; 
 break;
-case 34: this.$ = [$$[$0-2], $$[$0]] 
+case 34: this.$ = [$$[$0-2], $$[$0]]; 
 break;
-case 35: this.$ = [$$[$0-2], new yy.StringNode($$[$0])] 
+case 35: this.$ = [$$[$0-2], new yy.StringNode($$[$0])]; 
 break;
-case 36: this.$ = [$$[$0-2], new yy.IntegerNode($$[$0])] 
+case 36: this.$ = [$$[$0-2], new yy.IntegerNode($$[$0])]; 
 break;
-case 37: this.$ = [$$[$0-2], new yy.BooleanNode($$[$0])] 
+case 37: this.$ = [$$[$0-2], new yy.BooleanNode($$[$0])]; 
 break;
-case 38: this.$ = new yy.IdNode($$[$0]) 
+case 38: this.$ = new yy.IdNode($$[$0]); 
 break;
 case 39: $$[$0-2].push($$[$0]); this.$ = $$[$0-2]; 
 break;
-case 40: this.$ = [$$[$0]] 
+case 40: this.$ = [$$[$0]]; 
 break;
 }
 },
@@ -491,62 +496,68 @@ lexer.performAction = function anonymous(yy,yy_,$avoiding_name_collisions,YY_STA
 
 var YYSTATE=YY_START
 switch($avoiding_name_collisions) {
-case 0: this.begin("mu"); if (yy_.yytext) return 14; 
+case 0:
+                                   if(yy_.yytext.slice(-1) !== "\\") this.begin("mu");
+                                   if(yy_.yytext.slice(-1) === "\\") yy_.yytext = yy_.yytext.substr(0,yy_.yyleng-1), this.begin("emu");
+                                   if(yy_.yytext) return 14;
+                                 
 break;
 case 1: return 14; 
 break;
-case 2: return 24; 
+case 2: this.popState(); return 14; 
 break;
-case 3: return 16; 
+case 3: return 24; 
 break;
-case 4: return 20; 
+case 4: return 16; 
 break;
-case 5: return 19; 
+case 5: return 20; 
 break;
 case 6: return 19; 
 break;
-case 7: return 23; 
+case 7: return 19; 
 break;
 case 8: return 23; 
 break;
-case 9: yy_.yytext = yy_.yytext.substr(3,yy_.yyleng-5); this.begin("INITIAL"); return 15; 
+case 9: return 23; 
 break;
-case 10: return 22; 
+case 10: yy_.yytext = yy_.yytext.substr(3,yy_.yyleng-5); this.popState(); return 15; 
 break;
-case 11: return 34; 
+case 11: return 22; 
 break;
-case 12: return 33; 
+case 12: return 34; 
 break;
 case 13: return 33; 
 break;
-case 14: return 36; 
+case 14: return 33; 
 break;
-case 15: /*ignore whitespace*/ 
+case 15: return 36; 
 break;
-case 16: this.begin("INITIAL"); return 18; 
+case 16: /*ignore whitespace*/ 
 break;
-case 17: this.begin("INITIAL"); return 18; 
+case 17: this.popState(); return 18; 
 break;
-case 18: yy_.yytext = yy_.yytext.substr(1,yy_.yyleng-2).replace(/\\"/g,'"'); return 28; 
+case 18: this.popState(); return 18; 
 break;
-case 19: return 30; 
+case 19: yy_.yytext = yy_.yytext.substr(1,yy_.yyleng-2).replace(/\\"/g,'"'); return 28; 
 break;
 case 20: return 30; 
 break;
-case 21: return 29; 
+case 21: return 30; 
 break;
-case 22: return 33; 
+case 22: return 29; 
 break;
-case 23: yy_.yytext = yy_.yytext.substr(1, yy_.yyleng-2); return 33; 
+case 23: return 33; 
 break;
-case 24: return 'INVALID'; 
+case 24: yy_.yytext = yy_.yytext.substr(1, yy_.yyleng-2); return 33; 
 break;
-case 25: return 5; 
+case 25: return 'INVALID'; 
+break;
+case 26: return 5; 
 break;
 }
 };
-lexer.rules = [/^[^\x00]*?(?=(\{\{))/,/^[^\x00]+/,/^\{\{>/,/^\{\{#/,/^\{\{\//,/^\{\{\^/,/^\{\{\s*else\b/,/^\{\{\{/,/^\{\{&/,/^\{\{![\s\S]*?\}\}/,/^\{\{/,/^=/,/^\.(?=[} ])/,/^\.\./,/^[/.]/,/^\s+/,/^\}\}\}/,/^\}\}/,/^"(\\["]|[^"])*"/,/^true(?=[}\s])/,/^false(?=[}\s])/,/^[0-9]+(?=[}\s])/,/^[a-zA-Z0-9_$-]+(?=[=}\s/.])/,/^\[.*\]/,/^./,/^$/];
-lexer.conditions = {"mu":{"rules":[2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25],"inclusive":false},"INITIAL":{"rules":[0,1,25],"inclusive":true}};return lexer;})()
+lexer.rules = [/^[^\x00]*?(?=(\{\{))/,/^[^\x00]+/,/^[^\x00]{2,}?(?=(\{\{))/,/^\{\{>/,/^\{\{#/,/^\{\{\//,/^\{\{\^/,/^\{\{\s*else\b/,/^\{\{\{/,/^\{\{&/,/^\{\{![\s\S]*?\}\}/,/^\{\{/,/^=/,/^\.(?=[} ])/,/^\.\./,/^[\/.]/,/^\s+/,/^\}\}\}/,/^\}\}/,/^"(\\["]|[^"])*"/,/^true(?=[}\s])/,/^false(?=[}\s])/,/^[0-9]+(?=[}\s])/,/^[a-zA-Z0-9_$-]+(?=[=}\s\/.])/,/^\[[^\]]*\]/,/^./,/^$/];
+lexer.conditions = {"mu":{"rules":[3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26],"inclusive":false},"emu":{"rules":[2],"inclusive":false},"INITIAL":{"rules":[0,1,26],"inclusive":true}};return lexer;})()
 parser.lexer = lexer;
 return parser;
 })();
@@ -696,8 +707,10 @@ Handlebars.Exception = function(message) {
   for (var p in tmp) {
     if (tmp.hasOwnProperty(p)) { this[p] = tmp[p]; }
   }
+
+  this.message = tmp.message;
 };
-Handlebars.Exception.prototype = new Error;
+Handlebars.Exception.prototype = new Error();
 
 // Build out our basic SafeString type
 Handlebars.SafeString = function(string) {
@@ -752,6 +765,8 @@ Handlebars.SafeString.prototype.toString = function() {
   };
 })();;
 // lib/handlebars/compiler/compiler.js
+
+/*jshint eqnull:true*/
 Handlebars.Compiler = function() {};
 Handlebars.JavaScriptCompiler = function() {};
 
@@ -890,7 +905,7 @@ Handlebars.JavaScriptCompiler = function() {};
 
     compileProgram: function(program) {
       var result = new this.compiler().compile(program, this.options);
-      var guid = this.guid++;
+      var guid = this.guid++, depth;
 
       this.usePartial = this.usePartial || result.usePartial;
 
@@ -932,6 +947,7 @@ Handlebars.JavaScriptCompiler = function() {};
       this.declare('inverse', programGuid);
 
       this.opcode('invokeProgram', null, params.length, !!block.mustache.hash);
+      this.declare('inverse', null);
       this.opcode('append');
     },
 
@@ -972,7 +988,7 @@ Handlebars.JavaScriptCompiler = function() {};
 
       this.opcode('invokeMustache', params.length, mustache.id.original, !!mustache.hash);
 
-      if(mustache.escaped) {
+      if(mustache.escaped && !this.options.noEscape) {
         this.opcode('appendEscaped');
       } else {
         this.opcode('append');
@@ -1066,13 +1082,13 @@ Handlebars.JavaScriptCompiler = function() {};
     // PUBLIC API: You can override these methods in a subclass to provide
     // alternative compiled forms for name lookup and buffering semantics
     nameLookup: function(parent, name, type) {
-			if (/^[0-9]+$/.test(name)) {
+      if (/^[0-9]+$/.test(name)) {
         return parent + "[" + name + "]";
       } else if (JavaScriptCompiler.isValidJavaScriptVariableName(name)) {
-	    	return parent + "." + name;
-			}
-			else {
-				return parent + "['" + name + "']";
+        return parent + "." + name;
+      }
+      else {
+        return parent + "['" + name + "']";
       }
     },
 
@@ -1158,6 +1174,12 @@ Handlebars.JavaScriptCompiler = function() {};
     preamble: function() {
       var out = [];
 
+      // this register will disambiguate helper lookup from finding a function in
+      // a context. This is necessary for mustache compatibility, which requires
+      // that context functions in blocks are evaluated by blockHelperMissing, and
+      // then proceed as if the resulting value was provided to blockHelperMissing.
+      this.useRegister('foundHelper');
+
       if (!this.isChild) {
         var namespace = this.namespace;
         var copies = "helpers = helpers || " + namespace + ".helpers;";
@@ -1191,7 +1213,7 @@ Handlebars.JavaScriptCompiler = function() {};
 
       // Generate minimizer alias mappings
       if (!this.isChild) {
-        var aliases = []
+        var aliases = [];
         for (var alias in this.context.aliases) {
           this.source[1] = this.source[1] + ', ' + alias + '=' + this.context.aliases[alias];
         }
@@ -1270,10 +1292,8 @@ Handlebars.JavaScriptCompiler = function() {};
         } else if (isScoped || this.options.knownHelpersOnly) {
           toPush = topStack + " = " + this.nameLookup('depth' + this.lastContext, name, 'context');
         } else {
-          toPush =  topStack + " = "
-              + this.nameLookup('helpers', name, 'helper')
-              + " || "
-              + this.nameLookup('depth' + this.lastContext, name, 'context');
+          this.register('foundHelper', this.nameLookup('helpers', name, 'helper'));
+          toPush = topStack + " = foundHelper || " + this.nameLookup('depth' + this.lastContext, name, 'context');
         }
 
         toPush += ';';
@@ -1286,7 +1306,7 @@ Handlebars.JavaScriptCompiler = function() {};
     lookup: function(name) {
       var topStack = this.topStack();
       this.source.push(topStack + " = (" + topStack + " === null || " + topStack + " === undefined || " + topStack + " === false ? " +
- 				topStack + " : " + this.nameLookup(topStack, name, 'context') + ");");
+         topStack + " : " + this.nameLookup(topStack, name, 'context') + ");");
     },
 
     pushStringParam: function(string) {
@@ -1368,10 +1388,10 @@ Handlebars.JavaScriptCompiler = function() {};
 
       params.push(stringOptions);
 
-      this.populateCall(params, id, helperId || id, fn);
+      this.populateCall(params, id, helperId || id, fn, program !== '{}');
     },
 
-    populateCall: function(params, id, helperId, fn) {
+    populateCall: function(params, id, helperId, fn, program) {
       var paramString = ["depth0"].concat(params).join(", ");
       var helperMissingString = ["depth0"].concat(helperId).concat(params).join(", ");
 
@@ -1381,14 +1401,21 @@ Handlebars.JavaScriptCompiler = function() {};
         this.source.push(nextStack + " = " + id + ".call(" + paramString + ");");
       } else {
         this.context.aliases.functionType = '"function"';
-        this.source.push("if(typeof " + id + " === functionType) { " + nextStack + " = " + id + ".call(" + paramString + "); }");
+        var condition = program ? "foundHelper && " : "";
+        this.source.push("if(" + condition + "typeof " + id + " === functionType) { " + nextStack + " = " + id + ".call(" + paramString + "); }");
       }
       fn.call(this, nextStack, helperMissingString, id);
       this.usingKnownHelper = false;
     },
 
     invokePartial: function(context) {
-      this.pushStack("self.invokePartial(" + this.nameLookup('partials', context, 'partial') + ", '" + context + "', " + this.popStack() + ", helpers, partials);");
+      var params = [this.nameLookup('partials', context, 'partial'), "'" + context + "'", this.popStack(), "helpers", "partials"];
+
+      if (this.options.data) {
+        params.push("data");
+      }
+
+      this.pushStack("self.invokePartial(" + params.join(", ") + ");");
     },
 
     assignToHash: function(key) {
@@ -1421,7 +1448,8 @@ Handlebars.JavaScriptCompiler = function() {};
       if(guid == null) { return "self.noop"; }
 
       var child = this.environment.children[guid],
-          depths = child.depths.list;
+          depths = child.depths.list, depth;
+
       var programParams = [child.index, child.name, "data"];
 
       for(var i=0, l = depths.length; i<l; i++) {
@@ -1479,9 +1507,23 @@ Handlebars.JavaScriptCompiler = function() {};
     }
   };
 
-  var reservedWords = ("break case catch continue default delete do else finally " +
-                       "for function if in instanceof new return switch this throw " +
-                       "try typeof var void while with null true false").split(" ");
+  var reservedWords = (
+    "break else new var" +
+    " case finally return void" +
+    " catch for switch while" +
+    " continue function this with" +
+    " default if throw" +
+    " delete in try" +
+    " do instanceof typeof" +
+    " abstract enum int short" +
+    " boolean export interface static" +
+    " byte extends long super" +
+    " char final native synchronized" +
+    " class float package throws" +
+    " const goto private transient" +
+    " debugger implements protected volatile" +
+    " double import public let yield"
+  ).split(" ");
 
   var compilerWords = JavaScriptCompiler.RESERVED_WORDS = {};
 
@@ -1489,12 +1531,12 @@ Handlebars.JavaScriptCompiler = function() {};
     compilerWords[reservedWords[i]] = true;
   }
 
-	JavaScriptCompiler.isValidJavaScriptVariableName = function(name) {
-		if(!JavaScriptCompiler.RESERVED_WORDS[name] && /^[a-zA-Z_$][0-9a-zA-Z_$]+$/.test(name)) {
-			return true;
-		}
-		return false;
-	}
+  JavaScriptCompiler.isValidJavaScriptVariableName = function(name) {
+    if(!JavaScriptCompiler.RESERVED_WORDS[name] && /^[a-zA-Z_$][0-9a-zA-Z_$]+$/.test(name)) {
+      return true;
+    }
+    return false;
+  };
 
 })(Handlebars.Compiler, Handlebars.JavaScriptCompiler);
 
@@ -1526,7 +1568,7 @@ Handlebars.compile = function(string, options) {
   };
 };
 ;
-// lib/handlebars/vm.js
+// lib/handlebars/runtime.js
 Handlebars.VM = {
   template: function(templateSpec) {
     // Just add water
@@ -1572,20 +1614,21 @@ Handlebars.VM = {
     };
   },
   noop: function() { return ""; },
-  invokePartial: function(partial, name, context, helpers, partials) {
+  invokePartial: function(partial, name, context, helpers, partials, data) {
+    var options = { helpers: helpers, partials: partials, data: data };
+
     if(partial === undefined) {
       throw new Handlebars.Exception("The partial " + name + " could not be found");
     } else if(partial instanceof Function) {
-      return partial(context, {helpers: helpers, partials: partials});
+      return partial(context, options);
     } else if (!Handlebars.compile) {
-      throw new Handlebars.Exception("The partial " + name + " could not be compiled when running in vm mode");
+      throw new Handlebars.Exception("The partial " + name + " could not be compiled when running in runtime-only mode");
     } else {
       partials[name] = Handlebars.compile(partial);
-      return partials[name](context, {helpers: helpers, partials: partials});
+      return partials[name](context, options);
     }
   }
 };
 
 Handlebars.template = Handlebars.VM.template;
 ;
-

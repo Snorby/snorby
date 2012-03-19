@@ -22,10 +22,8 @@ module Snorby
                                           :options, :user_id, :reclassify)
 
       def perform
-        events = Event.all(options)
-        events.each_chunk(5000) do |chunk|
-          Event.classify_from_collection(chunk, classification_id, user_id, reclassify)
-        end
+        ids = Event.all(options).map {|x| "#{x.sid}-#{x.cid}" }.join(',')
+        Event.update_classification(ids, classification_id, user_id) unless ids.blank?
       end
 
     end

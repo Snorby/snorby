@@ -38,7 +38,7 @@ class SignaturesController < ApplicationController
         :total => @total
       }
     else
-      render :json => { signatures: [] }
+      render :json => { signatures => [] }
     end
   end
 

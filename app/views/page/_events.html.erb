@@ -9,7 +9,7 @@
 	<ul class='table'>
 		
 		<li class='header'>
-			<div class='row'>
+			<div class='row <%= 'geoip' if geoip? %>'>
         <div class='small'>
           <%= check_box_tag 'event-select-all', nil, false, :class => 'event-select-all' %>
         </div>

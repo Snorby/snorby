@@ -26,6 +26,7 @@ gem 'dm-active_model',             DM_VERSION
 gem 'dm-mysql-adapter',            DM_VERSION
 
 gem 'dm-pager',                    '~> 1.1.0'
+gem "dm-ar-finders",               DM_VERSION
 gem 'dm-migrations',               DM_VERSION
 gem 'dm-types',                    DM_VERSION
 gem 'dm-validations',              DM_VERSION

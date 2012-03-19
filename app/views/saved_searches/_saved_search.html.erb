@@ -1,0 +1,44 @@
+<% can_edit = (current_user.id == saved_search.user.id) %>
+<tr data-id="<%= saved_search.id %>">
+
+	<% if can_edit %>
+		
+    <td class='first' data-user='<%= saved_search.user.id %>' style='width:50px;'>
+      <%= check_box_tag :public, 1, saved_search.public %>
+    </td>
+	
+	<% else %>
+
+    <td class='first' style='width:50px;'>
+      <%= check_box_tag :public, 1, saved_search.public, :disabled => :disabled %>
+    </td>
+
+	<% end %>
+
+  <td class='click' style='width:430px;'>
+    <%= saved_search.title %>
+  </td>
+  
+  <td class='click' style='width:160px;'>
+    <%= saved_search.user.name %>
+  </td>
+
+  <td class='click'>
+    <%= display_time(saved_search.created_at, true) %>
+  </td>
+
+  <% if can_edit %>
+    <td><%= link_to "Edit", view_saved_search_path(saved_search), :class => "saved-search-edit" %></td>
+
+    <td class='last'>
+      <%= link_to image_tag("icons/destroy.png", :size => '16x16', :class => 'trash'), saved_search_path(saved_search), :method => :delete, :confirm => 'Are you sure you want to remove this search?' %>
+    </td>
+  <% else %>
+
+    <td><%= image_tag('icons/lock.png', :size => '16x16', :class => 'locked') %></td>
+    <td class='last'><%= image_tag('icons/lock.png', :size => '16x16', :class => 'locked') %></td>
+
+  <% end %>
+
+</tr>
+

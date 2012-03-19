@@ -1,0 +1,76 @@
+<%= stylesheet 'jquery' %>
+<%= javascript :header, 'daterangepicker' %>
+
+<%= title "Loading Search `#{@search.title}`..." -%>
+
+<script type="text/javascript" charset="utf-8">
+  $(function() {
+    var loadSavedSearch = function(data) {
+      if (data) {
+        $('#searches').hide();
+
+        rule.searchUI({
+          cssClass: "update-saved-search",
+          buttonTitle: "Update & Run"
+        }, function() {
+          rule.build(data.search);
+
+          $('#title-header').replaceWith('<div class="edit edit-search-title" id="title-header">'+data.title+'</div><span class="sub-title">(click to edit)</span>');
+
+          $('.edit-search-title').editable("/saved/searches/title", {
+            height: '20px',
+            method: 'POST',
+            width: '180px',
+            name: "title",
+            indicator: '<img src="/images/icons/pager.gif">',
+            data: function(value) {
+              var retval = value.replace(/<br[\s\/]?>/gi, '\n');
+              return retval;
+            },
+            submitdata : function() {
+              return { id: data.id, authenticity_token: csrf };
+            }
+          });
+
+          $('#form-actions').append('<button class="warning default"><span class="sub-title">Cancel</span></button>');
+
+          $('button.warning').bind('click', function(e) {
+            e.preventDefault();
+            window.location = '/saved/searches';
+          });
+
+          $('button.update-saved-search').click(function(e) {
+            e.preventDefault();
+
+            rule.submit(function(ss) {
+
+              $.ajax({
+                url: '/saved/searches/'+data.id,
+                type: "POST",
+                dataType: "json",
+                global: false,
+                cache: false,
+                data: {
+                id: data.id,
+                authenticity_token: csrf,
+                search: {
+                  match_all: ss.match_all,
+                  search: ss.items
+                }}
+              });
+
+            }, {
+              title: data.title,
+              search_id: data.id
+            });
+          });
+        });
+
+        $(this).removeClass('loading').text('Edit');
+      };
+    };
+
+    var rule = new SearchRule(<%= Snorby::Search.json %>);
+    loadSavedSearch(<%= @search.to_json.html_safe %>);
+  });
+</script>

@@ -139,6 +139,9 @@ module Snorby
           logit "[~] Building Signature Metrics", false
           update_signature_count
 
+          logit "[~] Building Classification Metrics", false
+          update_classification_count
+
           logit "[~] Building Severity Metrics\n\n", false
           Severity.all.each do |x|
             x.update(:events_count => Event.all(:"signature.sig_priority" => x.sig_id).count)
@@ -185,7 +188,7 @@ module Snorby
         #
         def split_events_and_process(start_time, end_time)
 
-          event = select(%{
+          event = db_select(%{
             select cid from event where timestamp >= '#{@stime}' 
             and timestamp < '#{@etime}' and sid = #{@sensor.sid.to_i} 
             order by timestamp desc limit 1

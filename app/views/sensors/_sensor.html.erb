@@ -18,6 +18,6 @@
 		<%= css_chart(sensor.event_percentage) %>
 	</td>
 	
-	<td class='last'><%= link_to 'View', results_path(:title => "#{sensor.sensor_name}", :search => { :sid => sensor.sid }) %></td>
+  <td class='last'><%= link_to 'View', results_path(:title => "#{sensor.sensor_name}", "match_all"=>"true", "search"=>{"sensor"=>{"column"=>"sensor", "operator"=>"is", "value"=> sensor.sid } }) %></td>
 	
 </tr>

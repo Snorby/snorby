@@ -1,0 +1,28 @@
+<div class='section-title plus'>References</div>
+
+<div class='references-table plus'>
+	
+	<table class='default' border='0' cellspacing='0' cellpadding='0'>
+		<tr>
+			<th class='first'>Type</th>
+			<th class='last'>Value</th>
+		</tr>
+    <tbody>
+      <% @event.signature.sig_references.each do |ref| %>
+        <tr>
+          
+          <td>
+            <%= ref.reference.type %>
+          </td>
+
+          <td>
+            <%= pretty_reference(ref.reference) %> 
+          </td>
+
+        </tr>
+      <% end %> 
+		</tbody>
+	</table>
+
+</div>
+
