@@ -90,13 +90,16 @@ class PageController < ApplicationController
       enabled_count = 0
       for item in params[:search] do
         x = item.last
-        enabled = x['enabled'] or x[:enabled]
-        if (enabled && enabled.to_s === "true")
+        enabled = (x['enabled'] or x[:enabled]).to_s
+
+        if !enabled.blank?
+          enabled_count += 1 if enabled.to_s === "true"
+        else
           enabled_count += 1 
         end
       end
 
-      if enabled_count < params[:search].length
+      if enabled_count == 0
         redirect_to :back, :flash => {:error => "There was a problem parsing the search rules."}
 
       else
