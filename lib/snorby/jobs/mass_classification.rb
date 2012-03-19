@@ -22,8 +22,7 @@ module Snorby
                                           :options, :user_id, :reclassify)
 
       def perform
-        ids = Event.all(options).map {|x| "#{x.sid}-#{x.cid}" }.join(',')
-        Event.update_classification(ids, classification_id, user_id) unless ids.blank?
+        Event.update_classification(ids, params[:classification_id], User.current_user.id)
       end
 
     end
