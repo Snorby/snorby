@@ -1087,30 +1087,6 @@ var Snorby = {
 				return false;
 			});
 
-      $('a.snorbybox-content').live('click', function(event) {
-        event.preventDefault();
-        $('dl.drop-down-menu').fadeOut('slow');
-				var content = $(this).attr('data-content');
-
-        $.fancybox({
-					padding: 0,
-          content: content,
-					centerOnScroll: true,
-	        zoomSpeedIn: 300,
-	        zoomSpeedOut: 300,
-					overlayShow: true,
-					overlayOpacity: 0.5,
-					overlayColor: '#000',
-					onStart: function() {
-            Snorby.eventCloseHotkeys(false);
-						$('dl#event-sub-menu').hide();
-					},
-					onClosed: function() {
-            Snorby.eventCloseHotkeys(true);
-					}
-				});
-      });
-
       $('.snorbybox').limp({
         cache: true,
         round: 0,
