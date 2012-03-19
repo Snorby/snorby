@@ -1,0 +1,33 @@
+<%= snorby_box("New Saved Search", false) do %>
+
+  <div id='saved-search-form' class='boxit page'>
+    <%= form_for @search, :html => { :class => 'validate' } do |f| %>
+      
+      <%= error_messages_for(@search) %>
+
+      <p>
+        <%= f.label 'Search Title' %><br />
+        <%= f.text_field :title, :class => 'required', 
+          :style => "width: 400px;",
+          :placeholder => 'Example: Web Attacks on port 8080', :autocomplete => :off %>
+      </p>
+
+      <br />
+
+      <p>
+        <%= f.check_box :public %> <%= f.label 'Display Search Publicly' %><br />
+      </p>
+
+    <% end %>
+    
+  </div>
+
+  <%= snorby_box_footer do %>
+    <%= form_actions do %>
+      <%= button "Save Search", :class => 'success new-saved-search-record' %>
+      <%= button "Cancel", :class => 'warning cancel-snorbybox' %>
+    <% end %>
+  <% end %>
+
+<% end %>
+

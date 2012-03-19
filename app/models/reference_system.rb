@@ -8,4 +8,6 @@ class ReferenceSystem
 
   property :ref_system_name, String
 
+  has n, :references, :parent_key => :ref_system_id, :child_key => [ :ref_system_id ]
+
 end

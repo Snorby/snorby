@@ -7,7 +7,7 @@ class Signature
 
   storage_names[:default] = "signature"
 
-  #belongs_to :category, :parent_key => :sig_class_id, :child_key => :sig_class_id, :required => true
+  belongs_to :category, :parent_key => :sig_class_id, :child_key => :sig_class_id, :required => true
 
   has n, :events, :parent_key => :sig_id, :child_key => :sig_id, :constraint => :destroy
   
@@ -15,7 +15,7 @@ class Signature
   
   belongs_to :severity, :child_key => :sig_priority, :parent_key => :sig_id
   
-  #has n, :sig_references, :parent_key => :sig_rev, :child_key => [ :ref_seq ]
+  has n, :sig_references, :parent_key => :sig_id, :child_key => [ :sig_id ]
 
   property :sig_id, Serial, :key => true, :index => true
 
@@ -32,6 +32,10 @@ class Signature
   property :sig_gid, Integer, :lazy => true
 
   property :events_count, Integer, :index => true, :default => 0
+
+  def refs
+    sig_references 
+  end
 
   def severity_id
     sig_priority

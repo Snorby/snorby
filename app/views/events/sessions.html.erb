@@ -1,0 +1,16 @@
+<%= title "Listing Sessions <i>(#{number_with_delimiter(@events.pager.total)} unique unclassified sessions)</i>".html_safe, 'Listing Sessions' do -%>
+  <%= menu_item "Hotkeys", hotkey_events_path, 'events/keyboard.png', :class => 'snorbybox', :"data-width" => '753px' %>
+
+	<%= render :partial => 'events/menu' %>
+
+  <%= drop_down_for('Filter Options', 'icons/filter.png', 'options') do %>
+
+    <%= drop_down_item "All Unclassified Events", events_path, nil, {} %>
+
+  <% end %>
+<%- end -%>
+
+<%= render :partial => 'events/events' %>
+
+<%= render :partial => 'events/hotkeys' %>
+

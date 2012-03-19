@@ -1,4 +1,18 @@
-# Snorby 2.4.0
+# Snorby 2.5.0
+
+  * New Search UI
+  * New saved search feature
+  * New Session View
+  * Fixed classification logic
+  * Mass classification Job Queue optional
+  * Major Bug fixes / UI Improvements
+
+  * Note: Make sure to run bundle exec rake snorby:update
+    - id column added to event table
+    - Agg view table added
+    - events_wtih_join view added
+
+# Snorby 2.4.1
 
   * Fix new event note controller bug.
   * Minor view fixes / improvements.

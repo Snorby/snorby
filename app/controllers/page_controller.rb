@@ -53,6 +53,10 @@ class PageController < ApplicationController
   def search
   end
 
+  def search_json
+    render :json => Snorby::Search.json
+  end
+
   def force_cache
     Snorby::Jobs.force_sensor_cache
     render :json => {
@@ -74,13 +78,54 @@ class PageController < ApplicationController
     }
   end
 
-  def results    
-    params[:sort] = sort_column
-    params[:direction] = sort_direction
-    params[:classification_all] = true
+  def results
 
-    @events = Event.sorty(params)
-    @classifications ||= Classification.all
+    if params.has_key?(:search) && !params[:search].blank?
+
+      if params[:search].is_a?(String)
+        @value ||= JSON.parse(params[:search])
+        params[:search] = @value
+      end
+
+      enabled_count = 0
+      for item in params[:search] do
+        x = item.last
+        enabled = (x['enabled'] or x[:enabled]).to_s
+
+        if !enabled.blank?
+          enabled_count += 1 if enabled.to_s === "true"
+        else
+          enabled_count += 1 
+        end
+      end
+
+      if enabled_count == 0
+        redirect_to :back, :flash => {:error => "There was a problem parsing the search rules."}
+
+      else
+        if params[:search_id]
+          @search_object ||= params[:search_id]
+        end
+
+        params[:sort] = sort_column
+        params[:direction] = sort_direction
+        
+        params[:classification_all] = true
+      
+        @search = (params.has_key?(:authenticity_token) ? true : false)
+
+        @params = params.to_json
+
+        @events = Event.sorty(params)
+
+        @classifications ||= Classification.all
+      end
+
+    else
+      redirect_to :back, :flash => {
+        :error => "There was a problem parsing the search rules."
+      }
+    end
   end
 
   private
@@ -89,9 +134,13 @@ class PageController < ApplicationController
 
     case @range.to_sym
     when :last_24
-      
+
       @start_time = @now.yesterday
       @end_time = @now
+      
+      # Fix This
+      # @start_time = @now.yesterday.beginning_of_day
+      # @end_time = @now.end_of_day
       
       @cache = Cache.last_24(@start_time, @end_time)
 

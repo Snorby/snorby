@@ -1,11 +1,16 @@
 module ApplicationHelper
 
-  def display_time(time)
-    if Setting.utc?
-      time.utc.strftime('%A, %b %d, %Y at %H:%M:%S %::z')
-    else
-      time.strftime('%A, %b %d, %Y at %l:%M:%S %p')
-    end
+  def display_time(time, short=false)
+    # if Setting.utc?
+      # time.utc.strftime('%A, %b %d, %Y at %H:%M:%S %::z')
+    # else
+      # time.strftime('%A, %b %d, %Y at %l:%M:%S %p')
+    # end
+
+    time_string = '%A, %b %d, %Y at %l:%M:%S %p'
+    time_string = '%a, %b %d, %y at %I:%M:%S %p' if short
+
+    time.strftime(time_string)
   end
 
   def geoip?
@@ -70,8 +75,10 @@ module ApplicationHelper
 
   def sortable(column, title = nil)
     title ||= column.titleize
-    css_class = column == sort_column ? "current #{sort_direction} add_tipsy" : 'add_tipsy'
-    direction = column == sort_column && sort_direction == :asc ? :desc : :asc
+
+    css_class = column == sort_column ? "current #{sort_direction} add_tipsy table-sort-link" : 'add_tipsy table-sort-link'
+    
+    direction = column == sort_column && sort_direction == :desc ? :asc : :desc
     
     link = {
       :sort => column,
@@ -87,7 +94,12 @@ module ApplicationHelper
     end
 
     link_to title, link, {
-      :class => css_class, 
+      :class => css_class,
+      :"data-direction" => direction,
+      :"data-sort" => column,
+      :"data-page" => params[:page].to_i.zero? ? 1 : params[:page].to_i,
+      :"data-title" => params[:title],
+      :"data-search-id" => params[:search_id],
       :title => "Sort `#{title}` #{direction}"}
   end
 
@@ -255,5 +267,24 @@ module ApplicationHelper
 
     html.html_safe
   end
-  
+ 
+  #
+  # Ref Render
+  #
+  def pretty_reference(ref)
+    value = ref.value
+
+    result = case ref.type.to_sym
+    when :"N/A"
+      value
+    when :url
+      #link_to value, value
+      value
+    else
+      value
+    end
+
+    result
+  end
+
 end

@@ -2,17 +2,19 @@
 	
 	<% classification_css = event.classification.blank? ? nil : "classified" %>
 	
-  <div class='row <%= classification_css %> <%= 'geoip' if geoip? %>'>
-		
+  <div class='row <%= classification_css %> <%= 'geoip' if geoip? %> <%= 'sessions' if @session_view %>'>		
+
 		<div class='select small'><%= check_box_tag 'event-selector', nil, false, :class => "check_box_#{event.id}" %></div>
-		
-		<div class='important small'>
-			<% if event.favorite? %>
-				<div class='destroy-favorite enabled'></div>
-			<% else %>
-				<div class='create-favorite enabled'></div>
-			<% end %>
-		</div>
+
+    <% unless @session_view %>
+      <div class='important small'>
+        <% if event.favorite? %>
+          <div class='destroy-favorite enabled'></div>
+        <% else %>
+          <div class='create-favorite enabled'></div>
+        <% end %>
+      </div>
+    <% end %>
 		
 		<div class='severity small'><span class='severity sev<%= event.signature.severity_id || 0 %>'><%= event.signature.severity_id || 0 %></span></div>
 		<div class='click sensor' title='<%=h event.sensor.sensor_name %>'><%= truncate(event.sensor.sensor_name, :length => 17, :omission => '...') %></div>
@@ -23,7 +25,7 @@
 
         <% geoip_src = event.ip.geoip[:source] %>
 
-        <span class='click country_flag add_tipsy_html' original-title='<img class="flag" src="/images/flags/<%= geoip_src[:country_code2].downcase %>.png"> <%= geoip_src[:country_name] %>'><%= geoip_src[:country_code2] %></span>
+        <div class='click country_flag add_tipsy_html' original-title='<img class="flag" src="/images/flags/<%= geoip_src[:country_code2].downcase %>.png"> <%= geoip_src[:country_name] %>'><%= geoip_src[:country_code2] %></div>
 
       <% end %>
 		  <%= event.ip.present? ? event.ip.ip_src : 'N/A' %>
@@ -34,7 +36,7 @@
 
         <% geoip_dest = event.ip.geoip[:destination] %>
 
-        <span class='click country_flag add_tipsy_html' original-title='<img class="flag" src="/images/flags/<%= geoip_dest[:country_code2].downcase  %>.png"> <%= geoip_dest[:country_name] %>'><%= geoip_dest[:country_code2] %></span>
+        <div class='click country_flag add_tipsy_html' original-title='<img class="flag" src="/images/flags/<%= geoip_dest[:country_code2].downcase  %>.png"> <%= geoip_dest[:country_name] %>'><%= geoip_dest[:country_code2] %></div>
 
       <% end %>
 		  <%= event.ip.present? ? event.ip.ip_dst : 'N/A' %>
@@ -62,6 +64,13 @@
       <b title='Event ID: <%= event.sid %>.<%= event.cid %> &nbsp; <%= display_time(event.timestamp) %>' class='add_tipsy'><%= event.pretty_time %></b>
 			
 		</div>
+
+
+    <% if @session_view %>
+      <div class="click session-count" data-sessions="<%= event.number_of_events %>">
+        <span><%= number_with_delimiter event.number_of_events %></span>
+      </div>
+    <% end %>
 		
 	</div>
 	

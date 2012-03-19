@@ -1,0 +1,13 @@
+<select {{#if multiple}}multiple{{/if}} {{#if width}}style="width:{{width}};"{{/if}} 
+  class="add_chosen" 
+  {{#if placeholder}}data-placeholder="{{placeholder}}"{{/if}}
+  name="{{name}}">
+
+  {{#if placeholder}}<option value=""></option>{{/if}}
+
+  {{#data.value}}
+    <option value="{{id}}">{{value}}</option>
+  {{/data.value}}
+</select>
+
+

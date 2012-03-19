@@ -39,6 +39,7 @@ GEM
       open4
     Platform (0.4.0)
     RedCloth (4.2.9)
+    RedCloth (4.2.9-java)
     actionmailer (3.1.0)
       actionpack (= 3.1.0)
       mail (~> 2.3.0)
@@ -72,6 +73,7 @@ GEM
     ansi (1.4.0)
     arel (2.2.1)
     bcrypt-ruby (3.0.1)
+    bcrypt-ruby (3.0.1-java)
     builder (3.0.0)
     capistrano (2.9.0)
       highline
@@ -105,6 +107,8 @@ GEM
       activemodel (~> 3.1.0)
       dm-core (~> 1.2.0)
     dm-aggregates (1.2.0)
+      dm-core (~> 1.2.0)
+    dm-ar-finders (1.2.0)
       dm-core (~> 1.2.0)
     dm-chunked_query (0.3.0)
       dm-aggregates (~> 1.0)
@@ -162,12 +166,20 @@ GEM
       dm-core (>= 0.10.2)
       ruby-graphviz (>= 0.9.10)
       thor (>= 0.13.4)
+    do_jdbc (0.10.7-java)
+      data_objects (= 0.10.7)
     do_mysql (0.10.7)
       data_objects (= 0.10.7)
+    do_mysql (0.10.7-java)
+      data_objects (= 0.10.7)
+      do_jdbc (= 0.10.7)
+      jdbc-mysql (>= 5.0.4)
     erubis (2.7.0)
     eventmachine (0.12.10)
+    eventmachine (0.12.10-java)
     fastercsv (1.5.4)
     ffi (1.0.9)
+    ffi (1.0.9-java)
     geoip (1.1.1)
     highline (1.6.5)
     hike (1.2.1)
@@ -176,10 +188,12 @@ GEM
     jammit (0.5.4)
       closure-compiler (>= 0.1.0)
       yui-compressor (>= 0.9.1)
+    jdbc-mysql (5.1.13)
     jquery-rails (1.0.16)
       railties (~> 3.0)
       thor (~> 0.14)
     json (1.6.1)
+    json (1.6.1-java)
     json_pure (1.6.1)
     mail (2.3.0)
       i18n (>= 0.4.0)
@@ -198,6 +212,7 @@ GEM
       net-ssh (>= 1.99.1)
     netaddr (1.5.0)
     nokogiri (1.5.0)
+    nokogiri (1.5.0-java)
     open4 (1.2.0)
     orm_adapter (0.0.5)
     pdfkit (0.4.6)
@@ -279,6 +294,7 @@ GEM
       POpen4 (>= 0.1.4)
 
 PLATFORMS
+  java
   ruby
 
 DEPENDENCIES
@@ -298,6 +314,7 @@ DEPENDENCIES
   devise_cas_authenticatable!
   dm-active_model (~> 1.2.0)
   dm-aggregates (~> 1.2.0)
+  dm-ar-finders (~> 1.2.0)
   dm-chunked_query (~> 0.3)
   dm-constraints (~> 1.2.0)
   dm-core (~> 1.2.0)

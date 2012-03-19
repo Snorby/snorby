@@ -1,0 +1,74 @@
+<%= title "Saved Searches" -%>
+
+<div id="searches" class='grid_12 page boxit'>
+
+<% if @searches.blank? %>
+
+  <div class="note no-click">
+    You don't currently have any saved searches. You can add them from the <%= link_to "advanced search", search_path %> builder.
+  </div>
+
+<% else %>
+	<table class='default' border="0" cellspacing="0" cellpadding="0">
+		<tr>		
+      <th>Public</th>
+			<th>Title</th>
+      <th>Author</th>
+      <th>Created At</th>
+			<th>Edit</th>
+			<th>Destroy</th>
+		</tr>
+		<tbody class='searches'>
+			<%= render @searches %>
+		</tbody>
+	</table>
+
+	<%= pager(@searches, '/saved/searches') %>
+<% end %>
+	
+</div>
+
+
+<script type="text/javascript" charset="utf-8">
+  $(function() {
+
+    $('#searches').on('click', 'td input[type="checkbox"]', function(e) {
+      var set_public = $(this).is(':checked');
+      var id = $(this).parents('tr').data('id');
+
+      $.post('/saved/searches/' + id, { id: id, public: set_public });
+    });
+
+    $('#searches').on('click', 'td.click', function(e) {
+      e.preventDefault();
+      var id = $(this).parents('tr').data('id');
+      
+      $('#searches table tr').animate({
+        opacity: 0.5
+      }, 1000);
+
+      flash_message.push({type: 'success', message: "Loading Search - Please Wait..."});flash();
+
+      $.getJSON('/saved/searches/' + id, function(data) {
+        var search = data.search.search;
+
+        var search_id = null;
+
+        if (current_user.id == data.user_id) {
+          search_id = "" + data.id + "";
+        };
+          
+        var params = {
+          search_id: search_id,
+          match_all: data.search.match_all,
+          search: search,
+          title: data.title,
+          authenticity_token: csrf
+        };
+        post_to_url('/results', params);
+      });
+
+      return false;
+    });
+  });
+</script>
