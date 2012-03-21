@@ -122,6 +122,7 @@ function post_to_url(path, params, method) {
     };
   };
 
+  document.body.appendChild(form);
   form.submit();
 };
 
@@ -575,23 +576,29 @@ function set_classification (class_id) {
 	var current_page = $('div#events').attr('data-action');
 	var current_page_number = $('div#events').attr('data-page');
 
+  var direction = $('div#events').attr('data-direction');
+  var sort = $('div#events').attr('data-sort');
+
   var classify_events = function() {
     $.post('/events/classify', {events: selected_events, classification: class_id, authenticity_token: csrf}, function() {
       if (current_page == "index") {
         clear_selected_events();
-        $.getScript('/events?page=' + current_page_number);
+        $.getScript('/events?direction='+direction+'&sort='+sort+'&page=' + current_page_number);
       } else if (current_page == "queue") {
         clear_selected_events();
-        $.getScript('/events/queue?page=' + current_page_number);
+        $.getScript('/events/queue?direction='+direction+'&sort='+sort+'&page=' + current_page_number);
       } else if (current_page == "history") {
         clear_selected_events();
-        $.getScript('/events/history?page=' + current_page_number);
+        $.getScript('/events/history?direction='+direction+'&sort='+sort+'&page=' + current_page_number);
       } else if (current_page == "results") {
         clear_selected_events();
 
         if ($('div#search-params').length > 0) {
 
           var search_data = JSON.parse($('div#search-params').text());
+
+          var direction = $('div#results').attr('data-direction');
+          var sort = $('div#results').attr('data-sort');
 
           if (search_data) {
             $.ajax({
@@ -601,7 +608,9 @@ function set_classification (class_id) {
               data: {
                 match_all: search_data.match_all,
                 search: search_data.search,
-                authenticity_token: csrf
+                authenticity_token: csrf,
+                direction: direction,
+                sort: sort
               },
               cache: false,
               type: 'POST',
@@ -639,13 +648,13 @@ function set_classification (class_id) {
         count = $('div#sessions-event-count-selected').data('count');
       };
 
-      $.post('/events/classify_sessions', {
+      $.post('/events/classify_sessions',{
         events: selected_events, 
         classification: class_id, 
         authenticity_token: csrf
       }, function(data) {
         clear_selected_events();
-        $.getScript('/events/sessions?page=' + current_page_number);
+        $.getScript('/events/sessions?direction=' + direction + '&sort=' + sort + '&page=' + current_page_number);
 
         flash_message.push({type: 'success', message: "Event(s) Classified Successfully ("+count+" sessions)"});
       });
@@ -1474,7 +1483,7 @@ var Snorby = {
         '</div>' +
         '</td>' +
         '<td class="last" style="width:45px;padding-right:6px;padding-left:0px;">' +
-        '<a href="/results?search%5Bsignature_name%5D={{sig_name}}&title={{sig_name}}">View</a>' +
+        '<a href="results?match_all=true&search%5Bsignature%5D%5Bcolumn%5D=signature&search%5Bsignature%5D%5Boperator%5D=is&search%5Bsignature%5D%5Bvalue%5D={{sig_id}}&title={{sig_name}}">View</a>' +
         '</td>' +
         '</tr>{{/each}}';
       return Snorby.templates.render(template, data);

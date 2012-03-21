@@ -1,3 +1,12 @@
+# Snorby 2.5.1
+
+  * Fixed Firefox JS/search issues
+  * Sort/Direction respected after classification
+  * Fixed issue when mass classification is ran in the background.
+  * Fixed popup box typo
+  * Fixed issue with signature listing/view button
+  * Fixed a timestamp/sql format issue with older versions of mysql
+
 # Snorby 2.5.0
 
   * New Search UI
