@@ -276,7 +276,12 @@ class Event
   end
 
   def self.update_classification_by_session(ids, classification, user_id=nil)
-    @classification = Classification.get(classification.to_i)
+
+    @classification = if classification.to_i.zero?
+      "NULL"
+    else
+      Classification.get(classification.to_i)
+    end
 
     uid = if user_id
       user_id
@@ -311,7 +316,11 @@ class Event
 
   def self.update_classification(ids, classification, user_id=nil)
 
-    @classification = Classification.get(classification.to_i)
+    @classification = if classification.to_i.zero?
+      "NULL"
+    else
+      Classification.get(classification.to_i)
+    end
 
     uid = if user_id
       user_id

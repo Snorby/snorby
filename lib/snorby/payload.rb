@@ -49,6 +49,9 @@ module Snorby
         0.step(@bytes.length, @width) {|i|
           string = @bytes[i,@width]
 
+          # p string
+          # string.gsub!(/\020/, " ")
+
           hex = string.unpack("H*")[0]
           hex.upcase! if @case == :upper
 
@@ -67,7 +70,7 @@ module Snorby
           end
 
           if @new_lines
-            string.gsub!(/[\x0a]/, "\n")
+            string.gsub!(/[\x0a]/, ".")
             string.gsub!(/[\040\177-\377]/, '.')
           else
             string.gsub!(/[\000-\040\177-\377]/, ".")

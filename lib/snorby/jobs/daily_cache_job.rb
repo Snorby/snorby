@@ -146,8 +146,8 @@ module Snorby
       def build_cache(day_start, day_end)
 
         event = db_select(%{
-          select cid from event where timestamp >= '#{@stime}' 
-          and timestamp < '#{@etime}' and sid = #{@sensor.sid.to_i} 
+          select cid from event where timestamp >= '#{@stime.to_s(:db)}' 
+          and timestamp < '#{@etime.to_s(:db)}' and sid = #{@sensor.sid.to_i} 
           order by timestamp desc limit 1
         })
 

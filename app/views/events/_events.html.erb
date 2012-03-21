@@ -1,4 +1,4 @@
-<div id="events" class='grid_12 boxit' data-action='<%= params[:action] %>' data-page='<%= params[:page].to_i %>'>
+<div id="events" data-direction="<%= params[:direction] %>" data-sort="<%= params[:sort] %>" class='grid_12 boxit' data-action='<%= params[:action] %>' data-page='<%= params[:page].to_i %>'>
 	
 	<%= form_tag mass_update_events_path do %>
 	

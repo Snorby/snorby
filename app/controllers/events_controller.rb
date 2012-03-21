@@ -207,7 +207,7 @@ class EventsController < ApplicationController
       ids = Event.get_collection_id_string(sql)
 
       if params[:jobqueue]
-        Delayed::Job.enqueue(Snorby::Jobs::MassClassification.new(params[:classification_id], options, User.current_user.id, reclassify))
+        Delayed::Job.enqueue(Snorby::Jobs::MassClassification.new(ids, params[:classification_id], User.current_user.id))
       else
         Event.update_classification(ids, params[:classification_id], User.current_user.id)
       end
