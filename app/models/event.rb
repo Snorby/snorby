@@ -280,7 +280,7 @@ class Event
     @classification = if classification.to_i.zero?
       "NULL"
     else
-      Classification.get(classification.to_i)
+      Classification.get(classification.to_i).id
     end
 
     uid = if user_id
@@ -290,7 +290,7 @@ class Event
     end
 
     if @classification
-      update = "UPDATE `events_with_join` as event SET `classification_id` = #{@classification.id}, `user_id` = #{uid} WHERE "
+      update = "UPDATE `events_with_join` as event SET `classification_id` = #{@classification}, `user_id` = #{uid} WHERE "
       event_data = ids.split(',');
       sql = "select * from events_with_join as event where "
       events = []
