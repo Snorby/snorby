@@ -136,7 +136,7 @@
 		<ul class='box-list'>
 			<% @recent_events.each do |event| %>
         <li>
-          <%= link_to truncate(event.signature.name, :length => 25), results_path(:title => "#{truncate(event.signature.name, :length => 40)}", 
+          <%= link_to truncate(event.signature.name, :length => 35), results_path(:title => "#{truncate(event.signature.name, :length => 40)}", 
                 "match_all"=>"true", "search"=>{"sensor"=>{"column"=>"signature", "operator"=>"is", "value"=> event.signature.sig_id } }), :title => event.signature.name %> 
           <span>
             <%= number_with_delimiter (event.signature.events_count.zero? ? Event.count(:sig_id => event.signature.sig_id) : event.signature.events_count) %>

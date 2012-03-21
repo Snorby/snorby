@@ -14,7 +14,15 @@
 	</td>
 
   <td class='last' style="width:45px;padding-right:6px;padding-left:0px;">
-    <%= link_to "View", results_path(:title => "#{signature.sig_name}", :search => { :signature_name => signature.sig_name }) %>
+    <%= link_to "View", results_path(:title => "#{signature.sig_name}",
+        :match_all => true,
+        :search => {
+        :signature => {
+          :column => :signature,
+          :operator => :is,
+          :value => signature.sig_id
+           }
+        }) %>
   </td>
 </tr>
 

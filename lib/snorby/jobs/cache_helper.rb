@@ -255,7 +255,7 @@ module Snorby
         sql = %{
           select min(cid), max(cid) from event USE INDEX (index_timestamp_cid_sid)
           where 
-          timestamp >= '#{@stime}' and timestamp < '#{@etime}' 
+          timestamp >= '#{@stime.to_s(:db)}' and timestamp < '#{@etime.to_s(:db)}' 
           and sid = #{@sensor.sid.to_i};
         } 
 
@@ -265,8 +265,8 @@ module Snorby
       def sql_event_count
         sql = %{
           select count(*) from event 
-          where sid = #{@sensor.sid.to_i} and timestamp >= '#{@stime}' 
-          and timestamp < '#{@etime}'
+          where sid = #{@sensor.sid.to_i} and timestamp >= '#{@stime.to_s(:db)}' 
+          and timestamp < '#{@etime.to_s(:db)}'
         }
 
         db_select(sql)
@@ -277,8 +277,8 @@ module Snorby
           select signature, sig_name, c as `count(*)` from
           (select signature,  count(*) as c from event  
           join signature  on event.signature = signature.sig_id  
-          where timestamp >= '#{@stime}' 
-          and timestamp < '#{@etime}' 
+          where timestamp >= '#{@stime.to_s(:db)}' 
+          and timestamp < '#{@etime.to_s(:db)}' 
           and sid = #{@sensor.sid.to_i}
           group by signature) a 
           inner join signature b on a.signature = b.sig_id
@@ -291,8 +291,8 @@ module Snorby
         sql = %{
           select INET_NTOA(ip_src), count(*) from event USE INDEX (index_timestamp_cid_sid) 
           inner join iphdr on event.cid  = iphdr.cid 
-          and event.sid = iphdr.sid where timestamp >= '#{@stime}' 
-          and timestamp < '#{@etime}'
+          and event.sid = iphdr.sid where timestamp >= '#{@stime.to_s(:db)}' 
+          and timestamp < '#{@etime.to_s(:db)}'
           and event.sid = #{@sensor.sid.to_i}
           group by INET_NTOA(ip_src); 
         }
@@ -304,8 +304,8 @@ module Snorby
         sql = %{
           select INET_NTOA(ip_dst), count(*) from event USE INDEX (index_timestamp_cid_sid)
           inner join iphdr on event.cid  = iphdr.cid 
-          and event.sid = iphdr.sid where timestamp >= '#{@stime}' 
-          and timestamp < '#{@etime}'
+          and event.sid = iphdr.sid where timestamp >= '#{@stime.to_s(:db)}' 
+          and timestamp < '#{@etime.to_s(:db)}'
           and event.sid = #{@sensor.sid.to_i}
           group by INET_NTOA(ip_dst); 
         }
@@ -317,8 +317,8 @@ module Snorby
         sql = %{
           select sig_priority, count(*) from event USE INDEX (index_timestamp_cid_sid) 
           inner join signature on event.signature = signature.sig_id 
-          where timestamp >= '#{@stime}' 
-          and timestamp < '#{@etime}'
+          where timestamp >= '#{@stime.to_s(:db)}' 
+          and timestamp < '#{@etime.to_s(:db)}'
           and event.sid = #{@sensor.sid.to_i}
           group by sig_priority; 
         }
@@ -329,8 +329,8 @@ module Snorby
       def sql_sensor
         sql = %{
           select `sid`, count(*) from event   
-          where timestamp >= '#{@stime}' 
-          and timestamp < '#{@etime}'
+          where timestamp >= '#{@stime.to_s(:db)}' 
+          and timestamp < '#{@etime.to_s(:db)}'
           and event.sid = #{@sensor.sid.to_i}
           group by sid; 
         }
@@ -343,8 +343,8 @@ module Snorby
           select count(*) from event  USE INDEX (index_timestamp_cid_sid)
           inner join tcphdr on event.cid  = tcphdr.cid 
           and event.sid = tcphdr.sid
-          where timestamp >= '#{@stime}' 
-          and timestamp < '#{@etime}' and event.sid = #{@sensor.sid.to_i};
+          where timestamp >= '#{@stime.to_s(:db)}' 
+          and timestamp < '#{@etime.to_s(:db)}' and event.sid = #{@sensor.sid.to_i};
         }
 
         db_select(sql)
@@ -355,8 +355,8 @@ module Snorby
           select count(*) from event USE INDEX (index_timestamp_cid_sid)
           inner join udphdr on event.cid  = udphdr.cid 
           and event.sid = udphdr.sid
-          where timestamp >= '#{@stime}' 
-          and timestamp < '#{@etime}' and event.sid = #{@sensor.sid.to_i};
+          where timestamp >= '#{@stime.to_s(:db)}' 
+          and timestamp < '#{@etime.to_s(:db)}' and event.sid = #{@sensor.sid.to_i};
         }
 
         db_select(sql)
@@ -367,8 +367,8 @@ module Snorby
           select count(*) from event USE INDEX (index_timestamp_cid_sid) 
           inner join icmphdr on 
           event.cid  = icmphdr.cid and event.sid = icmphdr.sid 
-          where timestamp >= '#{@stime}' 
-          and timestamp < '#{@etime}' and event.sid = #{@sensor.sid.to_i};
+          where timestamp >= '#{@stime.to_s(:db)}' 
+          and timestamp < '#{@etime.to_s(:db)}' and event.sid = #{@sensor.sid.to_i};
         }
 
         db_select(sql)
