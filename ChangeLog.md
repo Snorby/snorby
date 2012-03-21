@@ -9,6 +9,8 @@
   * Fixed bug when classification is zero (unclassified)
   * Fixed login image copyright date
 
+  * Note: Make sure to run bundle exec rake snorby:update
+
 # Snorby 2.5.0
 
   * New Search UI
