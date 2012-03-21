@@ -126,6 +126,11 @@ class PageController < ApplicationController
         :error => "There was a problem parsing the search rules."
       }
     end
+
+  rescue ActionController::RedirectBackError
+    redirect_to search_path, :flash => {
+        :error => "There was a problem parsing the search rules."
+      }
   end
 
   private

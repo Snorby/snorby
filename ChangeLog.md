@@ -6,6 +6,8 @@
   * Fixed popup box typo
   * Fixed issue with signature listing/view button
   * Fixed a timestamp/sql format issue with older versions of mysql
+  * Fixed bug when classification is zero (unclassified)
+  * Fixed login image copyright date
 
 # Snorby 2.5.0
 
