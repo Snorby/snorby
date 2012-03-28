@@ -5,8 +5,8 @@ RSPEC_VERSION = '~> 2.0.0'
 DATAMAPPER = 'http://github.com/datamapper'
 DM_VERSION = '~> 1.2.0'
 
-gem 'rake', '0.9.2'
-gem 'thin', '1.3.1'
+gem 'rake', '~> 0.9.2'
+gem 'thin', '~> 1.3.1'
 
 gem 'rails',                       RAILS_VERSION
 gem 'jquery-rails'
@@ -53,8 +53,10 @@ gem 'chronic',                     '~> 0.3.0'
 gem 'pdfkit',                      '~> 0.4.6'
 gem 'ezprint',                     :git => 'http://github.com/mephux/ezprint.git', :branch => 'rails3', :require => 'ezprint'
 gem 'daemons',                     '~> 1.1.0'
-gem 'delayed_job',                 '~> 2.1.4'
-gem 'delayed_job_data_mapper',     '~> 1.0.0.rc', :git => 'http://github.com/Snorby/delayed_job_data_mapper.git'
+
+gem 'delayed_job',                 '~> 3.0.1'
+gem 'delayed_job_data_mapper',     '~> 1.0.0.rc', :git => 'https://github.com/collectiveidea/delayed_job_data_mapper.git'
+
 gem 'rmagick',                     '~> 2.13.1'
 
 gem 'dm-paperclip',                '~> 2.4.1', :git => 'http://github.com/Snorby/dm-paperclip.git'

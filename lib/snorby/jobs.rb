@@ -32,7 +32,7 @@ module Snorby
       Delayed::Backend::DataMapper::Job
     end
 
-    def self.run(obj, priority=1, time=Time.now)
+    def self.run(obj, priority=1, time=Time.now.utc.to_datetime)
       Delayed::Job.enqueue(obj, :priority => priority, :run_at => time)
     end
 
@@ -120,21 +120,21 @@ module Snorby
 
     def self.run_now!
       Delayed::Job.enqueue(Snorby::Jobs::SensorCacheJob.new(false), 
-      :priority => 1, :run_at => DateTime.now + 5.second)
+      :priority => 1, :run_at => Time.now.utc.to_datetime + 5.second)
 
       Delayed::Job.enqueue(Snorby::Jobs::DailyCacheJob.new(false), 
-      :priority => 1, :run_at => DateTime.now + 5.second)
+      :priority => 1, :run_at => Time.now.utc.to_datetime + 5.second)
 
       Delayed::Job.enqueue(Snorby::Jobs::GeoipUpdatedbJob.new, 
-      :priority => 1, :run_at => DateTime.now + 5.second)
+      :priority => 1, :run_at => Time.now.utc.to_datetime + 5.second)
     end
 
     def self.force_sensor_cache
       if Jobs.sensor_cache?
-        Jobs.sensor_cache.update(:run_at => DateTime.now + 5.second)
+        Jobs.sensor_cache.update(:run_at => Time.now.utc.to_datetime + 5.second)
       else
         Delayed::Job.enqueue(Snorby::Jobs::SensorCacheJob.new(false), 
-        :priority => 1, :run_at => DateTime.now + 5.second)
+        :priority => 1, :run_at => Time.now.utc.to_datetime + 5.second)
       end
     end
 

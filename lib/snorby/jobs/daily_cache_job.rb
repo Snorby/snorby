@@ -127,7 +127,7 @@ module Snorby
 
         Delayed::Job.enqueue(Snorby::Jobs::DailyCacheJob.new(false), 
                              :priority => 1, 
-                             :run_at => Time.now.tomorrow.beginning_of_day)
+                             :run_at => Time.now.tomorrow.utc.to_datetime.beginning_of_day)
 
       rescue => e
         puts e
