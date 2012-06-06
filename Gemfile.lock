@@ -1,12 +1,6 @@
 GIT
-  remote: http://github.com/Snorby/dm-paperclip.git
-  revision: f3101cc52a47a9627f2fd5cb23c94814630e4b21
-  specs:
-    dm-paperclip (2.4.1)
-
-GIT
   remote: http://github.com/Snorby/snorby_cas_authenticatable.git
-  revision: 18cca67306d688f48e3138ce3e6c194fcb7cef18
+  revision: 281a58b363683b624ec92b8ea2929f3c93cdf30d
   specs:
     devise_cas_authenticatable (1.0.0.alpha10)
       devise
@@ -31,6 +25,125 @@ GIT
       i18n
       tzinfo
 
+GIT
+  remote: https://github.com/datamapper/dm-active_model.git
+  revision: aa8927391fb7db6eadd38d9d7bfbf3d663fd87ac
+  specs:
+    dm-active_model (1.3.0.beta)
+      activemodel (~> 3.0)
+      dm-core (~> 1.3.0.beta)
+
+GIT
+  remote: https://github.com/datamapper/dm-aggregates
+  revision: 11d52a6d5f9033ce727b89f4b8bd2b95eef26dce
+  specs:
+    dm-aggregates (1.3.0.beta)
+      dm-core (~> 1.3.0.beta)
+
+GIT
+  remote: https://github.com/datamapper/dm-ar-finders
+  revision: b67a2e464895e1c4830992b5a9e91164fb2840b5
+  specs:
+    dm-ar-finders (1.3.0.beta)
+      dm-core (~> 1.3.0.beta)
+
+GIT
+  remote: https://github.com/datamapper/dm-constraints
+  revision: 67cfad8018ed40dba510f2b73b38ac19e4c572e0
+  specs:
+    dm-constraints (1.3.0.beta)
+      dm-core (~> 1.3.0.beta)
+
+GIT
+  remote: https://github.com/datamapper/dm-core
+  revision: 14246fb8fe0a4485904b6a71e1a21a13160d1570
+  specs:
+    dm-core (1.3.0.beta)
+      addressable (~> 2.2.6)
+      backports (~> 2.3.0)
+      virtus (~> 0.2.0)
+
+GIT
+  remote: https://github.com/datamapper/dm-do-adapter
+  revision: d295d77f3e4b66cc22c10046598b500d8fa24dec
+  specs:
+    dm-do-adapter (1.3.0.beta)
+      data_objects (~> 0.10.6)
+      dm-core (~> 1.3.0.beta)
+
+GIT
+  remote: https://github.com/datamapper/dm-migrations
+  revision: 2876a90a9d808fe9724c7778b5eac44d56749190
+  specs:
+    dm-migrations (1.3.0.beta)
+      dm-core (~> 1.3.0.beta)
+
+GIT
+  remote: https://github.com/datamapper/dm-mysql-adapter
+  revision: ab08f5f57b77867b882f5fe873574d5a6b1f23be
+  specs:
+    dm-mysql-adapter (1.3.0.beta)
+      dm-do-adapter (~> 1.3.0.beta)
+      do_mysql (~> 0.10.6)
+
+GIT
+  remote: https://github.com/datamapper/dm-observer
+  revision: d6d0983ad8ed543c9b98a6c46dbad6f739106af0
+  specs:
+    dm-observer (1.3.0.beta)
+      dm-core (~> 1.3.0.beta)
+
+GIT
+  remote: https://github.com/datamapper/dm-rails.git
+  revision: 5f3fb01a9d5f5adb17665a3bdabffd396d722e61
+  specs:
+    dm-rails (1.3.0.beta)
+      actionpack (~> 3.0)
+      dm-active_model (~> 1.3.0.beta)
+      railties (~> 3.0)
+
+GIT
+  remote: https://github.com/datamapper/dm-serializer
+  revision: 82ffecec1f44f5af3d1362d65e946c9b53cca7ab
+  specs:
+    dm-serializer (1.3.0.beta)
+      dm-core (~> 1.3.0.beta)
+      fastercsv (~> 1.5.4)
+      multi_json (~> 1.0.3)
+
+GIT
+  remote: https://github.com/datamapper/dm-timestamps
+  revision: 70b58b365a29a26af62fc580be6c57b97c2770ca
+  specs:
+    dm-timestamps (1.3.0.beta)
+      dm-core (~> 1.3.0.beta)
+
+GIT
+  remote: https://github.com/datamapper/dm-transactions
+  revision: 0f00dd41a593ea06347c815fedd297b58c5d5d99
+  specs:
+    dm-transactions (1.3.0.beta)
+      dm-core (~> 1.3.0.beta)
+
+GIT
+  remote: https://github.com/datamapper/dm-types
+  revision: 08966f30a9e1e9bdfc45b63c789d4a0ed24cd946
+  specs:
+    dm-types (1.3.0.beta)
+      bcrypt-ruby (~> 3.0.0)
+      dm-core (~> 1.3.0.beta)
+      fastercsv (~> 1.5.4)
+      multi_json (~> 1.0.3)
+      stringex (~> 1.3.0)
+      uuidtools (~> 2.1.2)
+
+GIT
+  remote: https://github.com/datamapper/dm-validations.git
+  revision: 22d10e0e3e7685f0e51a9bad255b972fbd273823
+  specs:
+    dm-validations (1.3.0.beta)
+      dm-core (~> 1.3.0.beta)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -39,83 +152,69 @@ GEM
       open4
     Platform (0.4.0)
     RedCloth (4.2.9)
-    RedCloth (4.2.9-java)
-    actionmailer (3.1.0)
-      actionpack (= 3.1.0)
-      mail (~> 2.3.0)
-    actionpack (3.1.0)
-      activemodel (= 3.1.0)
-      activesupport (= 3.1.0)
+    actionmailer (3.2.0)
+      actionpack (= 3.2.0)
+      mail (~> 2.4.0)
+    actionpack (3.2.0)
+      activemodel (= 3.2.0)
+      activesupport (= 3.2.0)
       builder (~> 3.0.0)
       erubis (~> 2.7.0)
-      i18n (~> 0.6)
-      rack (~> 1.3.2)
-      rack-cache (~> 1.0.3)
-      rack-mount (~> 0.8.2)
+      journey (~> 1.0.0)
+      rack (~> 1.4.0)
+      rack-cache (~> 1.1)
       rack-test (~> 0.6.1)
-      sprockets (~> 2.0.0)
-    activemodel (3.1.0)
-      activesupport (= 3.1.0)
-      bcrypt-ruby (~> 3.0.0)
+      sprockets (~> 2.1.2)
+    activemodel (3.2.0)
+      activesupport (= 3.2.0)
       builder (~> 3.0.0)
-      i18n (~> 0.6)
-    activerecord (3.1.0)
-      activemodel (= 3.1.0)
-      activesupport (= 3.1.0)
-      arel (~> 2.2.1)
+    activerecord (3.2.0)
+      activemodel (= 3.2.0)
+      activesupport (= 3.2.0)
+      arel (~> 3.0.0)
       tzinfo (~> 0.3.29)
-    activeresource (3.1.0)
-      activemodel (= 3.1.0)
-      activesupport (= 3.1.0)
-    activesupport (3.1.0)
+    activeresource (3.2.0)
+      activemodel (= 3.2.0)
+      activesupport (= 3.2.0)
+    activesupport (3.2.0)
+      i18n (~> 0.6)
       multi_json (~> 1.0)
-    addressable (2.2.6)
-    ansi (1.4.0)
-    arel (2.2.1)
+    addressable (2.2.7)
+    ansi (1.4.2)
+    arel (3.0.2)
+    backports (2.3.0)
     bcrypt-ruby (3.0.1)
-    bcrypt-ruby (3.0.1-java)
     builder (3.0.0)
-    capistrano (2.9.0)
+    capistrano (2.11.2)
       highline
       net-scp (>= 1.0.0)
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
-    capybara (1.1.1)
+    capybara (1.1.2)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       selenium-webdriver (~> 2.0)
       xpath (~> 0.1.4)
-    childprocess (0.2.2)
+    childprocess (0.3.1)
       ffi (~> 1.0.6)
     chronic (0.3.0)
-    closure-compiler (1.1.4)
-    daemons (1.1.4)
-    data_objects (0.10.7)
+    closure-compiler (1.1.6)
+    daemons (1.1.8)
+    data_objects (0.10.8)
       addressable (~> 2.1)
     delayed_job (3.0.1)
       activesupport (~> 3.0)
-    devise (1.4.9)
+    devise (1.5.3)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
-      warden (~> 1.0.3)
+      warden (~> 1.1)
     diff-lcs (1.1.3)
-    dm-active_model (1.2.0)
-      activemodel (~> 3.1.0)
-      dm-core (~> 1.2.0)
-    dm-aggregates (1.2.0)
-      dm-core (~> 1.2.0)
-    dm-ar-finders (1.2.0)
-      dm-core (~> 1.2.0)
     dm-chunked_query (0.3.0)
       dm-aggregates (~> 1.0)
       dm-core (~> 1.0)
-    dm-constraints (1.2.0)
-      dm-core (~> 1.2.0)
-    dm-core (1.2.0)
-      addressable (~> 2.2.6)
     dm-devise (1.5.0)
       devise (~> 1.3)
       dm-core (>= 1.0.2, < 1.3)
@@ -123,125 +222,77 @@ GEM
       dm-rails (>= 1.0.3, < 1.3)
       dm-serializer (>= 1.0.2, < 1.3)
       dm-timestamps (>= 1.0.2, < 1.3)
-    dm-do-adapter (1.2.0)
-      data_objects (~> 0.10.6)
-      dm-core (~> 1.2.0)
-    dm-migrations (1.2.0)
-      dm-core (~> 1.2.0)
-    dm-mysql-adapter (1.2.0)
-      dm-do-adapter (~> 1.2.0)
-      do_mysql (~> 0.10.6)
-    dm-observer (1.2.0)
-      dm-core (~> 1.2.0)
     dm-pager (1.1.0)
       dm-aggregates (>= 0.10.1)
       dm-core (>= 0.10.1)
-    dm-rails (1.2.0)
-      actionpack (~> 3.1.0)
-      dm-active_model (~> 1.2.0)
-      dm-core (~> 1.2.0)
-      railties (~> 3.1.0)
-    dm-serializer (1.2.1)
-      dm-core (~> 1.2.0)
-      fastercsv (~> 1.5.4)
-      json (~> 1.6.1)
-      json_pure (~> 1.6.1)
-      multi_json (~> 1.0.3)
-    dm-timestamps (1.2.0)
-      dm-core (~> 1.2.0)
-    dm-transactions (1.2.0)
-      dm-core (~> 1.2.0)
-    dm-types (1.2.1)
-      bcrypt-ruby (~> 3.0.0)
-      dm-core (~> 1.2.0)
-      fastercsv (~> 1.5.4)
-      json (~> 1.6.1)
-      multi_json (~> 1.0.3)
-      stringex (~> 1.3.0)
-      uuidtools (~> 2.1.2)
-    dm-validations (1.2.0)
-      dm-core (~> 1.2.0)
     dm-visualizer (0.1.0)
       dm-core (>= 0.10.2)
       ruby-graphviz (>= 0.9.10)
       thor (>= 0.13.4)
-    do_jdbc (0.10.7-java)
-      data_objects (= 0.10.7)
-    do_mysql (0.10.7)
-      data_objects (= 0.10.7)
-    do_mysql (0.10.7-java)
-      data_objects (= 0.10.7)
-      do_jdbc (= 0.10.7)
-      jdbc-mysql (>= 5.0.4)
+    do_mysql (0.10.8)
+      data_objects (= 0.10.8)
     erubis (2.7.0)
     eventmachine (0.12.10)
-    eventmachine (0.12.10-java)
     fastercsv (1.5.4)
-    ffi (1.0.9)
-    ffi (1.0.9-java)
-    geoip (1.1.1)
-    highline (1.6.5)
+    ffi (1.0.11)
+    geoip (1.1.2)
+    highline (1.6.11)
     hike (1.2.1)
-    home_run (1.0.4)
+    home_run (1.0.6)
     i18n (0.6.0)
     jammit (0.5.4)
       closure-compiler (>= 0.1.0)
       yui-compressor (>= 0.9.1)
-    jdbc-mysql (5.1.13)
-    jquery-rails (1.0.16)
-      railties (~> 3.0)
+    journey (1.0.3)
+    jquery-rails (2.0.1)
+      railties (>= 3.2.0, < 5.0)
       thor (~> 0.14)
-    json (1.6.1)
-    json (1.6.1-java)
-    json_pure (1.6.1)
-    mail (2.3.0)
+    json (1.6.6)
+    mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    mime-types (1.17.2)
-    minitest (2.7.0)
-    multi_json (1.0.3)
+    mime-types (1.18)
+    minitest (2.11.4)
+    multi_json (1.0.4)
     net-dns (0.6.1)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
       net-ssh (>= 2.0.9)
-    net-ssh (2.2.1)
+    net-ssh (2.3.0)
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
     netaddr (1.5.0)
-    nokogiri (1.5.0)
-    nokogiri (1.5.0-java)
-    open4 (1.2.0)
-    orm_adapter (0.0.5)
+    nokogiri (1.5.2)
+    open4 (1.3.0)
+    orm_adapter (0.0.7)
     pdfkit (0.4.6)
     polyglot (0.3.3)
-    rack (1.3.5)
-    rack-cache (1.0.3)
+    rack (1.4.1)
+    rack-cache (1.2)
       rack (>= 0.4)
-    rack-mount (0.8.3)
-      rack (>= 1.0.0)
     rack-ssl (1.3.2)
       rack
     rack-test (0.6.1)
       rack (>= 1.0)
-    rails (3.1.0)
-      actionmailer (= 3.1.0)
-      actionpack (= 3.1.0)
-      activerecord (= 3.1.0)
-      activeresource (= 3.1.0)
-      activesupport (= 3.1.0)
+    rails (3.2.0)
+      actionmailer (= 3.2.0)
+      actionpack (= 3.2.0)
+      activerecord (= 3.2.0)
+      activeresource (= 3.2.0)
+      activesupport (= 3.2.0)
       bundler (~> 1.0)
-      railties (= 3.1.0)
-    railties (3.1.0)
-      actionpack (= 3.1.0)
-      activesupport (= 3.1.0)
+      railties (= 3.2.0)
+    railties (3.2.0)
+      actionpack (= 3.2.0)
+      activesupport (= 3.2.0)
       rack-ssl (~> 1.3.2)
       rake (>= 0.8.7)
       rdoc (~> 3.4)
       thor (~> 0.14.6)
-    rake (0.9.2)
-    rdoc (3.11)
+    rake (0.9.2.2)
+    rdoc (3.12)
       json (~> 1.4)
     rmagick (2.13.1)
     rspec (2.0.1)
@@ -256,21 +307,21 @@ GEM
       rspec-expectations (~> 2.0.1)
     rspec-rails (2.0.1)
       rspec (~> 2.0.0)
-    ruby-graphviz (1.0.0)
-    rubycas-client (2.3.1)
+    ruby-graphviz (1.0.5)
+    rubycas-client (2.3.8)
       activesupport
-    rubyzip (0.9.4)
-    selenium-webdriver (2.10.0)
-      childprocess (>= 0.2.1)
-      ffi (= 1.0.9)
-      json_pure
+    rubyzip (0.9.6.1)
+    selenium-webdriver (2.20.0)
+      childprocess (>= 0.2.5)
+      ffi (~> 1.0)
+      multi_json (~> 1.0)
       rubyzip
     simple_form (1.2.2)
-    sprockets (2.0.3)
+    sprockets (2.1.2)
       hike (~> 1.2)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    stringex (1.3.0)
+    stringex (1.3.2)
     thin (1.3.1)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -280,11 +331,12 @@ GEM
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
-    turn (0.8.3)
+    turn (0.9.4)
       ansi
-    tzinfo (0.3.31)
+    tzinfo (0.3.32)
     uuidtools (2.1.2)
-    warden (1.0.6)
+    virtus (0.2.0)
+    warden (1.1.1)
       rack (>= 1.0)
     whois (2.3.0)
     xpath (0.1.4)
@@ -293,16 +345,12 @@ GEM
       POpen4 (>= 0.1.4)
 
 PLATFORMS
-  java
   ruby
 
 DEPENDENCIES
   RedCloth (~> 4.2.9)
-  actionmailer (= 3.1.0)
-  actionpack (= 3.1.0)
-  activesupport (= 3.1.0)
   ansi
-  bundler (~> 1.0.0)
+  bundler (= 1.1.3)
   capistrano
   capybara
   chronic (~> 0.3.0)
@@ -311,25 +359,24 @@ DEPENDENCIES
   delayed_job_data_mapper (~> 1.0.0.rc)!
   devise (~> 1.4)
   devise_cas_authenticatable!
-  dm-active_model (~> 1.2.0)
-  dm-aggregates (~> 1.2.0)
-  dm-ar-finders (~> 1.2.0)
+  dm-active_model!
+  dm-aggregates!
+  dm-ar-finders!
   dm-chunked_query (~> 0.3)
-  dm-constraints (~> 1.2.0)
-  dm-core (~> 1.2.0)
+  dm-constraints!
+  dm-core!
   dm-devise (~> 1.5)
-  dm-do-adapter (~> 1.2.0)
-  dm-migrations (~> 1.2.0)
-  dm-mysql-adapter (~> 1.2.0)
-  dm-observer (~> 1.2.0)
+  dm-do-adapter!
+  dm-migrations!
+  dm-mysql-adapter!
+  dm-observer!
   dm-pager (~> 1.1.0)
-  dm-paperclip (~> 2.4.1)!
-  dm-rails (~> 1.2.0)
-  dm-serializer (~> 1.2.0)
-  dm-timestamps (~> 1.2.0)
-  dm-transactions (~> 1.2.0)
-  dm-types (~> 1.2.0)
-  dm-validations (~> 1.2.0)
+  dm-rails!
+  dm-serializer!
+  dm-timestamps!
+  dm-transactions!
+  dm-types!
+  dm-validations!
   dm-visualizer (~> 0.1.0)
   ezprint!
   geoip (~> 1.1.1)
@@ -341,9 +388,7 @@ DEPENDENCIES
   net-dns (~> 0.6.1)
   netaddr (~> 1.5.0)
   pdfkit (~> 0.4.6)
-  rails (= 3.1.0)
-  railties (= 3.1.0)
-  rake (~> 0.9.2)
+  rails (= 3.2.0)
   rmagick (~> 2.13.1)
   rspec (~> 2.0.0)
   rspec-core (~> 2.0.0)

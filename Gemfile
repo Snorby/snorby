@@ -1,41 +1,62 @@
 source 'http://rubygems.org'
 
-RAILS_VERSION = '3.1.0'
+RAILS_VERSION = '3.2.0'
 RSPEC_VERSION = '~> 2.0.0'
 DATAMAPPER = 'http://github.com/datamapper'
 DM_VERSION = '~> 1.2.0'
 
-gem 'rake', '~> 0.9.2'
+# gem 'rake', '~> 0.9.2.2'
 gem 'thin', '~> 1.3.1'
 
 gem 'rails',                       RAILS_VERSION
 gem 'jquery-rails'
-gem 'bundler',                     '~> 1.0.0'
+gem 'bundler',                     '1.1.3'
 
 # DateTime Patches
 gem 'home_run',                    :require => 'date'
 
-gem 'activesupport',               RAILS_VERSION, :require => 'active_support'
-gem 'actionpack',                  RAILS_VERSION, :require => 'action_pack'
-gem 'actionmailer',                RAILS_VERSION, :require => 'action_mailer'
-gem 'railties',                    RAILS_VERSION, :require => 'rails'
-gem 'dm-core',                     DM_VERSION
-gem 'dm-rails',                    DM_VERSION
-gem 'dm-do-adapter',               DM_VERSION
-gem 'dm-active_model',             DM_VERSION
-gem 'dm-mysql-adapter',            DM_VERSION
+# gem 'activesupport',               RAILS_VERSION, :require => 'active_support'
+# gem 'actionpack',                  RAILS_VERSION, :require => 'action_pack'
+# gem 'actionmailer',                RAILS_VERSION, :require => 'action_mailer'
+# gem 'railties',                    RAILS_VERSION, :require => 'rails'
+
+gem 'dm-core', git: 'https://github.com/datamapper/dm-core'
+gem 'dm-active_model', git: 'https://github.com/datamapper/dm-active_model.git'
+gem 'dm-validations', git: 'https://github.com/datamapper/dm-validations.git'
+gem 'dm-rails', git: 'https://github.com/datamapper/dm-rails.git'
+gem 'dm-migrations', git: 'https://github.com/datamapper/dm-migrations'
+gem 'dm-types', git: 'https://github.com/datamapper/dm-types'
+gem 'dm-constraints', git: 'https://github.com/datamapper/dm-constraints'
+gem 'dm-transactions', git: 'https://github.com/datamapper/dm-transactions'
+gem 'dm-aggregates', git: 'https://github.com/datamapper/dm-aggregates'
+gem 'dm-timestamps', git: 'https://github.com/datamapper/dm-timestamps'
+gem 'dm-observer', git: 'https://github.com/datamapper/dm-observer'
+gem 'dm-serializer', git: 'https://github.com/datamapper/dm-serializer'
+
+gem 'dm-ar-finders', git: 'https://github.com/datamapper/dm-ar-finders'
+
+gem 'dm-do-adapter', git: 'https://github.com/datamapper/dm-do-adapter'
+gem 'dm-mysql-adapter', git: 'https://github.com/datamapper/dm-mysql-adapter'
+
+# gem 'dm-paperclip',                '~> 2.4.1', :git => 'http://github.com/Snorby/dm-paperclip.git'
+
+# gem 'dm-core',                     DM_VERSION
+# gem 'dm-rails',                    DM_VERSION
+# gem 'dm-do-adapter',               DM_VERSION
+# gem 'dm-active_model',             DM_VERSION
+# gem 'dm-mysql-adapter',            DM_VERSION
 
 gem 'dm-pager',                    '~> 1.1.0'
-gem "dm-ar-finders",               DM_VERSION
-gem 'dm-migrations',               DM_VERSION
-gem 'dm-types',                    DM_VERSION
-gem 'dm-validations',              DM_VERSION
-gem 'dm-constraints',              DM_VERSION
-gem 'dm-transactions',             DM_VERSION
-gem 'dm-aggregates',               DM_VERSION
-gem 'dm-timestamps',               DM_VERSION
-gem 'dm-observer',                 DM_VERSION
-gem 'dm-serializer',               DM_VERSION
+# gem "dm-ar-finders",               DM_VERSION
+# gem 'dm-migrations',               DM_VERSION
+# gem 'dm-types',                    DM_VERSION
+# gem 'dm-validations',              DM_VERSION
+# gem 'dm-constraints',              DM_VERSION
+# gem 'dm-transactions',             DM_VERSION
+# gem 'dm-aggregates',               DM_VERSION
+# gem 'dm-timestamps',               DM_VERSION
+# gem 'dm-observer',                 DM_VERSION
+# gem 'dm-serializer',               DM_VERSION
 gem 'dm-chunked_query',            '~> 0.3'
 
 # Deploy with Capistrano
@@ -58,8 +79,6 @@ gem 'delayed_job',                 '~> 3.0.1'
 gem 'delayed_job_data_mapper',     '~> 1.0.0.rc', :git => 'https://github.com/collectiveidea/delayed_job_data_mapper.git'
 
 gem 'rmagick',                     '~> 2.13.1'
-
-gem 'dm-paperclip',                '~> 2.4.1', :git => 'http://github.com/Snorby/dm-paperclip.git'
 
 gem 'net-dns',                     '~> 0.6.1'
 gem 'whois',                       '~> 2.3.0'
