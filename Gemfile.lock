@@ -169,6 +169,7 @@ GEM
       data_objects (= 0.10.8)
       do_jdbc (= 0.10.8)
       jdbc-mysql (>= 5.0.4)
+    env (0.3.0)
     erubis (2.7.0)
     eventmachine (0.12.10)
     fastercsv (1.5.5)
@@ -341,6 +342,7 @@ DEPENDENCIES
   dm-types (~> 1.2.0)
   dm-validations (~> 1.2.0)
   dm-visualizer (~> 0.1.0)
+  env
   ezprint!
   geoip (~> 1.1.1)
   home_run

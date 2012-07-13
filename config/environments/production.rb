@@ -38,7 +38,7 @@ Snorby::Application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Enable threaded mode
-  # config.threadsafe!
+  config.threadsafe!
   config.dependency_loading = true
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to

@@ -11,6 +11,7 @@ gem 'thin', '1.3.1', :platforms => :mri
 gem 'rails',                       RAILS_VERSION
 gem 'jquery-rails'
 gem 'bundler',                     '>= 1.0.0'
+gem 'env'
 
 # Jruby
 gem 'jruby-openssl',   :platforms => :jruby
