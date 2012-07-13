@@ -1,7 +1,7 @@
 <div id='new_note_box' class='event-note round'>
 	
 	<div class='note-avatar-holder'>
-    <%= image_tag(@user.gravatar ? get_gravatar_uri(@user.email) : @user.avatar.url(:small), :size => '32x32') %> 
+    <%= image_tag(get_gravatar_uri(@user.email), :size => '32x32') %> 
 	</div>
 	
 	<div class='username'>

@@ -37,3 +37,4 @@ config/snorby_config.yml
 config/database.yml
 
 config/snorby-geoip.dat
+snorby.war
