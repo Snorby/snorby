@@ -8,7 +8,7 @@ module Snorby
     attr_accessor :config_path, :path, :template_path
 
     def initialize
-      @path = File.join(Env.home.to_s, '.snorby')
+      @path = File.join(File.expand_path('../../../', __FILE__), 'config')
       @config_path = File.join(@path, 'snorby.yml')
       @template_path = File.join(File.expand_path('../../../', __FILE__), 'config', 'snorby-config-template.yml')
       @config = nil
