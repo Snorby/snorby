@@ -175,7 +175,6 @@ GEM
     fastercsv (1.5.5)
     ffi (1.0.11)
     ffi (1.0.11-java)
-    gem_plugin (0.2.3)
     geoip (1.1.2)
     highline (1.6.13)
     hike (1.2.1)
@@ -205,8 +204,6 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.18)
     minitest (3.1.0)
-    mongrel (1.1.5-java)
-      gem_plugin (>= 0.2.3)
     multi_json (1.0.4)
     net-dns (0.6.1)
     net-scp (1.0.4)
@@ -352,7 +349,6 @@ DEPENDENCIES
   jruby-rack-worker
   mail (~> 2.3)
   minitest
-  mongrel
   net-dns (~> 0.6.1)
   netaddr (~> 1.5.0)
   pdfkit (~> 0.4.6)

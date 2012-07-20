@@ -1,0 +1,44 @@
+# 
+# Production
+#
+# Change the production configuration for your environment.
+# 
+# USE THIS! 
+#
+production:
+  domain: 'demo.snorby.org'
+  wkhtmltopdf: /usr/local/bin/wkhtmltopdf
+  mailer_sender: 'snorby@snorby.org'
+  geoip_uri: "http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz"
+  rules:
+    - ""
+  authentication_mode: database
+
+#
+# Only Use For Development
+#
+development:
+  domain: localhost:3000
+  wkhtmltopdf: /Users/mephux/.rvm/gems/ruby-1.9.2-p0/bin/wkhtmltopdf
+  mailer_sender: 'snorby@snorby.org'
+  geoip_uri: "http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz"
+  rules: 
+    - "/Users/mephux/.snort/rules"
+    - "/Users/mephux/.snort/so_rules"
+  authentication_mode: database
+#  authentication_mode: cas
+#  cas_config:
+#    base_url: https://auth.server.com.br/
+#    login_url: https://auth.server.com.br/login?domain=server
+#    logout_url: https://auth.server.com.br/logout?domain=server
+
+#
+# Only Use For Testing
+#
+test:
+  domain: localhost:3000
+  wkhtmltopdf: /usr/local/bin/wkhtmltopdf
+  mailer_sender: 'snorby@snorby.org'
+  geoip_uri: "http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz"
+  authentication_mode: database
+

@@ -1,5 +1,4 @@
-require File.expand_path('../boot', __FILE__)
-require File.expand_path('../../lib/snorby/config', __FILE__).to_s
+re File.expand_path('../boot', __FILE__)
 
 # require 'rails/all'
 require 'action_controller/railtie'
@@ -11,37 +10,35 @@ require 'rails/test_unit/railtie'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env) if defined?(Bundler)
 
-setup = Snorby::Config.new
-setup.build
-
-Snorby::CONFIG_PATH = setup.config_path
-Snorby::CONFIG = setup.current_configuration
-
-# Default authentication to database
-unless Snorby::CONFIG.has_key?(:authentication_mode)
-  Snorby::CONFIG[:authentication_mode] = "database"
-end
-
-module Rails
-  class Application
-    class Configuration
-
-      def database_configuration
-        config = { "#{Rails.env.to_s}" => Snorby::CONFIG }
-      end
-
-    end
-  end
-end
-
-
 module Snorby
+
+  # Check For snorby_config.yml
+  unless File.exists?("config/snorby_config.yml")
+    puts "Snorby Configuration Error"
+    puts "* Please EDIT and rename config/snorby_config.example.yml to config/snorby_config.yml"
+    exit 1
+  end
   
+  # Check For database.yml
+  unless File.exists?("config/database.yml")
+    puts "Snorby Configuration Error"
+    puts "* Please EDIT and rename config/database.example.yml to config/database.yml"
+    exit 1
+  end
+
+  # Snorby Environment Specific Configurations
+  raw_config = File.read("config/snorby_config.yml")
+  CONFIG = YAML.load(raw_config)[Rails.env].symbolize_keys
+
+  # Default authentication to database
+  unless CONFIG.has_key?(:authentication_mode)
+    CONFIG[:authentication_mode] = "database"
+  end
+
   class Application < Rails::Application
 
     config.threadsafe!
     config.dependency_loading = true
-
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths += %W(#{config.root}/lib)
 
@@ -89,6 +86,7 @@ module Snorby
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
 
+    # SSL
     # config.force_ssl = true
   end
 

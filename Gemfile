@@ -16,7 +16,6 @@ gem 'env'
 # Jruby
 gem 'jruby-openssl',   :platforms => :jruby
 gem 'warbler', :platforms => :jruby
-gem 'mongrel', :platforms => :jruby
 gem 'jruby-rack-worker', :platforms => :jruby
 # gem 'glassfish', :platforms => :jruby
 
@@ -63,6 +62,10 @@ gem 'ezprint',                     :git => 'http://github.com/mephux/ezprint.git
 gem 'daemons',                     '~> 1.1.0'
 gem 'delayed_job',                 '~> 2.1.4'
 gem 'delayed_job_data_mapper',     '~> 1.0.0.rc', :git => 'http://github.com/Snorby/delayed_job_data_mapper.git'
+
+# Working On This
+# gem 'delayed_job',                 '~> 3.0'
+# gem 'delayed_job_data_mapper',     '~> 1.0.0.rc', :git => 'https://github.com/collectiveidea/delayed_job_data_mapper.git'
 
 # Old - Remove Avatar Support
 # gem 'rmagick',                     '~> 2.13.1'
