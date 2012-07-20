@@ -1,4 +1,4 @@
-re File.expand_path('../boot', __FILE__)
+require File.expand_path('../boot', __FILE__)
 
 # require 'rails/all'
 require 'action_controller/railtie'
@@ -12,17 +12,24 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 module Snorby
 
+  # Check Ruby Version
+  unless RUBY_VERSION.match(/^1.9/)
+    puts "Snorby requires Ruby version 1.9.x"
+    puts "We suggest using Ruby Version Manager (RVM) https://rvm.io/ to install the newest release"
+    exit 1
+  end
+
   # Check For snorby_config.yml
   unless File.exists?("config/snorby_config.yml")
     puts "Snorby Configuration Error"
-    puts "* Please EDIT and rename config/snorby_config.example.yml to config/snorby_config.yml"
+    puts "* Please EDIT and rename config/snorby_config.yml.example to config/snorby_config.yml"
     exit 1
   end
   
   # Check For database.yml
   unless File.exists?("config/database.yml")
     puts "Snorby Configuration Error"
-    puts "* Please EDIT and rename config/database.example.yml to config/database.yml"
+    puts "* Please EDIT and rename config/database.yml.example to config/database.yml"
     exit 1
   end
 
