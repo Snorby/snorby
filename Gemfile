@@ -60,6 +60,7 @@ gem 'chronic',                     '~> 0.3.0'
 gem 'pdfkit',                      '~> 0.4.6'
 gem 'ezprint',                     :git => 'http://github.com/mephux/ezprint.git', :branch => 'rails3', :require => 'ezprint'
 gem 'daemons',                     '~> 1.1.0'
+
 gem 'delayed_job',                 '~> 2.1.4'
 gem 'delayed_job_data_mapper',     '~> 1.0.0.rc', :git => 'http://github.com/Snorby/delayed_job_data_mapper.git'
 

@@ -125,8 +125,9 @@
 			<% @favers.each do |user| %>
 			<li class='has-image'>
 				<%= image_tag(get_gravatar_uri(user.email), :size => '16x16', :class => 'avatar-small') %> 
-				<%= link_to truncate(user.name, :length => 30), activity_events_path(:user_id => user.id), :title => user.name %> 
-				<span><%= number_with_delimiter user.favorites_count %></span>
+				<%= link_to truncate(user.name, :length => 30), results_path(:title => "#{truncate("Events Classified By " + user.name.to_s, :length => 60)}", 
+                "match_all"=>"true", "search"=>{"user"=>{"column"=>"user", "operator"=>"is", "value"=> user.id } }), :title => user.name %> 
+				<span><%= number_with_delimiter user.classify_count %></span>
 			</li>
 			<% end %>
 		</ul>
@@ -138,7 +139,7 @@
 		<ul class='box-list'>
 			<% @recent_events.each do |event| %>
         <li>
-          <%= link_to truncate(event.signature.name, :length => 35), results_path(:title => "#{truncate(event.signature.name, :length => 40)}", 
+          <%= link_to truncate(event.signature.name, :length => 28), results_path(:title => "#{truncate(event.signature.name, :length => 40)}", 
                 "match_all"=>"true", "search"=>{"sensor"=>{"column"=>"signature", "operator"=>"is", "value"=> event.signature.sig_id } }), :title => event.signature.name %> 
           <span>
             <%= number_with_delimiter (event.signature.events_count.zero? ? Event.count(:sig_id => event.signature.sig_id) : event.signature.events_count) %>

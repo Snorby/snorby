@@ -172,6 +172,18 @@ module Snorby
         @db_options ||= DataMapper.repository.adapter.options
       end
 
+      def clean_old_data
+        sql = [
+          "DELETE FROM data USING data LEFT OUTER JOIN event USING (sid,cid) WHERE event.sid IS NULL;",
+          "DELETE FROM iphdr USING iphdr LEFT OUTER JOIN event USING (sid,cid) WHERE event.sid IS NULL;",
+          "DELETE FROM tcphdr USING tcphdr LEFT OUTER JOIN event USING (sid,cid) WHERE event.sid IS NULL;",
+          "DELETE FROM icmphdr USING icmphdr LEFT OUTER JOIN event USING (sid,cid) WHERE event.sid IS NULL;"
+        ]
+        sql.each do |x|
+          db_execute(x)
+        end
+      end
+
       def update_classification_count
         sql = %{
           update classifications set events_count = (select count(*) 
@@ -369,6 +381,16 @@ module Snorby
           event.cid  = icmphdr.cid and event.sid = icmphdr.sid 
           where timestamp >= '#{@stime.to_s(:db)}' 
           and timestamp < '#{@etime.to_s(:db)}' and event.sid = #{@sensor.sid.to_i};
+        }
+
+        db_select(sql)
+      end
+
+      def latest_five_distinct_signatures
+        sql = %{
+          select signature from (
+            select signature, MAX(timestamp) as timestamp from event group by signature order by timestamp desc limit 5
+          ) as signature;
         }
 
         db_select(sql)

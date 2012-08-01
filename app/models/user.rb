@@ -96,6 +96,10 @@ class User
     self.name.to_s
   end
 
+  def classify_count
+    Event.count(:user_id => self.id.to_i) 
+  end
+
   def accepts_note_notifications?(event=false)
     if accept_notes == 1
       return true
