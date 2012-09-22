@@ -70,18 +70,47 @@ namespace :snorby do
       Snorby::Worker.stop
     end
 
+    count = 0
+    stopped = false
+    while !stopped 
+      
+      stopped = true unless Snorby::Worker.running?
+      sleep 5 
+
+      count += 1
+      if count > 10
+        STDERR.puts "[X] Error: Unable to stop the Snorby worker process."
+        exit -1
+      end
+    end
+
     unless Snorby::Worker.running?
       puts "* Removing old jobs"
       Snorby::Jobs.find.all.destroy
 
       puts "* Starting the Snorby worker process."
       Snorby::Worker.start
+      
+      count = 0
+      ready = false
+      while !ready 
+        
+        ready = true if Snorby::Worker.running?
+        sleep 5 
+
+        count += 1
+        if count > 10
+          ready  = true
+        end
+      end
+
 
       if Snorby::Worker.running?
         puts "* Adding jobs to the queue"
         Snorby::Jobs.run_now!
       else
-        puts "[X] Error: Unable to start the Snorby worker process."
+        STDERR.puts "[X] Error: Unable to start the Snorby worker process."
+        exit -1
       end
     end
 
