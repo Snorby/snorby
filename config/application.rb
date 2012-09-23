@@ -93,8 +93,10 @@ module Snorby
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
 
-    # SSL
-    # config.force_ssl = true
+    # Enable SSL if it was enabled in the configuration
+    if CONFIG.has_key?(:ssl) && CONFIG[:ssl]
+      config.force_ssl = true
+    end
   end
 
 end
