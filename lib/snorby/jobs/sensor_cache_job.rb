@@ -80,7 +80,7 @@ module Snorby
 
               end
 
-              #logit "Building Empty Cache - #{start_time} - #{@stop_time}"
+              logit "Building Empty Cache - #{start_time} - #{@stop_time}"
               tmp = Cache.first_or_create(:sid => @sensor.sid, :ran_at => start_time)
               tmp.update(:updated_at => DateTime.now)
               #next

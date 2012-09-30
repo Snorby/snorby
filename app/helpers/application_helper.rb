@@ -9,7 +9,9 @@ module ApplicationHelper
 
     time_zone = Time.parse(DateTime.now.to_s).strftime('%Z')
     time_string = '%A, %b %d, %Y at %l:%M:%S %p'
-    time_string = '%a, %b %d, %y at %I:%M:%S %p' if short
+    time_string = '%D %I:%M %p' if short
+
+
 
     "#{time.strftime(time_string)} #{time_zone}"
   end
@@ -38,7 +40,7 @@ module ApplicationHelper
   end
 
   def pretty_time(time)
-    time.strftime('%A, %B %d, %Y %I:%M %p')
+    time.strftime(format)
   end
 
   def format_note_body(text)
