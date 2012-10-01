@@ -76,7 +76,7 @@
       <% if Setting.update_notifications? %>
         if (!$.cookie('snorby-ignore-update')) {
           $.ajax({
-            url: 'http://www.snorby.org/version?current_version=<%= Snorby::VERSION%>',
+            url: 'https://www.snorby.org/version?current_version=<%= Snorby::VERSION%>',
             dataType: "jsonp",
             global: false,
             crossDomain: true,
