@@ -33,7 +33,7 @@
 
       <div id='snorbybox-form-full'>
         <%= label_tag "", "Select Sensors <i>(optional - Blank = All)</i>".html_safe %><br />
-        <%= select_tag :sensor_ids, options_from_collection_for_select(Sensor.all, :sid, :name), 
+        <%= select_tag :sensor_ids, options_from_collection_for_select(Sensor.all, :sid, :sensor_name), 
           { :multiple => true, 
             :size => 10,
             :id => "sensor_select",

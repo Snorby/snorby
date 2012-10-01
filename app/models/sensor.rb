@@ -20,13 +20,19 @@ class Sensor
 
   property :last_cid, Integer, :index => true
 
+  property :pending_delete, Boolean, :default => false
+
   property :events_count, Integer, :index => true, :default => 0
 
-  has n, :events, :child_key => :sid, :constraint => :destroy
+  has n, :metrics, 'Cache', :child_key => :sid, :constraint => :destroy!
 
-  has n, :ips, :child_key => :sid, :constraint => :destroy
+  has n, :daily_metrics, 'DailyCache', :child_key => :sid, :constraint => :destroy!
+
+  has n, :events, :child_key => :sid, :constraint => :destroy!
+
+  has n, :ips, :child_key => :sid, :constraint => :destroy!
   
-  has n, :notes, :child_key => :sid, :constraint => :destroy
+  has n, :notes, :child_key => :sid, :constraint => :destroy!
 
   def cache
     Cache.all(:sid => sid)
@@ -52,6 +58,7 @@ class Sensor
   def event_percentage
     begin
       total_event_count = Sensor.all.map(&:events_count).sum
+      return 0 if total_event_count.zero?
       "%.2f" % ((self.events_count.to_f / total_event_count.to_f) * 100).round(1)
     rescue FloatDomainError
       0
