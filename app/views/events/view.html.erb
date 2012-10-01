@@ -3,3 +3,10 @@
 <%= render :partial => 'events/events' %>
 
 <%= render :partial => 'events/hotkeys' %>
+
+<%# This code below inspired by Brett Cunningham %>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.row:last .click:first').click();
+	});
+</script>

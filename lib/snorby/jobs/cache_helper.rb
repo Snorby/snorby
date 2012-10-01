@@ -1,21 +1,3 @@
-# Snorby - All About Simplicity.
-# 
-# Copyright (c) 2010 Dustin Willis Webber (dustin.webber at gmail.com)
-# 
-# This program is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 2 of the License, or
-# (at your option) any later version.
-# 
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-# 
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
 module Snorby
   module Jobs
     module CacheHelper
@@ -170,6 +152,18 @@ module Snorby
 
       def db_options
         @db_options ||= DataMapper.repository.adapter.options
+      end
+
+      def clean_old_data
+        sql = [
+          "DELETE FROM data USING data LEFT OUTER JOIN event USING (sid,cid) WHERE event.sid IS NULL;",
+          "DELETE FROM iphdr USING iphdr LEFT OUTER JOIN event USING (sid,cid) WHERE event.sid IS NULL;",
+          "DELETE FROM tcphdr USING tcphdr LEFT OUTER JOIN event USING (sid,cid) WHERE event.sid IS NULL;",
+          "DELETE FROM icmphdr USING icmphdr LEFT OUTER JOIN event USING (sid,cid) WHERE event.sid IS NULL;"
+        ]
+        sql.each do |x|
+          db_execute(x)
+        end
       end
 
       def update_classification_count
@@ -369,6 +363,16 @@ module Snorby
           event.cid  = icmphdr.cid and event.sid = icmphdr.sid 
           where timestamp >= '#{@stime.to_s(:db)}' 
           and timestamp < '#{@etime.to_s(:db)}' and event.sid = #{@sensor.sid.to_i};
+        }
+
+        db_select(sql)
+      end
+
+      def latest_five_distinct_signatures
+        sql = %{
+          select signature from (
+            select signature, MAX(timestamp) as timestamp from event group by signature order by timestamp desc limit 5
+          ) as signature;
         }
 
         db_select(sql)

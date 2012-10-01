@@ -44,29 +44,29 @@ class Event
   property :timestamp, DateTime
 
   has n, :favorites, :parent_key => [ :sid, :cid ], 
-    :child_key => [ :sid, :cid ], :constraint => :destroy
+    :child_key => [ :sid, :cid ], :constraint => :destroy!
 
   has n, :users, :through => :favorites
 
   has 1, :severity, :through => :signature, :via => :sig_priority
 
   has 1, :payload, :parent_key => [ :sid, :cid ], 
-    :child_key => [ :sid, :cid ], :constraint => :destroy
+    :child_key => [ :sid, :cid ], :constraint => :destroy!
 
   has 1, :icmp, :parent_key => [ :sid, :cid ], 
-    :child_key => [ :sid, :cid ], :constraint => :destroy
+    :child_key => [ :sid, :cid ], :constraint => :destroy!
 
   has 1, :tcp, :parent_key => [ :sid, :cid ], 
-    :child_key => [ :sid, :cid ], :constraint => :destroy
+    :child_key => [ :sid, :cid ], :constraint => :destroy!
 
   has 1, :udp, :parent_key => [ :sid, :cid ], 
-    :child_key => [ :sid, :cid ], :constraint => :destroy
+    :child_key => [ :sid, :cid ], :constraint => :destroy!
 
   has 1, :opt, :parent_key => [ :sid, :cid ], 
-    :child_key => [ :sid, :cid ], :constraint => :destroy
+    :child_key => [ :sid, :cid ], :constraint => :destroy!
 
   has n, :notes, :parent_key => [ :sid, :cid ], 
-    :child_key => [ :sid, :cid ], :constraint => :destroy
+    :child_key => [ :sid, :cid ], :constraint => :destroy!
 
   belongs_to :user
 
@@ -280,7 +280,7 @@ class Event
     @classification = if classification.to_i.zero?
       "NULL"
     else
-      Classification.get(classification.to_i)
+      Classification.get(classification.to_i).id
     end
 
     uid = if user_id
@@ -290,7 +290,7 @@ class Event
     end
 
     if @classification
-      update = "UPDATE `events_with_join` as event SET `classification_id` = #{@classification.id}, `user_id` = #{uid} WHERE "
+      update = "UPDATE `events_with_join` as event SET `classification_id` = #{@classification}, `user_id` = #{uid} WHERE "
       event_data = ids.split(',');
       sql = "select * from events_with_join as event where "
       events = []

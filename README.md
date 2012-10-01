@@ -129,24 +129,4 @@ You can open the rails console at anytime and interact with the Snorby environme
 
 ## License
 
-Snorby - All About Simplicity.
-
-Copyright (c) 2010 Dustin Willis Webber (dustin.webber at gmail.com)
-
-Snorby is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-* Note: The snorby source code is 100% free and open source however we use highcharts for metrics
-and reporting. Please make sure you review the [highcharts](http://www.highcharts.com) licensing in detail [here](http://www.highcharts.com/license). 
-The below license only applies to snorby source code which can be identified with the below license in each file.
+Please refer to the LICENSE file found in the root of the snorby project.

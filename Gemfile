@@ -6,14 +6,21 @@ DATAMAPPER = 'http://github.com/datamapper'
 DM_VERSION = '~> 1.2.0'
 
 gem 'rake', '0.9.2'
-gem 'thin', '1.3.1'
+gem 'thin'
 
 gem 'rails',                       RAILS_VERSION
 gem 'jquery-rails'
-gem 'bundler',                     '~> 1.0.0'
+gem 'bundler',                     '>= 1.0.0'
+gem 'env'
+
+# Jruby
+gem 'jruby-openssl',   :platforms => :jruby
+gem 'warbler', :platforms => :jruby
+gem 'jruby-rack-worker', :platforms => :jruby
+# gem 'glassfish', :platforms => :jruby
 
 # DateTime Patches
-gem 'home_run',                    :require => 'date'
+gem 'home_run',                    :require => 'date', :platforms => :mri
 
 gem 'activesupport',               RAILS_VERSION, :require => 'active_support'
 gem 'actionpack',                  RAILS_VERSION, :require => 'action_pack'
@@ -53,17 +60,28 @@ gem 'chronic',                     '~> 0.3.0'
 gem 'pdfkit',                      '~> 0.4.6'
 gem 'ezprint',                     :git => 'http://github.com/mephux/ezprint.git', :branch => 'rails3', :require => 'ezprint'
 gem 'daemons',                     '~> 1.1.0'
+
 gem 'delayed_job',                 '~> 2.1.4'
 gem 'delayed_job_data_mapper',     '~> 1.0.0.rc', :git => 'http://github.com/Snorby/delayed_job_data_mapper.git'
-gem 'rmagick',                     '~> 2.13.1'
 
-gem 'dm-paperclip',                '~> 2.4.1', :git => 'http://github.com/Snorby/dm-paperclip.git'
+# Working On This
+# gem 'delayed_job',                 '~> 3.0'
+# gem 'delayed_job_data_mapper',     '~> 1.0.0.rc', :git => 'https://github.com/collectiveidea/delayed_job_data_mapper.git'
+
+# Old - Remove Avatar Support
+# gem 'rmagick',                     '~> 2.13.1'
+# gem 'dm-paperclip',                '~> 2.4.1', :git => 'http://github.com/Snorby/dm-paperclip.git'
 
 gem 'net-dns',                     '~> 0.6.1'
 gem 'whois',                       '~> 2.3.0'
 gem 'simple_form',                 '~> 1.2.2'
 gem 'geoip',                       '~> 1.1.1'
 gem 'netaddr',                     '~> 1.5.0'
+
+
+group(:development) do
+	gem "letter_opener"
+end
 
 group(:test) do
   gem 'capybara'

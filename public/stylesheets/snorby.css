@@ -1592,7 +1592,7 @@ div.page-loading{
 	width: 50px;
 }
 
-table.default td a{
+table.default td a {
 	padding: 3px 5px;
 	background-color: #e0e0e0;
 	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#ffffff',endColorstr='#e0e0e0');
@@ -1608,6 +1608,18 @@ table.default td a{
 	font-variant: normal;
 	border: 1px solid #9a9a9b;
 }
+
+table.default td a.disabled {
+	opacity: 0.5;
+	color: #e6e6e6;
+	cursor: default;
+}
+
+table.default td a.disabled:hover, table.default td a.disabled:active  {
+	background-color: #e0e0e0;
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#ffffff',endColorstr='#e0e0e0');
+	background: -webkit-gradient(linear,0% 0,0% 100%,from(#fff),to(#e0e0e0));
+	background: -moz-linear-gradient(-90deg,#fff,#e0e0e0);}
 
 table.default td a.loading{
 	background: url(../images/icons/pager.gif) no-repeat center center;
@@ -1718,6 +1730,16 @@ table.default tr th:last-child{
 	border-right: 1px solid #CDCDCD;
 }
 
+table.default tr.deleted {
+	-webkit-opacity: 0.5;
+	-moz-opacity: 0.5;
+	opacity: 0.5;
+}
+
+table.default tr.deleted td {
+	text-decoration: line-through;
+}
+
 table.default th img{
 	vertical-align: middle;
 	margin-top: -3px;
@@ -1781,6 +1803,18 @@ table.default tbody.top tr:first-child td{
 
 table.default td.last{
 	border-right: 1px solid #cdcdcd;
+}
+
+table.default th.sensor-actions {
+	width: 90px;
+}
+
+table.default th.admin-sensor-actions {
+	width: 130px;
+}
+
+table.default td.admin-sensor-actions a:first-child {
+	margin: 0 10px 0 0;
 }
 
 table.default tr:hover td{
@@ -3339,7 +3373,7 @@ strong.no-notes{
 	color: #acacac;
 }
 
-div#new_note{
+div#new_note{`
 	display: block;
 	position: relative;
 	overflow: visible;
@@ -3623,8 +3657,8 @@ img.avatar-small{
 }
 
 #settings .user-show-avatar img{
-	min-height: 100px;
-	min-width: 100px;
+	height: 100px;
+	width: 100px;
 	float: left;
 	margin-right: 10px;
 }

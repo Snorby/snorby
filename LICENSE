@@ -1,0 +1,33 @@
+Snorby - All About Simplicity.
+
+Copyright (c) 2012 Dustin Willis Webber (dustin.webber at gmail.com)
+
+Snorby is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Snorby is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Snorby.  If not, see <http://www.gnu.org/licenses/>.
+
+Neither the names of Licensor, nor the names of any contributors to 
+the Original Work, nor any of their trademarks or service marks, may 
+be used to endorse or promote products derived from this Original Work 
+without express prior permission of the Licensor. No license is granted 
+to the trademarks of Licensor even if such marks are included in the 
+Original Work. 
+
+The above copyright notice and this permission notice shall be included 
+in all copies or substantial portions of the Software. Not limited to but
+including the Software's footer, Web URL and Author Names.
+
+**Notice**
+The snorby source code is 100% free and open source however we use highcharts 
+for metrics and reporting. Please make sure you review the [highcharts](http://www.highcharts.com) 
+licensing in detail [here](http://www.highcharts.com/license). The license above 
+only applies to snorby source code (contact the Dustin Willis Webber if you have futher questions).

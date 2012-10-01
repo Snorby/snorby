@@ -4,7 +4,7 @@ class User
   
   include DataMapper::Resource
   include DataMapper::Validate
-  include Paperclip::Resource
+  # include Paperclip::Resource
   include Snorby::Model::Counter
 
   cattr_accessor :current_user
@@ -61,19 +61,18 @@ class User
   # Define created_at and updated_at timestamps
   timestamps :at
 
-  has_attached_file :avatar,
-  :styles => {
-    :large => "500x500>",
-    :medium => "300x300>",
-    :small => "100x100#"
-  }, :default_url => '/images/default_avatar.png', :processors => [:cropper],
-    :whiny => false
+  property :avatar, String, :default => false
+  # has_attached_file :avatar,
+  # :styles => {
+    # :large => "500x500>",
+    # :medium => "300x300>",
+    # :small => "100x100#"
+  # }, :default_url => '/images/default_avatar.png', :processors => [:cropper],
+    # :whiny => false
 
-  ##validates_attachment_content_type :avatar, :content_type => ["image/png", "image/gif", "image/jpeg"]
-
-  validates_attachment_content_type :avatar, :content_type => ['image/jpeg', 'image/gif', 'image/png', 'image/pjpeg', 'image/x-png'], 
-  :message => 'Uploaded file is not an image', 
-  :if => Proc.new { |profile| profile.avatar.file? }
+  # validates_attachment_content_type :avatar, :content_type => ['image/jpeg', 'image/gif', 'image/png', 'image/pjpeg', 'image/x-png'], 
+  # :message => 'Uploaded file is not an image', 
+  # :if => Proc.new { |profile| profile.avatar.file? }
 
   has n, :notifications, :constraint => :destroy
 
@@ -100,6 +99,10 @@ class User
   def demo?
     return true if email == 'demo@snorby.org'
     false
+  end
+
+  def classify_count
+    Event.count(:user_id => self.id.to_i) 
   end
 
   def accepts_note_notifications?(event=false)

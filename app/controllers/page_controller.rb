@@ -1,6 +1,7 @@
 class PageController < ApplicationController
 
   helper_method :sort_column, :sort_direction, :sort_page
+  include Snorby::Jobs::CacheHelper
 
   def dashboard
     @now = Time.now
@@ -36,7 +37,8 @@ class PageController < ApplicationController
 
     @last_cache = @cache.cache_time
 
-    sigs = Event.all(:limit => 5, :order => [:timestamp.desc], :fields => [:sig_id], :unique => true).map(&:signature).map(&:sig_id)
+    sigs = latest_five_distinct_signatures
+
     @recent_events = [];
     sigs.each{|s| @recent_events << Event.last(:sig_id => s) }
 

@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
     def require_administrative_privileges
       return true if user_signed_in? && current_user.admin
-      redirect_to root_path
+      redirect_to root_path, :notice => 'Your do not have sufficent privledges to complete this action.'
     end
 
     def check_for_demo_user
