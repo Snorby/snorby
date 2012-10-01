@@ -146,7 +146,7 @@ class Cache
       end
       
       @metrics << { 
-        :name => sensor.name, 
+        :name => sensor.sensor_name, 
         :data => count.values,
         :range => count.keys.collect {|x| "'#{x.split('-').last}'" }
       }

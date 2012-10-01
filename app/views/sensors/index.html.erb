@@ -25,7 +25,7 @@
 			<th>Last Event</th>
 			<th>Event Count</th>
 			<th>Event %</th>
-			<th>Events</th>
+			<th class="<%= current_user.admin ? "admin-sensor-actions" : "sensor-actions" %>"></th>
 		</tr>
 		<tbody class='sensors'>
 			<%= render @sensors %>

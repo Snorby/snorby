@@ -78,6 +78,11 @@ gem 'simple_form',                 '~> 1.2.2'
 gem 'geoip',                       '~> 1.1.1'
 gem 'netaddr',                     '~> 1.5.0'
 
+
+group(:development) do
+	gem "letter_opener"
+end
+
 group(:test) do
   gem 'capybara'
 
