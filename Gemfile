@@ -6,7 +6,7 @@ DATAMAPPER = 'http://github.com/datamapper'
 DM_VERSION = '~> 1.2.0'
 
 gem 'rake', '0.9.2'
-gem 'thin', '1.3.1', :platforms => :mri
+gem 'thin'
 
 gem 'rails',                       RAILS_VERSION
 gem 'jquery-rails'
@@ -77,6 +77,11 @@ gem 'whois',                       '~> 2.3.0'
 gem 'simple_form',                 '~> 1.2.2'
 gem 'geoip',                       '~> 1.1.1'
 gem 'netaddr',                     '~> 1.5.0'
+
+
+group(:development) do
+	gem "letter_opener"
+end
 
 group(:test) do
   gem 'capybara'

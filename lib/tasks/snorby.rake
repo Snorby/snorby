@@ -61,6 +61,17 @@ namespace :snorby do
     `jammit`
   end
 
+  desc 'Start Snorby Worker if not running'
+  task :start_worker => :environment do
+
+    if Snorby::Worker.running?
+      exit 0
+    end
+    
+    # otherwise, restart worker.
+    Rake::Task['snorby:restart_worker'].invoke
+  end
+
   desc 'Restart Worker/Jobs'
   task :restart_worker => :environment do
 

@@ -64,7 +64,7 @@
 
           <li class='right last-cache-time'>
             <% if @last_cache.present? %>
-            <i>Updated: <%= @last_cache.strftime('%D %l:%M:%S %p') %></i>
+            <i>Updated: <%= display_time(@last_cache, true) %></i>
             <% end %>
           </li>
 
