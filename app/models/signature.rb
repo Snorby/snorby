@@ -53,9 +53,9 @@ class Signature
       if in_words
         "#{self.events_count}/#{count}"
       else
-        "%.2f" % ((self.events_count.to_f / count.to_f) * 100).round(2)
+        return 0 if Event.count.zero?
+         "%.2f" % ((self.events_count.to_f / count.to_f) * 100).round(2)
       end
-
     rescue FloatDomainError
       0
     end

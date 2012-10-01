@@ -2447,4 +2447,10 @@ jQuery(document).ready(function($) {
     return false;
   });
 
+  // Disable clicking on deleting rows
+  $('tr.deleted *').live('click', function(e){
+    $('.edit-sensor-name').unbind('click');
+    e.preventDefault();
+  })
+
 });

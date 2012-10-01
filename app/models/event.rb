@@ -44,29 +44,29 @@ class Event
   property :timestamp, DateTime
 
   has n, :favorites, :parent_key => [ :sid, :cid ], 
-    :child_key => [ :sid, :cid ], :constraint => :destroy
+    :child_key => [ :sid, :cid ], :constraint => :destroy!
 
   has n, :users, :through => :favorites
 
   has 1, :severity, :through => :signature, :via => :sig_priority
 
   has 1, :payload, :parent_key => [ :sid, :cid ], 
-    :child_key => [ :sid, :cid ], :constraint => :destroy
+    :child_key => [ :sid, :cid ], :constraint => :destroy!
 
   has 1, :icmp, :parent_key => [ :sid, :cid ], 
-    :child_key => [ :sid, :cid ], :constraint => :destroy
+    :child_key => [ :sid, :cid ], :constraint => :destroy!
 
   has 1, :tcp, :parent_key => [ :sid, :cid ], 
-    :child_key => [ :sid, :cid ], :constraint => :destroy
+    :child_key => [ :sid, :cid ], :constraint => :destroy!
 
   has 1, :udp, :parent_key => [ :sid, :cid ], 
-    :child_key => [ :sid, :cid ], :constraint => :destroy
+    :child_key => [ :sid, :cid ], :constraint => :destroy!
 
   has 1, :opt, :parent_key => [ :sid, :cid ], 
-    :child_key => [ :sid, :cid ], :constraint => :destroy
+    :child_key => [ :sid, :cid ], :constraint => :destroy!
 
   has n, :notes, :parent_key => [ :sid, :cid ], 
-    :child_key => [ :sid, :cid ], :constraint => :destroy
+    :child_key => [ :sid, :cid ], :constraint => :destroy!
 
   belongs_to :user
 
