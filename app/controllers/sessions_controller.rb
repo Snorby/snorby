@@ -28,9 +28,9 @@ class SessionsController < Devise::SessionsController
     # We actually need to hardcode this as Rails default responder doesn't
     # support returning empty response on GET request
     respond_to do |format|
-      format.html(*navigational_formats) { redirect_to redirect_path }
       format.html do
         head :no_content
+        redirect_to redirect_path
       end
       format.json { render :json => { status: "success", user: @current_user }}
     end
