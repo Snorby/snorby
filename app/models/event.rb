@@ -401,6 +401,37 @@ class Event
     "#{timestamp.strftime('%m/%d/%Y')}"
   end
 
+
+  def detailed_json 
+
+    geoip = Setting.geoip?
+    ip = self.ip
+
+    event = {
+      :sid => self.sid,
+      :cid => self.cid,
+      :hostname => self.sensor.sensor_name,
+      :severity => self.signature.sig_priority,
+      :ip_src => ip.ip_src.to_s,
+      :ip_dst => ip.ip_dst.to_s,
+      :timestamp => self.pretty_time,
+      :datetime => self.timestamp.strftime('%A, %b %d, %Y at %I:%M:%S %p'),
+      :message =>  self.signature.name, 
+      :geoip => false
+    }
+
+    if geoip
+      event.merge!({
+        :geoip => true,
+        :src_geoip => ip.geoip[:source],
+        :dst_geoip => ip.geoip[:destination]
+      })
+    end
+
+    event
+  end
+
+
   #
   # To Json From Time Range
   #

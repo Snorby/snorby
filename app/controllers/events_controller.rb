@@ -19,6 +19,18 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html {render :layout => true}
       format.js
+      format.json {render :json => {
+        :events => @events.map(&:detailed_json),
+        :classifications => @classifications,
+        :pagination => {
+          :total => @events.pager.total,
+          :per_page => @events.pager.per_page,
+          :current_page => @events.pager.current_page,
+          :previous_page => @events.pager.previous_page,
+          :next_page => @events.pager.next_page,
+          :total_pages => @events.pager.total_pages
+        }
+      }}
     end
   end
 
@@ -54,6 +66,18 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html {render :layout => true}
       format.js
+      format.json {render :json => {
+        :events => @events.map(&:detailed_json),
+        :classifications => @classifications,
+        :pagination => {
+          :total => @events.pager.total,
+          :per_page => @events.pager.per_page,
+          :current_page => @events.pager.current_page,
+          :previous_page => @events.pager.previous_page,
+          :next_page => @events.pager.next_page,
+          :total_pages => @events.pager.total_pages
+        }
+      }}
     end  
   end
 
