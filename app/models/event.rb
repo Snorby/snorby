@@ -418,7 +418,9 @@ class Event
       :timestamp => self.pretty_time,
       :datetime => self.timestamp.strftime('%A, %b %d, %Y at %I:%M:%S %p'),
       :message =>  self.signature.name, 
-      :geoip => false
+      :geoip => false,
+      :src_port => src_port,
+      :dst_port => dst_port
     }
 
     if geoip
