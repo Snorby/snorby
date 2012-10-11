@@ -34,6 +34,7 @@ class SessionsController < Devise::SessionsController
       end
       format.json { render :json => { status: "success", user: @current_user }}
     end
+  end
 
 end
 
