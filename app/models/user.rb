@@ -1,5 +1,4 @@
 require 'snorby/model/counter'
-
 class User
   
   include DataMapper::Resource
@@ -99,6 +98,16 @@ class User
   def demo?
     return true if email == 'demo@snorby.org'
     false
+  end
+
+  def in_json
+    # create the md5 hash
+    hash = Digest::MD5.hexdigest(self.email)
+    #"https://gravatar.com/avatar/#{hash}.png?s=256&d=#{CGI.escape(default_url)}"
+    data = self.attributes
+    data[:gravatar_hash] = hash
+    data[:classify_count] = classify_count
+    data
   end
 
   def classify_count

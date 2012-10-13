@@ -89,6 +89,24 @@ class EventsController < ApplicationController
 
     @events ||= current_user.events.sorty(params)
     @classifications ||= Classification.all
+
+    respond_to do |format|
+      format.html {render :layout => true}
+      format.js
+      format.json {render :json => {
+        :events => @events.map(&:detailed_json),
+        :classifications => @classifications,
+        :pagination => {
+          :total => @events.pager.total,
+          :per_page => @events.pager.per_page,
+          :current_page => @events.pager.current_page,
+          :previous_page => @events.pager.previous_page,
+          :next_page => @events.pager.next_page,
+          :total_pages => @events.pager.total_pages
+        }
+      }}
+    end
+
   end
 
   def request_packet_capture
@@ -132,7 +150,10 @@ class EventsController < ApplicationController
 
       format.xml { render :xml => @event.in_xml }
       format.csv { render :text => @event.to_csv }
-      format.json { render :json => @event.in_json }
+      format.json { render :json => {
+        :event => @event.in_json,
+        :notes => @notes.map(&:in_json)
+      }} 
     end
   end
 
@@ -305,7 +326,7 @@ class EventsController < ApplicationController
   def favorite
     @event = Event.get(params[:sid], params[:cid])
     @event.toggle_favorite
-    render :json => {}
+    render :json => { :favorite => @event.favorite? }
   end
 
   def lookup

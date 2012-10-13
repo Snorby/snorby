@@ -36,6 +36,15 @@ class Note
     user.update(:notes_count => user.notes_count - 1) if user
   end
 
+  def in_json
+    {
+      :user => user.in_json,
+      :body => body,
+      :created_at => created_at,
+      :updated_at => updated_at
+    }
+  end
+
   def html_id
     "note_#{id}"
   end
