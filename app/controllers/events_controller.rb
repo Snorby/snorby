@@ -285,7 +285,10 @@ class EventsController < ApplicationController
       Event.update_classification(params[:events], params[:classification].to_i, User.current_user.id)
     end
 
-    render :layout => false, :status => 200
+    respond_to do |format|
+      format.html { render :layout => false, :status => 200 }
+      format.json { render :json => { :status => 'success' }}
+    end
   end
 
   def classify_sessions
@@ -293,7 +296,10 @@ class EventsController < ApplicationController
       Event.update_classification_by_session(params[:events], params[:classification].to_i, User.current_user.id)
     end
 
-    render :layout => false, :status => 200
+    respond_to do |format|
+      format.html { render :layout => false, :status => 200 }
+      format.json { render :json => { :status => 'success' }}
+    end
   end
 
   def mass_create_favorite
