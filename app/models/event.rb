@@ -422,7 +422,8 @@ class Event
       :src_port => src_port,
       :dst_port => dst_port,
       :users_count => users_count,
-      :notes_count => notes_count
+      :notes_count => notes_count,
+      :favorite => favorite?
 
     }
 
@@ -579,7 +580,8 @@ class Event
       :proto => proto,
       :payload => payload,
       :payload_html => payload ? payload.to_html : '',
-      :sensor => sensor
+      :sensor => sensor,
+      :favorite => favorite?
 
     }
     return json
