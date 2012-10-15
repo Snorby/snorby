@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   respond_to :html, :xml, :json, :js, :csv
-  
+
   helper_method :sort_column, :sort_direction
 
   def index
@@ -35,13 +35,13 @@ class EventsController < ApplicationController
     params[:direction] = sort_direction
 
     sql = %{
-      select e.sid, e.cid, e.signature, 
-      e.classification_id, e.users_count, 
-      e.notes_count, e.timestamp, e.user_id, 
+      select e.sid, e.cid, e.signature,
+      e.classification_id, e.users_count,
+      e.notes_count, e.timestamp, e.user_id,
       a.number_of_events from aggregated_events a
       inner join event e on a.event_id = e.id
     }
-    
+
     sort = if [:sid,:signature,:timestamp].include?(params[:sort])
       "e.#{params[:sort]}"
     elsif params[:sort] == :sig_priority
@@ -72,7 +72,7 @@ class EventsController < ApplicationController
           :total_pages => @events.pager.total_pages
         }
       }}
-    end  
+    end
   end
 
   def queue
@@ -83,6 +83,24 @@ class EventsController < ApplicationController
 
     @events ||= current_user.events.sorty(params)
     @classifications ||= Classification.all
+
+    respond_to do |format|
+      format.html {render :layout => true}
+      format.js
+      format.json {render :json => {
+        :events => @events.map(&:detailed_json),
+        :classifications => @classifications,
+        :pagination => {
+          :total => @events.pager.total,
+          :per_page => @events.pager.per_page,
+          :current_page => @events.pager.current_page,
+          :previous_page => @events.pager.previous_page,
+          :next_page => @events.pager.next_page,
+          :total_pages => @events.pager.total_pages
+        }
+      }}
+    end
+
   end
 
   def request_packet_capture
@@ -111,7 +129,7 @@ class EventsController < ApplicationController
     @event = Event.get(params['sid'], params['cid'])
     @lookups ||= Lookup.all
 
-    @notes = @event.notes.all.page(params[:page].to_i, 
+    @notes = @event.notes.all.page(params[:page].to_i,
                                    :per_page => 5, :order => [:id.desc])
 
     respond_to do |format|
@@ -119,20 +137,23 @@ class EventsController < ApplicationController
       format.js
 
       format.pdf do
-        render :pdf => "Event:#{@event.id}", 
-               :template => "events/show.pdf.erb", 
+        render :pdf => "Event:#{@event.id}",
+               :template => "events/show.pdf.erb",
                :layout => 'pdf.html.erb', :stylesheets => ["pdf"]
       end
 
       format.xml { render :xml => @event.in_xml }
       format.csv { render :text => @event.to_csv }
-      format.json { render :json => @event.in_json }
+      format.json { render :json => {
+        :event => @event.in_json,
+        :notes => @notes.map(&:in_json) 
+      }}
     end
   end
 
   def view
-    @events = Event.all(:sid => params['sid'], 
-    :cid => params['cid']).page(params[:page].to_i, 
+    @events = Event.all(:sid => params['sid'],
+    :cid => params['cid']).page(params[:page].to_i,
     :per_page => @current_user.per_page_count, :order => [:timestamp.desc])
 
     @classifications ||= Classification.all
@@ -199,7 +220,7 @@ class EventsController < ApplicationController
         }
       })
     end
-    
+
     if params[:use_ip_src]
       options.merge!({
         :"use_ip_src" => {
@@ -254,7 +275,7 @@ class EventsController < ApplicationController
   end
 
   def history
-    @events = Event.all(:user_id => @current_user.id).page(params[:page].to_i, 
+    @events = Event.all(:user_id => @current_user.id).page(params[:page].to_i,
     :per_page => @current_user.per_page_count, :order => [:timestamp.desc])
     @classifications ||= Classification.all
   end
@@ -264,7 +285,10 @@ class EventsController < ApplicationController
       Event.update_classification(params[:events], params[:classification].to_i, User.current_user.id)
     end
 
-    render :layout => false, :status => 200
+    respond_to do |format|
+      format.html { render :layout => false, :status => 200 }
+      format.json { render :json => { :status => 'success' }}
+    end
   end
 
   def classify_sessions
@@ -272,7 +296,10 @@ class EventsController < ApplicationController
       Event.update_classification_by_session(params[:events], params[:classification].to_i, User.current_user.id)
     end
 
-    render :layout => false, :status => 200
+    respond_to do |format|
+      format.html { render :layout => false, :status => 200 }
+      format.json { render :json => { :status => 'success' }}
+    end
   end
 
   def mass_create_favorite
@@ -299,7 +326,7 @@ class EventsController < ApplicationController
   def favorite
     @event = Event.get(params[:sid], params[:cid])
     @event.toggle_favorite
-    render :json => {}
+    render :json => { :favorite => @event.favorite? }
   end
 
   def lookup
@@ -315,7 +342,7 @@ class EventsController < ApplicationController
     @user = User.get(params[:user_id])
     @user = @current_user unless @user
 
-    @events = @user.events.page(params[:page].to_i, :per_page => @current_user.per_page_count, 
+    @events = @user.events.page(params[:page].to_i, :per_page => @current_user.per_page_count,
               :order => [:timestamp.desc])
 
     @classifications ||= Classification.all
@@ -348,7 +375,7 @@ class EventsController < ApplicationController
       :timestamp
     end
   end
-  
+
   def sort_direction
     %w[asc desc].include?(params[:direction].to_s) ? params[:direction].to_sym : :desc
   end

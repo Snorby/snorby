@@ -420,7 +420,11 @@ class Event
       :message =>  self.signature.name, 
       :geoip => false,
       :src_port => src_port,
-      :dst_port => dst_port
+      :dst_port => dst_port,
+      :users_count => users_count,
+      :notes_count => notes_count,
+      :favorite => favorite?
+
     }
 
     if geoip
@@ -575,7 +579,10 @@ class Event
       :type => type,
       :proto => proto,
       :payload => payload,
-      :payload_html => payload ? payload.to_html : ''
+      :payload_html => payload ? payload.to_html : '',
+      :sensor => sensor,
+      :favorite => favorite?
+
     }
     return json
   end
