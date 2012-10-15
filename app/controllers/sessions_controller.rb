@@ -13,7 +13,13 @@ class SessionsController < Devise::SessionsController
     resource ||= resource_or_scope
     sign_in(scope, resource) unless warden.user(scope) == resource
 
-    return render :json => {:success => true, :authenticity_token => form_authenticity_token, :user => @current_user.in_json, :redirect => stored_location_for(scope) || after_sign_in_path_for(resource)}
+    return render :json => {
+      :success => true, 
+      :authenticity_token => form_authenticity_token, 
+      :user => @current_user.in_json,
+      :Version => Snorby::VERSION,
+      :redirect => stored_location_for(scope) || after_sign_in_path_for(resource)
+    }
   end
 
   def failure
