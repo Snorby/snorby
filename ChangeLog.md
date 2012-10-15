@@ -1,3 +1,12 @@
+# Snorby 2.5.3
+
+  ** NOTE **
+
+    This update is required to use the Snorby Mobile application.
+
+* Add json API
+* Fixed forgot password validation feedback
+
 # Snorby 2.5.2
 
 * License Changed to GPLv3 - Please review the License file.

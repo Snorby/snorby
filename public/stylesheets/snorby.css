@@ -4663,13 +4663,21 @@ html.login,body.login{
 	cursor: default;
 }
 
-#login #wrapper #content #password input,
+#login #wrapper #content #password input{
+	margin-top: 5px;
+	margin-bottom: 69px !important;
+	position: relative;
+	display: block;
+	overflow: visible;
+}
+
 #login #wrapper #content #password .field_with_errors input{
 	margin-top: 5px;
 	margin-bottom: 69px !important;
 	position: relative;
 	display: block;
 	overflow: visible;
+	border: 2px solid #ff4442;
 }
 
 #login #wrapper #content #password br {
