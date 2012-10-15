@@ -17,7 +17,7 @@ class SessionsController < Devise::SessionsController
       :success => true, 
       :authenticity_token => form_authenticity_token, 
       :user => @current_user.in_json,
-      :Version => Snorby::VERSION,
+      :version => Snorby::VERSION,
       :redirect => stored_location_for(scope) || after_sign_in_path_for(resource)
     }
   end
