@@ -66,9 +66,11 @@
 					
 				</div>
 				
-				<p>
+
+        <p>
+          <%= f.check_box :gravatar%> <%= f.label "Use Gravatar" %>
           <i>(To change/add a avatar please visit <a href="http://gravatar.com">http://gravatar.com</a>)</i>
-				</p>
+        </p>
 								
 				<% if current_user.admin? %>
 
