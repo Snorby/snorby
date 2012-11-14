@@ -1,28 +1,29 @@
 <div id='new_note_box' class='event-note round'>
-	
+
 	<div class='note-avatar-holder'>
-    <%= image_tag(get_gravatar_uri(@user.email), :size => '32x32') %> 
+    <img src="<%= get_gravatar_uri(@user.email) %>" height="32px" width="32px"
+			onerror="this.src='/images/default_avatar.png'">
 	</div>
-	
+
 	<div class='username'>
-		<span><%= @user %></span> 
+		<span><%= @user %></span>
 		<i><%= time_ago_in_words(Time.now) %></i>
-		
+
 	</div>
-	
+
 	<div class='note-body'>
-		
+
 		<div id='new_note' class='fake_form' data-event-sid='<%= @event.sid %>' data-event-cid='<%= @event.cid %>'>
-		
+
 			<%= text_area_tag :body %>
 
 			<%= form_actions do %>
 				<%= button "Save Note", :class => 'submit_new_note' %>
 				<%= button "Cancel", :class => 'warning cancel-note' %>
 			<% end %>
-		
+
 		</div>
-		
+
 	</div>
-	
+
 </div>

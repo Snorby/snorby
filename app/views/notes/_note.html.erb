@@ -1,29 +1,30 @@
 <div id='note_<%= note.id %>' class='event-note round'>
-	
+
 	<div class='note-avatar-holder'>
-	  <%= image_tag(get_gravatar_uri(note.user.email), :size => '32x32') %>			
+		<img src="<%= get_gravatar_uri(note.user.email) %>" height="32px" width="32px"
+			onerror="this.src='/images/default_avatar.png'">
 	</div>
-	
+
 	<% if current_user.admin %>
-		
+
 		<div class='note-options'>
 			<%= link_to "Destroy Note", '#', :class => 'destroy-event-note', :"data-note-id" => note.id %>
 		</div>
-		
+
 	<% end %>
-	
+
 	<div class='username'>
-		
-		<span><%= note.user %></span> 
-		
+
+		<span><%= note.user %></span>
+
 		<i><%= display_time(note.created_at) %></i>
-		
+
 	</div>
-	
+
 	<div class='note-body'>
-		
+
 		<%= RedCloth.new(format_note_body(note.body), [:filter_styles]).to_html.html_safe %>
-		
+
 	</div>
-	
+
 </div>
