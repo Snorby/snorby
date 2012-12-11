@@ -4,6 +4,11 @@ class SensorsController < ApplicationController
   
   def index
     @sensors ||= Sensor.all.page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:sid.asc])
+    
+    respond_to do |format|
+      format.html {render :layout => true}
+      format.js
+    end
   end
 
   def destroy
