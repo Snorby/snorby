@@ -1,0 +1,2 @@
+$('div#sensors').replaceWith("<%= escape_javascript(render(:partial => 'sensors/sensors', :locals => { :sensors => @sensors })) %>");
+flash();
