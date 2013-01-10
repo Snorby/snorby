@@ -5,7 +5,7 @@
 
   <script type="text/javascript">
 
-    var rule = new SearchRule(<%= Snorby::Search.json %>);
+    var rule = new SearchRule('<%= escape_javascript @json.html_safe %>');
     rule.searchUI({
       cssClass: "submit-search",
       buttonTitle: "Submit Search"

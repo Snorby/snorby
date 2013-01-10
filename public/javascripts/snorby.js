@@ -132,6 +132,7 @@ SearchRule = function() {
   function SearchRule(selectData, callback) {
     var self = this;
     self.html = Handlebars.templates['search-rule']({});
+    var selectData = JSON.parse(selectData);
     self.columns = selectData.columns;
     self.operators = selectData.operators;
 
