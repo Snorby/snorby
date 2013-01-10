@@ -19,7 +19,7 @@
 		         x: -20 //center
 		      },
 		      xAxis: {
-						categories: [<%= @axis %>],
+            categories: [<%= @axis.to_json.html_safe %>],
 		        title: {
 								margin: 10,
 								<% if (@range == 'year' || @range == 'quarter') %>

@@ -5,10 +5,6 @@
 <% else %>
 
 	<% content_for :footer do %>
-		<% source_data = [] %>
-		<% @src_metrics.each do |key,value| %>
-			<% source_data << "['#{key.to_s}', #{value}]" %>
-		<% end %>
 
 		<script type="text/javascript">
 
@@ -64,8 +60,10 @@
 		       series: [{
 		         type: 'pie',
 		         name: 'Unique Source Addresses',
-		         data: [
-							<%= source_data.join(',') %>
+             data: [
+              <% @src_metrics.each do |key,value| %>
+                 ['<%= key.to_s %>', <%= value %>],
+              <% end %>
 		         ]
 		      }]
 		   });
