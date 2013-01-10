@@ -1,4 +1,4 @@
-# Snorby 2.5.4
+# Snorby 2.5.4/5
 
   * Patch Multiple vulnerabilities in parameter parsing in Action Pack (CVE-2013-0156)
   * Fix json parsing issue with new SearchRule()
