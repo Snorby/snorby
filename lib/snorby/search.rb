@@ -561,8 +561,7 @@ module Snorby
           end
         }
       }
-
-      @json.to_json.html_safe
+      @json.to_json
     end
 
   end # Search

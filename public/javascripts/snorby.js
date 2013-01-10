@@ -132,6 +132,7 @@ SearchRule = function() {
   function SearchRule(selectData, callback) {
     var self = this;
     self.html = Handlebars.templates['search-rule']({});
+    var selectData = JSON.parse(selectData);
     self.columns = selectData.columns;
     self.operators = selectData.operators;
 
@@ -642,15 +643,15 @@ function set_classification (class_id) {
 		Snorby.helpers.remove_click_events(true);
 
     if ($('#events').data('action') === "sessions") {
-      
+
       var count = 0;
       if ($('div#sessions-event-count-selected').length > 0) {
         count = $('div#sessions-event-count-selected').data('count');
       };
 
       $.post('/events/classify_sessions',{
-        events: selected_events, 
-        classification: class_id, 
+        events: selected_events,
+        classification: class_id,
         authenticity_token: csrf
       }, function(data) {
         clear_selected_events();
@@ -1236,7 +1237,7 @@ var Snorby = {
 					$('li.event div.event-data').slideUp('fast');
 					parent_row.find('div.select').append("<img alt='laoding' src='/images/icons/loading.gif' class='select-loading'>");
 
-          var open_event_url = '/events/show/'+sid+'/'+cid; 
+          var open_event_url = '/events/show/'+sid+'/'+cid;
 
           if ($('div#events').data('action') === "sessions") {
             open_event_url = '/events/show/'+sid+'/'+cid+'?sessions=true';
@@ -1593,7 +1594,7 @@ var Snorby = {
 
           var current_count = parseInt($('div#sessions-event-count-selected').data('count'));
         };
-        
+
         var checked = $(this).is(':checked');
 
 				if (checked) {
@@ -2113,6 +2114,10 @@ jQuery(document).ready(function($) {
     };
   });
 
+  $('img.avatar, img.avatar-small, div.note-avatar-holder img').error(function(event) {
+    $(this).attr("src", "/images/default_avatar.png");
+  })
+
   $('#login button.forgot-my-password').live('click', function(event) {
     event.preventDefault();
     $.get('/users/password/new', function(data) {
@@ -2371,7 +2376,7 @@ jQuery(document).ready(function($) {
       var title = $('input#saved_search_title').val();
       var search_public = $('input#saved_search_public').is(":checked");
 
-     $.ajax({ 
+     $.ajax({
         url: '/saved_searches/create',
         global: false,
         dataType: 'json',
@@ -2421,7 +2426,7 @@ jQuery(document).ready(function($) {
       var title = $(this).data('title');
       var search_id = $(this).data('search-id');
 
-      var url = "/results?sort=" + sort + 
+      var url = "/results?sort=" + sort +
         "&direction="+direction+"&page=" + page;
 
       var params = {

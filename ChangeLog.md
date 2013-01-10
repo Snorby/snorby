@@ -1,3 +1,11 @@
+# Snorby 2.5.4
+
+  * Patch Multiple vulnerabilities in parameter parsing in Action Pack (CVE-2013-0156)
+  * Fix json parsing issue with new SearchRule()
+
+  ** UPDATE NOTE:
+  Make sure to run `bundle update` before you run `RAILS_ENV=production bundle exec rake snorby:update`
+
 # Snorby 2.5.3
 
   ** NOTE **

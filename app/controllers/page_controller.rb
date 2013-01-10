@@ -53,6 +53,7 @@ class PageController < ApplicationController
   end
 
   def search
+    @json = Snorby::Search.json
   end
 
   def search_json
