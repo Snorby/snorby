@@ -130,3 +130,5 @@ You can open the rails console at anytime and interact with the Snorby environme
 ## License
 
 Please refer to the LICENSE file found in the root of the snorby project.
+
+
