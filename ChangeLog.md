@@ -1,3 +1,8 @@
+# Snorby 2.5.6
+
+  * Fix xml user information disclosure - reported by Joshua Heiks (@solhive)
+  * Multiple bug fixes (dashboard logic/event)
+
 # Snorby 2.5.4/5
 
   * Patch Multiple vulnerabilities in parameter parsing in Action Pack (CVE-2013-0156)
