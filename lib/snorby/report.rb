@@ -24,7 +24,11 @@ module Snorby
 
       @event_count = @cache.all.map(&:event_count).sum
 
-      @axis = @sensor_metrics.last[:range].join(',') if @sensor_metrics.last
+      @axis = if @sensor_metrics.last
+        @sensor_metrics.last[:range].join(',')
+      else
+        ""
+      end
 
       @classifications = Classification.all(:order => [:events_count.desc])
       @sensors = Sensor.all(:limit => 5, :order => [:events_count.desc])

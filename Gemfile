@@ -46,7 +46,7 @@ gem 'dm-serializer',               DM_VERSION
 gem 'dm-chunked_query',            '~> 0.3'
 
 # Deploy with Capistrano
-gem 'capistrano'
+gem 'capistrano',                  '2.14.1'
 
 # Rails Plugins
 gem 'jammit',                      '~> 0.5.4'

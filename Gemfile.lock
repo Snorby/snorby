@@ -69,7 +69,7 @@ GEM
     bcrypt-ruby (3.0.1-java)
     bouncy-castle-java (1.5.0146.1)
     builder (3.0.4)
-    capistrano (2.14.0)
+    capistrano (2.14.1)
       highline
       net-scp (>= 1.0.0)
       net-sftp (>= 2.0.0)
@@ -219,7 +219,7 @@ GEM
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
       net-ssh (>= 2.0.9)
-    net-ssh (2.6.2)
+    net-ssh (2.6.3)
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
     netaddr (1.5.0)
@@ -322,7 +322,7 @@ DEPENDENCIES
   activesupport (= 3.1.10)
   ansi
   bundler (>= 1.0.0)
-  capistrano
+  capistrano (= 2.14.1)
   capybara
   chronic (~> 0.3.0)
   daemons (~> 1.1.0)
