@@ -8,16 +8,16 @@ class Udp
   
   belongs_to :event, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], :required => true
 
-  property :sid, Integer, :key => true, :index => true
+  property :sid, Integer, :key => true, :index => true, :min => 0
   
-  property :cid, Integer, :key => true, :index => true
+  property :cid, Integer, :key => true, :index => true, :min => 0
   
-  property :udp_sport, Integer, :index => true
+  property :udp_sport, Integer, :index => true, :min => 0
   
-  property :udp_dport, Integer, :index => true
+  property :udp_dport, Integer, :index => true, :min => 0
 
-  property :udp_len, Integer, :lazy => true
+  property :udp_len, Integer, :lazy => true, :min => 0
   
-  property :udp_csum, Integer, :lazy => true
+  property :udp_csum, Integer, :lazy => true, :min => 0
 
 end

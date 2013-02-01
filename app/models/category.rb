@@ -11,7 +11,7 @@ class Category
   #
   # Signature Class ID
   # 
-  property :sig_class_id, Serial, :key => true, :index => true
+  property :sig_class_id, Serial, :key => true, :index => true, :min => 0
   
   #
   # Signature Class Name

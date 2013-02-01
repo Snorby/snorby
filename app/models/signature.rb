@@ -17,21 +17,21 @@ class Signature
   
   has n, :sig_references, :parent_key => :sig_id, :child_key => [ :sig_id ]
 
-  property :sig_id, Serial, :key => true, :index => true
+  property :sig_id, Serial, :key => true, :index => true, :min => 0
 
-  property :sig_class_id, Integer, :index => true
+  property :sig_class_id, Integer, :index => true, :min => 0
 
   property :sig_name, Text
   
-  property :sig_priority, Integer, :index => true
+  property :sig_priority, Integer, :index => true, :min => 0
     
-  property :sig_rev, Integer, :lazy => true
+  property :sig_rev, Integer, :lazy => true, :min => 0
       
-  property :sig_sid, Integer, :lazy => true
+  property :sig_sid, Integer, :lazy => true, :min => 0
 
-  property :sig_gid, Integer, :lazy => true
+  property :sig_gid, Integer, :lazy => true, :min => 0
 
-  property :events_count, Integer, :index => true, :default => 0
+  property :events_count, Integer, :index => true, :default => 0, :min => 0
 
   def refs
     sig_references 

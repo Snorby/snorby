@@ -19,13 +19,13 @@ class Event
 
   storage_names[:default] = "event"
 
-  property :sid, Integer, :key => true, :index => true
+  property :sid, Integer, :key => true, :index => true, :min => 0
 
-  property :cid, Integer, :key => true, :index => true
+  property :cid, Integer, :key => true, :index => true, :min => 0
 
-  property :sig_id, Integer, :field => 'signature', :index => true
+  property :sig_id, Integer, :field => 'signature', :index => true, :min => 0
 
-  property :classification_id, Integer, :index => true, :required => false
+  property :classification_id, Integer, :index => true, :required => false, :min => 0
 
   property :users_count, Integer, :index => true, :default => 0
 

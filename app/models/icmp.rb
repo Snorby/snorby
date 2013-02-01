@@ -8,18 +8,18 @@ class Icmp
 
   belongs_to :event, :parent_key => [:sid, :cid], :child_key => [:sid, :cid], :required => true
 
-  property :sid, Integer, :key => true, :index => true
+  property :sid, Integer, :key => true, :index => true, :min => 0
   
-  property :cid, Integer, :key => true, :index => true
+  property :cid, Integer, :key => true, :index => true, :min => 0
 
-  property :icmp_type, Integer, :lazy => true
+  property :icmp_type, Integer, :lazy => true, :min => 0
   
-  property :icmp_code, Integer, :lazy => true
+  property :icmp_code, Integer, :lazy => true, :min => 0
   
-  property :icmp_csum, Integer, :lazy => true
+  property :icmp_csum, Integer, :lazy => true, :min => 0
   
-  property :icmp_id, Integer, :lazy => true
+  property :icmp_id, Integer, :lazy => true, :min => 0
   
-  property :icmp_seq, Integer, :lazy => true
+  property :icmp_seq, Integer, :lazy => true, :min => 0
 
 end

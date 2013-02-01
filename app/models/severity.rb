@@ -8,11 +8,11 @@ class Severity
 
   has n, :signatures, :child_key => :sig_priority, :parent_key => :sig_id
 
-  property :id, Serial, :index => true, :key => true
+  property :id, Serial, :index => true, :key => true, :min => 0
   
-  property :sig_id, Integer, :index => true
+  property :sig_id, Integer, :index => true, :min => 0
   
-  property :events_count, Integer, :index => true, :default => 0
+  property :events_count, Integer, :index => true, :default => 0, :min => 0
   
   # Set the name of the severity
   property :name, String

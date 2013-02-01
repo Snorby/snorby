@@ -4,7 +4,7 @@ class Sensor
 
   storage_names[:default] = "sensor"
 
-  property :sid, Serial, :key => true, :index => true
+  property :sid, Serial, :key => true, :index => true, :min => 0
 
   property :name, String, :default => 'Click To Change Me'
 
@@ -14,11 +14,11 @@ class Sensor
 
   property :filter, Text
 
-  property :detail, Integer, :index => true
+  property :detail, Integer, :index => true, :min => 0
 
-  property :encoding, Integer, :index => true
+  property :encoding, Integer, :index => true, :min => 0
 
-  property :last_cid, Integer, :index => true
+  property :last_cid, Integer, :index => true, :min => 0
 
   property :pending_delete, Boolean, :default => false
 

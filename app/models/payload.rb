@@ -6,9 +6,9 @@ class Payload
 
   storage_names[:default] = "data"
   
-  property :sid, Integer, :key => true, :index => true
+  property :sid, Integer, :key => true, :index => true, :min => 0
   
-  property :cid, Integer, :key => true, :index => true
+  property :cid, Integer, :key => true, :index => true, :min => 0
   
   property :data_payload, Text
 
