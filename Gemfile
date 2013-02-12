@@ -1,17 +1,17 @@
 source 'http://rubygems.org'
 
-RAILS_VERSION = '3.1.10'
+RAILS_VERSION = '3.1.11'
 RSPEC_VERSION = '~> 2.0.0'
 DATAMAPPER = 'http://github.com/datamapper'
 DM_VERSION = '~> 1.2.0'
 
 gem 'rake', '0.9.2'
-gem 'thin'
 
 gem 'rails',                       RAILS_VERSION
 gem 'jquery-rails'
 gem 'bundler',                     '>= 1.0.0'
 gem 'env'
+gem 'json', '~> 1.7'
 
 # Jruby
 gem 'jruby-openssl',   :platforms => :jruby
@@ -81,6 +81,7 @@ gem 'netaddr',                     '~> 1.5.0'
 
 group(:development) do
 	gem "letter_opener"
+  gem 'thin'
 end
 
 group(:test) do
