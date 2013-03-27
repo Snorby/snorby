@@ -1,9 +1,9 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
 RAILS_VERSION = '3.1.12'
 RSPEC_VERSION = '~> 2.0.0'
-DATAMAPPER = 'http://github.com/datamapper'
-DM_VERSION = '~> 1.2.0'
+DATAMAPPER    = 'http://github.com/datamapper'
+DM_VERSION    = '~> 1.2.0'
 
 gem 'rake', '0.9.2'
 
@@ -14,9 +14,9 @@ gem 'env'
 gem 'json', '~> 1.7'
 
 # Jruby
-gem 'jruby-openssl',   :platforms => :jruby
-gem 'warbler', :platforms => :jruby
-gem 'jruby-rack-worker', :platforms => :jruby
+gem 'jruby-openssl',               :platforms => :jruby
+gem 'warbler',                     :platforms => :jruby
+gem 'jruby-rack-worker',           :platforms => :jruby
 # gem 'glassfish', :platforms => :jruby
 
 # DateTime Patches
@@ -87,10 +87,10 @@ end
 group(:test) do
   gem 'capybara'
 
-  gem 'rspec',                RSPEC_VERSION
-  gem 'rspec-core',		        RSPEC_VERSION, :require => 'rspec/core'
-  gem 'rspec-expectations',	  RSPEC_VERSION, :require => 'rspec/expectations'
-  gem 'rspec-rails',		      RSPEC_VERSION
+  gem 'rspec',                	  RSPEC_VERSION
+  gem 'rspec-core',               RSPEC_VERSION, :require => 'rspec/core'
+  gem 'rspec-expectations',       RSPEC_VERSION, :require => 'rspec/expectations'
+  gem 'rspec-rails',		          RSPEC_VERSION
   gem 'ansi'
   gem 'turn'
   gem 'minitest'
