@@ -47,6 +47,7 @@ module Snorby
 
       av = ActionView::Base.new(Rails.root.join('app', 'views'))
       av.assign({
+        :range => @range,
         :start_time => @start_time,
         :end_time => @end_time,
         :cache => @cache,
