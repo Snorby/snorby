@@ -1,4 +1,4 @@
-  <li id='event_<%= event.sid %><%= event.cid %>' class='event' data-event-id='<%= event.id %>' data-event-sid='<%= event.sid %>' data-event-cid='<%= event.cid %>'>
+<li data-signature-id="<%= event.signature.sig_sid.to_i %>" data-agent-id="<%= event.sensor.sid %>" data-session-id="<%= event.ip.ip_src %>_<%= event.ip.ip_dst %>_<%= event.signature.sig_id %>" id='event_<%= event.sid %><%= event.cid %>' class='event' data-event-id='<%= event.id %>' data-event-sid='<%= event.sid %>' data-event-cid='<%= event.cid %>'>
 	
 	<% classification_css = event.classification.blank? ? nil : "classified" %>
 	
@@ -6,52 +6,70 @@
 
 		<div class='select small'><%= check_box_tag 'event-selector', nil, false, :class => "check_box_#{event.id}" %></div>
 
-    <% unless @session_view %>
-      <div class='important small'>
-        <% if event.favorite? %>
-          <div class='destroy-favorite enabled'></div>
-        <% else %>
-          <div class='create-favorite enabled'></div>
-        <% end %>
-      </div>
-    <% end %>
+    <div class='important small'>
+      <% if event.favorite? %>
+        <div class='destroy-favorite enabled'></div>
+      <% else %>
+        <div class='create-favorite enabled'></div>
+      <% end %>
+    </div>
 		
 		<div class='severity small'><span class='severity sev<%= event.signature.severity_id || 0 %>'><%= event.signature.severity_id || 0 %></span></div>
-		<div class='click sensor' title='<%=h event.sensor.sensor_name %>'><%= truncate(event.sensor.sensor_name, :length => 17, :omission => '...') %></div>
+    <div class='click sensor' title="<%= event.sensor.sensor_name %>">
+      <%= event.sensor.sensor_name %>
+    </div>
 		
-
-		<div class='click src_ip address'>
+    <div data-address="<%= event.ip.present? ? event.ip.ip_src : 'N/A' %>" class='click src_ip address'>
       <% if geoip? && event.ip.present?  %>
 
         <% geoip_src = event.ip.geoip[:source] %>
 
-        <div class='click country_flag add_tipsy_html' original-title='<img class="flag" src="/images/flags/<%= geoip_src[:country_code2].downcase %>.png"> <%= geoip_src[:country_name] %>'><%= geoip_src[:country_code2] %></div>
+        <div class='click country_flag add_tipsy_html' original-title='<img class="flag" src="/images/flags/<%= geoip_src[:country_code2].downcase %>.png">
+          <%= geoip_src[:country_name] %>'><%= geoip_src[:country_code2] %>
+        </div>
 
       <% end %>
-		  <%= event.ip.present? ? event.ip.ip_src : 'N/A' %>
+
+      <% if event.ip.present? && event.ip.asset_names[:source] %>
+        <div class='asset-name add_tipsy_html click' original-title="<%= event.ip.present? ? event.ip.ip_src : 'N/A' %> - <%= event.ip.asset_names[:source].name %>">
+          <%= event.ip.asset_names[:source].name %>
+        </div>
+      <% else %>
+        <div class='asset-name click'>
+          <%= event.ip.present? ? event.ip.ip_src : 'N/A' %>
+        </div>
+      <% end %>
 		</div>
 		
-		<div class='click dst_ip address'>
+		<div data-address="<%= event.ip.present? ? event.ip.ip_dst : 'N/A' %>" class='click dst_ip address'>
       <% if geoip? && event.ip.present? %>
 
         <% geoip_dest = event.ip.geoip[:destination] %>
-
         <div class='click country_flag add_tipsy_html' original-title='<img class="flag" src="/images/flags/<%= geoip_dest[:country_code2].downcase  %>.png"> <%= geoip_dest[:country_name] %>'><%= geoip_dest[:country_code2] %></div>
 
       <% end %>
-		  <%= event.ip.present? ? event.ip.ip_dst : 'N/A' %>
+      <% if event.ip.present? && event.ip.asset_names[:destination] %>
+        <div class='asset-name add_tipsy_html click' original-title="<%= event.ip.present? ? event.ip.ip_dst : 'N/A' %> - <%= event.ip.asset_names[:destination].name %>">
+          <%= event.ip.asset_names[:destination].name %>
+        </div>
+      <% else %>
+        <div class='asset-name click'>
+          <%= event.ip.present? ? event.ip.ip_dst : 'N/A' %>
+        </div>
+      <% end %>
+
 		</div>
 		
 		<% if classification_css %>
       <div class='click signature'>
         <span class='add_tipsy' title="<%= event.user.nil? ? '???' : event.user.name %> classified event as <%= event.classification.name %>">
-          <%= truncate(event.signature.name, :length => (geoip? ? 60 : 65), :omission => '...') %>
+          <%= event.signature.name %>
         </span>
       </div>
 		<% else %>
       <div class='click signature'>
         <span title='<%= event.signature.name %>'>
-          <%= truncate(event.signature.name, :length => (geoip? ? 60 : 65), :omission => '...') %>
+          <%= event.signature.name %>
         </span>
       </div>
 		<% end %>
@@ -62,7 +80,6 @@
 			<% end %>
 			
       <b title='Event ID: <%= event.sid %>.<%= event.cid %> &nbsp; <%= display_time(event.timestamp) %>' class='add_tipsy'><%= event.pretty_time %></b>
-			
 		</div>
 
 

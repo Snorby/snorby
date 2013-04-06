@@ -29,6 +29,11 @@ Snorby::Application.routes.draw do
   root :to => "page#dashboard"
 
   resources :sensors do
+
+
+    collection do
+      get :agent_list
+    end
   end
 
   resources :settings do
@@ -74,6 +79,19 @@ Snorby::Application.routes.draw do
   end
 
   match ':controller(/:action(/:sid/:cid))', :controller => 'Events'
+
+  resources :asset_names do
+    member do
+      delete :remove
+    end
+
+    collection do
+      post :add
+      get :lookup
+      post :bulk_upload
+      get 'get_bulk_upload', action: :get_bulk_upload, as: 'get_bulk_upload'
+    end
+  end
 
   resources :events do
     

@@ -1,0 +1,29 @@
+<%= snorby_box("Upload Asset Name Data", false) do %>
+  <div id='snorbybox-content' class='snorby-cloud-bulk-upload-asset-names'>
+    <div class="note no-click" style="margin: 5px; 0">
+      <div class="message">
+        Covert internal IP addresses displayed in an event by applying
+        relevant human-readable labels.<br />
+        Accepted format is a CSV file: <code>ip_address, asset name,
+        &lt;optional agent hostname&gt;</code> <br />
+        If no agent hostname is provided, the asset name is assumed to be global.
+      </div>
+    </div>
+    <br />
+    <%= form_tag({:action => :bulk_upload}, :id => 'bulk-upload-form', :multipart => true,
+       style: 'margin: 5px;') do %>
+
+      <%= file_field_tag 'csv' %>
+      <%= check_box_tag(:overwrite, checked: :checked) %>
+      <%= label_tag(:overwrite, "Overwrite existing entries") %>
+    <% end %>
+    <br />
+
+    <%= snorby_box_footer do %>
+      <%= form_actions do %>
+        <%= button "Upload CSV", :onClick => 'Snorby.file.upload_asset_csv(); return false;', :class => 'success submit-asset-name-csv-file' %>
+        <%= button "Close", :class => 'warning cancel-snorbybox' %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

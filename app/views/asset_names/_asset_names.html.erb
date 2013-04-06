@@ -1,0 +1,29 @@
+<div id="signatures" class='grid_12 page boxit'>
+
+  <% @total_event_count ||= Event.count %>
+
+  <table class='default' border="0" cellspacing="0" cellpadding="0">
+
+    <tr>
+      <th>
+        <%= sortable(:name, 'Name')%>
+      </th>
+      <th>
+        <%= sortable(:ip_address, 'IP Address')%>
+      </th>
+      <th>
+        <%= sortable(:global, 'Applies to')%>
+      </th>
+
+      <th>Edit</th>
+      <th>Destroy</th>
+    </tr>
+
+    <tbody class='signatures content'>
+      <%= render @asset_names %>
+    </tbody>
+
+  </table>
+
+  <%= pager(@asset_names, '/asset_names') %>
+</div>

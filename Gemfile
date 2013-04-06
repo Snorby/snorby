@@ -6,6 +6,8 @@ DATAMAPPER    = 'http://github.com/datamapper'
 DM_VERSION    = '~> 1.2.0'
 
 gem 'rake', '0.9.2'
+gem 'psych_shield'
+gem 'request_store', '~> 1.0.5'
 
 gem 'rails',                       RAILS_VERSION
 gem 'jquery-rails'
@@ -43,6 +45,7 @@ gem 'dm-aggregates',               DM_VERSION
 gem 'dm-timestamps',               DM_VERSION
 gem 'dm-observer',                 DM_VERSION
 gem 'dm-serializer',               DM_VERSION
+gem 'dm-is-read_only',             '~> 0.3', :git => 'git://github.com/postmodern/dm-is-read_only.git'
 gem 'dm-chunked_query',            '~> 0.3'
 
 # Deploy with Capistrano
@@ -50,6 +53,7 @@ gem 'capistrano',                  '2.14.1'
 
 # Rails Plugins
 gem 'jammit',                      '~> 0.5.4'
+gem 'cancan',                      '~> 1.6'
 gem 'devise',                      '~> 1.4'
 gem 'dm-devise',                   '~> 1.5'
 gem 'rubycas-client'

@@ -791,6 +791,268 @@ function update_note_count (event_id, data) {
 
 var Snorby = {
 
+  file: {
+    upload_asset_csv: function(){
+      var self = $('#bulk-upload-form')
+      self.submit();
+    }
+  },
+
+  submitAssetName: function() {
+    var self = $('form.update-asset-name-form');
+    var q = self.formParams();
+    var params = {};
+    var errors = 0;
+
+    $('button.update-asset-name-submit-button').attr('disabled', true).find('span').text('Loading...');
+
+    if (q.id) {
+      params.id = q.id;
+    };
+
+    if (q.ip_address) {
+      params.ip_address = q.ip_address;
+    } else {
+      errors++;
+    };
+
+    if (q.name) {
+      params.name = q.name;
+    } else {
+      errors++;
+      $('input#edit-asset-name-title').addClass('error');
+    };
+
+    if (q.global) {
+      params.global = true;
+    } else {
+      params.global = false;
+      if (q.agents) {
+        params.sensors = q.agents;
+      } else {
+        errors++;
+        $('#edit-asset-name-agent-select_chzn .chzn-choices').addClass('error');
+      };
+    };
+
+    if (Snorby.submitAjaxRequestAssetName) {
+      Snorby.submitAjaxRequestAssetName.abort();
+    };
+
+    if (errors <= 0) {
+      Snorby.submitAjaxRequestAssetName = $.ajax({
+        url: '/asset_names/add',
+        dataType: "json",
+        data: params,
+        type: "post",
+        success: function(data) {
+          $.limpClose();
+          var agent_ids = [];
+
+          for (var i = 0; i < data.asset_name.sensors.length; i += 1) {
+            agent_ids.push(parseInt(data.asset_name.sensors[i]));
+          }
+
+          $('ul.table div.content li.event div.address').each(function() {
+            var self = $(this).parents('li.event');
+            var addr = $(this).attr('data-address');
+            var id = parseInt(self.attr('data-agent-id'));
+
+            if (addr === data.asset_name.ip_address) {
+
+              self.find('dd a.edit-asset-name').each(function() {
+                var ip = $(this).attr('data-ip_address');
+                if (addr === ip) {
+                  $(this).attr('data-asset_agent_ids', agent_ids);
+                  $(this).attr('data-asset_global', data.asset_name.global);
+                  $(this).attr('data-asset_name', data.asset_name.name);
+                };
+              });
+
+              if (data.asset_name.global) {
+                self.find('div.address div.asset-name').text(data.asset_name.name);
+              } else {
+                if ($.inArray(id, agent_ids) !== -1) {
+                  self.find('div.address div.asset-name').text(data.asset_name.name);
+                } else {
+                  self.find('div.address div.asset-name').text(data.asset_name.ip_address);
+                };
+              };
+            };
+
+          });
+        },
+        error: function(a,b,c) {
+          $('button.update-asset-name-submit-button').attr('disabled', false).find('span').text('Update');
+          flash_message.push({
+            type: 'error',
+            message: "Error: " + c
+          });
+          flash();
+        }
+      });
+    } else {
+      $('button.update-asset-name-submit-button').attr('disabled', false).find('span').text('Update');
+      flash_message.push({
+        type: 'error',
+        message: "Please make sure all form fields are correctly populated."
+      });
+      flash();
+    }; // no errors
+
+  },
+
+  colorPicker: function() {
+
+    $('#severity-color-bg').ColorPicker({
+      color: $('#severity-color-bg').attr('value'),
+      onShow: function (colpkr) {
+        $(colpkr).fadeIn(500);
+        return false;
+      },
+      onHide: function (colpkr) {
+        $(colpkr).fadeOut(500);
+        return false;
+      },
+      onSubmit: function(hsb, hex, rgb, el) {
+          $(el).ColorPickerHide();
+      },
+      onChange: function (hsb, hex, rgb) {
+        $('#severity-color-bg').val('#'+hex);
+        $('span.severity').css('backgroundColor', '#' + hex);
+      }
+    });
+
+    $('#severity-color-text').ColorPicker({
+      color: $('#severity-color-text').attr('value'),
+      onShow: function (colpkr) {
+        $(colpkr).fadeIn(500);
+        return false;
+      },
+      onHide: function (colpkr) {
+        $(colpkr).fadeOut(500);
+        return false;
+      },
+      onSubmit: function(hsb, hex, rgb, el) {
+          $(el).ColorPickerHide();
+      },
+      onChange: function (hsb, hex, rgb) {
+        $('#severity-color-text').val('#'+hex);
+        $('span.severity').css('color', '#' + hex);
+      }
+    });
+  },
+
+ 
+
+  snorbyCloudBoxOptions: {
+    cache: true,
+    round: 5,
+    loading: true,
+    animation: 'none',
+    distance: 10,
+    overlayClick: true,
+    enableEscapeButton: true,
+    dataType: 'html',
+    centerOnResize: true,
+    closeButton: true,
+    shadow: '0 0 30px rgba(0,0,0,1)',
+    style: {
+      background: 'rgba(36,36,36,0.9)',
+      border: '1px solid rgba(0,0,0,0.9)',
+      padding: '0',
+      width: '700px'
+    },
+    inside: {
+      background: 'transparent',
+      padding: '0',
+      display: 'block',
+      border: 'none',
+      overflow: 'visible'
+    },
+    overlay: {
+      background: '#000',
+      opacity: 0.9
+    },
+    onOpen: function() {
+      // disable_scroll();
+      if (Snorby.escBind) {
+        $(document).unbind('keydown', Snorby.escBind);
+      };
+      $('body').addClass('stop-scrolling');
+      $('body').bind('touchmove', function(e){
+        e.preventDefault();
+      });
+
+      $('dl#event-sub-menu').hide();
+    },
+    afterOpen: function(limp, html) {
+      Snorby.eventCloseHotkeys(false);
+      // $('.add-chosen').chosen();
+      // $(".add-chosen").trigger("liszt:updated");
+      if (Snorby.escBind) {
+        $(document).unbind('keydown', Snorby.escBind);
+      };
+
+      html.find('#snorbybox-content .add_chosen').chosen({
+        allow_single_deselect: true
+      });
+
+      Snorby.colorPicker();
+
+      $('img.recover, img.avatar, img.user-view-avatar, img.avatar-small, div.note-avatar-holder img').error(function(event) {
+        $(this).attr("src", "/images/default_avatar.png");
+      });
+    },
+    afterClose: function() {
+      Snorby.eventCloseHotkeys(true);
+
+      if (Snorby.escBind) {
+        $(document).bind('keydown', 'esc', Snorby.escBind);
+      };
+
+      // enable_scroll();
+      $('body').removeClass('stop-scrolling');
+      $('body').unbind('touchmove')
+    },
+    onTemplate: function(template, data, limp) {
+
+      try {
+        var $html = Snorby.puts(template, data);
+        if ($html.length > 0) { return $html; }
+        return false;
+      } catch(e) {
+        return false;
+      }
+
+    }
+  },
+
+  puts: function(name, data) {
+    var self = this;
+
+    if (Handlebars.templates.hasOwnProperty(name)) {
+      var $html = $(Handlebars.templates[""+name+""](data));
+    } else {
+      var template = Handlebars.compile(name);
+      var $html = template(data);
+    }
+    return $html;
+  },
+
+  box: function(template, data, args) {
+    var self = this;
+
+    $.limpClose();
+    var options = $.extend({}, self.snorbyCloudBoxOptions, args);
+    options.template = template;
+    options.templateData = data;
+
+    var box = $.limp(options);
+
+    return box;
+  },
+
 	setup: function(){
 
 		$('div#flash_message, div#flash_message > *').live('click', function() {
@@ -2050,6 +2312,48 @@ jQuery(document).ready(function($) {
      };
   });
 
+  Handlebars.registerHelper('build_asset_name_agent_list', function() {
+    var buffer = "";
+
+    for (var i = 0; i < this.agents.length; i += 1) {
+      var a = this.agents[i];
+
+      if (a.name === "Click To Change Me") {
+        var name = a.hostname;
+      } else {
+        var name = a.name;
+      };
+
+      if (this.hasOwnProperty('agent_ids')) {
+        if ($.isArray(this.agent_ids)) {
+          if ($.inArray(a.sid, this.agent_ids) >= 0) {
+            buffer += "<option selected value='"+a.sid+"'>" + name + "</option>";
+          } else {
+            buffer += "<option value='"+a.sid+"'>" + name + "</option>";
+          };
+        } else {
+          buffer += "<option value='"+a.sid+"'>" + name + "</option>";
+        };
+      } else {
+        buffer += "<option value='"+a.sid+"'>" + name + "</option>";
+      };
+
+    }
+
+    return buffer;
+  });
+
+
+  Handlebars.registerHelper('sensor_name', function() {
+    if (this.name === "Click To Change Me") {
+      return this.hostname;
+    } else {
+      return this.name;
+    };
+  });
+
+  
+
   Handlebars.registerHelper('percentage', function(total) {
     var calc = ((parseFloat(this.events_count) / parseFloat(total)) * 100);
     return calc.toFixed(2);
@@ -2458,4 +2762,106 @@ jQuery(document).ready(function($) {
     e.preventDefault();
   })
 
+  $('#is-asset-name-global').live('change', function(e) {
+    var value = $(this).is(':checked');
+    if (value) {
+      $('#edit-asset-name-agent-select').attr('disabled', true);
+      $('.add_chosen').trigger("liszt:updated");
+    } else {
+      $('#edit-asset-name-agent-select').attr('disabled', false);
+      $('.add_chosen').trigger("liszt:updated");
+    };
+  });
+
+  $('.edit-asset-name').live('click', function(e) {
+    e.preventDefault();
+    var self = $(this);
+
+    if (Snorby.getSensorList) {
+      Snorby.getSensorList.abort();
+    };
+
+    $('.loading-bar').slideDown('fast');
+
+    Snorby.getSensorList = $.ajax({
+      url: "/sensors/agent_list.json",
+      type: "GET",
+      dataType: "json",
+      success: function(data) {
+
+        $('.loading-bar').slideUp('fast');
+
+        var params = {
+          ip_address: self.attr('data-ip_address'),
+          agent_id: self.attr('data-agent_id'),
+          asset_name: self.attr('data-asset_name'),
+          asset_id: self.attr('data-asset_id'),
+          global: (self.attr('data-asset_global') === "true" ? true : false),
+          agents: data
+        };
+
+        params.agent_ids = [];
+        if (self.attr('data-asset_agent_ids')) {
+          var ids = self.attr('data-asset_agent_ids').split(',');
+           for (var i = 0; i < ids.length; i += 1) {
+             params.agent_ids.push(parseInt(ids[i]));
+           }
+        }
+        var box = Snorby.box('edit-asset-name', params);
+        box.open();
+      },
+      error: function(a,b,c) {
+        $('.loading-bar').slideUp('fast');
+        flash_message.push({
+          type: 'error',
+          message: "Unable to edit asset name for address."
+        });
+        flash();
+      }
+    });
+
+  });
+
+  $('a.destroy-asset-name').live('click', function(e) {
+    e.preventDefault();
+    var id = $(this).attr('data-asset_id');
+
+    var box = Snorby.box('confirm', {
+      title: "Remove Asset Name",
+      message: "Are you sure you want to remove this asset name? This action cannot be undone.",
+      button: {
+        title: "Yes",
+        type: "default success"
+      },
+      icon: "warning"
+    }, {
+      onAction: function() {
+        $('.loading-bar').slideDown('fast');
+        $('.limp-action').attr('disabled', true).find('span').text('Loading...');
+        $.ajax({
+          url: '/asset_names/' + id + '/remove',
+          type: 'delete',
+          data: {
+            csrf: csrf
+          },
+          dataType: "json",
+          success: function(data) {
+            $('.loading-bar').slideUp('fast');
+            $.limpClose();
+            $('tr[data-asset-id="'+id+'"]').remove();
+          },
+          error: function(a,b,c) {
+            $('.loading-bar').slideUp('fast');
+            $.limpClose();
+          }
+        });
+      }
+    });
+
+    box.open();
+  });
+
 });
+
+
+

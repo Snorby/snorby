@@ -12,7 +12,8 @@
     self.$element = $(element);
 
     self.inProgress = false;
-    self.content = self.options.content || null;
+    self.template = self.options.template || null;
+    self.templateData = self.options.templateData || {};
     
     self.url = self.options.url || null;
     self.$limp = false;
@@ -20,21 +21,21 @@
     self.$loader = false;
     self.cache = false;
 
-    if (self.$element.attr('data-content')) {
-      self.content = $(self.$element.attr('data-content')).html();
+    if (self.$element.data('template')) {
+      self.template = self.$element.data('template');
     };
 
-    if (self.$element.attr('data-width')) {
-      self.options.style.width = self.$element.attr('data-width');
+    if (self.$element.data('width')) {
+      self.options.style.width = self.$element.data('width');
     };
 
     // Ajax Request
-    if (!self.content && !self.url) {
+    if (!self.template) {
      
       if (self.$element.attr('href')) { 
         self.url = self.$element.attr('href');
-      } else if (self.$element.attr('data-url')) {
-        self.url = self.$element.attr('data-url');
+      } else if (self.$element.data('url')) {
+        self.url = self.$element.data('url');
       };
 
     };
@@ -46,9 +47,7 @@
 
     open: function() {
       var self = this;
-
       if (self.inProgress) { return };
-      
       self.inProgress = true;
       self.limp();
 
@@ -56,10 +55,26 @@
         self.close();
       });
 
+      self.enableEscapeButtonHandler = function(e) {
+        e.stopPropagation();
+        if (e.keyCode == 27) { self.close() };
+      };
+
+      self.onActionHandler = function(e) {
+        e.stopPropagation();
+        if (e.keyCode == 13) {
+          var $button = $('button.limp-action');
+          if ($button) {
+            $button.click();
+          };
+        };
+      };
+
       if (self.options.enableEscapeButton) {
-        $(document).keypress(function(event) {
-          if (event.keyCode == 27) { self.close() };
-        });
+        if (Snorby.escBind) {
+          $(document).unbind('keydown', Snorby.escBind);
+        };
+        $(document).bind('keydown', 'esc', self.enableEscapeButtonHandler);
       };
 
       self.$overlay.prependTo('body');
@@ -86,6 +101,7 @@
 
         };
 
+
         self.$limp.find('#limp-box-inside').html(content);
         
         self.$limp.css({
@@ -99,7 +115,9 @@
         // Animations
         if (self.options.animation == 'pop') {
 
-          self.$overlay.fadeTo('fast', self.options.overlay.opacity);
+          self.$overlay.animate({
+            opacity: self.options.overlay.opacity 
+          }, 'fast');
           
           var position = self.resize(200);
           
@@ -121,10 +139,14 @@
         } else if (self.options.animation == 'fade') {
 
           self.resize();
-          
-          self.$limp.fadeTo('fast', 1);
-          
-          self.$overlay.fadeTo('fast', self.options.overlay.opacity);
+
+          self.$limp.animate({
+            opacity: 1
+          }, 'fast');
+
+          self.$overlay.animate({
+            opacity: self.options.overlay.opacity 
+          }, 'fast');
 
           self.onClose = function(that, callback) {
             self.$overlay.fadeOut('fast');
@@ -135,7 +157,9 @@
 
         } else {
 
-          self.$overlay.fadeTo(0, self.options.overlay.opacity);
+          // self.$overlay.fadeTo(0, self.options.overlay.opacity);
+          // console.log(self.options.overlay.opacity);
+          self.$overlay.css({opacity:0.8});
           
           self.resize();
           
@@ -146,7 +170,18 @@
           };
 
         };
-        
+
+        self.$limp.data('limp-api', self);
+
+        $(document).bind('keydown', self.onActionHandler);
+
+        if (self.options.onAction && (typeof self.options.onAction === "function")) {
+          $('.limp-action', self.$limp).bind('click', function(e) {
+            e.preventDefault();
+            self.options.onAction();
+          }); 
+        };
+
         self.loading();
       });
 
@@ -162,10 +197,26 @@
       var screenh = ($(window).height() / 2);
       var screenw = ($(window).width() / 2);
 
+      if (typeof self.limpStartSize === "undefined") {
+        self.limpStartSize = self.$limp.outerHeight(true);
+      };
+
       if (self.options.adjustmentSize) {
 
-        var height = (screenh - self.options.adjustmentSize) 
-        - (self.$limp.outerHeight(true) / 2);
+        if (self.limpStartSize < 500) {
+
+          if ($(window).height() > 400) {
+            var height = (screenh - self.options.adjustmentSize) 
+            - (self.$limp.outerHeight(true) / 2);
+
+            if (height <= self.options.adjustmentSize) { height = self.options.adjustmentSize };          
+          } else {
+            var height = (screenh - (self.$limp.outerHeight(true) / 2));
+          };
+
+        } else {
+          var height = (screenh - (self.$limp.outerHeight(true) / 2));
+        };
 
       } else {
         
@@ -191,20 +242,32 @@
         left: width
       });
 
-      return {
+      // self.$limpInside.css({
+        // maxHeight: $(window).height() - (self.options.distance * 2),
+      // });
+
+      $('.snorby-cloud-box').css({
+        maxHeight: $(window).height() - (self.options.distance * 2)
+      });
+
+      var resizeData = {
         height: height,
         width: width,
         offset: offset,
         offsetHeight: offsetHeight
       };
 
+      return resizeData;
     },
 
     close: function() {
       var self = this;
 
       self.inProgress = false;
-      self.onClose(self, function() { self.clean() });
+      self.onClose(self, function() { 
+        self.clean(); 
+        self.options.onClose(self, self.$limp);
+      });
 
       return self;
     },
@@ -216,12 +279,17 @@
       self.$limp.css('opacity', 0);
 
       $(window).unbind('limp.resize');
-      $(document).unbind('limp.keydown').unbind('limp.close');
+      
+      $(document).unbind('keydown', self.enableEscapeButtonHandler);
+      $(document).unbind('keydown', self.onActionHandler);
+      $(document).unbind('limp.close');
 
       self.options.onOpen(self);
       self.$limp.remove();
 
       self.$overlay.remove();
+
+      self.options.afterClose(self, self.$limp);
     },
 
     error: function(xhr, textStatus, errorThrown) {
@@ -237,7 +305,12 @@
       } catch(err) {
 
         var status = textStatus;
-        var message = $error.append('Error: Not Found.');
+
+        var html = "<div class='snorby-cloud-box'><div class='snorby-cloud-box-title'><div class='icon' />Loading Error</div><div class='snorby-cloud-box-content'><span>Error: Not Found</span></div>" +
+        "<div class='snorby-cloud-box-footer'><div class='form-actions'><button class='form-button default' onClick='$.limpClose()'>Ok</button></div></div>" +
+        "</div>";
+
+        var message = $error.append(html);
 
       };
 
@@ -248,6 +321,11 @@
       var self = this;
 
       self.loading();
+
+      if ($.fn.limp.loading) {
+        $.fn.limp.loading.remove();
+        $.fn.limp.loading = false;        
+      }
 
       if (self.url) {
 
@@ -273,16 +351,21 @@
 
         };
 
-      } else if (self.content) {
-        self.cache = self.content;
+      } else if (self.template) {
 
-        if (self.cache) {
+        if (self.options.onTemplate && (typeof self.options.onTemplate === "function")) {
+          
+          self.cache = self.options.onTemplate(self.template, self.templateData, self);
 
-          callback(self.cache);
+          if (self.cache) {
 
-        } else {
+            callback(self.cache);
 
-          callback(self.content);
+          } else {
+
+            callback(self.error());
+
+          };
 
         };
 
@@ -309,7 +392,7 @@
           top: 0,
           right: 0,
           bottom: 0,
-          zIndex: 1000000
+          zIndex: 99999995
         });
 
         self.$limp = $('<div id="limp-box" />');
@@ -320,13 +403,13 @@
         if (self.options.closeButton) {
 
           var $limpClose = $('<div id="limp-box-close" ' + 
-          'class="limp-box-close">×</div>').css({
+          'class="limp-box-close"><div class="limp-box-close-icon" /></div>').css({
             position: 'absolute',
             display: 'block',
             top: 15,
             right: 18,
-            height: 10,
-            width: 10,
+            height: 22,
+            width: 22,
             cursor: 'pointer',
             position: 'absolute',
             color: '#999',
@@ -335,6 +418,12 @@
           });
 
           $limpClose.appendTo(self.$limp);
+
+
+          $('body').on('click', '.limp-box-close', function(event) {
+            event.preventDefault();
+            $(document).trigger('limp.close');
+          });
         };
 
         self.css();
@@ -410,7 +499,7 @@
           left: (($(window).width() / 2) - (37 / 2)),
           display: 'block',
           padding: '10px',
-          zIndex: 1000002,
+          zIndex: 9999999999,
           position: 'fixed',
           background: '#111111',
           'background-image': 'url(data:image/gif;base64,R0lGODlhEAALAPQAA' + 
@@ -436,9 +525,22 @@
 
         self.$loader.appendTo('body');
       };
-
     }
 
+  };
+
+  $.limpClose = function() {
+    $(document).trigger('limp.close');
+    return false;
+  };
+
+  $.limp = function(options) {
+    options = $.extend({}, $.fn.limp.defaults, options);
+    options.style = $.extend({}, $.fn.limp.style, options.style);
+    options.overlay = $.extend({}, $.fn.limp.overlay, options.overlay);
+    options.inside = $.extend({}, $.fn.limp.inside, options.inside);
+    var limp = new Limp(null, options);
+    return limp;
   };
 
   $.fn.limp = function(options) {
@@ -448,6 +550,9 @@
     options.style = $.extend({}, $.fn.limp.style, options.style);
     options.overlay = $.extend({}, $.fn.limp.overlay, options.overlay);
     options.inside = $.extend({}, $.fn.limp.inside, options.inside);
+
+
+    $.limpLoading();
 
     function fetch(ele) {
       var obj = $.data(ele, 'limp');
@@ -465,11 +570,6 @@
       return obj;
     };
 
-    $('body').on('click', '.limp-box-close', function(event) {
-      event.preventDefault();
-      $(document).trigger('limp.close');
-    });
-
     function toggle(event) {
       event.preventDefault();
       var limp = fetch(this);
@@ -481,7 +581,6 @@
       };
 
     };
-
     this['live']('click', toggle);
     return this;
   };
@@ -502,7 +601,9 @@
     closeButton: true,
     onOpen: function(limp) {},
     afterOpen: function(limp, html) {},
-    onClose: function(limp) {}
+    onClose: function(limp) {},
+    afterClose: function(limp) {},
+    onTemplate: function(template, limp) {}
   };
 
   $.fn.limp.style = {
@@ -514,10 +615,10 @@
     border: 'solid 5px #ededed',
     color: 'black',
     outline: 0,
-    zIndex: 1000001,
+    zIndex: 99999999,
     opacity: 0,
     height: 'auto',
-    overflow: 'auto'
+    overflow: 'visible'
   };
 
   $.fn.limp.inside = {
@@ -525,13 +626,62 @@
     padding: '35px 40px',
     display: 'block',
     border: '1px solid #ddd',
-    overflow: 'hidden'
+    overflow: 'visible'
   };
 
   $.fn.limp.overlay = {
     background: '#fff',
-    opacity: 0.4
+    opacity: 0.4,
+    zIndex: 99999995
   };
+
+  $.fn.limp.loading = false;
+
+  $.limpLoading = function() {
+
+      if ($.fn.limp.loading) {
+        $.fn.limp.loading.remove();
+        $.fn.limp.loading = false;
+      } else {
+        $.fn.limp.loading = $('<div id="limp-box-loading" />');
+        $.fn.limp.loading.css({
+        'border-radius': 5,
+        '-moz-border-radius': 5,
+        '-webkit-border-radius': 5,
+          width: '21px',
+          height: '16px',
+          top: (($(window).height() / 2) - (37 / 2)),
+          left: (($(window).width() / 2) - (37 / 2)),
+          display: 'block',
+          padding: '10px',
+          zIndex: 1000002,
+          position: 'fixed',
+          background: '#111111',
+          'background-image': 'url(data:image/gif;base64,R0lGODlhEAALAPQAA' + 
+          'BEREf///zIyMjs7OyMjI/j4+P///9PT04SEhKSkpFBQUN7e3ri4uH19faCgoExM' + 
+          'TNra2vr6+rW1tScnJzQ0NBoaGsnJyTAwMBwcHFRUVGhoaEFBQR8fHwAAAAAAAAA' + 
+          'AACH+GkNyZWF0ZWQgd2l0aCBhamF4bG9hZC5pbmZvACH5BAALAAAAIf8LTkVUU0' + 
+          'NBUEUyLjADAQAAACwAAAAAEAALAAAFLSAgjmRpnqSgCuLKAq5AEIM4zDVw03ve2' + 
+          '7ifDgfkEYe04kDIDC5zrtYKRa2WQgAh+QQACwABACwAAAAAEAALAAAFJGBhGAVg' + 
+          'nqhpHIeRvsDawqns0qeN5+y967tYLyicBYE7EYkYAgAh+QQACwACACwAAAAAEAA' + 
+          'LAAAFNiAgjothLOOIJAkiGgxjpGKiKMkbz7SN6zIawJcDwIK9W/HISxGBzdHTuB' + 
+          'NOmcJVCyoUlk7CEAAh+QQACwADACwAAAAAEAALAAAFNSAgjqQIRRFUAo3jNGIkS' + 
+          'dHqPI8Tz3V55zuaDacDyIQ+YrBH+hWPzJFzOQQaeavWi7oqnVIhACH5BAALAAQA' + 
+          'LAAAAAAQAAsAAAUyICCOZGme1rJY5kRRk7hI0mJSVUXJtF3iOl7tltsBZsNfUeg' + 
+          'jAY3I5sgFY55KqdX1GgIAIfkEAAsABQAsAAAAABAACwAABTcgII5kaZ4kcV2EqL' + 
+          'JipmnZhWGXaOOitm2aXQ4g7P2Ct2ER4AMul00kj5g0Al8tADY2y6C+4FIIACH5B' + 
+          'AALAAYALAAAAAAQAAsAAAUvICCOZGme5ERRk6iy7qpyHCVStA3gNa/7txxwlwv2' + 
+          'isSacYUc+l4tADQGQ1mvpBAAIfkEAAsABwAsAAAAABAACwAABS8gII5kaZ7kRFG' + 
+          'TqLLuqnIcJVK0DeA1r/u3HHCXC/aKxJpxhRz6Xi0ANAZDWa+kEAA7AAAAAAAAAA' + 
+          'AA)',
+          'background-repeat': 'no-repeat',
+          'background-position': 'center center'
+        });
+
+
+        $.fn.limp.loading.prependTo('body');
+      };    
+  }
 
 })(jQuery);
 

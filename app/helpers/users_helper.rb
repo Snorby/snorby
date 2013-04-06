@@ -7,17 +7,12 @@ module UsersHelper
 
     return default_url unless @current_user && @current_user.gravatar
 
-    email_address = email.downcase
+    return default_url unless email
 
+    email_address = email.downcase
     # create the md5 hash
     hash = Digest::MD5.hexdigest(email_address)
     "https://gravatar.com/avatar/#{hash}.png?s=256&d=#{CGI.escape(default_url)}"
   end
   
 end
-
-
-
-
-
-

@@ -415,6 +415,7 @@ class Event
       :session_count => self.number_of_events,
       :ip_src => self.ip.ip_src.to_s,
       :ip_dst => self.ip.ip_dst.to_s,
+      :asset_names => self.ip.asset_names,
       :timestamp => self.pretty_time,
       :datetime => self.timestamp.strftime('%A, %b %d, %Y at %I:%M:%S %p'),
       :message =>  self.signature.name, 
