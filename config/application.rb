@@ -71,6 +71,31 @@ module Snorby
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'
+    #
+
+    time_zone = CONFIG[:time_zone] # set your local time zone here. use rake time:zones:local to choose a value, or use UTC.
+
+    unless time_zone
+      # try to detect one
+
+      if File.exists?('/etc/localtime')
+        path = File.readlink('/etc/localtime')
+        items = path.split("zoneinfo/")
+        if items.length == 2
+          time_zone = items[1] 
+        end
+      end
+
+      unless time_zone
+        puts "*** Warning:  no time zone is set in config/application.rb. Using UTC as the default time and behavior may be unexpected."
+        time_zone = "UTC"
+      end
+    end
+
+    config.time_zone = time_zone
+
+    DataMapper::Zone::Types.storage_zone = time_zone
+    CONFIG[:time_zone] = time_zone unless CONFIG[:time_zone]
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]

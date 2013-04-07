@@ -81,7 +81,7 @@ gem 'whois',                       '~> 2.3.0'
 gem 'simple_form',                 '~> 1.2.2'
 gem 'geoip',                       '~> 1.1.1'
 gem 'netaddr',                     '~> 1.5.0'
-
+gem 'dm-zone-types',               '~> 0.3'
 
 group(:development) do
 	gem "letter_opener"

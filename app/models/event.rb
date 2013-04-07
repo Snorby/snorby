@@ -27,21 +27,26 @@ class Event
 
   property :classification_id, Integer, :index => true, :required => false, :min => 0
 
-  property :users_count, Integer, :index => true, :default => 0
+  property :users_count, Integer, :index => true, :default => 0, :min => 0
 
-  property :user_id, Integer, :index => true, :required => false
+  property :user_id, Integer, :index => true, :required => false, :min => 0
   
-  property :notes_count, Integer, :index => true, :default => 0
+  property :notes_count, Integer, :index => true, :default => 0, :min => 0
+ 
+  # 1 = nids
+  # 2 = hids
+  # others TBD
+  property :type, Integer, :default => 1, :min => 0 
 
   # Fake Column
-  property :number_of_events, Integer, :default => 0
+  property :number_of_events, Integer, :default => 0, :min => 0
   #
   # property :event_id, Integer
   ###
 
   belongs_to :classification
 
-  property :timestamp, DateTime
+  property :timestamp, ZonedTime
 
   has n, :favorites, :parent_key => [ :sid, :cid ], 
     :child_key => [ :sid, :cid ], :constraint => :destroy!
@@ -96,8 +101,18 @@ class Event
 
   def self.last_event_timestamp
     event = first(:order => [:timestamp.desc])
-    timestamp = event ? event.timestamp : DateTime.now
+    timestamp = event ? event.timestamp : Time.zone.now
   end
+
+  def hids?
+    return true if self.signature.name =~ /\[HIDS\]/
+    false
+  end
+
+  def helpers
+    ActionController::Base.helpers
+  end
+ 
 
   def self.unique_events_by_source_ip
     data = []
@@ -127,7 +142,7 @@ class Event
     direction = params[:direction]
 
     page = {
-      :per_page => User.current_user.per_page_count
+      :per_page => (params[:limit] ? params[:limit].to_i : User.current_user.per_page_count.to_i)
     }
 
     if params.has_key?(:search)
@@ -137,14 +152,14 @@ class Event
       sql[0] += " LIMIT ? OFFSET ?"
 
       page(params[:page], { 
-        :per_page => User.current_user.per_page_count.to_i,
+        :per_page => (params[:limit] ? params[:limit].to_i : User.current_user.per_page_count.to_i),
         :order => :timestamp.desc
       }, sql, count)
     else
 
       if sql
         
-        page(params[:page].to_i, page, sql, count)
+        page(params[:page].to_i, page, sql, count);
 
       else
 
@@ -276,6 +291,7 @@ class Event
   end
 
   def self.update_classification_by_session(ids, classification, user_id=nil)
+    event_count = 0
 
     @classification = if classification.to_i.zero?
       "NULL"
@@ -297,6 +313,8 @@ class Event
 
       event_data.each_with_index do |e, index|
         event = e.split('-')
+        event_count += 1
+
         events.push("(`sid` = #{event.first.to_i} and `cid` = #{event.last.to_i})") 
       end
 
@@ -311,10 +329,13 @@ class Event
       tmp = update += classification_sql.join(" OR ")
       db_execute(tmp)
       db_execute("update classifications set events_count = (select count(*) from event where event.`classification_id` = classifications.id);")
+
+      event_count
     end
   end
 
   def self.update_classification(ids, classification, user_id=nil)
+    event_count = 0
 
     @classification = if classification.to_i.zero?
       "NULL"
@@ -329,13 +350,15 @@ class Event
     end
 
     if @classification
-      update = "UPDATE `event` SET `classification_id` = #{@classification.id}, `user_id` = #{uid} WHERE "
+      update = "UPDATE `event` SET `classification_id` = #{(@classification == "NULL" ? @classification : @classification.id)}, `user_id` = #{uid} WHERE "
       events = []
 
       process = lambda do |e|
         event_data = e.split(',')
 
         event_data.each_with_index do |e, index|
+          event_count += 1
+
           event = e.split('-')
           events.push("(`sid` = #{event.first.to_i} and `cid` = #{event.last.to_i})")
 
@@ -357,6 +380,7 @@ class Event
         end
 
         db_execute("update classifications set events_count = (select count(*) from event where event.`classification_id` = classifications.id);")
+        event_count
       end
 
       if ids.is_a?(Array)
@@ -364,8 +388,8 @@ class Event
       else
         process.call(ids)
       end
+
     end
-    
   end
 
   def self.find_by_ids(ids)
@@ -397,7 +421,7 @@ class Event
       # return "#{timestamp.strftime('%l:%M %p')}" if Date.today.to_date == timestamp.to_date
       # "#{timestamp.strftime('%m/%d/%Y')}"
     # end
-    return "#{timestamp.strftime('%l:%M %p')}" if Date.today.to_date == timestamp.to_date
+    return "#{timestamp.strftime('%l:%M %p')}" if Time.zone.today.to_date == timestamp.to_date
     "#{timestamp.strftime('%m/%d/%Y')}"
   end
 
@@ -424,6 +448,7 @@ class Event
       :dst_port => dst_port,
       :users_count => users_count,
       :notes_count => notes_count,
+      :sig_id => signature.sig_id,
       :favorite => favorite?
 
     }
@@ -453,9 +478,14 @@ class Event
   # @return [Hash] hash of events between range.
   #
   def self.to_json_since(time)
-    
+   
+    if !time
+      time = Time.zone.now
+    end
+
+    p "XXXX: #{Time.zone}, #{time}, #{Time.zone.parse(time.to_s)}"
     geoip = Setting.geoip?
-    events = Event.all(:timestamp.gt => time, :classification_id => nil, :order => [:timestamp.desc])
+    events = Event.all(:timestamp.gt => Time.zone.parse(time.to_s), :classification_id => nil, :order => [:timestamp.desc])
     json = {:events => []}
 
     events.each do |event|
@@ -470,7 +500,7 @@ class Event
         :ip_dst => ip.ip_dst.to_s,
         :timestamp => event.pretty_time,
         :datetime => event.timestamp.strftime('%A, %b %d, %Y at %I:%M:%S %p'),
-        :message => truncate(event.signature.name, :length => 65, :omission => '...'),
+        :message => event.signature.name,
         :geoip => false
       }
 
@@ -564,7 +594,7 @@ class Event
   end
   
   def in_xml
-    # add back user
+    # add user information
     %{<snorby>#{to_xml}#{ip.to_xml}#{protocol_data.last.to_xml if protocol_data}#{classification.to_xml if classification}#{payload.to_xml if payload}</snorby>}.chomp
   end
 

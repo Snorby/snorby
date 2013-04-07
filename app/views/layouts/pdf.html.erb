@@ -707,7 +707,7 @@ return;var vpath=[x-radius,y-radius,x+radius,y+radius,startx,starty,endx,endy];v
 					<h1>Snorby Reports</h1>
 				<% end %>
 
-				Date: <%= Time.now.strftime('%A %B, %Y at %I:%M %p') %>
+				Date: <%= Time.zone.now.strftime('%A %B, %Y at %I:%M %p %Z') %>
 
 				<%= yield(:pdf_header) %>
 

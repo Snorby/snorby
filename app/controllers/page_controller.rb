@@ -4,9 +4,18 @@ class PageController < ApplicationController
   include Snorby::Jobs::CacheHelper
 
   def dashboard
+
     @now = Time.now
 
     @range = params[:range].blank? ? 'last_24' : params[:range]
+
+    if @range.to_sym == :custom
+      begin
+        @custom_start = Time.zone.parse(params[:start]).utc.strftime('%Y-%m-%d %H:%M:%S')
+        @custom_end = Time.zone.parse(params[:end]).utc.strftime('%Y-%m-%d %H:%M:%S')
+      rescue => e
+      end
+    end
 
     set_defaults
 
@@ -142,7 +151,13 @@ class PageController < ApplicationController
 
   def set_defaults
 
+    @now = Time.zone.now
+
     case @range.to_sym
+    when :custom
+      @cache = Cache.all(:ran_at.gte => @custom_start, :ran_at.lte => @custom_end)
+      @start_time = Time.zone.parse(@custom_start).beginning_of_day
+      @end_time = Time.zone.parse(@custom_end).end_of_day
     when :last_24
 
       @start_time = @now.yesterday

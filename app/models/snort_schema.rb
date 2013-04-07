@@ -8,7 +8,7 @@ class SnortSchema
 
   property :vseq, Integer, :min => 0
 
-  property :ctime, DateTime
+  property :ctime, ZonedTime
 
   property :version, String
   

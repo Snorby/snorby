@@ -7,11 +7,9 @@ module ApplicationHelper
       # time.strftime('%A, %b %d, %Y at %l:%M:%S %p')
     # end
 
-    time_zone = Time.parse(DateTime.now.to_s).strftime('%Z')
+    time_zone = Time.zone.parse(DateTime.now.to_s).strftime('%Z')
     time_string = '%A, %b %d, %Y at %l:%M:%S %p'
     time_string = '%D %I:%M %p' if short
-
-
 
     "#{time.strftime(time_string)} #{time_zone}"
   end

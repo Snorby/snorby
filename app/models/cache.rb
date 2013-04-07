@@ -8,7 +8,7 @@ class Cache
 
   property :cid, Integer
 
-  property :ran_at, DateTime
+  property :ran_at, ZonedTime
 
   property :event_count, Integer, :default => 0
 
@@ -28,41 +28,43 @@ class Cache
 
   # Define created_at and updated_at timestamps
   timestamps :at
+  property :created_at, ZonedTime
+  property :updated_at, ZonedTime
 
   belongs_to :sensor, :parent_key => :sid, :child_key => :sid
 
   has 1, :event, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ]
 
   def self.last_month
-    all(:ran_at.gte => (Time.now - 2.months).beginning_of_month, :ran_at.lte => (Time.now - 2.months).end_of_month)
+    all(:ran_at.gte => (Time.zone.now - 2.months).beginning_of_month, :ran_at.lte => (Time.zone.now - 2.months).end_of_month)
   end
 
   def self.this_quarter
-    all(:ran_at.gte => Time.now.beginning_of_quarter, :ran_at.lte => Time.now.end_of_quarter)
+    all(:ran_at.gte => Time.zone.now.beginning_of_quarter, :ran_at.lte => Time.zone.now.end_of_quarter)
   end
 
   def self.this_month
-    all(:ran_at.gte => Time.now.beginning_of_month, :ran_at.lte => Time.now.end_of_month)
+    all(:ran_at.gte => Time.zone.now.beginning_of_month, :ran_at.lte => Time.zone.now.end_of_month)
   end
 
   def self.last_week
-    all(:ran_at.gte => (Time.now - 1.weeks).beginning_of_week, :ran_at.lte => (Time.now - 1.weeks).end_of_week)
+    all(:ran_at.gte => (Time.zone.now - 1.weeks).beginning_of_week, :ran_at.lte => (Time.zone.now - 1.weeks).end_of_week)
   end
 
   def self.this_week
-    all(:ran_at.gte => Time.now.beginning_of_week, :ran_at.lte => Time.now.end_of_week)
+    all(:ran_at.gte => Time.zone.now.beginning_of_week, :ran_at.lte => Time.zone.now.end_of_week)
   end
 
   def self.yesterday
-    all(:ran_at.gte => Time.now.yesterday.beginning_of_day, :ran_at.lte => Time.now.yesterday.end_of_day)
+    all(:ran_at.gte => Time.zone.now.yesterday.beginning_of_day, :ran_at.lte => Time.zone.now.yesterday.end_of_day)
   end
 
   def self.today
-    all(:ran_at.gte => Time.now.beginning_of_day, :ran_at.lte => Time.now.end_of_day)
+    all(:ran_at.gte => Time.zone.now.beginning_of_day, :ran_at.lte => Time.zone.now.end_of_day)
   end
 
   def self.last_24(first=nil,last=nil)
-    current = Time.now
+    current = Time.zone.now
     end_time = last ? last : current
     start_time = first ? first : current.yesterday
 
@@ -73,7 +75,7 @@ class Cache
     if (time = get_last)
       return time.updated_at
     else
-      Time.now 
+      Time.zone.now 
     end
   end
 
@@ -137,19 +139,42 @@ class Cache
     @metrics = []
 
     Sensor.all(:limit => 5, :order => [:events_count.desc]).each do |sensor|
-      count = count_hash(type)
 
-      blah = self.all(:sid => sensor.sid).group_by { |x| "#{x.ran_at.day}-#{x.ran_at.hour}" }
-      
-      blah.each do |hour, data|
-        count[hour] = data.map(&:event_count).sum
-      end
-      
-      @metrics << { 
-        :name => sensor.sensor_name, 
-        :data => count.values,
-        :range => count.keys.collect {|x| "'#{x.split('-').last}'" }
-      }
+      if type == :custom
+        count = {} #count_hash(type)
+
+        blah = self.all(:sid => sensor.sid).group_by do |x| 
+          time = x.ran_at
+          "#{time.year}-#{time.month}-#{time.day}-#{time.hour}"
+        end
+
+        blah.each do |hour, data|
+          count[hour] = data.map(&:event_count).sum
+        end
+
+        @metrics << { 
+          :name => sensor.sensor_name, 
+          :data => count.values,
+          :range => count.keys.collect {|x| "'#{x.split('-')[2]}'" }
+        }
+
+      else # if not custom
+
+        count = count_hash(type)
+
+        blah = self.all(:sid => sensor.sid).group_by { |x| "#{x.ran_at.day}-#{x.ran_at.hour}" }
+
+        blah.each do |hour, data|
+          count[hour] = data.map(&:event_count).sum
+        end
+
+        @metrics << { 
+          :name => sensor.sensor_name, 
+          :data => count.values,
+          :range => count.keys.collect {|x| "'#{x.split('-').last}'" }
+        }
+
+      end # custom logic
     end
 
     @metrics
@@ -240,31 +265,43 @@ class Cache
     count = {}
 
     if type == :last_24
-      now = Time.now
+      now = Time.zone.now
       # TODO
       # this will need to store the key as day/hour
       
       Range.new(now.yesterday.to_i, now.to_i).step(1.hour) do |seconds_since_epoch|
-        time = Time.at(seconds_since_epoch)
+        time = Time.zone.at(seconds_since_epoch)
         key = "#{time.day}-#{time.hour}"
         count[key] = 0
       end
 
     else
-    
-      if type == :today
-        time_start = Time.now.beginning_of_day.to_i
-        time_end =  Time.now.end_of_day.to_i
-      else
-        time_start = Time.now.yesterday.beginning_of_day.to_i
-        time_end =  Time.now.yesterday.end_of_day.to_i  
-      end
 
-      Range.new(time_start, time_end).step(1.hour) do |seconds_since_epoch|
-        time = Time.at(seconds_since_epoch)
-        key = "#{time.day}-#{time.hour}"
-        count[key] = 0
-      end
+      if type == :custom
+        time_start = Time.zone.now.yesterday.beginning_of_day.to_i
+        time_end =  Time.zone.now.yesterday.end_of_day.to_i  
+
+        Range.new(time_start, time_end).step(1.day) do |seconds_since_epoch|
+          time = Time.zone.at(seconds_since_epoch)
+          key = "#{time.year}-#{time.month}-#{time.day}-#{time.hour}"
+          count[key] = 0
+        end
+      else # if not custom
+        if type == :today
+          time_start = Time.zone.now.beginning_of_day.to_i
+          time_end =  Time.zone.now.end_of_day.to_i
+        else
+          time_start = Time.zone.now.yesterday.beginning_of_day.to_i
+          time_end =  Time.zone.now.yesterday.end_of_day.to_i  
+        end
+
+        Range.new(time_start, time_end).step(1.hour) do |seconds_since_epoch|
+          time = Time.zone.at(seconds_since_epoch)
+          key = "#{time.day}-#{time.hour}"
+          count[key] = 0
+        end
+      end # if custom
+
 
     end
 
@@ -279,8 +316,8 @@ class Cache
   end
 
   def self.range_for_type(type=:hour, &block)
-    Range.new(Time.now.beginning_of_day.to_i, Time.now.end_of_day.to_i).step(1.hour) do |seconds_since_epoch|
-      time = Time.at(seconds_since_epoch)
+    Range.new(Time.zone.now.beginning_of_day.to_i, Time.zone.now.end_of_day.to_i).step(1.hour) do |seconds_since_epoch|
+      time = Time.zone.at(seconds_since_epoch)
       key = "#{time.day}-#{time.hour}"
       block.call(key) if block
     end

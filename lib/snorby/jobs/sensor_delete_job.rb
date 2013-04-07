@@ -19,14 +19,13 @@
 module Snorby
   module Jobs
     class SensorDeleteJob < Struct.new(:sensor_id)
+
+      include Snorby::Jobs::CacheHelper
+
       def perform
-        sensor = Sensor.get(sensor_id)
-        while(true)
-          break unless Snorby::Jobs.caching?
-          sleep 5
-        end
-          sensor.destroy
+        delete_sensor(sensor_id) if sensor_id
       end
+
     end
   end
 end

@@ -22,7 +22,13 @@ class Sensor
 
   property :pending_delete, Boolean, :default => false
 
-  property :events_count, Integer, :index => true, :default => 0
+  property :updated_at, ZonedTime
+
+  property :events_count, Integer, :index => true, :default => 0, :min => 0
+
+  has n, :agent_asset_names
+
+  has n, :asset_names, :through => :agent_asset_names
 
   has n, :metrics, 'Cache', :child_key => :sid, :constraint => :destroy!
 
@@ -31,18 +37,18 @@ class Sensor
   has n, :events, :child_key => :sid, :constraint => :destroy!
 
   has n, :ips, :child_key => :sid, :constraint => :destroy!
-  
+
   has n, :notes, :child_key => :sid, :constraint => :destroy!
 
   def cache
     Cache.all(:sid => sid)
   end
-  
+
   def sensor_name
     return name unless name == 'Click To Change Me'
     hostname
   end
-  
+
   def daily_cache
     DailyCache.all(:sid => sid)
   end
@@ -51,10 +57,10 @@ class Sensor
     return Event.get(sid, last_cid) unless last_cid.blank?
     false
   end
-  
+
   #
-  #  
-  # 
+  #
+  #
   def event_percentage
     begin
       total_event_count = Sensor.all.map(&:events_count).sum
@@ -64,5 +70,6 @@ class Sensor
       0
     end
   end
+
 
 end

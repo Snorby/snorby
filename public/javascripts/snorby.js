@@ -2296,12 +2296,28 @@ jQuery(document).ready(function($) {
       var code = ip.country_code2;
       if (name === "--") { name = 'N/A' };
 
-      return '<span class="click ' +
+      return '<div class="click ' +
       'country_flag add_tipsy_html" title="&lt;img class=&quot;flag&quot; ' +
-      'src=&quot;/images/flags/'+code.toLowerCase()+'.png&quot;&gt; ' + name + '">' + code + '</span>';
+      'src=&quot;/images/flags/'+code.toLowerCase()+'.png&quot;&gt; ' + name + '">' + code + '</div>';
     } else {
       return null;
     };
+  });
+
+  Handlebars.registerHelper('format_time', function(time) {
+    // 2012-09-22 19:25:13 UTC
+    return moment(time).utc().add('seconds', Snorby.current_user.timezone_offset).format('MMMM DD, YYYY HH:mm:ss'); //.fromNow();
+  });
+
+  Handlebars.registerHelper('short_format_time', function(time) {
+    // 2012-09-22 19:25:13 UTC
+    return moment(time).utc().add('seconds', Snorby.current_user.timezone_offset).format('MM/DD/YY HH:mm:ss'); //.fromNow();
+  });
+
+  Handlebars.registerHelper('format_unix_js', function(time) {
+    // 2012-09-22 19:25:13 UTC
+    time = Math.floor(time / 1000);
+    return moment.unix(time).utc().add('seconds', Snorby.current_user.timezone_offset).format('MM/DD/YY hh:mm:ss A ') + Snorby.current_user.timezone; //.fromNow();
   });
 
   Handlebars.registerHelper('truncate', function(data, length) {

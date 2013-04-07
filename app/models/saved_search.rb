@@ -20,7 +20,9 @@ class SavedSearch
 
   property :checksum, Text
 
-  timestamps :at
+  # timestamps :at
+  property :created_at, ZonedTime
+  property :updated_at, ZonedTime
   
   belongs_to :user
 
