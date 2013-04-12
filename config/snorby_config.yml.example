@@ -9,6 +9,7 @@ production:
   domain: 'demo.snorby.org'
   wkhtmltopdf: /usr/local/bin/wkhtmltopdf
   ssl: false
+  https: true
   mailer_sender: 'snorby@snorby.org'
   geoip_uri: "http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz"
   rules:
@@ -22,6 +23,7 @@ development:
   domain: localhost:3000
   wkhtmltopdf: /Users/mephux/.rvm/gems/ruby-1.9.2-p0/bin/wkhtmltopdf
   ssl: false
+  https: false
   mailer_sender: 'snorby@snorby.org'
   geoip_uri: "http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz"
   rules: 
