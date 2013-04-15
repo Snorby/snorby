@@ -855,6 +855,7 @@ var Snorby = {
 
           $('ul.table div.content li.event div.address').each(function() {
             var self = $(this).parents('li.event');
+            var address = $('div.asset-name', this);
             var addr = $(this).attr('data-address');
             var id = parseInt(self.attr('data-agent-id'));
 
@@ -870,12 +871,12 @@ var Snorby = {
               });
 
               if (data.asset_name.global) {
-                self.find('div.address div.asset-name').text(data.asset_name.name);
+                address.text(data.asset_name.name);
               } else {
                 if ($.inArray(id, agent_ids) !== -1) {
-                  self.find('div.address div.asset-name').text(data.asset_name.name);
+                  address.text(data.asset_name.name);
                 } else {
-                  self.find('div.address div.asset-name').text(data.asset_name.ip_address);
+                  address.text(data.asset_name.ip_address);
                 };
               };
             };
