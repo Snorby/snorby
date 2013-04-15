@@ -12,9 +12,7 @@
           <%= check_box_tag 'event-select-all', nil, false, :class => 'event-select-all' %>
         </div>
 
-        <% unless @session_view %>
-          <div class='small'>&nbsp;</div>
-        <% end %>
+        <div class='small'>&nbsp;</div>
         
         <div class='small'>
           <%= sortable(:sig_priority, 'Sev.')%>

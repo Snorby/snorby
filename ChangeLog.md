@@ -32,12 +32,13 @@
   3. Event emails. 
     You can now get email notifcations every 30 mins with an event summary and stats.
 
+  * The session view is now the default.
   * Major Bug fixes
   * Fixed issue with signature name contains on the adv. search form
   * Fixed range issue on pdf reports with the event graph
   * Gem vewrsion updates
   * Rails version bump
-  * fixed typo in sensor controller before_filter
+  * Fixed typo in sensor controller before_filter
 
 # Snorby 2.5.6
 
