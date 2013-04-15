@@ -85,8 +85,7 @@ namespace :snorby do
     while !stopped 
       
       stopped = true unless Snorby::Worker.running?
-      sleeps
-      5 
+      sleep 5 
 
       count += 1
       if count > 10
