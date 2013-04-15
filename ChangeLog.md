@@ -1,33 +1,34 @@
 # Snorby 2.6.0
   
   ** NOTICE **
-    # To Current and Future Users of Snorby,
+  
+    To Current and Future Users of Snorby,
     
-    # On November 2012, I started Threat Stack, a company with two 
+    On November 2012, I started Threat Stack, a company with two 
     
-    # colleagues to achieve my vision of building the worlds best Incident 
+    colleagues to achieve my vision of building the worlds best Incident 
     
-    # Response system. I have transferred ownership of Snorby into this 
+    Response system. I have transferred ownership of Snorby into this 
     
-    # new entity so that it can continue to grow and become part of a much 
+    new entity so that it can continue to grow and become part of a much 
     
-    # larger ecosystem of incredible products the team and I are developing right now.
+    larger ecosystem of incredible products the team and I are developing right now.
     
-    # Rest assured, Snorby will always remain free, open-source, and most 
+    Rest assured, Snorby will always remain free, open-source, and most 
     
-    # importantly, useful. We are excited about what the future holds for 
+    importantly, useful. We are excited about what the future holds for 
     
-    # Snorby and the security industry and hope you will join us on this 
+    Snorby and the security industry and hope you will join us on this 
     
-    # exciting journey.
+    exciting journey.
     
-    # Thank you,
+    Thank you,
 
-    # Dustin Webber
+    Dustin Webber
     
-    # Creator of Snorby 
+    Creator of Snorby 
     
-    # Co-Founder CTO of Threat Stack, Inc.
+    Co-Founder CTO of Threat Stack, Inc.
     
 
   1. Time zone support. 
