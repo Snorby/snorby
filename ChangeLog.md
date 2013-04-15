@@ -2,20 +2,33 @@
   
   ** NOTICE **
     # To Current and Future Users of Snorby,
+    
     # On November 2012, I started Threat Stack, a company with two 
+    
     # colleagues to achieve my vision of building the worlds best Incident 
+    
     # Response system. I have transferred ownership of Snorby into this 
+    
     # new entity so that it can continue to grow and become part of a much 
+    
     # larger ecosystem of incredible products the team and I are developing right now.
+    
     # Rest assured, Snorby will always remain free, open-source, and most 
+    
     # importantly, useful. We are excited about what the future holds for 
+    
     # Snorby and the security industry and hope you will join us on this 
+    
     # exciting journey.
+    
     # Thank you,
 
     # Dustin Webber
+    
     # Creator of Snorby 
+    
     # Co-Founder CTO of Threat Stack, Inc.
+    
 
   1. Time zone support. 
     You can now change your timezone and view events in the the time 
