@@ -78,7 +78,7 @@ module Snorby
     unless time_zone
       # try to detect one
 
-      if File.exists?('/etc/localtime')
+      if File.exists?('/etc/localtime') && File.symlink?('/etc/localtime')
         path = File.readlink('/etc/localtime')
         items = path.split("zoneinfo/")
         if items.length == 2
