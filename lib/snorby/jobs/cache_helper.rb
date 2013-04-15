@@ -166,6 +166,29 @@ module Snorby
         end
       end
 
+      def delete_sensor(sensor_id)
+        sql = [
+          "delete from agent_asset_names where sensor_sid = #{sensor_id.to_i};",
+          "delete from caches where sid = #{sensor_id.to_i};",
+          "delete from cids where sid = #{sensor_id.to_i};",
+          "delete from daily_caches where sid = #{sensor_id.to_i};",
+          "delete from `data` where sid = #{sensor_id.to_i};",
+          "delete from favorites where sid = #{sensor_id.to_i};",
+          "delete from icmphdr where sid = #{sensor_id.to_i};",
+          "delete from iphdr where sid = #{sensor_id.to_i};",
+          "delete from notes where sid = #{sensor_id.to_i};",
+          "delete from opt where sid = #{sensor_id.to_i};",
+          "delete from tcphdr where sid = #{sensor_id.to_i};",
+          "delete from udphdr where sid = #{sensor_id.to_i};",
+          "delete from `event` where sid = #{sensor_id.to_i};",
+          "delete from sensor where sid = #{sensor_id.to_i};"
+        ]
+
+        sql.each do |x|
+          db_execute(x)
+        end
+      end
+
       def update_classification_count
         sql = %{
           update classifications set events_count = (select count(*) 

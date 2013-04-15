@@ -11,28 +11,28 @@ class Tcp
              :child_key => [ :sid, :cid ], 
              :required => true
 
-  property :sid, Integer, :key => true, :index => true
+  property :sid, Integer, :key => true, :index => true, :min => 0
   
-  property :cid, Integer, :key => true, :index => true
+  property :cid, Integer, :key => true, :index => true, :min => 0
   
-  property :tcp_sport, Integer, :index => true
+  property :tcp_sport, Integer, :index => true, :min => 0
   
-  property :tcp_dport, Integer, :index => true
+  property :tcp_dport, Integer, :index => true, :min => 0
 
-  property :tcp_seq, Integer, :lazy => true
+  property :tcp_seq, Integer, :lazy => true, :min => 0
   
-  property :tcp_ack, Integer, :lazy => true
+  property :tcp_ack, Integer, :lazy => true, :min => 0
   
-  property :tcp_off, Integer, :lazy => true
+  property :tcp_off, Integer, :lazy => true, :min => 0
   
-  property :tcp_res, Integer, :lazy => true
+  property :tcp_res, Integer, :lazy => true, :min => 0
   
-  property :tcp_flags, Integer, :lazy => true
+  property :tcp_flags, Integer, :lazy => true, :min => 0
   
-  property :tcp_win, Integer, :lazy => true
+  property :tcp_win, Integer, :lazy => true, :min => 0
   
-  property :tcp_csum, Integer, :lazy => true
+  property :tcp_csum, Integer, :lazy => true, :min => 0
   
-  property :tcp_urp, Integer, :lazy => true
+  property :tcp_urp, Integer, :lazy => true, :min => 0
 
 end

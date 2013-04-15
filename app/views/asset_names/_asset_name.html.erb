@@ -1,0 +1,28 @@
+<tr data-asset-id="<%= asset_name.id %>">
+  <td class='first'><%= asset_name.name %></td>
+  <td>
+    <%= asset_name.ip_address %>
+  </td>
+  <td class=''>
+    <%= asset_name.applies_to %>
+  </td>
+  <td>
+    <%= link_to "Edit", '#', 
+      :"data-ip_address" => asset_name.ip_address,
+      :"data-asset_global" => asset_name.try(:global),
+      :"data-asset_agent_ids" => asset_name.try(:agent_ids_string),
+      :"data-asset_name" => asset_name.try(:name),
+      :"data-asset_id" => asset_name.try(:id),
+      :class => 'edit-asset-name'
+    %>
+  </td>
+  <td class='last'>
+    <%= link_to "Destroy", '#', :class => 'destroy-asset-name',
+      :"data-ip_address" => asset_name.ip_address,
+      :"data-asset_global" => asset_name.try(:global),
+      :"data-asset_agent_ids" => asset_name.try(:agent_ids_string),
+      :"data-asset_name" => asset_name.try(:name),
+      :"data-asset_id" => asset_name.try(:id)
+    %>
+  </td>
+</tr>

@@ -2,7 +2,23 @@ class SensorsController < ApplicationController
 
   before_filter :require_administrative_privileges, :except => [:index, :destory, :update_name]
   before_filter :check_for_demo_user, :only => [:destroy, :update_name]
-  
+
+  def agents
+    @sensors ||= Sensor.all.page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:sid.asc])
+    respond_to do |format|
+      format.html {render :layout => true}
+      format.js { render :json => @sensors }
+    end
+  end
+
+  def agent_list
+    @agents ||= Sensor.all(:order => [:sid.asc])
+    respond_to do |format|
+      format.html {render :layout => true}
+      format.json { render :json => @agents }
+    end
+  end
+
   def index
     @sensors ||= Sensor.all.page(params[:page].to_i, :per_page => @current_user.per_page_count, :order => [:sid.asc])
     

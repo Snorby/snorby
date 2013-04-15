@@ -1,88 +1,104 @@
-<%= title "Add New User" -%>
+<%= snorby_box("Add New User") do %>
 
-<div id='settings' class='grid_12 boxit page'>
-	
-	<%= form_for(@user, :url => add_users_path(@user), :html => { :method => :put, :multipart => true, :class => 'basic-form validate' }) do |f| %>
-	
-		<%= error_messages_for(@user) %>
+  <div id='snorbybox-content' class=''>
 
-		<div id='form-holder' class=''>
+    <div id='settings' class='boxit page'>
 
-			<div class='grid_5'>
-				
-				<% if Snorby::CONFIG[:authentication_mode] == "cas" %>
-  				<p><%= f.label :name %> <i>(please use your complete CAS login)</i><br />
-  			  <%= f.text_field :name, :placeholder => 'CAS login', :class => 'required' %></p>
-        <% else %>
-  				<p><%= f.label :name %> <i>(please use first and last name)</i><br />
-  			  <%= f.text_field :name, :placeholder => 'Full Name', :class => 'required' %></p>        
-        <% end %>  
-        
-			  <p><%= f.label :email %> <i>(example: snorby@snorby.org)</i><br />
-			  <%= f.text_field :email, :placeholder => 'E-mail Address', :class => 'required email' %></p>
-				
-				<% if Snorby::CONFIG[:authentication_mode] == "database" %>
-  				<p><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-  			  <%= f.password_field :password, :placeholder => 'Password' %></p>
+      <%= form_for(@user, :url => add_users_path(@user), :html => { :method => :put, :multipart => true, :class => 'basic-form validate' }) do |f| %>
 
-  			  <p><%= f.label :password_confirmation %><br />
-  			  <%= f.password_field :password_confirmation, :placeholder => 'Password Confirmation' %></p>
+        <%= error_messages_for(@user) %>
 
-  				<p>
-				<% end %>  
-					I would like to list <%= f.select :per_page_count, %w[25 45 65 100], { :include_blank => false } %>  <%= f.label "items per page." %><br />
-					<i>(select the default amount of events to list per page view)</i><br />
-					<br />
-				</p>
+        <div id='form-holder' class=''>
 
-			</div>
+          <div class='grid_5'>
 
-			<div class='grid_5 alpha'>
-				
-				<div class='user-show-avatar'>
-					
-					<%= image_tag(get_gravatar_uri(@user.email), :class => 'avatar') %>
-					
-					<p><strong>Login Count:</strong> <%= @user.sign_in_count %></p>
-          
-					<p><strong>Current Login IP:</strong> <%= @user.current_sign_in_ip || 'N/A' %></p>
-          
-					<p><strong>Last Login:</strong> <%= @user.last_sign_in_at.blank? ? Time.now.strftime('%a %b, %Y %I:%M %p') : @user.last_sign_in_at.strftime('%a %b, %Y %I:%M %p') %></p>
-          
-					<p><strong>Last Login IP:</strong> <%= @user.last_sign_in_ip || 'N/A' %></p>
-          
-					<p><strong>Queued Event Count:</strong> <%= @user.favorites_count %></p>
-          
-					<p><strong>Notes Count:</strong> <%= @user.notes_count %></p>
-					
-				</div>
-							
-				<p>
-					<%= f.check_box :gravatar%> <%= f.label "Use Gravatar" %>
-					<i>(Get avatar from gravatar.com)</i>
-				</p>
-				
-				<% if current_user.admin? %>
+            <% if Snorby::CONFIG[:authentication_mode] == "cas" %>
+              <p><%= f.label :name %> <em>(please use your complete CAS login)</em><br />
+              <%= f.text_field :name, :placeholder => 'CAS login', :class => 'required' %></p>
+            <% else %>
+              <p><%= f.label :name %> <em>(please use first and last name)</em><br />
+              <%= f.text_field :name, :placeholder => 'Full Name', :class => 'required' %></p>
+            <% end %>
 
-					<p>
-						<%= f.check_box :admin %> <%= f.label "Administrator" %>
-						<i>(should this user have administrative rights?)</i>
-					</p>
+            <p><%= f.label :email %> <em>(example: snorby@snorby.org)</em><br />
+            <%= f.text_field :email, :placeholder => 'E-mail Address', :class => 'required email' %></p>
 
-				<% end %>
-				
-			</div>
-		
-		</div>
+            <% if Snorby::CONFIG[:authentication_mode] == "database" %>
+              <p><%= f.label :password %> <em>(leave blank if you don't want to change it)</em><br />
+              <%= f.password_field :password, :placeholder => 'Password' %></p>
 
-		<%= form_actions do %>
+              <p><%= f.label :password_confirmation %><br />
+              <%= f.password_field :password_confirmation, :placeholder => 'Password Confirmation' %></p>
 
-			<%= button "Update Settings", :class => 'success' %>
+              <p>
+            <% end %>
+              I would like to list <%= f.select :per_page_count, %w[25 45 65 100], { :include_blank => false } %>  <%= f.label "items per page." %><br />
+              <em>(select the default amount of events to list per page view)</em><br />
+              <br />
+            </p>
 
-			<%= button "Cancel", :class => 'warning cancel' %>
+          </div>
 
-		<% end %>
+          <div class='grid_5 alpha'>
 
-	<% end %>
-	
-</div>
+            <div class='user-show-avatar'>
+
+              <%= image_tag(get_gravatar_uri(@user.email), :class => 'avatar') %>
+
+              <p><strong>Login Count:</strong> <%= @user.sign_in_count %></p>
+
+              <p><strong>Current Login IP:</strong> <%= @user.current_sign_in_ip || 'N/A' %></p>
+
+              <p><strong>Last Login:</strong> <%= @user.last_sign_in_at.blank? ? Time.now.strftime('%a %b, %Y %I:%M %p') : @user.last_sign_in_at.strftime('%a %b, %Y %I:%M %p') %></p>
+
+              <p><strong>Last Login IP:</strong> <%= @user.last_sign_in_ip || 'N/A' %></p>
+
+              <p><strong>Queued Event Count:</strong> <%= @user.favorites_count %></p>
+
+              <p><strong>Notes Count:</strong> <%= @user.notes_count %></p>
+
+            </div>
+
+            <p>
+              <em>(To change/add a avatar please visit <a href="http://gravatar.com">http://gravatar.com</a>)</em>
+            </p>
+
+            <p>
+              <%= f.label 'Time Zone:' %>
+              <%= f.time_zone_select :timezone, ActiveSupport::TimeZone.us_zones %>
+            </p>
+
+            <p>
+              <%= f.check_box :email_reports %> <%= f.label 'Event Summary Report:' %>
+              <br />
+              <em>(Would you like to receive an event summary report every 30 minutes)</em><br />
+            </p>
+
+            <% if current_user.admin? %>
+
+              <p>
+                <%= f.check_box :admin %> <%= f.label "Administrator" %>
+                <em>(should this user have administrative rights?)</em>
+              </p>
+
+            <% end %>
+
+          </div>
+
+        </div>
+
+        <%= form_actions do %>
+
+          <%= button "Update Settings", :class => 'success' %>
+
+          <%= button "Cancel", :class => 'warning limp-box-close' %>
+
+        <% end %>
+
+      <% end %>
+
+    </div>
+      
+  </div>
+
+<% end %>

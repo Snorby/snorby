@@ -1,25 +1,31 @@
 <%= title "Please log in to continue..." -%>
+<div id='signin' class='content-box'>
+  <div class="content-box-title">
+    Login
+  </div>
+  <div class="content-box-body">
+    <div class="login-form-body">
+      <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'validate'}) do |f| %>
+      <p><%= f.label :email %><br />
+      <%= f.text_field :email, :value => session[:email], :placeholder => 'example@example.com', :autocomplete => :off, :class => 'required email' %><i class="icon-user"></i></p>
 
-<div id='signin' class='grid_12 page boxit'>
-	
-	<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'validate'}) do |f| %>
-	  <p><%= f.label :email %><br />
-	  <%= f.text_field :email, :placeholder => 'example@example.com', :autocomplete => :off, :class => 'required email' %></p>
-
-	  <p><%= f.label :password %><br />
-	  <%= f.password_field :password, :placeholder => 'P@ssw0rd', :autocomplete => :off, :class => 'required password' %></p>
-		
-	 <%= form_actions do %>
+      <p><%= f.label :password %><br />
+      <%= f.password_field :password, :placeholder => 'password', :autocomplete => :off, :class => 'required password' %><i class="icon-lock"></i></p>
 
       <% if devise_mapping.rememberable? -%>
+      <div class="remember-me">
         <p><%= f.check_box :remember_me, :checked => 'checked' %> <%= f.label :remember_me  %></p>
+      </div>
       <% end -%>
-
-      <%= button "Welcome, Sign In", :class => 'success' %>
-      <%= button "Forgot Password?", :class => 'warning forgot-my-password' %>
-		
-		<% end %>
-
-	<% end %>
-	
+    </div>
+    <div class="login-form-actions">
+      <button class="login-button login-default">Welcome, Sign In</button>
+      <%= link_to 'Forgot Password?', new_user_password_path,
+       class: "login-button forgot-my-password", :"data-no-turbolink" => "true"  %>
+    </div>
+  <% end %>
+  </div>
+  <div class="auth-loading" style="display:none;">
+    <span>Submitting Credentials, Please Wait...</span>
+  </div>
 </div>

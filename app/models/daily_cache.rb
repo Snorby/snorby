@@ -1,6 +1,8 @@
 class DailyCache
-
+ 
   include DataMapper::Resource
+  
+  storage_names[:default] = "caches"
 
   property :id, Serial
 
@@ -28,6 +30,9 @@ class DailyCache
 
   # Define created_at and updated_at timestamps
   timestamps :at
+  property :created_at, ZonedTime
+  property :updated_at, ZonedTime
+
 
   belongs_to :sensor, :parent_key => :sid, :child_key => :sid
 
@@ -42,31 +47,31 @@ class DailyCache
   end
 
   def self.this_year
-    all(:ran_at.gte => Time.now.beginning_of_year, :ran_at.lte => Time.now.end_of_year)
+    all(:ran_at.gte => Time.zone.now.beginning_of_year, :ran_at.lte => Time.zone.now.end_of_year)
   end
 
   def self.this_quarter
-    all(:ran_at.gte => Time.now.beginning_of_quarter, :ran_at.lte => Time.now.end_of_quarter)
+    all(:ran_at.gte => Time.zone.now.beginning_of_quarter, :ran_at.lte => Time.zone.now.end_of_quarter)
   end
 
   def self.last_month
-    all(:ran_at.gte => (Time.now - 1.months).beginning_of_month, :ran_at.lte => (Time.now - 1.months).end_of_month)
+    all(:ran_at.gte => (Time.zone.now - 1.months).beginning_of_month, :ran_at.lte => (Time.zone.now - 1.months).end_of_month)
   end
 
   def self.this_month
-    all(:ran_at.gte => Time.now.beginning_of_month, :ran_at.lte => Time.now.end_of_month)
+    all(:ran_at.gte => Time.zone.now.beginning_of_month, :ran_at.lte => Time.zone.now.end_of_month)
   end
 
   def self.last_week
-    all(:ran_at.gte => (Time.now - 1.week).beginning_of_week, :ran_at.lte => (Time.now - 1.week).end_of_week)
+    all(:ran_at.gte => (Time.zone.now - 1.week).beginning_of_week, :ran_at.lte => (Time.zone.now - 1.week).end_of_week)
   end
 
   def self.this_week
-    all(:ran_at.gte => Time.now.beginning_of_week, :ran_at.lte => Time.now.end_of_week)
+    all(:ran_at.gte => Time.zone.now.beginning_of_week, :ran_at.lte => Time.zone.now.end_of_week)
   end
 
   def self.yesterday
-    all(:ran_at.gte => (Time.now - 1.day).beginning_of_day, :ran_at.lte => (Time.now - 1.day).end_of_day)
+    all(:ran_at.gte => (Time.zone.now - 1.day).beginning_of_day, :ran_at.lte => (Time.zone.now - 1.day).end_of_day)
   end
 
   def severities
@@ -280,43 +285,43 @@ class DailyCache
     case type.to_sym
     when :week
 
-      ((Time.now.beginning_of_week.to_date)..(Time.now.end_of_week.to_date)).to_a.each do |i|
+      ((Time.zone.now.beginning_of_week.to_date)..(Time.zone.now.end_of_week.to_date)).to_a.each do |i|
         block.call(i.day) if block
       end
 
     when :last_week
 
-      (((Time.now - 1.week).beginning_of_week.to_date)..((Time.now - 1.week).end_of_week.to_date)).to_a.each do |i|
+      (((Time.zone.now - 1.week).beginning_of_week.to_date)..((Time.zone.now - 1.week).end_of_week.to_date)).to_a.each do |i|
         block.call(i.day) if block
       end
 
     when :month
 
-      ((Time.now.beginning_of_month.to_date)..(Time.now.end_of_month.to_date)).to_a.each do |i|
+      ((Time.zone.now.beginning_of_month.to_date)..(Time.zone.now.end_of_month.to_date)).to_a.each do |i|
         block.call(i.day) if block
       end
 
     when :last_month
 
-      (((Time.now - 1.month).beginning_of_month.to_date)..((Time.now - 1.month).end_of_month.to_date)).to_a.each do |i|
+      (((Time.zone.now - 1.month).beginning_of_month.to_date)..((Time.zone.now - 1.month).end_of_month.to_date)).to_a.each do |i|
         block.call(i.day) if block
       end
 
     when :quarter
 
-      ((Time.now.beginning_of_quarter.month)..(Time.now.end_of_quarter.month)).to_a.each do |i|
+      ((Time.zone.now.beginning_of_quarter.month)..(Time.zone.now.end_of_quarter.month)).to_a.each do |i|
         block.call(i) if block
       end
 
     when :year
 
-      Time.now.beginning_of_year.month.upto(Time.now.end_of_year.month) do |i|
+      Time.zone.now.beginning_of_year.month.upto(Time.zone.now.end_of_year.month) do |i|
         block.call(i) if block
       end
 
     else
 
-      ((Time.now.beginning_of_week.to_date)..(Time.now.end_of_week.to_date)).to_a.each do |i|
+      ((Time.zone.now.beginning_of_week.to_date)..(Time.zone.now.end_of_week.to_date)).to_a.each do |i|
         block.call(i.day) if block
       end
 

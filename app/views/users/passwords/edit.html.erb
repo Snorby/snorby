@@ -1,23 +1,19 @@
-<%= title "Change your password" -%>
+<%= title "Reset your password" -%>
+<div id='new-password' class="content-box">
+		<div class="content-box-title">Reset your Password</div>
+		<div class="content-box-body">
+	  <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put, :id => 'user_password_reset', :class => 'validate' }) do |f| %>
+		  <%= f.hidden_field :reset_password_token %>
 
-<div id='signin' class='grid_12 page boxit'>
+		  <p><%= f.label :password %><br>
+		  <%= f.password_field :password, :placeholder => 'P@ssw0rd', :autocomplete => :off, :class => 'required password' %></p>
 
-  <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put, :id => 'user_password_reset', :class => 'validate' }) do |f| %>
-	  <%= f.hidden_field :reset_password_token %>
+		  <p><%= f.label :password_confirmation %><br>
+		  <%= f.password_field :password_confirmation, :placeholder => 'P@ssw0rd', :autocomplete => :off, :class => 'required password' %></p>
 
-	  <p><%= f.label :password %>
-	  <%= f.password_field :password, :placeholder => 'P@ssw0rd', :autocomplete => :off, :class => 'required password' %></p>
-
-	  <p><%= f.label :password_confirmation %>
-	  <%= f.password_field :password_confirmation, :placeholder => 'P@ssw0rd', :autocomplete => :off, :class => 'required password' %></p>
-
-		<%= form_actions do %>
-
-			<%= button "Change my password", :class => 'success' %>
-      <%= button "Cancel", :class => 'warning cancel' %>
-
+			<button class="login-button login-default">Change my password</button>
+			<%= link_to 'Cancel', new_user_session_path, class: 'login-button',
+			 :"data-no-turbolink" => "true" %>
 		<% end %>
-
-	<% end %>
-
+	</div>
 </div>

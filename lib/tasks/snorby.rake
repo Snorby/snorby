@@ -116,6 +116,7 @@ namespace :snorby do
 
 
       if Snorby::Worker.running?
+        Snorby::Jobs.find.all.destroy
         puts "* Adding jobs to the queue"
         Snorby::Jobs.run_now!
       else

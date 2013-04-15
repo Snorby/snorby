@@ -29,6 +29,23 @@
           </a>
           
           <dl class='event-sub-menu round shadow push-down' style='display:none;'>
+
+            <% if @current_user.admin %>
+
+            <dd>
+              <%= link_to "Edit Asset Name", "#",
+              :"data-ip_address" => @event.ip.ip_src,
+              :"data-agent_id" => @event.sensor.sid,
+              :"data-asset_global" => @event.ip.asset_names[:source].try(:global),
+              :"data-asset_agent_ids" => @event.ip.asset_names[:source].try(:agent_ids_string),
+              :"data-asset_name" => @event.ip.asset_names[:source].try(:name),
+              :"data-asset_id" => @event.ip.asset_names[:source].try(:id),
+              :class => 'edit-asset-name'
+            %>
+            </dd>
+
+            <% end %>
+
             <dd><%= link_to 'Basic Source Lookup', "/events/lookup?address=#{@event.ip.ip_src}", :class => 'snorbybox' %></dd>
 
             <% @lookups.each do |lookup| %>
@@ -53,6 +70,21 @@
           </a>
 
           <dl class='event-sub-menu round shadow push-down' style='display:none;'>
+
+
+            <% if @current_user.admin %>
+            <dd>
+              <%= link_to "Edit Asset Name", "#",
+              :"data-ip_address" => @event.ip.ip_dst,
+              :"data-agent_id" => @event.sensor.sid,
+              :"data-asset_global" => @event.ip.asset_names[:destination].try(:global),
+              :"data-asset_agent_ids" => @event.ip.asset_names[:destination].try(:agent_ids_string),
+              :"data-asset_name" => @event.ip.asset_names[:destination].try(:name),
+              :"data-asset_id" => @event.ip.asset_names[:destination].try(:id),
+              :class => 'edit-asset-name' %>
+            </dd>
+            <% end %>
+
             <dd><%= link_to 'Basic Destination Lookup', "/events/lookup?address=#{@event.ip.ip_dst}", :class => 'snorbybox' %></dd>
             
             <% @lookups.each do |lookup| %>

@@ -12,7 +12,9 @@ class Note
   
   property :body, Text, :lazy => true
   
-  timestamps :at
+  # timestamps :at
+  property :created_at, ZonedTime
+  property :updated_at, ZonedTime
   
   belongs_to :user
   

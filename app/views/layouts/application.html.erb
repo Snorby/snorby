@@ -34,7 +34,19 @@
 		<%= csrf_meta_tag %>
 
 		<%= include_stylesheets :snorby, :media => 'all' %>
-		<%= include_javascripts :snorby %>
+    <%= include_javascripts :snorby %>
+
+    <% if @current_user %>
+      <script type="text/javascript" charset="utf-8">
+        Snorby.current_user = current_user;
+        Snorby.current_user.avatar = "<%= json_escape @current_user.avatar %>";
+        Snorby.current_user.timezone = "<%= json_escape Time.zone.now.strftime('%Z') %>";
+        Snorby.current_user.timezone_offset = "<%= json_escape Time.zone.utc_offset %>";
+        Snorby.current_user.timezone_offset_hour = "<%= json_escape Time.zone.now.strftime('%z') %>";
+        Snorby.event_notifications = <%= Setting.event_notifications? %>;
+        </script>
+    <% end %>
+
 
 		<%= yield(:header) %>
 

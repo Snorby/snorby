@@ -22,7 +22,10 @@ class Notification
   property :sensor_ids, Object
 
   # Define created_at and updated_at timestamps
-  timestamps :at
+  # timestamps :at
+
+  property :created_at, ZonedTime
+  property :updated_at, ZonedTime
 
   belongs_to :user
 

@@ -52,6 +52,72 @@ class Ip
   has n, :events, :parent_key => [ :sid, :cid ], :child_key => [ :sid, :cid ], 
          :constraint => :destroy
 
+  def src_asset_name 
+ 
+    RequestStore.store[:assets] ||= {}
+    matches =  RequestStore.store[:assets].fetch("#{self.sid}_#{self.ip_src.to_i}", nil)
+    return matches if matches
+    
+    sql = %{
+      select name, id, global, ip_address from asset_names a 
+      left outer join agent_asset_names b on
+      a.id = b.asset_name_id and b.sensor_sid = ?
+      where ip_address = ? and
+      (global = 1 or b.sensor_sid is not null)
+      order by global desc
+      limit 1
+    }
+
+    matches = AssetName.find_by_sql([sql, self.sid, self.ip_src.to_i])
+    if matches
+      RequestStore.store[:assets]["#{self.sid}_#{self.ip_src.to_i}"] = matches.first
+      return matches.first
+    else
+      nil
+    end
+  end
+
+  def dst_asset_name 
+
+    RequestStore.store[:assets] ||= {}
+    matches =  RequestStore.store[:assets].fetch("#{self.sid}_#{self.ip_dst.to_i}", nil)
+    return matches if matches
+
+    sql = %{
+      select name, id, global, ip_address from asset_names a 
+      left outer join agent_asset_names b on
+      a.id = b.asset_name_id and b.sensor_sid = ?
+      where ip_address = ? and
+      (global = 1 or b.sensor_sid is not null)
+      order by global desc
+      limit 1
+    }
+    
+    matches = AssetName.find_by_sql([sql, self.sid, self.ip_dst.to_i])
+    if matches
+      RequestStore.store[:assets]["#{self.sid}_#{self.ip_dst.to_i}"] = matches.first
+      return matches.first
+    else
+      nil
+    end
+  end
+
+  def asset_names 
+
+    @asset_names ||= {}
+
+    if @asset_names.empty?
+   
+      @asset_names = {
+        :source => src_asset_name,
+        :destination => dst_asset_name 
+      }
+
+    end
+    
+    @asset_names
+  end
+
   def geoip
     @geoip_hash ||= {}
 

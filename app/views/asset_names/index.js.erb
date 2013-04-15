@@ -1,0 +1,3 @@
+$('div#signatures').replaceWith("<%= escape_javascript(render(:partial => 'asset_names/asset_names', :locals => { :asset_names => @asset_names })) %>");
+flash();
+$('#wrapper').scrollTop(0,0);

@@ -1,0 +1,6 @@
+<%= title "Listing Asset Names", "Listing Asset Names" do -%>
+  <%= menu_item "<i class='icon-upload' style='font-size: 14px; position:relative; top: 1px;'></i>Upload Name Data".html_safe, get_bulk_upload_asset_names_path, false,
+    :class => 'snorbybox', :"data-width" => '753px' %>
+<%- end -%>
+
+<%= render :partial => 'asset_names/asset_names' %>

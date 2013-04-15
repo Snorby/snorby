@@ -4,7 +4,6 @@
 	
 		<% if Snorby::Worker.running? %>
 			<%= drop_down_item "Start Sensor Cache Job", start_sensor_cache_settings_path unless Snorby::Jobs.sensor_cache? %>
-			<%= drop_down_item "Start Daily Cache Job", start_daily_cache_settings_path unless Snorby::Jobs.daily_cache?  %>
 			<%= drop_down_item "Start GeoIP Database Update Job", start_geoip_update_settings_path if (Setting.geoip? && !Snorby::Jobs.geoip_update?) %>			
 		<% else %>
 			<%= drop_down_item "Start Worker", start_worker_settings_path %>

@@ -5,35 +5,42 @@
 <html class='login'>
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
-		<title><%= content_for?(:title) ? yield(:title) : "Snorby #{Snorby::VERSION}" %></title>
-		
-		<meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title><%= content_for?(:title) ? yield(:title) : "Snorby #{Snorby::VERSION}" %></title>
+
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="description" content="Snorby - All About Simplicity" />
     <link rel="icon" href="/favicon.png" type="image/png" />
 
-		<%= csrf_meta_tag %>
-		
-		<%= include_stylesheets :snorby, :media => 'all' %>
-		<%= include_javascripts :snorby %>
+    <%= csrf_meta_tag %>
+
+    <script type="text/javascript" charset="utf-8">
+      var snorby_url = "<%= request.protocol %><%= escape_javascript request.host %>";
+    </script>
+
+    <%= include_stylesheets :snorby, :media => 'all' %>
+    <%= include_javascripts :snorby %>
 
   </head>
-  
-	<body class='login'>
+
+  <body class='login'>
 
     <div id="login">
-      <div id="wrapper">
-        <div id="login-logo"></div>
-        <%= render :partial => 'layouts/content.html.erb' %>
+      <%= image_tag 'login.png', width: '500px', style: 'padding-bottom: 20px' %>
+      <%= yield %>
+      <hr>
+      <div class="login-footer">
+      &copy; <%= Time.now.year %> <a href="https://threatstack.com">Threat Stack, Inc</a> - Created By: Dustin Willis Webber
+      <br /><br /> 
+        Snorby <%= Snorby::VERSION %> - <%= link_to 'https://www.snorby.org', 'https://www.snorby.org' %> 
       </div>
     </div>
-		
-		<%- flash.each do |type, message| -%>
+    <%- flash.each do |type, message| -%>
 
       <script type="text/javascript" charset="utf-8">
-				flash_message.push({type: "<%= type %>", message: "<%= message %>"}); flash();
+        flash_message.push({type: "<%= type %>", message: "<%= message %>"}); flash();
       </script>
 
     <%- end -%>
-		
-  </body> 
-</html> 
+
+  </body>
+</html>

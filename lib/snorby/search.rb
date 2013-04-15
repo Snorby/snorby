@@ -115,7 +115,11 @@ module Snorby
           :process => lambda do |data|
             tmp = []
             data.each do |ip|
-              tmp.push(IPAddr.new(ip.to_s).to_i)
+              if ip.to_s.length >= 1
+                tmp.push(IPAddr.new(ip.to_s).to_i)
+              else
+                tmp.push("");
+              end
             end
             tmp
           end
@@ -159,7 +163,11 @@ module Snorby
           :process => lambda do |data|
             tmp = []
             data.each do |ip|
-              tmp.push(IPAddr.new(ip.to_s).to_i)
+              if ip.to_s.length >= 1
+                tmp.push(IPAddr.new(ip.to_s).to_i)
+              else
+                tmp.push("");
+              end
             end
             tmp
           end
@@ -291,8 +299,6 @@ module Snorby
       total_sql.push(values.flatten).flatten!
       count.push(values.flatten).flatten!
 
-      p [total_sql, count]
-
       [total_sql, count]
     end
 
@@ -329,6 +335,15 @@ module Snorby
 
               instance_variable_get("@" + x.to_s).push(tmp_sql)
               unless [:isnull].include?(operator)
+
+                if [:start_time, :end_time].include?(column)
+                  value = Time.zone.parse(value).utc.strftime('%Y-%m-%d %H:%M:%S') 
+                end
+
+                if column == :signature_name
+                  value = "%#{value}%"
+                end
+
                 instance_variable_get("@" + x.to_s + "_value").push(value)
               end
             end
@@ -337,6 +352,16 @@ module Snorby
             tmp_sql = "#{COLUMN[column]} #{OPERATOR[operator]}"
             instance_variable_get("@" + map_value.to_s).push(tmp_sql)
             unless [:isnull].include?(operator)
+
+              if [:start_time, :end_time].include?(column)
+                value = Time.zone.parse(value).utc.strftime('%Y-%m-%d %H:%M:%S') 
+              end
+
+              if column == :signature_name
+                value = "%#{value}%"
+              end
+
+
               instance_variable_get("@" + map_value.to_s + "_value").push(value)
             end
           end
@@ -354,6 +379,16 @@ module Snorby
 
       @json ||= {
         :operators => {
+          :contains => [
+            {
+              :id => :contains,
+              :value => "contains"
+            },
+            {
+              :id => :contains_not,
+              :value => "does not contain"
+            }
+          ],
           :more_text_input => [
             {
               :id => :is,
@@ -461,7 +496,7 @@ module Snorby
           {
             :value => "Signature Name",
             :id => :signature_name,
-            :type => :text_input
+            :type => :contains
           },
           {
             :value => "Classified By",
@@ -469,7 +504,7 @@ module Snorby
             :type => :select
           },
           {
-            :value => "Sensor",
+            :value => "Agent",
             :id => :sensor,
             :type => :select
           },
@@ -556,11 +591,12 @@ module Snorby
           :value => @sensors.collect do |x|
             {
               :id => x.sid,
-              :value => x.name
+              :value => x.sensor_name
             }
           end
         }
       }
+
       @json.to_json
     end
 

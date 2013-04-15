@@ -1,0 +1,64 @@
+<div class="snorby-box" id="snorby-box">
+
+  <div id="box-title">
+    Edit Asset Name For {{ip_address}}
+    <div class="more"></div>
+  </div>
+  <div id="box-content-small">
+
+    <div id="snorbybox-content" class="">
+        <form class="update-asset-name-form" action="#">
+          <div class="grid_5">
+            
+            <input type="hidden" name="ip_address" value="{{ip_address}}" />
+            <input type="hidden" name="id" value="{{asset_id}}" />
+
+            <p>
+              <input id="edit-asset-name-title" {{#if asset_name}}value="{{asset_name}}"{{/if}} name="name" type="text" style='width:339px;' placeholder="Enter Asset Name" />
+            </p>
+
+            <div class="clear"></div>
+
+            <p>
+              <input type="checkbox" id='is-asset-name-global' name="global" {{#if global}}checked{{/if}} />
+              <label>Enable Globally</label> <em>(Enable this rule for all sensors)</em><br />
+            </p>
+
+            <div class="clear"></div>
+
+            <div id='snorbybox-form-full'>
+              <select {{#if global}}disabled{{/if}} style="width:350px;margin-bottom:5px;" name="agents" id="edit-asset-name-agent-select" class='add_chosen' "data-placeholder"="Select individual agents" multiple name="">
+                {{{build_asset_name_agent_list}}}
+              </select>
+              <br />
+            </div>
+          
+          </div>
+
+          <div class="grid_5" style='width:287px;'>
+            <div class="note no-click">
+              <div class="message">
+                <strong>Global</strong> This asset name will be used for all sensors that match this address.<br />
+              </div>
+            </div>
+          </div>
+
+          <div class="clear"></div>
+
+          <br />
+
+          <div id="box-footer">
+            <div id="form-actions">
+              <button class='update-asset-name-submit-button button success default' onclick="Snorby.submitAssetName(); return false;">
+                <span>Update</span>
+              </button>
+              <button class='warning cancel-snorbybox default' onClick='$.limpClose()'><span>Cancel</span></button>
+            </div>
+          </div>
+
+        </form>
+    </div>
+
+
+  </div>
+</div>

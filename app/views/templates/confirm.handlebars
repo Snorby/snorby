@@ -1,0 +1,30 @@
+<div class="snorby-box" id="snorby-box">
+
+  <div id="box-title">
+    {{title}}
+    <div class="more">
+    </div>
+  </div>
+  <div id="box-content-small">
+
+    <div id="snorbybox-content" class="">
+      <div class='snorbybox-content-message'>
+      {{{message}}}
+      </div>
+    </div>
+
+    <div id="box-footer">
+      <div id="form-actions">
+
+      <button class='button {{button.type}} limp-action'><span>{{button.title}}</span></button>
+
+      {{#if ignore_cancel}}
+      {{else}}
+      <button class='warning cancel-snorbybox default' onClick='$.limpClose()'><span>Cancel</span></button>
+      {{/if}}
+      </div>
+
+    </div>
+
+  </div>
+</div>

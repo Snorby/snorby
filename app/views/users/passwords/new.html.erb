@@ -1,25 +1,27 @@
 <%= title "Forgot your password?" -%>
+<div class="content-box">
+  <div class="content-box-title">
+    Forgot Your Password?
+  </div>
+  <div class="content-box-body">
+    <div id='password'>
 
-<div id='password' class='grid_12 page boxit'>
-	
   <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :class => 'validate' }) do |f| %>
 
-    <div class='note'>
-      Please enter your email and snorby will send you a reset url. You will
-      be prompted to submit a new password and confirmation.
+    <div class='login-note'>
+      <i class="icon-question-sign"></i>
+      Please enter your email and snorby will send you a reset URL. You will
+      be prompted to submit a new password.
     </div>
 
     <p class='item'>
       <%= f.label :email %><br />
       <%= f.text_field :email, :title => 'E-mail...', :placeholder => 'example@example.com', :autocomplete => :off, :class => 'required email' %>
     </p>
+      <button class="login-button login-default">Send me reset password instructions</button>
+      <%= link_to 'Cancel', new_user_session_path, class: 'login-button', :"data-no-turbolink" => "true" %>
+  <% end %>
 
-		<%= form_actions do %>
-		
-			<%= button "Send me reset password instructions", :class => 'success' %>
-      <%= button "Cancel", :class => 'warning cancel' %>
-
-		<% end %>
-	<% end %>
-	
+  </div>
+  </div>
 </div>

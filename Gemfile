@@ -1,22 +1,24 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
-RAILS_VERSION = '3.1.10'
+RAILS_VERSION = '3.1.12'
 RSPEC_VERSION = '~> 2.0.0'
-DATAMAPPER = 'http://github.com/datamapper'
-DM_VERSION = '~> 1.2.0'
+DATAMAPPER    = 'http://github.com/datamapper'
+DM_VERSION    = '~> 1.2.0'
 
 gem 'rake', '0.9.2'
-gem 'thin'
+gem 'psych_shield'
+gem 'request_store', '~> 1.0.5'
 
 gem 'rails',                       RAILS_VERSION
 gem 'jquery-rails'
 gem 'bundler',                     '>= 1.0.0'
 gem 'env'
+gem 'json', '~> 1.7'
 
 # Jruby
-gem 'jruby-openssl',   :platforms => :jruby
-gem 'warbler', :platforms => :jruby
-gem 'jruby-rack-worker', :platforms => :jruby
+gem 'jruby-openssl',               :platforms => :jruby
+gem 'warbler',                     :platforms => :jruby
+gem 'jruby-rack-worker',           :platforms => :jruby
 # gem 'glassfish', :platforms => :jruby
 
 # DateTime Patches
@@ -43,6 +45,7 @@ gem 'dm-aggregates',               DM_VERSION
 gem 'dm-timestamps',               DM_VERSION
 gem 'dm-observer',                 DM_VERSION
 gem 'dm-serializer',               DM_VERSION
+gem 'dm-is-read_only',             '~> 0.3', :git => 'git://github.com/postmodern/dm-is-read_only.git'
 gem 'dm-chunked_query',            '~> 0.3'
 
 # Deploy with Capistrano
@@ -50,6 +53,7 @@ gem 'capistrano',                  '2.14.1'
 
 # Rails Plugins
 gem 'jammit',                      '~> 0.5.4'
+gem 'cancan',                      '~> 1.6'
 gem 'devise',                      '~> 1.4'
 gem 'dm-devise',                   '~> 1.5'
 gem 'rubycas-client'
@@ -77,19 +81,20 @@ gem 'whois',                       '~> 2.3.0'
 gem 'simple_form',                 '~> 1.2.2'
 gem 'geoip',                       '~> 1.1.1'
 gem 'netaddr',                     '~> 1.5.0'
-
+gem 'dm-zone-types',               '~> 0.3'
 
 group(:development) do
 	gem "letter_opener"
+  gem 'thin'
 end
 
 group(:test) do
   gem 'capybara'
 
-  gem 'rspec',                RSPEC_VERSION
-  gem 'rspec-core',		        RSPEC_VERSION, :require => 'rspec/core'
-  gem 'rspec-expectations',	  RSPEC_VERSION, :require => 'rspec/expectations'
-  gem 'rspec-rails',		      RSPEC_VERSION
+  gem 'rspec',                	  RSPEC_VERSION
+  gem 'rspec-core',               RSPEC_VERSION, :require => 'rspec/core'
+  gem 'rspec-expectations',       RSPEC_VERSION, :require => 'rspec/expectations'
+  gem 'rspec-rails',		          RSPEC_VERSION
   gem 'ansi'
   gem 'turn'
   gem 'minitest'
