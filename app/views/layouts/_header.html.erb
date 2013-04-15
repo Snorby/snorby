@@ -5,6 +5,7 @@
 				
 				<div id="logo" class='grid_6'>
 					<%= link_to "Snorby", root_path %>
+          <%= link_to "TS", "https://www.threatstack.com", :target => "_BLANK", :class => "threat-stack" %>
 				</div>
 				
 				<div id="user-menu" class=''>
@@ -42,7 +43,7 @@
 					<li class='item blank first'></li>
 					<li class='item'><%= link_to "Dashboard", dashboard_path %></li>
 					<li class='item'><%= link_to "My Queue (<span class='queue-count'>#{current_user.favorites_count}</span>)".html_safe, queue_events_path %></liü>
-					<li class='item'><%= link_to "Events", events_path %></li>
+            <li class='item'><%= link_to "Events", sessions_events_path %></li>
 					<li class='item'><%= link_to "Sensors", sensors_path %></li>
 					<li class='item'><%= link_to "Search", search_path %></li>
 					<li class='item blank last'></li>

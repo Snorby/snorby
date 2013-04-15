@@ -301,7 +301,7 @@ SearchRule = function() {
           self.operators_html($html, self.operators.text_input);
         } else if (value === "signature_name") {
           that.find('.value').html('<input class="search-content-value" placeholder="Enter search value" name="" type="text">');
-          self.operators_html($html, self.operators.more_text_input);
+          self.operators_html($html, self.operators.contains);
         } else if (value === "sensor") {
           that.find('.value').html(self.sensors_html);
           self.operators_html($html, self.operators.text_input);
@@ -976,9 +976,9 @@ var Snorby = {
     },
     onOpen: function() {
       // disable_scroll();
-      if (Snorby.escBind) {
-        $(document).unbind('keydown', Snorby.escBind);
-      };
+      // if (Snorby.escBind) {
+        // $(document).unbind('keydown', Snorby.escBind);
+      // };
       $('body').addClass('stop-scrolling');
       $('body').bind('touchmove', function(e){
         e.preventDefault();
@@ -1382,6 +1382,10 @@ var Snorby = {
         },
         onOpen: function() {
           Snorby.eventCloseHotkeys(false);
+          $('body').addClass('stop-scrolling');
+          $('body').bind('touchmove', function(e){
+        e.preventDefault();
+      });
           $('dl#event-sub-menu').hide();
         },
         afterOpen: function(limp, html) {
@@ -1392,7 +1396,18 @@ var Snorby = {
         },
         onClose: function() {
           Snorby.eventCloseHotkeys(true);
-        }
+        },
+        afterClose: function() {
+          Snorby.eventCloseHotkeys(true);
+
+          if (Snorby.escBind) {
+            $(document).bind('keydown', 'esc', Snorby.escBind);
+          };
+
+          // enable_scroll();
+          $('body').removeClass('stop-scrolling');
+          $('body').unbind('touchmove')
+        },
       });
 
 			$('div.create-favorite.enabled').live('click', function() {

@@ -1,3 +1,44 @@
+# Snorby 2.6.0
+  
+  ** NOTICE **
+    # To Current and Future Users of Snorby,
+    # On November 2012, I started Threat Stack, a company with two 
+    # colleagues to achieve my vision of building the worlds best Incident 
+    # Response system. I have transferred ownership of Snorby into this 
+    # new entity so that it can continue to grow and become part of a much 
+    # larger ecosystem of incredible products the team and I are developing right now.
+    # Rest assured, Snorby will always remain free, open-source, and most 
+    # importantly, useful. We are excited about what the future holds for 
+    # Snorby and the security industry and hope you will join us on this 
+    # exciting journey.
+    # Thank you,
+
+    # Dustin Webber
+    # Creator of Snorby 
+    # Co-Founder CTO of Threat Stack, Inc.
+
+  1. Time zone support. 
+    You can now change your timezone and view events in the the time 
+    your comfortable with. 
+
+    ** NOTICE ** you must insert events in UTC. Use barnyard2 for now.
+      Threat Stack, Inc will be releasing an open source project called `Pigsty`
+      if a few weeks that will replace the need for barnyard2 when using Snorby.
+  
+  2. Asset tagging. 
+    Manually change IP address to a name thats more familiar. Or bulk 
+    upload an asset list using the upload form on the `asset names` admin section.
+  
+  3. Event emails. 
+    You can now get email notifcations every 30 mins with an event summary and stats.
+
+  * Major Bug fixes
+  * Fixed issue with signature name contains on the adv. search form
+  * Fixed range issue on pdf reports with the event graph
+  * Gem vewrsion updates
+  * Rails version bump
+  * fixed typo in sensor controller before_filter
+
 # Snorby 2.5.6
 
   * Fix xml user information disclosure - reported by Joshua Heiks (@solhive)

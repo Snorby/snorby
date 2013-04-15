@@ -191,7 +191,6 @@ module ApplicationHelper
   def worker_status(show_image=false)
 
     validations = [{:check => Snorby::Jobs.sensor_cache?, :enabled => true, :desc => "Sensor Cache Job"},
-                   {:check=> Snorby::Jobs.daily_cache?, :enabled => true, :desc => "Daily Cache Job"},
                    {:check=> Snorby::Jobs.geoip_update?, :enabled => Setting.geoip?, :desc => "GeoIP Update Job"}
                   ]
 

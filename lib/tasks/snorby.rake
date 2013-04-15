@@ -85,7 +85,8 @@ namespace :snorby do
     while !stopped 
       
       stopped = true unless Snorby::Worker.running?
-      sleep 5 
+      sleeps
+      5 
 
       count += 1
       if count > 10
@@ -116,6 +117,7 @@ namespace :snorby do
 
 
       if Snorby::Worker.running?
+        Snorby::Jobs.find.all.destroy
         puts "* Adding jobs to the queue"
         Snorby::Jobs.run_now!
       else

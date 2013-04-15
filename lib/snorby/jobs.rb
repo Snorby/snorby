@@ -20,7 +20,7 @@ module Snorby
 
     def self.start
       Jobs::SensorCacheJob.new(false).perform unless Jobs.sensor_cache?
-      Jobs::DailyCacheJob.new(false).perform unless Jobs.daily_cache?
+      # Jobs::DailyCacheJob.new(false).perform unless Jobs.daily_cache?
       Jobs::GeoipUpdatedbJob.new(false).perform if (Setting.geoip? && !Jobs.geoip_update?)
     end
 
@@ -104,8 +104,8 @@ module Snorby
       Delayed::Job.enqueue(Snorby::Jobs::SensorCacheJob.new(false), 
       :priority => 1, :run_at => DateTime.now + 5.second)
 
-      Delayed::Job.enqueue(Snorby::Jobs::DailyCacheJob.new(false), 
-      :priority => 1, :run_at => DateTime.now + 5.second)
+      # Delayed::Job.enqueue(Snorby::Jobs::DailyCacheJob.new(false), 
+      # :priority => 1, :run_at => DateTime.now + 5.second)
 
       Delayed::Job.enqueue(Snorby::Jobs::GeoipUpdatedbJob.new, 
       :priority => 1, :run_at => DateTime.now + 5.second)

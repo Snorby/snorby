@@ -426,6 +426,11 @@ div.rule-data pre{
 
 /* @group Main */
 
+.stop-scrolling {
+  height: 100% !important;
+  overflow: hidden !important;
+}
+
 hr {
 	border-top: 1px solid rgba(0,0,0,0.8);
 	border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -480,7 +485,7 @@ a {
 }
 
 #snorby-box #box-content-small{
-	overflow: auto;
+	overflow: visible;
 	display: block;
 	position: relative;
 	padding: 10px;
@@ -695,14 +700,24 @@ body.login #flash_message.success{
 }
 
 #header #header-inside #header-content #header-top #logo a{
-	width: 265px;
-	display: block;
-	position: relative;
+	width: 140px;
+	margin-left: 45px;
+	display: inline-block;
+	float: left;
 	overflow: hidden;
 	height: 60px;
 	text-indent: 99999em;
 }
 
+#header #header-inside #header-content #header-top #logo a.threat-stack{
+	display: inline-block;
+	float: left;
+	float: left;
+	display: inline-block;
+	height: 60px;
+	text-indent: 99999em;
+	margin-left: 0px;
+}
 
 strong.current-snorby-env{
 	color: #fefad4;
@@ -1351,7 +1366,7 @@ div.content-box-body {
 
 #footer{
 	margin-top: 10px;
-	margin-bottom: 30px;
+	margin-bottom: 70px;
 }
 
 #footer #footer-inside{
@@ -1359,10 +1374,23 @@ div.content-box-body {
 	font-size: 0.9em;
 	text-align: right;
 	height: 25px;
-	line-height: 25px;
 	padding-left: 20px;
 	padding-right: 10px;
+	padding-top: 10px;
+	line-height: 10px;
 }
+
+/*.footer-small-logo{
+	background: url(../images/ts-logo-small.png) no-repeat;
+	float: left;
+	width: 100px;
+	height: 60px;
+	display: block;
+	position: relative;
+	margin-left: -60px;
+	margin-top: -10px;
+	left: 0;
+}*/
 
 #footer #footer-inside a{
 	color: #494949;
@@ -4460,6 +4488,16 @@ div.search-port-break{
 	display: block;
 	overflow: visible;
 	position: relative;
+}
+
+.snorbybox-content-message{
+	line-height: 17px;
+	margin: 10px 10px 15px;
+	font-weight: normal;
+	font-style: normal;
+	text-decoration: none;
+	font-variant: normal;
+	font-size: 1.1em;
 }
 
 #snorbybox-content form{

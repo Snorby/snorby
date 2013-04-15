@@ -29,9 +29,9 @@
       <%= yield %>
       <hr>
       <div class="login-footer">
-        Snorby & Snorby Cloud
-        &copy; <%= Time.now.year %> Dustin Willis Webber &amp;
-        <%= link_to "Threat Stack, Inc.", 'https://threatstack.com', :target => '_blank' %>
+      &copy; <%= Time.now.year %> <a href="https://threatstack.com">Threat Stack, Inc</a> - Created By: Dustin Willis Webber
+      <br /><br /> 
+        Snorby <%= Snorby::VERSION %> - <%= link_to 'https://www.snorby.org', 'https://www.snorby.org' %> 
       </div>
     </div>
     <%- flash.each do |type, message| -%>

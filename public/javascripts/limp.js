@@ -599,10 +599,18 @@
     dataType: 'html',
     centerOnResize: true,
     closeButton: true,
-    onOpen: function(limp) {},
+    onOpen: function(limp) {
+      $('body').addClass('stop-scrolling');
+      $('body').bind('touchmove', function(e){
+        e.preventDefault();
+      });
+    },
     afterOpen: function(limp, html) {},
     onClose: function(limp) {},
-    afterClose: function(limp) {},
+    afterClose: function(limp) {
+      $('body').removeClass('stop-scrolling');
+      $('body').unbind('touchmove')
+    },
     onTemplate: function(template, limp) {}
   };
 
