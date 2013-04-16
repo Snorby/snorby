@@ -1,11 +1,4 @@
 GIT
-  remote: git://github.com/postmodern/dm-is-read_only.git
-  revision: 43ffedc64a261b12ee324db616a427048e14ba4c
-  specs:
-    dm-is-read_only (0.3.0)
-      dm-core (~> 1.2)
-
-GIT
   remote: http://github.com/Snorby/delayed_job_data_mapper.git
   revision: 6f1c4a8c3ad62e4ef6baafec9a2a9914d0643085
   specs:
@@ -31,6 +24,13 @@ GIT
   specs:
     ezprint (0.2.0)
       pdfkit (>= 0.4.1)
+
+GIT
+  remote: https://github.com/postmodern/dm-is-read_only.git
+  revision: 43ffedc64a261b12ee324db616a427048e14ba4c
+  specs:
+    dm-is-read_only (0.3.0)
+      dm-core (~> 1.2)
 
 GEM
   remote: https://rubygems.org/
