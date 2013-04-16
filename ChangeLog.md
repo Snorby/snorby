@@ -35,9 +35,13 @@
     You can now change your timezone and view events in the the time 
     your comfortable with. 
 
-    ** NOTICE ** you must insert events in UTC. Use barnyard2 for now.
-      Threat Stack, Inc will be releasing an open source project called `Pigsty`
-      if a few weeks that will replace the need for barnyard2 when using Snorby.
+    ** NOTICE ** Snorby will assume the events in the database are set to the timezone of the box.
+    If the timezone of the box is not auto-detected, or if your boxes timezone does not match the timezone of the
+    event data in the database, you can set the global timezone in config/snorby_config.yml using the `time_zone` parameter.
+    
+    Example: http://t.co/y2m4go7Pjk
+    
+    The time zone config string should be a valid time zone configuration from /usr/share/zoneinfo, e.g. "Europe/Berlin"
   
   2. Asset tagging. 
     Manually change IP address to a name thats more familiar. Or bulk 
