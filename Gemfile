@@ -45,7 +45,7 @@ gem 'dm-aggregates',               DM_VERSION
 gem 'dm-timestamps',               DM_VERSION
 gem 'dm-observer',                 DM_VERSION
 gem 'dm-serializer',               DM_VERSION
-gem 'dm-is-read_only',             '~> 0.3', :git => 'git://github.com/postmodern/dm-is-read_only.git'
+gem 'dm-is-read_only',             '~> 0.3', :git => 'https://github.com/postmodern/dm-is-read_only.git' 
 gem 'dm-chunked_query',            '~> 0.3'
 
 # Deploy with Capistrano
