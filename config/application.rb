@@ -5,6 +5,7 @@ require 'action_controller/railtie'
 require 'dm-rails/railtie'
 require 'action_mailer/railtie'
 require 'rails/test_unit/railtie'
+require 'timezone_local'
 
 # If you have a Gemfile, require the gems listed there, including any gems
 # you've limited to :test, :development, or :production.
@@ -76,18 +77,16 @@ module Snorby
     time_zone = CONFIG[:time_zone] # set your local time zone here. use rake time:zones:local to choose a value, or use UTC.
 
     unless time_zone
-      # try to detect one
-
-      if File.exists?('/etc/localtime') && File.symlink?('/etc/localtime')
-        path = File.readlink('/etc/localtime')
-        items = path.split("zoneinfo/")
-        if items.length == 2
-          time_zone = items[1] 
-        end
-      end
-
-      unless time_zone
+      # try to detect zone using
+      detected_time_zone = TimeZone::Local.get
+   
+      if detected_time_zone
+        time_zone = detected_time_zone.name
+        puts "No time_zone specified in snorby_config.yml; detected time_zone: #{time_zone}"
+      else
         puts "*** Warning:  no time zone is set in config/application.rb. Using UTC as the default time and behavior may be unexpected."
+        puts "*** You can manually set the timezone in config/snorby_config.yml in the time_zone setting."
+        puts "*** Valid time zones can be found by running `rake time:zones:local`"
         time_zone = "UTC"
       end
     end
