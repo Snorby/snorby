@@ -112,14 +112,15 @@ module Snorby
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
 
-    config.action_mailer.default_url_options = { :host => Snorby::CONFIG[:domain] }
-
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
 
     # Enable SSL if it was enabled in the configuration
     if CONFIG.has_key?(:ssl) && CONFIG[:ssl]
       config.force_ssl = true
+      config.action_mailer.default_url_options = { :protocol => 'https', :host => Snorby::CONFIG[:domain] }
+    else
+      config.action_mailer.default_url_options = { :host => Snorby::CONFIG[:domain] }
     end
   end
 
