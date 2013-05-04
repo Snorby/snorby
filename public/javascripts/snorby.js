@@ -903,6 +903,70 @@ var Snorby = {
 
   },
 
+  sessionViewUpdate: function(params, timeout) {
+    var delay = timeout || 20000;
+
+    Snorby.sessionViewUpdateClear();
+
+    Snorby.sessionViewUpdateInterval = setInterval(function() {
+      if (Snorby.sessionViewUpdateRequest) {
+        Snorby.sessionViewUpdateRequest.abort();
+      };
+
+      Snorby.sessionViewUpdateRequest = $.ajax({
+        url: '/events/sessions.json',
+        data: {
+          sort:  params.sort || 'desc',
+          direction: params.direction || 'timestamp',
+          page: params.page || 0
+        },
+        global: false,
+        type: 'get',
+        dataType: 'json',
+        success: function(data) {
+          if (data.hasOwnProperty('events')) {
+            for (var i = 0; i < data.events.length; i += 1) {
+              var event = data.events[i];
+              var row = $('li.event[data-session-id="'+event.ip_src+'_'+event.ip_dst+'_'+event.sig_id+'"]');
+
+              if (row.length > 0) {
+                if (parseInt(row.find('div.session-count').attr('data-sessions')) !== event.session_count) {
+
+                  row.find('div.session-count')
+                  .attr('data-sessions', event.session_count).find('span')
+                  .html(event.session_count)
+                  .effect("highlight", {}, 3000);
+
+                  row.find('div.timestamp b')
+                  .attr('title', "Event ID: " + event.sid + "." + event.cid + " " + event.datetime)
+                  .html(event.timestamp);
+                };
+              } else {
+                if (parseInt(params.page) < 1) {
+                  var html = Snorby.puts('session-event-row', event);
+                  $('div#events ul.table div.content').prepend(html);
+                };
+              };
+            } // for loop
+
+            // $('div#events ul.table div.content li').sortElements(function(a, b) {
+            // });
+          };
+        }
+      });
+    }, delay);
+  },
+
+  sessionViewUpdateClear: function() {
+    if (Snorby.sessionViewUpdateInterval) {
+      clearInterval(Snorby.sessionViewUpdateInterval);
+    };
+
+    if (Snorby.sessionViewUpdateRequest) {
+      Snorby.sessionViewUpdateRequest.abort();
+    };
+  },
+
   colorPicker: function() {
 
     $('#severity-color-bg').ColorPicker({
