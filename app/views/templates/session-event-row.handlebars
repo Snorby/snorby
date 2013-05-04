@@ -1,0 +1,24 @@
+<li id='event_{{sid}}{{cid}}' data-session-id="{{ip_src}}_{{ip_dst}}_{{sig_id}}" class='event' style='' data-event-id='{{sid}}-{{cid}}' data-event-sid='{{sid}}' data-event-cid='{{cid}}'>
+  <div class='row geoip sessions'>
+    <div class='select small'><input class='event-selector' id='event-selector' name='event-selector' type='checkbox'></div>
+    <div class='important small'><div class='create-favorite enabled'></div></div>
+    <div class='severity small'><span class='severity sev{{severity}}'>{{severity}}</span></div>
+    <div class='click sensor'>{{hostname}}</div>
+    <div class='click src_ip address'>
+      {{{geoip src_geoip}}} {{ip_src}}
+    </div>
+    <div class='click dst_ip address'>
+      {{{geoip dst_geoip}}} {{ip_dst}}
+    </div>
+    <div class='click signature'>{{message}}</div>
+    <div class='click timestamp'>
+      <b class='add_tipsy' title='Event ID: {{sid}}.{{cid}} &nbsp; {{datetime}}'>
+        {{timestamp}}
+      </b>
+    </div>
+    <div class="click session-count" data-sessions="{{session_count}}">
+      <span>{{session_count}}</span>
+    </div>
+  </div>
+  <div style='display:none;' class='event-data' data='false'></div>
+</li>
