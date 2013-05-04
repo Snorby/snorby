@@ -727,7 +727,7 @@ function new_event_check(prepend_events) {
 
       if (old_id != data.time) {
         $.ajax({
-          url: 'events/since',
+          url: '/events/since',
           data: { timestamp: old_id },
           dataType: 'json',
           type: 'GET',
