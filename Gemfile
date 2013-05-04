@@ -45,7 +45,7 @@ gem 'dm-aggregates',               DM_VERSION
 gem 'dm-timestamps',               DM_VERSION
 gem 'dm-observer',                 DM_VERSION
 gem 'dm-serializer',               DM_VERSION
-gem 'dm-is-read_only',             '~> 0.3', :git => 'git://github.com/postmodern/dm-is-read_only.git'
+gem 'dm-is-read_only',             '~> 0.3', :git => 'https://github.com/postmodern/dm-is-read_only.git' 
 gem 'dm-chunked_query',            '~> 0.3'
 
 # Deploy with Capistrano
@@ -82,6 +82,7 @@ gem 'simple_form',                 '~> 1.2.2'
 gem 'geoip',                       '~> 1.1.1'
 gem 'netaddr',                     '~> 1.5.0'
 gem 'dm-zone-types',               '~> 0.3'
+gem 'timezone_local',              '~> 0.1.5'
 
 group(:development) do
 	gem "letter_opener"
