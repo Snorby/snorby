@@ -483,7 +483,6 @@ class Event
       time = Time.zone.now
     end
 
-    p "XXXX: #{Time.zone}, #{time}, #{Time.zone.parse(time.to_s)}"
     geoip = Setting.geoip?
     events = Event.all(:timestamp.gt => Time.zone.parse(time.to_s), :classification_id => nil, :order => [:timestamp.desc])
     json = {:events => []}

@@ -31,7 +31,7 @@ class EventsController < ApplicationController
   def sessions
     @session_view = true
 
-    params[:sort] = sort_column
+    params[:sort] = sort_column 
     params[:direction] = sort_direction
 
     sql = %{
@@ -369,11 +369,7 @@ class EventsController < ApplicationController
       return params[:sort].to_sym if Event::SORT.has_key?(params[:sort].to_sym) or [:signature].include?(params[:sort].to_sym)
     end
 
-    if @session_view
-      :number_of_events
-    else
-      :timestamp
-    end
+    :timestamp
   end
 
   def sort_direction

@@ -5364,3 +5364,10 @@ div.map{
 /* @end */
 
 
+.row .address div{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 105px;
+}
+

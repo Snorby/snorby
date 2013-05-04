@@ -310,8 +310,8 @@ module Snorby
         def split_events_and_process(start_time, end_time)
 
           event = db_select(%{
-            select cid from event where timestamp >= '#{@stime.to_s(:db)}' 
-            and timestamp < '#{@etime.to_s(:db)}' and sid = #{@sensor.sid.to_i} 
+            select cid from event where timestamp >= '#{@stime.strftime("%Y-%m-%d %H:%M:%S")}' 
+            and timestamp < '#{@etime.strftime("%Y-%m-%d %H:%M:%S")}' and sid = #{@sensor.sid.to_i} 
             order by timestamp desc limit 1
           })
 
