@@ -1,3 +1,11 @@
+# Snorby 2.6.1
+
+ * Session view now sorts by timestamp
+ * Session view now updates periodically
+ * fix dashboard/cache issues with timezone logic #274
+ * fix asset name overflow issues #270
+ * fix view event signatures search #276 
+
 # Snorby 2.6.0
   
   ** NOTICE **

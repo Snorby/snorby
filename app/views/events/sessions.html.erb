@@ -14,3 +14,11 @@
 
 <%= render :partial => 'events/hotkeys' %>
 
+<script type="text/javascript" charset="utf-8">
+  Snorby.sessionViewUpdate({
+    page: <%= params[:page].to_i %>,
+    sort: "<%= params[:sort] %>",
+    direction: "<%= params[:direction] %>",
+    timestamp: "<%= params[:_] %>"
+});
+</script>
