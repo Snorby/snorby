@@ -1,3 +1,12 @@
+# Snorby 2.6.2
+
+  * Feature Request - Add search criteria 'HAS NOTE' #263
+  * Cannot search for Unclassified events #189
+  * Long event signatures bleed into timestamp field #279
+  * Saved Search EDIT not shown (can't edit)') #280
+  * BUG - Functionality - 'Click to Change' on Sensor Page #284
+  * BUG - Functionality - Clicking on Signature graph brings up blank search #287
+
 # Snorby 2.6.1
 
  * Session view now sorts by timestamp

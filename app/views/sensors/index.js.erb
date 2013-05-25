@@ -1,2 +1,14 @@
 $('div#sensors').replaceWith("<%= escape_javascript(render(:partial => 'sensors/sensors', :locals => { :sensors => @sensors })) %>");
 flash();
+
+$('.edit-sensor-name').editable("/sensors/update_name", {
+  height: '20px',width: '180px',name: "name",
+  indicator: '<img src="/images/icons/pager.gif">',
+  data: function(value) {
+    var retval = value.replace(/<br[\s\/]?>/gi, '\n');
+    return retval;
+  },
+  submitdata : function() {
+    return { id: $(this).attr('data-sensor-id'), authenticity_token: csrf };
+  }
+});
