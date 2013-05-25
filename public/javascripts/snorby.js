@@ -144,6 +144,7 @@ SearchRule = function() {
     self.signatures = selectData.signatures;
     self.severities = selectData.severities;
     self.protocol = selectData.protocol;
+    self.has_note = selectData.has_note;
 
     self.init();
     return self;
@@ -172,6 +173,14 @@ SearchRule = function() {
         name: "severities-select",
         width: width,
         data: self.severities
+      });
+
+      console.log(self);
+
+      self.has_note_html = Handlebars.templates['select']({
+        name: "has-note-select",
+        width: width,
+        data: self.has_note
       });
 
       self.signatures_html = Handlebars.templates['select']({
@@ -307,6 +316,9 @@ SearchRule = function() {
           self.operators_html($html, self.operators.text_input);
         } else if (value === "classification") {
           that.find('.value').html(self.classifications_html);
+          self.operators_html($html, self.operators.text_input);
+        } else if (value === "has_note") {
+          that.find('.value').html(self.has_note_html);
           self.operators_html($html, self.operators.text_input);
         } else if (value === "user") {
           that.find('.value').html(self.users_html);

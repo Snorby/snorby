@@ -5,7 +5,8 @@
 
 <script type="text/javascript" charset="utf-8">
   $(function() {
-    var loadSavedSearch = function(data) {
+    var loadSavedSearch = function(json) {
+      var data = JSON.parse(json);
       if (data) {
         $('#searches').hide();
 
@@ -70,7 +71,7 @@
       };
     };
 
-    var rule = new SearchRule(<%= Snorby::Search.json %>);
-    loadSavedSearch(<%= @search.to_json.html_safe %>);
+    var rule = new SearchRule('<%= escape_javascript Snorby::Search.json.html_safe %>');
+    loadSavedSearch('<%= escape_javascript @search.to_json.html_safe %>');
   });
 </script>

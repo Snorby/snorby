@@ -6,7 +6,6 @@ DATAMAPPER    = 'http://github.com/datamapper'
 DM_VERSION    = '~> 1.2.0'
 
 gem 'rake', '0.9.2'
-gem 'psych_shield'
 gem 'request_store', '~> 1.0.5'
 
 gem 'rails',                       RAILS_VERSION

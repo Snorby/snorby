@@ -1988,15 +1988,21 @@ ul.table div.content li .row{
 }
 
 ul.table div.content li .row .signature{
-	white-space:nowrap;
 	display: block;
 	width: 430px;
 	position: relative;
+	
+	white-space:nowrap;
 	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 ul.table div.content li .row.sessions .signature{
-	width: 390px;
+	width: 350px;
+	
+	white-space:nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 ul.table div.content li .row.classified .signature{

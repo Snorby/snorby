@@ -28,7 +28,8 @@ module Snorby
       :user => "event.user_id",
       :payload => "data.data_payload",
       :start_time => "event.timestamp",
-      :end_time => "event.timestamp"
+      :end_time => "event.timestamp",
+      :has_note => "event.notes_count"
     }
 
     OPERATOR = {
@@ -41,7 +42,7 @@ module Snorby
       :lt => "< ?",
       :gt => "> ?",
       :in => "IN (?)",
-      :notnull => "NOT NULL ?",
+      :notnull => "IS NOT NULL",
       :isnull => "IS NULL"
     }
 
@@ -193,7 +194,8 @@ module Snorby
       :classification => :event,
       :user => :event,
       :sensor => :event,
-      :sensor_name => :sensor
+      :sensor_name => :sensor,
+      :has_note => :event
     }
 
     def self.joins
@@ -331,10 +333,44 @@ module Snorby
           if map_value.is_a?(Array)
 
             map_value.each do |x|
+
+              if column == :classification && value.to_i == 0
+                if operator == :is
+                  operator = :isnull
+                else
+                  operator = :notnull
+                end
+                value = "NULL"
+              end
+
+              if column == :has_note
+                if value.to_i == 1
+                  case operator
+                  when :is
+                    operator = :gt
+                    value = 0
+                  when :is_not
+                    operator = :lt
+                    value = 1
+                  end
+
+                else
+                  case operator
+                  when :is
+                    operator = :lt
+                    value = 1
+                  when :is_not
+                    operator = :gt
+                    value = 0
+                  end
+
+                end
+              end
+
               tmp_sql = "#{COLUMN[column][x]} #{OPERATOR[operator]}"
 
               instance_variable_get("@" + x.to_s).push(tmp_sql)
-              unless [:isnull].include?(operator)
+              unless [:isnull, :notnull].include?(operator)
 
                 if [:start_time, :end_time].include?(column)
                   value = Time.zone.parse(value).utc.strftime('%Y-%m-%d %H:%M:%S') 
@@ -349,9 +385,44 @@ module Snorby
             end
 
           else
+
+            if column == :classification && value.to_i == 0
+              if operator == :is
+                operator = :isnull
+              else
+                operator = :notnull
+              end
+              value = "NULL"
+            end
+
+            if column == :has_note
+
+              if value.to_i == 1
+                case operator
+                when :is
+                  operator = :gt
+                  value = 0
+                when :is_not
+                  operator = :lt
+                  value = 1
+                end
+
+              else
+                case operator
+                when :is
+                  operator = :lt
+                  value = 1
+                when :is_not
+                  operator = :gt
+                  value = 0
+                end
+                
+              end
+            end
+
             tmp_sql = "#{COLUMN[column]} #{OPERATOR[operator]}"
             instance_variable_get("@" + map_value.to_s).push(tmp_sql)
-            unless [:isnull].include?(operator)
+            unless [:isnull, :notnull].include?(operator)
 
               if [:start_time, :end_time].include?(column)
                 value = Time.zone.parse(value).utc.strftime('%Y-%m-%d %H:%M:%S') 
@@ -527,6 +598,11 @@ module Snorby
             :value => "Severity",
             :id => :severity,
             :type => :select
+          },
+          {
+            :value => "Has Note",
+            :id => :has_note,
+            :type => :select
           }
           # {
             # :value => "Protocol",
@@ -550,6 +626,18 @@ module Snorby
             }
           ]
         },
+        :has_note => {
+          :value => [
+            {
+              :id => 1,
+              :value => "Yes"
+            },
+            {
+              :id => 0,
+              :value => "No"
+            }
+          ]
+        },
         :classifications => {
           :type => :dropdown,
           :value => @classifications.collect do |x|
@@ -557,7 +645,7 @@ module Snorby
               :id => x.id,
               :value => x.name
             }
-          end
+          end.push({ :id => 0, :value => "Unclassified" })
         },
         :severities => {
           :type => :dropdown,

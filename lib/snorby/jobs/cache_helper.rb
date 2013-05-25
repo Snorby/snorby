@@ -216,6 +216,15 @@ module Snorby
         !db_select(sql).empty?
       end
 
+      def has_caches_ran_at_index?
+        sql = %{
+          select * FROM information_schema.statistics 
+          WHERE table_schema = '#{db_options["database"]}'
+          AND table_name = 'caches' AND index_name = 'index_caches_ran_at' limit 1;
+        }
+        !db_select(sql).empty?
+      end
+
       def has_aggregated_events_view?
         sql = %{
           select *
@@ -247,6 +256,11 @@ module Snorby
         unless has_timestamp_index?
           puts "[~] Adding `index_timestamp_cid_sid` index to the event table"
           db_execute("create index index_timestamp_cid_sid on event (  timestamp,  cid, sid );")
+        end
+
+        unless has_caches_ran_at_index?
+          puts "[~] Adding `index_caches_ran_at` index to the caches table"
+          db_execute("create index index_caches_ran_at on caches (`ran_at`);")
         end
 
         unless has_event_id?
