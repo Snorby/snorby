@@ -6,6 +6,9 @@
   * Saved Search EDIT not shown (can't edit)') #280
   * BUG - Functionality - 'Click to Change' on Sensor Page #284
   * BUG - Functionality - Clicking on Signature graph brings up blank search #287
+  * Removed old deps from Gemfile
+  * Fixed isse with Snorby::Worker.problems? returning true - DelayedJob check was not removed.
+  * Index added to cache tables / column ran_at - Render speed up
 
 # Snorby 2.6.1
 
