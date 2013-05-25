@@ -10,8 +10,6 @@
 
 Snorby is a ruby on rails web application for network security monitoring that interfaces with current popular intrusion detection systems (Snort, Suricata and Sagan). The basic fundamental concepts behind Snorby are **simplicity**, organization and power. The project goal is to create a free, open source and highly competitive application for network monitoring for both private and enterprise use.
 
-* [Snorby Screenshot](http://snorby.org/snorby.png)
-
 ## Demo
 
 URL: [http://demo.snorby.org](http://demo.snorby.org)
@@ -26,20 +24,9 @@ Pass: snorby
 
 * Snort
 * Ruby >= 1.9.2
-* Rails >= 3.0.0 
-* ImageMagick >= 6.6.4-5
+* Rails >= 3.0.0
 
 ## Install
-
-* Install ImageMagick
-
-	* Mac OSX:
-	
-		`brew install imagemagick`
-
-	* Linux:
-	
-		`apt-get install imagemagick`
 
 * Get Snorby from the download section or use the latest edge release via git.
 
