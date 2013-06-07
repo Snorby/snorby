@@ -336,9 +336,9 @@ module Snorby
 
               if column == :classification && value.to_i == 0
                 if operator == :is
-                  operator = :isnull
-                else
                   operator = :notnull
+                else
+                  operator = :isnull
                 end
                 value = "NULL"
               end
@@ -388,9 +388,9 @@ module Snorby
 
             if column == :classification && value.to_i == 0
               if operator == :is
-                operator = :isnull
-              else
                 operator = :notnull
+              else
+                operator = :isnull
               end
               value = "NULL"
             end
