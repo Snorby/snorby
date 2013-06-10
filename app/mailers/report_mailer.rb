@@ -14,7 +14,7 @@ class ReportMailer < ActionMailer::Base
   end
 
   def weekly_report(email, timezone="UTC")
-    report = Snorby::Report.build_report('last_week', "UTC")
+    report = Snorby::Report.build_report('last_week', timezone)
     attachments["snorby-weekly-report.pdf"] = report[:pdf]
 
     # File.open("/Users/jandre/Desktop/test-#{timezone}.pdf", "wb") do |file|
