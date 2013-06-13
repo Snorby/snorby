@@ -170,7 +170,6 @@ module Snorby
         sql = [
           "delete from agent_asset_names where sensor_sid = #{sensor_id.to_i};",
           "delete from caches where sid = #{sensor_id.to_i};",
-          "delete from cids where sid = #{sensor_id.to_i};",
           "delete from daily_caches where sid = #{sensor_id.to_i};",
           "delete from `data` where sid = #{sensor_id.to_i};",
           "delete from favorites where sid = #{sensor_id.to_i};",
