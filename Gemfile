@@ -8,8 +8,6 @@ DM_VERSION    = '~> 1.2.0'
 gem 'rake', '0.9.2'
 gem 'request_store', '~> 1.0.5'
 
-gem 'newrelic_rpm'
-
 gem 'rails',                       RAILS_VERSION
 gem 'jquery-rails'
 gem 'bundler',                     '>= 1.0.0'
