@@ -86,8 +86,27 @@
 
 					<p>
 						<%= f.check_box :admin %> <%= f.label "Administrator" %>
+                        <br />
 						<em>(should this user have administrative rights?)</em>
 					</p>
+                <% end %>
+
+                <% if Snorby::CONFIG[:user_reports_control] %>
+                    <p>
+                        <%= f.check_box :daily_reports %> <%= f.label 'Daily Reports' %>
+                        <br />
+                        <em>(Send a report summarizing the captured traffic daily)</em>
+                    </p>
+                    <p>
+                        <%= f.check_box :weekly_reports %> <%= f.label 'Weekly Reports' %>
+                        <br />
+                        <em>(Send a report summarizing the captured traffic weekly)</em>
+                    </p>
+                    <p>
+                        <%= f.check_box :monthly_reports %> <%= f.label 'Monthly Reports' %>
+                        <br />
+                        <em>(Send a report summarizing the captured traffic monthly)</em>
+                    </p>
 
 				<% end %>
 
