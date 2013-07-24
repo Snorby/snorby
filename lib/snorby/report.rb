@@ -39,10 +39,6 @@ module Snorby
         sigs = Event.all(:limit => 5, :order => [:timestamp.desc], 
                          :fields => [:sig_id], 
                          :unique => true).map(&:signature).map(&:sig_id)
-
-        @recent_events = Event.all(:sig_id => sigs).group_by do |x| 
-          x.sig_id 
-        end.map(&:last).map(&:first)
         
 
         av = ActionView::Base.new(Rails.root.join('app', 'views'))
