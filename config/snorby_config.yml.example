@@ -14,6 +14,10 @@ production:
   rules:
     - ""
   authentication_mode: database
+  # If timezone_search is undefined or false, searching based on time will
+  # use UTC times (historical behavior). If timezone_search is true
+  # searching will use local time.
+  timezone_search: true
   # uncomment to set time zone to time zone of box from /usr/share/zoneinfo, e.g. "America/Cancun"
   # time_zone: 'UTC'
 
