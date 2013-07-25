@@ -373,7 +373,10 @@ module Snorby
               unless [:isnull, :notnull].include?(operator)
 
                 if [:start_time, :end_time].include?(column)
-                  value = Time.zone.parse(value).utc.strftime('%Y-%m-%d %H:%M:%S') 
+                  # If timezone_search exists ands is set to true
+                  # in snorby_config.yml set the search with the local time.
+                  # Otherwise (default) search with UTC
+		  value = APP_CONFIG['timezone_search'] ?  Time.zone.parse(value).strftime('%Y-%m-%d %H:%M:%S') : Time.zone.parse(value).utc.strftime('%Y-%m-%d %H:%M:%S')
                 end
 
                 if column == :signature_name
@@ -425,7 +428,10 @@ module Snorby
             unless [:isnull, :notnull].include?(operator)
 
               if [:start_time, :end_time].include?(column)
-                value = Time.zone.parse(value).utc.strftime('%Y-%m-%d %H:%M:%S') 
+	  	# If timezone_search exists ands is set to true
+                # in snorby_config.yml set the search with the local time.
+                # Otherwise (default) search with UTC
+                value = APP_CONFIG['timezone_search'] ?  Time.zone.parse(value).strftime('%Y-%m-%d %H:%M:%S') : Time.zone.parse(value).utc.strftime('%Y-%m-%d %H:%M:%S')
               end
 
               if column == :signature_name
