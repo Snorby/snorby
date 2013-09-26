@@ -1589,7 +1589,7 @@ var Snorby = {
 
 					check_box.hide();
 					$('li.event div.event-data').slideUp('fast');
-					parent_row.find('div.select').append("<img alt='laoding' src='/images/icons/loading.gif' class='select-loading'>");
+					parent_row.find('div.select').append("<img alt='loading' src='/images/icons/loading.gif' class='select-loading'>");
 
           var open_event_url = '/events/show/'+sid+'/'+cid;
 
