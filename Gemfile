@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 RAILS_VERSION = '3.1.12'
 RSPEC_VERSION = '~> 2.0.0'
-DATAMAPPER    = 'http://github.com/datamapper'
+DATAMAPPER    = 'https://github.com/datamapper'
 DM_VERSION    = '~> 1.2.0'
 
 gem 'rake', '0.9.2'
@@ -56,16 +56,16 @@ gem 'cancan',                      '~> 1.6'
 gem 'devise',                      '~> 1.4'
 gem 'dm-devise',                   '~> 1.5'
 gem 'rubycas-client'
-gem 'devise_cas_authenticatable',  :git => 'http://github.com/Snorby/snorby_cas_authenticatable.git'
+gem 'devise_cas_authenticatable',  :git => 'https://github.com/Snorby/snorby_cas_authenticatable.git'
 gem "mail",                        '~> 2.3'
 gem "RedCloth",                    "~> 4.2.9", :require => 'redcloth'
 gem 'chronic',                     '~> 0.3.0'
 gem 'pdfkit',                      '~> 0.4.6'
-gem 'ezprint',                     :git => 'http://github.com/mephux/ezprint.git', :branch => 'rails3', :require => 'ezprint'
+gem 'ezprint',                     :git => 'https://github.com/mephux/ezprint.git', :branch => 'rails3', :require => 'ezprint'
 gem 'daemons',                     '~> 1.1.0'
 
 gem 'delayed_job',                 '~> 2.1.4'
-gem 'delayed_job_data_mapper',     '~> 1.0.0.rc', :git => 'http://github.com/Snorby/delayed_job_data_mapper.git'
+gem 'delayed_job_data_mapper',     '~> 1.0.0.rc', :git => 'https://github.com/Snorby/delayed_job_data_mapper.git'
 
 # Working On This
 # gem 'delayed_job',                 '~> 3.0'
@@ -73,7 +73,7 @@ gem 'delayed_job_data_mapper',     '~> 1.0.0.rc', :git => 'http://github.com/Sno
 
 # Old - Remove Avatar Support
 # gem 'rmagick',                     '~> 2.13.1'
-# gem 'dm-paperclip',                '~> 2.4.1', :git => 'http://github.com/Snorby/dm-paperclip.git'
+# gem 'dm-paperclip',                '~> 2.4.1', :git => 'https://github.com/Snorby/dm-paperclip.git'
 
 gem 'net-dns',                     '~> 0.6.1'
 gem 'whois',                       '~> 2.3.0'
