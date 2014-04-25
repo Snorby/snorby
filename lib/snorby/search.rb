@@ -492,6 +492,14 @@ module Snorby
             {
               :id => :is_not,
               :value => "is not"
+            },
+            {
+              :id => :gte,
+              :value => "range start"
+            },
+            {
+              :id => :lte,
+              :value => "range end"
             }
           ],
           :datetime => [
