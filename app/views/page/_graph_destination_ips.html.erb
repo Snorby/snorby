@@ -28,7 +28,7 @@
 		         pie: {
               events: {
                 click: function(event) {
-                  HCloader(event.toElement.offsetParent.id);
+                  HCloader(event.target.nearestViewportElement.parentElement.id);
                   document.location = '/results?title=Destination Address '+event.point.name+'&match_all=true&search%5B0%5D%5Bcolumn%5D=destination_ip&search'+
                     '%5B0%5D%5Benabled%5D=true&search%5B0%5D%5Boperator%'+
                     '5D=is&search%5B0%5D%5Bvalue%5D='+event.point.name+'&search%'+
