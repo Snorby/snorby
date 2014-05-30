@@ -6,6 +6,9 @@
 # USE THIS! 
 #
 production:
+  # in case you want to run snorby under a suburi/suburl under eg. passenger:
+  baseuri: ''
+  # baseuri: '/snorby'
   domain: 'demo.snorby.org'
   wkhtmltopdf: /usr/local/bin/wkhtmltopdf
   ssl: false
@@ -25,6 +28,7 @@ production:
 # Only Use For Development
 #
 development:
+  baseuri: ''
   domain: localhost:3000
   wkhtmltopdf: /Users/mephux/.rvm/gems/ruby-1.9.2-p0/bin/wkhtmltopdf
   ssl: false
@@ -46,6 +50,7 @@ development:
 # Only Use For Testing
 #
 test:
+  baseuri: ''
   domain: localhost:3000
   wkhtmltopdf: /usr/local/bin/wkhtmltopdf
   mailer_sender: 'snorby@snorby.org'
