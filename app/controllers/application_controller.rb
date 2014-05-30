@@ -48,10 +48,12 @@ class ApplicationController < ActionController::Base
       else
 
         current_uri = request.env['PATH_INFO']
-        routes = ["", "/", "/users/login"]
-
+        rails_root = request.env['RAILS_ROOT']
+	baseuri = Snorby::CONFIG[:baseuri]
+        routes = ["", "/", baseuri + "/users/login"]
+	
         if current_uri && routes.include?(current_uri)
-          redirect_to '/users/login' unless current_uri == "/users/login"
+          redirect_to baseuri + '/users/login' unless current_uri == baseuri + "/users/login"
         else
           authenticate_user!
         end

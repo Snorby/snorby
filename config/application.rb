@@ -43,6 +43,11 @@ module Snorby
     CONFIG[:authentication_mode] = "database"
   end
 
+  # default base uri is none...
+  unless CONFIG.has_key?(:baseuri)
+    CONFIG[:baseuri] = ""
+  end
+
   class Application < Rails::Application
 
     config.threadsafe!
