@@ -427,7 +427,7 @@ SearchRule = function() {
 
       var update_url = function() {
         if (history && history.pushState) {
-          history.pushState(null, document.title, '/results');
+          history.pushState(null, document.title, baseuri + '/results');
         };
       };
 
@@ -437,7 +437,7 @@ SearchRule = function() {
 
       if (search && !$.isEmptyObject(search.items)) {
         if (otherOptions.search_id) {
-          post_to_url('/results', {
+          post_to_url(baseuri + '/results', {
             match_all: search.match_all,
             search: search.items,
             title: otherOptions.title,
@@ -445,7 +445,7 @@ SearchRule = function() {
             authenticity_token: csrf
           });
         } else {
-          post_to_url('/results', {
+          post_to_url(baseuri + '/results', {
             match_all: search.match_all,
             search: search.items,
             authenticity_token: csrf
@@ -593,16 +593,16 @@ function set_classification (class_id) {
   var sort = $('div#events').attr('data-sort');
 
   var classify_events = function() {
-    $.post('/events/classify', {events: selected_events, classification: class_id, authenticity_token: csrf}, function() {
+    $.post(baseuri + '/events/classify', {events: selected_events, classification: class_id, authenticity_token: csrf}, function() {
       if (current_page == "index") {
         clear_selected_events();
-        $.getScript('/events?direction='+direction+'&sort='+sort+'&page=' + current_page_number);
+        $.getScript(baseuri + '/events?direction='+direction+'&sort='+sort+'&page=' + current_page_number);
       } else if (current_page == "queue") {
         clear_selected_events();
-        $.getScript('/events/queue?direction='+direction+'&sort='+sort+'&page=' + current_page_number);
+        $.getScript(baseuri + '/events/queue?direction='+direction+'&sort='+sort+'&page=' + current_page_number);
       } else if (current_page == "history") {
         clear_selected_events();
-        $.getScript('/events/history?direction='+direction+'&sort='+sort+'&page=' + current_page_number);
+        $.getScript(baseuri + '/events/history?direction='+direction+'&sort='+sort+'&page=' + current_page_number);
       } else if (current_page == "results") {
         clear_selected_events();
 
@@ -644,7 +644,7 @@ function set_classification (class_id) {
 
       } else {
         // clear_selected_events();
-        // $.getScript('/events');
+        // $.getScript(baseuri + '/events');
       };
       flash_message.push({type: 'success', message: "Event(s) Classified Successfully"});
     });
@@ -661,13 +661,13 @@ function set_classification (class_id) {
         count = $('div#sessions-event-count-selected').data('count');
       };
 
-      $.post('/events/classify_sessions',{
+      $.post(baseuri + '/events/classify_sessions',{
         events: selected_events,
         classification: class_id,
         authenticity_token: csrf
       }, function(data) {
         clear_selected_events();
-        $.getScript('/events/sessions?direction=' + direction + '&sort=' + sort + '&page=' + current_page_number);
+        $.getScript(baseuri + '/events/sessions?direction=' + direction + '&sort=' + sort + '&page=' + current_page_number);
 
         flash_message.push({type: 'success', message: "Event(s) Classified Successfully ("+count+" sessions)"});
       });
@@ -696,7 +696,7 @@ function set_classification (class_id) {
 
 function fetch_last_event(callback) {
   $.ajax({
-    url: '/events/last',
+    url: baseuri + '/events/last',
     dataType: 'json',
     type: 'GET',
     global: false,
@@ -727,7 +727,7 @@ function monitor_events(prepend_events) {
 
 function new_event_check(prepend_events) {
   $.ajax({
-    url: '/events/last',
+    url: baseuri + '/events/last',
     dataType: 'json',
     type: 'GET',
     global: false,
@@ -739,7 +739,7 @@ function new_event_check(prepend_events) {
 
       if (old_id != data.time) {
         $.ajax({
-          url: '/events/since',
+          url: baseuri + '/events/since',
           data: { timestamp: old_id },
           dataType: 'json',
           type: 'GET',
@@ -782,7 +782,7 @@ function update_note_count (event_id, data) {
 	var event_row = $('li#'+event_id+' div.row div.timestamp');
 	var notes_count = event_row.find('span.notes-count');
 
-	var template = '<span class="add_tipsy round notes-count" title="{{notes_count_in_words}}"><img alt="Notes" height="16" src="/images/icons/notes.png" width="16"></span>'
+	var template = '<span class="add_tipsy round notes-count" title="{{notes_count_in_words}}"><img alt="Notes" height="16" src="' + baseuri + '/images/icons/notes.png" width="16"></span>'
 	var event_html = Snorby.templates.render(template, data);
 
 	if (data.notes_count == 0) {
@@ -853,7 +853,7 @@ var Snorby = {
 
     if (errors <= 0) {
       Snorby.submitAjaxRequestAssetName = $.ajax({
-        url: '/asset_names/add',
+        url: baseuri + '/asset_names/add',
         dataType: "json",
         data: params,
         type: "post",
@@ -926,7 +926,7 @@ var Snorby = {
       };
 
       Snorby.sessionViewUpdateRequest = $.ajax({
-        url: '/events/sessions.json',
+        url: baseuri + '/events/sessions.json',
         data: {
           sort:  params.sort || 'desc',
           direction: params.direction || 'timestamp',
@@ -1078,7 +1078,7 @@ var Snorby = {
       Snorby.colorPicker();
 
       $('img.recover, img.avatar, img.user-view-avatar, img.avatar-small, div.note-avatar-holder img').error(function(event) {
-        $(this).attr("src", "/images/default_avatar.png");
+        $(this).attr("src", baseuri + "/images/default_avatar.png");
       });
     },
     afterClose: function() {
@@ -1141,9 +1141,9 @@ var Snorby = {
 		    expires: 5000
 		});
 
-		$('.edit-sensor-name').editable("/sensors/update_name", {
+		$('.edit-sensor-name').editable(baseuri + "/sensors/update_name", {
 			height: '20px',width: '180px',name: "name",
-			indicator: '<img src="/images/icons/pager.gif">',
+			indicator: '<img src="' + baseuri + '/images/icons/pager.gif">',
 			data: function(value) {
 				var retval = value.replace(/<br[\s\/]?>/gi, '\n');
 				return retval;
@@ -1272,7 +1272,7 @@ var Snorby = {
 						$.scrollTo('#header', 500);
 					} else {
 						$(document).trigger('limp.close');
-						$.post('/events/email', $('form.email-event-information').serialize(), null, "script");
+						$.post(baseuri + '/events/email', $('form.email-event-information').serialize(), null, "script");
 					};
 				};
 				return false;
@@ -1281,7 +1281,7 @@ var Snorby = {
 			$('button.request_packet_capture').live('click', function(e) {
 		    e.preventDefault();
 				if ($(this).attr('data-deepsee')) { $('form.request_packet_capture input#method').val('deepsee') };
-				$.post('/events/request_packet_capture', $('form.request_packet_capture').serialize(), null, "script");
+				$.post(baseuri + '/events/request_packet_capture', $('form.request_packet_capture').serialize(), null, "script");
 				return false;
 			});
 
@@ -1304,14 +1304,14 @@ var Snorby = {
 				e.preventDefault();
 				var nform = $('form#mass-action-form');
 				$(document).trigger('limp.close');
-				$.post('/events/mass_action', nform.serialize(), null, "script");
+				$.post(baseuri + '/events/mass_action', nform.serialize(), null, "script");
 				return false;
 			});
 
 			$('button.create-notification').live('click', function(e) {
 				e.preventDefault();
 				var nform = $('form#new_notification');
-				$.post('/notifications', nform.serialize(), null, "script");
+				$.post(baseuri + '/notifications', nform.serialize(), null, "script");
 				$(document).trigger('limp.close');
 				return false;
 			});
@@ -1361,7 +1361,7 @@ var Snorby = {
 				e.preventDefault();
 				var note = $(this).parents('div.event-note');
 				var note_id = $(this).attr('data-note-id');
-				$.getScript('/notes/' + note_id + '/edit');
+				$.getScript(baseuri + '/notes/' + note_id + '/edit');
 				return false;
 			});
 
@@ -1372,7 +1372,7 @@ var Snorby = {
 
 				if ( confirm("Are you sure you want to delete this note?") ) {
 					$('div.notes').fadeTo(500, 0.4);
-					$.post('/notes/destroy', { id: note_id, authenticity_token: csrf, '_method': 'delete' }, null, 'script');
+					$.post(baseuri + '/notes/destroy', { id: note_id, authenticity_token: csrf, '_method': 'delete' }, null, 'script');
 				};
 
 				return false;
@@ -1402,7 +1402,7 @@ var Snorby = {
 					var current_width = $(this).width();
 					$(this).addClass('loading').css('width', current_width);
 
-					$.get('/notes/new', { sid: event_sid, cid: event_cid, authenticity_token: csrf}, null, 'script');
+					$.get(baseuri + '/notes/new', { sid: event_sid, cid: event_cid, authenticity_token: csrf}, null, 'script');
 				};
 
 				return false;
@@ -1419,7 +1419,7 @@ var Snorby = {
 					var current_width = $(this).width();
 					$(this).addClass('loading').css('width', current_width);
 
-					$.post('/notes/create', { sid: event_sid, cid: event_cid, body: note_body, authenticity_token: csrf}, null, 'script');
+					$.post(baseuri + '/notes/create', { sid: event_sid, cid: event_cid, body: note_body, authenticity_token: csrf}, null, 'script');
 
 				} else {
 					flash_message.push({type: "error", message: "The note body cannot be blank!"});
@@ -1492,7 +1492,7 @@ var Snorby = {
 				var cid = $(this).parents('li.event').attr('data-event-cid');
 
 				$(this).removeClass('create-favorite').addClass('destroy-favorite');
-				$.post('/events/favorite', { sid: sid, cid: cid, authenticity_token: csrf});
+				$.post(baseuri + '/events/favorite', { sid: sid, cid: cid, authenticity_token: csrf});
 
 				var count = new Queue();
 				count.up();
@@ -1506,7 +1506,7 @@ var Snorby = {
 				var action = $('div#events').attr('data-action');
 
 				$(this).removeClass('destroy-favorite').addClass('create-favorite');
-				$.post('/events/favorite', { sid: sid, cid: cid, authenticity_token: csrf});
+				$.post(baseuri + '/events/favorite', { sid: sid, cid: cid, authenticity_token: csrf});
 
 				var count = new Queue();
 				count.down();
@@ -1515,7 +1515,7 @@ var Snorby = {
 					$('div.content').fadeTo(500, 0.4);
 					Snorby.helpers.remove_click_events(true);
 					$('div.destroy-favorite').removeClass('enabled').css('cursor', 'default');
-					$.get('/events/queue', null, null, "script");
+					$.get(baseuri + '/events/queue', null, null, "script");
 				};
 
 				return false;
@@ -1589,12 +1589,12 @@ var Snorby = {
 
 					check_box.hide();
 					$('li.event div.event-data').slideUp('fast');
-					parent_row.find('div.select').append("<img alt='loading' src='/images/icons/loading.gif' class='select-loading'>");
+					parent_row.find('div.select').append("<img alt='loading' src='" + baseuri + "/images/icons/loading.gif' class='select-loading'>");
 
-          var open_event_url = '/events/show/'+sid+'/'+cid;
+          var open_event_url = baseuri + '/events/show/'+sid+'/'+cid;
 
           if ($('div#events').data('action') === "sessions") {
-            open_event_url = '/events/show/'+sid+'/'+cid+'?sessions=true';
+            open_event_url = baseuri + '/events/show/'+sid+'/'+cid+'?sessions=true';
           };
 
 					$.get(open_event_url, function () {
@@ -1628,7 +1628,7 @@ var Snorby = {
 			$('div.new_events').live('click', function() {
 				$(this).remove();
 				if (parseInt($('strong.new_event_count').html()) > 100) {
-					window.location = '/events'
+					window.location = baseuri + '/events'
 				} else {
 					$('#events ul.table div.content li').fadeIn('slow');
 				};
@@ -1667,18 +1667,18 @@ var Snorby = {
 		$('#users input#enabled').live('click', function(e) {
 			var user_id = $(this).parent('td').attr('data-user');
 			if ($(this).attr('checked')) {
-				$.post('/users/toggle_settings', { user_id: user_id, user: { enabled: true }, authenticity_token: csrf});
+				$.post(baseuri + '/users/toggle_settings', { user_id: user_id, user: { enabled: true }, authenticity_token: csrf});
 			} else {
-				$.post('/users/toggle_settings', { user_id: user_id, user: { enabled: false }, authenticity_token: csrf});
+				$.post(baseuri + '/users/toggle_settings', { user_id: user_id, user: { enabled: false }, authenticity_token: csrf});
 			};
 		});
 
 		$('#users input#admin').live('click', function(e) {
 			var user_id = $(this).parent('td').attr('data-user');
 			if ($(this).attr('checked')) {
-				$.post('/users/toggle_settings', { user_id: user_id, user: { admin: true }, authenticity_token: csrf});
+				$.post(baseuri + '/users/toggle_settings', { user_id: user_id, user: { admin: true }, authenticity_token: csrf});
 			} else {
-				$.post('/users/toggle_settings', { user_id: user_id, user: { admin: false }, authenticity_token: csrf});
+				$.post(baseuri + '/users/toggle_settings', { user_id: user_id, user: { admin: false }, authenticity_token: csrf});
 			};
 		});
 
@@ -1878,7 +1878,7 @@ var Snorby = {
 		input_style: function(){
 
 			$('div#form-actions button.cancel').live('click', function() {
-				window.location = '/';
+				window.location = baseuri + '/';
 				return false;
 			});
 
@@ -2182,22 +2182,22 @@ var Snorby = {
 		});
 
 		$(document).bind('keydown', 'ctrl+3', function() {
-			window.location = '/jobs';
+			window.location = baseuri + '/jobs';
 			return false;
 		});
 
 		$(document).bind('keydown', 'ctrl+2', function() {
-			window.location = '/events';
+			window.location = baseuri + '/events';
 			return false;
 		});
 
 		$(document).bind('keydown', 'ctrl+1', function() {
-			window.location = '/events/queue';
+			window.location = baseuri + '/events/queue';
 			return false;
 		});
 
 		$(document).bind('keydown', 'ctrl+shift+s', function() {
-			window.location = '/search';
+			window.location = baseuri + '/search';
 			return false;
 		});
 
@@ -2494,7 +2494,7 @@ jQuery(document).ready(function($) {
                 document.open();
                 document.write(data);
                 document.close();
-                history.pushState(null, 'Snorby - Dashboard', '/');
+                history.pushState(null, 'Snorby - Dashboard', baseuri + '/');
               });
             });
 
@@ -2516,15 +2516,15 @@ jQuery(document).ready(function($) {
   $('#login #title').remove();
 
   $('img.avatar, img.avatar-small, div.note-avatar-holder img').error(function(event) {
-    $(this).attr("src", "/images/default_avatar.png");
+    $(this).attr("src", baseuri + "/images/default_avatar.png");
   })
 
   $('#login button.forgot-my-password').live('click', function(event) {
     event.preventDefault();
-    $.get('/users/password/new', function(data) {
+    $.get(baseuri + '/users/password/new', function(data) {
       var content = $(data).find('#content').html();
       $('#login').html(content);
-      history.pushState(null, 'Snorby - Password Reset', '/users/password/new');
+      history.pushState(null, 'Snorby - Password Reset', baseuri + '/users/password/new');
     });
   });
 
@@ -2603,7 +2603,7 @@ jQuery(document).ready(function($) {
         };
 
         signature_input_search = $.ajax({
-          url: '/signatures/search',
+          url: baseuri + '/signatures/search',
           global: false,
           data: { q: value, authenticity_token: csrf },
           type: "POST",
@@ -2637,7 +2637,7 @@ jQuery(document).ready(function($) {
   var cache_reload_count = 0;
   function currently_caching() {
     $.ajax({
-      url: '/cache/status',
+      url: baseuri + '/cache/status',
       global: false,
       dataType: 'json',
       cache: false,
@@ -2708,7 +2708,7 @@ jQuery(document).ready(function($) {
       $('#content').addClass('original-content-data');
 
       var item = '<li><a href="#" class="snorby-content-restore"><img' +
-        ' alt="Restart" src="/images/icons/restart.png">Go Back</a></li>';
+        ' alt="Restart" src="' + baseuri + '/images/icons/restart.png">Go Back</a></li>';
       var menu = '<ul class="" id="title-menu-holder"><ul id="title-menu">' +
         '<li>&nbsp;</li>'+item+'<li>&nbsp;</li></ul></ul>';
 
@@ -2778,7 +2778,7 @@ jQuery(document).ready(function($) {
       var search_public = $('input#saved_search_public').is(":checked");
 
      $.ajax({
-        url: '/saved_searches/create',
+        url: baseuri + '/saved_searches/create',
         global: false,
         dataType: 'json',
         cache: false,
@@ -2827,7 +2827,7 @@ jQuery(document).ready(function($) {
       var title = $(this).data('title');
       var search_id = $(this).data('search-id');
 
-      var url = "/results?sort=" + sort +
+      var url = baseuri + "/results?sort=" + sort +
         "&direction="+direction+"&page=" + page;
 
       var params = {
@@ -2881,7 +2881,7 @@ jQuery(document).ready(function($) {
     $('.loading-bar').slideDown('fast');
 
     Snorby.getSensorList = $.ajax({
-      url: "/sensors/agent_list.json",
+      url: baseuri + "/sensors/agent_list.json",
       type: "GET",
       dataType: "json",
       success: function(data) {
@@ -2936,7 +2936,7 @@ jQuery(document).ready(function($) {
         $('.loading-bar').slideDown('fast');
         $('.limp-action').attr('disabled', true).find('span').text('Loading...');
         $.ajax({
-          url: '/asset_names/' + id + '/remove',
+          url: baseuri + '/asset_names/' + id + '/remove',
           type: 'delete',
           data: {
             csrf: csrf

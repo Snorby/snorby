@@ -18,6 +18,7 @@
 				var sev<%= sev.sig_id %>_bg_color = '<%= sev.bg_color %>';
       <% end %>
 
+      var baseuri = "<%= Snorby::CONFIG[:baseuri] %>"; 
       var current_user = <%= @current_user.to_json(
         :only => [
           :email,

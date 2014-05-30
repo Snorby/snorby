@@ -243,14 +243,14 @@ module ApplicationHelper
                 height="14" 
                 class="clippy" 
                 id="clippy">
-        <param name="movie" value="/flash/clippy.swf">
+        <param name="movie" value="#{Snorby::CONFIG[:baseuri]}/flash/clippy.swf">
         <param name="allowScriptAccess" value="always">
         <param name="quality" value="high">
         <param name="scale" value="noscale">
         <param name="FlashVars" value="id=clippy_#{id}&amp;copied=&amp;copyto=">
         <param name="bgcolor" value="#{bgcolor}">
         <param name="wmode" value="opaque">
-        <embed src="/flash/clippy.swf" 
+        <embed src="#{Snorby::CONFIG[:baseuri]}/flash/clippy.swf" 
                width="14" 
                height="14" 
                name="clippy" 
