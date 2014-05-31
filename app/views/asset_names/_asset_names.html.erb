@@ -25,5 +25,5 @@
 
   </table>
 
-  <%= pager(@asset_names, '/asset_names') %>
+  <%= pager(@asset_names, Snorby::CONFIG[:baseuri] + '/asset_names') %>
 </div>

@@ -52,7 +52,7 @@ class Setting
     new_file_path = "#{Rails.root.to_s}/public/system/#{new_file_name}"
 
     FileUtils.mv(file.tempfile.path, new_file_path)
-    self.set(:logo, "/system/#{new_file_name}")
+    self.set(:logo, "#{Snorby::CONFIG[:baseuri]}/system/#{new_file_name}")
   end
 
   def self.method_missing(method, *args)

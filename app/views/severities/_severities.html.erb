@@ -21,6 +21,6 @@
 	</table>
 
 
-	<%= pager(@severities, '/severities') %>
+	<%= pager(@severities, Snorby::CONFIG[:baseuri] + '/severities') %>
 	
 </div>

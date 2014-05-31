@@ -9,7 +9,7 @@
 		
 		<meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="description" content="Snorby - All About Simplicity" />
-    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="icon" href="<%= Snorby::CONFIG[:baseuri] %>/favicon.png" type="image/png" />
 
 		<% @severities ||= Severity.all %>
 
@@ -107,7 +107,7 @@
       <% if Setting.event_notifications? %>
         monitor_events(false);
       <% else %>
-        if (window.location.pathname === "/events") {
+        if (window.location.pathname === baseuri + "/events") {
           monitor_events(true);
         };
       <% end %>

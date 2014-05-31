@@ -10,7 +10,7 @@
 	<% else %>
     
     <%= render @notes %>
-		<%= pager(@notes, "/events/show/#{@event.sid}/#{@event.cid}", false) %>
+		<%= pager(@notes, "#{Snorby::CONFIG[:baseuri]}/events/show/#{@event.sid}/#{@event.cid}", false) %>
 		
 	<% end %>
 	

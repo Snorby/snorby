@@ -19,7 +19,7 @@
 		</tbody>
 	</table>
 
-	<%= pager(@lookups, '/lookups') %>
+	<%= pager(@lookups, Snorby::CONFIG[:baseuri] + '/lookups') %>
 	
 </div>
 

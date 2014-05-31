@@ -2,7 +2,7 @@
 
   <div id='snorbybox-content' class=''>
   
-  <%= form_tag '/events/mass_action', :id => 'mass-action-form' do %>
+  <%= form_tag Snorby::CONFIG[:baseuri] + '/events/mass_action', :id => 'mass-action-form' do %>
 
       <div id="snorbybox-form-holder">
 

@@ -23,7 +23,7 @@
 		</tbody>
 	</table>
 
-	<%= pager(@searches, '/saved/searches') %>
+	<%= pager(@searches, Snorby::CONFIG[:baseuri] + '/saved/searches') %>
 <% end %>
 	
 </div>
@@ -36,7 +36,7 @@
       var set_public = $(this).is(':checked');
       var id = $(this).parents('tr').data('id');
 
-      $.post('/saved/searches/' + id, { id: id, public: set_public });
+      $.post(baseuri + '/saved/searches/' + id, { id: id, public: set_public });
     });
 
     $('#searches').on('click', 'td.click', function(e) {
@@ -49,7 +49,7 @@
 
       flash_message.push({type: 'success', message: "Loading Search - Please Wait..."});flash();
 
-      $.getJSON('/saved/searches/' + id, function(data) {
+      $.getJSON(baseuri + '/saved/searches/' + id, function(data) {
         var search = data.search.search;
 
         var search_id = null;
@@ -65,7 +65,7 @@
           title: data.title,
           authenticity_token: csrf
         };
-        post_to_url('/results', params);
+        post_to_url(baseuri + '/results', params);
       });
 
       return false;

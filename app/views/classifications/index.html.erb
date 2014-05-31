@@ -21,6 +21,6 @@
 		</tbody>
 	</table>
 
-	<%= pager(@classifications, '/classifications') %>
+	<%= pager(@classifications, Snorby::CONFIG[:baseuri] + '/classifications') %>
 	
 </div>
