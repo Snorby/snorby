@@ -48,7 +48,6 @@ class ApplicationController < ActionController::Base
       else
 
         current_uri = request.env['PATH_INFO']
-        rails_root = request.env['RAILS_ROOT']
 	baseuri = Snorby::CONFIG[:baseuri]
         routes = ["", "/", baseuri + "/users/login"]
 	

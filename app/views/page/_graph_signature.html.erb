@@ -29,7 +29,7 @@
               events: {
                 click: function(event) {
                   HCloader(event.target.nearestViewportElement.parentElement.id);
-                  document.location = '/results?title='+event.point.name+'&match_all=true&search%5B0%5D%5Bcolumn%5D=signature_name&search'+
+                  document.location = baseuri + '/results?title='+event.point.name+'&match_all=true&search%5B0%5D%5Bcolumn%5D=signature_name&search'+
                     '%5B0%5D%5Benabled%5D=true&search%5B0%5D%5Boperator%'+
                     '5D=contains&search%5B0%5D%5Bvalue%5D='+event.point.name+'&search%'+
                     '5B1%5D%5Bcolumn%5D=start_time&search%5B1%5D%5Benabl'+

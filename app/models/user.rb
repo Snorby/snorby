@@ -112,7 +112,7 @@ class User
   end
 
   def avatar
-    default_url = File.join(::User.snorby_url, "/images/default_avatar.png")
+    default_url = File.join(::User.snorby_url, "#{Snorby::CONFIG[:baseuri]}/images/default_avatar.png")
     return default_url unless self.gravatar
 
     email_address = self.email.downcase

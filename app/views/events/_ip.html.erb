@@ -21,7 +21,7 @@
 			<tr>
         
         <td style='width:150px;' class='first'>
-          <a href='/events/lookup?address=<%= @event.ip.ip_src %>' 
+          <a href='<%= Snorby::CONFIG[:baseuri] %>/events/lookup?address=<%= @event.ip.ip_src %>' 
             data-address='<%= @event.ip.ip_src %>' class='ip-button has-event-menu' onclick="return false;">
             
             <%= @event.ip.ip_src %>
@@ -46,7 +46,7 @@
 
             <% end %>
 
-            <dd><%= link_to 'Basic Source Lookup', "/events/lookup?address=#{@event.ip.ip_src}", :class => 'snorbybox' %></dd>
+            <dd><%= link_to 'Basic Source Lookup', "#{Snorby::CONFIG[:baseuri]}/events/lookup?address=#{@event.ip.ip_src}", :class => 'snorbybox' %></dd>
 
             <% @lookups.each do |lookup| %>
               <dd>
@@ -62,7 +62,7 @@
         </td>
 
         <td style='width:150px;'>
-          <a href='/events/lookup?address=<%= @event.ip.ip_dst %>' 
+          <a href='<%= Snorby::CONFIG[:baseuri] %>/events/lookup?address=<%= @event.ip.ip_dst %>' 
             data-address='<%= @event.ip.ip_dst %>' class='ip-button has-event-menu'>
             
             <%= @event.ip.ip_dst %>
@@ -85,7 +85,7 @@
             </dd>
             <% end %>
 
-            <dd><%= link_to 'Basic Destination Lookup', "/events/lookup?address=#{@event.ip.ip_dst}", :class => 'snorbybox' %></dd>
+            <dd><%= link_to 'Basic Destination Lookup', "#{Snorby::CONFIG[:baseuri]}/events/lookup?address=#{@event.ip.ip_dst}", :class => 'snorbybox' %></dd>
             
             <% @lookups.each do |lookup| %>
               <dd>

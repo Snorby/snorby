@@ -2,7 +2,7 @@
 
 	<div id='snorbybox-content' class=''>
 		
-		<%= form_tag '/request_packet_capture', :class => 'request_packet_capture' do %>
+		<%= form_tag Snorby::CONFIG[:baseuri] + '/request_packet_capture', :class => 'request_packet_capture' do %>
 		
 		<div class='grid_5'>
 			

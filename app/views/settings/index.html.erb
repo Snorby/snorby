@@ -6,7 +6,7 @@
 
 <div id='general-settings', class='grid_12 page boxit'>
 	
-	<%= form_tag '/settings', :multipart => true, :class => 'basic-form validate' do %>
+	<%= form_tag Snorby::CONFIG[:baseuri] + '/settings', :multipart => true, :class => 'basic-form validate' do %>
 	
 	
 	<div id='form-holder'>

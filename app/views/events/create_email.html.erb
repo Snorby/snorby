@@ -4,7 +4,7 @@
 
 		<div id='snorbybox-content' class=''>
 
-			<%= form_tag '/email', :class => 'email-event-information validate' do %>
+			<%= form_tag Snorby::CONFIG[:baseuri] + '/email', :class => 'email-event-information validate' do %>
 
 			<div class='grid_17' style='disply:block;'>
 

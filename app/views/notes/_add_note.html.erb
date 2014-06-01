@@ -2,7 +2,7 @@
 
 	<div class='note-avatar-holder'>
     <img src="<%= get_gravatar_uri(@user.email) %>" height="32px" width="32px"
-			onerror="this.src='/images/default_avatar.png'">
+			onerror="this.src=baseuri+'/images/default_avatar.png'">
 	</div>
 
 	<div class='username'>

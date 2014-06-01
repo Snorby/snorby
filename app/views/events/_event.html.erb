@@ -24,7 +24,7 @@
 
         <% geoip_src = event.ip.geoip[:source] %>
 
-        <div class='click country_flag add_tipsy_html' original-title='<img class="flag" src="/images/flags/<%= geoip_src[:country_code2].downcase %>.png">
+        <div class='click country_flag add_tipsy_html' original-title='<img class="flag" src="<%= Snorby::CONFIG[:baseuri] %>/images/flags/<%= geoip_src[:country_code2].downcase %>.png">
           <%= geoip_src[:country_name] %>'><%= geoip_src[:country_code2] %>
         </div>
 
@@ -45,7 +45,7 @@
       <% if geoip? && event.ip.present? %>
 
         <% geoip_dest = event.ip.geoip[:destination] %>
-        <div class='click country_flag add_tipsy_html' original-title='<img class="flag" src="/images/flags/<%= geoip_dest[:country_code2].downcase  %>.png"> <%= geoip_dest[:country_name] %>'><%= geoip_dest[:country_code2] %></div>
+        <div class='click country_flag add_tipsy_html' original-title='<img class="flag" src="<%= Snorby::CONFIG[:baseuri] %>/images/flags/<%= geoip_dest[:country_code2].downcase  %>.png"> <%= geoip_dest[:country_name] %>'><%= geoip_dest[:country_code2] %></div>
 
       <% end %>
       <% if event.ip.present? && event.ip.asset_names[:destination] %>
