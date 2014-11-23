@@ -48,7 +48,7 @@ Pass: snorby
 	
 * Install wkhtmltopdf
 
-	`pdfkit --install-wkhtmltopdf # If this fails - visit http://code.google.com/p/wkhtmltopdf/ for more information`
+	`pdfkit --install-wkhtmltopdf # If this fails - visit http://wkhtmltopdf.org/ for more information`
 
 * Run The Snorby Setup
 
