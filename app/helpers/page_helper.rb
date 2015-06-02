@@ -5,7 +5,7 @@ module PageHelper
     title = case type.to_sym
     when :last_24
       %{
-        #{@now.strftime('%D %H:%M')}
+        #{@now.yesterday.strftime('%D %H:%M')}
         -
         #{@now.strftime('%D %H:%M')}
       }
