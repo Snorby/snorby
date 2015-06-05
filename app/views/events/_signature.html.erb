@@ -24,7 +24,7 @@
         
         <td class='search-by-signature add_tipsy'
           title="View all '<%= @event.signature.name%>' events."
-          data-url=baseuri + "/results?title=<%= @event.signature.name %>&search%5B0%5D%5Bcolumn%5D=signature&search%5B0%5D%5Benabled%5D=true&search%5B0%5D%5Boperator%5D=is&search%5B0%5D%5Bvalue%5D=<%= @event.signature.sig_id %>">
+          data-url="/results?title=<%= @event.signature.name %>&search%5B0%5D%5Bcolumn%5D=signature&search%5B0%5D%5Benabled%5D=true&search%5B0%5D%5Boperator%5D=is&search%5B0%5D%5Bvalue%5D=<%= @event.signature.sig_id %>">
           <%= css_chart(@event.signature.event_percentage(false, total_event_count)) %>
         </td>
 
