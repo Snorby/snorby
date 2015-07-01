@@ -2,9 +2,9 @@
 	
 	<% @classifications.each do |cls| %>
 		<% if cls.locked && cls.hotkey %>
-			<%= drop_down_item "#{cls.name}<span class='shortcut'>#{cls.shortcut}</span>", '#', nil, { :class => 'classification', :"data-classification-id" => cls.id.to_i } %>
+			<%= drop_down_item "#{sanitize cls.name}<span class='shortcut'>#{cls.shortcut}</span>", '#', nil, { :class => 'classification', :"data-classification-id" => cls.id.to_i } %>
 		<% else %>
-			<%= drop_down_item "#{cls.name}", '#', nil, { :class => 'classification', :"data-classification-id" => cls.id.to_i } %>
+			<%= drop_down_item "#{sanitize cls.name}", '#', nil, { :class => 'classification', :"data-classification-id" => cls.id.to_i } %>
 		<% end %>
 	<% end %>
 	
