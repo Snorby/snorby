@@ -1,6 +1,5 @@
 # Snorby
 
-* [snorby.org](http://www.snorby.org)
 * [github.com/Snorby/snorby](http://github.com/Snorby/snorby/)
 * [github.com/Snorby/snorby/issues](http://github.com/Snorby/snorby/issues)
 * [github.com/Snorby/snorby/wiki](http://github.com/Snorby/snorby/wiki)
@@ -9,16 +8,6 @@
 ## Description
 
 Snorby is a ruby on rails web application for network security monitoring that interfaces with current popular intrusion detection systems (Snort, Suricata and Sagan). The basic fundamental concepts behind Snorby are **simplicity**, organization and power. The project goal is to create a free, open source and highly competitive application for network monitoring for both private and enterprise use.
-
-## Demo
-
-URL: [http://demo.snorby.org](http://demo.snorby.org)
-
-User: demo@snorby.org
-
-Pass: snorby
-
-**NOTE** For the full packet capture HTTP basic AUTH use the same credentials.
 
 ## Requirements
 
@@ -69,7 +58,7 @@ Pass: snorby
 	
 * Default User Credentials
 
-	* E-mail: **snorby@snorby.org**
+	* E-mail: **snorby@example.com**
 	* Password: **snorby**
 	
 * NOTE - If you do not run Snorby with passenger (http://www.modrails.com) people remember to start rails in production mode.

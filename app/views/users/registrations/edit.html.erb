@@ -17,7 +17,7 @@
   			  <%= f.text_field :name, :placeholder => 'Full Name', :class => 'required' %></p>
         <% end %>
 
-			  <p><%= f.label :email %> <em>(example: snorby@snorby.org)</em><br />
+			  <p><%= f.label :email %> <em>(example: snorby@example.com)</em><br />
 			  <%= f.text_field :email, :placeholder => 'E-mail Address', :class => 'required email' %></p>
 
         <% if Snorby::CONFIG[:authentication_mode] == "database"  %>
