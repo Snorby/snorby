@@ -6,7 +6,7 @@ class EventMailer < ActionMailer::Base
     @emails = emails.split(',')
     @note = note
 
-    @from = (Setting.email? ? Setting.find(:email) : "snorby@snorby.org")
+    @from = (Setting.email? ? Setting.find(:email) : "snorby@example.com")
     
     mail(:to => @emails, :from => @from, :subject => "[Snorby Event] #{subject}")
   end

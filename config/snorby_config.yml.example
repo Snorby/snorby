@@ -9,10 +9,10 @@ production:
   # in case you want to run snorby under a suburi/suburl under eg. passenger:
   baseuri: ''
   # baseuri: '/snorby'
-  domain: 'demo.snorby.org'
+  domain: 'demo.example.com'
   wkhtmltopdf: /usr/local/bin/wkhtmltopdf
   ssl: false
-  mailer_sender: 'snorby@snorby.org'
+  mailer_sender: 'snorby@example.com'
   geoip_uri: "http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz"
   rules:
     - ""
@@ -32,7 +32,7 @@ development:
   domain: localhost:3000
   wkhtmltopdf: /Users/mephux/.rvm/gems/ruby-1.9.2-p0/bin/wkhtmltopdf
   ssl: false
-  mailer_sender: 'snorby@snorby.org'
+  mailer_sender: 'snorby@example.com'
   geoip_uri: "http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz"
   rules: 
     - "/Users/mephux/.snort/rules"
@@ -53,6 +53,6 @@ test:
   baseuri: ''
   domain: localhost:3000
   wkhtmltopdf: /usr/local/bin/wkhtmltopdf
-  mailer_sender: 'snorby@snorby.org'
+  mailer_sender: 'snorby@example.com'
   geoip_uri: "http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz"
   authentication_mode: database

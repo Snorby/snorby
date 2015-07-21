@@ -86,24 +86,6 @@
     <%= render :partial => 'layouts/notify' %>
 
     <script type="text/javascript" charset="utf-8">
-      <% if Setting.update_notifications? %>
-        if (!$.cookie('snorby-ignore-update')) {
-          $.ajax({
-            url: 'https://www.snorby.org/version?current_version=<%= Snorby::VERSION%>',
-            dataType: "jsonp",
-            global: false,
-            crossDomain: true,
-            success: function(data) {
-              if (data && (typeof data === "object")) {
-                if (data.version !== "<%= Snorby::VERSION %>") {
-                  $('#header-top').append(Snorby.templates.update_notifications(data));
-                };
-              };
-            }
-          });
-        };
-      <% end %>
-
       <% if Setting.event_notifications? %>
         monitor_events(false);
       <% else %>

@@ -9,7 +9,7 @@ class NoteMailer < ActionMailer::Base
       @emails << "#{user.name} <#{user.email}>" if user.accepts_note_notifications?(@event)
     end
 
-    @from = (Setting.email? ? Setting.find(:email) : "snorby@snorby.org")
+    @from = (Setting.email? ? Setting.find(:email) : "snorby@example.com")
 
     mail(:to => @emails, :from => @from, :subject => "[Snorby] New Event Note Added")
   end
