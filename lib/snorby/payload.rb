@@ -54,9 +54,9 @@ module Snorby
 
           if @new_lines
             string.gsub!(/[\x0a]/, ".")
-            string.gsub!(/[\040\177-\377]/, '.')
+            string.gsub!(Regexp.new("[\040\177-\377]"), '.')
           else
-            string.gsub!(/[\000-\040\177-\377]/, ".")
+            string.gsub!(Regexp.new("[\000-\040\177-\377]"), ".")
           end
 
           len = case @format

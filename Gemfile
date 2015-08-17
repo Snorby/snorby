@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-RAILS_VERSION = '3.1.12'
+RAILS_VERSION = '3.2.22'
 RSPEC_VERSION = '~> 2.0.0'
 DATAMAPPER    = 'https://github.com/datamapper'
 DM_VERSION    = '~> 1.2.0'
@@ -12,7 +12,7 @@ gem 'rails',                       RAILS_VERSION
 gem 'jquery-rails'
 gem 'bundler',                     '>= 1.0.0'
 gem 'env'
-gem 'json', '~> 1.7'
+gem 'json', '~> 1.8.3'
 
 # Jruby
 gem 'jruby-openssl',               :platforms => :jruby
@@ -56,7 +56,7 @@ gem 'cancan',                      '~> 1.6'
 gem 'devise',                      '~> 1.4'
 gem 'dm-devise',                   '~> 1.5'
 gem 'rubycas-client'
-gem 'devise_cas_authenticatable',  :git => 'https://github.com/Snorby/snorby_cas_authenticatable.git'
+gem 'devise_cas_authenticatable'
 gem "mail",                        '~> 2.3'
 gem "RedCloth",                    "~> 4.2.9", :require => 'redcloth'
 gem 'chronic',                     '~> 0.3.0'
@@ -84,13 +84,13 @@ gem 'dm-zone-types',               '~> 0.3'
 gem 'timezone_local',              '~> 0.1.5'
 
 group(:development) do
-	gem "letter_opener"
+  gem "letter_opener"
   gem 'thin'
 end
 
 group(:test) do
   gem 'capybara'
-
+  gem 'test-unit'	
   gem 'rspec',                	  RSPEC_VERSION
   gem 'rspec-core',               RSPEC_VERSION, :require => 'rspec/core'
   gem 'rspec-expectations',       RSPEC_VERSION, :require => 'rspec/expectations'
