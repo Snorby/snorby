@@ -19,9 +19,11 @@ class Event
 
   storage_names[:default] = "event"
 
-  property :sid, Integer, :key => true, :index => true, :min => 0
+  property :id, Serial
 
-  property :cid, Integer, :key => true, :index => true, :min => 0
+  property :sid, Integer, :key => true, :index => [ true, :index_timestamp_cid_sid ], :min => 0
+
+  property :cid, Integer, :key => true, :index => [ true, :index_timestamp_cid_sid ], :min => 0
 
   property :sig_id, Integer, :field => 'signature', :index => true, :min => 0
 
@@ -46,7 +48,7 @@ class Event
 
   belongs_to :classification
 
-  property :timestamp, ZonedTime
+  property :timestamp, ZonedTime, :index => :index_timestamp_cid_sid
 
   has n, :favorites, :parent_key => [ :sid, :cid ], 
     :child_key => [ :sid, :cid ], :constraint => :destroy!
