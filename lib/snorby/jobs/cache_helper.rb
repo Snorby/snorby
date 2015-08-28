@@ -85,7 +85,7 @@ module Snorby
 
         sql_severity.collect do |x| 
           key = x['sig_priority'].to_i
-          value = x['count(*)'].to_i
+          value = x['count'].to_i
 
           metrics[key] = value
         end
@@ -98,7 +98,7 @@ module Snorby
         signature_metrics = {}
 
         sql_signature.collect do |x|
-          signature_metrics[x['sig_name']] = x['count(*)'].to_i
+          signature_metrics[x['sig_name']] = x['c'].to_i
         end
 
         signature_metrics
@@ -109,8 +109,8 @@ module Snorby
         src_ips = {}
 
         sql_source_ip.collect do |x|
-          key = x["inet_ntoa(ip_src)"].to_s
-          value = x["count(*)"].to_i
+          key = x["inet_ntoa"].to_s
+          value = x["count"].to_i
 
           src_ips[key] = value
         end
@@ -123,8 +123,8 @@ module Snorby
         dst_ips = {}
 
         sql_destination_ip.collect do |x|
-          key = x["inet_ntoa(ip_dst)"].to_s
-          value = x["count(*)"].to_i
+          key = x["inet_ntoa"].to_s
+          value = x["count"].to_i
 
           dst_ips[key] = value
         end
@@ -170,7 +170,7 @@ module Snorby
         sql = [
           "delete from agent_asset_names where sensor_sid = #{sensor_id.to_i};",
           "delete from caches where sid = #{sensor_id.to_i};",
-          "delete from `data` where sid = #{sensor_id.to_i};",
+          "delete from data where sid = #{sensor_id.to_i};",
           "delete from favorites where sid = #{sensor_id.to_i};",
           "delete from icmphdr where sid = #{sensor_id.to_i};",
           "delete from iphdr where sid = #{sensor_id.to_i};",
@@ -178,7 +178,7 @@ module Snorby
           "delete from opt where sid = #{sensor_id.to_i};",
           "delete from tcphdr where sid = #{sensor_id.to_i};",
           "delete from udphdr where sid = #{sensor_id.to_i};",
-          "delete from `event` where sid = #{sensor_id.to_i};",
+          "delete from event where sid = #{sensor_id.to_i};",
           "delete from sensor where sid = #{sensor_id.to_i};"
         ]
 
@@ -189,8 +189,8 @@ module Snorby
 
       def update_classification_count
         sql = %{
-          update classifications set events_count = (select count(*) 
-          from event where event.`classification_id` = classifications.id); 
+          update classifications set events_count = (select count(*) as count 
+          from event where event.classification_id = classifications.id); 
         }
 
         db_execute(sql)
@@ -198,7 +198,7 @@ module Snorby
 
       def update_signature_count
         sql = %{
-          update signature set events_count = (select count(*) 
+          update signature set events_count = (select count(*) as count 
           from event where event.signature = signature.sig_id);
         }
 
@@ -207,10 +207,10 @@ module Snorby
 
 
       def validate_cache_indexes
-        puts "[~] Building `aggregated_events` database view"
-        db_execute("create or replace view `aggregated_events` AS select `iphdr`.`ip_src` AS `ip_src`, `iphdr`.`ip_dst` AS `ip_dst`, `event`.`signature` AS `signature`,max(`event`.`id`) AS `event_id`,count(0) AS `number_of_events` from (`event` join `iphdr` on(((`event`.`sid` = `iphdr`.`sid`) and (`event`.`cid` = `iphdr`.`cid`)))) where isnull(`event`.`classification_id`) group by `iphdr`.`ip_src`,`iphdr`.`ip_dst`,`event`.`signature`;")
+        puts "[~] Building aggregated_events database view"
+        db_execute("create or replace view aggregated_events AS select iphdr.ip_src AS ip_src, iphdr.ip_dst AS ip_dst, event.signature AS signature,max(event.id) AS event_id,count(0) AS number_of_events from (event join iphdr on(((event.sid = iphdr.sid) and (event.cid = iphdr.cid)))) where event.classification_id IS NULL group by iphdr.ip_src,iphdr.ip_dst,event.signature;")
 
-        puts "[~] Building `events_with_join` database view"
+        puts "[~] Building events_with_join database view"
         db_execute("create or replace view events_with_join as select event.*, iphdr.ip_src, iphdr.ip_dst, signature.sig_priority, signature.sig_name from event inner join iphdr on event.sid = iphdr.sid and event.cid = iphdr.cid inner join signature on event.signature = signature.sig_id;")
 
       end
@@ -218,7 +218,7 @@ module Snorby
 
       def sql_min_max
         sql = %{
-          select min(cid), max(cid) from event USE INDEX (index_timestamp_cid_sid)
+          select min(cid), max(cid) from event 
           where 
           timestamp >= '#{@stime.strftime("%Y-%m-%d %H:%M:%S")}' and timestamp < '#{@etime.strftime("%Y-%m-%d %H:%M:%S")}' 
           and sid = #{@sensor.sid.to_i};
@@ -243,14 +243,12 @@ module Snorby
 
       def sql_signature
         sql = %{
-          select signature, sig_name, c as `count(*)` from
-          (select signature,  count(*) as c from event  
+          select signature, sig_name, count(*) as count from event  
           join signature  on event.signature = signature.sig_id  
           where timestamp >= '#{to_db_time(@stime)}' 
           and timestamp < '#{to_db_time(@etime)}' 
           and sid = #{@sensor.sid.to_i}
-          group by signature) a 
-          inner join signature b on a.signature = b.sig_id
+          group by signature, sig_name 
         }
 
         db_select(sql)
@@ -258,12 +256,12 @@ module Snorby
       
       def sql_source_ip
         sql = %{
-          select INET_NTOA(ip_src), count(*) from event USE INDEX (index_timestamp_cid_sid) 
+          select inet_ntoa(ip_src), count(*) as count from event 
           inner join iphdr on event.cid  = iphdr.cid 
           and event.sid = iphdr.sid where timestamp >= '#{to_db_time(@stime)}' 
           and timestamp < '#{to_db_time(@etime)}'
           and event.sid = #{@sensor.sid.to_i}
-          group by INET_NTOA(ip_src); 
+          group by inet_ntoa(ip_src); 
         }
 
         db_select(sql)
@@ -271,12 +269,12 @@ module Snorby
 
       def sql_destination_ip
         sql = %{
-          select INET_NTOA(ip_dst), count(*) from event USE INDEX (index_timestamp_cid_sid)
+          select inet_ntoa(ip_dst), count(*) as count from event 
           inner join iphdr on event.cid  = iphdr.cid 
           and event.sid = iphdr.sid where timestamp >= '#{to_db_time(@stime)}' 
           and timestamp < '#{to_db_time(@etime)}'
           and event.sid = #{@sensor.sid.to_i}
-          group by INET_NTOA(ip_dst); 
+          group by inet_ntoa(ip_dst); 
         }
 
         db_select(sql)
@@ -284,7 +282,7 @@ module Snorby
 
       def sql_severity
         sql = %{
-          select sig_priority, count(*) from event USE INDEX (index_timestamp_cid_sid) 
+          select sig_priority, count(*) as count from event 
           inner join signature on event.signature = signature.sig_id 
           where timestamp >= '#{to_db_time(@stime)}' 
           and timestamp < '#{to_db_time(@etime)}'
@@ -297,7 +295,7 @@ module Snorby
 
       def sql_sensor
         sql = %{
-          select `sid`, count(*) from event   
+          select sid, count(*) as count from event   
           where timestamp >= '#{to_db_time(@stime)}' 
           and timestamp < '#{to_db_time(@etime)}'
           and event.sid = #{@sensor.sid.to_i}
@@ -309,7 +307,7 @@ module Snorby
 
       def sql_tcp
         sql = %{
-          select count(*) from event  USE INDEX (index_timestamp_cid_sid)
+          select count(*) as count from event  
           inner join tcphdr on event.cid  = tcphdr.cid 
           and event.sid = tcphdr.sid
           where timestamp >= '#{to_db_time(@stime)}' 
@@ -321,7 +319,7 @@ module Snorby
 
       def sql_udp
         sql = %{
-          select count(*) from event USE INDEX (index_timestamp_cid_sid)
+          select count(*) from event 
           inner join udphdr on event.cid  = udphdr.cid 
           and event.sid = udphdr.sid
           where timestamp >= '#{to_db_time(@stime)}' 
@@ -333,7 +331,7 @@ module Snorby
 
       def sql_icmp
         sql = %{
-          select count(*) from event USE INDEX (index_timestamp_cid_sid) 
+          select count(*) from event  
           inner join icmphdr on 
           event.cid  = icmphdr.cid and event.sid = icmphdr.sid 
           where timestamp >= '#{to_db_time(@stime)}' 
@@ -346,7 +344,7 @@ module Snorby
       def latest_five_distinct_signatures
         sql = %{
           select signature from (
-            select signature, MAX(timestamp) as timestamp from event group by signature order by timestamp desc limit 5
+            select signature, MAX(timestamp) as timestamp from event group by signature,timestamp order by timestamp desc limit 5
           ) as signature;
         }
 

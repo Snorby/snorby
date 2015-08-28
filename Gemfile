@@ -7,7 +7,6 @@ DM_VERSION    = '~> 1.2.0'
 
 gem 'rake', '0.9.2'
 gem 'request_store', '~> 1.0.5'
-
 gem 'rails',                       RAILS_VERSION
 gem 'jquery-rails'
 gem 'bundler',                     '>= 1.0.0'
@@ -32,7 +31,7 @@ gem 'dm-rails',                    DM_VERSION
 gem 'dm-do-adapter',               DM_VERSION
 gem 'dm-active_model',             DM_VERSION
 gem 'dm-mysql-adapter',            DM_VERSION
-
+gem 'dm-postgres-adapter',         DM_VERSION
 gem 'dm-pager',                    '~> 1.1.0'
 gem "dm-ar-finders",               DM_VERSION
 gem 'dm-migrations',               DM_VERSION

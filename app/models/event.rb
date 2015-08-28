@@ -19,11 +19,10 @@ class Event
 
   storage_names[:default] = "event"
 
-  property :id, Serial
 
-  property :sid, Integer, :key => true, :index => [ true, :index_timestamp_cid_sid ], :min => 0
+  property :sid, Integer, :key => true, :index => [ :sid, :index_timestamp_cid_sid ], :min => 0
 
-  property :cid, Integer, :key => true, :index => [ true, :index_timestamp_cid_sid ], :min => 0
+  property :cid, Integer, :key => true, :index => [ :cid, :index_timestamp_cid_sid ], :min => 0
 
   property :sig_id, Integer, :field => 'signature', :index => true, :min => 0
 
@@ -35,6 +34,7 @@ class Event
   
   property :notes_count, Integer, :index => true, :default => 0, :min => 0
  
+#  property :id, Serial
   # 1 = nids
   # 2 = hids
   # others TBD
