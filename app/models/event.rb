@@ -35,10 +35,9 @@ class Event
   property :users_count, Integer, :index => true, :default => 0, :min => 0
 
   property :user_id, Integer, :index => true, :required => false, :min => 0
-  
+
   property :notes_count, Integer, :index => true, :default => 0, :min => 0
- 
-#  property :id, Serial
+
   # 1 = nids
   # 2 = hids
   # others TBD
