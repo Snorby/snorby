@@ -24,6 +24,10 @@ class Event
 
   property :cid, Integer, :key => true, :index => [ :cid, :index_timestamp_cid_sid ], :min => 0
 
+  property :sid, Integer, :key => true, :index => [ :sid_index, :index_timestamp_cid_sid ], :min => 0
+
+  property :cid, Integer, :key => true, :index => [ :cid_index, :index_timestamp_cid_sid ], :min => 0
+
   property :sig_id, Integer, :field => 'signature', :index => true, :min => 0
 
   property :classification_id, Integer, :index => true, :required => false, :min => 0
