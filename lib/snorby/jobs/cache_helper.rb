@@ -315,12 +315,12 @@ module Snorby
 
       def sql_source_ip
         sql = %{
-          select inet_ntoa(ip_src), count(*) as count from event
+          select inet_ntoa(ip_src) as inet_ntoa, count(*) as count from event
           inner join iphdr on event.cid  = iphdr.cid
           and event.sid = iphdr.sid where timestamp >= '#{to_db_time(@stime)}'
           and timestamp < '#{to_db_time(@etime)}'
           and event.sid = #{@sensor.sid.to_i}
-          group by inet_ntoa(ip_src);
+          group by inet_ntoa;
         }
 
         db_select(sql)
@@ -328,12 +328,12 @@ module Snorby
 
       def sql_destination_ip
         sql = %{
-          select inet_ntoa(ip_dst), count(*) as count from event
+          select inet_ntoa(ip_dst) as inet_ntoa, count(*) as count from event
           inner join iphdr on event.cid  = iphdr.cid
           and event.sid = iphdr.sid where timestamp >= '#{to_db_time(@stime)}'
           and timestamp < '#{to_db_time(@etime)}'
           and event.sid = #{@sensor.sid.to_i}
-          group by inet_ntoa(ip_dst);
+          group by inet_ntoa;
         }
 
         db_select(sql)
