@@ -98,7 +98,7 @@ module Snorby
         signature_metrics = {}
 
         sql_signature.collect do |x|
-          signature_metrics[x['sig_name']] = x['c'].to_i
+          signature_metrics[x['sig_name']] = x['count'].to_i
         end
 
         signature_metrics
@@ -205,72 +205,64 @@ module Snorby
         db_execute(sql)
       end
 
+       def has_event_id?
+        adapter_type = db_adapter().class.name.split("::").last()
+        if adapter_type == "PostgresAdapter"
+          sql = %{
+            SELECT column_name FROM information_schema.columns WHERE table_name ='event' AND column_name = 'id';
+          }
+        else
+          sql = %{
+            SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '#{db_options["database"]}' AND TABLE_NAME = 'event' AND COLUMN_NAME = 'id';
+          }
+        end
+
+        !db_select(sql).empty?
+      end
 
       def validate_cache_indexes
+
+
+        unless has_event_id?
+          puts "[~] Adding `id` to the event table"
+
+          adapter_type = db_adapter().class.name.split("::").last()
+          if adapter_type == "PostgresAdapter"
+            db_execute("alter table event add column id bigserial;")
+            db_execute("create index index_event_id on event (id);")
+          else
+            db_execute("alter table event add column id int;")
+            db_execute("create index index_event_id on event (id);")
+            db_execute("alter table event change column id id int not null auto_increment;")
+          end
+        end
+
+        #check if the database is PostgreSQL and alter iphdr.ip_src, iphdr.ip_dst, tcphdr.seq, tcphdr.ack, icmphdr.seq to int8
+        #Add INET_ATON & INET_NTOA functions to PostgreSQL
+        #credit to https://github.com/challengemylimit
+        adapter_type = db_adapter().class.name.split("::").last()
+        if adapter_type == "PostgresAdapter"
+          puts "[~] fixing database types for ip addresses"
+          db_execute("DROP INDEX index_iphdr_ip_src;");
+          db_execute("DROP INDEX index_iphdr_ip_dst;");
+          db_execute("ALTER TABLE iphdr ALTER COLUMN ip_src SET DATA TYPE int8;");
+          db_execute("ALTER TABLE iphdr ALTER COLUMN ip_dst SET DATA TYPE int8;");
+          db_execute("create index index_iphdr_ip_src on iphdr (ip_src);");
+          db_execute("create index index_iphdr_ip_dst on iphdr (ip_dst);");
+
+          db_execute("ALTER TABLE tcphdr ALTER COLUMN tcp_ack SET DATA TYPE int8;");
+          db_execute("ALTER TABLE tcphdr ALTER COLUMN tcp_seq SET DATA TYPE int8;");
+          db_execute("ALTER TABLE icmphdr ALTER COLUMN icmp_seq SET DATA TYPE int8;");
+
+          db_execute("CREATE OR REPLACE FUNCTION inet_aton(inet) RETURNS bigint AS 'select inetmi($1,''0.0.0.0'');' language sql immutable;");
+          db_execute("CREATE OR REPLACE FUNCTION inet_ntoa(bigint) RETURNS inet AS 'select ''0.0.0.0''::inet+$1;' language sql immutable;");
+        end
+
         puts "[~] Building aggregated_events database view"
         db_execute("create or replace view aggregated_events AS select iphdr.ip_src AS ip_src, iphdr.ip_dst AS ip_dst, event.signature AS signature,max(event.id) AS event_id,count(0) AS number_of_events from (event join iphdr on(((event.sid = iphdr.sid) and (event.cid = iphdr.cid)))) where event.classification_id IS NULL group by iphdr.ip_src,iphdr.ip_dst,event.signature;")
 
         puts "[~] Building events_with_join database view"
         db_execute("create or replace view events_with_join as select event.*, iphdr.ip_src, iphdr.ip_dst, signature.sig_priority, signature.sig_name from event inner join iphdr on event.sid = iphdr.sid and event.cid = iphdr.cid inner join signature on event.signature = signature.sig_id;")
-
-        adapter_type = db_adapter().class.name.split("::").last()
-        if adapter_type == "PostgresAdapter"
-          # work based off https://github.com/intgr/mysqlcompat
-          puts "[~] Building inet_aton and inet_ntoa functions for postgresql"
-          db_execute("CREATE OR REPLACE FUNCTION inet_aton(text)
-                      RETURNS bigint AS $$
-                        DECLARE
-                            a text[];
-                            b text[4];
-                            up int;
-                            family int;
-                            i int;
-                        BEGIN
-                            IF position(':' in $1) > 0 THEN
-                              family = 6;
-                            ELSE
-                              family = 4;
-                            END IF;
-                            -- mysql doesn't support IPv6 yet, it seems
-                            IF family = 6 THEN
-                              RETURN NULL;
-                            END IF;
-                            a = pg_catalog.string_to_array($1, '.');
-                            up = array_upper(a, 1);
-                            IF up = 4 THEN
-                              -- nothing to do
-                              b = a;
-                            ELSIF up = 3 THEN
-                              -- 127.1.2 = 127.1.0.2
-                              b = array[a[1], a[2], '0', a[3]];
-                            ELSIF up = 2 THEN
-                              -- 127.1 = 127.0.0.1
-                              b = array[a[1], '0', '0', a[2]];
-                            ELSIF up = 1 THEN
-                              -- 127 = 0.0.0.127
-                              b = array['0', '0', '0', a[1]];
-                            END IF;
-                            i = 1;
-                            -- handle 127..1
-                            WHILE i <= 4 LOOP
-                              IF length(b[i]) = 0 THEN
-                                b[i] = '0';
-                              END IF;
-                              i = i + 1;
-                            END LOOP;
-                            RETURN (b[1]::bigint << 24) | (b[2]::bigint << 16) |
-                                    (b[3]::bigint << 8) | b[4]::bigint;
-                        END
-                    $$ IMMUTABLE STRICT LANGUAGE PLPGSQL;")
-          db_execute("CREATE OR REPLACE FUNCTION inet_ntoa(bigint)
-                    RETURNS text AS $$
-                    SELECT CASE WHEN $1 > 4294967295 THEN NULL ELSE
-                        ((($1::bigint >> 24) % 256) + 256) % 256 operator(pg_catalog.||) '.' operator(pg_catalog.||)
-                        ((($1::bigint >> 16) % 256) + 256) % 256 operator(pg_catalog.||) '.' operator(pg_catalog.||)
-                        ((($1::bigint >>  8) % 256) + 256) % 256 operator(pg_catalog.||) '.' operator(pg_catalog.||)
-                        ((($1::bigint      ) % 256) + 256) % 256 END;
-                    $$ IMMUTABLE STRICT LANGUAGE SQL;")
-        end
 
       end
       alias :checkdb :validate_cache_indexes
