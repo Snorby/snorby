@@ -220,6 +220,14 @@ module Snorby
         !db_select(sql).empty?
       end
 
+      def is_bigint?(table, column)
+        # this is only called from a postgres block
+        sql = %{
+          select data_type from information_schema.columns where table_name = '#{table}' and column_name='#{column}';
+        }
+        !db_select(sql).empty?
+      end
+
       def validate_cache_indexes
 
 
@@ -243,16 +251,25 @@ module Snorby
         adapter_type = db_adapter().class.name.split("::").last()
         if adapter_type == "PostgresAdapter"
           puts "[~] fixing database types for ip addresses"
-          db_execute("DROP INDEX index_iphdr_ip_src;");
-          db_execute("DROP INDEX index_iphdr_ip_dst;");
-          db_execute("ALTER TABLE iphdr ALTER COLUMN ip_src SET DATA TYPE int8;");
-          db_execute("ALTER TABLE iphdr ALTER COLUMN ip_dst SET DATA TYPE int8;");
+          db_execute("DROP INDEX IF EXISTS index_iphdr_ip_src;");
+          db_execute("DROP INDEX IF EXISTS index_iphdr_ip_dst;");
+          unless is_bigint?('iphdr','ip_src')
+            db_execute("ALTER TABLE iphdr ALTER COLUMN ip_src SET DATA TYPE int8;");
+          end
+          unless is_bigint?('iphdr','ip_dst')
+            db_execute("ALTER TABLE iphdr ALTER COLUMN ip_dst SET DATA TYPE int8;");
+          end
+          unless is_bigint?('tcphdr','tcp_ack')
+            db_execute("ALTER TABLE tcphdr ALTER COLUMN tcp_ack SET DATA TYPE int8;");
+          end
+          unless is_bigint?('tcphdr','tcp_seq')
+            db_execute("ALTER TABLE tcphdr ALTER COLUMN tcp_seq SET DATA TYPE int8;");
+          end
+          unless is_bigint?('icmphdr','icmp_seq')
+            db_execute("ALTER TABLE icmphdr ALTER COLUMN icmp_seq SET DATA TYPE int8;");
+          end
           db_execute("create index index_iphdr_ip_src on iphdr (ip_src);");
           db_execute("create index index_iphdr_ip_dst on iphdr (ip_dst);");
-
-          db_execute("ALTER TABLE tcphdr ALTER COLUMN tcp_ack SET DATA TYPE int8;");
-          db_execute("ALTER TABLE tcphdr ALTER COLUMN tcp_seq SET DATA TYPE int8;");
-          db_execute("ALTER TABLE icmphdr ALTER COLUMN icmp_seq SET DATA TYPE int8;");
 
           db_execute("CREATE OR REPLACE FUNCTION inet_aton(inet) RETURNS bigint AS 'select inetmi($1,''0.0.0.0'');' language sql immutable;");
           db_execute("CREATE OR REPLACE FUNCTION inet_ntoa(bigint) RETURNS inet AS 'select ''0.0.0.0''::inet+$1;' language sql immutable;");
