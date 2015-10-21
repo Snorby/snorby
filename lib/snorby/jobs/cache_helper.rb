@@ -223,7 +223,7 @@ module Snorby
       def is_bigint?(table, column)
         # this is only called from a postgres block
         sql = %{
-          select data_type from information_schema.columns where table_name = '#{table}' and column_name='#{column}';
+          select data_type from information_schema.columns where table_name = '#{table}' and column_name='#{column}' and data_type='bigint';
         }
         !db_select(sql).empty?
       end
