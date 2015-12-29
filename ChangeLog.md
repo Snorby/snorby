@@ -1,3 +1,8 @@
+# Snorby 2.6.3
+  * XSS Fix - CVE-2015-5460
+  * XSS Fix in saved searches
+  * Removed references to snorby.org
+
 # Snorby 2.6.2
 
   * Feature Request - Add search criteria 'HAS NOTE' #263

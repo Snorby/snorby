@@ -16,7 +16,7 @@
         }, function() {
           rule.build(data.search);
 
-          $('#title-header').replaceWith('<div class="edit edit-search-title" id="title-header">'+data.title+'</div><span class="sub-title">(click to edit)</span>');
+          $('#title-header').replaceWith('<div class="edit edit-search-title" id="title-header">'+sanitize data.title+'</div><span class="sub-title">(click to edit)</span>');
 
           $('.edit-search-title').editable(baseuri + "/saved/searches/title", {
             height: '20px',
