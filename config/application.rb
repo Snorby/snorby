@@ -14,7 +14,7 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 module Snorby
 
   # Check Ruby Version
-  unless RUBY_VERSION.match(/^1.9/)
+  unless RUBY_VERSION.starts_with?("2.") || RUBY_VERSION.starts_with?("1.9")
     puts "Snorby requires Ruby version 1.9.x"
     puts "We suggest using Ruby Version Manager (RVM) https://rvm.io/ to install the newest release"
     exit 1
