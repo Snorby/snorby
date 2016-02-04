@@ -13,6 +13,7 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 module Snorby
 
+  config_dir = File.expand_path('../', __FILE__)
   # Check Ruby Version
   unless RUBY_VERSION.starts_with?("2.") || RUBY_VERSION.starts_with?("1.9")
     puts "Snorby requires Ruby version 1.9.x"
@@ -21,21 +22,21 @@ module Snorby
   end
 
   # Check For snorby_config.yml
-  unless File.exists?("config/snorby_config.yml")
+  unless File.exists?(config_dir + "/snorby_config.yml")
     puts "Snorby Configuration Error"
     puts "* Please EDIT and rename config/snorby_config.yml.example to config/snorby_config.yml"
     exit 1
   end
   
   # Check For database.yml
-  unless File.exists?("config/database.yml")
+  unless File.exists?(config_dir + "/database.yml")
     puts "Snorby Configuration Error"
     puts "* Please EDIT and rename config/database.yml.example to config/database.yml"
     exit 1
   end
 
   # Snorby Environment Specific Configurations
-  raw_config = File.read("config/snorby_config.yml")
+  raw_config = File.read(config_dir + "/snorby_config.yml")
   CONFIG = YAML.load(raw_config)[Rails.env].symbolize_keys
 
   # Default authentication to database
