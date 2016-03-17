@@ -40,7 +40,7 @@
 		</div>
 
 		<div class='grid_5'>
-
+		<% if not Snorby::CONFIG[:user_reports_control] %>
 			<p>
 				<%= check_box_tag '[settings][daily]', 1, (Setting.daily ? Setting.find(:daily) : nil) %> <%= label_tag 'Daily Reports' %><br />
 				<i>(Send a report summarizing the captured traffic daily.)</i><br />
@@ -55,7 +55,7 @@
 				<%= check_box_tag '[settings][monthly]', 1, (Setting.monthly ? Setting.find(:monthly) : nil) %> <%= label_tag 'Monthly Reports' %><br />
 				<i>(Send a report summarizing the captured traffic monthly)</i><br />
 			</p>
-
+		<% end %>
 			<p>
 				<%= check_box_tag '[settings][lookups]', 1, (Setting.lookups ? Setting.find(:lookups) : nil) %> <%= label_tag 'Address Lookups' %><br />
 				<i>(This option enables the analyst to perform basic queries on source & destination addresses using external sources.)</i><br />
