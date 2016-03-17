@@ -331,6 +331,7 @@ DEPENDENCIES
   mail (~> 2.3)
   minitest
   net-dns (~> 0.6.1)
+  net-ssh (~> 2.9.2)
   netaddr (~> 1.5.0)
   pdfkit (~> 0.4.6)
   rails (= 3.2.22)
