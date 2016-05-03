@@ -119,7 +119,7 @@ GEM
       dm-core (~> 1.2.0)
     dm-mysql-adapter (1.2.0)
       dm-do-adapter (~> 1.2.0)
-      do_mysql (~> 0.10.6)
+      do_mysql (~> 0.10.17)
     dm-observer (1.2.0)
       dm-core (~> 1.2.0)
     dm-pager (1.1.0)
@@ -158,7 +158,7 @@ GEM
       activesupport (>= 3.0.0.beta3)
       dm-core
       tzinfo
-    do_mysql (0.10.16)
+    do_mysql (0.10.17)
       data_objects (= 0.10.16)
     env (0.3.0)
     erubis (2.7.0)
