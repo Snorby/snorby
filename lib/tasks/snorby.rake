@@ -137,7 +137,8 @@ namespace :snorby do
     Signature.update!(:events_count => 0)
 
     puts 'This could take awhile. Please wait while the Snorby cache is rebuilt.'
-    Snorby::Worker.reset_cache(:all, true)
+    Snorby::Jobs.clear_cache(true)
+    Snorby::Jobs.run_now!
   end
   
   desc 'Hard Reset - Rebuild Snorby Database'
