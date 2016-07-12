@@ -28,7 +28,11 @@ module Snorby
 
     def self.process
       if Worker.pid
-        Snorby::Process.new(`ps -o ruser,pid,%cpu,%mem,vsize,rss,tt,stat,start,etime,command -p #{Worker.pid} |grep delayed_job |grep -v grep`.chomp.strip)
+        if RUBY_PLATFORM =~ /solaris/ then
+          Snorby::Process.new(`ps -o ruser,pid,pcpu,pmem,vsz,rss,tty,s,stime,etime,args -p #{Worker.pid} |grep delayed_job |grep -v grep`.chomp.strip)
+        else
+          Snorby::Process.new(`ps -o ruser,pid,%cpu,%mem,vsize,rss,tt,stat,start,etime,command -p #{Worker.pid} |grep delayed_job |grep -v grep`.chomp.strip)
+        end
       end
     end
 
