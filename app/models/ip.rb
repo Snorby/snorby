@@ -63,7 +63,7 @@ class Ip
       left outer join agent_asset_names b on
       a.id = b.asset_name_id and b.sensor_sid = ?
       where ip_address = ? and
-      (global = 1 or b.sensor_sid is not null)
+      (global = true or b.sensor_sid is not null)
       order by global desc
       limit 1
     }
@@ -88,7 +88,7 @@ class Ip
       left outer join agent_asset_names b on
       a.id = b.asset_name_id and b.sensor_sid = ?
       where ip_address = ? and
-      (global = 1 or b.sensor_sid is not null)
+      (global = true or b.sensor_sid is not null)
       order by global desc
       limit 1
     }
