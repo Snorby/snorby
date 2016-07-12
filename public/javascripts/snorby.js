@@ -2467,7 +2467,7 @@ jQuery(document).ready(function($) {
     return calc.toFixed(2);
   });
 
-  $('#login form#user_new').submit(function(event) {
+  $('#login form#new_user').submit(function(event) {
     event.preventDefault();
     var self = $('#login');
     var that = this;

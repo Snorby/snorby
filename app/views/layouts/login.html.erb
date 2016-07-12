@@ -14,7 +14,7 @@
     <%= csrf_meta_tag %>
 
     <script type="text/javascript" charset="utf-8">
-      var snorby_url = "<%= request.protocol %><%= escape_javascript request.host %>";
+      var baseuri = "<%= request.protocol %><%= escape_javascript request.host %>";
     </script>
 
     <%= include_stylesheets :snorby, :media => 'all' %>
@@ -29,9 +29,9 @@
       <%= yield %>
       <hr>
       <div class="login-footer">
-      &copy; <%= Time.now.year %> <a href="https://threatstack.com">Threat Stack, Inc</a> - Created By: Dustin Willis Webber
+      &copy; <%= Time.now.year %>
       <br /><br /> 
-        Snorby <%= Snorby::VERSION %> - <%= link_to 'https://github.com/Snorby/snorby', 'https://github.com/Snorby/snorby' %> 
+        Snorby <%= Snorby::VERSION %> - <%= link_to 'https://github.com/Flashdown/snorby', 'https://github.com/Flashdown/snorby' %> 
       </div>
     </div>
     <%- flash.each do |type, message| -%>
