@@ -8,7 +8,7 @@ class Cache
 
   property :cid, Integer
 
-  property :ran_at, ZonedTime
+  property :ran_at, ZonedTime, :index => true
 
   property :event_count, Integer, :default => 0
 
