@@ -14,7 +14,7 @@
     <%= csrf_meta_tag %>
 
     <script type="text/javascript" charset="utf-8">
-      var snorby_url = "<%= request.protocol %><%= escape_javascript request.host %>";
+      var baseuri = "<%= request.protocol %><%= escape_javascript request.host %>";
     </script>
 
     <%= include_stylesheets :snorby, :media => 'all' %>
