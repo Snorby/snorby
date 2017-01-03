@@ -41,9 +41,12 @@ Snorby is a ruby on rails web application for network security monitoring that i
 
 	* If this fails - visit https://github.com/pdfkit/pdfkit#wkhtmltopdf for other options
 
-* Edit The Snorby Configuration File
+* Edit The Snorby Configuration Files
 
-	`config/snorby_config.yml`
+	* `config/snorby_config.yml`
+	* `config/database.yml`
+	
+	* Templates can be found in `config/snorby_config.yml.example` and `config/database.yml.example` respectively.
 
 * Run The Snorby Setup
 
