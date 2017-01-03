@@ -41,6 +41,10 @@ Snorby is a ruby on rails web application for network security monitoring that i
 
 	* If this fails - visit https://github.com/pdfkit/pdfkit#wkhtmltopdf for other options
 
+* Edit The Snorby Configuration File
+
+	`config/snorby_config.yml`
+
 * Run The Snorby Setup
 
 	`rake snorby:setup`
@@ -52,10 +56,6 @@ Snorby is a ruby on rails web application for network security monitoring that i
 	sed -i 's/\(^.*\)\(Mime::Type.register.*application\/pdf.*$\)/\1if Mime::Type.lookup_by_extension(:pdf) != "application\/pdf"\n\1  \2\n\1end/' vendor/cache/ruby/*.*.*/gems/actionpack-*/lib/action_dispatch/http/mime_types.rb
 	sed -i 's/\(^.*\)\(Mime::Type.register.*application\/pdf.*$\)/\1if Mime::Type.lookup_by_extension(:pdf) != "application\/pdf"\n\1  \2\n\1end/' vendor/cache/ruby/*.*.*/gems/railties-*/guides/source/action_controller_overview.textile
 	```
-
-* Edit The Snorby Configuration File
-
-	`config/snorby_config.yml`
 	
 * Edit The Snorby Mail Configurations
 
