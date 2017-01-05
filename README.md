@@ -60,16 +60,25 @@ Snorby is a ruby on rails web application for network security monitoring that i
 	sed -i 's/\(^.*\)\(Mime::Type.register.*application\/pdf.*$\)/\1if Mime::Type.lookup_by_extension(:pdf) != "application\/pdf"\n\1  \2\n\1end/' vendor/cache/ruby/*.*.*/gems/actionpack-*/lib/action_dispatch/http/mime_types.rb
 	sed -i 's/\(^.*\)\(Mime::Type.register.*application\/pdf.*$\)/\1if Mime::Type.lookup_by_extension(:pdf) != "application\/pdf"\n\1  \2\n\1end/' vendor/cache/ruby/*.*.*/gems/railties-*/guides/source/action_controller_overview.textile
 	```
+
+* Start Rails
+
+	For instance with `rails server` or `bundle exec rails server` and point a browser to localhost:3000
+	or whatever you put in `config/snorby_config.yml`.
+
+* Log in and create new user
+
+	If you selected authentication_mode: database in `config/snorby_config.yml` the default user credentials are:
+	* Email: **snorby@example.com**
+	* Password: **snorby**
 	
+	After logging in go to **Administration** / **Users**, click **Add user** and fill out the form to create
+	a personal account with administrator privileges before you delete the default user.
+
 * Once all options have been configured and snorby is up and running
 
 	* Make sure you start the Snorby Worker from the Administration page.
 	* Make sure that both the `DailyCache` and `SensorCache` jobs are running.
-	
-* Default User Credentials
-
-	* E-mail: **snorby@example.com**
-	* Password: **snorby**
 	
 * NOTE - If you do not run Snorby with passenger (http://www.modrails.com) people remember to start rails in production mode.
 
