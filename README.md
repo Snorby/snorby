@@ -21,11 +21,11 @@ Snorby is a ruby on rails web application for network security monitoring that i
 
 	`git clone git://github.com/Snorby/snorby.git`
 
-* Move into de snorby Directory
+* Move into the Snorby directory
 
 	`cd snorby`
 
-* Install Gem Dependencies  (make sure you have bundler installed: `gem install bundler`)
+* Install Gem dependencies  (make sure you have bundler installed: `gem install bundler`)
 
 	`$ bundle install`
 	
@@ -41,7 +41,7 @@ Snorby is a ruby on rails web application for network security monitoring that i
 
 	* If this fails - visit https://github.com/pdfkit/pdfkit#wkhtmltopdf for other options
 
-* Edit The Snorby Configuration Files
+* Edit the Snorby configuration files
 
 	* `config/snorby_config.yml`
 	* `config/database.yml`
@@ -49,7 +49,7 @@ Snorby is a ruby on rails web application for network security monitoring that i
 	
 	* Templates can be found in `config/snorby_config.yml.example`, `config/database.yml.example` and `config/initializers/mail_config.example.rb` respectively.
 
-* Run The Snorby Setup
+* Run the Snorby setup
 
 	`rake snorby:setup`
 	
