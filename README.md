@@ -45,8 +45,9 @@ Snorby is a ruby on rails web application for network security monitoring that i
 
 	* `config/snorby_config.yml`
 	* `config/database.yml`
+	* `config/initializers/mail_config.rb`
 	
-	* Templates can be found in `config/snorby_config.yml.example` and `config/database.yml.example` respectively.
+	* Templates can be found in `config/snorby_config.yml.example`, `config/database.yml.example` and `config/initializers/mail_config.example.rb` respectively.
 
 * Run The Snorby Setup
 
@@ -59,10 +60,6 @@ Snorby is a ruby on rails web application for network security monitoring that i
 	sed -i 's/\(^.*\)\(Mime::Type.register.*application\/pdf.*$\)/\1if Mime::Type.lookup_by_extension(:pdf) != "application\/pdf"\n\1  \2\n\1end/' vendor/cache/ruby/*.*.*/gems/actionpack-*/lib/action_dispatch/http/mime_types.rb
 	sed -i 's/\(^.*\)\(Mime::Type.register.*application\/pdf.*$\)/\1if Mime::Type.lookup_by_extension(:pdf) != "application\/pdf"\n\1  \2\n\1end/' vendor/cache/ruby/*.*.*/gems/railties-*/guides/source/action_controller_overview.textile
 	```
-	
-* Edit The Snorby Mail Configurations
-
-	`config/initializers/mail_config.rb`
 	
 * Once all options have been configured and snorby is up and running
 
