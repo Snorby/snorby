@@ -38,4 +38,5 @@ config/snorby_config.yml
 config/database.yml
 config/snorby.yml
 config/snorby-geoip.dat
+config/initializers/mail_config.rb
 snorby.war
