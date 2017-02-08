@@ -31,7 +31,11 @@ module Snorby
         if RUBY_PLATFORM =~ /solaris/ then
           Snorby::Process.new(`ps -o ruser,pid,pcpu,pmem,vsz,rss,tty,s,stime,etime,args -p #{Worker.pid} |grep delayed_job |grep -v grep`.chomp.strip)
         else
-          Snorby::Process.new(`ps -o ruser,pid,%cpu,%mem,vsize,rss,tt,stat,start,etime,command -p #{Worker.pid} |grep delayed_job |grep -v grep`.chomp.strip)
+          if RUBY_PLATFORM =~ /freebsd/ then
+            Snorby::Process.new(`ps -w -w -o ruser,pid,pcpu,pmem,vsz,rss,tty,s,stime,etime,args -p #{Worker.pid} |grep delayed_job |grep -v grep`.chomp.strip)
+          else
+            Snorby::Process.new(`ps -o ruser,pid,%cpu,%mem,vsize,rss,tt,stat,start,etime,command -p #{Worker.pid} |grep delayed_job |grep -v grep`.chomp.strip)
+          end
         end
       end
     end
