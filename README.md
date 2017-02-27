@@ -12,7 +12,7 @@ Snorby is a ruby on rails web application for network security monitoring that i
 ## Requirements
 
 * Snort
-* Ruby >= 1.9.2
+* Ruby >= 1.9.2, <2.x.x
 * Rails >= 3.0.0
 
 ## Install
