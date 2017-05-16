@@ -2,43 +2,32 @@ class SessionsController < Devise::SessionsController
   layout 'login'
 
   def create
-    resource = warden.authenticate!(:scope => resource_name, 
+    resource = warden.authenticate!(:scope => :user,
     :recall => "sessions#failure")
 
-    return sign_in_and_redirect(resource_name, resource)
-  end
-  
-  def sign_in_and_redirect(resource_or_scope, resource=nil)
-    scope = Devise::Mapping.find_scope!(resource_or_scope)
-    resource ||= resource_or_scope
-    sign_in(scope, resource) unless warden.user(scope) == resource
+    sign_in resource
 
-    return render :json => {
-      :success => true, 
-      :authenticity_token => form_authenticity_token, 
-      :user => @current_user.in_json,
-      :version => Snorby::VERSION,
-      :redirect => stored_location_for(scope) || after_sign_in_path_for(resource)
-    }
+    set_flash_message :notice, :signed_in
+    redirect_to root_path
   end
 
   def failure
-    return render:json => {:success => false, :errors => ["Login failed."]}
+    respond_to do |format|
+      format.html do
+        set_flash_message :notice, :invalid
+        redirect_to new_user_session_path
+      end
+    end
   end
 
   # DELETE /resource/sign_out
   def destroy
-    redirect_path = after_sign_out_path_for(resource_name)
-    signed_out = (Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name))
-    set_flash_message :notice, :signed_out if signed_out && is_navigational_format?
-
-    # We actually need to hardcode this as Rails default responder doesn't
-    # support returning empty response on GET request
     respond_to do |format|
       format.html do
-        redirect_to redirect_path
+        set_flash_message :notice, :signed_out
+        sign_out current_user
+        redirect_to new_user_session_path
       end
-      format.json { render :json => { status: "success", user: @current_user }}
     end
   end
 
