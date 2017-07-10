@@ -75,7 +75,7 @@ gem 'delayed_job_data_mapper',     '~> 1.0.0.rc', :git => 'https://github.com/Sn
 # gem 'rmagick',                     '~> 2.13.1'
 # gem 'dm-paperclip',                '~> 2.4.1', :git => 'https://github.com/Snorby/dm-paperclip.git'
 
-gem 'net-dns',                     '~> 0.6.1'
+gem 'net-dns',                     '~> 0.8.0'
 gem 'whois',                       '~> 2.3.0'
 gem 'simple_form',                 '~> 1.2.2'
 gem 'geoip',                       '~> 1.1.1'
