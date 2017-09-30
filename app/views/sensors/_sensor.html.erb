@@ -24,7 +24,7 @@
   <% if current_user.admin? %>
 	  <% if Snorby::Worker.running? %>
 	    	<%= link_to image_tag("icons/destroy.png", :size => '16x16', :class => 'trash'), sensor, :method => :delete, 
-	    	:confirm => "WARNING: Are you sure you want to destroy this sensor? All events and metrics associated with this sensor will be permentantly deleted!" %>
+	    	:confirm => "WARNING: Are you sure you want to destroy this sensor? All events and metrics associated with this sensor will be permanently deleted!" %>
 	  <% else %>
 	      	<%= link_to image_tag("icons/destroy.png", :size => '16x16', :class => 'trash'), "#", 
 	      	:class => "disabled add_tipsy", :title => "The Snorby worker must be running!" %>
