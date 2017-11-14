@@ -42,7 +42,7 @@ Snorby is a ruby on rails web application for network security monitoring that i
 * Run The Snorby Setup
 
 	`rake snorby:setup`
-	
+
 	* NOTE: If you get warning such as "already initialized constant PDF", you can fix it by running these commands :
 
 	```

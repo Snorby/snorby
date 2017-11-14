@@ -22,7 +22,7 @@ production:
   # searching will use local time.
   timezone_search: true
   # uncomment to set time zone to time zone of box from /usr/share/zoneinfo, e.g. "America/Cancun"
-  # time_zone: 'UTC'
+  time_zone: 'Europe/Paris'
 
 #
 # Only Use For Development
@@ -39,7 +39,7 @@ development:
     - "/Users/mephux/.snort/so_rules"
   authentication_mode: database
   # uncomment to set time zone to time zone of box from /usr/share/zoneinfo, e.g. "America/Cancun"
-  # time_zone: 'UTC'
+  time_zone: 'Europe/Paris'
 #  authentication_mode: cas
 #  cas_config:
 #    base_url: https://auth.server.com.br/
