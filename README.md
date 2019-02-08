@@ -12,7 +12,7 @@ Snorby is a ruby on rails web application for network security monitoring that i
 ## Requirements
 
 * Snort
-* Ruby >= 1.9.2, <2.x.x
+* Ruby >= 2.5
 * Rails >= 3.0.0
 
 ## Install
@@ -26,6 +26,11 @@ Snorby is a ruby on rails web application for network security monitoring that i
 	`cd snorby`
 
 * Install Gem Dependencies  (make sure you have bundler installed: `gem install bundler`)
+	
+for me working >
+			gem install rubygems-bundler
+			gem install rbundler -v 1.16.1
+			gem install bundler -v 1.16.1
 
 	`$ bundle install`
 	
