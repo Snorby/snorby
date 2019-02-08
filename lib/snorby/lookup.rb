@@ -14,7 +14,7 @@ module Snorby
     end
     
     def whois
-      @whois ||= Whois::Client.new.query(@address)
+      @whois ||= Whois::Client.new.lookup(@address)
     end
     
     def hostname
