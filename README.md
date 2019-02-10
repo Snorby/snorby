@@ -27,10 +27,15 @@ Snorby is a ruby on rails web application for network security monitoring that i
 
 * Install Gem Dependencies  (make sure you have bundler installed: `gem install bundler`)
 	
-for me working >
-			gem install rubygems-bundler
-			gem install rbundler -v 1.16.1
-			gem install bundler -v 1.16.1
+Ubuntu 18.04 >
+
+	apt-get install ruby-graphviz ruby-dev ruby ruby-bundler rake ruby-rails 
+			
+	gem install rubygems-bundler
+			
+	gem install rbundler -v 1.16.1
+			
+	gem install bundler -v 1.16.1
 
 	`$ bundle install`
 	
