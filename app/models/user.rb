@@ -89,6 +89,10 @@ class User
   property :last_email_report_at, ZonedTime
   property :email_reports, Boolean, :default => false
 
+  property :daily_reports, Boolean, :default => false
+  property :weekly_reports, Boolean, :default => false
+  property :monthly_reports, Boolean, :default => false
+
   has n, :notifications, :constraint => :destroy
 
   has n, :favorites, :child_key => :user_id, :constraint => :destroy

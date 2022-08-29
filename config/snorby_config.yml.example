@@ -23,6 +23,9 @@ production:
   timezone_search: true
   # uncomment to set time zone to time zone of box from /usr/share/zoneinfo, e.g. "America/Cancun"
   # time_zone: 'UTC'
+  # user_reports_control: true => give control of receiving reports to individual users
+  # user_reports_control: false (previous default)=> configure reports globally
+  user_reports_control: false
 
 #
 # Only Use For Development
