@@ -1,32 +1,8 @@
-GIT
-  remote: https://github.com/Snorby/delayed_job_data_mapper.git
-  revision: 6f1c4a8c3ad62e4ef6baafec9a2a9914d0643085
-  specs:
-    delayed_job_data_mapper (1.0.0.rc)
-      delayed_job (~> 2.1)
-      dm-aggregates
-      dm-core
-      dm-observer
-
-GIT
-  remote: https://github.com/mephux/ezprint.git
-  revision: c231df760dae8a2d4bc906888285c6d314de4cf6
-  branch: rails3
-  specs:
-    ezprint (0.2.0)
-      pdfkit (>= 0.4.1)
-
-GIT
-  remote: https://github.com/postmodern/dm-is-read_only.git
-  revision: 43ffedc64a261b12ee324db616a427048e14ba4c
-  specs:
-    dm-is-read_only (0.3.0)
-      dm-core (~> 1.2)
-
 GEM
   remote: https://rubygems.org/
   specs:
     RedCloth (4.2.9)
+    RedCloth (4.2.9-java)
     actionmailer (3.2.22)
       actionpack (= 3.2.22)
       mail (~> 2.5.4)
@@ -54,43 +30,55 @@ GEM
     activesupport (3.2.22)
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
-    addressable (2.3.8)
+    addressable (2.6.0)
+      public_suffix (>= 2.0.2, < 4.0)
+    airbrussh (1.3.1)
+      sshkit (>= 1.6.1, != 1.7.0)
     ansi (1.5.0)
     arel (3.0.3)
-    bcrypt (3.1.10)
+    bcrypt (3.1.12)
+    bcrypt (3.1.12-java)
     bcrypt-ruby (3.1.5)
       bcrypt (>= 3.1.3)
+    bcrypt-ruby (3.1.5-java)
+      bcrypt (>= 3.1.3)
     builder (3.0.4)
-    byebug (6.0.0)
+    byebug (10.0.2)
     cancan (1.6.10)
-    capistrano (2.14.1)
-      highline
-      net-scp (>= 1.0.0)
-      net-sftp (>= 2.0.0)
-      net-ssh (>= 2.0.14)
-      net-ssh-gateway (>= 1.1.0)
-    capybara (2.4.4)
-      mime-types (>= 1.16)
+    capistrano (3.11.0)
+      airbrussh (>= 1.0.0)
+      i18n
+      rake (>= 10.0.0)
+      sshkit (>= 1.9.0)
+    capybara (2.18.0)
+      addressable
+      mini_mime (>= 0.1.3)
       nokogiri (>= 1.3.3)
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
-      xpath (~> 2.0)
-    chronic (0.3.0)
-    closure-compiler (1.1.11)
-    daemons (1.1.9)
-    data_objects (0.10.16)
+      xpath (>= 2.0, < 4.0)
+    chronic (0.10.2)
+    closure-compiler (1.1.14)
+    concurrent-ruby (1.1.4)
+    daemons (1.3.1)
+    data_objects (0.10.17)
       addressable (~> 2.1)
-    delayed_job (2.1.4)
-      activesupport (~> 3.0)
-      daemons
+    delayed_job (4.1.5)
+      activesupport (>= 3.0, < 5.3)
+    delayed_job_data_mapper (1.0.0)
+      delayed_job (~> 4.0)
+      dm-active_model (~> 1.0)
+      dm-core (~> 1.0)
+      i18n
+      tzinfo
     devise (1.5.4)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
       warden (~> 1.1)
-    devise_cas_authenticatable (1.5.0)
+    devise_cas_authenticatable (1.10.3)
       devise (>= 1.2.0)
       rubycas-client (>= 2.2.1)
-    diff-lcs (1.2.5)
+    diff-lcs (1.3)
     dm-active_model (1.2.1)
       activemodel (~> 3.0)
       dm-core (~> 1.2.0)
@@ -115,11 +103,13 @@ GEM
     dm-do-adapter (1.2.0)
       data_objects (~> 0.10.6)
       dm-core (~> 1.2.0)
+    dm-is-read_only (0.3.0)
+      dm-core (~> 1.2)
     dm-migrations (1.2.0)
       dm-core (~> 1.2.0)
     dm-mysql-adapter (1.2.0)
       dm-do-adapter (~> 1.2.0)
-      do_mysql (~> 0.10.17)
+      do_mysql (~> 0.10.6)
     dm-observer (1.2.0)
       dm-core (~> 1.2.0)
     dm-pager (1.1.0)
@@ -161,56 +151,81 @@ GEM
       activesupport (>= 3.0.0.beta3)
       dm-core
       tzinfo
+    do_jdbc (0.10.17-java)
+      data_objects (= 0.10.17)
     do_mysql (0.10.17)
-      data_objects (= 0.10.16)
-    do_postgres (0.10.16)
-      data_objects (= 0.10.16)
+      data_objects (= 0.10.17)
+    do_mysql (0.10.17-java)
+      data_objects (= 0.10.17)
+      do_jdbc (= 0.10.17)
+      jdbc-mysql (>= 5.0.4)
+    do_postgres (0.10.17)
+      data_objects (= 0.10.17)
+    do_postgres (0.10.17-java)
+      data_objects (= 0.10.17)
+      do_jdbc (= 0.10.17)
+      jdbc-postgres (>= 8.2)
     env (0.3.0)
     erubis (2.7.0)
-    eventmachine (1.0.8)
+    eventmachine (1.2.7)
+    eventmachine (1.2.7-java)
+    ezprint (1.0.1)
+      pdfkit (~> 0.8.0)
     fastercsv (1.5.5)
-    geoip (1.1.2)
-    highline (1.7.3)
+    ffi (1.10.0)
+    ffi (1.10.0-java)
+    geoip (1.6.4)
     hike (1.2.3)
     home_run (1.0.9)
-    i18n (0.7.0)
+    i18n (0.9.5)
+      concurrent-ruby (~> 1.0)
     jammit (0.5.4)
       closure-compiler (>= 0.1.0)
       yui-compressor (>= 0.9.1)
+    jdbc-mysql (5.1.47)
+    jdbc-postgres (42.1.4)
     journey (1.0.4)
-    jquery-rails (3.1.3)
+    jquery-rails (3.1.5)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
-    json (1.8.3)
-    json_pure (1.8.2)
+    jruby-jars (9.2.5.0)
+    jruby-openssl (0.10.1-java)
+    jruby-rack (1.1.21)
+    jruby-rack-worker (0.14.1)
+      jruby-rack (~> 1.1.10)
+    json (1.8.6)
+    json (1.8.6-java)
+    json_pure (1.8.6)
     launchy (2.4.3)
       addressable (~> 2.3)
-    letter_opener (1.4.1)
+    launchy (2.4.3-java)
+      addressable (~> 2.3)
+      spoon (~> 0.0.1)
+    letter_opener (1.7.0)
       launchy (~> 2.2)
-    mail (2.5.4)
+    mail (2.5.5)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.25.1)
+    mini_mime (1.0.1)
     mini_portile2 (2.4.0)
     minitest (4.7.5)
-    multi_json (1.11.2)
-    net-dns (0.8.0)
+    multi_json (1.13.1)
+    net-dns (0.9.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
-    net-sftp (2.1.2)
-      net-ssh (>= 2.6.5)
-    net-ssh (2.9.2)
-    net-ssh-gateway (1.2.0)
-      net-ssh (>= 2.6.5)
-    netaddr (1.5.0)
-    nokogiri (1.10.8)
+    net-ssh (5.1.0)
+    netaddr (2.0.3)
+    nokogiri (1.10.1)
       mini_portile2 (~> 2.4.0)
+    nokogiri (1.10.1-java)
     orm_adapter (0.0.7)
-    pdfkit (0.4.6)
+    pdfkit (0.8.2)
     polyglot (0.3.5)
-    power_assert (0.2.4)
+    power_assert (1.1.3)
+    public_suffix (3.0.3)
     rack (1.4.7)
-    rack-cache (1.2)
+    rack-cache (1.8.0)
       rack (>= 0.4)
     rack-ssl (1.3.4)
       rack
@@ -231,39 +246,57 @@ GEM
       rake (>= 0.8.7)
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
-    rake (0.9.2)
+    rake (12.3.2)
     rdoc (3.12.2)
       json (~> 1.4)
-    request_store (1.0.8)
-    rspec (2.0.1)
-      rspec-core (~> 2.0.1)
-      rspec-expectations (~> 2.0.1)
-      rspec-mocks (~> 2.0.1)
-    rspec-core (2.0.1)
-    rspec-expectations (2.0.1)
-      diff-lcs (>= 1.1.2)
-    rspec-mocks (2.0.1)
-      rspec-core (~> 2.0.1)
-      rspec-expectations (~> 2.0.1)
-    rspec-rails (2.0.1)
-      rspec (~> 2.0.0)
-    ruby-graphviz (1.2.2)
+    request_store (1.4.1)
+      rack (>= 1.4)
+    rspec (3.8.0)
+      rspec-core (~> 3.8.0)
+      rspec-expectations (~> 3.8.0)
+      rspec-mocks (~> 3.8.0)
+    rspec-core (3.8.0)
+      rspec-support (~> 3.8.0)
+    rspec-expectations (3.8.2)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.8.0)
+    rspec-mocks (3.8.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.8.0)
+    rspec-rails (3.8.2)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (~> 3.8.0)
+      rspec-expectations (~> 3.8.0)
+      rspec-mocks (~> 3.8.0)
+      rspec-support (~> 3.8.0)
+    rspec-support (3.8.0)
+    ruby-graphviz (1.2.4)
     rubycas-client (2.3.9)
       activesupport
-    simple_form (1.2.2)
+    rubyzip (1.2.2)
+    simple_form (2.1.3)
+      actionpack (~> 3.0)
+      activemodel (~> 3.0)
+    spoon (0.0.6)
+      ffi
     sprockets (2.2.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
+    sshkit (1.18.1)
+      net-scp (>= 1.1.2)
+      net-ssh (>= 2.8.0)
     stringex (1.5.1)
-    test-unit (3.1.3)
+    test-unit (3.3.0)
       power_assert
-    thin (1.6.3)
+    thin (1.7.2)
       daemons (~> 1.0, >= 1.0.9)
-      eventmachine (~> 1.0)
-      rack (~> 1.0)
-    thor (0.19.1)
+      eventmachine (~> 1.0, >= 1.0.4)
+      rack (>= 1, < 3)
+    thor (0.20.3)
     tilt (1.4.1)
     timezone_local (0.1.5)
       tzinfo (>= 0.3.24)
@@ -273,16 +306,23 @@ GEM
     turn (0.9.7)
       ansi
       minitest (~> 4)
-    tzinfo (0.3.44)
+    tzinfo (0.3.55)
     uuidtools (2.1.5)
-    warden (1.2.3)
+    warbler (2.0.5)
+      jruby-jars (>= 9.0.0.0)
+      jruby-rack (>= 1.1.1, < 1.3)
+      rake (>= 10.1.0)
+      rubyzip (~> 1.0, < 1.4)
+    warden (1.2.7)
       rack (>= 1.0)
-    whois (2.3.0)
-    xpath (2.0.0)
-      nokogiri (~> 1.3)
+    whois (4.0.7)
+    whois-parser (0.0.1)
+    xpath (3.2.0)
+      nokogiri (~> 1.8)
     yui-compressor (0.12.0)
 
 PLATFORMS
+  java
   ruby
 
 DEPENDENCIES
@@ -291,15 +331,15 @@ DEPENDENCIES
   actionpack (= 3.2.22)
   activesupport (= 3.2.22)
   ansi
-  bundler (>= 1.0.0)
+  bundler
   byebug
   cancan (~> 1.6)
-  capistrano (= 2.14.1)
+  capistrano
   capybara
-  chronic (~> 0.3.0)
-  daemons (~> 1.1.0)
-  delayed_job (~> 2.1.4)
-  delayed_job_data_mapper (~> 1.0.0.rc)!
+  chronic
+  daemons
+  delayed_job
+  delayed_job_data_mapper
   devise (~> 1.4)
   devise_cas_authenticatable
   dm-active_model (~> 1.2.0)
@@ -310,11 +350,11 @@ DEPENDENCIES
   dm-core (~> 1.2.0)
   dm-devise (~> 1.5)
   dm-do-adapter (~> 1.2.0)
-  dm-is-read_only (~> 0.3)!
+  dm-is-read_only (~> 0.3)
   dm-migrations (~> 1.2.0)
   dm-mysql-adapter (~> 1.2.0)
   dm-observer (~> 1.2.0)
-  dm-pager (~> 1.1.0)
+  dm-pager
   dm-postgres-adapter (~> 1.2.0)
   dm-rails (~> 1.2.0)
   dm-serializer (~> 1.2.0)
@@ -323,38 +363,40 @@ DEPENDENCIES
   dm-types (~> 1.2.0)
   dm-validations (~> 1.2.0)
   dm-visualizer (~> 0.1.0)
-  dm-zone-types (~> 0.3)
+  dm-zone-types
+  do_mysql
   env
-  ezprint!
-  geoip (~> 1.1.1)
+  ezprint
+  geoip
   home_run
   jammit (~> 0.5.4)
   jquery-rails
   jruby-openssl
   jruby-rack-worker
-  json (~> 1.8.3)
+  json
   letter_opener
-  mail (~> 2.3)
+  mail
   minitest
-  net-dns (~> 0.8.0)
-  netaddr (~> 1.5.0)
-  pdfkit (~> 0.4.6)
+  net-dns
+  netaddr
+  pdfkit
   rails (= 3.2.22)
   railties (= 3.2.22)
-  rake (= 0.9.2)
-  request_store (~> 1.0.5)
-  rspec (~> 2.0.0)
-  rspec-core (~> 2.0.0)
-  rspec-expectations (~> 2.0.0)
-  rspec-rails (~> 2.0.0)
+  rake
+  request_store
+  rspec (~> 3.8.0)
+  rspec-core (~> 3.8.0)
+  rspec-expectations (~> 3.8.0)
+  rspec-rails (~> 3.8.0)
   rubycas-client
-  simple_form (~> 1.2.2)
+  simple_form
   test-unit
   thin
-  timezone_local (~> 0.1.5)
+  timezone_local
   turn
   warbler
-  whois (~> 2.3.0)
+  whois
+  whois-parser
 
 BUNDLED WITH
-   1.10.6
+   1.16.1

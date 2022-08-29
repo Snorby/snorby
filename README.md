@@ -12,7 +12,7 @@ Snorby is a ruby on rails web application for network security monitoring that i
 ## Requirements
 
 * Snort
-* Ruby >= 1.9.2, <2.x.x
+* Ruby >= 2.5
 * Rails >= 3.0.0
 
 ## Install
@@ -21,11 +21,22 @@ Snorby is a ruby on rails web application for network security monitoring that i
 
 	`git clone git://github.com/Snorby/snorby.git`
 
-* Move into de snorby Directory
+* Move into the Snorby directory
 
 	`cd snorby`
 
+
 * Install Gem Dependencies  (make sure you have bundler installed: `gem install bundler`)
+	
+Ubuntu 18.04 >
+
+	apt-get install ruby-graphviz ruby-dev ruby ruby-bundler rake ruby-rails 
+			
+	gem install rubygems-bundler
+			
+	gem install rbundler -v 1.16.1
+			
+	gem install bundler -v 1.16.1
 
 	`$ bundle install`
 	
@@ -37,9 +48,19 @@ Snorby is a ruby on rails web application for network security monitoring that i
 	
 * Install wkhtmltopdf
 
-	`pdfkit --install-wkhtmltopdf # If this fails - visit http://wkhtmltopdf.org/ for more information`
+	`pdfkit --install-wkhtmltopdf`
 
-* Run The Snorby Setup
+	* If this fails - visit https://github.com/pdfkit/pdfkit#wkhtmltopdf for other options
+
+* Edit the Snorby configuration files
+
+	* `config/snorby_config.yml`
+	* `config/database.yml`
+	* `config/initializers/mail_config.rb`
+	
+	* Templates can be found in `config/snorby_config.yml.example`, `config/database.yml.example` and `config/initializers/mail_config.example.rb` respectively.
+
+* Run the Snorby setup
 
 	`rake snorby:setup`
 	
@@ -51,23 +72,24 @@ Snorby is a ruby on rails web application for network security monitoring that i
 	sed -i 's/\(^.*\)\(Mime::Type.register.*application\/pdf.*$\)/\1if Mime::Type.lookup_by_extension(:pdf) != "application\/pdf"\n\1  \2\n\1end/' vendor/cache/ruby/*.*.*/gems/railties-*/guides/source/action_controller_overview.textile
 	```
 
-* Edit The Snorby Configuration File
+* Start Rails
 
-	`config/snorby_config.yml`
-	
-* Edit The Snorby Mail Configurations
+	For instance with `rails server` or `bundle exec rails server` and point a browser to localhost:3000
+	or whatever you put in `config/snorby_config.yml`.
 
-	`config/initializers/mail_config.rb`
+* Log in and create new user
+
+	If you selected authentication_mode: database in `config/snorby_config.yml` the default user credentials are:
+	* Email: **snorby@example.com**
+	* Password: **snorby**
 	
+	After logging in go to **Administration** / **Users**, click **Add user** and fill out the form to create
+	a personal account with administrator privileges before you delete the default user.
+
 * Once all options have been configured and snorby is up and running
 
 	* Make sure you start the Snorby Worker from the Administration page.
 	* Make sure that both the `DailyCache` and `SensorCache` jobs are running.
-	
-* Default User Credentials
-
-	* E-mail: **snorby@example.com**
-	* Password: **snorby**
 	
 * NOTE - If you do not run Snorby with passenger (http://www.modrails.com) people remember to start rails in production mode.
 
