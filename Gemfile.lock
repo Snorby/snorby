@@ -172,7 +172,6 @@ GEM
     ezprint (1.0.1)
       pdfkit (~> 0.8.0)
     fastercsv (1.5.5)
-    ffi (1.10.0)
     ffi (1.10.0-java)
     geoip (1.6.4)
     hike (1.2.3)
@@ -275,7 +274,7 @@ GEM
     ruby-graphviz (1.2.4)
     rubycas-client (2.3.9)
       activesupport
-    rubyzip (1.2.2)
+    rubyzip (1.3.0)
     simple_form (2.1.3)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
