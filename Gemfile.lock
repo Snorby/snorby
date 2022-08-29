@@ -172,7 +172,6 @@ GEM
     ezprint (1.0.1)
       pdfkit (~> 0.8.0)
     fastercsv (1.5.5)
-    ffi (1.10.0)
     ffi (1.10.0-java)
     geoip (1.6.4)
     hike (1.2.3)
@@ -306,7 +305,7 @@ GEM
     turn (0.9.7)
       ansi
       minitest (~> 4)
-    tzinfo (0.3.55)
+    tzinfo (0.3.61)
     uuidtools (2.1.5)
     warbler (2.0.5)
       jruby-jars (>= 9.0.0.0)
