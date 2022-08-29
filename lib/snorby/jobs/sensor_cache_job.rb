@@ -144,7 +144,7 @@ module Snorby
                 now = current_time.to_date + 0.second
                 yesterday = current_time.yesterday.to_date + 0.second
 
-                if Setting.daily?
+                if (Snorby::CONFIG[:user_reports_control] and user.daily_reports) or ((not       Snorby::CONFIG[:user_reports_control]) and Setting.daily?)
                   last_report_to_date = if user.last_daily_report_at.present?
                                           user.last_daily_report_at.in_time_zone(user.timezone).to_date + 0.second
                                         else
@@ -168,7 +168,7 @@ module Snorby
 
 
                 # Weekly
-                if Setting.weekly?
+                if (Snorby::CONFIG[:user_reports_control] and user.weekly_reports) or ((not      Snorby::CONFIG[:user_reports_control]) and Setting.weekly?)
                   current_week = current_time.strftime('%Y%W').to_i
 
                   last_weekly_to_date = if user.last_weekly_report_at.present?
@@ -188,7 +188,7 @@ module Snorby
                 end
 
                 # Monthly
-                if Setting.monthly?
+                if (Snorby::CONFIG[:user_reports_control] and user.monthly_reports) or ((not     Snorby::CONFIG[:user_reports_control]) and Setting.monthly?)
                   current_month = current_time.strftime('%Y%m').to_i
 
                   last_monthly_to_date = if user.last_monthly_report_at.present?
