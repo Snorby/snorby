@@ -124,7 +124,6 @@
 		<ul class='box-list'>
 			<% @favers.each do |user| %>
 			<li class='has-image'>
-				<%= image_tag(get_gravatar_uri(user.email), :size => '16x16', :class => 'avatar-small') %> 
 				<%= link_to truncate(user.name, :length => 30), results_path(:title => "#{truncate("Events Classified By " + user.name.to_s, :length => 60)}", 
                 "match_all"=>"true", "search"=>{"user"=>{"column"=>"user", "operator"=>"is", "value"=> user.id } }), :title => user.name %> 
 				<span><%= number_with_delimiter user.classify_count %></span>

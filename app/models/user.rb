@@ -57,9 +57,6 @@ class User
   # Define if the user has been enabled/disabled
   property :enabled, Boolean, :default => true
 
-  # Define if get avatar from gravatar.com or not
-  property :gravatar, Boolean, :default => true
-  
   # Define created_at and updated_at timestamps
   timestamps :at
   property :created_at, ZonedTime
@@ -117,21 +114,12 @@ class User
 
   def avatar
     default_url = File.join(::User.snorby_url, "#{Snorby::CONFIG[:baseuri]}/images/default_avatar.png")
-    return default_url unless self.gravatar
-
-    email_address = self.email.downcase
-
-    # create the md5 hash
-    hash = Digest::MD5.hexdigest(email_address)
-    "https://gravatar.com/avatar/#{hash}.png?s=256&d=#{CGI.escape(default_url)}"
+    default_url
   end
 
   def in_json
     # create the md5 hash
-    hash = Digest::MD5.hexdigest(self.email)
-    #"https://gravatar.com/avatar/#{hash}.png?s=256&d=#{CGI.escape(default_url)}"
     data = self.attributes
-    data[:gravatar_hash] = hash
     data[:classify_count] = classify_count
     data
   end
