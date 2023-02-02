@@ -281,6 +281,9 @@ module Snorby
         puts "[~] Building events_with_join database view"
         db_execute("create or replace view events_with_join as select event.*, iphdr.ip_src, iphdr.ip_dst, signature.sig_priority, signature.sig_name from event inner join iphdr on event.sid = iphdr.sid and event.cid = iphdr.cid inner join signature on event.signature = signature.sig_id;")
 
+        puts "[~] Creating timestamp index on event table"
+        db_execute("CREATE INDEX IF NOT EXISTS index_event_timestamp ON event (timestamp) USING BTREE;")
+
       end
       alias :checkdb :validate_cache_indexes
 
