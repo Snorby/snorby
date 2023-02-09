@@ -197,12 +197,11 @@ module Snorby
       end
 
       def update_signature_count
-        sql = %{
-          update signature set events_count = (select count(*) as count
-          from event where event.signature = signature.sig_id);
-        }
+        sigs = db_select("SELECT COUNT(*) AS c, signature AS s FROM event GROUP BY signature")
 
-        db_execute(sql)
+        sigs.each do |s|
+          db_execute("UPDATE signature SET events_count=#{s.c} WHERE signature.sig_id=#{s.s}")
+        end
       end
 
        def has_event_id?
