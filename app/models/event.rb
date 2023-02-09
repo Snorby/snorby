@@ -47,7 +47,7 @@ class Event
 
   belongs_to :classification
 
-  property :timestamp, ZonedTime, :index => :index_timestamp_cid_sid
+  property :timestamp, ZonedTime, :index => [ :index_timestamp_cid_sid, :timestamp ]
 
   has n, :favorites, :parent_key => [ :sid, :cid ], 
     :child_key => [ :sid, :cid ], :constraint => :destroy!

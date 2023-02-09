@@ -1,10 +1,5 @@
 <div id='new_note_box' class='event-note round'>
 
-	<div class='note-avatar-holder'>
-    <img src="<%= get_gravatar_uri(@user.email) %>" height="32px" width="32px"
-			onerror="this.src=baseuri+'/images/default_avatar.png'">
-	</div>
-
 	<div class='username'>
 		<span><%= @user %></span>
 		<i><%= time_ago_in_words(Time.now) %></i>

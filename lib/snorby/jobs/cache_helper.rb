@@ -197,12 +197,11 @@ module Snorby
       end
 
       def update_signature_count
-        sql = %{
-          update signature set events_count = (select count(*) as count
-          from event where event.signature = signature.sig_id);
-        }
+        sigs = db_select("SELECT COUNT(*) AS c, signature AS s FROM event GROUP BY signature")
 
-        db_execute(sql)
+        sigs.each do |s|
+          db_execute("UPDATE signature SET events_count=#{s.c} WHERE signature.sig_id=#{s.s}")
+        end
       end
 
        def has_event_id?
@@ -280,6 +279,9 @@ module Snorby
 
         puts "[~] Building events_with_join database view"
         db_execute("create or replace view events_with_join as select event.*, iphdr.ip_src, iphdr.ip_dst, signature.sig_priority, signature.sig_name from event inner join iphdr on event.sid = iphdr.sid and event.cid = iphdr.cid inner join signature on event.signature = signature.sig_id;")
+
+        puts "[~] Creating timestamp index on event table"
+        db_execute("CREATE INDEX IF NOT EXISTS index_event_timestamp ON event (timestamp) USING BTREE;")
 
       end
       alias :checkdb :validate_cache_indexes
@@ -411,9 +413,7 @@ module Snorby
 
       def latest_five_distinct_signatures
         sql = %{
-          select signature from (
-            select signature, MAX(timestamp) as timestamp from event group by signature,timestamp order by timestamp desc limit 5
-          ) as signature;
+          SELECT UNIQUE(signature) AS signature FROM event ORDER BY timestamp DESC LIMIT 5;
         }
 
         db_select(sql)

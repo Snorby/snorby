@@ -12,7 +12,7 @@
 		
 	<% end %>
 	
-	<td class='name' data-user-id='<%= user.id %>'><%= image_tag(get_gravatar_uri(user.email), :size => '16x16', :class => 'avatar-small') %> <%= user.name %></td>
+	<td class='name' data-user-id='<%= user.id %>'><%= user.name %></td>
 	<td class='email'><%= user.email %></td>
 	<td class='email'><%= number_with_delimiter user.sign_in_count %></td>
 	<td class='last_sign_in_ip'><%= !user.last_sign_in_ip.blank? ? user.last_sign_in_ip : 'N/A' %></td>

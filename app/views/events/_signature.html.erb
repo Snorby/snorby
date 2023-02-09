@@ -1,48 +1,40 @@
 <div class='section-title plus'>Signature Information</div>
 
 <div class='signature-table plus'>
-	
-	<table class='default' border='0' cellspacing='0' cellpadding='0'>
-		<tr>
-			<th class='first'>Generator ID</th>
-			<th>Sig. ID</th>
+  <table class='default' border='0' cellspacing='0' cellpadding='0'>
+    <tr>
+      <th class='first'>Generator ID</th>
+      <th>Sig. ID</th>
       <th>Sig. Revision</th>
-
-      <% total_event_count ||= Event.count %>
-      <th>Activity (<%= @event.signature.event_percentage(true, total_event_count) %>)</th>
-
       <th>Category</th>
-
       <th>Sig Info</th>
-			<th class='last'></th>
-		</tr>
-		<tbody>
-			<tr>
-				<td class='first'><%= @event.signature.sig_gid || 'N/A' %></td>
-				<td><%= @event.signature.sig_sid || 'N/A' %></td>
-				<td><%= @event.signature.sig_rev || 'N/A' %></td>
-        
+      <th class='last'></th>
+    </tr>
+    <tbody>
+      <tr>
+        <td class='first'><%= @event.signature.sig_gid || 'N/A' %></td>
+
         <td class='search-by-signature add_tipsy'
-          title="View all '<%= @event.signature.name%>' events."
-          data-url="/results?title=<%= @event.signature.name %>&search%5B0%5D%5Bcolumn%5D=signature&search%5B0%5D%5Benabled%5D=true&search%5B0%5D%5Boperator%5D=is&search%5B0%5D%5Bvalue%5D=<%= @event.signature.sig_id %>">
-          <%= css_chart(@event.signature.event_percentage(false, total_event_count)) %>
+            title="View all '<%= @event.signature.name%>' events."
+            data-url="/results?title=<%= @event.signature.name %>&search%5B0%5D%5Bcolumn%5D=signature&search%5B0%5D%5Benabled%5D=true&search%5B0%5D%5Boperator%5D=is&search%5B0%5D%5Bvalue%5D=<%= @event.signature.sig_id %>">
+            <%= @event.signature.sig_sid || 'N/A' %>
         </td>
+
+        <td><%= @event.signature.sig_rev || 'N/A' %></td>
 
         <td>
           <%= @event.signature.category.present? ? @event.signature.category.sig_class_name : 'N/A' %>
         </td>
 
         <td style='width:190px;' class=''>
-          <%= link_to "Query Signature Database", 
+          <%= link_to "Query Signature Database",
             @event.signature_url, :target => '_blank' %>
         </td>
 
         <td style='width:90px;' class='last'>
-          <%= link_to "View Rule", rule_events_path(:sid => @event.sid, :cid => @event.cid), :class => 'snorbybox', :target => '_blank' %>  
+          <%= link_to "View Rule", rule_events_path(:sid => @event.sid, :cid => @event.cid), :class => 'snorbybox', :target => '_blank' %>
         </td>
-
-			</tr>
-		</tbody>
-	</table>
-
+      </tr>
+    </tbody>
+  </table>
 </div>
